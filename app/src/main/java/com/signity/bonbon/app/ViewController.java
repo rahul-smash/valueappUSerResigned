@@ -5,12 +5,12 @@ import android.support.v4.app.Fragment;
 
 import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
-import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.ui.fragment.HomeFragment;
 import com.signity.bonbon.ui.restaurant.storeamritsarizaika21.fragment.HomeFragAmritsarizaikaTheme5;
 import com.signity.bonbon.ui.restaurant.storeburaan14.fragment.HomeFragmentBuraanTheme6;
 import com.signity.bonbon.ui.restaurant.storetangerine9.fragment.HomeFragmentTangerineTheme1;
+import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
 
@@ -25,19 +25,6 @@ public class ViewController {
         this.context = context;
     }
 
-
-    public String getBookNowlbl(String appType) {
-
-        String lbl = null;
-        if (appType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
-            lbl = context.getString(R.string.class_constatnt_book_now_grocery).toString();
-        } else if (appType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
-            lbl = context.getString(R.string.class_constatnt_book_now_rest).toString();
-        }
-
-        return lbl;
-    }
-
     public Fragment getHomeFragment() {
 
         Fragment fragment = null;
@@ -50,6 +37,10 @@ public class ViewController {
                 break;
             case 2:
                 fragment = new HomeFragmentTownkingTheme2();
+                break;
+            case 3:
+                fragment = new HomeFragmentTheme3();
+                break;
             case 4:
                 fragment = new HomeFragmentTheme4();
                 break;
@@ -84,6 +75,9 @@ public class ViewController {
                 break;
             case 14:
                 layoutId = R.layout.home_activity_buraans;
+                break;
+            case 16:
+                layoutId = R.layout.home_activity_theme_3;
                 break;
             case 18:
                 layoutId = R.layout.home_activity_blue_chillis_theme_5;

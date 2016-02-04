@@ -17,13 +17,16 @@
     <color name="colorTransWhite_80">#CCFFFFFF</color>
 
     <!--color store 21 amritsari zaika-->
-    <!--<color name="colorTransRed_65">#d65758</color>-->
-    <!--<color name="colorTransRed_70">#c91e1e</color>-->
-    <!--<color name="colorTransRed_80">#c50a0a</color>-->
+    <color name="colorTransRed_65">#d65758</color>
+    <color name="colorTransRed_70">#c91e1e</color>
+    <color name="colorTransRed_80">#c50a0a</color>
+
+    <color name="favouriteColorSelected">#4FB954</color>
+
 
     <!--color store 18 blue chillis zaika-->
-    <color name="colorTransRed_65">#729caf</color>
-    <color name="colorTransRed_70">#427b94</color>
-    <color name="colorTransRed_80">#316f8a</color>
+    <!--<color name="colorTransRed_65">#729caf</color>-->
+    <!--<color name="colorTransRed_70">#427b94</color>-->
+    <!--<color name="colorTransRed_80">#316f8a</color>-->
 
 </resources>

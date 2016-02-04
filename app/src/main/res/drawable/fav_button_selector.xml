@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/ColorPrimary" android:state_selected="true" />
+    <item android:drawable="@color/favouriteColorSelected" android:state_selected="true" />
     <item android:drawable="@android:color/black" android:state_selected="false" />
     <item android:drawable="@android:color/black" />
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_minus_32" android:state_selected="true"></item>
+    <item android:drawable="@drawable/ic_add_32"></item>
+
+</selector>

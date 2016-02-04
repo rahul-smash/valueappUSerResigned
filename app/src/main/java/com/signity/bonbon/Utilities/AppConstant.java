@@ -1,0 +1,31 @@
+package com.signity.bonbon.Utilities;
+
+import com.signity.bonbon.BuildConfig;
+
+/**
+ * Created by rajesh on 9/10/15.
+ */
+public class AppConstant {
+
+    public static final String PROJECT_NUMBER = BuildConfig.PROJECT_NUMBER;  // for tangerine
+    public final static String PLATFORM = "android";
+    public static String ID = "com.android.bonbon.Utilities.ID";
+
+
+    public static String FROM = "com.android.bonbon.Utilities.FROM";
+    public static String PHONE = "com.android.bonbon.Utilities.PHONE";
+    public static String NAME = "com.android.bonbon.Utilities.NAME";
+    public static String EMAIL = "com.android.bonbon.Utilities.EMAIL";
+    public static String ACTION = "com.android.bonbon.Utilities.ACTION";
+    public static String ADD_ID = "com.android.bonbon.Utilities.ADD_ID";
+    public static final String NOTE = "com.android.bonbon.Utilities.NOTE";
+    public static final String STORE_ID = "com.android.bonbon.Utilities.STORE_ID";
+    public static final String APP_VERISON = "com.android.bonbon.Utilities.APP_VERISON";
+    public static final String APP_OLD_VERISON = "com.android.bonbon.Utilities.APP_OLD_VERISON";
+    public static final String OFFER_VIEW = "com.android.bonbon.Utilities.OFFER_DATA";
+
+    public static final String APP_TYPE_GROCERY = "grocery";
+    public static final String APP_TYPE_RESTAURANT = "restaurant";
+
+
+}

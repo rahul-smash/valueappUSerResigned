@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/offer_bg"
+    android:orientation="vertical"
+
+    tools:context="com.signity.bonbon.ui.offer.OfferFragment">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listHeader"
+        android:background="@drawable/bg_shape_listview"
+        android:divider="@color/divider"
+        android:dividerHeight="2dp"></ListView>
+
+    <TextView
+        android:id="@+id/no_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Offers Found"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

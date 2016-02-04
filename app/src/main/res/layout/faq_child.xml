@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="14dp"
+            android:text="How do i verify my number in GrocersApp?"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/arrow_down"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="14dp"
+            android:focusable="false"
+            android:clickable="false"
+            android:background="@drawable/arrow_down" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/answer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#e2e2e2"
+        android:padding="10dp"
+        android:text="guguhuihigdufdbihcutuiywoheowhshGUYGGGGGGGGGGGGGGGGGGGGGGDBVHNGYHGIGDDDDDDDDDAAAAAAAAAAAAAaaaabjbjbkkjnnnkjiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooopo[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[o[o["
+        android:textColor="#848383"
+        android:textSize="12sp"
+        android:visibility="gone"/>
+</LinearLayout>

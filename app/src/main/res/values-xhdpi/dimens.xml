@@ -1,0 +1,56 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+
+    <integer name="num_cols">1</integer>
+
+
+    <!--common constant-->
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_normal">18sp</dimen>
+    <dimen name="text_size_sub_normal">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+
+    <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_spacing">1dp</dimen>
+    <dimen name="image_detail_pager_margin">80dp</dimen>
+
+    <!-- Main activity sliding pane-->
+
+    <dimen name="slider_pane_width">280dp</dimen>
+
+    <dimen name="slider_logo_width">100dp</dimen>
+    <dimen name="slider_logo_heigh">100dp</dimen>
+    <dimen name="slider_logo_block_height">120dp</dimen>
+    <dimen name="slider_list_icon_width">28dp</dimen>
+    <dimen name="slider_list_icon_height">28dp</dimen>
+
+    <!--   header and toolbar -->
+    <dimen name="header_toolbar_text_size">18sp</dimen>
+
+
+    <!--Dimensions for layout_home-->
+    <dimen name="home_text_size_menu_button">15sp</dimen>
+    <dimen name="categories_image_size">150dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
+
+    <!-- Dimension for Category grid view-->
+    <dimen name="category_grid_block_width">180dp</dimen>
+    <dimen name="category_grid_block_height">180dp</dimen>
+    <dimen name="category_gird_image_width">150dp</dimen>
+    <dimen name="category_gird_image_height">150dp</dimen>
+
+    <!-- Product listView dimensions -->
+    <dimen name="category_item_heart_width">30dp</dimen>
+    <dimen name="category_item_heart_height">39dp</dimen>
+    <dimen name="category_item_image_width">72dp</dimen>
+    <dimen name="category_item_image_height">72dp</dimen>
+    <dimen name="category_icon_add_width">25dp</dimen>
+    <dimen name="category_icon_add_height">25dp</dimen>
+
+
+</resources>

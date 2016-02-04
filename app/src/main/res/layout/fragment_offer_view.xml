@@ -1,0 +1,188 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.signity.bonbon.ui.offer.OfferFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:background="#ffffff"
+                android:elevation="3dp"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtLbl1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_image"
+                android:text="Valid From"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_image"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/txtLbl1"
+                android:text="2015-12-02"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtLbl2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_image"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/date1"
+                android:text="to"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_image"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/txtLbl2"
+                android:text="2015-12-02"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!--<TextView-->
+            <!--android:id="@+id/txtLbl3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtLbl1"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Usage Limit :"-->
+            <!--android:textAppearance="?android:textAppearanceSmall"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/txtUsageLimit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/txtLbl1"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_toRightOf="@+id/txtLbl3"-->
+            <!--android:text="Usage Limit :"-->
+            <!--android:textAppearance="?android:textAppearanceSmall"-->
+            <!--android:textSize="16sp" />-->
+
+            <TextView
+                android:id="@+id/txtLbl4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl2"
+                android:layout_marginTop="10dp"
+                android:text="Mimimum order amount :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtMinimumOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/txtLbl4"
+                android:text="500 :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtLbl5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl4"
+                android:layout_marginTop="10dp"
+                android:text="Discount :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl4"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/txtLbl5"
+                android:text="10 :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtLbl6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl5"
+                android:layout_marginTop="10dp"
+                android:text="Coupon Code :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtCoupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl5"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/txtLbl6"
+                android:background="@color/ColorPrimary"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="3243"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl6"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text="3243"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

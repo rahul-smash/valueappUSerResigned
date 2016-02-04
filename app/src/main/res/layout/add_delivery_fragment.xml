@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e2e2e2"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/add_address"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="#29a829"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:drawableLeft="@drawable/add1"
+            android:drawablePadding="15dp"
+            android:gravity="center"
+            android:text="Add Delivery Address"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/address_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mRelativeProceed"
+        android:layout_below="@+id/add_address"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="13.0sp"></ListView>
+
+    <RelativeLayout
+        android:id="@+id/mRelativeProceed"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="#29a829">
+
+        <TextView
+            android:id="@+id/mTxtProceed"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Proceed"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</RelativeLayout>

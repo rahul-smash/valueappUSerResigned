@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ColorPrimary">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:contentDescription=""
+            android:drawableLeft="@drawable/left"
+            android:paddingLeft="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="Mobile Verification"
+            android:textColor="@color/color_white"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+        <!--<Button-->
+        <!--android:id="@+id/btnDone"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:contentDescription=""-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:text="Done"-->
+        <!--android:textColor="@color/color_white"-->
+        <!--android:textSize="19dp"-->
+        <!--android:visibility="visible" />-->
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="Please enter your One Time Password. We have sent the same to your number"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18sp" />
+
+
+    <EditText
+        android:id="@+id/edtOTp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textLbl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="OTP"
+        android:imeOptions="actionDone"
+        android:inputType="phone"
+        android:textColor="@android:color/black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtOTp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/selector_resend_button"
+            android:ems="6"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/text_resend"
+            android:textColor="@color/color_white"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/resend"
+            android:background="@drawable/shape_button_resend"
+            android:contentDescription=""
+            android:ems="6"
+            android:text="Done"
+            android:textColor="@color/color_white"
+            android:textSize="18dp"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+    <!--<Button-->
+    <!--android:id="@+id/skipOtp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:layout_marginTop="25dp"-->
+    <!--android:background="@drawable/shape_button_resend"-->
+    <!--android:minHeight="10dp"-->
+    <!--android:paddingBottom="5dp"-->
+    <!--android:paddingLeft="5dp"-->
+    <!--android:paddingRight="5dp"-->
+    <!--android:paddingTop="5dp"-->
+    <!--android:text="@string/skip_otp"-->
+    <!--android:textColor="@color/color_white"-->
+    <!--android:textSize="@dimen/text_size_small"-->
+    <!--android:visibility="gone" />-->
+
+
+</RelativeLayout>

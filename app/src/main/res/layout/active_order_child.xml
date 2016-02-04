@@ -1,0 +1,173 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/order_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Order date:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/order_date_text"
+            android:text="4/08/2015"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_number_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_date_text"
+            android:text="Order Number:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_date"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/order_number_text"
+            android:text="1911575"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_number_text"
+            android:text="Status:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_number"
+            android:layout_toRightOf="@+id/status_text"
+            android:text="Pending"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnViewOrder"
+            android:layout_width="75dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/round_corners"
+            android:layout_marginLeft="5dp"
+            android:text="View Order"
+            android:textColor="#ffffff"
+            android:textSize="9sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout1">
+
+    <TextView
+        android:id="@+id/approval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="35dp"
+        android:layout_alignParentLeft="true"
+        android:text="Approved"
+        android:textColor="#3a3675"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/processing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="22dp"
+        android:layout_centerHorizontal="true"
+        android:text="Shipped"
+        android:textColor="#3a3675"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/shipping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="35dp"
+        android:layout_alignParentRight="true"
+        android:text="Delivered"
+        android:textColor="#3a3675"
+        android:textSize="14sp" />
+
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/approval"
+        android:layout_marginTop="18dp"
+        android:background="#e2e2e2" />
+
+    <ImageView
+        android:id="@+id/status_dot1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/approval"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/active_green" />
+
+    <ImageView
+        android:id="@+id/status_dot2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/processing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/active_green" />
+
+    <ImageView
+        android:id="@+id/status_dot3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/shipping"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="50dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/active_dull" />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+
+

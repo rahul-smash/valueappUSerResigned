@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/rightButtonSection"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/order_number_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Number:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/order_number_text"
+            android:text="sd"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_number_text"
+            android:text="Order date:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_number_text"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/order_date_text"
+            android:text=""
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/lbl_order_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_date_text"
+            android:layout_marginTop="5dp"
+            android:text="Order Price:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/order_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_date_text"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/lbl_order_total_price"
+            android:text=""
+            android:textColor="#2f2f2f"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/ship_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_order_total_price"
+            android:layout_marginTop="5dp"
+            android:text="Ship to:"
+            android:textColor="#2f2f2f"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/ship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_order_total_price"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/ship_to"
+            android:text=""
+            android:textColor="#2f2f2f"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ship_to"
+            android:layout_marginTop="5dp"
+            android:text="Status:"
+            android:textColor="@color/ColorPrimary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ship"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/status_text"
+            android:text="In progress"
+            android:textColor="@color/ColorPrimary"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rightButtonSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp">
+
+        <Button
+            android:id="@+id/view_order"
+            android:layout_width="75dp"
+            android:layout_height="22dp"
+            android:background="@drawable/round_corners"
+            android:text="View Order"
+            android:textColor="#ffffff"
+            android:textSize="9sp" />
+
+        <Button
+            android:id="@+id/mBtnReorder"
+            android:layout_width="75dp"
+            android:layout_height="22dp"
+            android:layout_below="@+id/view_order"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corners"
+            android:text="Re Order"
+            android:textColor="#ffffff"
+            android:textSize="9sp" />
+
+        <Button
+            android:id="@+id/mBtnCancel"
+            android:layout_width="75dp"
+            android:layout_height="22dp"
+            android:layout_below="@+id/mBtnReorder"
+            android:background="@drawable/round_corners"
+            android:text="Cancel"
+            android:textColor="#ffffff"
+            android:textSize="9sp" />
+    </RelativeLayout>
+</RelativeLayout>

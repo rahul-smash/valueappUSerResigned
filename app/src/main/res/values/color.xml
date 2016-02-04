@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="transparent">#00000000</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_bg_tab">#512F73</color>
+    <color name="divider">#ff616161</color>
+    <color name="bg_dailog">#fafafa</color>
+    <color name="bg_popupwindow">#ffd6d7d7</color>
+    <color name="backgroundGray">#e2e2e2</color>
+    <color name="colorGray">#e2e2e2</color>
+    <color name="colorWhite">#ffffff</color>
+
+    <!-- color store 15 townking code -->
+    <color name="colorTransWhite_65">#A6FFFFFF</color>
+    <color name="colorTransWhite_70">#80FFFFFF</color>
+    <color name="colorTransWhite_80">#CCFFFFFF</color>
+
+    <!--color store 21 amritsari zaika-->
+    <!--<color name="colorTransRed_65">#d65758</color>-->
+    <!--<color name="colorTransRed_70">#c91e1e</color>-->
+    <!--<color name="colorTransRed_80">#c50a0a</color>-->
+
+    <!--color store 18 blue chillis zaika-->
+    <color name="colorTransRed_65">#729caf</color>
+    <color name="colorTransRed_70">#427b94</color>
+    <color name="colorTransRed_80">#316f8a</color>
+
+</resources>

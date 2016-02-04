@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.signity.bonbon">
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <permission
+        android:name="${applicationId}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="${applicationId}.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false"
+        android:xlargeScreens="true"></supports-screens>
+
+    <application
+        android:name="com.signity.bonbon.app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.signity.bonbon.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.signity.bonbon.ui.home.MainActivity"
+            android:label="@string/title_activity_slider_pane"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.login.LoginScreenActivity"
+            android:label="@string/title_activity_slider_pane"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.category.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.book.BookNowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.category.CategoryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.shopcart.ShoppingCartActivity"
+            android:configChanges="keyboard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.smartbasket.SmartBasketActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.smartbasket.CustomizeBasketActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.signity.bonbon.ui.Delivery.DeliveryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.category.ProductViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.shopping.ShoppingListActivity"
+            android:configChanges="keyboard|orientation"
+            android:label="@string/title_activity_shopping_list"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.shopcart.ShoppingCartActivity2"
+            android:configChanges="keyboard|orientation"
+            android:label="@string/title_activity_shopping_cart_activity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.order.OrderListActivity"
+            android:label="@string/title_activity_shopping_list"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.signity.bonbon.ui.order.OrderDetail"
+            android:label="@string/title_activity_order_detail"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.signity.bonbon.ui.offer.OfferListActivity"
+            android:label="@string/title_activity_shopping_list"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.offer.OfferViewActivity"
+            android:label="@string/title_activity_shopping_list"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.signity.bonbon.ui.common.CityAreaActivitiy"
+            android:label="@string/title_activity_order_detail"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.signity.bonbon.ui.contacts.ContactActivity"
+            android:label="@string/title_activity_contact"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.Delivery.DeliveryAreaActivity"
+            android:label="@string/title_activity_delivery_area"></activity>
+
+        <receiver
+            android:name=".gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".gcm.GCMNotificationIntentService" />
+
+        <service
+            android:name="com.signity.bonbon.service.NotifyService"
+            android:enabled="true" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/map_api_key" />
+    </application>
+
+</manifest>

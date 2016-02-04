@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint1"><i>Prepare your List</i></string>
+    <string name="hint2"><i>Prepare your List</i></string>
+    <string name="title_activity_offers">Offers</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_active_order">ActiveOrder</string>
+    <string name="title_activity_faq">Faq</string>
+    <string name="title_activity_order_history">OrderHistory</string>
+    <string name="title_activity_delivery_address">DeliveryAddress</string>
+    <string name="title_activity_delivery_address2">DeliveryAddress2</string>
+    <string name="title_activity_slider_pane">MainActivity</string>
+    <string name="title_activity_product_view">ProductViewActivity</string>
+    <string name="title_activity_shopping_list">ShoppingListActivity</string>
+    <string name="title_activity_order_detail">OrderDetail</string>
+    <string name="title_activity_shopping_cart_activity2">ShoppingCartActivity2</string>
+    <string name="title_activity_contact">ContactActivity</string>
+    <string name="text_resend">Resend</string>
+    <string name="text_rs">\u20B9</string>
+    <string name="text_percent">%</string>
+    <string name="title_activity_delivery_area">DeliveryAreaActivity</string>
+
+    <string name="skip_otp">Skip and Authenticate Later</string>
+
+    <!-- alL CONSTANT USED DYANAMICALLY ON CLASS LEVEN-->
+    <string name="class_constatnt_book_now_grocery">SHOPPING</string>
+    <string name="class_constatnt_book_now_rest">BOOK NOW</string>
+</resources>

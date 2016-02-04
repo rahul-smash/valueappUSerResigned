@@ -1,0 +1,90 @@
+<android.support.v4.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SlidingPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/slider_pane_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@color/ColorPrimaryDark"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/slider_logo_block_height"
+            android:background="@color/ColorPrimary">
+
+            <ImageView
+                android:id="@+id/profile_pic"
+                android:layout_width="@dimen/slider_logo_width"
+                android:layout_height="@dimen/slider_logo_heigh"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/profile_pic"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="3dp"
+                    android:text="Welcome"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textStyle="bold" />
+
+                <!--<View-->
+                <!--android:layout_width="130dp"-->
+                <!--android:layout_height="1px"-->
+                <!--android:background="#7c7a83" />-->
+
+                <TextView
+                    android:id="@+id/user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="3dp"
+                    android:text="Guest"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_size_small" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/menulist"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"></ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/tool_bar"></include>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</android.support.v4.widget.SlidingPaneLayout>

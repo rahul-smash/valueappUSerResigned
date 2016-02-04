@@ -88,6 +88,9 @@ public class ViewController {
             case 18:
                 layoutId = R.layout.home_activity_blue_chillis_theme_5;
                 break;
+            case 20:
+                layoutId = R.layout.home_activity_theme_4;
+                break;
             case 21:
                 layoutId = R.layout.home_activity_amritsarizaika_theme_5;
                 break;

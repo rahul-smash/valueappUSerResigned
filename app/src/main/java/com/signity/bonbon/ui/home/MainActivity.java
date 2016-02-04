@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profilePic.setOnClickListener(this);
         store = appDb.getStore(storeId);
         updateStoreInfo(store);
+
         Fragment fragment = viewController.getHomeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();

@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Store store;
     AppDatabase appDb;
     PrefManager prefManager;
-    private PendingIntent pendingIntent;
+     PendingIntent pendingIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

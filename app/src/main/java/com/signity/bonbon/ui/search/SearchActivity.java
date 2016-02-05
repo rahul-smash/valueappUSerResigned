@@ -20,6 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -299,6 +300,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 holder.rel_mrp_offer_price = (RelativeLayout) convertView.findViewById(R.id.rel_mrp_offer_price);
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
+                holder.block2 = (LinearLayout) convertView.findViewById(R.id.block2);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
                 holder.items_name.setTypeface(typeFaceRobotoBold);
                 holder.items_price = (TextView) convertView.findViewById(R.id.items_price);
@@ -446,7 +448,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             }
 
 
-            convertView.setOnClickListener(new View.OnClickListener() {
+            holder.block2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -509,6 +511,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
         class ViewHolder {
             RelativeLayout parent;
+            LinearLayout block2;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
             TextView items_name, items_price, items_mrp_price, number_text, rupee;

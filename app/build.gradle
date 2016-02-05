@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId 'com.signity.buraans'
         minSdkVersion 15
-        targetSdkVersion 20
+        targetSdkVersion 23
         versionCode 3
         versionName "1.3"
 

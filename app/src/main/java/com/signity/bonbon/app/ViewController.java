@@ -3,7 +3,6 @@ package com.signity.bonbon.app;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.ui.fragment.HomeFragment;
@@ -51,7 +50,7 @@ public class ViewController {
                 fragment = new HomeFragmentBuraanTheme6();
                 break;
             case 11:
-                fragment = new HomeFragmentTheme11();
+//                fragment = new HomeFragmentTheme11();
                 break;
             default:
                 fragment = new HomeFragment();
@@ -63,7 +62,7 @@ public class ViewController {
     public int getHomeResourceLayout() {
         PrefManager prefManager = new PrefManager(context);
         String themeId = prefManager.getProjectTheme();
-        int layoutId;
+        int layoutId=0;
         switch (Integer.parseInt(themeId)) {
             case 1:
                 // tangerine
@@ -90,7 +89,7 @@ public class ViewController {
                 layoutId = R.layout.home_activity_buraans;
                 break;
             case 11:
-                layoutId = R.layout.home_activity_theme_11;
+//                layoutId = R.layout.home_activity_theme_11;
                 break;
             default:
                 layoutId = R.layout.home_activity;

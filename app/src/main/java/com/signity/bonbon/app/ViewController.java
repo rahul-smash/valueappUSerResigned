@@ -10,6 +10,7 @@ import com.signity.bonbon.ui.fragment.HomeFragment;
 import com.signity.bonbon.ui.restaurant.storeamritsarizaika21.fragment.HomeFragAmritsarizaikaTheme5;
 import com.signity.bonbon.ui.restaurant.storeburaan14.fragment.HomeFragmentBuraanTheme6;
 import com.signity.bonbon.ui.restaurant.storetangerine9.fragment.HomeFragmentTangerineTheme1;
+import com.signity.bonbon.ui.restaurant.storetheme11.fragment.HomeFragmentTheme11;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
@@ -49,6 +50,9 @@ public class ViewController {
                 break;
             case 6:
                 fragment = new HomeFragmentBuraanTheme6();
+                break;
+            case 11:
+                fragment = new HomeFragmentTheme11();
                 break;
             default:
                 fragment = new HomeFragment();
@@ -90,6 +94,9 @@ public class ViewController {
                 break;
             case 21:
                 layoutId = R.layout.home_activity_amritsarizaika_theme_5;
+                break;
+            case 27:
+                layoutId = R.layout.home_activity_theme_11;
                 break;
             default:
                 layoutId = R.layout.home_activity;

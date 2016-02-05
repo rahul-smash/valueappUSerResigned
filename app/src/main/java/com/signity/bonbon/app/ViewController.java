@@ -3,6 +3,7 @@ package com.signity.bonbon.app;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.ui.fragment.HomeFragment;
@@ -49,6 +50,9 @@ public class ViewController {
             case 6:
                 fragment = new HomeFragmentBuraanTheme6();
                 break;
+            case 11:
+                fragment = new HomeFragmentTheme11();
+                break;
             default:
                 fragment = new HomeFragment();
                 break;
@@ -84,6 +88,9 @@ public class ViewController {
             case 6:
                 //Buraans
                 layoutId = R.layout.home_activity_buraans;
+                break;
+            case 11:
+                layoutId = R.layout.home_activity_theme_11;
                 break;
             default:
                 layoutId = R.layout.home_activity;

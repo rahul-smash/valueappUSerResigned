@@ -3,7 +3,6 @@ package com.signity.bonbon.app;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.ui.fragment.HomeFragment;
@@ -58,38 +57,33 @@ public class ViewController {
     }
 
     public int getHomeResourceLayout() {
-        String storeId = BuildConfig.STORE_ID;
+        PrefManager prefManager = new PrefManager(context);
+        String themeId = prefManager.getProjectTheme();
         int layoutId;
-        switch (Integer.parseInt(storeId)) {
-            case 9:
+        switch (Integer.parseInt(themeId)) {
+            case 1:
+                // tangerine
                 layoutId = R.layout.home_activity_tangerine;
                 break;
-            case 10:
-                layoutId = R.layout.home_activity_bestrestaurant;
-                break;
-            case 13:
-                layoutId = R.layout.home_activity_theme_4;
-                break;
-            case 15:
+            case 2:
+                // best and townking using theme 2
                 layoutId = R.layout.home_activity_townking;
                 break;
-            case 14:
-                layoutId = R.layout.home_activity_buraans;
-                break;
-            case 16:
+            case 3:
+                // Desitadka and f eleven using theme3
                 layoutId = R.layout.home_activity_theme_3;
                 break;
-            case 18:
-                layoutId = R.layout.home_activity_blue_chillis_theme_5;
-                break;
-            case 19:
-                layoutId = R.layout.home_activity_theme_3;
-                break;
-            case 20:
+            case 4:
+                // Mr Rooster and signh eleven
                 layoutId = R.layout.home_activity_theme_4;
                 break;
-            case 21:
+            case 5:
+                // Bluechillis and Amritsari zaika using theme5
                 layoutId = R.layout.home_activity_amritsarizaika_theme_5;
+                break;
+            case 6:
+                //Buraans
+                layoutId = R.layout.home_activity_buraans;
                 break;
             default:
                 layoutId = R.layout.home_activity;

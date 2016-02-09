@@ -14,7 +14,11 @@ import com.signity.bonbon.ui.fragment.BookNowFragment;
 import com.signity.bonbon.ui.fragment.HomeFragment;
 import com.signity.bonbon.ui.fragment.MyFavourite;
 import com.signity.bonbon.ui.fragment.MyFavouriteGroceryFragment;
+import com.signity.bonbon.ui.grocery.storetheme1.fragment.HomeFragmentTheme1Grocery;
+import com.signity.bonbon.ui.grocery.storetheme10.fragment.HomeFragmentTheme10Grocery;
 import com.signity.bonbon.ui.grocery.storetheme7.fragment.HomeFragmentTheme7Grocery;
+import com.signity.bonbon.ui.grocery.storetheme8.fragment.HomeFragmentTheme8Grocery;
+import com.signity.bonbon.ui.grocery.storetheme9.fragment.HomeFragmentTheme9Grocery;
 import com.signity.bonbon.ui.restaurant.storeamritsarizaika21.fragment.HomeFragAmritsarizaikaTheme5;
 import com.signity.bonbon.ui.restaurant.storeburaan14.fragment.HomeFragmentBuraanTheme6;
 import com.signity.bonbon.ui.restaurant.storetangerine9.fragment.HomeFragmentTangerineTheme1;
@@ -47,7 +51,7 @@ public class ViewController {
         switch (Integer.parseInt(themeId)) {
             case 1:
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
-                    fragment = new HomeFragmentTheme7Grocery();
+                    fragment = new HomeFragmentTheme1Grocery();
                 } else {
                     fragment = new HomeFragmentTangerineTheme1();
                 }
@@ -74,6 +78,27 @@ public class ViewController {
 
                 }
                 break;
+            case 8:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    fragment = new HomeFragmentTheme8Grocery();
+                } else {
+
+                }
+                break;
+            case 9:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    fragment = new HomeFragmentTheme9Grocery();
+                } else {
+
+                }
+                break;
+            case 10:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    fragment = new HomeFragmentTheme10Grocery();
+                } else {
+
+                }
+                break;
             case 11:
 //                fragment = new HomeFragmentTheme11();
                 break;
@@ -94,7 +119,7 @@ public class ViewController {
             case 1:
                 // tangerine
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
-                    layoutId = R.layout.home_activity_theme_7_gorcery;
+                    layoutId = R.layout.home_activity_theme_1_grocery;
                 } else {
                     layoutId = R.layout.home_activity_tangerine;
                 }
@@ -125,6 +150,28 @@ public class ViewController {
                     layoutId = R.layout.home_activity_theme_7_gorcery;
                 } else {
 
+                }
+                break;
+            case 8:
+                // Empire
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    layoutId = R.layout.home_activity_theme_8_grocery;
+                } else {
+                }
+                break;
+
+            case 9:
+                // Bon Bon
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    layoutId = R.layout.home_activity_theme_9_grocery;
+                } else {
+                }
+                break;
+            case 10:
+                // Kumar Mega Mall
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    layoutId = R.layout.home_activity_theme_10_grocery;
+                } else {
                 }
                 break;
             case 11:

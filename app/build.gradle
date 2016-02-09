@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId 'com.signity.sixten'
+        applicationId 'com.signity.empire'
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1

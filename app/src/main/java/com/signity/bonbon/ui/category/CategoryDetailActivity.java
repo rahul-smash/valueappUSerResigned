@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -23,7 +24,6 @@ import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.ui.fragment.ProductListFragment;
-import com.signity.bonbon.ui.search.SearchActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 
@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * @author Rajinder
  */
-public class CategoryDetailActivity  extends FragmentActivity implements View.OnClickListener, CartChangeListener {
+public class CategoryDetailActivity extends FragmentActivity implements View.OnClickListener, CartChangeListener {
 
     public static final String TAG = CategoryDetailActivity.class.getSimpleName();
     private GCMClientManager pushClientManager;
@@ -75,9 +75,6 @@ public class CategoryDetailActivity  extends FragmentActivity implements View.On
         btnSearch.setOnClickListener(this);
         linearShopCart.setOnClickListener(this);
         checkCartValue();
-//     getUserCartHistory();
-
-
         Category category = appDb.getCategoryById(id);
         subCategoryList = category.getSubCategoryList();
         if (subCategoryList != null && subCategoryList.size() != 0) {
@@ -161,7 +158,7 @@ public class CategoryDetailActivity  extends FragmentActivity implements View.On
                 break;
 
             case R.id.btnSearch:
-                startActivity(new Intent(CategoryDetailActivity.this, SearchActivity.class));
+                startActivity(new Intent(CategoryDetailActivity.this, AppController.getInstance().getViewController().getSearchActivity()));
                 AnimUtil.slideFromRightAnim(CategoryDetailActivity.this);
                 break;
 

@@ -11,5 +11,4 @@
         android:scaleType="fitXY"
         android:src="@drawable/splash" />
 
-
 </RelativeLayout>

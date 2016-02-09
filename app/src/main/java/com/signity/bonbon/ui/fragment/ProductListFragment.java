@@ -32,6 +32,7 @@ import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -42,7 +43,6 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.category.ProductViewActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -326,7 +326,7 @@ public final class ProductListFragment extends Fragment {
             holder.block2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(getActivity(), ProductViewActivity.class);
+                    Intent i = new Intent(getActivity(), AppController.getInstance().getViewController().getProductViewActivity());
                     i.putExtra("product_id", product.getId());
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(getActivity());

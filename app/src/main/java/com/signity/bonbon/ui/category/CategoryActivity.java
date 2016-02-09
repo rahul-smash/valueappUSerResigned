@@ -25,12 +25,13 @@ import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
+import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.GetCategory;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.search.SearchActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -40,7 +41,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class CategoryActivity  extends FragmentActivity implements View.OnClickListener {
+public class CategoryActivity extends FragmentActivity implements View.OnClickListener {
 
     RelativeLayout menu_layout;
     Button btnBack, btnSearch;
@@ -210,7 +211,8 @@ public class CategoryActivity  extends FragmentActivity implements View.OnClickL
                 public void onClick(View view) {
 
                     if (category.getSubCategoryList() != null && category.getSubCategoryList().size() != 0) {
-                        Intent i = new Intent(CategoryActivity.this, CategoryDetailActivity.class);
+                        ViewController viewController = AppController.getInstance().getViewController();
+                        Intent i = new Intent(CategoryActivity.this, viewController.getCategoryDetailActivity());
                         i.putExtra("categoryId", category.getId());
                         i.putExtra("title", category.getTitle());
                         startActivity(i);
@@ -218,11 +220,8 @@ public class CategoryActivity  extends FragmentActivity implements View.OnClickL
                     } else {
                         showAlertDialog(CategoryActivity.this, "Alert", "No Subcategories available");
                     }
-
                 }
             });
-
-
             return convertView;
         }
 
@@ -246,7 +245,7 @@ public class CategoryActivity  extends FragmentActivity implements View.OnClickL
                 onBackPressed();
                 break;
             case R.id.btnSearch:
-                startActivity(new Intent(CategoryActivity.this, SearchActivity.class));
+                startActivity(new Intent(CategoryActivity.this, AppController.getInstance().getViewController().getSearchActivity()));
                 AnimUtil.slideFromRightAnim(CategoryActivity.this);
                 break;
 

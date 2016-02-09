@@ -23,9 +23,9 @@ import android.widget.Toast;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.ShoppingListObject;
-import com.signity.bonbon.ui.search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,16 +70,11 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
         mView = inflater.inflate(com.signity.bonbon.R.layout.shopping_list, container, false);
         initialize();
 
-//
-//        Intent i=getIntent();
-//        final int temp1=i.getIntExtra("key",0);
-
         adapter = new Adapter(getActivity());
         shoppingList.setAdapter(adapter);
 
         add_list.setOnClickListener(this);
         backButton.setOnClickListener(this);
-//        btnSearch.setOnClickListener(this);
 
         return mView;
     }
@@ -95,7 +90,6 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
         add_list = (Button) mView.findViewById(com.signity.bonbon.R.id.add_list);
         searchBar = (EditText) mView.findViewById(com.signity.bonbon.R.id.searchBar);
 
-
         if (getArguments() != null) {
             listHeader.setVisibility(View.VISIBLE);
         } else {
@@ -107,15 +101,6 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
 
         db = new ListDatabase(getActivity());
         viewList = db.getAllContacts();
-
-
-//        for (int i = 0; i < listName.length; i++) {
-//            ShoppingListObject att = new ShoppingListObject();
-//            att.listName = listName[i];
-//
-//            viewList.add(att);
-//        }
-
 
         getActivity().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -160,7 +145,7 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
                 break;
 
             case com.signity.bonbon.R.id.btnSearch:
-                startActivity(new Intent(getActivity(), SearchActivity.class));
+                startActivity(new Intent(getActivity(), AppController.getInstance().getViewController().getSearchActivity()));
                 AnimUtil.slideFromRightAnim(getActivity());
 
                 break;
@@ -220,6 +205,16 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
                     db.deleteContact(att);
                     viewList.remove(position);
                     notifyDataSetChanged();
+                }
+            });
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intentSearch = new Intent(getActivity(), AppController.getInstance().getViewController().getSearchActivity());
+                    intentSearch.putExtra("search_str", viewList.get(position).itemName);
+                    startActivity(intentSearch);
+
                 }
             });
 

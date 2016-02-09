@@ -3,4 +3,3 @@ ALTER TABLE store ADD COLUMN store_status TEXT;
 ALTER TABLE store ADD COLUMN android_app_share TEXT;
 ALTER TABLE store ADD COLUMN type TEXT;
 ALTER TABLE store ADD COLUMN theme TEXT;
-

@@ -38,12 +38,9 @@ import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.AboutUs.AboutUsFragment;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.fragment.BookNowFragment;
-import com.signity.bonbon.ui.fragment.MyFavourite;
 import com.signity.bonbon.ui.fragment.Profile;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.order.OrderHistory;
-import com.signity.bonbon.ui.search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,13 +118,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMenuList = (ListView) findViewById(R.id.menulist);
         shopingcart = (ImageButton) findViewById(R.id.shopingcart);
         profilePic = (ImageView) findViewById(R.id.profile_pic);
-
+        labels[4] = AppController.getInstance().getViewController().getMenuTextBookNow();
         for (int i = 0; i < labels.length; i++) {
             SliderObject att = new SliderObject();
             att.labels = labels[i];
             att.icons = icons[i];
             viewList.add(att);
         }
+
 
         adapter = new Adapter(MainActivity.this);
         mMenuList.setAdapter(adapter);
@@ -195,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 toggleSlidingMenu();
                 break;
             case R.id.search:
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                startActivity(new Intent(MainActivity.this, AppController.getInstance().getViewController().getSearchActivity()));
                 AnimUtil.slideFromRightAnim(MainActivity.this);
                 break;
             case R.id.profile_pic:
@@ -241,7 +239,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case 2:
-
                 if (userId.isEmpty()) {
                     Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
                     intent.putExtra(AppConstant.FROM, "menu");
@@ -253,11 +250,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intentDelivery.putExtra(AppConstant.FROM, "menu");
                     startActivity(intentDelivery);
                     AnimUtil.slideFromRightAnim(MainActivity.this);
-//                    fragment = DeliveryAddressFragment.newInstance(this);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString(AppConstant.FROM, "menu");
-//                    fragment.setArguments(bundle);
-//                    replace(fragment);
                 }
                 break;
 
@@ -275,13 +267,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case 4:
-                title.setText("Book Now");
-                replace(new BookNowFragment());
+                title.setText(AppController.getInstance().getViewController().getMenuTextBookNow());
+                replace(AppController.getInstance().getViewController().getBookNowOrShoppinFragment());
                 break;
 
             case 5:
                 title.setText("My Favorites");
-                replace(new MyFavourite());
+                replace(AppController.getInstance().getViewController().getFavouritesFragment());
                 break;
 
             case 6:
@@ -444,7 +436,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.storeSharedValue(AppConstant.APP_VERISON, store.getVersion());
                     prefManager.setProjectTheme(store.getTheme());
                     prefManager.setProjectType(store.getType());
-                    prefManager.setProjectType(store.getOtpSkip());
+                    prefManager.setOtoSkip(store.getOtpSkip());
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());

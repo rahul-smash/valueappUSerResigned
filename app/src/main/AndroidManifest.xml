@@ -70,6 +70,9 @@
             android:name="com.signity.bonbon.ui.category.CategoryDetailActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.signity.bonbon.ui.category.CategoryDetailGroceryActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.signity.bonbon.ui.shopcart.ShoppingCartActivity"
             android:configChanges="keyboard"
             android:screenOrientation="portrait"
@@ -88,7 +91,13 @@
             android:name="com.signity.bonbon.ui.category.ProductViewActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.signity.bonbon.ui.category.ProductViewGroceryActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.signity.bonbon.ui.search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.signity.bonbon.ui.search.SearchForGroceryActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.signity.bonbon.ui.shopping.ShoppingListActivity"

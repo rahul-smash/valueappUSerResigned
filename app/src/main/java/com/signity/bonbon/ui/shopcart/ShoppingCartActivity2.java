@@ -39,7 +39,6 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
-import com.signity.bonbon.ui.search.SearchActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -231,10 +230,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 }
                 break;
 
-            case com.signity.bonbon.R.id.btnSearch:
-                startActivity(new Intent(ShoppingCartActivity2.this, SearchActivity.class));
-                AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
-                break;
             case R.id.applyCoupen:
                 if (applyCoupon.getTag().equals("apply")) {
                     onApplyCoupon();
@@ -379,6 +374,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
+
+
 
             holder.add_button.setVisibility(View.GONE);
             holder.remove_button.setVisibility(View.GONE);

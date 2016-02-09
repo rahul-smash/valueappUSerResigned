@@ -1133,11 +1133,11 @@ public class AppDatabase {
         // onCreate is called once if database not exists.
         @Override
         public void onCreate(SQLiteDatabase db) {
+            db.execSQL(this.stringFromAssets("sql/store.ddl"));
             db.execSQL(this.stringFromAssets("sql/category.ddl"));
             db.execSQL(this.stringFromAssets("sql/sub_category.ddl"));
             db.execSQL(this.stringFromAssets("sql/product.ddl"));
             db.execSQL(this.stringFromAssets("sql/cart_table.ddl"));
-            db.execSQL(this.stringFromAssets("sql/store.ddl"));
         }
 
         @Override
@@ -1146,7 +1146,7 @@ public class AppDatabase {
                     + "  New Version:" + newVersion + "------------");
 
             // some of the store element are added so better to drop the store table and  recreate this
-            if (newVersion == 3) {
+            if (newVersion == 2) {
                 db.execSQL(this.stringFromAssets("sql/alter_store_version_two.ddl"));
             }
         }

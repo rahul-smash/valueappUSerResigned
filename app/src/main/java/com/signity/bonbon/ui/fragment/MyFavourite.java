@@ -26,12 +26,12 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.FontUtil;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
-import com.signity.bonbon.ui.category.ProductViewActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 
 import java.util.List;
@@ -46,14 +46,14 @@ public class MyFavourite extends Fragment {
     ;
     ListView items_list;
     List<Product> listProduct;
-    public FavouriteItemAdapter adapter;
     private GCMClientManager pushClientManager;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     Button btnCartCount;
-
     LinearLayout linearShopCart;
     public AppDatabase appDb;
     View mView;
+
+    private FavouriteItemAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +65,6 @@ public class MyFavourite extends Fragment {
         cartTotalPrice = (TextView) mView.findViewById(R.id.price);
         btnCartCount = (Button) mView.findViewById(R.id.shoppingcart_text);
         linearShopCart = (LinearLayout) mView.findViewById(R.id.linearShopCart);
-        adapter = new FavouriteItemAdapter(context, listProduct);
 
 
         linearShopCart.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +103,6 @@ public class MyFavourite extends Fragment {
             adapter = new FavouriteItemAdapter(context, listProduct);
             items_list.setAdapter(adapter);
             items_list.setVisibility(View.VISIBLE);
-
         } else {
             items_list.setVisibility(View.GONE);
             showNoInfo.setVisibility(View.VISIBLE);
@@ -322,7 +320,7 @@ public class MyFavourite extends Fragment {
             holder.block2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(getActivity(), ProductViewActivity.class);
+                    Intent i = new Intent(getActivity(), AppController.getInstance().getViewController().getProductViewActivity());
                     i.putExtra("product_id", product.getId());
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(getActivity());
@@ -382,6 +380,5 @@ public class MyFavourite extends Fragment {
             public ImageButton add_button, remove_button, heart;
         }
     }
-
 
 }

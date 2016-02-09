@@ -115,7 +115,7 @@ public class SplashActivity extends Activity {
                     prefManager.storeSharedValue(AppConstant.APP_VERISON, store.getVersion());
                     prefManager.setProjectTheme(store.getTheme());
                     prefManager.setProjectType(store.getType());
-                    prefManager.setProjectType(store.getOtpSkip());
+                    prefManager.setOtoSkip(store.getOtpSkip());
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());

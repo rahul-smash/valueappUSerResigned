@@ -53,4 +53,18 @@
     <dimen name="category_icon_add_width">25dp</dimen>
     <dimen name="category_icon_add_height">25dp</dimen>
 
+    <!--Dimentions for six ten-->
+    <dimen name="layout_size">150dp</dimen>
+    <dimen name="inner_top_margin">18dp</dimen>
+    <dimen name="layout_left_margin">18dp</dimen>
+    <dimen name="layout_right_margin">15dp</dimen>
+    <dimen name="layout_top_margin">-60dp</dimen>
+    <dimen name="layout_header_margin">50dp</dimen>
+    <dimen name="home_text_size">16sp</dimen>
+
+    <dimen name="image_width">350dp</dimen>
+    <dimen name="image_height">250dp</dimen>
+    <dimen name="button_size">40dp</dimen>
+
+
 </resources>

@@ -32,7 +32,6 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
-import com.signity.bonbon.ui.search.SearchActivity;
 
 import java.util.List;
 
@@ -43,20 +42,19 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
     TextView total, title, emptyCart;
     Button placeorder;
-    ImageButton back;
-    RelativeLayout menu_layout;
     List<Product> listProduct;
     private GCMClientManager pushClientManager;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private Button backButton;
     private AppDatabase appDb;
+    private PrefManager prefManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shopping_cart_activity);
         appDb = DbAdapter.getInstance().getDb();
-        PrefManager prefManager = new PrefManager(this);
+        prefManager = new PrefManager(this);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
@@ -142,6 +140,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 holder.items_name.setTypeface(typeFaceRobotoBold);
                 holder.items_price = (TextView) convertView.findViewById(R.id.items_price);
                 holder.items_price.setTypeface(typeFaceRobotoRegular);
+                holder.btnVarient = (Button) convertView.findViewById(R.id.btnVarient);
                 holder.add_button = (ImageButton) convertView.findViewById(R.id.add_button);
                 holder.remove_button = (ImageButton) convertView.findViewById(R.id.remove_button);
                 holder.number_text = (TextView) convertView.findViewById(R.id.number_text);
@@ -163,7 +162,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             String txtQuantCount = "";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 txtQuantCount = selectedVariant.getQuantity();
                 mrpPrice = selectedVariant.getMrpPrice();
@@ -177,11 +176,21 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 selectedVariant.setDiscount(variant.getDiscount());
                 selectedVariant.setUnitType(variant.getUnitType());
                 selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 txtQuantCount = selectedVariant.getQuantity();
                 mrpPrice = selectedVariant.getMrpPrice();
             }
+
+            if (prefManager.getProjectType().equals(AppConstant.APP_TYPE_GROCERY)) {
+                holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                holder.btnVarient.setText(txtQuant);
+                holder.btnVarient.setVisibility(View.VISIBLE);
+            } else {
+                holder.btnVarient.setVisibility(View.GONE);
+            }
+
+
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
             holder.number_text.setText(txtQuantCount);
@@ -261,6 +270,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
         class ViewHolder {
             RelativeLayout parent;
+            Button btnVarient;
             TextView items_name, items_price, number_text, rupee;
             public ImageButton add_button, remove_button;
             public RelativeLayout rel_mrp_offer_price;
@@ -290,10 +300,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 }
                 break;
 
-            case R.id.btnSearch:
-                startActivity(new Intent(ShoppingCartActivity.this, SearchActivity.class));
-                AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
-                break;
         }
 
     }

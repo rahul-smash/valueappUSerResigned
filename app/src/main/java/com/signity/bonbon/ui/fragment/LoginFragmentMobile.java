@@ -136,7 +136,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
             @Override
             public void success(MobResponse mobResponse, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (mobResponse.getSuccess()) {
+                if (mobResponse.getSuccess() != null ? mobResponse.getSuccess() : false) {
                     String isOtpSkip = prefManager.getOtoSkip();
                     if (mobResponse.getUserExistStatus() == 1 || isOtpSkip.equalsIgnoreCase("yes")) {
                         proceedToAlreadyExistModule(mobResponse.getData());

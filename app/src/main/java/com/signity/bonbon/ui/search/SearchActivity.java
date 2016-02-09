@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,24 +32,19 @@ import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
-import com.signity.bonbon.cart.CartHelper;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
-import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.category.ProductViewActivity;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +73,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     GsonHelper gsonHelper;
     PrefManager prefManager;
 
+    String searchStr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,12 +89,24 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
                 getSearchList(mSearchEdit.getText().toString());
-
                 return false;
             }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        try {
+            if (bundle != null) {
+                searchStr = bundle.getString("search_str");
+            }
+        } catch (Exception e) {
+
+        }
+
+        if (searchStr != null && !searchStr.isEmpty()) {
+            mSearchEdit.setText(searchStr);
+            getSearchList(mSearchEdit.getText().toString());
+        }
     }
 
 
@@ -131,36 +139,6 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void updateCartOnBack() {
-
-        String deviceId = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(SearchActivity.this);
-        String orders = CartHelper.getOrderStringJson(SearchActivity.this);
-        Map<String, String> param = new HashMap<String, String>();
-        param.put("device_id", deviceId);
-        param.put("device_token", deviceToken);
-        param.put("platform", AppConstant.PLATFORM);
-        param.put("orders", orders);
-
-        NetworkAdaper.getInstance().getNetworkServices().setCartItems(param, new Callback<ResponseData>() {
-            @Override
-            public void success(ResponseData responseData, Response response) {
-
-                if (responseData.getSuccess()) {
-//                    Toast.makeText(CategoryDetailActivity.this, "Cart  item updated", Toast.LENGTH_SHORT).show();
-                } else {
-//                    Toast.makeText(CategoryDetailActivity.this, "Unable to update cart item", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-//                Toast.makeText(CategoryDetailActivity.this, "Unable to update cart item", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -187,54 +165,14 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         param.put("keyword", keyWords);
 
         NetworkAdaper.getInstance().getNetworkServices().getSearchList(param, new Callback<GetSubCategory>() {
-//            @Override
-//            public void success(ProductListModel getProducts, Response response) {
-//                Log.e("Tab", getProducts.toString());
-//                if (getProducts.getSuccess()) {
-//                    ProgressDialogUtil.hideProgressDialog();
-//
-//                    adapter = new ProductListAdapter(SearchActivity.this, getProducts.getData());
-//                    mSearchList.setAdapter(adapter);
-//                } else {
-//                    ProgressDialogUtil.hideProgressDialog();
-//                    adapter = new ProductListAdapter(SearchActivity.this, getProducts.getData());
-//                    mSearchList.setAdapter(adapter);
-//                    Toast.makeText(SearchActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
 
             @Override
             public void success(GetSubCategory getSubCategory, Response response) {
                 if (getSubCategory.getSuccess()) {
-
                     ProgressDialogUtil.hideProgressDialog();
-
                     setupListProduct(getSubCategory.getData());
-//                    if (getSearchData.getData().size() > 0) {
-//                        for (int i = 0; i < getSearchData.getData().size(); i++) {
-//                            if (getSearchData.getData().get(i).getProducts().size() > 0) {
-//                                parentList.add(getSearchData.getData().get(i).getProducts());
-//                            }
-//
-//                        }
-//                    }
-//
-//                    if(parentList.size()>0){
-//                        for(int j=0; j<parentList.size();j++){
-//
-//                            for(int k=0;parentList.get(j);j)
-//                        }
-//                    }
-
-
-//
-//                    adapter = new ProductListAdapter(SearchActivity.this,parentList. );
-//                    mSearchList.setAdapter(adapter);
                 } else {
                     ProgressDialogUtil.hideProgressDialog();
-//                    adapter = new ProductListAdapter(SearchActivity.this, getSearchData.getData());
-//                    mSearchList.setAdapter(adapter);
                     Toast.makeText(SearchActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -250,14 +188,11 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         listProduct = new ArrayList<>();
         for (SubCategory subCategory : data) {
             listProduct.addAll(subCategory.getProducts());
-
         }
-
         if (listProduct != null) {
             adapter = new ProductListAdapter(SearchActivity.this, listProduct);
             mSearchList.setAdapter(adapter);
         }
-
     }
 
 
@@ -454,7 +389,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
                     String productString = gsonHelper.getProduct(product);
                     prefManager.storeSharedValue(PrefManager.PREF_SEARCH_PRODUCT, productString);
-                    Intent i = new Intent(SearchActivity.this, ProductViewActivity.class);
+                    Intent i = new Intent(SearchActivity.this, AppController.getInstance().getViewController().getProductViewActivity());
                     i.putExtra("product_id", product.getId());
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(SearchActivity.this);
@@ -519,41 +454,4 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void callNetworkForFavo(String productId, String varientId, String action) {
-        ProgressDialogUtil.showProgressDialog(SearchActivity.this);
-        String deviceid = Settings.Secure.getString(SearchActivity.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(SearchActivity.this);
-
-        String[] myarray = {productId, varientId};
-        JSONArray mJSONArray = new JSONArray(Arrays.asList(myarray));
-        String product_ids = mJSONArray.toString();
-
-        Log.e("products_id", product_ids);
-        Log.e("method", action);
-        Map<String, String> param = new HashMap<String, String>();
-        param.put("device_id", deviceid);
-        param.put("device_token", deviceToken);
-        param.put("platform", AppConstant.PLATFORM);
-        param.put("method", action);
-        param.put("product_ids", product_ids);
-
-        NetworkAdaper.getInstance().getNetworkServices().addToFavourite(param, new Callback<ResponseData>() {
-
-            @Override
-            public void success(ResponseData responseData, Response response) {
-                ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess()) {
-                    Log.e("", responseData.getMessage());
-                } else {
-                    Log.e("", responseData.getMessage());
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                ProgressDialogUtil.hideProgressDialog();
-                Log.e("", error.getMessage());
-            }
-        });
-    }
 }

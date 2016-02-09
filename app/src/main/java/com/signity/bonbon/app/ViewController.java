@@ -46,7 +46,11 @@ public class ViewController {
 
         switch (Integer.parseInt(themeId)) {
             case 1:
-                fragment = new HomeFragmentTangerineTheme1();
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    fragment = new HomeFragmentTheme7Grocery();
+                } else {
+                    fragment = new HomeFragmentTangerineTheme1();
+                }
                 break;
             case 2:
                 fragment = new HomeFragmentTownkingTheme2();
@@ -64,7 +68,7 @@ public class ViewController {
                 fragment = new HomeFragmentBuraanTheme6();
                 break;
             case 7:
-                if (storeType.equalsIgnoreCase("grocery")) {
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme7Grocery();
                 } else {
 
@@ -89,7 +93,11 @@ public class ViewController {
         switch (Integer.parseInt(themeId)) {
             case 1:
                 // tangerine
-                layoutId = R.layout.home_activity_tangerine;
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    layoutId = R.layout.home_activity_theme_7_gorcery;
+                } else {
+                    layoutId = R.layout.home_activity_tangerine;
+                }
                 break;
             case 2:
                 // best and townking using theme 2
@@ -113,7 +121,7 @@ public class ViewController {
                 break;
             case 7:
                 //Six ten grocery
-                if (storeType.equalsIgnoreCase("grocery")) {
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_7_gorcery;
                 } else {
 
@@ -135,7 +143,7 @@ public class ViewController {
         String themeId = prefManager.getProjectTheme();
         String storeType = prefManager.getProjectType();
 
-        if (storeType.equalsIgnoreCase("grocery")) {
+        if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
             return CategoryDetailGroceryActivity.class;
         } else {
             return CategoryDetailActivity.class;
@@ -177,7 +185,7 @@ public class ViewController {
     public Fragment getBookNowOrShoppinFragment() {
         PrefManager prefManager = new PrefManager(context);
         String storeType = prefManager.getProjectType();
-        if (storeType.equalsIgnoreCase("grocery")) {
+        if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
             return new ShoppingList();
         } else {
             return new BookNowFragment();

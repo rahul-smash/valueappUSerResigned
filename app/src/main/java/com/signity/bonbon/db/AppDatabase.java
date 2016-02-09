@@ -404,15 +404,6 @@ public class AppDatabase {
                         values.put("selectedVariant", gsonHelper.getSelectedVarient(product.getSelectedVariant()));
                         long l = db.insert("product", null, values);
                         Log.i(TAG, "-----------Product--------" + product.getTitle() + "--------Added--------");
-//                        boolean isAddProduct = true;
-//                        if (product.getVariants() != null && product.getVariants().size() != 0) {
-//                            isAddProduct = (product.getVariants().get(0) != null && product.getVariants().get(0).getId() != null
-//                                    && !(product.getVariants().get(0).getId().isEmpty())) ? true : false;
-//                        } else {
-//                            isAddProduct = false;
-//                        }
-//                        if (isAddProduct) {
-//                        }
                     }
 
                 } catch (Exception e) {
@@ -497,17 +488,9 @@ public class AppDatabase {
                 if (l == 0) {
                     long l2 = db.insert("product", null, values);
                     Log.i("TAG", "---------Product---------" + product.getTitle() + "------Added------");
-//                    boolean isAddProduct = true;
-//                    if (product.getVariants() != null && product.getVariants().size() != 0) {
-//                        isAddProduct = (product.getVariants().get(0) != null && product.getVariants().get(0).getId() != null
-//                                && !(product.getVariants().get(0).getId().isEmpty())) ? true : false;
-//                    } else {
-//                        isAddProduct = false;
-//                    }
-//                    if (isAddProduct) {
-//                    }
+                } else {
+                    Log.i("TAG", "---------Product---------" + product.getTitle() + "------Updated------");
                 }
-                Log.i("TAG", "---------Product---------" + product.getTitle() + "------Updated------");
 
 
             }
@@ -681,7 +664,7 @@ public class AppDatabase {
                 if (selectedVarient.getQuantity().equals("0")) {
                     long deleteRow = db.delete("cart_table", "variant_id" + "=?", new String[]{String.valueOf(product.getSelectedVariant().getVariantId())});
                     if (deleteRow != 0) {
-                        Log.i(TAG, product.getTitle() + " Removed from Cart");
+                        Log.i(TAG,"--------Cart----"+product.getTitle() + "--------Removed--------");
                     }
                 } else {
                     ContentValues values = new ContentValues();
@@ -697,10 +680,10 @@ public class AppDatabase {
                         long l = db.update("cart_table", values, "variant_id=?", new String[]{
                                 selectedVarient.getVariantId()
                         });
-                        Log.i(TAG, "Cart Value Update" + l);
+                        Log.i(TAG, "--------Cart-----+" + product.getTitle() + "-----Updated----");
                     } else {
                         long l = db.insert("cart_table", null, values);
-                        Log.i(TAG, "Cart Value Inserted" + l);
+                        Log.i(TAG, "--------Cart-----+" + product.getTitle() + "-----Added----");
                     }
                 }
             }
@@ -727,10 +710,10 @@ public class AppDatabase {
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
                         updateCartModel.getVariantId()
                 });
-                Log.i(TAG, "Cart Value Update" + l);
+                Log.i(TAG, "--------Cart-----+" + updateCartModel.getVariantId() + "-----Updated----");
             } else {
                 long l = db.insert("cart_table", null, values);
-                Log.i(TAG, "Cart Value Inserted" + l);
+                Log.i(TAG, "--------Cart-----+" + updateCartModel.getVariantId() + "-----Added----");
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -759,7 +742,7 @@ public class AppDatabase {
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
                         selectedVarient.getVariantId()
                 });
-                Log.i(TAG, "Cart Value Update" + l);
+                Log.i(TAG, "--------Product Changes from Version -----+" + product.getTitle() + "-----Updated To Cart----");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1019,10 +1002,10 @@ public class AppDatabase {
                 values.put("theme", store.getTheme());
                 if (isStoreInCart(store.getId())) {
                     long l = db.update("store", values, "id=?", new String[]{store.getId()});
-                    Log.i(TAG, "store " + l + " updated");
+                    Log.i(TAG, "-----------store-----------" + store.getId() + "---updated---");
                 } else {
                     long l = db.insert("store", null, values);
-                    Log.i(TAG, "store " + l + " Added");
+                    Log.i(TAG, "-----------store-----------" + store.getId() + "---Added---");
                 }
             }
         } catch (Exception e) {

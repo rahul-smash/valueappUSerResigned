@@ -16,6 +16,7 @@ import com.signity.bonbon.ui.fragment.MyFavourite;
 import com.signity.bonbon.ui.fragment.MyFavouriteGroceryFragment;
 import com.signity.bonbon.ui.grocery.storetheme1.fragment.HomeFragmentTheme1Grocery;
 import com.signity.bonbon.ui.grocery.storetheme10.fragment.HomeFragmentTheme10Grocery;
+import com.signity.bonbon.ui.grocery.storetheme4.fragment.HomeFragmentTheme4Grocery;
 import com.signity.bonbon.ui.grocery.storetheme7.fragment.HomeFragmentTheme7Grocery;
 import com.signity.bonbon.ui.grocery.storetheme8.fragment.HomeFragmentTheme8Grocery;
 import com.signity.bonbon.ui.grocery.storetheme9.fragment.HomeFragmentTheme9Grocery;
@@ -63,7 +64,12 @@ public class ViewController {
                 fragment = new HomeFragmentTheme3();
                 break;
             case 4:
-                fragment = new HomeFragmentTheme4();
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    fragment = new HomeFragmentTheme4Grocery();
+                } else {
+                    fragment = new HomeFragmentTheme4();
+                }
+
                 break;
             case 5:
                 fragment = new HomeFragAmritsarizaikaTheme5();
@@ -133,8 +139,13 @@ public class ViewController {
                 layoutId = R.layout.home_activity_theme_3;
                 break;
             case 4:
-                // Mr Rooster and signh eleven
-                layoutId = R.layout.home_activity_theme_4;
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    //Himachal Traders
+                    layoutId = R.layout.home_activity_theme_4_grocery;
+                } else {
+                    // Mr Rooster and signh eleven
+                    layoutId = R.layout.home_activity_theme_4;
+                }
                 break;
             case 5:
                 // Bluechillis and Amritsari zaika using theme5

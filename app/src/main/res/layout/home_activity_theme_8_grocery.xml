@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/theme_8_home_bg">
@@ -294,5 +294,5 @@
 
 
         </RelativeLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
 </RelativeLayout>

@@ -64,7 +64,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(com.signity.bonbon.R.layout.fragment_layout_login_mobile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_layout_login_mobile, container, false);
         btnNext = (Button) rootView.findViewById(com.signity.bonbon.R.id.btnNext);
         edtPhone = (EditText) rootView.findViewById(com.signity.bonbon.R.id.edtPhone);
         backButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.backButton);

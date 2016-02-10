@@ -38,16 +38,6 @@
 
     </RelativeLayout>
 
-    <!--<TextView-->
-    <!--android:id="@+id/textLbl"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/header"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:text="Kindly login to proceed further."-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-
     <TextView
         android:id="@+id/textLbl2"
         android:layout_width="wrap_content"

@@ -83,7 +83,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(com.signity.bonbon.R.layout.fragment_layout_login_otp, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_layout_login_otp, container, false);
         btnDone = (Button) rootView.findViewById(R.id.btnDone);
         resend = (Button) rootView.findViewById(R.id.resend);
 //        skipOtp = (Button) rootView.findViewById(R.id.skipOtp);

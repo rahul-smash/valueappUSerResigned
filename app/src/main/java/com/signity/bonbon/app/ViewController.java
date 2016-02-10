@@ -23,6 +23,7 @@ import com.signity.bonbon.ui.grocery.storetheme9.fragment.HomeFragmentTheme9Groc
 import com.signity.bonbon.ui.restaurant.storeamritsarizaika21.fragment.HomeFragAmritsarizaikaTheme5;
 import com.signity.bonbon.ui.restaurant.storeburaan14.fragment.HomeFragmentBuraanTheme6;
 import com.signity.bonbon.ui.restaurant.storetangerine9.fragment.HomeFragmentTangerineTheme1;
+import com.signity.bonbon.ui.restaurant.storetheme11.fragment.HomeFragmentTheme11;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
@@ -106,7 +107,7 @@ public class ViewController {
                 }
                 break;
             case 11:
-//                fragment = new HomeFragmentTheme11();
+                fragment = new HomeFragmentTheme11();
                 break;
             default:
                 fragment = new HomeFragment();
@@ -186,7 +187,7 @@ public class ViewController {
                 }
                 break;
             case 11:
-//                layoutId = R.layout.home_activity_theme_11;
+                layoutId = R.layout.home_activity_theme_11;
                 break;
             default:
                 layoutId = R.layout.home_activity;

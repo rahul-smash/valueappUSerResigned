@@ -70,4 +70,12 @@
     <dimen name="icon_height">35dp</dimen>
 
 
+    <!--For Chatwall hawali-->
+    <dimen name="bg_size">140dp</dimen>
+    <dimen name="left_margin">85dp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
+    <dimen name="home_11_text_size">12sp</dimen>
+    <dimen name="home_icon_size">27sp</dimen>
+
+
 </resources>

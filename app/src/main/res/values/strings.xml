@@ -29,4 +29,7 @@
     <!-- alL CONSTANT USED DYANAMICALLY ON CLASS LEVEN-->
     <string name="class_constatnt_book_now_grocery">SHOPPING</string>
     <string name="class_constatnt_book_now_rest">BOOK NOW</string>
+
+
+    <string name="font_text_cat">\uE900</string>
 </resources>

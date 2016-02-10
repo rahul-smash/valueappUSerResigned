@@ -10,11 +10,7 @@ public class FontUtil {
 
     public static final String FONT_ROBOTO_REGULAR = "fonts/Roboto-Regular.ttf";
     public static final String FONT_ROBOTO_BOLD = "fonts/Roboto-Bold.ttf";
-//    public static final String FONT_ROBOTO_MEDUIM = "fonts/Roboto-Medium.ttf";
-//    public static final String FONT_ProximaNova_Semibold = "fonts/ProximaNova-Semibold.otf";
-//    public static final String FONT_ProximaNovaCond_Regular = "fonts/ProximaNovaCond-Regular.otf";
-//    public static final String FONT_ProximaNova_Light = "fonts/ProximaNova-Light.otf";
-//    public static final String FONT_ProximaNova_Bold = "fonts/ProximaNova-Bold.otf";
+    public static final String ICON_SET = "fonts/icon_set.ttf";
 
 
     private static final Map<String, Typeface> typefaces = new HashMap<String, Typeface>();

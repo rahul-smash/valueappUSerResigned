@@ -27,6 +27,7 @@ import com.signity.bonbon.ui.fragment.ProductListFragment;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -230,7 +231,9 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
             btnCartCount.setVisibility(View.GONE);
         }
         String totalCartValue = appDb.getCartTotalPrice();
-        cartTotalPrice.setText(totalCartValue);
+        DecimalFormat df = new DecimalFormat("####0.00");
+        double doublePrice = Double.parseDouble(totalCartValue);
+        cartTotalPrice.setText(df.format(doublePrice));
     }
 
     public void openShopCartActivity() {

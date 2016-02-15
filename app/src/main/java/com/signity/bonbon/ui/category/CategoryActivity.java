@@ -200,7 +200,8 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
 //            holder.image.setImageResource(images[0]);
 
             if (category.getImageMedium() != null && !category.getImageMedium().isEmpty()) {
-                Picasso.with(CategoryActivity.this).load(category.getImageMedium()).error(R.drawable.no_image).into(holder.image);
+                Picasso.with(CategoryActivity.this).load(category.getImage()).
+                        resize(300, 300).error(R.drawable.no_image).into(holder.image);
             } else {
                 holder.image.setImageResource(R.drawable.no_image);
             }

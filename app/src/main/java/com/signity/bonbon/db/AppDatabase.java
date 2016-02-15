@@ -3,6 +3,7 @@ package com.signity.bonbon.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -664,7 +665,7 @@ public class AppDatabase {
                 if (selectedVarient.getQuantity().equals("0")) {
                     long deleteRow = db.delete("cart_table", "variant_id" + "=?", new String[]{String.valueOf(product.getSelectedVariant().getVariantId())});
                     if (deleteRow != 0) {
-                        Log.i(TAG,"--------Cart----"+product.getTitle() + "--------Removed--------");
+                        Log.i(TAG, "--------Cart----" + product.getTitle() + "--------Removed--------");
                     }
                 } else {
                     ContentValues values = new ContentValues();
@@ -1130,7 +1131,18 @@ public class AppDatabase {
 
             // some of the store element are added so better to drop the store table and  recreate this
             if (newVersion == 2) {
-                db.execSQL(this.stringFromAssets("sql/alter_store_version_two.ddl"));
+                String script = this.stringFromAssets("sql/alter_store_version_two.ddl");
+                String[] queries = script.split(";");
+
+                for (String query : queries) {
+                    try {
+                        db.execSQL(query);
+                    } catch (SQLException e) {
+                        Log.e("Sqlite Error", e.getMessage());
+                    } catch (Exception e) {
+                        Log.e("Sqlite Error", e.getMessage());
+                    }
+                }
             }
         }
 

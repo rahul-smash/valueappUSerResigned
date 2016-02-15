@@ -66,13 +66,11 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     ProductListAdapter adapter;
     ListView mSearchList;
     List<Product> listProduct;
-
     List<List<GetSearchSubProducts>> parentList;
     List<GetSearchSubProducts> childList;
     AppDatabase appDb;
     GsonHelper gsonHelper;
     PrefManager prefManager;
-
     String searchStr;
 
     @Override

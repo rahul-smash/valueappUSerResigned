@@ -219,6 +219,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("email", email);
         param.put("city", cityName);
         param.put("state", stateName);
+        param.put("area_name", stateName);
         param.put("zipcode", zipCode);
 
 
@@ -269,6 +270,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("email", email);
         param.put("city", cityName);
         param.put("state", stateName);
+        param.put("area_name", stateName);
         param.put("zipcode", zipCode);
 
 

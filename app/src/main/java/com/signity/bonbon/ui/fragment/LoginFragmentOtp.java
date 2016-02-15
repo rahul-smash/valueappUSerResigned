@@ -24,6 +24,7 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.GsonHelper;
+import com.signity.bonbon.Utilities.KeyBoard;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -158,6 +159,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     edtOTp.setError("Enter your one time password");
                     return;
                 }
+                KeyBoard.toggle(getActivity(), false);
                 break;
 
             case R.id.backButton:
@@ -386,7 +388,6 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
     private void checkAutoReiceveVerificationCode(int verificationCode) {
         edtOTp.setText(String.valueOf(verificationCode));
         btnDone.performClick();
-
     }
 
 }

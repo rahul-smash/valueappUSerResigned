@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Context context;
     Store store;
 
-
     // Controller;
     ViewController viewController;
 

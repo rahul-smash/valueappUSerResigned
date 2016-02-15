@@ -20,6 +20,7 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.GsonHelper;
+import com.signity.bonbon.Utilities.KeyBoard;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -111,6 +112,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                     } else {
                         callNetworkServiceForOtp();
                     }
+                    KeyBoard.toggle(getActivity(), false);
                 }
                 break;
             case R.id.backButton:

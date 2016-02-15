@@ -64,13 +64,13 @@ public class Store {
     @SerializedName("theme")
     private String theme;
 
-    @SerializedName("current_gold_rate")
-    private String currentGoldRate;
-
-    @SerializedName("display_gold_rate")
-    private String displayGoldRate;
     @SerializedName("otp_skip")
     private String otpSkip;
+
+    @SerializedName("current_gold_rate")
+    private String currentGoldRate;
+    @SerializedName("display_gold_rate")
+    private String displayGoldRate;
 
     public String getVersion() {
         return version;

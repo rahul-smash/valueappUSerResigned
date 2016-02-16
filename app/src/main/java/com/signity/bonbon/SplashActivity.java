@@ -1,11 +1,17 @@
 package com.signity.bonbon;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +30,7 @@ import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -158,5 +165,31 @@ public class SplashActivity extends Activity {
     public void showAlertDialog(Context context, String title,
                                 String message) {
         new DialogHandler(context).setdialogForFinish(title, message, true);
+    }
+
+
+    private void sendNotification(String title, String message) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        int icon = R.mipmap.ic_launcher;
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setTicker(title)
+                .setSmallIcon(icon)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify((new Random(100).nextInt()) /* ID of notification */, notificationBuilder.build());
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.signity.bonbon.R;
@@ -42,6 +43,7 @@ public class Profile extends Fragment implements View.OnClickListener {
     PrefManager prefManager;
     String userId, name, email;
     GCMClientManager pushClientManager;
+    public TextView mobilenumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class Profile extends Fragment implements View.OnClickListener {
 
         rootView = inflater.inflate(R.layout.profile, container, false);
 
+        mobilenumber = (TextView) rootView.findViewById(R.id.mobilenumber);
+        mobilenumber.setText(prefManager.getSharedValue(AppConstant.PHONE));
         edtName = (EditText) rootView.findViewById(R.id.edtName);
         edtName.setTypeface(typeFaceRobotoRegular);
         edtEmail = (EditText) rootView.findViewById(R.id.edtEmail);

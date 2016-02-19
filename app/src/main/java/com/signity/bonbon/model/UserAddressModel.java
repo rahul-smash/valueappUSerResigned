@@ -59,6 +59,19 @@ public class UserAddressModel implements Serializable {
     @Expose
     private String note;
 
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    @SerializedName("city_id")
+    @Expose
+    private String cityId;
+
     /**
      * @return The id
      */

@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
+    android:orientation="vertical"
     tools:context="com.android.grocersapp.DeliveryAddress.DeliveryAddress2">
 
 
@@ -19,71 +20,20 @@
         android:textStyle="bold" />
 
     <ScrollView
-        android:id="@+id/main_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_address">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/done_text"
+            android:layout_below="@+id/edit_address"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="20dp">
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="Full Name"
-                android:textColor="#646464"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/first_name"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                android:textColor="#3a3a3a" />
-
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:text="Mobile Number"
-                android:textColor="#646464"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/mobilenumber"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="phone"
-                android:singleLine="true"
-                android:textColor="#3a3a3a" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="5dp"
-                android:text="Email Address"
-                android:textColor="#646464"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/email_address"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textColor="#3a3a3a" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -176,37 +126,20 @@
                 android:singleLine="true"
                 android:textColor="#3a3a3a" />
 
-            <!--<TextView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="4dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="Country"-->
-            <!--android:textColor="#646464"-->
-            <!--android:textSize="12sp" />-->
-
-            <!--<EditText-->
-            <!--android:id="@+id/country_name"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:imeOptions="actionDone"-->
-            <!--android:singleLine="true"-->
-            <!--android:textColor="#3a3a3a" />-->
-
             <TextView
                 android:id="@+id/done_text"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="15dp"
                 android:background="#29a829"
                 android:gravity="center"
                 android:text="Done"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
-
         </LinearLayout>
 
     </ScrollView>
 
-
-</RelativeLayout>
+</LinearLayout>

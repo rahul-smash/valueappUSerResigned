@@ -3,19 +3,23 @@ package com.signity.bonbon.ui.shopcart;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,6 +73,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private Button applyCoupon;
     private EditText editCoupon;
     private EditText edtBar;
+    ImageButton homeBtn;
+
+    RelativeLayout relativeLayout;
+
+    boolean keyboardOpen=false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +101,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
+
+
+        final View activityRootView = findViewById(R.id.activityRoot);
+        relativeLayout = (RelativeLayout) findViewById(R.id.listLayout);
+        homeBtn=(ImageButton)findViewById(R.id.homeBtn);
+        homeBtn.setOnClickListener(this);
+
         listViewCart = (ListView) findViewById(com.signity.bonbon.R.id.items_list);
         items_price = (TextView) findViewById(com.signity.bonbon.R.id.items_price);
         discountVal = (TextView) findViewById(R.id.discountVal);
@@ -121,6 +137,68 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             listViewCart.setVisibility(View.VISIBLE);
             updateCartPrice();
         }
+
+
+
+        relativeLayout.post(new Runnable() {
+            public void run() {
+                int height = relativeLayout.getHeight();
+                LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, height);
+                relativeLayout.setLayoutParams(mParam);
+            }
+        });
+
+
+        listViewCart.setOnTouchListener(new ListView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                if (keyboardOpen) {
+                    v.getParent().requestDisallowInterceptTouchEvent(false);
+                } else {
+                    int action = event.getAction();
+                    switch (action) {
+                        case MotionEvent.ACTION_DOWN:
+                            // Disallow ScrollView to intercept touch events.
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                            break;
+
+                        case MotionEvent.ACTION_UP:
+                            // Allow ScrollView to intercept touch events.
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+
+                    }
+                }
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
+
+
+        activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                //r will be populated with the coordinates of your view that area still visible.
+                activityRootView.getWindowVisibleDisplayFrame(r);
+
+                int heightDiff = activityRootView.getRootView().getHeight() - (r.bottom - r.top);
+                if (heightDiff > 100) {
+                    // if more than 100 pixels, its probably a keyboard...
+                    keyboardOpen=true;
+                }
+                else {
+                    keyboardOpen=false;
+                }
+            }
+        });
+
+
+
+
     }
 
     private void updateShippingCharges() {
@@ -236,6 +314,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else if (applyCoupon.getTag().equals("remove")) {
                     onRemoveCoupon();
                 }
+                break;
+            case R.id.homeBtn:
+                Intent intent=new Intent(ShoppingCartActivity2.this,MainActivity.class);
+                startActivity(intent);
                 break;
         }
     }

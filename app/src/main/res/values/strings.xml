@@ -32,4 +32,12 @@
 
 
     <string name="font_text_cat">\uE900</string>
+    <!--  FOnt aswsome -->
+    <string name="font_home_cat"></string>
+    <string name="font_home_my_cart"></string>
+    <string name="font_home_contact"></string>
+    <string name="font_home_offer"></string>
+    <string name="font_home_order"></string>
+    <string name="font_home_fav"></string>
+    <string name="font_home_book"></string>
 </resources>

@@ -37,7 +37,7 @@ import retrofit.client.Response;
  */
 public class AddAddressFragment extends Fragment implements View.OnClickListener {
 
-    EditText first_name, mobilenumber, email_address, address_line1, address_line2, zip_code;
+    EditText address_line1, address_line2, zip_code;
     Button city_name, state_name;
     public TextView done_text;
     View mView;
@@ -77,9 +77,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 
         mView = inflater.inflate(com.signity.bonbon.R.layout.add_address_fragment, container, false);
         edit_address = (TextView) mView.findViewById(com.signity.bonbon.R.id.edit_address);
-        first_name = (EditText) mView.findViewById(com.signity.bonbon.R.id.first_name);
-        mobilenumber = (EditText) mView.findViewById(com.signity.bonbon.R.id.mobilenumber);
-        email_address = (EditText) mView.findViewById(com.signity.bonbon.R.id.email_address);
         address_line1 = (EditText) mView.findViewById(com.signity.bonbon.R.id.address_line1);
         city_name = (Button) mView.findViewById(com.signity.bonbon.R.id.city_name);
         city_name.setOnClickListener(this);
@@ -95,43 +92,15 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             UserAddressModel object = (UserAddressModel) getArguments().getSerializable("object");
             addressId = object.getId();
             areaID = object.getAreaId();
+            cityId = object.getCityId() != null ? object.getCityId() : "";
             edit_address.setText("Edit address");
-            first_name.setText(object.getFirstName().toString());
-            mobilenumber.setText(object.getMobile().toString());
-            email_address.setText(object.getEmail().toString());
 
-            if (!first_name.getText().toString().isEmpty()) {
-                first_name.setInputType(InputType.TYPE_NULL);
-                first_name.setEnabled(false);
-            }
-            if (!mobilenumber.getText().toString().isEmpty()) {
-                mobilenumber.setInputType(InputType.TYPE_NULL);
-                mobilenumber.setEnabled(false);
-            }
-            if (!email_address.getText().toString().isEmpty()) {
-                email_address.setInputType(InputType.TYPE_NULL);
-                email_address.setEnabled(false);
-            }
-
+            city_name.setText(object.getCity() != null ? object.getCity() : "");
+            state_name.setText(object.getState() != null ? object.getState() : "");
             address_line1.setText(object.getAddress().toString());
             zip_code.setText(object.getZipcode().toString());
         } else if (action.equalsIgnoreCase("ADD")) {
             edit_address.setText("Add address");
-            first_name.setText(prefManager.getSharedValue(AppConstant.NAME));
-            mobilenumber.setText(prefManager.getSharedValue(AppConstant.PHONE));
-            email_address.setText(prefManager.getSharedValue(AppConstant.EMAIL));
-            if (!first_name.getText().toString().isEmpty()) {
-                first_name.setInputType(InputType.TYPE_NULL);
-                first_name.setEnabled(false);
-            }
-            if (!mobilenumber.getText().toString().isEmpty()) {
-                mobilenumber.setInputType(InputType.TYPE_NULL);
-                mobilenumber.setEnabled(false);
-            }
-            if (!email_address.getText().toString().isEmpty()) {
-                email_address.setInputType(InputType.TYPE_NULL);
-                email_address.setEnabled(false);
-            }
         }
 
         done_text.setOnClickListener(new View.OnClickListener() {
@@ -139,49 +108,23 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                                          public void onClick(View v) {
                                              if (action.equalsIgnoreCase("edit")) {
 
-                                                 if (first_name.getText().toString().isEmpty()) {
-                                                     first_name.setError("Name Required");
-                                                 } else if (mobilenumber.getText().toString().isEmpty()) {
-                                                     mobilenumber.setError("Mobile Number Required");
-                                                 } else if (address_line1.getText().toString().isEmpty()) {
+                                                 if (address_line1.getText().toString().isEmpty()) {
                                                      address_line1.setError("Address Required");
                                                  } else {
-                                                     if (!email_address.getText().toString().isEmpty()) {
-                                                         if (!Util.checkValidEmail(email_address.getText().toString())) {
-                                                             email_address.setError("Enter Valid Email");
-                                                         } else {
-                                                             updateDeliveryAddress();
-                                                         }
-                                                     } else {
-                                                         updateDeliveryAddress();
-                                                     }
+                                                     updateDeliveryAddress();
                                                  }
 
                                              } else {
-
-                                                 if (first_name.getText().toString().isEmpty()) {
-                                                     first_name.setError("Name Required");
-                                                 } else if (mobilenumber.getText().toString().isEmpty()) {
-                                                     mobilenumber.setError("Mobile Number Required");
-                                                 } else if (address_line1.getText().toString().isEmpty()) {
+                                                 if (address_line1.getText().toString().isEmpty()) {
                                                      address_line1.setError("Address Required");
                                                  } else if (areaID.isEmpty()) {
                                                      city_name.setError("City");
                                                      state_name.setError("Area");
                                                  } else {
-                                                     if (!email_address.getText().toString().isEmpty()) {
-                                                         if (!Util.checkValidEmail(email_address.getText().toString())) {
-                                                             email_address.setError("Enter Valid Email");
-                                                         } else {
-                                                             addNewDeliveryAddress();
-                                                         }
-                                                     } else {
-                                                         addNewDeliveryAddress();
-                                                     }
+                                                     addNewDeliveryAddress();
                                                  }
 
                                              }
-
                                          }
                                      }
 
@@ -199,13 +142,22 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         PrefManager prefManager = new PrefManager(getActivity());
         String userId = prefManager.getSharedValue(AppConstant.ID);
 
-        String firstName = String.valueOf(first_name.getText());
-        String mobileNumber = String.valueOf(mobilenumber.getText());
-        String email = String.valueOf(email_address.getText());
+        String firstName = prefManager.getSharedValue(AppConstant.NAME);
+        if (firstName.isEmpty()) {
+            firstName = "Guest";
+        }
+        String mobileNumber = prefManager.getSharedValue(AppConstant.PHONE);
+        String email = prefManager.getSharedValue(AppConstant.EMAIL);
+        if (email.isEmpty()) {
+            email = "No Email Info";
+        }
         String addressLine1 = String.valueOf(address_line1.getText());
         String cityName = String.valueOf(city_name.getText());
         String stateName = String.valueOf(state_name.getText());
         String zipCode = String.valueOf(zip_code.getText());
+        if (zipCode.isEmpty()) {
+            zipCode = "0";
+        }
 
         Map<String, String> param = new HashMap<String, String>();
 
@@ -219,7 +171,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("email", email);
         param.put("city", cityName);
         param.put("state", stateName);
-        param.put("area_name", stateName);
         param.put("zipcode", zipCode);
 
 
@@ -251,13 +202,22 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         PrefManager prefManager = new PrefManager(getActivity());
         String userId = prefManager.getSharedValue(AppConstant.ID);
 
-        String firstName = String.valueOf(first_name.getText());
-        String mobileNumber = String.valueOf(mobilenumber.getText());
-        String email = String.valueOf(email_address.getText());
+        String firstName = prefManager.getSharedValue(AppConstant.NAME);
+        if (firstName.isEmpty()) {
+            firstName = "Guest";
+        }
+        String mobileNumber = prefManager.getSharedValue(AppConstant.PHONE);
+        String email = prefManager.getSharedValue(AppConstant.EMAIL);
+        if (email.isEmpty()) {
+            email = "No Email Info";
+        }
         String addressLine1 = String.valueOf(address_line1.getText());
         String cityName = String.valueOf(city_name.getText());
         String stateName = String.valueOf(state_name.getText());
         String zipCode = String.valueOf(zip_code.getText());
+        if (zipCode.isEmpty()) {
+            zipCode = "0";
+        }
 
         Map<String, String> param = new HashMap<String, String>();
 
@@ -270,7 +230,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("email", email);
         param.put("city", cityName);
         param.put("state", stateName);
-        param.put("area_name", stateName);
         param.put("zipcode", zipCode);
 
 

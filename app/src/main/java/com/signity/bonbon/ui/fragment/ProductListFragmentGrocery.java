@@ -357,6 +357,7 @@ public final class ProductListFragmentGrocery extends Fragment {
             });
 
 
+
             holder.heart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -374,6 +375,7 @@ public final class ProductListFragmentGrocery extends Fragment {
 
             return convertView;
         }
+
 
         class MyAdapter extends ArrayAdapter<Variant> {
             LayoutInflater l;

@@ -24,8 +24,11 @@ import com.signity.bonbon.ui.restaurant.storeamritsarizaika21.fragment.HomeFragA
 import com.signity.bonbon.ui.restaurant.storeburaan14.fragment.HomeFragmentBuraanTheme6;
 import com.signity.bonbon.ui.restaurant.storetangerine9.fragment.HomeFragmentTangerineTheme1;
 import com.signity.bonbon.ui.restaurant.storetheme11.fragment.HomeFragmentTheme11;
+import com.signity.bonbon.ui.restaurant.storetheme13.fragment.HomeFragmentKhaneTheme13;
+import com.signity.bonbon.ui.restaurant.storetheme14.fragment.HomeFragmentLazeezTheme14;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
+import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
 import com.signity.bonbon.ui.search.SearchActivity;
 import com.signity.bonbon.ui.search.SearchForGroceryActivity;
@@ -82,7 +85,7 @@ public class ViewController {
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme7Grocery();
                 } else {
-
+                    fragment = new HomeFragmentHundredTheme7();
                 }
                 break;
             case 8:
@@ -108,6 +111,12 @@ public class ViewController {
                 break;
             case 11:
                 fragment = new HomeFragmentTheme11();
+                break;
+            case 13:
+                fragment = new HomeFragmentKhaneTheme13();
+                break;
+            case 14:
+                fragment = new HomeFragmentLazeezTheme14();
                 break;
             default:
                 fragment = new HomeFragment();
@@ -161,7 +170,8 @@ public class ViewController {
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_7_gorcery;
                 } else {
-
+                    //Hundred SPices
+                    layoutId = R.layout.home_activity_theme_7;
                 }
                 break;
             case 8:
@@ -188,6 +198,13 @@ public class ViewController {
                 break;
             case 11:
                 layoutId = R.layout.home_activity_theme_11;
+                break;
+            case 13:
+                //Khane Khaas
+                layoutId = R.layout.home_activity_theme_13;
+            case 14:
+                //Lazeez Rasoi
+                layoutId = R.layout.home_activity_theme_14;
                 break;
             default:
                 layoutId = R.layout.home_activity;

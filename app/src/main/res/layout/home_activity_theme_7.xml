@@ -33,13 +33,15 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="35dp">
 
-                        <ImageView
+                        <com.signity.bonbon.view.FontTextView
                             android:id="@+id/imgCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/theme_7_home_cat" />
+                            android:gravity="center"
+                            android:text="@string/font_home_cat"
+                            android:textColor="@color/color_white"
+                            android:textSize="32dp" />
 
                         <TextView
                             android:id="@+id/category_name"
@@ -47,9 +49,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/imgCategory"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="8dp"
                             android:text="CATEGORIES"
-                            android:textColor="@color/ColorPrimary"
+                            android:textColor="@color/color_white"
                             android:textSize="@dimen/home_text_size" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -70,13 +71,15 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="35dp">
 
-                        <ImageView
+                        <com.signity.bonbon.view.FontTextView
                             android:id="@+id/imgOffers"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/theme_7_home_offers" />
+                            android:gravity="center"
+                            android:text="@string/font_home_offer"
+                            android:textColor="@color/color_white"
+                            android:textSize="32dp" />
 
                         <TextView
                             android:id="@+id/offers"
@@ -84,9 +87,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/imgOffers"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
                             android:text="OFFERS"
-                            android:textColor="@color/ColorPrimary"
+                            android:textColor="@color/color_white"
                             android:textSize="@dimen/home_text_size" />
                     </RelativeLayout>
 
@@ -111,23 +113,25 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="35dp">
 
-                    <ImageView
-                        android:id="@+id/imgMyOrder"
+
+                    <com.signity.bonbon.view.FontTextView
+                        android:id="@+id/imgOrderHistory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/theme_7_home_order_history" />
+                        android:gravity="center"
+                        android:text="@string/font_home_order"
+                        android:textColor="@color/color_white"
+                        android:textSize="32dp" />
 
                     <TextView
                         android:id="@+id/myOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/imgMyOrder"
+                        android:layout_below="@+id/imgOrderHistory"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="8dp"
                         android:text="DELIVERY AREAS"
-                        android:textColor="@color/ColorPrimary"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/home_text_size" />
 
                 </RelativeLayout>
@@ -152,13 +156,15 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="35dp">
 
-                    <ImageView
+                    <com.signity.bonbon.view.FontTextView
                         android:id="@+id/imgCart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/theme_7_home_mycart" />
+                        android:gravity="center"
+                        android:text="@string/font_home_my_cart"
+                        android:textColor="@color/color_white"
+                        android:textSize="32dp" />
 
                     <TextView
                         android:id="@+id/myCart"
@@ -166,9 +172,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/imgCart"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="8dp"
                         android:text="MY CART"
-                        android:textColor="@color/ColorPrimary"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/home_text_size" />
 
 
@@ -218,13 +223,15 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="35dp">
 
-                    <ImageView
+                    <com.signity.bonbon.view.FontTextView
                         android:id="@+id/imgBookNow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/theme_7_home_shop_list" />
+                        android:gravity="center"
+                        android:text="@string/font_home_book"
+                        android:textColor="@color/color_white"
+                        android:textSize="32dp" />
 
                     <TextView
                         android:id="@+id/bookNow"
@@ -232,9 +239,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/imgBookNow"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:text="SHOPPING"
-                        android:textColor="@color/ColorPrimary"
+                        android:text="BOOK NOW"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/home_text_size" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -254,13 +260,16 @@
                     android:layout_marginTop="35dp">
 
 
-                    <ImageView
+
+                    <com.signity.bonbon.view.FontTextView
                         android:id="@+id/imgContact"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/theme_7_home_contact" />
+                        android:gravity="center"
+                        android:text="@string/font_home_contact"
+                        android:textColor="@color/color_white"
+                        android:textSize="32dp" />
 
                     <TextView
                         android:id="@+id/contact"
@@ -268,9 +277,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/imgContact"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
                         android:text="CONTACT"
-                        android:textColor="@color/ColorPrimary"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/home_text_size" />
 
                 </RelativeLayout>

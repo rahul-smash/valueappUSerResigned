@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -63,15 +64,18 @@ public class GCMNotificationIntentService extends IntentService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+
         int icon = R.mipmap.ic_launcher;
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(icon)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setTicker(title)
+                .setSmallIcon(icon)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =

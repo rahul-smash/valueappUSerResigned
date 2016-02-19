@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
-                    title.setText("Delivery Address");
+//                    title.setText("Delivery Address");
                     Intent intentDelivery = new Intent(MainActivity.this, DeliveryActivity.class);
                     intentDelivery.putExtra(AppConstant.FROM, "menu");
                     startActivity(intentDelivery);

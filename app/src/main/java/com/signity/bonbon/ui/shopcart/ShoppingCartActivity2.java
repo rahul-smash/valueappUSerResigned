@@ -210,6 +210,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     shipping_charges.setText(String.valueOf(shippingCharge));
                     total.setText(String.valueOf(totalPrice + shippingCharge));
                 } else {
+                    shippingCharge=0.0;
                     shipping_charges.setText(String.valueOf(0.0));
                     total.setText(String.valueOf(totalPrice));
                 }

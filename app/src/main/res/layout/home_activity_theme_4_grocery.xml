@@ -6,126 +6,126 @@
     android:weightSum="5">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2">-->
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/theme_4_home_slider" />
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/theme_4_home_slider" />-->
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:adjustViewBounds="true"
-            android:src="@drawable/theme_4_home_logo" />
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:src="@drawable/theme_4_home_logo" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:background="@drawable/theme_4_home_bg">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="3"-->
+        <!--android:background="@drawable/theme_4_home_bg">-->
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="10dp">-->
 
-            <ImageButton
-                android:id="@+id/btnContact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/theme_4_home_contact" />
-
-
-            <Button
-                android:id="@+id/buttonCart"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignRight="@+id/btnMyCart"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/red_noto"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="10sp"
-                android:visibility="gone" />
-
-            <ImageButton
-                android:id="@+id/btnMyCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/btnContact"
-                android:background="@android:color/transparent"
-                android:src="@drawable/theme_4_home_cart" />
-        </RelativeLayout>
-
-        <ImageButton
-            android:id="@+id/btnMyOrders"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/theme_4_home_delivery" />
-
-        <ImageView
-            android:id="@+id/cook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/theme_4_home_center_logo" />
-
-        <ImageButton
-            android:id="@+id/btnCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/theme_4_home_cat" />
+            <!--<ImageButton-->
+                <!--android:id="@+id/btnContact"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="30dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:src="@drawable/theme_4_home_contact" />-->
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp">
+            <!--<Button-->
+                <!--android:id="@+id/buttonCart"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_alignRight="@+id/btnMyCart"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="@drawable/red_noto"-->
+                <!--android:clickable="false"-->
+                <!--android:gravity="center"-->
+                <!--android:text="0"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="10sp"-->
+                <!--android:visibility="gone" />-->
 
-            <ImageButton
-                android:id="@+id/btnBookNow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/theme_4_home_book_now" />
+            <!--<ImageButton-->
+                <!--android:id="@+id/btnMyCart"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_toRightOf="@+id/btnContact"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:src="@drawable/theme_4_home_cart" />-->
+        <!--</RelativeLayout>-->
 
-            <ImageButton
-                android:id="@+id/btnOffers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/btnBookNow"
-                android:background="@android:color/transparent"
-                android:src="@drawable/theme_4_home_offer" />
-        </RelativeLayout>
+        <!--<ImageButton-->
+            <!--android:id="@+id/btnMyOrders"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:src="@drawable/theme_4_home_delivery" />-->
 
-    </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/cook"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/theme_4_home_center_logo" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/btnCategory"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:src="@drawable/theme_4_home_cat" />-->
+
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginBottom="10dp">-->
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/btnBookNow"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="30dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:src="@drawable/theme_4_home_book_now" />-->
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/btnOffers"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_toRightOf="@+id/btnBookNow"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:src="@drawable/theme_4_home_offer" />-->
+        <!--</RelativeLayout>-->
+
+    <!--</RelativeLayout>-->
 
 </LinearLayout>

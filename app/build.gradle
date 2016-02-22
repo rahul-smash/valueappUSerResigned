@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId 'com.signity.hollymart'
+        applicationId 'com.signity.empire'
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

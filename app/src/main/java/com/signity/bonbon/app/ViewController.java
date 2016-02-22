@@ -183,7 +183,7 @@ public class ViewController {
                 break;
 
             case 9:
-                // Bon Bon
+
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_9_grocery;
                 } else {
@@ -202,6 +202,7 @@ public class ViewController {
             case 13:
                 //Khane Khaas
                 layoutId = R.layout.home_activity_theme_13;
+                break;
             case 14:
                 //Lazeez Rasoi
                 layoutId = R.layout.home_activity_theme_14;

@@ -5,11 +5,18 @@
     android:orientation="vertical">
 
 
+    <View
+        android:id="@+id/horizontalLine1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"
+        android:layout_alignParentTop="true"/>
     <RelativeLayout
+        android:layout_below="@+id/horizontalLine1"
         android:id="@+id/add_address"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:background="#29a829"
+        android:background="@color/ColorPrimary"
         android:padding="6dp">
 
         <TextView
@@ -21,7 +28,7 @@
             android:drawableLeft="@drawable/add1"
             android:drawablePadding="15dp"
             android:gravity="center"
-            android:text="Add Delivery Address"
+            android:text="Add Delivery Addresses"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -41,7 +48,7 @@
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:background="#29a829">
+        android:background="@color/ColorPrimary">
 
         <TextView
             android:id="@+id/mTxtProceed"

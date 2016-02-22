@@ -50,6 +50,7 @@
             android:id="@+id/linear0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
@@ -65,25 +66,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:padding="10dp"
                     android:text="Name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/text_size_large" />
 
                 <EditText
                     android:id="@+id/edtName"
                     android:layout_width="fill_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="2dp"
                     android:background="@color/color_white"
                     android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="Name"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:textColor="@android:color/black" />
+                    android:padding="5dp"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@null" />
             </LinearLayout>
 
 
@@ -100,25 +102,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:padding="10dp"
                     android:text="Email"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/text_size_large" />
 
                 <EditText
                     android:id="@+id/edtEmail"
                     android:layout_width="fill_parent"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="2dp"
                     android:background="@color/color_white"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Email (Optional)"
+                    android:hint="Email(Optional)"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="10dp"
-                    android:textColor="@android:color/black" />
+                    android:padding="5dp"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@null" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phoneLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Mobile Number"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/mobilenumber"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="2dp"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="Mobile"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="2dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_large"/>
+
+
             </LinearLayout>
 
             <Button

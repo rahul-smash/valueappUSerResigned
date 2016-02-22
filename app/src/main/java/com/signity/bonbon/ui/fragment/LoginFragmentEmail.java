@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -43,6 +45,7 @@ public class LoginFragmentEmail extends Fragment {
     private PrefManager prefManager;
 
     String from, fullName, email;
+    public TextView mobilenumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class LoginFragmentEmail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(com.signity.bonbon.R.layout.fragment_layout_login_email, container, false);
+        mobilenumber = (TextView) rootView.findViewById(R.id.mobilenumber);
+        mobilenumber.setText(prefManager.getSharedValue(AppConstant.PHONE));
         updateButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.updateButton);
         backButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.backButton);
         edtName = (EditText) rootView.findViewById(com.signity.bonbon.R.id.edtName);

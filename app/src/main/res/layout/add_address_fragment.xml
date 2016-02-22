@@ -28,9 +28,9 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/done_text"
             android:layout_below="@+id/edit_address"
-            android:layout_marginTop="40dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="20dp">
@@ -45,23 +45,6 @@
                 android:textColor="#3a3a3a"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="10dp"
-                android:text="Full Address"
-                android:textColor="#646464"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/address_line1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                android:textColor="#3a3a3a" />
 
 
             <TextView
@@ -105,6 +88,23 @@
                 android:hint="Area"
                 android:imeOptions="actionNext"
                 android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textColor="#3a3a3a" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="10dp"
+                android:text="Full Address"
+                android:textColor="#646464"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/address_line1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
                 android:singleLine="true"
                 android:textColor="#3a3a3a" />
 

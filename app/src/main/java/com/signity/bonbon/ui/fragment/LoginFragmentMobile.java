@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.GsonHelper;
-import com.signity.bonbon.Utilities.KeyBoard;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -112,7 +112,10 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                     } else {
                         callNetworkServiceForOtp();
                     }
-                    KeyBoard.toggle(getActivity(), false);
+
+                    InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mgr.hideSoftInputFromWindow(btnNext.getWindowToken(), 0);
+
                 }
                 break;
             case R.id.backButton:

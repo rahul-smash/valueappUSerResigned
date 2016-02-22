@@ -1,254 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-<!--    <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/theme_9_home_bg">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-
         <RelativeLayout
-            android:id="@+id/relCategory"
-            android:layout_width="@dimen/menu_bg_width"
-            android:layout_height="@dimen/menu_bg_height"
-            android:layout_margin="5dp"
-            android:background="@drawable/theme_9_home_menu_bg">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:id="@+id/relCategory"
+                android:layout_width="@dimen/menu_bg_width"
+                android:layout_height="@dimen/menu_bg_height"
+                android:layout_margin="5dp"
+                android:background="@drawable/theme_9_home_menu_bg">
 
-                <ImageView
-                    android:id="@+id/imgCategory"
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/theme_9_home_cat" />
+                    android:layout_centerVertical="true">
 
-                <TextView
-                    android:id="@+id/category_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgCategory"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="CATEGORIES"
-                    android:textSize="@dimen/home_text_size"
-                    android:textColor="@android:color/white"/>
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/imgCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/theme_9_home_cat" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relMyOrders"
-            android:layout_width="@dimen/menu_bg_width"
-            android:layout_height="@dimen/menu_bg_height"
-            android:layout_margin="5dp"
-            android:layout_toRightOf="@+id/relCategory"
-            android:background="@drawable/theme_9_home_menu_bg">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
-
-                <ImageView
-                    android:id="@+id/imgMyOrder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/theme_9_home_order_history" />
-
-                <TextView
-                    android:id="@+id/myOrder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgMyOrder"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="ORDER HISTORY"
-                    android:textSize="@dimen/home_text_size"
-                    android:textColor="@android:color/white"/>
+                    <TextView
+                        android:id="@+id/category_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgCategory"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="CATEGORIES"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_text_size" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relMyCart"
-            android:layout_width="@dimen/menu_bg_width"
-            android:layout_height="@dimen/menu_bg_height"
-            android:layout_below="@+id/relCategory"
-            android:layout_margin="5dp"
-            android:background="@drawable/theme_9_home_menu_bg">
-
             <RelativeLayout
-                android:id="@+id/relativeInnerMycart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:id="@+id/relMyOrders"
+                android:layout_width="@dimen/menu_bg_width"
+                android:layout_height="@dimen/menu_bg_height"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/relCategory"
+                android:background="@drawable/theme_9_home_menu_bg">
 
-                <ImageView
-                    android:id="@+id/imgCart"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/theme_9_home_mycart" />
+                    android:layout_centerVertical="true">
 
-                <TextView
-                    android:id="@+id/myCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgCart"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="MY CART"
-                    android:textSize="@dimen/home_text_size"
-                    android:textColor="@android:color/white"/>
+                    <ImageView
+                        android:id="@+id/imgMyOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/theme_9_home_order_history" />
+
+                    <TextView
+                        android:id="@+id/myOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgMyOrder"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="ORDER HISTORY"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_text_size" />
+
+                </RelativeLayout>
+
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/buttonCart"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_alignRight="@+id/relativeInnerMycart"
-                android:layout_alignTop="@+id/relativeInnerMycart"
-                android:layout_marginTop="-5dp"
-                android:background="@drawable/red_noto"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="13sp"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relOffers"
-            android:layout_width="@dimen/menu_bg_width"
-            android:layout_height="@dimen/menu_bg_height"
-            android:layout_below="@+id/relMyOrders"
-            android:layout_margin="5dp"
-            android:layout_toRightOf="@+id/relMyCart"
-            android:background="@drawable/theme_9_home_menu_bg">
-
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:id="@+id/relMyCart"
+                android:layout_width="@dimen/menu_bg_width"
+                android:layout_height="@dimen/menu_bg_height"
+                android:layout_below="@+id/relCategory"
+                android:layout_margin="5dp"
+                android:background="@drawable/theme_9_home_menu_bg">
 
-                <ImageView
-                    android:id="@+id/imgOffers"
+                <RelativeLayout
+                    android:id="@+id/relativeInnerMycart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/theme_9_home_offers" />
+                    android:layout_centerVertical="true">
 
-                <TextView
-                    android:id="@+id/offers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgOffers"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="OFFERS"
-                    android:textSize="@dimen/home_text_size"
-                    android:textColor="@android:color/white"/>
+                    <ImageView
+                        android:id="@+id/imgCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/theme_9_home_mycart" />
+
+                    <TextView
+                        android:id="@+id/myCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgCart"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="MY CART"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_text_size" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/buttonCart"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignRight="@+id/relativeInnerMycart"
+                    android:layout_alignTop="@+id/relativeInnerMycart"
+                    android:layout_marginTop="-5dp"
+                    android:background="@drawable/red_noto"
+                    android:clickable="false"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
             </RelativeLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relBookNow"
-            android:layout_width="@dimen/menu_bg_width"
-            android:layout_height="@dimen/menu_bg_height"
-            android:layout_below="@+id/relMyCart"
-            android:layout_margin="5dp"
-            android:background="@drawable/theme_9_home_menu_bg">
-
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:id="@+id/relOffers"
+                android:layout_width="@dimen/menu_bg_width"
+                android:layout_height="@dimen/menu_bg_height"
+                android:layout_below="@+id/relMyOrders"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/relMyCart"
+                android:background="@drawable/theme_9_home_menu_bg">
 
-                <ImageView
-                    android:id="@+id/imgBookNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/icon_height"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/theme_9_home_shop_list" />
-
-                <TextView
-                    android:id="@+id/bookNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgBookNow"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="SHOPPING"
-                    android:textSize="@dimen/home_text_size"
-                    android:textColor="@android:color/white"/>
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/relContact"
-            android:layout_width="@dimen/menu_bg_width"
-            android:layout_height="@dimen/menu_bg_height"
-            android:layout_below="@+id/relOffers"
-            android:layout_margin="5dp"
-            android:layout_toRightOf="@+id/relMyCart"
-            android:background="@drawable/theme_9_home_menu_bg">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
-
-
-                <ImageView
-                    android:id="@+id/imgContact"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/theme_9_home_contact" />
+                    android:layout_centerVertical="true">
 
-                <TextView
-                    android:id="@+id/contact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/imgContact"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:text="CONTACT"
-                    android:textSize="@dimen/home_text_size"
-                    android:textColor="@android:color/white"/>
+                    <ImageView
+                        android:id="@+id/imgOffers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/theme_9_home_offers" />
+
+                    <TextView
+                        android:id="@+id/offers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgOffers"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="OFFERS"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_text_size" />
+                </RelativeLayout>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relBookNow"
+                android:layout_width="@dimen/menu_bg_width"
+                android:layout_height="@dimen/menu_bg_height"
+                android:layout_below="@+id/relMyCart"
+                android:layout_margin="5dp"
+                android:background="@drawable/theme_9_home_menu_bg">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true">
+
+                    <ImageView
+                        android:id="@+id/imgBookNow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/icon_height"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/theme_9_home_shop_list" />
+
+                    <TextView
+                        android:id="@+id/bookNow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgBookNow"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="SHOPPING"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_text_size" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relContact"
+                android:layout_width="@dimen/menu_bg_width"
+                android:layout_height="@dimen/menu_bg_height"
+                android:layout_below="@+id/relOffers"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/relMyCart"
+                android:background="@drawable/theme_9_home_menu_bg">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true">
+
+
+                    <ImageView
+                        android:id="@+id/imgContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/theme_9_home_contact" />
+
+                    <TextView
+                        android:id="@+id/contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgContact"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="CONTACT"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_text_size" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>
-
-    </RelativeLayout>-->
 </RelativeLayout>

@@ -44,6 +44,7 @@ import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,31 +54,27 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
+    public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
     TextView items_price, discountVal, total, title;
     Button placeorder;
-    private GCMClientManager pushClientManager;
-
-    public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
-    private Button backButton, btnSearch;
-    private TextView shipping_charges;
-
     String userId;
     String addressId;
     String shippingChargeText, minmimumChargesText, user_address;
-    private AppDatabase appDb;
     ProductListAdapter adapter;
     List<Product> listProduct;
     double shippingCharge = 0.0;
     double minimumCharges = 0.0;
+    ImageButton homeBtn;
+    RelativeLayout relativeLayout;
+    boolean keyboardOpen = false;
+    private GCMClientManager pushClientManager;
+    private Button backButton, btnSearch;
+    private TextView shipping_charges;
+    private AppDatabase appDb;
     private Button applyCoupon;
     private EditText editCoupon;
     private EditText edtBar;
-    ImageButton homeBtn;
-
-    RelativeLayout relativeLayout;
-
-    boolean keyboardOpen=false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,7 +102,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         final View activityRootView = findViewById(R.id.activityRoot);
         relativeLayout = (RelativeLayout) findViewById(R.id.listLayout);
-        homeBtn=(ImageButton)findViewById(R.id.homeBtn);
+        homeBtn = (ImageButton) findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(this);
 
         listViewCart = (ListView) findViewById(com.signity.bonbon.R.id.items_list);
@@ -137,7 +134,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             listViewCart.setVisibility(View.VISIBLE);
             updateCartPrice();
         }
-
 
 
         relativeLayout.post(new Runnable() {
@@ -188,15 +184,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 int heightDiff = activityRootView.getRootView().getHeight() - (r.bottom - r.top);
                 if (heightDiff > 100) {
                     // if more than 100 pixels, its probably a keyboard...
-                    keyboardOpen=true;
-                }
-                else {
-                    keyboardOpen=false;
+                    keyboardOpen = true;
+                } else {
+                    keyboardOpen = false;
                 }
             }
         });
-
-
 
 
     }
@@ -210,7 +203,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     shipping_charges.setText(String.valueOf(shippingCharge));
                     total.setText(String.valueOf(totalPrice + shippingCharge));
                 } else {
-                    shippingCharge=0.0;
+                    shippingCharge = 0.0;
                     shipping_charges.setText(String.valueOf(0.0));
                     total.setText(String.valueOf(totalPrice));
                 }
@@ -317,7 +310,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 }
                 break;
             case R.id.homeBtn:
-                Intent intent=new Intent(ShoppingCartActivity2.this,MainActivity.class);
+                Intent intent = new Intent(ShoppingCartActivity2.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -401,6 +394,23 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+    public void showAlertDialog(Context context, String title,
+                                String message) {
+        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+        dialogHandler.setDialog(title, message);
+        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                appDb.deleteCartElement();
+                Intent intent_home = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent_home);
+                finish();
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+            }
+        });
+    }
 
     class ProductListAdapter extends BaseAdapter {
         Activity context;
@@ -436,7 +446,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         public View getView(final int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
-                convertView = layoutInflater.inflate(R.layout.view_shopcart_item_child, null);
+                convertView = layoutInflater.inflate(R.layout.view_shoppingcart_item_child, null);
                 holder = new ViewHolder();
                 holder.rel_mrp_offer_price = (RelativeLayout) convertView.findViewById(R.id.rel_mrp_offer_price);
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
@@ -445,12 +455,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.items_name.setTypeface(typeFaceRobotoBold);
                 holder.items_price = (TextView) convertView.findViewById(com.signity.bonbon.R.id.items_price);
                 holder.items_price.setTypeface(typeFaceRobotoRegular);
-                holder.add_button = (ImageButton) convertView.findViewById(com.signity.bonbon.R.id.add_button);
-                holder.remove_button = (ImageButton) convertView.findViewById(com.signity.bonbon.R.id.remove_button);
                 holder.number_text = (TextView) convertView.findViewById(com.signity.bonbon.R.id.number_text);
                 holder.number_text.setTypeface(typeFaceRobotoRegular);
                 holder.rupee = (TextView) convertView.findViewById(com.signity.bonbon.R.id.rupee);
                 holder.rupee.setTypeface(typeFaceRobotoRegular);
+                holder.totalValue = (TextView) convertView.findViewById(R.id.totalValue);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -458,10 +467,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
-
-
-            holder.add_button.setVisibility(View.GONE);
-            holder.remove_button.setVisibility(View.GONE);
 
             String productPrice = "";
             String mrpPrice = "";
@@ -499,6 +504,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.rel_mrp_offer_price.setVisibility(View.VISIBLE);
             }
             holder.items_mrp_price.setText(mrpPrice);
+            Double totalPrice = Double.parseDouble(txtQuantCount) * Double.parseDouble(productPrice);
+
+            holder.totalValue.setText(String.valueOf(totalPrice));
+
             return convertView;
         }
 
@@ -531,29 +540,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }
 
         class ViewHolder {
+            public RelativeLayout rel_mrp_offer_price;
+            public TextView items_mrp_price, totalValue;
             RelativeLayout parent;
             TextView items_name, items_price, number_text, rupee;
-            public ImageButton add_button, remove_button;
-            public RelativeLayout rel_mrp_offer_price;
-            public TextView items_mrp_price;
         }
-    }
-
-    public void showAlertDialog(Context context, String title,
-                                String message) {
-        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-        dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogHandler.dismiss();
-                appDb.deleteCartElement();
-                Intent intent_home = new Intent(ShoppingCartActivity2.this, MainActivity.class);
-                intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent_home);
-                finish();
-                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
-            }
-        });
     }
 }

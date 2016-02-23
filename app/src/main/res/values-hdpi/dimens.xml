@@ -85,4 +85,8 @@
     <!--For Lazeez Rasoi-->
     <dimen name="layout_bottom_margin">25dp</dimen>
     <dimen name="layout_side_margin">10dp</dimen>
+
+    <!--For Nukkar Dhaba-->
+    <dimen name="menubg_height">40dp</dimen>
+
 </resources>

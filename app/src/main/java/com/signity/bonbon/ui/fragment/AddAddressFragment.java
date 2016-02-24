@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.UserAddressModel;
@@ -52,7 +50,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     String action;
     private PrefManager prefManager;
     private String userId;
-    private String areaID = "", areaName;
+    private String areaID = "", areaName = "";
     private String from;
     private TextView edit_address;
 
@@ -93,12 +91,15 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             addressId = object.getId();
             areaID = object.getAreaId();
             cityId = object.getCityId() != null ? object.getCityId() : "";
+            areaName = object.getAreaName();
             edit_address.setText("Edit address");
 
             city_name.setText(object.getCity() != null ? object.getCity() : "");
             state_name.setText(object.getState() != null ? object.getState() : "");
+
             address_line1.setText(object.getAddress().toString());
             zip_code.setText(object.getZipcode().toString());
+
         } else if (action.equalsIgnoreCase("ADD")) {
             edit_address.setText("Add address");
         }
@@ -172,6 +173,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("city", cityName);
         param.put("state", stateName);
         param.put("zipcode", zipCode);
+        param.put("area_name", areaName);
 
 
         NetworkAdaper.getInstance().getNetworkServices().updateDeliveryAddress(param, new Callback<EmailResponse>() {
@@ -231,7 +233,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("city", cityName);
         param.put("state", stateName);
         param.put("zipcode", zipCode);
-
+        param.put("area_name", areaName);
 
         NetworkAdaper.getInstance().getNetworkServices().addNewDeliveryAddress(param, new Callback<EmailResponse>() {
 
@@ -314,7 +316,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 //                    buttonCountryCode.setText(code);
                 }
             }
-
         }
 
     }

@@ -573,6 +573,10 @@ public class AppDatabase {
                 cursor.close();
             productName = "";
         }
+        if(productName.contains("&")){
+            productName=productName.replace("&","");
+        }
+
         return productName;
 
     }

@@ -41,7 +41,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
     public static final String TAG = ProductViewGroceryActivity.class.getSimpleName();
     private GCMClientManager pushClientManager;
-    Button backButton, btnVarient, btnShopList;
+    Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text;
     TextView description, item_name, price, number_text, title, price_text;
     TextView textTitle;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
@@ -51,6 +51,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
     private AppDatabase appDb;
     private GsonHelper gsonHelper;
     private PrefManager prefManager;
+
+    public int cartSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,13 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         btnVarient = (Button) findViewById(R.id.btnVarient);
         textTitle = (TextView) findViewById(R.id.textTitle);
         btnShopList = (Button) findViewById(R.id.btnShopList);
+        btnShopcart=(Button)findViewById(R.id.btnShopcart);
+        shoppinglist_text=(Button)findViewById(R.id.shoppinglist_text);
+
         btnShopList.setOnClickListener(this);
         backButton.setOnClickListener(this);
+        btnShopcart.setOnClickListener(this);
+
         textTitle.setText(product.getTitle());
 
         item_image = (ImageView) findViewById(com.signity.bonbon.R.id.item_image);
@@ -92,6 +99,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
         setupProductUi();
+        checkCartValue();
     }
 
     private void setupProductUi() {
@@ -144,6 +152,19 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         }
     }
 
+
+    public void checkCartValue() {
+        cartSize = appDb.getCartSize();
+
+        if(cartSize!=0){
+            shoppinglist_text.setVisibility(View.VISIBLE);
+            shoppinglist_text.setText(""+cartSize);
+        }else {
+            shoppinglist_text.setVisibility(View.GONE);
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
 
@@ -177,6 +198,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             number_text.setText(quant + "");
             appDb.updateProduct(product);
             appDb.updateToCart(product);
+            checkCartValue();
         }
     }
 
@@ -189,6 +211,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         number_text.setText(quant + "");
         appDb.updateProduct(product);
         appDb.updateToCart(product);
+        checkCartValue();
 
     }
 
@@ -265,5 +288,11 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 //        updateCartOnBack();
         super.onBackPressed();
         AnimUtil.slideFromLeftAnim(ProductViewGroceryActivity.this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkCartValue();
     }
 }

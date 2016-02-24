@@ -81,6 +81,10 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         if (subCategoryList != null && subCategoryList.size() != 0) {
             setupTab(subCategoryList);
         }
+
+        if (subCategoryList.size() <= 1) {
+            tabLayout.setVisibility(View.GONE);
+        }
     }
 
     public void setupTab(List<SubCategory> subCategoryList) {

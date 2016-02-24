@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.FontUtil;
@@ -30,6 +31,7 @@ import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
+import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     public static final String TAG = ProductViewActivity.class.getSimpleName();
     private GCMClientManager pushClientManager;
-    Button backButton, btnVarient, btnShopList;
+    Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text;
     TextView description, item_name, price, number_text, title, price_text;
     TextView textTitle;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
@@ -48,6 +50,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private GsonHelper gsonHelper;
 
     private PrefManager prefManager;
+    public int cartSize;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +68,13 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         btnVarient = (Button) findViewById(com.signity.bonbon.R.id.btnVarient);
         textTitle = (TextView) findViewById(com.signity.bonbon.R.id.textTitle);
         btnShopList = (Button) findViewById(com.signity.bonbon.R.id.btnShopList);
+        btnShopcart=(Button)findViewById(R.id.btnShopcart);
+        shoppinglist_text=(Button)findViewById(R.id.shoppinglist_text);
+
+
         btnShopList.setOnClickListener(this);
         backButton.setOnClickListener(this);
+        btnShopcart.setOnClickListener(this);
 
         item_name = (TextView) findViewById(com.signity.bonbon.R.id.item_name);
         item_name.setTypeface(typeFaceRobotoRegular);
@@ -88,6 +97,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
         setupProductUi();
+        checkCartValue();
     }
 
     // setup value for ui element
@@ -133,6 +143,18 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+
+    public void checkCartValue() {
+        cartSize = appDb.getCartSize();
+
+        if(cartSize!=0){
+            shoppinglist_text.setVisibility(View.VISIBLE);
+            shoppinglist_text.setText(""+cartSize);
+        }else {
+            shoppinglist_text.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void onClick(View view) {
 
@@ -142,6 +164,10 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 break;
             case com.signity.bonbon.R.id.btnShopList:
                 startActivity(new Intent(ProductViewActivity.this, ShoppingListActivity.class));
+                AnimUtil.slideFromRightAnim(ProductViewActivity.this);
+                break;
+            case R.id.btnShopcart:
+                startActivity(new Intent(ProductViewActivity.this, ShoppingCartActivity.class));
                 AnimUtil.slideFromRightAnim(ProductViewActivity.this);
                 break;
             case com.signity.bonbon.R.id.btnVarient:
@@ -166,6 +192,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             number_text.setText(quant + "");
             appDb.updateProduct(product);
             appDb.updateToCart(product);
+            checkCartValue();
         }
     }
 
@@ -178,6 +205,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         number_text.setText(quant + "");
         appDb.updateProduct(product);
         appDb.updateToCart(product);
+        checkCartValue();
 
     }
 
@@ -261,4 +289,12 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         super.onBackPressed();
         AnimUtil.slideFromLeftAnim(ProductViewActivity.this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkCartValue();
+    }
 }
+
+

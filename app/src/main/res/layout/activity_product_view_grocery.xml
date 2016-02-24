@@ -66,6 +66,42 @@
             android:drawableLeft="@drawable/search"
             android:paddingLeft="5dp"
             android:visibility="gone" />
+        <Button
+            android:id="@+id/btnShopcart"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:contentDescription=""
+            android:drawableLeft="@drawable/add_to_cart"
+            android:paddingLeft="5dp"
+            android:visibility="visible" />
+
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:layout_alignRight="@+id/btnShopcart"
+            android:layout_alignTop="@+id/btnShopcart"
+            android:layout_marginRight="15dp" />
+
+        <Button
+            android:id="@+id/shoppinglist_text"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignLeft="@+id/dot1"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/red_noto"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

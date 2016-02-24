@@ -112,7 +112,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     public void onMapReady(GoogleMap map) {
         this.map = map;
         String latitudeString = store.getLat();
-        String longitudeString = store.getLng();
+        String longitudeString =store.getLng();
         String address = store.getLocation() + "," + store.getCity() + "," + store.getState() + "," + store.getCountry() + "," + store.getZipcode();
         LatLng bonbon = null;
         Log.e("Location", store.getLocation());
@@ -124,8 +124,6 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         } else {
             new GetLatLngTask().execute(address);
         }
-
-
     }
 
     public void showLocationOnMap(LatLng latLng) {

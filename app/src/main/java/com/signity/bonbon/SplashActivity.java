@@ -38,7 +38,7 @@ import retrofit.client.Response;
 
 public class SplashActivity extends Activity {
 
-    private int SPLASH_TIME_OUT = 1500;
+    private int SPLASH_TIME_OUT = 500;
     private GCMClientManager pushClientManager;
     AppDatabase appDb;
     PrefManager prefManager;

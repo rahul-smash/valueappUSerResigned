@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:id="@+id/block2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/block3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/items_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amul Butter"
+            android:textColor="#2f2f2f"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/quantityLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp">
+
+            <TextView
+                android:id="@+id/quantTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity:"
+                android:textColor="#2f2f2f"
+                android:textSize="@dimen/text_size_small"
+                />
+
+            <TextView
+                android:id="@+id/number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/quantTxt"
+                android:layout_marginLeft="5dp"
+                android:text="1"
+                android:textColor="#2f2f2f"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/priceTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: "
+                android:textColor="#2f2f2f"
+                android:textSize="13sp"
+                android:layout_alignParentLeft="true"/>
+
+            <RelativeLayout
+                android:id="@+id/rel_mrp_offer_price"
+                android:layout_toRightOf="@+id/priceTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
+
+
+
+                <TextView
+                    android:id="@+id/items_mrp_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rupee2"
+                    android:text="95.00"
+                    android:textColor="#2f2f2f"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/rupee2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="\u20B9"
+                    android:textColor="#2f2f2f"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@+id/rupee2"
+                    android:layout_alignRight="@+id/items_mrp_price"
+                    android:layout_centerVertical="true"
+                    android:background="@color/divider" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_offer_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rel_mrp_offer_price">
+
+                <TextView
+                    android:id="@+id/items_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/rupee"
+                    android:text="95.00"
+                    android:textColor="#2f2f2f"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/rupee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="\u20B9"
+                    android:textColor="#2f2f2f"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnVarient"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/sku"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:paddingBottom="3dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:singleLine="true"
+            android:text="Select Quant"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/block3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        >
+
+
+        <ImageButton
+            android:id="@+id/listIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:padding="8dp"
+            android:src="@drawable/list_icon"
+            android:visibility="gone"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:id="@+id/rupeeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="\u20B9"
+            android:textSize="@dimen/text_size_normal"
+            android:layout_marginRight="2dp"/>
+
+        <TextView
+            android:id="@+id/totalValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rupeeTxt"
+            android:layout_centerVertical="true"
+            android:text="100.0"
+            android:layout_marginRight="5dp"
+            android:textSize="@dimen/text_size_normal"/>
+
+
+        <ImageButton
+            android:id="@+id/add_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@+id/totalValue"
+            android:background="@drawable/add"
+            android:visibility="invisible"/>
+
+        <ImageButton
+            android:id="@+id/remove_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/add_button"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/totalValue"
+            android:background="@drawable/remove"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

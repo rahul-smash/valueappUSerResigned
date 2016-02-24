@@ -433,11 +433,11 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 Bundle bundle = new Bundle();
                 bundle.putString(AppConstant.FROM, from);
                 bundle.putString(AppConstant.ACTION, "ADD");
-                if (listOfDeliveryAddress.isEmpty()) {
+                /*if (listOfDeliveryAddress.isEmpty()) {
                     bundle.putSerializable("object", null);
                 } else {
                     bundle.putSerializable("object", listOfDeliveryAddress.get(0));
-                }
+                }*/
                 fragment.setArguments(bundle);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.anim.right_to_center_slide,

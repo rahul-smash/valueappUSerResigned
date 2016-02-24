@@ -201,6 +201,7 @@ public class ViewController {
                 }
                 break;
             case 11:
+                //Chhatwal Haveli
                 layoutId = R.layout.home_activity_theme_11;
                 break;
             case 13:

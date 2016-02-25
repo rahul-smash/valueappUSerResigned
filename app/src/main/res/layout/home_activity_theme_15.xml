@@ -3,211 +3,211 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/theme_15_home_bg">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/theme_15_home_bg">-->
 
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:orientation="vertical">-->
 
-            <RelativeLayout
-                android:id="@+id/relCategory"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relCategory"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="@dimen/menubg_height"-->
+                <!--android:background="@drawable/theme_15_home_menu_bg">-->
 
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_cat"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
-
-
-                <TextView
-                    android:layout_toRightOf="@+id/imgCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="CATEGORIES"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/relOffers"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgOffers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_offer"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                <!--<com.signity.bonbon.view.FontTextView-->
+                    <!--android:id="@+id/imgCategory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="25dp"-->
+                    <!--android:text="@string/font_home_cat"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@color/ColorPrimary"/>-->
 
 
-                <TextView
-                    android:layout_toRightOf="@+id/imgOffers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="OFFERS"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
-            </RelativeLayout>
+                <!--<TextView-->
+                    <!--android:layout_toRightOf="@+id/imgCategory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="CATEGORIES"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/home_text_size"/>-->
+            <!--</RelativeLayout>-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relOffers"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="@dimen/menubg_height"-->
+                <!--android:background="@drawable/theme_15_home_menu_bg">-->
 
-            <RelativeLayout
-                android:id="@+id/relMyCart"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_my_cart"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
-
-
-                <TextView
-                    android:layout_toRightOf="@+id/imgCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="MY CART"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                <!--<com.signity.bonbon.view.FontTextView-->
+                    <!--android:id="@+id/imgOffers"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="25dp"-->
+                    <!--android:text="@string/font_home_offer"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@color/ColorPrimary"/>-->
 
 
-                <Button
-                    android:id="@+id/buttonCart"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignRight="@+id/imgCart"
-                    android:layout_alignTop="@+id/imgCart"
-                    android:background="@drawable/red_noto"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#ffffff"
-                    android:textSize="13sp"
-                    android:visibility="visible" />
-            </RelativeLayout>
+                <!--<TextView-->
+                    <!--android:layout_toRightOf="@+id/imgOffers"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="OFFERS"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/home_text_size"/>-->
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:id="@+id/relBookNow"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relMyCart"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="@dimen/menubg_height"-->
+                <!--android:background="@drawable/theme_15_home_menu_bg">-->
 
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgBookNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_book"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                <!--<com.signity.bonbon.view.FontTextView-->
+                    <!--android:id="@+id/imgCart"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="25dp"-->
+                    <!--android:text="@string/font_home_my_cart"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@color/ColorPrimary"/>-->
 
 
-                <TextView
-                    android:layout_toRightOf="@+id/imgBookNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="BOOK NOW"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relMyOrders"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgOrderHistory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_order"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                <!--<TextView-->
+                    <!--android:layout_toRightOf="@+id/imgCart"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="MY CART"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/home_text_size"/>-->
 
 
-                <TextView
-                    android:layout_toRightOf="@+id/imgOrderHistory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="DELIVERY AREA"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
-            </RelativeLayout>
+                <!--<Button-->
+                    <!--android:id="@+id/buttonCart"-->
+                    <!--android:layout_width="18dp"-->
+                    <!--android:layout_height="18dp"-->
+                    <!--android:layout_alignRight="@+id/imgCart"-->
+                    <!--android:layout_alignTop="@+id/imgCart"-->
+                    <!--android:background="@drawable/red_noto"-->
+                    <!--android:clickable="false"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="0"-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:textSize="13sp"-->
+                    <!--android:visibility="visible" />-->
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:id="@+id/relContact"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relBookNow"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="@dimen/menubg_height"-->
+                <!--android:background="@drawable/theme_15_home_menu_bg">-->
 
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgContact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_contact"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
-
-
-                <TextView
-                    android:layout_toRightOf="@+id/imgContact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="CONTACT"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
-            </RelativeLayout>
+                <!--<com.signity.bonbon.view.FontTextView-->
+                    <!--android:id="@+id/imgBookNow"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="25dp"-->
+                    <!--android:text="@string/font_home_book"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@color/ColorPrimary"/>-->
 
 
+                <!--<TextView-->
+                    <!--android:layout_toRightOf="@+id/imgBookNow"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="BOOK NOW"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/home_text_size"/>-->
+            <!--</RelativeLayout>-->
 
-        </LinearLayout>
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relMyOrders"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="@dimen/menubg_height"-->
+                <!--android:background="@drawable/theme_15_home_menu_bg">-->
 
-    </RelativeLayout>
+                <!--<com.signity.bonbon.view.FontTextView-->
+                    <!--android:id="@+id/imgOrderHistory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="25dp"-->
+                    <!--android:text="@string/font_home_order"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@color/ColorPrimary"/>-->
+
+
+                <!--<TextView-->
+                    <!--android:layout_toRightOf="@+id/imgOrderHistory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="DELIVERY AREA"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/home_text_size"/>-->
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/relContact"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="@dimen/menubg_height"-->
+                <!--android:background="@drawable/theme_15_home_menu_bg">-->
+
+                <!--<com.signity.bonbon.view.FontTextView-->
+                    <!--android:id="@+id/imgContact"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="25dp"-->
+                    <!--android:text="@string/font_home_contact"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@color/ColorPrimary"/>-->
+
+
+                <!--<TextView-->
+                    <!--android:layout_toRightOf="@+id/imgContact"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="CONTACT"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="@dimen/home_text_size"/>-->
+            <!--</RelativeLayout>-->
+
+
+
+        <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
 
 
 </RelativeLayout>

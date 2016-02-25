@@ -43,13 +43,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
-                    android:background="@color/color_white"
+                    android:background="@drawable/edittext_round_corners"
                     android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="Name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:padding="5dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingBottom="8dp"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
             </LinearLayout>
@@ -79,13 +82,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
-                    android:background="@color/color_white"
                     android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="Email(Optional)"
+                    android:background="@drawable/edittext_round_corners"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:padding="5dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingBottom="8dp"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
 
@@ -142,5 +148,6 @@
         </LinearLayout>
 
     </ScrollView>
+
 
 </LinearLayout>

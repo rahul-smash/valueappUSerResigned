@@ -44,7 +44,6 @@ import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -535,7 +534,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                 return convertView;
             }
-
 
         }
 

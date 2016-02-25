@@ -262,7 +262,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess()) {
+                if (responseData.getSuccess()!=null?responseData.getSuccess():false) {
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     Toast.makeText(ShoppingCartActivity2.this, responseData.getMessage(), Toast.LENGTH_SHORT).show();

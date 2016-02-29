@@ -122,6 +122,9 @@ public class ViewController {
             case 15:
                 fragment = new HomeFragmentNukkarTheme15();
                 break;
+            case 17:
+                fragment = new HomeFragmentNukkarTheme17();
+                break;
             default:
                 fragment = new HomeFragment();
                 break;
@@ -217,12 +220,10 @@ public class ViewController {
                 //Nukkar Dhaba
                 layoutId = R.layout.home_activity_theme_15;
                 break;
-
             case 17:
-                //Food o nine
+                //Nukkar Dhaba
                 layoutId = R.layout.home_activity_theme_17;
                 break;
-
             default:
                 layoutId = R.layout.home_activity;
                 break;

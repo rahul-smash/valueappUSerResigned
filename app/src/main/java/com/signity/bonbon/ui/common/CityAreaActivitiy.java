@@ -166,16 +166,27 @@ public class CityAreaActivitiy extends FragmentActivity {
                 for (int i = 0; i < areasmain.size(); i++) {
 
                     String city = areasmain.get(i).getCity().getCity().toLowerCase();
-                    if (city
-                            .contains(s.toString().toLowerCase())) {
+                    if (city.contains(s.toString().toLowerCase())) {
                         filterList.add(areasmain.get(i));
                     }
+
                 }
 
                 if (s.length() == 0) {
                     cityAdapter.update(areasmain);
                 } else {
-                    cityAdapter.update(filterList);
+                    if(filterList!=null && filterList.size()!=0){
+                        cityAdapter.update(filterList);
+                    }
+                    else {
+                        GetStoreAreaModel model=new GetStoreAreaModel();
+                        GetStoreAreaModel2 model2=new GetStoreAreaModel2();
+                        model2.setCity("No City Found");
+                        model.setCity(model2);
+                        filterList.add(model);
+                        cityAdapter.update(filterList);
+                    }
+
 
                 }
 
@@ -191,6 +202,8 @@ public class CityAreaActivitiy extends FragmentActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
+
+
 
             }
         });
@@ -208,8 +221,7 @@ public class CityAreaActivitiy extends FragmentActivity {
                 for (int i = 0; i < cityArea.size(); i++) {
 
                     String area = cityArea.get(i).getArea().toLowerCase();
-                    if (area
-                            .contains(s.toString().toLowerCase())) {
+                    if (area.contains(s.toString().toLowerCase())) {
                         filterList.add(cityArea.get(i));
                     }
                 }
@@ -217,7 +229,16 @@ public class CityAreaActivitiy extends FragmentActivity {
                 if (s.length() == 0) {
                     cityAreaAdapter.update(cityArea);
                 } else {
-                    cityAreaAdapter.update(filterList);
+
+                    if(filterList!=null && filterList.size()!=0){
+                        cityAreaAdapter.update(filterList);
+                    }else {
+                        GetStoreAreaModel1 model1=new GetStoreAreaModel1();
+                        model1.setArea("No Area found");
+                        filterList.add(model1);
+                        cityAreaAdapter.update(filterList);
+                    }
+
 
                 }
 

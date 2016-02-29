@@ -27,6 +27,8 @@ import com.signity.bonbon.ui.restaurant.storetheme11.fragment.HomeFragmentTheme1
 import com.signity.bonbon.ui.restaurant.storetheme13.fragment.HomeFragmentKhaneTheme13;
 import com.signity.bonbon.ui.restaurant.storetheme14.fragment.HomeFragmentLazeezTheme14;
 import com.signity.bonbon.ui.restaurant.storetheme15.fragment.HomeFragmentNukkarTheme15;
+import com.signity.bonbon.ui.restaurant.storetheme17.fragment.HomeFragmentTheme17;
+import com.signity.bonbon.ui.restaurant.storetheme18.HomeFragmentTheme18;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
@@ -123,7 +125,10 @@ public class ViewController {
                 fragment = new HomeFragmentNukkarTheme15();
                 break;
             case 17:
-                fragment = new HomeFragmentNukkarTheme17();
+                fragment = new HomeFragmentTheme17();
+                break;
+            case 18:
+                fragment = new HomeFragmentTheme18();
                 break;
             default:
                 fragment = new HomeFragment();
@@ -222,7 +227,11 @@ public class ViewController {
                 break;
             case 17:
                 //Nukkar Dhaba
-                layoutId = R.layout.home_activity_theme_17;
+                layoutId = R.layout.home_activity_theme_18;
+                break;
+            case 18:
+                //Nukkar Dhaba
+                layoutId = R.layout.home_activity_theme_18;
                 break;
             default:
                 layoutId = R.layout.home_activity;

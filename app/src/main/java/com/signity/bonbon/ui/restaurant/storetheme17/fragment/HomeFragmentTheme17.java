@@ -35,7 +35,7 @@ import java.util.Calendar;
 /**
  * Created by root on 22/2/16.
  */
-public class HomeFragmentNukkarTheme17 extends Fragment implements View.OnClickListener {
+public class HomeFragmentTheme17 extends Fragment implements View.OnClickListener {
 
 
 

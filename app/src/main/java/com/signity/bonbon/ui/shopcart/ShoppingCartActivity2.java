@@ -44,7 +44,6 @@ import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -263,7 +262,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess()) {
+                if (responseData.getSuccess()!=null?responseData.getSuccess():false) {
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     Toast.makeText(ShoppingCartActivity2.this, responseData.getMessage(), Toast.LENGTH_SHORT).show();
@@ -535,7 +534,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                 return convertView;
             }
-
 
         }
 

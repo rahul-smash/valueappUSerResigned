@@ -24,9 +24,9 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:scaleType="fitXY"
-                    android:src="@drawable/theme_13_home_logo"
-                    android:layout_gravity="center_horizontal"/>
+                    android:src="@drawable/theme_13_home_logo" />
 
                 <ImageView
                     android:layout_width="fill_parent"
@@ -151,19 +151,20 @@
                             android:text="MY CART"
                             android:textColor="@color/color_white"
                             android:textSize="@dimen/text_size_small" />
+
                         <Button
-                        android:id="@+id/buttonCart"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:background="@drawable/red_noto"
-                        android:clickable="false"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp"
-                        android:visibility="visible"
-                        android:layout_alignRight="@+id/imgCart"
-                        />
+                            android:id="@+id/buttonCart"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_alignRight="@+id/imgCart"
+                            android:background="@drawable/red_noto"
+                            android:clickable="false"
+                            android:layout_marginRight="-5dp"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="#ffffff"
+                            android:textSize="10sp"
+                            android:visibility="visible" />
                     </RelativeLayout>
                 </LinearLayout>
 

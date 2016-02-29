@@ -38,7 +38,6 @@ import java.util.Calendar;
 public class HomeFragmentLazeezTheme14 extends Fragment implements View.OnClickListener {
 
 
-
     RelativeLayout relCategory, relOffers, relBookNow, relMyOrders, relContact, relMyCart;
     Button buttonCart;
     View mView;

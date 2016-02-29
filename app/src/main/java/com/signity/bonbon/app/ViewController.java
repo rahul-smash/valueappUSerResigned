@@ -27,6 +27,7 @@ import com.signity.bonbon.ui.restaurant.storetheme11.fragment.HomeFragmentTheme1
 import com.signity.bonbon.ui.restaurant.storetheme13.fragment.HomeFragmentKhaneTheme13;
 import com.signity.bonbon.ui.restaurant.storetheme14.fragment.HomeFragmentLazeezTheme14;
 import com.signity.bonbon.ui.restaurant.storetheme15.fragment.HomeFragmentNukkarTheme15;
+import com.signity.bonbon.ui.restaurant.storetheme17.fragment.HomeFragmentFoodTheme17;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
@@ -121,6 +122,9 @@ public class ViewController {
                 break;
             case 15:
                 fragment = new HomeFragmentNukkarTheme15();
+                break;
+            case 17:
+                fragment = new HomeFragmentFoodTheme17();
                 break;
             default:
                 fragment = new HomeFragment();

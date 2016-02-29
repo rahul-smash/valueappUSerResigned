@@ -1,0 +1,169 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.signity.bonbon.ui.Location.LocationSelectActivity">
+
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/theme_11_location_banner" />
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/banner"
+        android:background="#fdfdfd">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="Choose your location and enjoy"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_large" />
+
+
+            <RelativeLayout
+                android:id="@+id/citySelect"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_corner_2"
+                >
+
+                <TextView
+                    android:id="@+id/cityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:text="City"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    android:id="@+id/cityValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/cityTitle"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="1dp"
+                    android:text="Chandigarh"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_normal" />
+
+            </RelativeLayout>
+            <!--<Button
+                android:id="@+id/citySelect"
+                android:layout_below="@+id/title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_normal"
+                android:layout_margin="20dp"
+                android:text="City"
+                android:gravity="left"
+                android:drawableRight="@drawable/arrow_spinner_down_24"
+                android:visibility="gone"/>-->
+
+
+            <RelativeLayout
+                android:id="@+id/areaSelect"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/citySelect"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_corner_2"
+                >
+
+                <TextView
+                    android:id="@+id/areaTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:text="Area"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    android:id="@+id/areaValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/areaTitle"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="1dp"
+                    android:text="Sector 42"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="8dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/select_icon" />
+
+            </RelativeLayout>
+
+            <!--<Button
+                android:id="@+id/areaSelect"
+                android:layout_below="@+id/citySelect"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_normal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Area"
+                android:gravity="left"
+                android:drawableRight="@drawable/arrow_spinner_down_24"
+                android:visibility="gone"/>-->
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/areaSelect"
+                android:layout_margin="20dp"
+                android:background="@color/ColorPrimary"
+                android:text="Go"
+                android:textSize="@dimen/text_size_normal" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

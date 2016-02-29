@@ -36,6 +36,8 @@ public class NetworkAdaper {
         apiService = restAdapter.create(ApiService.class);
     }
 
+
+
     public ApiService getNetworkServices() {
         return apiService;
     }

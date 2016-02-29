@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -184,6 +185,10 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                 ProgressDialogUtil.hideProgressDialog();
                 if (emailResponse.getSuccess()) {
                     getActivity().onBackPressed();
+                    InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mgr.hideSoftInputFromWindow(done_text.getWindowToken(), 0);
+
+
                 } else {
 //                    Toast.makeText(getActivity(), emailResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -243,6 +248,10 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                 ProgressDialogUtil.hideProgressDialog();
                 if (emailResponse.getSuccess()) {
                     getActivity().onBackPressed();
+
+                    InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mgr.hideSoftInputFromWindow(done_text.getWindowToken(), 0);
+
                 } else {
                     Toast.makeText(getActivity(), "Failed to connect", Toast.LENGTH_SHORT).show();
                 }

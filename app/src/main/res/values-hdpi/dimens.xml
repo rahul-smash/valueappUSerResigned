@@ -89,4 +89,7 @@
     <!--For Nukkar Dhaba-->
     <dimen name="menubg_height">40dp</dimen>
 
+    <dimen name="pop_up_size">250dp</dimen>
+    <dimen name="top_margin">5dp</dimen>
+
 </resources>

@@ -20,12 +20,16 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.Utilities.Util;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
+import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.network.NetworkConstant;
+import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
@@ -43,6 +47,7 @@ public class SplashActivity extends Activity {
     AppDatabase appDb;
     PrefManager prefManager;
     String deviceToken;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,8 @@ public class SplashActivity extends Activity {
             });
         }
     }
+
+
 
     private void checkAgainProcess() {
         if (Util.checkInternetConnection(this)) {
@@ -128,7 +135,10 @@ public class SplashActivity extends Activity {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
+
                         getMainActivity();
+//                        moveToCitySelection();
+
                     } else {
                         showAlertDialog(SplashActivity.this, "Message", "Store under maintenance.  Please try later");
                     }
@@ -146,6 +156,65 @@ public class SplashActivity extends Activity {
         });
 
     }
+
+
+
+    private void moveToCitySelection() {
+
+//        boolean x=prefManager.getBoolean(AppConstant.CITY_SELECTED);
+
+        if(prefManager.getBoolean(AppConstant.AREA_SELECTED)){
+            getMainActivity();
+        }else {
+
+            getAllAreaDetail();
+
+        }
+
+    }
+
+    private void getAllAreaDetail() {
+
+        ProgressDialogUtil.showProgressDialog(SplashActivity.this);
+
+        NetworkAdaper.getInstance().getNetworkServices().getStoreAreaList(new Callback<GetStoreArea>() {
+            @Override
+            public void success(GetStoreArea getStoreArea, Response response) {
+                if (getStoreArea.getSuccess()) {
+
+                    if (getStoreArea.getData() != null && getStoreArea.getData().size() != 0) {
+                        ProgressDialogUtil.hideProgressDialog();
+
+                        DataAdapter.getInstance().setStoreArea(getStoreArea);
+                        Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
+                        startActivity(intent_location);
+                        finish();
+
+                    } else {
+                        ProgressDialogUtil.hideProgressDialog();
+                        getMainActivity();
+                    }
+                } else {
+                    ProgressDialogUtil.hideProgressDialog();
+                    getMainActivity();
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+            }
+        });
+    }
+
+
+
+
+
+
+
+
 
     public void showAlertDialogForInternetConnection(Context context) {
 

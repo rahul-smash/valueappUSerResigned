@@ -1,5 +1,6 @@
 package com.signity.bonbon.app;
 
+import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.OrderHistoryModel;
 import com.signity.bonbon.model.Product;
 
@@ -19,6 +20,18 @@ public class DataAdapter {
     public OrderHistoryModel orderHistoryModel;
 
     public boolean isCartUpdated;
+
+
+    public GetStoreArea getStoreArea() {
+        return storeArea;
+    }
+
+    public void setStoreArea(GetStoreArea storeArea) {
+        this.storeArea = storeArea;
+    }
+
+    public GetStoreArea storeArea;
+
 
     /* Static 'instance' method */
     public static DataAdapter getInstance() {

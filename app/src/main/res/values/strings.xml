@@ -40,4 +40,5 @@
     <string name="font_home_order"></string>
     <string name="font_home_fav"></string>
     <string name="font_home_book"></string>
+    <string name="title_activity_select_location">SelectLocationActivity</string>
 </resources>

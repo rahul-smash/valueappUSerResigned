@@ -32,6 +32,7 @@ import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
+import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 import com.squareup.picasso.Picasso;
 
@@ -174,6 +175,10 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
                 break;
             case com.signity.bonbon.R.id.btnShopList:
                 startActivity(new Intent(ProductViewGroceryActivity.this, ShoppingListActivity.class));
+                AnimUtil.slideFromRightAnim(ProductViewGroceryActivity.this);
+                break;
+            case R.id.btnShopcart:
+                startActivity(new Intent(ProductViewGroceryActivity.this, ShoppingCartActivity.class));
                 AnimUtil.slideFromRightAnim(ProductViewGroceryActivity.this);
                 break;
             case com.signity.bonbon.R.id.btnVarient:

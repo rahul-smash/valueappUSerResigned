@@ -105,4 +105,16 @@ public class PrefManager {
     }
 
 
+    public void storeBoolean(String key, boolean value) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public boolean getBoolean(String key) {
+        return sharedpreferences.getBoolean(key, false);
+    }
+
+
+
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_parent"
+    android:layout_width="@dimen/pop_up_size"
+    android:layout_height="@dimen/pop_up_size"
+    android:layout_centerInParent="true"
+    android:background="#fff">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ColorPrimary">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:contentDescription=""
+            android:drawableLeft="@drawable/left"
+            android:paddingLeft="10dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="Select City"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_large"
+            android:padding="5dp"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="2dp"
+        android:visibility="visible"/>
+
+</RelativeLayout>

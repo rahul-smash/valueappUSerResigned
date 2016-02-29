@@ -39,6 +39,7 @@ import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.AboutUs.AboutUsFragment;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
+import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.fragment.Profile;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.order.OrderHistory;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView mMenuList;
     public TextView title, user;
     ImageButton search, shopingcart;
-    Button menu;
+    Button menu,citySelect;
     ImageView profilePic;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     String[] labels = {"Home", "My Profile", "Delivery Address", "My Order",
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PrefManager prefManager;
     private GCMClientManager pushClientManager;
     String userId;
-    String storeId;
+    String storeId,areaName;
 
     String name;
     String phone;
@@ -106,10 +107,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mSlidingPanel = (SlidingPaneLayout) findViewById(R.id.SlidingPanel);
         menu = (Button) findViewById(R.id.menu);
+
+        citySelect=(Button)findViewById(R.id.citySelect);
+        areaName=prefManager.getSharedValue(AppConstant.AREA_NAME);
+        citySelect.setText(""+areaName);
+
         search = (ImageButton) findViewById(R.id.search);
         search.setVisibility(View.GONE);
         title = (TextView) findViewById(R.id.title);
         user = (TextView) findViewById(R.id.user);
+
+        title.setVisibility(View.VISIBLE);
+        citySelect.setVisibility(View.GONE);
+
 
         updateUserName();
 
@@ -136,6 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.setOnClickListener(this);
         search.setOnClickListener(this);
         profilePic.setOnClickListener(this);
+        citySelect.setOnClickListener(this);
+
         store = appDb.getStore(storeId);
         updateStoreInfo(store);
 
@@ -206,6 +218,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 replaceFragment(0);
                 mSlidingPanel.closePane();
                 break;
+            case R.id.citySelect:
+                Intent intent_location = new Intent(MainActivity.this, SelectLocationActivity.class);
+                startActivity(intent_location);
+                finish();
+                break;
         }
     }
 
@@ -222,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 0:
                 if (store != null) {
                     if (store.getStoreName() != null && !store.getStoreName().isEmpty()) {
+                        title.setVisibility(View.VISIBLE);
+                        citySelect.setVisibility(View.GONE);
                         title.setText("" + store.getStoreName());
                     } else {
                         title.setText("");
@@ -237,6 +256,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
+
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
                     title.setText("My Profile");
                     fragment = new Profile();
                     replace(fragment);
@@ -251,6 +273,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
 //                    title.setText("Delivery Address");
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
                     Intent intentDelivery = new Intent(MainActivity.this, DeliveryActivity.class);
                     intentDelivery.putExtra(AppConstant.FROM, "menu");
                     startActivity(intentDelivery);
@@ -266,22 +290,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
                     title.setText("Active Order");
                     fragment = new OrderHistory();
                     replace(fragment);
                 }
                 break;
             case 4:
+                title.setVisibility(View.VISIBLE);
+                citySelect.setVisibility(View.GONE);
                 title.setText(AppController.getInstance().getViewController().getMenuTextBookNow());
                 replace(AppController.getInstance().getViewController().getBookNowOrShoppinFragment());
                 break;
 
             case 5:
+                title.setVisibility(View.VISIBLE);
+                citySelect.setVisibility(View.GONE);
                 title.setText("My Favorites");
                 replace(AppController.getInstance().getViewController().getFavouritesFragment());
                 break;
 
             case 6:
+                title.setVisibility(View.VISIBLE);
+                citySelect.setVisibility(View.GONE);
                 title.setText("About Us");
                 replace(new AboutUsFragment());
 
@@ -298,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(Intent.createChooser(intent, "Share with"));
                 break;
             case 8:
+
                 title.setText(store.getStoreName());
                 if (userId.isEmpty()) {
                     Intent intentLogin = new Intent(MainActivity.this, LoginScreenActivity.class);
@@ -305,6 +338,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intentLogin);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
+
+                    title.setVisibility(View.GONE);
+                    citySelect.setVisibility(View.VISIBLE);
+
                     replace(viewController.getHomeFragment());
                     logOutUser();
                 }

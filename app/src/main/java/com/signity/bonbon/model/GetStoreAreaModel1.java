@@ -26,6 +26,18 @@ public class GetStoreAreaModel1 {
     @Expose
     private String note;
 
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    @SerializedName("store_id")
+    @Expose
+    private String storeId;
+
     /**
      *
      * @return

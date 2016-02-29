@@ -217,6 +217,12 @@ public class ViewController {
                 //Nukkar Dhaba
                 layoutId = R.layout.home_activity_theme_15;
                 break;
+
+            case 17:
+                //Food o nine
+                layoutId = R.layout.home_activity_theme_17;
+                break;
+
             default:
                 layoutId = R.layout.home_activity;
                 break;

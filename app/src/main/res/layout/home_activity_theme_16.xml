@@ -8,216 +8,111 @@
         android:layout_height="match_parent"
         android:background="@drawable/theme_16_home_bg">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/logoTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/theme_16_home_top_bg">
+            android:layout_marginTop="20dp"
+            android:src="@drawable/theme_16_home_top_bg" />
 
-            <TextView
+        <TextView
+            android:id="@+id/textViewLbl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logoTop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="All Time Favourite Pizza's"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dimen_big_text_size" />
+
+        <View
+            android:id="@+id/center_dot"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_below="@+id/textViewLbl1"
+            android:layout_marginTop="30dp"
+            android:background="@color/color_white"></View>
+
+
+        <RelativeLayout
+            android:id="@+id/relativeRing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/center_dot"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/theme_16_home_ring">
+
+            <ImageView
+                android:id="@+id/imageViewRing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_centerInParent="true"
-                android:layout_marginLeft="20dp"
-                android:text="All Time Favourite Pizza's"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/dimen_big_text_size" />
+                android:layout_centerInParent="true"
+                android:src="@drawable/theme_16_home_center_pizza" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical">
+            android:layout_below="@+id/center_dot"
+            android:layout_centerHorizontal="true">
 
-            <RelativeLayout
-                android:id="@+id/relCategory"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height">
+            <ImageView
+                android:id="@+id/myCategories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/theme_16_category" />
+        </RelativeLayout>
 
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_cat"
-                    android:textColor="@color/ColorPrimary"
-                    android:textSize="30sp" />
+        <RelativeLayout
+            android:id="@+id/relative3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/relative2"
+            android:layout_centerHorizontal="true">
 
+            <ImageView
+                android:id="@+id/myOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/theme_16_my_order" />
+            <ImageView
+                android:id="@+id/offers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/theme_16_offers" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_alignBottom="@+id/relativeRing"
+            android:layout_centerHorizontal="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/imgCategory"
-                    android:text="CATEGORIES"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relOffers"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgOffers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_offer"
-                    android:textColor="@color/ColorPrimary"
-                    android:textSize="30sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/imgOffers"
-                    android:text="OFFERS"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relMyCart"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_my_cart"
-                    android:textColor="@color/ColorPrimary"
-                    android:textSize="30sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/imgCart"
-                    android:text="MY CART"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size" />
-
-
-                <Button
-                    android:id="@+id/buttonCart"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignRight="@+id/imgCart"
-                    android:layout_alignTop="@+id/imgCart"
-                    android:background="@drawable/red_noto"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#ffffff"
-                    android:textSize="13sp"
-                    android:visibility="visible" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relBookNow"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgBookNow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_book"
-                    android:textColor="@color/ColorPrimary"
-                    android:textSize="30sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/imgBookNow"
-                    android:text="BOOK NOW"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relMyOrders"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgOrderHistory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_order"
-                    android:textColor="@color/ColorPrimary"
-                    android:textSize="30sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/imgOrderHistory"
-                    android:text="DELIVERY AREA"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relContact"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height">
-
-                <com.signity.bonbon.view.FontTextView
-                    android:id="@+id/imgContact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/font_home_contact"
-                    android:textColor="@color/ColorPrimary"
-                    android:textSize="30sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/imgContact"
-                    android:text="CONTACT"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
-
+            <ImageView
+                android:id="@+id/mydelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/theme_16_delivery" />
+            <ImageView
+                android:id="@+id/myCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/theme_16_my_cart" />
+        </RelativeLayout>
     </RelativeLayout>
 
 

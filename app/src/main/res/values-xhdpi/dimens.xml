@@ -90,4 +90,7 @@
     <dimen name="pop_up_size">350dp</dimen>
     <dimen name="top_margin">10dp</dimen>
 
+    <!-- Lapinoz pizza-->
+    <dimen name="dimen_big_text_size">25sp</dimen>
+
 </resources>

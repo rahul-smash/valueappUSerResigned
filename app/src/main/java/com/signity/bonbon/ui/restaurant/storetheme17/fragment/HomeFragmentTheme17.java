@@ -62,8 +62,6 @@ public class HomeFragmentTheme17 extends Fragment implements View.OnClickListene
         if (!prefManager.isCartSetLocalNotification()) {
             setUpLocalNotificationForCart();
         }
-
-
     }
 
     @Override

@@ -6,8 +6,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/theme_15_home_bg">
+        android:background="@drawable/theme_16_home_bg">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/theme_16_home_top_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:text="All Time Favourite Pizza's"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_big_text_size" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -18,8 +35,7 @@
             <RelativeLayout
                 android:id="@+id/relCategory"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+                android:layout_height="@dimen/menubg_height">
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgCategory"
@@ -29,25 +45,25 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="@string/font_home_cat"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                    android:textColor="@color/ColorPrimary"
+                    android:textSize="30sp" />
 
 
                 <TextView
-                    android:layout_toRightOf="@+id/imgCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="CATEGORIES"
                     android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imgCategory"
+                    android:text="CATEGORIES"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                    android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/relOffers"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+                android:layout_height="@dimen/menubg_height">
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgOffers"
@@ -57,26 +73,25 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="@string/font_home_offer"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                    android:textColor="@color/ColorPrimary"
+                    android:textSize="30sp" />
 
 
                 <TextView
-                    android:layout_toRightOf="@+id/imgOffers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="OFFERS"
                     android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imgOffers"
+                    android:text="OFFERS"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                    android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/relMyCart"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+                android:layout_height="@dimen/menubg_height">
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgCart"
@@ -86,19 +101,19 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="@string/font_home_my_cart"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                    android:textColor="@color/ColorPrimary"
+                    android:textSize="30sp" />
 
 
                 <TextView
-                    android:layout_toRightOf="@+id/imgCart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="MY CART"
                     android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imgCart"
+                    android:text="MY CART"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                    android:textSize="@dimen/home_text_size" />
 
 
                 <Button
@@ -119,8 +134,7 @@
             <RelativeLayout
                 android:id="@+id/relBookNow"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+                android:layout_height="@dimen/menubg_height">
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgBookNow"
@@ -130,26 +144,25 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="@string/font_home_book"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                    android:textColor="@color/ColorPrimary"
+                    android:textSize="30sp" />
 
 
                 <TextView
-                    android:layout_toRightOf="@+id/imgBookNow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="BOOK NOW"
                     android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imgBookNow"
+                    android:text="BOOK NOW"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                    android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/relMyOrders"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+                android:layout_height="@dimen/menubg_height">
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgOrderHistory"
@@ -159,26 +172,25 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="@string/font_home_order"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                    android:textColor="@color/ColorPrimary"
+                    android:textSize="30sp" />
 
 
                 <TextView
-                    android:layout_toRightOf="@+id/imgOrderHistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="DELIVERY AREA"
                     android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imgOrderHistory"
+                    android:text="DELIVERY AREA"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                    android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/relContact"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/menubg_height"
-                android:background="@drawable/theme_15_home_menu_bg">
+                android:layout_height="@dimen/menubg_height">
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgContact"
@@ -188,21 +200,20 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="25dp"
                     android:text="@string/font_home_contact"
-                    android:textSize="30sp"
-                    android:textColor="@color/ColorPrimary"/>
+                    android:textColor="@color/ColorPrimary"
+                    android:textSize="30sp" />
 
 
                 <TextView
-                    android:layout_toRightOf="@+id/imgContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="CONTACT"
                     android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/imgContact"
+                    android:text="CONTACT"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/home_text_size"/>
+                    android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
-
 
 
         </LinearLayout>

@@ -239,8 +239,7 @@ public class ViewController {
                 break;
             case 18:
                 //Nukkar Dhaba
-                layoutId = R.layout.home_activity_theme_16;
-//                layoutId = R.layout.home_activity_theme_18;
+                layoutId = R.layout.home_activity_theme_18;
                 break;
             default:
                 layoutId = R.layout.home_activity;

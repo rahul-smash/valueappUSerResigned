@@ -66,6 +66,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     Adapter adapter;
 
+    boolean isHeader;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,12 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
         prefManager = new PrefManager(getActivity());
         appDb = DbAdapter.getInstance().getDb();
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            isHeader = bundle.getBoolean(AppConstant.IS_HEADER);
+        } else {
+            isHeader = false;
+        }
     }
 
     public static Fragment newInstance(Context context) {
@@ -94,7 +102,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
         backButton = (Button) mView.findViewById(R.id.backButton);
         backButton.setOnClickListener(this);
 
-        if (getArguments() != null) {
+        if (isHeader) {
             listHeader.setVisibility(View.VISIBLE);
         } else {
             listHeader.setVisibility(View.GONE);
@@ -243,7 +251,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                 if (responseStatus.getSuccess()) {
                     getOrderHistory();
                 } else {
-                    Toast.makeText(getActivity(), " No Data found.", Toast.LENGTH_SHORT).show();
+
+                    Log.e("Message", "Success:false");
                 }
 
             }
@@ -251,7 +260,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(getActivity(), "Error." + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                Log.e("Error", error.getMessage());
             }
         });
     }

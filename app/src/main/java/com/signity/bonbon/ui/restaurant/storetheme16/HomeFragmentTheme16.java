@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
@@ -24,10 +24,11 @@ import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.service.NotifyService;
 import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
-import com.signity.bonbon.ui.book.BookNowActivity;
 import com.signity.bonbon.ui.category.CategoryActivity;
 import com.signity.bonbon.ui.contacts.ContactActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;
+import com.signity.bonbon.ui.order.OrderListActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 
 import java.util.Calendar;
@@ -38,8 +39,7 @@ import java.util.Calendar;
 public class HomeFragmentTheme16 extends Fragment implements View.OnClickListener {
 
 
-
-    RelativeLayout relCategory, relOffers, relBookNow, relMyOrders, relContact, relMyCart;
+    ImageView imageViewCategories, imageViewOffers, imageViewDelivery, imageViewOrder, imageViewContact, imageViewCart;
     Button buttonCart;
     View mView;
     String storeId;
@@ -69,19 +69,19 @@ public class HomeFragmentTheme16 extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(viewController.getHomeResourceLayout(), container, false);
-        relCategory = (RelativeLayout) mView.findViewById(R.id.relCategory);
-        relOffers = (RelativeLayout) mView.findViewById(R.id.relOffers);
-        relBookNow = (RelativeLayout) mView.findViewById(R.id.relBookNow);
-        relMyOrders = (RelativeLayout) mView.findViewById(R.id.relMyOrders);
-        relContact = (RelativeLayout) mView.findViewById(R.id.relContact);
-        relMyCart = (RelativeLayout) mView.findViewById(R.id.relMyCart);
+        imageViewCategories = (ImageView) mView.findViewById(R.id.imageViewCategories);
+        imageViewOffers = (ImageView) mView.findViewById(R.id.imageViewOffers);
+        imageViewDelivery = (ImageView) mView.findViewById(R.id.imageViewDelivery);
+        imageViewOrder = (ImageView) mView.findViewById(R.id.imageViewOrder);
+        imageViewContact = (ImageView) mView.findViewById(R.id.imageViewContact);
+        imageViewCart = (ImageView) mView.findViewById(R.id.imageViewCart);
         buttonCart = (Button) mView.findViewById(R.id.buttonCart);
-        relCategory.setOnClickListener(this);
-        relOffers.setOnClickListener(this);
-        relBookNow.setOnClickListener(this);
-        relMyOrders.setOnClickListener(this);
-        relContact.setOnClickListener(this);
-        relMyCart.setOnClickListener(this);
+        imageViewCategories.setOnClickListener(this);
+        imageViewOffers.setOnClickListener(this);
+        imageViewDelivery.setOnClickListener(this);
+        imageViewOrder.setOnClickListener(this);
+        imageViewContact.setOnClickListener(this);
+        imageViewCart.setOnClickListener(this);
         store = appDb.getStore(storeId);
         return mView;
     }
@@ -108,29 +108,42 @@ public class HomeFragmentTheme16 extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.relCategory:
+            case R.id.imageViewCategories:
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
-            case R.id.relOffers:
+            case R.id.imageViewOffers:
                 startActivity(new Intent(getActivity(), OfferListActivity.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
-            case R.id.relBookNow:
-                startActivity(new Intent(getActivity(), BookNowActivity.class));
-                AnimUtil.slideFromRightAnim(getActivity());
-                break;
-            case R.id.relMyOrders:
+            case R.id.imageViewDelivery:
                 Intent intent = new Intent(getActivity(), DeliveryAreaActivity.class);
                 startActivity(intent);
                 AnimUtil.slideFromRightAnim(getActivity());
 
                 break;
-            case R.id.relContact:
+            case R.id.imageViewOrder:
+//                Intent intent = new Intent(getActivity(), DeliveryAreaActivity.class);
+//                startActivity(intent);
+//                AnimUtil.slideFromRightAnim(getActivity());
+                if (userId.isEmpty()) {
+                    Intent intentLogin = new Intent(getActivity(), LoginScreenActivity.class);
+                    intentLogin.putExtra(AppConstant.FROM, "menu");
+                    startActivity(intentLogin);
+                    AnimUtil.slideUpAnim(getActivity());
+                } else {
+                    Intent intentOrder = new Intent(getActivity(), OrderListActivity.class);
+                    intentOrder.putExtra(AppConstant.IS_HEADER, true);
+                    startActivity(intentOrder);
+                    AnimUtil.slideFromRightAnim(getActivity());
+                }
+
+                break;
+            case R.id.imageViewContact:
                 startActivity(new Intent(getActivity(), ContactActivity.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
-            case R.id.relMyCart:
+            case R.id.imageViewCart:
                 openShopCartActivity();
                 break;
 
@@ -156,8 +169,6 @@ public class HomeFragmentTheme16 extends Fragment implements View.OnClickListene
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
     }
-
-
 
 
 }

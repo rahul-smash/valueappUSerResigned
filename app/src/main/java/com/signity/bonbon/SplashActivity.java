@@ -28,7 +28,6 @@ import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.network.NetworkConstant;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
@@ -89,7 +88,6 @@ public class SplashActivity extends Activity {
             });
         }
     }
-
 
 
     private void checkAgainProcess() {
@@ -158,14 +156,13 @@ public class SplashActivity extends Activity {
     }
 
 
-
     private void moveToCitySelection() {
 
 //        boolean x=prefManager.getBoolean(AppConstant.CITY_SELECTED);
 
-        if(prefManager.getBoolean(AppConstant.AREA_SELECTED)){
+        if (prefManager.getBoolean(AppConstant.AREA_SELECTED)) {
             getMainActivity();
-        }else {
+        } else {
 
             getAllAreaDetail();
 
@@ -207,13 +204,6 @@ public class SplashActivity extends Activity {
             }
         });
     }
-
-
-
-
-
-
-
 
 
     public void showAlertDialogForInternetConnection(Context context) {

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/theme_16_home_bg">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/theme_16_home_bg">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/logoTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimen_logo_width"
+            android:layout_height="@dimen/dimen_logo_height"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/imgmargintop"
             android:src="@drawable/theme_16_home_top_bg" />
 
         <TextView
@@ -22,18 +23,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/logoTop"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/labl1margintop"
             android:text="All Time Favourite Pizza's"
             android:textColor="@android:color/white"
             android:textSize="@dimen/dimen_big_text_size" />
 
         <View
             android:id="@+id/center_dot"
-            android:layout_width="5dp"
-            android:layout_height="5dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_below="@+id/textViewLbl1"
-            android:layout_marginTop="30dp"
-            android:background="@color/color_white"></View>
+            android:layout_marginTop="@dimen/dot1margintop"
+            android:background="@color/color_white"
+            android:visibility="invisible"></View>
 
 
         <RelativeLayout
@@ -42,13 +44,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/center_dot"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="@dimen/relativeRingmargintop"
             android:background="@drawable/theme_16_home_ring">
 
             <ImageView
                 android:id="@+id/imageViewRing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/center_pizza_width"
+                android:layout_height="@dimen/center_pizza_height"
                 android:layout_centerInParent="true"
                 android:src="@drawable/theme_16_home_center_pizza" />
 
@@ -62,57 +64,102 @@
             android:layout_centerHorizontal="true">
 
             <ImageView
-                android:id="@+id/myCategories"
+                android:id="@+id/imageViewCategories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/theme_16_category" />
         </RelativeLayout>
 
+        <View
+            android:id="@+id/center_dot2"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@+id/relative2"
+            android:layout_marginTop="@dimen/dot2margintop"
+            android:background="@color/color_white"
+            android:visibility="invisible"></View>
+
         <RelativeLayout
             android:id="@+id/relative3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/relative2"
-            android:layout_centerHorizontal="true">
+            android:layout_below="@+id/center_dot2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/relative_3_marigin_top">
 
             <ImageView
-                android:id="@+id/myOrder"
+                android:id="@+id/imageViewDelivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/theme_16_my_order" />
+                android:layout_marginLeft="@dimen/margin_left_my_delivery"
+                android:src="@drawable/theme_16_delivery" />
+
             <ImageView
-                android:id="@+id/offers"
+                android:id="@+id/imageViewOffers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_right_offers"
                 android:src="@drawable/theme_16_offers" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/relative4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_alignBottom="@+id/relativeRing"
-            android:layout_centerHorizontal="true">
+            android:layout_below="@+id/relative3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/relative_4_marigin_top">
 
             <ImageView
-                android:id="@+id/mydelivery"
+                android:id="@+id/imageViewOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:src="@drawable/theme_16_delivery" />
+                android:layout_marginLeft="@dimen/margin_left_my_order"
+                android:src="@drawable/theme_16_my_order" />
+
+
             <ImageView
-                android:id="@+id/myCart"
+                android:id="@+id/imageViewCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_right_my_cart"
                 android:src="@drawable/theme_16_my_cart" />
+
+            <Button
+                android:id="@+id/buttonCart"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignRight="@+id/imageViewCart"
+                android:layout_alignTop="@+id/imageViewCart"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/red_noto"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:visibility="gone" />
         </RelativeLayout>
+
+        <View
+            android:id="@+id/center_dot3"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@+id/relative4"
+            android:layout_marginTop="@dimen/dot3margintop"
+            android:background="@color/color_white"
+            android:visibility="invisible"></View>
+
+        <ImageView
+            android:id="@+id/imageViewContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/center_dot3"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/theme_16_contact" />
     </RelativeLayout>
 
 

@@ -17,8 +17,7 @@ public class OrderListActivity extends FragmentActivity {
         setContentView(com.signity.bonbon.R.layout.order_list_activity);
 
         Fragment fragment = OrderHistory.newInstance(this);
-        Bundle bundle = new Bundle();
-        bundle.putString("check", "check");
+        Bundle bundle = getIntent().getExtras();
         fragment.setArguments(bundle);
 
         if (savedInstanceState == null)

@@ -92,6 +92,22 @@
     <dimen name="top_margin">10dp</dimen>
 
     <!-- Lapinoz pizza-->
-    <dimen name="dimen_big_text_size">25sp</dimen>
+    <dimen name="dimen_big_text_size">22sp</dimen>
+    <dimen name="dimen_logo_width">80dp</dimen>
+    <dimen name="dimen_logo_height">80dp</dimen>
+    <dimen name="imgmargintop">10dp</dimen>
+    <dimen name="labl1margintop">15dp</dimen>
+    <dimen name="dot1margintop">15dp</dimen>
+    <dimen name="dot2margintop">15dp</dimen>
+    <dimen name="dot3margintop">15dp</dimen>
+    <dimen name="relativeRingmargintop">35dp</dimen>
+    <dimen name="center_pizza_height">150dp</dimen>
+    <dimen name="center_pizza_width">150dp</dimen>
+    <dimen name="relative_3_marigin_top">-15dp</dimen>
+    <dimen name="relative_4_marigin_top">15dp</dimen>
+    <dimen name="margin_left_my_order">35dp</dimen>
+    <dimen name="margin_right_offers">35dp</dimen>
+    <dimen name="margin_left_my_delivery">35dp</dimen>
+    <dimen name="margin_right_my_cart">35dp</dimen>
 
 </resources>

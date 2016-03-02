@@ -13,6 +13,9 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.signity.bonbon.Utilities.AppConstant;
@@ -46,6 +49,7 @@ public class SplashActivity extends Activity {
     AppDatabase appDb;
     PrefManager prefManager;
     String deviceToken;
+    ImageView splash_screen;
 
 
     @Override
@@ -53,20 +57,42 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        splash_screen = (ImageView) findViewById(R.id.splash_screen);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoom_with_bounce_anim);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (Util.checkInternetConnection(SplashActivity.this)) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            initSplash();
+                        }
+                    }, SPLASH_TIME_OUT);
+                } else {
+                    showAlertDialogForInternetConnection(SplashActivity.this);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        splash_screen.startAnimation(animation);
         prefManager = new PrefManager(this);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
-        if (Util.checkInternetConnection(this)) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    initSplash();
-                }
-            }, SPLASH_TIME_OUT);
-        } else {
-            showAlertDialogForInternetConnection(SplashActivity.this);
-        }
+
+//        startAnimationProcess()
+//
+//
     }
 
     private void initSplash() {

@@ -231,16 +231,21 @@ public class ViewController {
                 layoutId = R.layout.home_activity_theme_15;
                 break;
             case 16:
-                //Nukkar Dhaba
+                //La piano
                 layoutId = R.layout.home_activity_theme_16;
                 break;
             case 17:
-                //Nukkar Dhaba
-                layoutId = R.layout.home_activity_theme_18;
+                //Food o Nine
+                layoutId = R.layout.home_activity_theme_17;
                 break;
             case 18:
-                //Nukkar Dhaba
+                //Cafe sweet
                 layoutId = R.layout.home_activity_theme_18;
+                break;
+
+            case 19:
+                //E Grocers
+                layoutId = R.layout.home_activity_theme_19_grocery;
                 break;
             default:
                 layoutId = R.layout.home_activity;

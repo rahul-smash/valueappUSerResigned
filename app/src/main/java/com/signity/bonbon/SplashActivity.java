@@ -49,7 +49,7 @@ public class SplashActivity extends Activity {
     AppDatabase appDb;
     PrefManager prefManager;
     String deviceToken;
-    ImageView splash_screen;
+//    ImageView splash_screen;
 
 
     @Override
@@ -57,8 +57,8 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-        splash_screen = (ImageView) findViewById(R.id.splash_screen);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoom_with_bounce_anim);
+//        splash_screen = (ImageView) findViewById(R.id.splash_screen);
+        /*Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoom_with_bounce_anim);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -83,13 +83,23 @@ public class SplashActivity extends Activity {
             public void onAnimationRepeat(Animation animation) {
 
             }
-        });
-        splash_screen.startAnimation(animation);
+        });*/
+//        splash_screen.startAnimation(animation);
         prefManager = new PrefManager(this);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
 
+        if (Util.checkInternetConnection(this)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    initSplash();
+                }
+            }, SPLASH_TIME_OUT);
+        } else {
+            showAlertDialogForInternetConnection(SplashActivity.this);
+        }
 //        startAnimationProcess()
 //
 //

@@ -462,6 +462,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
+
+        selectedUserAddress=null;
+
         InputMethodManager inputManager = (InputMethodManager) getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -472,4 +475,6 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
+
+
 }

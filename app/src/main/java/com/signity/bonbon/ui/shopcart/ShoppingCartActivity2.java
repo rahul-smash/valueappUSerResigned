@@ -190,6 +190,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
         });
 
+        listViewCart.setSelection(0);
 
     }
 

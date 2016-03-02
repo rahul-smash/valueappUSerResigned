@@ -1,10 +1,9 @@
-package com.signity.bonbon.ui.grocery.storetheme1.fragment;
+package com.signity.bonbon.ui.grocery.storetheme19.fragment;
 
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -36,11 +35,9 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 
 /**
- * Created by root on 9/2/16.
+ * Created by root on 2/3/16.
  */
-public class HomeFragmentTheme1Grocery extends Fragment implements View.OnClickListener {
-
-
+public class HomeFragmentEgrocersTheme19 extends Fragment implements View.OnClickListener {
 
     RelativeLayout relCategory, relOffers, relBookNow, relMyOrders, relContact, relMyCart;
 
@@ -90,17 +87,6 @@ public class HomeFragmentTheme1Grocery extends Fragment implements View.OnClickL
         relContact.setOnClickListener(this);
         relMyCart.setOnClickListener(this);
         store = appDb.getStore(storeId);
-        if (store != null) {
-            String banner = store.getBanner();
-            if (store.getBanner() != null && !store.getBanner().isEmpty()) {
-                Picasso.with(getActivity()).load(banner).error(R.drawable.no_image).into(imageView);
-            } else {
-                imageView.setImageResource(R.drawable.no_image);
-            }
-        } else {
-            imageView.setImageResource(R.drawable.no_image);
-        }
-
         return mView;
     }
 
@@ -173,12 +159,4 @@ public class HomeFragmentTheme1Grocery extends Fragment implements View.OnClickL
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
     }
-
-    @Override
-    public void onStop() {
-        // When our activity is stopped ensure we also stop the connection to the service
-        // this stops us leaking our activity into the system *bad*
-        super.onStop();
-    }
-
 }

@@ -60,7 +60,8 @@
                         android:gravity="center"
                         android:text="@string/font_home_cat"
                         android:textColor="@color/color_theme_19_orange"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/category_name"
@@ -102,7 +103,8 @@
                         android:gravity="center"
                         android:text="@string/font_home_offer"
                         android:textColor="@color/color_theme_19_orange"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/offers"
@@ -151,7 +153,8 @@
                         android:gravity="center"
                         android:text="@string/font_home_book"
                         android:textColor="@color/color_theme_19_orange"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:padding="5dp"/>
 
 
                     <TextView
@@ -193,7 +196,8 @@
                         android:gravity="center"
                         android:text="@string/font_home_order"
                         android:textColor="@color/color_theme_19_orange"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/myOrder"
@@ -244,7 +248,8 @@
                         android:gravity="center"
                         android:text="@string/font_home_contact"
                         android:textColor="@color/color_theme_19_orange"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:padding="5dp"/>
 
                     <TextView
                         android:id="@+id/contact"
@@ -289,7 +294,8 @@
                         android:gravity="center"
                         android:text="@string/font_home_my_cart"
                         android:textColor="@color/color_theme_19_orange"
-                        android:textSize="32dp" />
+                        android:textSize="32dp"
+                        android:padding="5dp"/>
 
 
 
@@ -303,24 +309,24 @@
                         android:text="MY CART"
                         android:textSize="@dimen/home_text_size_menu_button"
                         android:textColor="@android:color/black"/>
+
+                    <Button
+                        android:id="@+id/buttonCart"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignRight="@+id/imgCart"
+                        android:layout_alignTop="@+id/imgCart"
+                        android:background="@drawable/red_noto"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:visibility="visible" />
                 </RelativeLayout>
 
-                <Button
-                    android:id="@+id/buttonCart"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignRight="@+id/relativeInnerMycart"
-                    android:layout_alignTop="@+id/relativeInnerMycart"
-                    android:layout_marginBottom="0dp"
-                    android:layout_marginRight="14dp"
-                    android:layout_marginTop="0dp"
-                    android:background="@drawable/red_noto"
-                    android:clickable="false"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="#ffffff"
-                    android:textSize="13sp"
-                    android:visibility="visible" />
+
             </RelativeLayout>
         </LinearLayout>
 

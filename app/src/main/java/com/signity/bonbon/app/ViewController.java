@@ -16,6 +16,7 @@ import com.signity.bonbon.ui.fragment.MyFavourite;
 import com.signity.bonbon.ui.fragment.MyFavouriteGroceryFragment;
 import com.signity.bonbon.ui.grocery.storetheme1.fragment.HomeFragmentTheme1Grocery;
 import com.signity.bonbon.ui.grocery.storetheme10.fragment.HomeFragmentTheme10Grocery;
+import com.signity.bonbon.ui.grocery.storetheme19.fragment.HomeFragmentEgrocersTheme19;
 import com.signity.bonbon.ui.grocery.storetheme4.fragment.HomeFragmentTheme4Grocery;
 import com.signity.bonbon.ui.grocery.storetheme7.fragment.HomeFragmentTheme7Grocery;
 import com.signity.bonbon.ui.grocery.storetheme8.fragment.HomeFragmentTheme8Grocery;
@@ -135,6 +136,15 @@ public class ViewController {
             case 18:
                 fragment = new HomeFragmentTheme18();
                 break;
+
+            case 19:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                    fragment = new HomeFragmentEgrocersTheme19();
+                } else {
+
+                }
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;

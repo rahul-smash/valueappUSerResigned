@@ -339,8 +339,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
 
-                    title.setVisibility(View.GONE);
-                    citySelect.setVisibility(View.VISIBLE);
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
 
                     replace(viewController.getHomeFragment());
                     logOutUser();

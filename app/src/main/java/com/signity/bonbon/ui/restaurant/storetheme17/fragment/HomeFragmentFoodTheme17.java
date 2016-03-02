@@ -1,4 +1,4 @@
-package com.signity.bonbon.ui.restaurant.storetheme15.fragment;
+package com.signity.bonbon.ui.restaurant.storetheme17.fragment;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -33,10 +33,9 @@ import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import java.util.Calendar;
 
 /**
- * Created by root on 22/2/16.
+ * Created by root on 29/2/16.
  */
-public class HomeFragmentNukkarTheme15 extends Fragment implements View.OnClickListener {
-
+public class HomeFragmentFoodTheme17 extends Fragment implements View.OnClickListener {
 
 
     RelativeLayout relCategory, relOffers, relBookNow, relMyOrders, relContact, relMyCart;
@@ -62,6 +61,8 @@ public class HomeFragmentNukkarTheme15 extends Fragment implements View.OnClickL
         if (!prefManager.isCartSetLocalNotification()) {
             setUpLocalNotificationForCart();
         }
+
+
     }
 
     @Override
@@ -154,8 +155,6 @@ public class HomeFragmentNukkarTheme15 extends Fragment implements View.OnClickL
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
     }
-
-
 
 
 }

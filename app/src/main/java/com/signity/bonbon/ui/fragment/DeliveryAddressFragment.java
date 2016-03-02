@@ -66,6 +66,8 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     UserAddressModel selectedUserAddress;
     private RelativeLayout mRelativeProceed;
 
+    int selectedPostion = -1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,7 +139,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     class Adapter extends BaseAdapter {
         Activity context;
         LayoutInflater l;
-        int selectedPostion = -1;
+
         public List<UserAddressModel> deliveryAddress;
 
         public Adapter(Activity context, List<UserAddressModel> deliveryAddress) {
@@ -464,6 +466,8 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         super.onResume();
 
         selectedUserAddress=null;
+        selectedPostion=-1;
+        getDeliveryAddress();
 
         InputMethodManager inputManager = (InputMethodManager) getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);

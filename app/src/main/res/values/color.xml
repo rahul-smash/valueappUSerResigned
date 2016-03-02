@@ -23,7 +23,13 @@
 
     <color name="favouriteColorSelected">#4FB954</color>
     <color name="menu_bg_color">#333470</color>
+    <color name="text">#353334</color>
+    <color name="text2">#252424</color>
 
+
+    <!-- Color code theme 17 -->
+    <color name="color_theme_17_home_menu_bg">#EED1BA</color>
+    <color name="color_theme_17_home_menu_text_yellow_">#F6EA56</color>
 
     <!--color store 18 blue chillis zaika-->
     <!--<color name="colorTransRed_65">#729caf</color>-->

@@ -13,6 +13,7 @@ public class AppConstant {
 
 
     public static String FROM = "com.android.bonbon.Utilities.FROM";
+    public static String IS_HEADER = "com.android.bonbon.Utilities.IS_HEADER";
     public static String PHONE = "com.android.bonbon.Utilities.PHONE";
     public static String NAME = "com.android.bonbon.Utilities.NAME";
     public static String EMAIL = "com.android.bonbon.Utilities.EMAIL";

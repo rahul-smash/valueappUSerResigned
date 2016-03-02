@@ -573,8 +573,8 @@ public class AppDatabase {
                 cursor.close();
             productName = "";
         }
-        if(productName.contains("&")){
-            productName=productName.replace("&","");
+        if (productName.contains("&")) {
+            productName = productName.replace("&", "");
         }
 
         return productName;
@@ -1000,6 +1000,7 @@ public class AppDatabase {
                 values.put("about_us", store.getAboutUs());
                 values.put("version", store.getVersion());
                 values.put("lat", store.getLat());
+                values.put("lng", store.getLng());
                 values.put("otp_skip", store.getOtpSkip());
                 values.put("store_status", store.getStoreStatus());
                 values.put("android_app_share", store.getAndroidAppShareLink());

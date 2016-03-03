@@ -5,11 +5,14 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -17,6 +20,7 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
@@ -39,7 +43,7 @@ import java.util.Calendar;
 public class HomeFragmentTheme16 extends Fragment implements View.OnClickListener {
 
 
-    ImageView imageViewCategories, imageViewOffers, imageViewDelivery, imageViewOrder, imageViewContact, imageViewCart;
+    ImageView imageViewCategories, imageViewOffers, imageViewDelivery, imageViewOrder, imageViewContact, imageViewCart,imageViewRing;
     Button buttonCart;
     View mView;
     String storeId;
@@ -70,12 +74,24 @@ public class HomeFragmentTheme16 extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(viewController.getHomeResourceLayout(), container, false);
         imageViewCategories = (ImageView) mView.findViewById(R.id.imageViewCategories);
+        imageViewCategories.setVisibility(View.INVISIBLE);
+
         imageViewOffers = (ImageView) mView.findViewById(R.id.imageViewOffers);
+        imageViewOffers.setVisibility(View.INVISIBLE);
+
         imageViewDelivery = (ImageView) mView.findViewById(R.id.imageViewDelivery);
+        imageViewDelivery.setVisibility(View.INVISIBLE);
+
         imageViewOrder = (ImageView) mView.findViewById(R.id.imageViewOrder);
+        imageViewOrder.setVisibility(View.INVISIBLE);
+
         imageViewContact = (ImageView) mView.findViewById(R.id.imageViewContact);
+        imageViewContact.setVisibility(View.INVISIBLE);
+
         imageViewCart = (ImageView) mView.findViewById(R.id.imageViewCart);
+        imageViewCart.setVisibility(View.INVISIBLE);
         buttonCart = (Button) mView.findViewById(R.id.buttonCart);
+        buttonCart.setVisibility(View.INVISIBLE);
         imageViewCategories.setOnClickListener(this);
         imageViewOffers.setOnClickListener(this);
         imageViewDelivery.setOnClickListener(this);
@@ -83,8 +99,69 @@ public class HomeFragmentTheme16 extends Fragment implements View.OnClickListene
         imageViewContact.setOnClickListener(this);
         imageViewCart.setOnClickListener(this);
         store = appDb.getStore(storeId);
+        imageViewRing=(ImageView)mView.findViewById(R.id.imageViewRing);
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_with_bounce_anim);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                buttonCart.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                buttonCart.setVisibility(View.GONE);
+                homeIconAnimation();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        imageViewRing.startAnimation(animation);
+
+
         return mView;
     }
+
+    private void homeIconAnimation() {
+        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.zoom_with_bounce_anim);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                imageViewCategories.setVisibility(View.VISIBLE);
+                imageViewOffers.setVisibility(View.VISIBLE);
+                imageViewDelivery.setVisibility(View.VISIBLE);
+                imageViewOrder.setVisibility(View.VISIBLE);
+                imageViewContact.setVisibility(View.VISIBLE);
+                imageViewCart.setVisibility(View.VISIBLE);
+                buttonCart.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                int cartSize = appDb.getCartSize();
+                if (cartSize != 0) {
+                    buttonCart.setVisibility(View.VISIBLE);
+                    buttonCart.setText(String.valueOf(cartSize));
+                } else {
+                    buttonCart.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        imageViewCategories.startAnimation(animation);
+        imageViewOffers.startAnimation(animation);
+        imageViewDelivery.startAnimation(animation);
+        imageViewOrder.startAnimation(animation);
+        imageViewContact.startAnimation(animation);
+        imageViewCart.startAnimation(animation);
+    }
+
 
     private void checkCartCount() {
 

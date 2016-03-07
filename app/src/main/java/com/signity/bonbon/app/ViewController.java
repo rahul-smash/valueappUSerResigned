@@ -29,9 +29,9 @@ import com.signity.bonbon.ui.restaurant.storetheme13.fragment.HomeFragmentKhaneT
 import com.signity.bonbon.ui.restaurant.storetheme14.fragment.HomeFragmentLazeezTheme14;
 import com.signity.bonbon.ui.restaurant.storetheme15.fragment.HomeFragmentNukkarTheme15;
 import com.signity.bonbon.ui.restaurant.storetheme16.HomeFragmentTheme16;
-import com.signity.bonbon.ui.restaurant.storetheme17.fragment.HomeFragmentTheme17;
-import com.signity.bonbon.ui.restaurant.storetheme18.HomeFragmentTheme18;
 import com.signity.bonbon.ui.restaurant.storetheme17.fragment.HomeFragmentFoodTheme17;
+import com.signity.bonbon.ui.restaurant.storetheme18.HomeFragmentTheme18;
+import com.signity.bonbon.ui.restaurant.storetheme20.HomeFragmentTheme20;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
@@ -143,6 +143,9 @@ public class ViewController {
                 } else {
 
                 }
+                break;
+            case 20:
+                fragment = new HomeFragmentTheme20();
                 break;
 
             default:
@@ -256,6 +259,10 @@ public class ViewController {
             case 19:
                 //E Grocers
                 layoutId = R.layout.home_activity_theme_19_grocery;
+                break;
+            case 20:
+                //Sam Pizza
+                layoutId = R.layout.home_activity_theme_20;
                 break;
             default:
                 layoutId = R.layout.home_activity;

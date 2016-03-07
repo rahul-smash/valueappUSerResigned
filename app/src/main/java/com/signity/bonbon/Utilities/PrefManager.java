@@ -23,6 +23,9 @@ public class PrefManager {
     public static final String OTP_SKIP = BuildConfig.APPLICATION_ID + ".OTP_SKIP";
     public static final String USER_RECORD_KEY = BuildConfig.APPLICATION_ID + "._KEY_USER";
 
+    public static class SharedPrefs {
+        public static String Geofences = "SHARED_PREFS_GEOFENCES";
+    }
 
     public Context _ctx;
     SharedPreferences sharedpreferences;
@@ -114,7 +117,6 @@ public class PrefManager {
     public boolean getBoolean(String key) {
         return sharedpreferences.getBoolean(key, false);
     }
-
 
 
 }

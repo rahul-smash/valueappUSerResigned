@@ -12,12 +12,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -27,6 +27,7 @@ import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
+import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
@@ -49,7 +50,7 @@ public class SplashActivity extends Activity {
     AppDatabase appDb;
     PrefManager prefManager;
     String deviceToken;
-//    ImageView splash_screen;
+    ImageView splash_screen;
 
 
     @Override
@@ -57,8 +58,35 @@ public class SplashActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-//        splash_screen = (ImageView) findViewById(R.id.splash_screen);
-        /*Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoom_with_bounce_anim);
+        GeofenceController.getInstance().init(this);
+        prefManager = new PrefManager(this);
+        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
+        appDb = DbAdapter.getInstance().getDb();
+        deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
+        splash_screen = (ImageView) findViewById(R.id.splash_screen);
+
+
+//        startAnimationProcess()
+//
+//
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        Log.i(SplashActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
+
+        if (googlePlayServicesCode == 1 || googlePlayServicesCode == 2 || googlePlayServicesCode == 3) {
+            GooglePlayServicesUtil.getErrorDialog(googlePlayServicesCode, this, 0).show();
+        } else {
+            startSplashProcess();
+        }
+
+    }
+
+    private void startSplashProcess() {
+          /*Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoom_with_bounce_anim);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -85,10 +113,7 @@ public class SplashActivity extends Activity {
             }
         });*/
 //        splash_screen.startAnimation(animation);
-        prefManager = new PrefManager(this);
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
-        appDb = DbAdapter.getInstance().getDb();
-        deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
+
 
         if (Util.checkInternetConnection(this)) {
             new Handler().postDelayed(new Runnable() {
@@ -100,9 +125,6 @@ public class SplashActivity extends Activity {
         } else {
             showAlertDialogForInternetConnection(SplashActivity.this);
         }
-//        startAnimationProcess()
-//
-//
     }
 
     private void initSplash() {
@@ -287,4 +309,6 @@ public class SplashActivity extends Activity {
 
         notificationManager.notify((new Random(100).nextInt()) /* ID of notification */, notificationBuilder.build());
     }
+
+
 }

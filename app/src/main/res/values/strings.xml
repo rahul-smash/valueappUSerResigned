@@ -41,4 +41,10 @@
     <string name="font_home_fav"></string>
     <string name="font_home_book"></string>
     <string name="title_activity_select_location">SelectLocationActivity</string>
+
+
+    <!-- Notification -->
+    <string name="Notification.Title">Are we there yet?</string>
+    <string name="Notification.Text">We\'re at %1$s!!!</string>
+    <string name="fence_radius">.200</string>
 </resources>

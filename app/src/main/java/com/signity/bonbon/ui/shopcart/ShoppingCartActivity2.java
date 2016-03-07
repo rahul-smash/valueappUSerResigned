@@ -138,7 +138,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         relativeLayout.post(new Runnable() {
             public void run() {
                 int height = relativeLayout.getHeight();
-                LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, height);
+                LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
                 relativeLayout.setLayoutParams(mParam);
             }
         });
@@ -263,17 +263,18 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess()!=null?responseData.getSuccess():false) {
+                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
-                    Toast.makeText(ShoppingCartActivity2.this, responseData.getMessage(), Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Failure", "" + responseData.getMessage(), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Log.e("Error", error.getMessage());
+                Toast.makeText(ShoppingCartActivity2.this, "Server Not Responding", Toast.LENGTH_SHORT).show();
             }
         });
 

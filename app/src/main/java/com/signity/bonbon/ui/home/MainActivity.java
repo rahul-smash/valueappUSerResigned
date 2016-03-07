@@ -3,6 +3,7 @@ package com.signity.bonbon.ui.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -33,6 +35,8 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
+import com.signity.bonbon.geofence.GeofenceController;
+import com.signity.bonbon.geofence.NamedGeofence;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.SliderObject;
 import com.signity.bonbon.model.Store;
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView mMenuList;
     public TextView title, user;
     ImageButton search, shopingcart;
-    Button menu,citySelect;
+    Button menu, citySelect;
     ImageView profilePic;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     String[] labels = {"Home", "My Profile", "Delivery Address", "My Order",
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PrefManager prefManager;
     private GCMClientManager pushClientManager;
     String userId;
-    String storeId,areaName;
+    String storeId, areaName;
 
     String name;
     String phone;
@@ -91,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slider_pane);
+
+
         context = this;
         prefManager = new PrefManager(MainActivity.this);
         viewController = AppController.getInstance().getViewController();
@@ -108,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSlidingPanel = (SlidingPaneLayout) findViewById(R.id.SlidingPanel);
         menu = (Button) findViewById(R.id.menu);
 
-        citySelect=(Button)findViewById(R.id.citySelect);
-        areaName=prefManager.getSharedValue(AppConstant.AREA_NAME);
-        citySelect.setText(""+areaName);
+        citySelect = (Button) findViewById(R.id.citySelect);
+        areaName = prefManager.getSharedValue(AppConstant.AREA_NAME);
+        citySelect.setText("" + areaName);
 
         search = (ImageButton) findViewById(R.id.search);
         search.setVisibility(View.GONE);
@@ -119,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         title.setVisibility(View.VISIBLE);
         citySelect.setVisibility(View.GONE);
-
 
         updateUserName();
 
@@ -151,19 +156,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         store = appDb.getStore(storeId);
         updateStoreInfo(store);
 
+        setUpFenceAroundStore(store);
+
         Fragment fragment = viewController.getHomeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
     }
 
+    private void setUpFenceAroundStore(Store store) {
+
+        if (dataIsValid(store)) {
+            NamedGeofence geofence = new NamedGeofence();
+            geofence.name = store.getStoreName();
+            geofence.storeId = store.getId();
+            // for testing at signity software
+//            geofence.latitude = Double.parseDouble("30.723774");
+//            geofence.longitude = Double.parseDouble("76.846933");
+            geofence.latitude = Double.parseDouble(store.getLat());
+            geofence.longitude = Double.parseDouble(store.getLng());
+            geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+            GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
+
+        } else {
+            Log.e("Fence", "Fence already created or unable to create");
+        }
+
+
+    }
+
+    private boolean dataIsValid(Store store) {
+        boolean status = false;
+        if (store.getLat() != null && store.getLng() != null && !(store.getLat().isEmpty() && store.getLat().equalsIgnoreCase("0"))
+                && !(store.getLng().isEmpty() && store.getLng().equalsIgnoreCase("0"))) {
+            SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
+            String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
+            if (!fenceId.isEmpty()) {
+                Log.e("Fence", "One Fence Found.. With id.." + fenceId);
+                status = false;
+            } else {
+                Log.e("Fence", "NO Fence Available ");
+                status = true;
+            }
+        }
+        return status;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if (!isActivityLoadsFirstTime) {
-            getStoreServicesForUpdate();
+        int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        Log.i(MainActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
+
+        if (googlePlayServicesCode == 1 || googlePlayServicesCode == 2 || googlePlayServicesCode == 3) {
+            GooglePlayServicesUtil.getErrorDialog(googlePlayServicesCode, this, 0).show();
         } else {
-            isActivityLoadsFirstTime = false;
+            if (!isActivityLoadsFirstTime) {
+                getStoreServicesForUpdate();
+            } else {
+                isActivityLoadsFirstTime = false;
+            }
         }
+
     }
 
     private void updateUserName() {
@@ -197,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mSlidingPanel.closePane();
         }
 
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
@@ -500,5 +553,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
+    private GeofenceController.GeofenceControllerListener geofenceControllerListener = new GeofenceController.GeofenceControllerListener() {
+        @Override
+        public void onGeofencesUpdated() {
+            Log.i("Geo Fence", "Geo Fence");
+        }
+
+        @Override
+        public void onError() {
+            Log.i("Geo Fence", "Error on Fence Created");
+        }
+    };
 
 }

@@ -28,15 +28,13 @@ public class NetworkAdaper {
 
     public void setupRetrofitClient() {
         OkHttpClient client = new OkHttpClient();
-        client.setConnectTimeout(2, TimeUnit.MINUTES);
-        client.setReadTimeout(2, TimeUnit.MINUTES);
+        client.setConnectTimeout(1, TimeUnit.MINUTES);
+        client.setReadTimeout(1, TimeUnit.MINUTES);
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client)).setEndpoint(NetworkConstant.BASE).setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         apiService = restAdapter.create(ApiService.class);
     }
-
-
 
     public ApiService getNetworkServices() {
         return apiService;

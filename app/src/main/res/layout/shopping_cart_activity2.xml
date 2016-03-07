@@ -277,14 +277,14 @@
                     android:imeOptions="actionDone"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/text_size_small" />
 
                 <Button
                     android:id="@+id/applyCoupen"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_toLeftOf="@+id/applyOffer"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/shape_apply_round_corners"
@@ -293,7 +293,24 @@
                     android:paddingRight="10dp"
                     android:text="Apply Coupon"
                     android:textColor="#ffffff"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/text_size_small" />
+
+                <Button
+                    android:id="@+id/applyOffer"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Available Offers"
+                    android:textColor="@color/color_blue"
+                    android:textSize="@dimen/text_size_sub_normal" />
 
                 <TextView
                     android:layout_width="match_parent"

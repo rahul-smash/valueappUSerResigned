@@ -1,10 +1,13 @@
 package com.signity.bonbon.ui.shopcart;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -35,14 +39,17 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
+import com.signity.bonbon.model.GetOfferResponse;
 import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.OfferData;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.SelectedVariant;
+import com.signity.bonbon.model.Store;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.offer.OfferViewActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +78,19 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private Button backButton, btnSearch;
     private TextView shipping_charges;
     private AppDatabase appDb;
-    private Button applyCoupon;
+    private Button applyCoupon,applyOffer;
     private EditText editCoupon;
     private EditText edtBar;
+
+    PrefManager prefManager;
+    //list and adapter
+    List<OfferData> listOfferData;
+    ListOfferAdapter mAdapter;
+
+    ListView offerList;
+    TextView messageTxt;
+    Dialog dialog;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +100,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
         appDb = DbAdapter.getInstance().getDb();
+        prefManager = new PrefManager(ShoppingCartActivity2.this);
         userId = getIntent().getStringExtra("userId");
         addressId = getIntent().getStringExtra("addressId");
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
@@ -121,8 +139,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         placeorder.setOnClickListener(this);
         editCoupon = (EditText) findViewById(R.id.editCoupon);
         applyCoupon = (Button) findViewById(R.id.applyCoupen);
+        applyOffer=(Button)findViewById(R.id.applyOffer);
         applyCoupon.setTag("apply");
         applyCoupon.setOnClickListener(this);
+        applyOffer.setOnClickListener(this);
 
 
         listProduct = appDb.getCartListProduct();
@@ -138,7 +158,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         relativeLayout.post(new Runnable() {
             public void run() {
                 int height = relativeLayout.getHeight();
-                LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+                LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, height);
                 relativeLayout.setLayoutParams(mParam);
             }
         });
@@ -263,7 +283,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
+                if (responseData.getSuccess()!=null?responseData.getSuccess():false) {
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
@@ -274,7 +294,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(ShoppingCartActivity2.this, "Server Not Responding", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShoppingCartActivity2.this, "Server not responding.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -310,11 +330,74 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     onRemoveCoupon();
                 }
                 break;
+
+            case R.id.applyOffer:
+                if(dialog!=null){
+                    dialog=null;
+                }
+                callNetworkForOffers();
+                break;
+
             case R.id.homeBtn:
                 Intent intent = new Intent(ShoppingCartActivity2.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void callNetworkForOffers() {
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+
+        Store store = appDb.getStore(prefManager.getSharedValue(AppConstant.STORE_ID));
+        String storeId = store.getId();
+        Map<String, String> param = new HashMap<String, String>();
+
+        param.put("store_id", storeId);
+
+        NetworkAdaper.getInstance().getNetworkServices().getStoreOffer(param, new Callback<GetOfferResponse>() {
+            @Override
+            public void success(GetOfferResponse getOfferResponse, Response response) {
+
+                if (getOfferResponse.getSuccess()) {
+
+                    listOfferData = getOfferResponse.getData();
+                    dialog = new Dialog(ShoppingCartActivity2.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.offers_screen);
+
+                    offerList = (ListView) dialog.findViewById(R.id.offerList);
+                    messageTxt=(TextView)dialog.findViewById(R.id.messageTxt);
+
+                    if (listOfferData != null && listOfferData.size() != 0) {
+                        mAdapter = new ListOfferAdapter(ShoppingCartActivity2.this, listOfferData);
+                        offerList.setAdapter(mAdapter);
+                        offerList.setVisibility(View.VISIBLE);
+                        messageTxt.setVisibility(View.GONE);
+                    } else {
+                        offerList.setVisibility(View.GONE);
+                        messageTxt.setVisibility(View.VISIBLE);
+                    }
+
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.show();
+
+                } else {
+                    offerList.setVisibility(View.GONE);
+                    messageTxt.setVisibility(View.VISIBLE);
+                }
+
+
+                ProgressDialogUtil.hideProgressDialog();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+//                showAlertDialog(getActivity(), "Error", error.getMessage());
+            }
+        });
+
     }
 
     private void onRemoveCoupon() {
@@ -327,6 +410,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             discountVal.setText("0");
             applyCoupon.setText("Apply Coupon");
             applyCoupon.setTag("apply");
+            editCoupon.setText("");
         }
 
 
@@ -544,6 +628,86 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public TextView items_mrp_price, totalValue;
             RelativeLayout parent;
             TextView items_name, items_price, number_text, rupee;
+        }
+    }
+
+
+    class ListOfferAdapter extends BaseAdapter {
+        Activity context;
+        LayoutInflater l;
+        List<OfferData> listOfferData;
+
+        public ListOfferAdapter(Activity context, List<OfferData> listOfferData) {
+            this.context = context;
+            l = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.listOfferData = listOfferData;
+
+        }
+
+        @Override
+        public int getCount() {
+            return listOfferData.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return listOfferData.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        ViewHolder holder;
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = l.inflate(R.layout.offers_screen_child, null);
+                holder = new ViewHolder();
+                holder.discountValue = (TextView) (convertView.findViewById(R.id.discountValue));
+                holder.minValue = (TextView) (convertView.findViewById(R.id.minValue));
+                holder.applyBtn = (Button) (convertView.findViewById(R.id.applyBtn));
+                holder.needTxt = (TextView) (convertView.findViewById(R.id.needTxt));
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            final OfferData data = listOfferData.get(position);
+            holder.discountValue.setText(""+data.getDiscount()+"% Off");
+            holder.minValue.setText("Min Order "+data.getMinimumOrderAmount());
+
+            double totalPrice = getTotalPrice();
+            double minimumCharges= Double.parseDouble(data.getMinimumOrderAmount());
+            if (minimumCharges > totalPrice) {
+                holder.applyBtn.setVisibility(View.GONE);
+                holder.needTxt.setVisibility(View.VISIBLE);
+                holder.needTxt.setText("You have "+(minimumCharges-totalPrice)+" amount short for this offer.");
+            } else {
+                holder.applyBtn.setVisibility(View.VISIBLE);
+                holder.needTxt.setVisibility(View.GONE);
+            }
+
+            holder.applyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editCoupon.setText("");
+                    editCoupon.setText(data.getCouponCode());
+                    onApplyCoupon();
+                    dialog.dismiss();
+                    dialog = null;
+                }
+            });
+
+            return convertView;
+        }
+
+
+        class ViewHolder {
+            TextView discountValue,minValue,needTxt;
+            Button applyBtn;
         }
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/pop_up_size"
+    android:layout_margin="10dp"
+    android:layout_centerInParent="true"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ColorPrimary">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:contentDescription=""
+            android:drawableLeft="@drawable/left"
+            android:paddingLeft="10dp"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:text="Select Coupon"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:padding="8dp"
+        android:textSize="@dimen/text_size_normal"
+        android:text="Available Coupons"
+        android:gravity="left"/>
+
+
+    <View
+        android:id="@+id/line_horizontal"
+        android:layout_below="@+id/note"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_popupwindow"/>
+
+
+    <TextView
+        android:id="@+id/messageTxt"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/line_horizontal"
+        android:padding="8dp"
+        android:textSize="@dimen/text_size_normal"
+        android:text="Sorry, there are no Coupons available."
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="visible"/>
+
+    <ListView
+        android:id="@+id/offerList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_horizontal"
+        android:divider="@color/bg_popupwindow"
+        android:dividerHeight="1dp"
+        android:visibility="visible" />
+
+
+
+
+</RelativeLayout>

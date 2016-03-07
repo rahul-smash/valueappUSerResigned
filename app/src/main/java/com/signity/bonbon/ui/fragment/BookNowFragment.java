@@ -2,6 +2,7 @@ package com.signity.bonbon.ui.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TimePicker;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -48,6 +50,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     // edtName   city  message
     private DatePickerDialog toDatePickerDialog;
+    private TimePickerDialog toTimePickerDialog;
 
     EditText edtName, phoneNumber, email, city, message;
     Button btnSubmit, date;
@@ -62,6 +65,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
     String from;
 
     boolean isFinsish = false;
+    Calendar bookDateAndTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,15 +111,25 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        Calendar newDate = Calendar.getInstance();
-                        newDate.set(year, monthOfYear, dayOfMonth);
-                        String dateValue = Util.getTime(newDate.getTime(), "dd-MM-yyyy HH:mm");
-                        date.setText(dateValue);
+                        bookDateAndTime = Calendar.getInstance();
+                        bookDateAndTime.set(year, monthOfYear, dayOfMonth);
+                        toTimePickerDialog.show();
 
                     }
                 }, newCalendar.get(Calendar.YEAR),
                 newCalendar.get(Calendar.MONTH),
                 newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        toTimePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                bookDateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                bookDateAndTime.set(Calendar.MINUTE, minute);
+                String dateValue = Util.getTime(bookDateAndTime.getTime(), "dd-MM-yyyy hh:mm a");
+                date.setText(dateValue);
+
+            }
+        }, newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), false);
 
     }
 
@@ -254,8 +268,8 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.date:
-//                toDatePickerDialog.show();
-                showDateTimeDialog();
+                toDatePickerDialog.show();
+//                showDateTimeDialog();
                 break;
         }
 
@@ -291,7 +305,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
         ((Button) mDateTimeDialogView.findViewById(R.id.SetDateTime)).setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-//                mDateTimePicker.clearFocus();
+                mDateTimePicker.clearFocus();
                 String dateValue;
                 Calendar newDate = Calendar.getInstance();
 //                newDate.set(mDateTimePicker.get(Calendar.YEAR), (mDateTimePicker.get(Calendar.MONTH) + 1), mDateTimePicker.get(Calendar.DAY_OF_MONTH));

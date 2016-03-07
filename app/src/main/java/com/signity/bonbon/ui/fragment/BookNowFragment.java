@@ -1,6 +1,7 @@
 package com.signity.bonbon.ui.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -10,9 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -25,6 +28,7 @@ import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.view.DateTimePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -212,7 +216,6 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
             case R.id.btnSubmit:
                 if (validForm()) {
 
-
                     String query = getQueryJson();
 
                     String userId = prefManager.getSharedValue(AppConstant.ID);
@@ -251,7 +254,8 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.date:
-                toDatePickerDialog.show();
+//                toDatePickerDialog.show();
+                showDateTimeDialog();
                 break;
         }
 
@@ -271,5 +275,77 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
         });
     }
 
+
+    private void showDateTimeDialog() {
+        // Create the dialog
+        final Dialog mDateTimeDialog = new Dialog(getActivity());
+        // Inflate the root layout
+        final RelativeLayout mDateTimeDialogView = (RelativeLayout) getActivity().getLayoutInflater().inflate(R.layout.date_time_dialog, null);
+        // Grab widget instance
+        final DateTimePicker mDateTimePicker = (DateTimePicker) mDateTimeDialogView.findViewById(R.id.DateTimePicker);
+        // Check is system is set to use 24h time (this doesn't seem to work as expected though)
+        final String timeS = android.provider.Settings.System.getString(getActivity().getContentResolver(), android.provider.Settings.System.TIME_12_24);
+        final boolean is24h = !(timeS == null || timeS.equals("12"));
+
+        // Update demo TextViews when the "OK" button is clicked
+        ((Button) mDateTimeDialogView.findViewById(R.id.SetDateTime)).setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+//                mDateTimePicker.clearFocus();
+                String dateValue;
+                Calendar newDate = Calendar.getInstance();
+//                newDate.set(mDateTimePicker.get(Calendar.YEAR), (mDateTimePicker.get(Calendar.MONTH) + 1), mDateTimePicker.get(Calendar.DAY_OF_MONTH));
+
+                dateValue = mDateTimePicker.get(Calendar.YEAR) + "/" + (mDateTimePicker.get(Calendar.MONTH) + 1) + "/"
+                        + mDateTimePicker.get(Calendar.DAY_OF_MONTH);
+//                ((TextView) v.findViewById(R.id.Date)).setText(mDateTimePicker.get(Calendar.YEAR) + "/" + (mDateTimePicker.get(Calendar.MONTH) + 1) + "/"
+//                        + mDateTimePicker.get(Calendar.DAY_OF_MONTH));
+                if (mDateTimePicker.is24HourView()) {
+//                    newDate.set(Calendar.HOUR_OF_DAY, mDateTimePicker.get(Calendar.HOUR_OF_DAY));
+//                    newDate.set(Calendar.MINUTE, mDateTimePicker.get(Calendar.MINUTE));
+                    dateValue = dateValue.concat(mDateTimePicker.get(Calendar.HOUR_OF_DAY) + ":" + mDateTimePicker.get(Calendar.MINUTE));
+//                    ((TextView) findViewById(R.id.Time)).setText(mDateTimePicker.get(Calendar.HOUR_OF_DAY) + ":" + mDateTimePicker.get(Calendar.MINUTE));
+                } else {
+                    newDate.set(Calendar.HOUR, mDateTimePicker.get(Calendar.HOUR));
+                    newDate.set(Calendar.MINUTE, mDateTimePicker.get(Calendar.MINUTE));
+                    newDate.set(Calendar.AM_PM, (mDateTimePicker.get(Calendar.AM_PM)));
+                    dateValue = dateValue.concat(mDateTimePicker.get(Calendar.HOUR) + ":" + mDateTimePicker.get(Calendar.MINUTE) + " "
+                            + (mDateTimePicker.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM"));
+//                    ((TextView) findViewById(R.id.Time)).setText(mDateTimePicker.get(Calendar.HOUR) + ":" + mDateTimePicker.get(Calendar.MINUTE) + " "
+//                            + (mDateTimePicker.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM"));
+                }
+//                String dateValue = Util.getTime(newDate.getTime(), "dd-MM-yyyy HH:mm");
+                date.setText(dateValue);
+                mDateTimeDialog.dismiss();
+            }
+        });
+
+        // Cancel the dialog when the "Cancel" button is clicked
+        ((Button) mDateTimeDialogView.findViewById(R.id.CancelDialog)).setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                mDateTimeDialog.cancel();
+            }
+        });
+
+        // Reset Date and Time pickers when the "Reset" button is clicked
+        ((Button) mDateTimeDialogView.findViewById(R.id.ResetDateTime)).setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                mDateTimePicker.reset();
+            }
+        });
+
+        // Setup TimePicker
+        mDateTimePicker.setIs24HourView(is24h);
+        // No title on the dialog window
+        mDateTimeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // Set the dialog content view
+        mDateTimeDialog.setContentView(mDateTimeDialogView);
+        // Display the dialog
+        mDateTimeDialog.show();
+    }
 
 }

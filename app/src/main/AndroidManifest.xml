@@ -136,7 +136,7 @@
         <activity
             android:name=".ui.Location.SelectLocationActivity"
             android:label="@string/title_activity_select_location"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
 
         <receiver
@@ -151,8 +151,7 @@
         </receiver>
 
         <service android:name=".gcm.GCMNotificationIntentService" />
-
-        <service android:name=".geofence.AreWeThereIntentService"/>
+        <service android:name=".geofence.AreWeThereIntentService" />
         <service
             android:name=".service.NotifyService"
             android:enabled="true" />
@@ -161,7 +160,10 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/map_api_key" />
 
-
+        <activity
+            android:name=".ui.PickUpDelivery.PickUpActivity"
+            android:label="@string/title_activity_pick_up" >
+        </activity>
     </application>
 
 </manifest>

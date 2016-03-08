@@ -40,4 +40,6 @@
     <color name="color_theme_19_orange">#ec522c</color>
 
     <color name="color_blue">#1d5387</color>
+    <!--color code wah ji wah-->
+    <color name="color_blue_dark">#01578f</color>
 </resources>

@@ -51,6 +51,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.offer.OfferViewActivity;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -247,7 +248,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private double getTotalPrice() {
         String totalCartValue = appDb.getCartTotalPrice();
-        return Double.valueOf(totalCartValue);
+        DecimalFormat df = new DecimalFormat("###.##");
+        return Double.valueOf(df.format(Double.parseDouble(totalCartValue)));
     }
 
     private void callNetworkServiceForPlaceOrder(String id, String addressId) {
@@ -424,7 +426,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         if (offerMinimumPrice < totalPrice) {
             double finalPrice = totalPrice - discount + shippingCharge;
-            total.setText(String.valueOf(finalPrice));
+            DecimalFormat df = new DecimalFormat("###.##");
+            total.setText(String.valueOf(df.format(finalPrice)));
             discountVal.setText(String.valueOf(discount));
             applyCoupon.setText("Remove Coupon");
             applyCoupon.setTag("remove");

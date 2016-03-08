@@ -3,24 +3,36 @@ package com.signity.bonbon.ui.restaurant.storetheme17.fragment;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.Utilities.ZoomOutPageTransformer;
 import com.signity.bonbon.app.AppController;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.model.Banner;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.service.NotifyService;
 import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
@@ -29,8 +41,13 @@ import com.signity.bonbon.ui.category.CategoryActivity;
 import com.signity.bonbon.ui.contacts.ContactActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by root on 29/2/16.
@@ -48,6 +65,11 @@ public class HomeFragmentFoodTheme17 extends Fragment implements View.OnClickLis
     PrefManager prefManager;
     private PendingIntent pendingIntent;
     ViewController viewController;
+
+    ViewPager viewPager;
+    CustomPagerAdapter customPagerAdapter;
+    private List<Banner> banners;
+    int currentPage=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +90,38 @@ public class HomeFragmentFoodTheme17 extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(viewController.getHomeResourceLayout(), container, false);
+        viewPager = (ViewPager) mView.findViewById(R.id.pager);
+        banners= DataAdapter.getInstance().getBanners();
+        if(banners!=null && banners.size()!=0){
+
+            customPagerAdapter = new CustomPagerAdapter(getActivity(), banners);
+            viewPager.setAdapter(customPagerAdapter);
+            viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
+            final Handler handler = new Handler();
+            final Runnable Update = new Runnable() {
+                public void run() {
+                    if (viewPager.getCurrentItem() == (banners.size()-1)) {
+                        currentPage = 0;
+                        viewPager.setCurrentItem(currentPage++, false);
+                    }
+                    else
+                    {
+                        viewPager.setCurrentItem(currentPage++, true);
+                    }
+
+                }
+            };
+
+            Timer swipeTimer = new Timer();
+            swipeTimer.schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    handler.post(Update);
+                }
+            }, 5000, 4000);
+        }
         relCategory = (RelativeLayout) mView.findViewById(R.id.relCategory);
         relOffers = (RelativeLayout) mView.findViewById(R.id.relOffers);
         relBookNow = (RelativeLayout) mView.findViewById(R.id.relBookNow);
@@ -154,6 +208,68 @@ public class HomeFragmentFoodTheme17 extends Fragment implements View.OnClickLis
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent);  //set repeating every 24 hours
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
+    }
+
+
+
+
+
+    class CustomPagerAdapter extends PagerAdapter {
+
+        Context mContext;
+        LayoutInflater mLayoutInflater;
+        List<Banner> banners;
+
+        public CustomPagerAdapter(Context context, List<Banner> banners) {
+            this.banners = banners;
+            mContext = context;
+            mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return banners.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == ((LinearLayout) object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
+
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
+
+
+
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+            try
+            {
+                Picasso.with(getActivity()).load(banners.get(position).getImage()).error(R.drawable.no_image).into(imageView);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            container.addView(itemView);
+
+            return itemView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((LinearLayout) object);
+        }
     }
 
 

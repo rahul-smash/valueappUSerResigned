@@ -190,6 +190,12 @@ public class SplashActivity extends Activity {
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
+
+                    if(store.getBanners()!=null && store.getBanners().size()!=0){
+                        DataAdapter.getInstance().setBanners(store.getBanners());
+                    }
+
+
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
 
                         getMainActivity();

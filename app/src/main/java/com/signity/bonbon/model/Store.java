@@ -3,6 +3,9 @@ package com.signity.bonbon.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by root on 20/10/15.
  */
@@ -77,6 +80,18 @@ public class Store {
     private String currentGoldRate;
     @SerializedName("display_gold_rate")
     private String displayGoldRate;
+
+    public List<Banner> getBanners() {
+        return banners;
+    }
+
+    public void setBanners(List<Banner> banners) {
+        this.banners = banners;
+    }
+
+    @SerializedName("banners")
+    @Expose
+    private List<Banner> banners = new ArrayList<Banner>();
 
 
     public String getStoreMsg() {

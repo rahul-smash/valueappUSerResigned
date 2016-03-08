@@ -538,7 +538,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     Log.e("Store Version", store.getVersion());
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
-                        new DialogHandler(MainActivity.this).setdialogForFinish("Error", "Store Under maintainence, please try later", true);
+                        String msg=""+store.getStoreMsg();
+                        new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
                     }
 
                 } else {

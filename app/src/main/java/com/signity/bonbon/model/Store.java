@@ -51,6 +51,12 @@ public class Store {
     @Expose
     private String storeStatus;
 
+
+
+    @SerializedName("store_msg")
+    @Expose
+    private String storeMsg;
+
     @SerializedName("version")
     @Expose
     private String version;
@@ -71,6 +77,17 @@ public class Store {
     private String currentGoldRate;
     @SerializedName("display_gold_rate")
     private String displayGoldRate;
+
+
+    public String getStoreMsg() {
+        return storeMsg;
+    }
+
+    public void setStoreMsg(String storeMsg) {
+        this.storeMsg = storeMsg;
+    }
+
+
 
     public String getVersion() {
         return version;

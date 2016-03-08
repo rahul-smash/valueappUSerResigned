@@ -196,7 +196,8 @@ public class SplashActivity extends Activity {
 //                        moveToCitySelection();
 
                     } else {
-                        showAlertDialog(SplashActivity.this, "Message", "Store under maintenance.  Please try later");
+                        String msg=""+store.getStoreMsg();
+                        showAlertDialog(SplashActivity.this, "Message",msg );
                     }
 
                 } else {

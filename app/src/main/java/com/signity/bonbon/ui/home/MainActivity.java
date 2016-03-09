@@ -532,13 +532,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setProjectTheme(store.getTheme());
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
+                    prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
                     Log.e("Store Version", store.getVersion());
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
-                        String msg=""+store.getStoreMsg();
+                        String msg = "" + store.getStoreMsg();
                         new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
                     }
 

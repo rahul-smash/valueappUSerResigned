@@ -54,8 +54,6 @@ public class Store {
     @Expose
     private String storeStatus;
 
-
-
     @SerializedName("store_msg")
     @Expose
     private String storeMsg;
@@ -93,6 +91,13 @@ public class Store {
     @Expose
     private List<Banner> banners = new ArrayList<Banner>();
 
+    @SerializedName("currency")
+    @Expose
+    private String currency;
+    @SerializedName("pickup_facility")
+    @Expose
+    private String pickUpFacility;
+
 
     public String getStoreMsg() {
         return storeMsg;
@@ -101,7 +106,6 @@ public class Store {
     public void setStoreMsg(String storeMsg) {
         this.storeMsg = storeMsg;
     }
-
 
 
     public String getVersion() {
@@ -338,5 +342,22 @@ public class Store {
 
     public void setOtpSkip(String otpSkip) {
         this.otpSkip = otpSkip;
+    }
+
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getPickUpFacility() {
+        return pickUpFacility;
+    }
+
+    public void setPickUpFacility(String pickUpFacility) {
+        this.pickUpFacility = pickUpFacility;
     }
 }

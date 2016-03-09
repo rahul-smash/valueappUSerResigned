@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -49,7 +48,6 @@ import com.signity.bonbon.model.Store;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
-import com.signity.bonbon.ui.offer.OfferViewActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +76,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private Button backButton, btnSearch;
     private TextView shipping_charges;
     private AppDatabase appDb;
-    private Button applyCoupon,applyOffer;
+    private Button applyCoupon, applyOffer;
     private EditText editCoupon;
     private EditText edtBar;
 
@@ -90,6 +88,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     ListView offerList;
     TextView messageTxt;
     Dialog dialog;
+    private String isForPickUpStatus = "no";
+    private String coupenCode = "";
 
 
     @Override
@@ -106,6 +106,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
         minmimumChargesText = getIntent().getStringExtra("minimum_charges");
         user_address = getIntent().getStringExtra("user_address");
+        isForPickUpStatus = getIntent().getStringExtra("isForPickup") != null ? getIntent().getStringExtra("isForPickup") : "no";
         if (shippingChargeText != null && !shippingChargeText.isEmpty()) {
             shippingCharge = Double.parseDouble(shippingChargeText);
         }
@@ -139,11 +140,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         placeorder.setOnClickListener(this);
         editCoupon = (EditText) findViewById(R.id.editCoupon);
         applyCoupon = (Button) findViewById(R.id.applyCoupen);
-        applyOffer=(Button)findViewById(R.id.applyOffer);
+        applyOffer = (Button) findViewById(R.id.applyOffer);
         applyCoupon.setTag("apply");
         applyCoupon.setOnClickListener(this);
         applyOffer.setOnClickListener(this);
-
 
         listProduct = appDb.getCartListProduct();
 
@@ -175,7 +175,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     int action = event.getAction();
                     switch (action) {
                         case MotionEvent.ACTION_DOWN:
-                            // Disallow ScrollView to intercept touch events.
+                            // Disallow ScrollView to intercept touapplyOfferapplyOfferapplyOfferapplyOfferch events.
                             v.getParent().requestDisallowInterceptTouchEvent(true);
                             break;
 
@@ -274,6 +274,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("shipping_charges", shippingcharge);
         param.put("note", note);
         param.put("orders", order);
+        param.put("coupon_code", coupenCode);
         param.put("checkout", orderPrice);
         param.put("discount", discount);
         param.put("total", amount);
@@ -283,7 +284,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess()!=null?responseData.getSuccess():false) {
+                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
@@ -301,6 +302,54 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+    private void callNetworkServiceForPlaceOrderForPickup(String id, String addressId) {
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+        String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+//        String order = appDb.getOrderStringForSubmit();
+        String shippingcharge = shipping_charges.getText().toString();
+        String orderPrice = items_price.getText().toString();
+        String discount = discountVal.getText().toString();
+        String amount = total.getText().toString();
+        String order = appDb.getCartListStringJson();
+        String note = edtBar.getText().toString();
+
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("device_id", deviceId);
+        param.put("user_id", id);
+        param.put("device_token", deviceToken);
+        param.put("platform", AppConstant.PLATFORM);
+        param.put("payment_method", "cod");
+        param.put("user_address_id", addressId);
+        param.put("shipping_charges", shippingcharge);
+        param.put("note", note);
+        param.put("orders", order);
+        param.put("checkout", orderPrice);
+        param.put("coupon_code", coupenCode);
+        param.put("discount", discount);
+        param.put("total", amount);
+        param.put("user_address", user_address);
+        Log.e("params", param.toString());
+        NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
+            @Override
+            public void success(ResponseData responseData, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
+                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                } else {
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Failure", "" + responseData.getMessage(), false);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                Toast.makeText(ShoppingCartActivity2.this, "Server not responding.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -316,7 +365,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 break;
             case com.signity.bonbon.R.id.placeorder:
                 if (appDb.getCartSize() != 0) {
-                    callNetworkServiceForPlaceOrder(userId, addressId);
+                    if (isForPickUpStatus.equalsIgnoreCase("yes")) {
+                        callNetworkServiceForPlaceOrderForPickup(userId, addressId);
+                    } else {
+                        callNetworkServiceForPlaceOrder(userId, addressId);
+                    }
                 } else {
 //                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
                     new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", "You have a empty cart", false);
@@ -332,8 +385,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 break;
 
             case R.id.applyOffer:
-                if(dialog!=null){
-                    dialog=null;
+                if (dialog != null) {
+                    dialog = null;
                 }
                 callNetworkForOffers();
                 break;
@@ -367,7 +420,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     dialog.setContentView(R.layout.offers_screen);
 
                     offerList = (ListView) dialog.findViewById(R.id.offerList);
-                    messageTxt=(TextView)dialog.findViewById(R.id.messageTxt);
+                    messageTxt = (TextView) dialog.findViewById(R.id.messageTxt);
 
                     if (listOfferData != null && listOfferData.size() != 0) {
                         mAdapter = new ListOfferAdapter(ShoppingCartActivity2.this, listOfferData);
@@ -386,8 +439,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     offerList.setVisibility(View.GONE);
                     messageTxt.setVisibility(View.VISIBLE);
                 }
-
-
                 ProgressDialogUtil.hideProgressDialog();
             }
 
@@ -403,6 +454,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private void onRemoveCoupon() {
 
         if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
+            coupenCode = "";
             double discount = Double.parseDouble(discountVal.getText().toString());
             double totalval = Double.parseDouble(total.getText().toString());
             double finalVal = totalval + discount;
@@ -437,7 +489,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private void onApplyCoupon() {
 
-        String couponCode = editCoupon.getText().toString();
+        final String couponCode = editCoupon.getText().toString();
         if (!couponCode.isEmpty()) {
             String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
             String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
@@ -456,12 +508,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     ProgressDialogUtil.hideProgressDialog();
                     if (getValidCouponResponse.getSuccess()) {
+                        coupenCode = couponCode;
                         OfferData offerData = getValidCouponResponse.getData();
                         String discountPercent = offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
                         applyDiscount(discountPercent, offerMinimumPrice);
-
                     } else {
+                        coupenCode = "";
                         Log.e("Tag", getValidCouponResponse.getMessage());
                         Toast.makeText(ShoppingCartActivity2.this, getValidCouponResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -469,6 +522,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                 @Override
                 public void failure(RetrofitError error) {
+                    coupenCode = "";
                     ProgressDialogUtil.hideProgressDialog();
                 }
             });
@@ -676,15 +730,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder = (ViewHolder) convertView.getTag();
             }
             final OfferData data = listOfferData.get(position);
-            holder.discountValue.setText(""+data.getDiscount()+"% Off");
-            holder.minValue.setText("Min Order "+data.getMinimumOrderAmount());
+            holder.discountValue.setText("" + data.getDiscount() + "% Off");
+            holder.minValue.setText("Min Order " + data.getMinimumOrderAmount());
 
             double totalPrice = getTotalPrice();
-            double minimumCharges= Double.parseDouble(data.getMinimumOrderAmount());
+            double minimumCharges = Double.parseDouble(data.getMinimumOrderAmount());
             if (minimumCharges > totalPrice) {
                 holder.applyBtn.setVisibility(View.GONE);
                 holder.needTxt.setVisibility(View.VISIBLE);
-                holder.needTxt.setText("You have "+(minimumCharges-totalPrice)+" amount short for this offer.");
+                holder.needTxt.setText("You have " + (minimumCharges - totalPrice) + " amount short for this offer.");
             } else {
                 holder.applyBtn.setVisibility(View.VISIBLE);
                 holder.needTxt.setVisibility(View.GONE);
@@ -706,7 +760,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
         class ViewHolder {
-            TextView discountValue,minValue,needTxt;
+            TextView discountValue, minValue, needTxt;
             Button applyBtn;
         }
     }

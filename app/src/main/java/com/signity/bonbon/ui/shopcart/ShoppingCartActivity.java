@@ -32,6 +32,7 @@ import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.List;
@@ -68,7 +69,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         title.setTypeface(typeFaceRobotoRegular);
         placeorder = (Button) findViewById(R.id.placeorder);
         backButton = (Button) findViewById(R.id.backButton);
-
         backButton.setOnClickListener(this);
         placeorder.setOnClickListener(this);
         ShoppingCartActivity.this.getWindow().setSoftInputMode(
@@ -279,7 +279,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         }
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -309,11 +308,15 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
         PrefManager prefManager = new PrefManager(ShoppingCartActivity.this);
         String userId = prefManager.getSharedValue(AppConstant.ID);
-
-
+        String pickUpStatus = prefManager.getPickupFacilityStatus();
         if (!userId.isEmpty()) {
-//            callNetworkServiceForPlaceOrder(userId);
-            Intent intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+
+            Intent intentDelivery = null;
+            if (pickUpStatus.equalsIgnoreCase("0")) {
+                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+            } else {
+                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
+            }
             intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
             startActivity(intentDelivery);
             AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
@@ -323,8 +326,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             startActivity(intentLogin);
             AnimUtil.slideUpAnim(ShoppingCartActivity.this);
         }
-
-
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.signity.bonbon" >
+    package="com.signity.bonbon">
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -38,11 +38,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -134,14 +134,16 @@
             android:name=".ui.Delivery.DeliveryAreaActivity"
             android:label="@string/title_activity_delivery_area" />
         <activity
+            android:name=".ui.Delivery.DeliveryPickupActivity"
+            android:label="@string/title_activity_delivery_area" />
+        <activity
             android:name=".ui.Location.SelectLocationActivity"
             android:label="@string/title_activity_select_location"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <receiver
             android:name=".gcm.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -152,7 +154,7 @@
 
         <service android:name=".gcm.GCMNotificationIntentService" />
 
-        <service android:name=".geofence.AreWeThereIntentService"/>
+        <service android:name=".geofence.AreWeThereIntentService" />
         <service
             android:name=".service.NotifyService"
             android:enabled="true" />

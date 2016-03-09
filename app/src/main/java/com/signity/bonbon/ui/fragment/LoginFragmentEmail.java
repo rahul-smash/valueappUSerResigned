@@ -23,6 +23,7 @@ import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
@@ -129,7 +130,14 @@ public class LoginFragmentEmail extends Fragment {
                     if (from.equals("menu")) {
                         showAlertDialogForLogin(getActivity(), "Success", "You have login successfully. Please continue.");
                     } else {
-                        Intent intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+                        PrefManager prefManager = new PrefManager(getActivity());
+                        String pickUpStatus = prefManager.getPickupFacilityStatus();
+                        Intent intentDelivery = null;
+                        if (pickUpStatus.equalsIgnoreCase("0")) {
+                            intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+                        } else {
+                            intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
+                        }
                         intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
                         startActivity(intentDelivery);
                         getActivity().finish();

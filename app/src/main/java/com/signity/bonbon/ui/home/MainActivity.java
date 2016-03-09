@@ -186,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean dataIsValid(Store store) {
         boolean status = false;
-        if (store.getLat() != null && store.getLng() != null && !(store.getLat().isEmpty() && store.getLat().equalsIgnoreCase("0"))
-                && !(store.getLng().isEmpty() && store.getLng().equalsIgnoreCase("0"))) {
+        if (store.getLat() != null && store.getLng() != null && !store.getLat().isEmpty() &&  !store.getLat().equalsIgnoreCase("0")
+                && !store.getLng().isEmpty() && !store.getLng().equalsIgnoreCase("0")) {
             SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
             String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
             if (!fenceId.isEmpty()) {

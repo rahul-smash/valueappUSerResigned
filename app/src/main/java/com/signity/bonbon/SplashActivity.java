@@ -140,8 +140,9 @@ public class SplashActivity extends Activity {
                 @Override
                 public void onFailure(String ex) {
                     super.onFailure(ex);
-                    Toast.makeText(SplashActivity.this, "Message" + ex, Toast.LENGTH_SHORT).show();
-                    finish();
+//                    Toast.makeText(SplashActivity.this, "Message" + ex, Toast.LENGTH_SHORT).show();
+//                    finish();
+
                 }
             });
         }

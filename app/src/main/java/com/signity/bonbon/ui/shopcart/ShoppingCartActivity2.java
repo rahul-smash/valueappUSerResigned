@@ -265,6 +265,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
+        String coupon_code=""+editCoupon.getText().toString();
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -280,6 +281,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("discount", discount);
         param.put("total", amount);
         param.put("user_address", user_address);
+//        param.put("coupon_code", coupon_code);
         Log.e("params", param.toString());
         NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
             @Override

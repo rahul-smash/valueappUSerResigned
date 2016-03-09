@@ -180,8 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Log.e("Fence", "Fence already created or unable to create");
         }
-
-
     }
 
     private boolean dataIsValid(Store store) {

@@ -142,7 +142,7 @@ public class SplashActivity extends Activity {
                     super.onFailure(ex);
 //                    Toast.makeText(SplashActivity.this, "Message" + ex, Toast.LENGTH_SHORT).show();
 //                    finish();
-
+                    Log.e("Message", "Message" + ex);
                 }
             });
         }

@@ -170,10 +170,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             geofence.name = store.getStoreName();
             geofence.storeId = store.getId();
             // for testing at signity software
-//            geofence.latitude = Double.parseDouble("30.723774");
-//            geofence.longitude = Double.parseDouble("76.846933");
-            geofence.latitude = Double.parseDouble(store.getLat());
-            geofence.longitude = Double.parseDouble(store.getLng());
+            geofence.latitude = Double.parseDouble("30.7242764");
+            geofence.longitude = Double.parseDouble("76.8465703");
+//            geofence.latitude = Double.parseDouble(store.getLat());
+//            geofence.longitude = Double.parseDouble(store.getLng());
             geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
             GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
 
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean dataIsValid(Store store) {
         boolean status = false;
-        if (store.getLat() != null && store.getLng() != null && !store.getLat().isEmpty() &&  !store.getLat().equalsIgnoreCase("0")
+        /*if (store.getLat() != null && store.getLng() != null && !store.getLat().isEmpty() &&  !store.getLat().equalsIgnoreCase("0")
                 && !store.getLng().isEmpty() && !store.getLng().equalsIgnoreCase("0")) {
             SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
             String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
@@ -196,7 +196,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 status = true;
             }
         }
-        return status;
+        return status;*/
+
+        SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
+        String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
+        if (!fenceId.isEmpty()) {
+            Log.e("Fence", "One Fence Found.. With id.." + fenceId);
+            status = false;
+        } else {
+            Log.e("Fence", "NO Fence Available ");
+            status = true;
+        }
+
+        return true;
     }
 
     @Override

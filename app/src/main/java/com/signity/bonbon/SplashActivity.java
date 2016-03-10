@@ -15,7 +15,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -35,9 +34,13 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -174,6 +177,28 @@ public class SplashActivity extends Activity {
         param.put("device_id", deviceid);
         param.put("device_token", deviceToken);
         param.put("platform", AppConstant.PLATFORM);
+//        NetworkAdaper.getInstance().getNetworkServices().getStore(param, new Callback<GetStoreModel>() {
+//
+//            @Override
+//            public void success(GetStoreModel getStoreModel, Response response) {
+//
+//                try {
+//                    Scanner scanner = new Scanner(response.getBody().in());
+//                    StringBuilder sb = new StringBuilder();
+//                    while(scanner.hasNext()){
+//                        sb.append(scanner.next());
+//                    }
+//                    Log.i("API reposne",sb.toString());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                Log.i("API reposne","failed: " + error.getResponse());
+//            }
+//        });
 
         NetworkAdaper.getInstance().getNetworkServices().getStore(param, new Callback<GetStoreModel>() {
             @Override

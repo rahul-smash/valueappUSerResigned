@@ -16,11 +16,11 @@ import com.google.android.gms.location.GeofencingEvent;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.signity.bonbon.R;
-import com.signity.bonbon.SplashActivity;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.model.GeoFenceModel;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.home.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,9 +40,10 @@ public class AreWeThereIntentService extends IntentService {
     // region Properties
 
     private final String TAG = AreWeThereIntentService.class.getName();
-    String geofenceName = "";
+
     private SharedPreferences prefs;
     private Gson gson;
+    String geofenceName = "";
     private String contextText = "";
 
     // endregion
@@ -176,14 +177,14 @@ public class AreWeThereIntentService extends IntentService {
 
     private void sendNotificationWithMessage(String contextText) {
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-                .setContentTitle(this.getResources().getString(R.string.Notification_Title))
+                .setContentTitle(this.getResources().getString(R.string.app_name))
                 .setContentText(contextText)
                 .setContentIntent(pendingNotificationIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(contextText))

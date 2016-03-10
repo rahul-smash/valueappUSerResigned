@@ -163,7 +163,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/map_api_key" />
 
-
     </application>
 
 </manifest>

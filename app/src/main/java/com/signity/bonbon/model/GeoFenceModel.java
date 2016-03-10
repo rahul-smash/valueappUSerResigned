@@ -4,10 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by root on 10/3/16.
+ * Created by rajesh on 10/3/16.
  */
 public class GeoFenceModel {
-
 
     @SerializedName("success")
     @Expose

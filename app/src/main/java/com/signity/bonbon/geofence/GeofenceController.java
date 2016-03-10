@@ -183,20 +183,25 @@ public class GeofenceController {
     private GoogleApiClient.ConnectionCallbacks connectionAddListener = new GoogleApiClient.ConnectionCallbacks() {
         @Override
         public void onConnected(Bundle bundle) {
-            Intent intent = new Intent(context, AreWeThereIntentService.class);
-            PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            PendingResult<Status> result = LocationServices.GeofencingApi.addGeofences(googleApiClient, getAddGeofencingRequest(), pendingIntent);
-            result.setResultCallback(new ResultCallback<Status>() {
-                @Override
-                public void onResult(Status status) {
-                    if (status.isSuccess()) {
-                        saveGeofence();
-                    } else {
-                        Log.e(TAG, "Registering geofence failed: " + status.getStatusMessage() + " : " + status.getStatusCode());
-                        sendError();
+            try {
+                Intent intent = new Intent(context, AreWeThereIntentService.class);
+                PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingResult<Status> result = LocationServices.GeofencingApi.addGeofences(googleApiClient, getAddGeofencingRequest(), pendingIntent);
+                result.setResultCallback(new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        if (status.isSuccess()) {
+                            Log.e(TAG, "Fence Added");
+                            saveGeofence();
+                        } else {
+                            Log.e(TAG, "Registering geofence failed: " + status.getStatusMessage() + " : " + status.getStatusCode());
+                            sendError();
+                        }
                     }
-                }
-            });
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -209,24 +214,29 @@ public class GeofenceController {
     private GoogleApiClient.ConnectionCallbacks connectionRemoveListener = new GoogleApiClient.ConnectionCallbacks() {
         @Override
         public void onConnected(Bundle bundle) {
-            List<String> removeIds = new ArrayList<>();
-            for (NamedGeofence namedGeofence : namedGeofencesToRemove) {
-                removeIds.add(namedGeofence.id);
-            }
+            try {
+                List<String> removeIds = new ArrayList<>();
+                for (NamedGeofence namedGeofence : namedGeofencesToRemove) {
+                    removeIds.add(namedGeofence.id);
+                }
 
-            if (removeIds.size() > 0) {
-                PendingResult<Status> result = LocationServices.GeofencingApi.removeGeofences(googleApiClient, removeIds);
-                result.setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        if (status.isSuccess()) {
-                            removeSavedGeofences();
-                        } else {
-                            Log.e(TAG, "Removing geofence failed: " + status.getStatusMessage());
-                            sendError();
+                if (removeIds.size() > 0) {
+                    PendingResult<Status> result = LocationServices.GeofencingApi.removeGeofences(googleApiClient, removeIds);
+                    result.setResultCallback(new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            if (status.isSuccess()) {
+                                Log.e(TAG, "Fence Removed");
+                                removeSavedGeofences();
+                            } else {
+                                Log.e(TAG, "Removing geofence failed: " + status.getStatusMessage());
+                                sendError();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

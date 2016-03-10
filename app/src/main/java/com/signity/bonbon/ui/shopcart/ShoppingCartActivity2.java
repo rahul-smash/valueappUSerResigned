@@ -265,7 +265,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
-        String coupon_code=""+editCoupon.getText().toString();
+        String coupon_code = "" + editCoupon.getText().toString();
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -414,36 +414,30 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         NetworkAdaper.getInstance().getNetworkServices().getStoreOffer(param, new Callback<GetOfferResponse>() {
             @Override
             public void success(GetOfferResponse getOfferResponse, Response response) {
-
-                if (getOfferResponse.getSuccess()) {
-
+                ProgressDialogUtil.hideProgressDialog();
+                if (getOfferResponse.getSuccess() != null ? getOfferResponse.getSuccess() : false) {
                     listOfferData = getOfferResponse.getData();
-                    dialog = new Dialog(ShoppingCartActivity2.this);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    dialog.setContentView(R.layout.offers_screen);
+                }
+                dialog = new Dialog(ShoppingCartActivity2.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setContentView(R.layout.offers_screen);
 
-                    offerList = (ListView) dialog.findViewById(R.id.offerList);
-                    messageTxt = (TextView) dialog.findViewById(R.id.messageTxt);
-
-                    if (listOfferData != null && listOfferData.size() != 0) {
-                        mAdapter = new ListOfferAdapter(ShoppingCartActivity2.this, listOfferData);
-                        offerList.setAdapter(mAdapter);
-                        offerList.setVisibility(View.VISIBLE);
-                        messageTxt.setVisibility(View.GONE);
-                    } else {
-                        offerList.setVisibility(View.GONE);
-                        messageTxt.setVisibility(View.VISIBLE);
-                    }
-
-                    dialog.setCanceledOnTouchOutside(true);
-                    dialog.show();
-
+                offerList = (ListView) dialog.findViewById(R.id.offerList);
+                messageTxt = (TextView) dialog.findViewById(R.id.messageTxt);
+                if (listOfferData != null && listOfferData.size() != 0) {
+                    mAdapter = new ListOfferAdapter(ShoppingCartActivity2.this, listOfferData);
+                    offerList.setAdapter(mAdapter);
+                    offerList.setVisibility(View.VISIBLE);
+                    messageTxt.setVisibility(View.GONE);
                 } else {
                     offerList.setVisibility(View.GONE);
                     messageTxt.setVisibility(View.VISIBLE);
                 }
-                ProgressDialogUtil.hideProgressDialog();
+
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
+
             }
 
             @Override

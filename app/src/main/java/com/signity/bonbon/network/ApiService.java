@@ -6,6 +6,7 @@ import com.signity.bonbon.model.GerOrderHistoryModel;
 import com.signity.bonbon.model.GetBigComCategory;
 import com.signity.bonbon.model.GetCategory;
 import com.signity.bonbon.model.GetOfferResponse;
+import com.signity.bonbon.model.GetPickupApiResponse;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.GetSubCategory;
@@ -126,4 +127,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/verifyOtp")
     void verifyOtp(@FieldMap Map<String, String> parameters, Callback<VerifyOtpResponse> response);
+
+    @FormUrlEncoded
+    @POST("/getPickupAddress")
+    void getPickupLocation(@FieldMap Map<String, String> parameters, Callback<GetPickupApiResponse> response);
+
+
 }

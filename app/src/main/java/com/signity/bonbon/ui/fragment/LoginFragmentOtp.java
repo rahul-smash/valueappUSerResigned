@@ -33,6 +33,7 @@ import com.signity.bonbon.model.UserRecord;
 import com.signity.bonbon.model.VerifyOtpResponse;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 import java.text.SimpleDateFormat;
@@ -187,7 +188,14 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                 proceedToEmail(from);
             }
         } else if (from.equals("shop_cart")) {
-            Intent intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+            PrefManager prefManager = new PrefManager(getActivity());
+            String pickUpStatus = prefManager.getPickupFacilityStatus();
+            Intent intentDelivery = null;
+            if (pickUpStatus.equalsIgnoreCase("0")) {
+                intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+            } else {
+                intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
+            }
             intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
             startActivity(intentDelivery);
             getActivity().finish();
@@ -210,7 +218,14 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
 
         } else if (from.equals("shop_cart")) {
             if (isNameExist && isEmailExist) {
-                Intent intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+                PrefManager prefManager = new PrefManager(getActivity());
+                String pickUpStatus = prefManager.getPickupFacilityStatus();
+                Intent intentDelivery = null;
+                if (pickUpStatus.equalsIgnoreCase("0")) {
+                    intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+                } else {
+                    intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
+                }
                 intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
                 startActivity(intentDelivery);
                 getActivity().finish();

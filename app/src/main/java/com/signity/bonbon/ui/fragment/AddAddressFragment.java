@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
@@ -268,7 +269,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case com.signity.bonbon.R.id.city_name:
+            case R.id.city_name:
                 Intent intentCity = new Intent(getActivity(),
                         CityAreaActivitiy.class);
                 intentCity.putExtra("key", "city");
@@ -277,7 +278,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 //                AnimUtil.slideUpAnim(getActivity());
 
                 break;
-            case com.signity.bonbon.R.id.state_name:
+            case R.id.state_name:
 
                 if (cityId.isEmpty()) {
                     Toast.makeText(getActivity(), "Select City First", Toast.LENGTH_SHORT).show();

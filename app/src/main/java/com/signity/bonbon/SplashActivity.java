@@ -187,12 +187,14 @@ public class SplashActivity extends Activity {
                     prefManager.setProjectTheme(store.getTheme());
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
+                    prefManager.setPickupFacilityStatus(store.getPickUpFacility());
+
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
 
-                    if(store.getBanners()!=null && store.getBanners().size()!=0){
+                    if (store.getBanners() != null && store.getBanners().size() != 0) {
                         DataAdapter.getInstance().setBanners(store.getBanners());
                     }
 
@@ -203,8 +205,8 @@ public class SplashActivity extends Activity {
 //                        moveToCitySelection();
 
                     } else {
-                        String msg=""+store.getStoreMsg();
-                        showAlertDialog(SplashActivity.this, "Message",msg );
+                        String msg = "" + store.getStoreMsg();
+                        showAlertDialog(SplashActivity.this, "Message", msg);
                     }
 
                 } else {

@@ -12,12 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -74,15 +72,7 @@ public class SplashActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        Log.i(SplashActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
-
-        if (googlePlayServicesCode == 1 || googlePlayServicesCode == 2 || googlePlayServicesCode == 3) {
-            GooglePlayServicesUtil.getErrorDialog(googlePlayServicesCode, this, 0).show();
-        } else {
-            startSplashProcess();
-        }
-
+        startSplashProcess();
     }
 
     private void startSplashProcess() {
@@ -178,7 +168,7 @@ public class SplashActivity extends Activity {
             @Override
             public void success(GetStoreModel getStroeModel, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (getStroeModel.getSuccess()) {
+                if (getStroeModel.getSuccess() != null ? getStroeModel.getSuccess() : false) {
                     appDb.addStore(getStroeModel.getStore());
                     Store store = getStroeModel.getStore();
                     prefManager.storeSharedValue(AppConstant.STORE_ID, store.getId());

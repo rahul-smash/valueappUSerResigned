@@ -101,8 +101,8 @@ public class PrefManager {
     }
 
     public String getPickupFacilityStatus() {
-//        return sharedpreferences.getString(PICKUP_STATUS, "0");
-        return "1";
+        return sharedpreferences.getString(PICKUP_STATUS, "0");
+//        return "1";
     }
 
     public String getOtoSkip() {

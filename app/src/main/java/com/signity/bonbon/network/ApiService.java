@@ -2,6 +2,7 @@ package com.signity.bonbon.network;
 
 import com.signity.bonbon.model.AboutUsModel1;
 import com.signity.bonbon.model.EmailResponse;
+import com.signity.bonbon.model.GeoFenceModel;
 import com.signity.bonbon.model.GerOrderHistoryModel;
 import com.signity.bonbon.model.GetBigComCategory;
 import com.signity.bonbon.model.GetCategory;
@@ -131,6 +132,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/getPickupAddress")
     void getPickupLocation(@FieldMap Map<String, String> parameters, Callback<GetPickupApiResponse> response);
+
+    @GET("/getGeofencingMessage")
+    void getGeofencingMessage(Callback<GeoFenceModel> response);
 
 
 }

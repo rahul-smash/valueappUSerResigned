@@ -180,8 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Gson gson = new Gson();
                 try {
                     namedGeofence = gson.fromJson(getFenceString, NamedGeofence.class);
-
-                    GeofenceController.getInstance().addGeofence(namedGeofence, geofenceControllerListener);
                 } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
@@ -190,10 +188,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     namedGeofence.name = store.getStoreName();
                     namedGeofence.storeId = store.getId();
                     // for testing at signity software
-                    namedGeofence.latitude = Double.parseDouble("30.723774");
-                    namedGeofence.longitude = Double.parseDouble("76.846933");
-//            geofence.latitude = Double.parseDouble(store.getLat());
-//            geofence.longitude = Double.parseDouble(store.getLng());
+//                    namedGeofence.latitude = Double.parseDouble("30.723774");
+//                    namedGeofence.longitude = Double.parseDouble("76.846933");
+                    namedGeofence.latitude = Double.parseDouble(store.getLat());
+                    namedGeofence.longitude = Double.parseDouble(store.getLng());
                     namedGeofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
                     GeofenceController.getInstance().addGeofence(namedGeofence, geofenceControllerListener);
                 }
@@ -202,10 +200,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 geofence.name = store.getStoreName();
                 geofence.storeId = store.getId();
                 // for testing at signity software
-                geofence.latitude = Double.parseDouble("30.723774");
-                geofence.longitude = Double.parseDouble("76.846933");
-//            geofence.latitude = Double.parseDouble(store.getLat());
-//            geofence.longitude = Double.parseDouble(store.getLng());
+//                geofence.latitude = Double.parseDouble("30.723774");
+//                geofence.longitude = Double.parseDouble("76.846933");
+            geofence.latitude = Double.parseDouble(store.getLat());
+            geofence.longitude = Double.parseDouble(store.getLng());
                 geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
                 GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
             }

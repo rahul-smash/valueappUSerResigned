@@ -16,11 +16,11 @@ import com.google.android.gms.location.GeofencingEvent;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.signity.bonbon.R;
+import com.signity.bonbon.SplashActivity;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.model.GeoFenceModel;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.home.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,35 +118,40 @@ public class AreWeThereIntentService extends IntentService {
                             while (scanner.hasNext()) {
                                 stringBuilder.append(scanner.next());
                             }
-
                             try {
                                 JSONObject mJob = new JSONObject(stringBuilder.toString());
-
-
                                 if (mJob != null) {
-                                    boolean success = mJob.getBoolean("success");
-
+                                    boolean success;
+                                    if (mJob.has("success")) {
+                                        success = mJob.getBoolean("success");
+                                    } else {
+                                        success = false;
+                                    }
                                     if (success) {
+                                        if (mJob.has("data")) {
+                                            JSONObject jDataObject = null;
+                                            try {
+                                                jDataObject = mJob.getJSONObject("data");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            if (jDataObject != null) {
+                                                if (jDataObject.has("message")) {
+                                                    String message = jDataObject.getString("message");
+                                                    contextText = message;
+                                                }
 
-                                        Gson mGson = new Gson();
-                                        GeoFenceModel mGeoFenceModel = mGson.fromJson(stringBuilder.toString(), GeoFenceModel.class);
-
-                                        if (mGeoFenceModel.getData() != null) {
-                                            if (mGeoFenceModel.getData().getMessage() != null && !mGeoFenceModel.getData().getMessage().isEmpty()) {
-                                                contextText = mGeoFenceModel.getData().getMessage();
                                             } else {
                                                 contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
                                             }
                                         } else {
                                             contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
                                         }
-
                                     } else {
                                         contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
                                     }
 
                                     sendNotificationWithMessage(contextText);
-
                                 }
 
                             } catch (JSONException e) {
@@ -177,7 +182,7 @@ public class AreWeThereIntentService extends IntentService {
 
     private void sendNotificationWithMessage(String contextText) {
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

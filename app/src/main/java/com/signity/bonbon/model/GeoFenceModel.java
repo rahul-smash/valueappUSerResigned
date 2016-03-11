@@ -11,7 +11,7 @@ public class GeoFenceModel {
     @SerializedName("success")
     @Expose
     private Boolean success;
-    @SerializedName("")
+    @SerializedName("data")
     private GeoFenceMessage data;
 
     /**

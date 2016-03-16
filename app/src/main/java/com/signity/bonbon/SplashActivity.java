@@ -184,12 +184,13 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setBanners(store.getBanners());
                     }
 
+                    if (store.getForceDownload() != null && store.getForceDownload().size() > 0) {
+                        DataAdapter.getInstance().setForceDownloadModel(store.getForceDownload().get(0));
+                    }
+
 
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
-
                         getMainActivity();
-//                        moveToCitySelection();
-
                     } else {
                         String msg = "" + store.getStoreMsg();
                         showAlertDialog(SplashActivity.this, "Message", msg);

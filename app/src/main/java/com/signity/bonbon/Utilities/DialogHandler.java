@@ -51,6 +51,10 @@ public class DialogHandler {
 
     }
 
+    public void setCancelable(boolean status) {
+        dialog.setCancelable(status);
+    }
+
     public View setPostiveButton(String text, boolean isShow) {
         positveButton.setText(text);
         if (isShow) {

@@ -103,7 +103,7 @@ public class PrefManager {
 
     public String getPickupFacilityStatus() {
 //        return sharedpreferences.getString(PICKUP_STATUS, "0");
-        return "0";
+        return "1";
     }
 
     public String getOtoSkip() {
@@ -139,7 +139,7 @@ public class PrefManager {
 
     public String getAppVersion() {
         return sharedpreferences.getString(APP_VERSION, "");
-//        return "0";
+//        return "1";
     }
 
 }

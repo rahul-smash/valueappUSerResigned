@@ -1,6 +1,7 @@
 package com.signity.bonbon.app;
 
 import com.signity.bonbon.model.Banner;
+import com.signity.bonbon.model.ForceDownloadModel;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.OrderHistoryModel;
 import com.signity.bonbon.model.Product;
@@ -34,8 +35,9 @@ public class DataAdapter {
     public GetStoreArea storeArea;
 
 
-
     private List<Banner> banners;
+
+    private ForceDownloadModel forceDownloadModel;
 
 
     public List<Banner> getBanners() {
@@ -46,6 +48,13 @@ public class DataAdapter {
         this.banners = banners;
     }
 
+    public void setForceDownloadModel(ForceDownloadModel forceDownloadModel) {
+        this.forceDownloadModel = forceDownloadModel;
+    }
+
+    public ForceDownloadModel getForceDownloadModel() {
+        return forceDownloadModel;
+    }
 
     /* Static 'instance' method */
     public static DataAdapter getInstance() {

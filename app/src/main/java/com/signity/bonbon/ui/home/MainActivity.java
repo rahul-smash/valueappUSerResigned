@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -33,12 +35,14 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.geofence.NamedGeofence;
+import com.signity.bonbon.model.ForceDownloadModel;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.SliderObject;
 import com.signity.bonbon.model.Store;
@@ -165,53 +169,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fragment fragment = viewController.getHomeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
+
+
     }
 
     private void setUpFenceAroundStore(final Store store) {
 
-        if (dataIsValid(store)) {
+        try {
+            if (dataIsValid(store)) {
 
-            SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
-            String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
-            if (!fenceId.isEmpty()) {
-                NamedGeofence namedGeofence = null;
-                List<NamedGeofence> listNamedGeofenceToRemove = new ArrayList<>();
-                String getFenceString = localSharedPref.getString(fenceId, "");
-                Gson gson = new Gson();
-                try {
-                    namedGeofence = gson.fromJson(getFenceString, NamedGeofence.class);
+                SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
+                String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
+                if (!fenceId.isEmpty()) {
+                    NamedGeofence namedGeofence = null;
+                    List<NamedGeofence> listNamedGeofenceToRemove = new ArrayList<>();
+                    String getFenceString = localSharedPref.getString(fenceId, "");
+                    Gson gson = new Gson();
+                    try {
+                        namedGeofence = gson.fromJson(getFenceString, NamedGeofence.class);
+                    } catch (JsonSyntaxException e) {
+                        e.printStackTrace();
+                    }
 
-                    GeofenceController.getInstance().addGeofence(namedGeofence, geofenceControllerListener);
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
-                }
-
-                if (namedGeofence != null) {
-                    namedGeofence.name = store.getStoreName();
-                    namedGeofence.storeId = store.getId();
+                    if (namedGeofence != null) {
+                        namedGeofence.name = store.getStoreName();
+                        namedGeofence.storeId = store.getId();
+                        // for testing at signity software
+                        //                    namedGeofence.latitude = Double.parseDouble("30.723774");
+                        //                    namedGeofence.longitude = Double.parseDouble("76.846933");
+                        namedGeofence.latitude = Double.parseDouble(store.getLat());
+                        namedGeofence.longitude = Double.parseDouble(store.getLng());
+                        namedGeofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+                        GeofenceController.getInstance().addGeofence(namedGeofence, geofenceControllerListener);
+                    }
+                } else {
+                    NamedGeofence geofence = new NamedGeofence();
+                    geofence.name = store.getStoreName();
+                    geofence.storeId = store.getId();
                     // for testing at signity software
-                    namedGeofence.latitude = Double.parseDouble("30.723774");
-                    namedGeofence.longitude = Double.parseDouble("76.846933");
-//            geofence.latitude = Double.parseDouble(store.getLat());
-//            geofence.longitude = Double.parseDouble(store.getLng());
-                    namedGeofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
-                    GeofenceController.getInstance().addGeofence(namedGeofence, geofenceControllerListener);
+                    //                geofence.latitude = Double.parseDouble("30.723774");
+                    //                geofence.longiontude = Double.parseDouble("76.846933");
+                    geofence.latitude = Double.parseDouble(store.getLat());
+                    geofence.longitude = Double.parseDouble(store.getLng());
+                    geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+                    GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
                 }
-            } else {
-                NamedGeofence geofence = new NamedGeofence();
-                geofence.name = store.getStoreName();
-                geofence.storeId = store.getId();
-                // for testing at signity software
-                geofence.latitude = Double.parseDouble("30.723774");
-                geofence.longitude = Double.parseDouble("76.846933");
-//            geofence.latitude = Double.parseDouble(store.getLat());
-//            geofence.longitude = Double.parseDouble(store.getLng());
-                geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
-                GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
-            }
 
-        } else {
-            Log.e(TAG, "Fence already created or unable to create");
+            } else {
+                Log.e(TAG, "Fence already created or unable to create");
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
     }
 
@@ -222,12 +230,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && !(store.getLat().equalsIgnoreCase("0")) && !(store.getLng().equalsIgnoreCase("0"))) {
             status = true;
         }
-        return true;
+        return status;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
         int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         Log.i(MainActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
 
@@ -240,6 +249,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isActivityLoadsFirstTime = false;
             }
         }
+
+        checkForAppVersion(DataAdapter.getInstance().getForceDownloadModel());
 
     }
 
@@ -567,6 +578,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
                     }
 
+
                 } else {
                     Log.e("Error", "Error success false");
                 }
@@ -578,6 +590,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    private void checkForAppVersion(ForceDownloadModel forceDownloadModel) {
+
+        if (forceDownloadModel != null) {
+            PrefManager prefManager = new PrefManager(MainActivity.this);
+            String appVersion = prefManager.getAppVersion();
+            if (appVersion.isEmpty()) {
+                String version = forceDownloadModel.getAndroidAppVerison() != null ?
+                        forceDownloadModel.getAndroidAppVerison() : "";
+                if (!version.isEmpty()) {
+                    prefManager.setAppVersion(version);
+                }
+            } else {
+                String version = forceDownloadModel.getAndroidAppVerison() != null ?
+                        forceDownloadModel.getAndroidAppVerison() : "";
+                if (!version.isEmpty()) {
+                    if (!appVersion.equalsIgnoreCase(version)) {
+                        openDialogForVersion(forceDownloadModel);
+                    } else {
+                        prefManager.setAppVersion(version);
+                    }
+                }
+            }
+        }
+    }
+
+    private void openDialogForVersion(ForceDownloadModel forceDownloadModel) {
+
+        if (forceDownloadModel.getForceDownload() != null) {
+            final DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
+            dialogHandler.setDialog("Latest Update", forceDownloadModel.getForceDownloadMessage());
+            if (forceDownloadModel.getForceDownload().equalsIgnoreCase("1")) {
+                dialogHandler.setCancelable(false);
+                dialogHandler.setPostiveButton("Update", true).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openPlayStoreLink();
+                        dialogHandler.dismiss();
+                    }
+
+                });
+            } else {
+                dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogHandler.dismiss();
+                    }
+                });
+                dialogHandler.setPostiveButton("Update", true).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        openPlayStoreLink();
+                        dialogHandler.dismiss();
+                    }
+                });
+            }
+        }
+    }
+
+    private void openPlayStoreLink() {
+        final String appPackageName = BuildConfig.APPLICATION_ID; // getPackageName() from Context or Activity object
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 
     private GeofenceController.GeofenceControllerListener geofenceControllerListener = new GeofenceController.GeofenceControllerListener() {
@@ -592,3 +671,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 }
+
+
+//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//            alertDialogBuilder.setTitle("Latest Update");
+//            alertDialogBuilder.setMessage(forceDownloadModel.getForceDownloadMessage());
+//            alertDialogBuilder.setCancelable(false);
+//
+//            if (forceDownloadModel.getForceDownload().equalsIgnoreCase("1")) {
+//                alertDialogBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        openPlayStoreLink();
+//                    }
+//                });
+//            } else {
+//                alertDialogBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        openPlayStoreLink();
+//                    }
+//                });
+//                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//
+//            AlertDialog alertDialog = alertDialogBuilder.create();
+//            alertDialog.show();

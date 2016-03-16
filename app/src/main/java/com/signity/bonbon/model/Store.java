@@ -99,6 +99,10 @@ public class Store {
     private String pickUpFacility;
 
 
+    @SerializedName("force_download")
+    @Expose
+    private List<ForceDownloadModel> forceDownload = new ArrayList<ForceDownloadModel>();
+
     public String getStoreMsg() {
         return storeMsg;
     }
@@ -359,5 +363,14 @@ public class Store {
 
     public void setPickUpFacility(String pickUpFacility) {
         this.pickUpFacility = pickUpFacility;
+    }
+
+
+    public List<ForceDownloadModel> getForceDownload() {
+        return forceDownload;
+    }
+
+    public void setForceDownload(List<ForceDownloadModel> forceDownload) {
+        this.forceDownload = forceDownload;
     }
 }

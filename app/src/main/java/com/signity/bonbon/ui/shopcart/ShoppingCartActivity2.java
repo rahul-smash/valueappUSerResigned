@@ -456,14 +456,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             double discount = Double.parseDouble(discountVal.getText().toString());
             double totalval = Double.parseDouble(total.getText().toString());
             double finalVal = totalval + discount;
-            total.setText(String.valueOf(finalVal));
+            DecimalFormat df = new DecimalFormat("###.##");
+            total.setText(String.valueOf(df.format(finalVal)));
             discountVal.setText("0");
             applyCoupon.setText("Apply Coupon");
             applyCoupon.setTag("apply");
             editCoupon.setText("");
         }
-
-
     }
 
 
@@ -479,6 +478,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             discountVal.setText(String.valueOf(discount));
             applyCoupon.setText("Remove Coupon");
             applyCoupon.setTag("remove");
+
         } else {
             Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
                     + offerMinimumPrice, Toast.LENGTH_SHORT).show();

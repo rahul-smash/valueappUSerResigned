@@ -14,7 +14,6 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -62,7 +61,6 @@ public class SplashActivity extends Activity {
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
-
 
 //        startAnimationProcess()
 //
@@ -130,7 +128,6 @@ public class SplashActivity extends Activity {
                 @Override
                 public void onFailure(String ex) {
                     super.onFailure(ex);
-                    Toast.makeText(SplashActivity.this, "Message" + ex, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });

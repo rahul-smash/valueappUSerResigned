@@ -283,7 +283,7 @@ public class ViewController {
 
             case 23:
                 //Chawla 2
-                layoutId = R.layout.home_activity_theme_22;
+                layoutId = R.layout.home_activity_theme_23;
                 break;
             default:
                 layoutId = R.layout.home_activity;

@@ -169,8 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fragment fragment = viewController.getHomeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
-
-
     }
 
     private void setUpFenceAroundStore(final Store store) {

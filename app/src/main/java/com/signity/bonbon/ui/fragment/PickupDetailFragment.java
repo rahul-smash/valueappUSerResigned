@@ -2,6 +2,8 @@ package com.signity.bonbon.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,6 +44,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     private PickupAdressModel pickupAdressModel;
     private TextView textViewAddress;
     private Button buttonProceed;
+    private Button btnCall;
 
 
     @Override
@@ -71,9 +75,11 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
         textViewAddress = (TextView) rootView.findViewById(R.id.textViewAddress);
 
         buttonProceed = (Button) rootView.findViewById(R.id.buttonProceed);
+        btnCall = (Button) rootView.findViewById(R.id.btnCall);
         textViewAddress.setText(pickupAdressModel.getPickupAdd() != null ?
                 pickupAdressModel.getPickupAdd() : "");
         buttonProceed.setOnClickListener(this);
+        btnCall.setOnClickListener(this);
         return rootView;
     }
 
@@ -129,6 +135,24 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 startActivity(intent);
                 getActivity().finish();
                 AnimUtil.slideFromRightAnim(getActivity());
+                break;
+
+            case R.id.btnCall:
+                if (pickupAdressModel.getPickupPhone() != null && !pickupAdressModel.getPickupPhone().isEmpty()) {
+                    PackageManager pm = getActivity().getBaseContext().getPackageManager();
+                    if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
+                        Intent intentCall = new Intent(Intent.ACTION_DIAL);
+                        intentCall.setData(Uri.parse("tel:" + pickupAdressModel.getPickupPhone()));
+                        startActivity(intentCall);
+                        AnimUtil.slideFromRightAnim(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), "Your device is not supporting any calling feature", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Number not available", Toast.LENGTH_SHORT).show();
+
+                }
+
                 break;
         }
     }

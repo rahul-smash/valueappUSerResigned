@@ -123,7 +123,6 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                 }
                 break;
             case R.id.buttonDelivery:
-                Intent intentDelivery = null;
                 buttonPickup.setSelected(false);
                 buttonDelivery.setSelected(true);
                 new Handler().postDelayed(new Runnable() {

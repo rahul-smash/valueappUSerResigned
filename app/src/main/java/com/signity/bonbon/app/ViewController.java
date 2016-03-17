@@ -150,8 +150,7 @@ public class ViewController {
                 fragment = new HomeFragmentTheme20();
                 break;
             case 21:
-//                fragment = new HomeFragmentWahTheme21();
-                fragment = new HomeFragmentBeliramTheme22();
+                fragment = new HomeFragmentWahTheme21();
                 break;
             case 22:
                 fragment = new HomeFragmentBeliramTheme22();
@@ -275,11 +274,15 @@ public class ViewController {
                 break;
             case 21:
                 //Wah ji Wah
-//                layoutId = R.layout.home_activity_theme_21;
-                layoutId = R.layout.home_activity_theme_22;
+                layoutId = R.layout.home_activity_theme_21;
                 break;
             case 22:
                 //Beliran Degchiwala
+                layoutId = R.layout.home_activity_theme_22;
+                break;
+
+            case 23:
+                //Chawla 2
                 layoutId = R.layout.home_activity_theme_22;
                 break;
             default:

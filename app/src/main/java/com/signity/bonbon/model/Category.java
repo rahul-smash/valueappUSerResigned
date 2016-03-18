@@ -33,6 +33,16 @@ public class Category {
     @Expose
     private List<SubCategory> subCategoryList;
 
+    @SerializedName("status")
+    @Expose
+    private String isEnable;
+
+    @SerializedName("deleted")
+    @Expose
+    private boolean isDeleted;
+
+
+
     private String oldVersion = "";
 
     /**
@@ -115,5 +125,21 @@ public class Category {
 
     public void setImageMedium(String imageMedium) {
         this.imageMedium = imageMedium;
+    }
+
+    public String getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(String isEnable) {
+        this.isEnable = isEnable;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

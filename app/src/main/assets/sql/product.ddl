@@ -12,6 +12,8 @@ favorites TEXT,
 image_100_80 TEXT,
 image_300_200 TEXT,
 variants TEXT,
-selectedVariant TEXT
+selectedVariant TEXT,
+is_enable TEXT DEFAULT (1),
+is_deleted TEXT DEFAULT (0)
 );
 

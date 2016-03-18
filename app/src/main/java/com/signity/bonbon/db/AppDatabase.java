@@ -20,10 +20,6 @@ import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.UpdateCartModel;
 import com.signity.bonbon.model.Variant;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,7 +49,6 @@ public class AppDatabase {
 
     // operation related to category table
     public void addCategoryList(List<Category> data) {
-
         if (data != null && data.size() != 0) {
             for (Category category : data) {
                 try {
@@ -63,8 +58,11 @@ public class AppDatabase {
                     values.put("image", category.getImage());
                     values.put("image_small", category.getImageSmall());
                     values.put("image_medium", category.getImageMedium());
+                    values.put("image_medium", category.getImageMedium());
+                    values.put("image_medium", category.getImageMedium());
                     values.put("sub_category", gsonHelper.getSubCategory(category.getSubCategoryList()));
-
+                    values.put("is_enable", category.getIsEnable());
+                    values.put("is_deleted", category.isDeleted() ? "1" : "0");
                     Category dbCategory = getCategoryById(category.getId());
                     if (dbCategory != null) {
                         if (!((dbCategory.getVersion()).equals(category.getVersion()))) {
@@ -87,37 +85,12 @@ public class AppDatabase {
     }
 
 
-    public void updateCategoryVersion(Category category) {
-
-        try {
-            Category avaiableCategory = getCategoryById(category.getId());
-            if (avaiableCategory != null) {
-                ContentValues values = new ContentValues();
-                values.put("id", category.getId());
-                values.put("title", category.getTitle());
-                values.put("image", category.getImage());
-                values.put("image_small", category.getImageSmall());
-                values.put("image_medium", category.getImageMedium());
-                values.put("sub_category", gsonHelper.getSubCategory(category.getSubCategoryList()));
-                values.put("version", category.getVersion());
-                values.put("old_version", category.getOldVersion());
-                long l = db.update("category", values, "id=?", new String[]{category.getId()});
-                Log.i(TAG, "Category " + l + " Updated");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
     public List<Category> getCategoryList() {
         List<Category> list = new ArrayList<>();
 
         Cursor cursor = null;
         try {
-            String sql = "SELECT * FROM category where 1=1";
+            String sql = String.format(Locale.US, "SELECT * FROM category where is_enable=%s AND is_deleted=%s", "1", "0");
             cursor = db.rawQuery(sql, null);
             cursor.moveToFirst();
             while (cursor.isAfterLast() == false) {
@@ -129,14 +102,16 @@ public class AppDatabase {
                 category.setVersion(cursor.getString(4));
                 category.setImageSmall(cursor.getString(5));
                 category.setImageMedium(cursor.getString(6));
+                category.setIsEnable(cursor.getString(7));
+                category.setIsDeleted(cursor.getString(8).equals("1") ? true : false);
                 cursor.moveToNext();
                 list.add(category);
             }
-            cursor.close();
-        } catch (Exception e) {
-            e.printStackTrace();
             if (cursor != null)
                 cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (cursor != null) cursor.close();
         }
         return list;
     }
@@ -158,6 +133,8 @@ public class AppDatabase {
                 category.setVersion(cursor.getString(4));
                 category.setImageSmall(cursor.getString(5));
                 category.setImageMedium(cursor.getString(6));
+                category.setIsEnable(cursor.getString(7));
+                category.setIsDeleted(cursor.getString(8).equals("1") ? true : false);
             }
             cursor.close();
         } catch (Exception e) {
@@ -220,47 +197,6 @@ public class AppDatabase {
         return status;
     }
 
-    public boolean addSubCategoryList(List<SubCategory> data) {
-
-        boolean status = false;
-        try {
-            if (data != null && data.size() != 0) {
-                for (SubCategory subCategory : data) {
-                    try {
-                        ContentValues values = new ContentValues();
-                        values.put("id", subCategory.getId());
-                        values.put("title", subCategory.getTitle());
-                        values.put("image", subCategory.getImage());
-                        values.put("parent_id", subCategory.getParentId());
-                        values.put("version", subCategory.getVersion());
-
-                        SubCategory subCategory1 = getSubCategoryById(subCategory.getId());
-                        if (subCategory1 != null) {
-                            Category category = getCategoryById(subCategory.getParentId());
-                            if (!category.getVersion().equals(subCategory1.getVersion())) {
-                                List<Product> products = subCategory.getProducts();
-                                addListProduct(products, subCategory.getId());
-                                long l = db.update("sub_category", values, "id=?", new String[]{subCategory.getId()});
-                                Log.i(TAG, "Sub Category " + l + " updated");
-                            }
-                        } else {
-                            List<Product> products = subCategory.getProducts();
-                            addListProduct(products, subCategory.getId());
-                            long l = db.insert("sub_category", null, values);
-                            Log.i(TAG, "Sub Category " + l + " Added");
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                status = true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            status = false;
-        }
-        return status;
-    }
 
     public void updateVersionSubCategoryIfExist(List<SubCategory> subCategoryList) {
 
@@ -313,43 +249,6 @@ public class AppDatabase {
     }
 
 
-    //id TEXT,
-//    title TEXT,
-//    image TEXT,
-//    parent_id TEXT,
-//    product_id TEXT
-    public List<SubCategory> getSubCategegory(String parentId) {
-        List<SubCategory> subCategoryList = new ArrayList<>();
-
-        Cursor cursor = null;
-        try {
-            String sql = String.format(Locale.US,
-                    "SELECT * FROM sub_category where parent_id=%s", parentId);
-            cursor = db.rawQuery(sql, null);
-            cursor.moveToFirst();
-            while (cursor.isAfterLast() == false) {
-                SubCategory subCategory = new SubCategory();
-                subCategory.setId(cursor.getString(0));
-                subCategory.setTitle(cursor.getString(1));
-                subCategory.setImage(cursor.getString(2));
-                subCategory.setParentId(cursor.getString(3));
-                subCategory.setProductId(cursor.getString(4));
-                subCategory.setVersion(cursor.getString(5));
-                subCategory.setOldVersion(cursor.getString(6));
-                subCategory.setImageSmall(cursor.getString(7));
-                subCategory.setImageMedium(cursor.getString(8));
-                cursor.moveToNext();
-                subCategoryList.add(subCategory);
-            }
-            cursor.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (cursor != null)
-                cursor.close();
-        }
-        return subCategoryList;
-    }
-
 
     // SUB_CATEGORY OPERATION ENDS HERE
 
@@ -390,6 +289,8 @@ public class AppDatabase {
                     values.put("image", product.getImage());
                     values.put("show_price", product.getShowPrice());
                     values.put("favorites", product.isFavorites() ? "1" : "0");
+                    values.put("is_enable", product.getIsEnable());
+                    values.put("is_deleted", product.isDeleted() ? "1" : "0");
                     values.put("image_100_80", product.getImageSmall());
                     values.put("image_300_200", product.getImageMedium());
                     values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
@@ -450,6 +351,8 @@ public class AppDatabase {
                 values.put("image", product.getImage());
                 values.put("show_price", product.getShowPrice());
                 values.put("favorites", product.isFavorites() ? "1" : "0");
+                values.put("is_enable", product.getIsEnable());
+                values.put("is_deleted", product.isDeleted() ? "1" : "0");
                 values.put("image_100_80", product.getImageSmall());
                 values.put("image_300_200", product.getImageMedium());
                 values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
@@ -541,6 +444,8 @@ public class AppDatabase {
                 product.setImageMedium(cursor.getString(11));
                 product.setVariants(gsonHelper.getProductVarientsArray(cursor.getString(12)));
                 product.setSelectedVariant(gsonHelper.getSelectedVarient(cursor.getString(13)));
+                product.setIsEnable(cursor.getString(14));
+                product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
             }
             cursor.close();
         } catch (Exception e) {
@@ -589,7 +494,7 @@ public class AppDatabase {
         Cursor cursor = null;
         try {
             String sql = String.format(Locale.US,
-                    "SELECT * FROM product where category_ids=%s", subCategoryId);
+                    "SELECT * FROM product where category_ids=%s AND is_enable=%s AND is_deleted=%s", subCategoryId, "1", "0");
             cursor = db.rawQuery(sql, null);
             cursor.moveToFirst();
             while (cursor.isAfterLast() == false) {
@@ -608,14 +513,15 @@ public class AppDatabase {
                 product.setImageMedium(cursor.getString(11));
                 product.setVariants(gsonHelper.getProductVarientsArray(cursor.getString(12)));
                 product.setSelectedVariant(gsonHelper.getSelectedVarient(cursor.getString(13)));
+                product.setIsEnable(cursor.getString(14));
+                product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 cursor.moveToNext();
                 listProduct.add(product);
             }
             cursor.close();
         } catch (Exception e) {
             e.printStackTrace();
-            if (cursor != null)
-                cursor.close();
+            if (cursor != null) cursor.close();
         }
         return listProduct;
 
@@ -648,6 +554,8 @@ public class AppDatabase {
                 product.setImageMedium(cursor.getString(11));
                 product.setVariants(gsonHelper.getProductVarientsArray(cursor.getString(12)));
                 product.setSelectedVariant(gsonHelper.getSelectedVarient(cursor.getString(13)));
+                product.setIsEnable(cursor.getString(14));
+                product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 cursor.moveToNext();
                 listProduct.add(product);
 
@@ -914,29 +822,6 @@ public class AppDatabase {
         return jsonString;
     }
 
-    public String getOrderStringForSubmit() {
-        String jsonString = "";
-        JSONArray order = new JSONArray();
-
-        List<UpdateCartModel> updateCartModelList = getCartList();
-
-        for (UpdateCartModel updateCartModel : updateCartModelList) {
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("product_id", updateCartModel.getProductId());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                jsonObject.put("variant_id", updateCartModel.getVariantId());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            order.put(jsonObject);
-        }
-        Log.i("TAG", order.toString());
-        return order.toString();
-    }
 
     private SelectedVariant getSelctedVarient(Product product, String variantId) {
         List<Variant> listVarient = product.getVariants();
@@ -1133,13 +1018,22 @@ public class AppDatabase {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.i("Grocers", "------Database Version : Old Version:" + oldVersion
                     + "  New Version:" + newVersion + "------------");
-
             // some of the store element are added so better to drop the store table and  recreate this
-            if (newVersion == 2) {
+            if (newVersion != oldVersion) {
                 String script = this.stringFromAssets("sql/alter_store_version_two.ddl");
                 String[] queries = script.split(";");
-
                 for (String query : queries) {
+                    try {
+                        db.execSQL(query);
+                    } catch (SQLException e) {
+                        Log.e("Sqlite Error", e.getMessage());
+                    } catch (Exception e) {
+                        Log.e("Sqlite Error", e.getMessage());
+                    }
+                }
+                String scriptForProduct = this.stringFromAssets("sql/alter_tables_version_three.ddl");
+                String[] queriesForProduct = scriptForProduct.split(";");
+                for (String query : queriesForProduct) {
                     try {
                         db.execSQL(query);
                     } catch (SQLException e) {

@@ -20,6 +20,7 @@
     <string name="title_activity_shopping_cart_activity2">ShoppingCartActivity2</string>
     <string name="title_activity_contact">ContactActivity</string>
     <string name="text_resend">Resend</string>
+    <!--<string name="text_rs">\\u20B9</string>-->
     <string name="text_rs">\u20B9</string>
     <string name="text_percent">%</string>
     <string name="title_activity_delivery_area">DeliveryAreaActivity</string>

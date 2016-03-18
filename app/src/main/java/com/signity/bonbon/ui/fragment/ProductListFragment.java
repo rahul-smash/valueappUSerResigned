@@ -416,7 +416,8 @@ public final class ProductListFragment extends Fragment {
                     if (list != null && !list.isEmpty()) {
                         SubCategory subCategory = list.get(0);
                         appDb.addSubCategoryToDb(subCategory);
-                        listProduct = subCategory.getProducts();
+//                        listProduct = subCategory.getProducts();
+                        listProduct = appDb.getProductList(subCategoryId);
                         if (listProduct != null && listProduct.size() != 0) {
                             adapter = new ProductListAdapter(getActivity(), listProduct);
                             listView.setAdapter(adapter);

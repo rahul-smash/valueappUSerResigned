@@ -42,4 +42,7 @@
     <color name="color_blue">#1d5387</color>
     <!--color code wah ji wah-->
     <color name="color_blue_dark">#01578f</color>
+
+    <!--chawla's-->
+    <color name="color_ligh_black">#292929</color>
 </resources>

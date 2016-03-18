@@ -22,8 +22,8 @@
 
     <dimen name="slider_pane_width">280dp</dimen>
 
-    <dimen name="slider_logo_width">120dp</dimen>
-    <dimen name="slider_logo_heigh">120dp</dimen>
+    <dimen name="slider_logo_width">80dp</dimen>
+    <dimen name="slider_logo_heigh">80dp</dimen>
     <dimen name="slider_logo_block_height">140dp</dimen>
     <dimen name="slider_list_icon_width">30dp</dimen>
     <dimen name="slider_list_icon_height">30dp</dimen>
@@ -109,5 +109,9 @@
     <dimen name="margin_right_offers">35dp</dimen>
     <dimen name="margin_left_my_delivery">35dp</dimen>
     <dimen name="margin_right_my_cart">35dp</dimen>
+
+    <!--Chawlas 2-->
+
+    <dimen name="cart_size">67dp</dimen>
 
 </resources>

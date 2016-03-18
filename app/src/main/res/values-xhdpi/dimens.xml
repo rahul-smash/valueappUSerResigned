@@ -23,8 +23,8 @@
 
     <dimen name="slider_pane_width">280dp</dimen>
 
-    <dimen name="slider_logo_width">100dp</dimen>
-    <dimen name="slider_logo_heigh">100dp</dimen>
+    <dimen name="slider_logo_width">80dp</dimen>
+    <dimen name="slider_logo_heigh">80dp</dimen>
     <dimen name="slider_logo_block_height">120dp</dimen>
     <dimen name="slider_list_icon_width">28dp</dimen>
     <dimen name="slider_list_icon_height">28dp</dimen>
@@ -108,5 +108,6 @@
     <dimen name="margin_right_offers">35dp</dimen>
     <dimen name="margin_left_my_delivery">35dp</dimen>
     <dimen name="margin_right_my_cart">35dp</dimen>
+
 
 </resources>

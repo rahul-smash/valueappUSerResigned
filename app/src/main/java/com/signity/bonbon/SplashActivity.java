@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -32,6 +34,9 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -61,6 +66,7 @@ public class SplashActivity extends Activity {
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
+
 
 //        startAnimationProcess()
 //
@@ -188,9 +194,11 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setForceDownloadModel(store.getForceDownload().get(0));
                     }
 
-
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
+
                         getMainActivity();
+//                        moveToCitySelection();
+
                     } else {
                         String msg = "" + store.getStoreMsg();
                         showAlertDialog(SplashActivity.this, "Message", msg);

@@ -30,6 +30,10 @@ public class NetworkAdaper {
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(1, TimeUnit.MINUTES);
         client.setReadTimeout(1, TimeUnit.MINUTES);
+
+
+
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setClient(new OkClient(client)).setEndpoint(NetworkConstant.BASE).setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();

@@ -12,8 +12,9 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/slider_logo_block_height"
-            android:background="@color/ColorPrimary">
+            android:layout_height="wrap_content"
+            android:background="@color/ColorPrimary"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/profile_pic"
@@ -31,7 +32,8 @@
                 android:layout_height="70dp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/profile_pic"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -41,7 +43,7 @@
                     android:text="Welcome"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/text_size_normal"
-                    android:textStyle="bold" />
+                    />
 
                 <!--<View-->
                 <!--android:layout_width="130dp"-->
@@ -66,7 +68,9 @@
         <ListView
             android:id="@+id/menulist"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"></ListView>
+            android:layout_height="fill_parent"
+            android:divider="@android:color/white"
+            android:dividerHeight="1dp"></ListView>
     </LinearLayout>
 
     <LinearLayout

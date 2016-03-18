@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/theme_22_home_bg"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:layout_above="@+id/bottomLayout"/>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#330202"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="30dp">
+
+        <ImageButton
+            android:id="@+id/cartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/theme_22_home_cart"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"/>
+
+        <Button
+            android:id="@+id/buttonCart"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignRight="@+id/cartBtn"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/red_noto"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_alignRight="@+id/cartBtn"
+            android:layout_below="@+id/cartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cart"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@android:color/white"
+            android:layout_alignParentLeft="true"/>
+
+        <ImageButton
+            android:id="@+id/historyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/theme_22_home_history"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_below="@+id/historyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:padding="5dp"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@android:color/white"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/offersBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/theme_22_home_offers"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:layout_alignLeft="@+id/offersBtn"
+            android:layout_below="@+id/offersBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offers"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@android:color/white"
+            android:layout_alignParentRight="true"/>
+
+
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="#F6D920"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:id="@+id/categoriesBtn"
+        android:layout_marginBottom="-24dp"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/theme_22_home_menu"
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

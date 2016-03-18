@@ -147,7 +147,6 @@ public class HomeFragmentChawlasTheme23 extends Fragment implements View.OnClick
             case R.id.cartBtn:
                 openShopCartActivity();
                 break;
-
         }
     }
 

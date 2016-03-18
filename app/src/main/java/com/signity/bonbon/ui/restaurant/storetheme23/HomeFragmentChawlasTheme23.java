@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.signity.bonbon.R;
@@ -41,6 +43,7 @@ public class HomeFragmentChawlasTheme23 extends Fragment implements View.OnClick
 
     RelativeLayout relCategory, relOffers, relHistory, relContact;
     Button buttonCart;
+    ImageButton cartBtn;
     View mView;
     String storeId;
     String userId;
@@ -71,13 +74,15 @@ public class HomeFragmentChawlasTheme23 extends Fragment implements View.OnClick
         mView = inflater.inflate(viewController.getHomeResourceLayout(), container, false);
         relCategory = (RelativeLayout) mView.findViewById(R.id.relCategory);
         relOffers = (RelativeLayout) mView.findViewById(R.id.relOffers);
-        relHistory = (RelativeLayout) mView.findViewById(R.id.relMyOrders);
+        relHistory = (RelativeLayout) mView.findViewById(R.id.relHistory);
         relContact = (RelativeLayout) mView.findViewById(R.id.relContact);
+        cartBtn=(ImageButton)mView.findViewById(R.id.cartBtn);
         buttonCart = (Button) mView.findViewById(R.id.buttonCart);
         relCategory.setOnClickListener(this);
         relOffers.setOnClickListener(this);
         relHistory.setOnClickListener(this);
         relContact.setOnClickListener(this);
+        cartBtn.setOnClickListener(this);
         store = appDb.getStore(storeId);
         return mView;
     }
@@ -136,6 +141,10 @@ public class HomeFragmentChawlasTheme23 extends Fragment implements View.OnClick
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
             case R.id.relMyCart:
+                openShopCartActivity();
+                break;
+
+            case R.id.cartBtn:
                 openShopCartActivity();
                 break;
 

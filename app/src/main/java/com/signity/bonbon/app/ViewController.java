@@ -35,6 +35,7 @@ import com.signity.bonbon.ui.restaurant.storetheme20.HomeFragmentTheme20;
 import com.signity.bonbon.ui.restaurant.storetheme21.HomeFragmentWahTheme21;
 import com.signity.bonbon.ui.restaurant.storetheme22.HomeFragmentBeliramTheme22;
 import com.signity.bonbon.ui.restaurant.storetheme23.HomeFragmentChawlasTheme23;
+import com.signity.bonbon.ui.restaurant.storetheme24.HomeFragmentCrazyTheme24;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
@@ -159,6 +160,10 @@ public class ViewController {
 
             case 23:
                 fragment = new HomeFragmentChawlasTheme23();
+                break;
+
+            case 24:
+                fragment = new HomeFragmentCrazyTheme24();
                 break;
 
             default:
@@ -290,6 +295,12 @@ public class ViewController {
                 //Chawla 2
                 layoutId = R.layout.home_activity_theme_23;
                 break;
+            case 24:
+                //Crazy Chicken
+                layoutId = R.layout.home_activity_theme_24;
+                break;
+
+
             default:
                 layoutId = R.layout.home_activity;
                 break;

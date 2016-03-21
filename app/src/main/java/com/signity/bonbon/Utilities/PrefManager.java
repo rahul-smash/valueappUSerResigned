@@ -23,6 +23,7 @@ public class PrefManager {
     public static final String OTP_SKIP = BuildConfig.APPLICATION_ID + ".OTP_SKIP";
     public static final String USER_RECORD_KEY = BuildConfig.APPLICATION_ID + "._KEY_USER";
     public static final String PICKUP_STATUS = BuildConfig.APPLICATION_ID + ".PICKUP_STATUS";
+    public static final String GEOFENCE_ENABLE = BuildConfig.APPLICATION_ID + ".GEOFENCE_ENABLE";
     public static final String APP_VERSION = BuildConfig.APPLICATION_ID + ".APP_VERSION";
 
     public static class SharedPrefs {
@@ -104,6 +105,16 @@ public class PrefManager {
     public String getPickupFacilityStatus() {
         return sharedpreferences.getString(PICKUP_STATUS, "0");
 //        return "1";
+    }
+
+    public void setGeoFenceEnableFeature(String geofenceStatus) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(GEOFENCE_ENABLE, geofenceStatus);
+        editor.commit();
+    }
+
+    public String getsetGeoFenceEnableStatus() {
+        return sharedpreferences.getString(GEOFENCE_ENABLE, "0");
     }
 
     public String getOtoSkip() {

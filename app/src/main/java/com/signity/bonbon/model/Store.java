@@ -74,10 +74,10 @@ public class Store {
     @SerializedName("otp_skip")
     private String otpSkip;
 
-    @SerializedName("current_gold_rate")
-    private String currentGoldRate;
-    @SerializedName("display_gold_rate")
-    private String displayGoldRate;
+
+    @SerializedName("banners")
+    @Expose
+    private List<Banner> banners = new ArrayList<Banner>();
 
     public List<Banner> getBanners() {
         return banners;
@@ -87,10 +87,6 @@ public class Store {
         this.banners = banners;
     }
 
-    @SerializedName("banners")
-    @Expose
-    private List<Banner> banners = new ArrayList<Banner>();
-
     @SerializedName("currency")
     @Expose
     private String currency;
@@ -98,6 +94,23 @@ public class Store {
     @Expose
     private String pickUpFacility;
 
+    @SerializedName("geofencing")
+    @Expose
+    private String geoFenceStatus;
+
+
+    @SerializedName("Geofencing")
+    @Expose
+    private List<GeofenceObjectModel> geofenceObjects = new ArrayList<GeofenceObjectModel>();
+
+
+    public List<GeofenceObjectModel> getGeofenceObjects() {
+        return geofenceObjects;
+    }
+
+    public void setGeofenceObjects(List<GeofenceObjectModel> geofenceObjects) {
+        this.geofenceObjects = geofenceObjects;
+    }
 
     @SerializedName("force_download")
     @Expose
@@ -324,22 +337,6 @@ public class Store {
         this.theme = theme;
     }
 
-    public String getCurrentGoldRate() {
-        return currentGoldRate;
-    }
-
-    public void setCurrentGoldRate(String currentGoldRate) {
-        this.currentGoldRate = currentGoldRate;
-    }
-
-    public String getDisplayGoldRate() {
-        return displayGoldRate;
-    }
-
-    public void setDisplayGoldRate(String displayGoldRate) {
-        this.displayGoldRate = displayGoldRate;
-    }
-
     public String getOtpSkip() {
         return otpSkip;
     }
@@ -366,7 +363,13 @@ public class Store {
     }
 
 
+    public String getGeoFenceStatus() {
+        return geoFenceStatus;
+    }
 
+    public void setGeoFenceStatus(String geoFenceStatus) {
+        this.geoFenceStatus = geoFenceStatus;
+    }
 
     public List<ForceDownloadModel> getForceDownload() {
         return forceDownload;

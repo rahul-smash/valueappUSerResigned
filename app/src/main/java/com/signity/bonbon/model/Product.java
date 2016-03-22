@@ -61,6 +61,13 @@ public class Product {
     @Expose
     private boolean favorites;
 
+    @SerializedName("deleted")
+    @Expose
+    private boolean isDeleted;
+    @SerializedName("status")
+    @Expose
+    private String isEnable;
+
     /**
      * @return The selectedVariant
      */
@@ -256,6 +263,23 @@ public class Product {
 
     public void setFavorites(boolean favorites) {
         this.favorites = favorites;
+    }
+
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public String getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(String isEnable) {
+        this.isEnable = isEnable;
     }
 
     @Override

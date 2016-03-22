@@ -122,7 +122,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                     appDb.addCategoryList(getCategory.getData());
                     listCategory = appDb.getCategoryList();
                     if (listCategory != null && listCategory.size() != 0) {
-                        adapter = new GridViewAdapter(CategoryActivity.this, getCategory.getData());
+                        adapter = new GridViewAdapter(CategoryActivity.this, listCategory);
                         mGridView.setAdapter(adapter);
                         noRecord.setVisibility(View.GONE);
                         mGridView.setVisibility(View.VISIBLE);

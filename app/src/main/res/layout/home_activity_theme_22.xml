@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-    <ImageView
+<!--    <ImageView
         android:id="@+id/logo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -120,6 +120,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/theme_22_home_menu"
         android:background="@android:color/transparent"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"/>-->
 
 </RelativeLayout>

@@ -60,7 +60,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="fill_parent"
-                android:background="@color/color_ligh_black" />
+                android:background="@color/bg_popupwindow" />
 
             <RelativeLayout
                 android:id="@+id/relOffers"
@@ -98,7 +98,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@color/color_ligh_black" />
+            android:background="@color/bg_popupwindow" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -137,7 +137,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="fill_parent"
-                android:background="@color/color_ligh_black" />
+                android:background="@color/bg_popupwindow" />
 
             <RelativeLayout
                 android:id="@+id/relMyCart"
@@ -185,7 +185,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="fill_parent"
-                android:background="@color/color_ligh_black" />
+                android:background="@color/bg_popupwindow" />
 
             <RelativeLayout
                 android:id="@+id/relContact"

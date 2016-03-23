@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && !(store.getLat().equalsIgnoreCase("0")) && !(store.getLng().equalsIgnoreCase("0"))) {
             status = true;
         }
-        return status;
+        return false;
     }
 
     @Override

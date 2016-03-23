@@ -17,9 +17,9 @@
     <color name="colorTransWhite_80">#CCFFFFFF</color>
 
     <!--color store 21 amritsari zaika-->
-    <color name="colorTransRed_65">#d65758</color>
+   <!-- <color name="colorTransRed_65">#d65758</color>
     <color name="colorTransRed_70">#c91e1e</color>
-    <color name="colorTransRed_80">#c50a0a</color>
+    <color name="colorTransRed_80">#c50a0a</color>-->
 
     <color name="favouriteColorSelected">#4FB954</color>
     <color name="menu_bg_color">#333470</color>
@@ -32,9 +32,9 @@
     <color name="color_theme_17_home_menu_text_yellow_">#F6EA56</color>
 
     <!--color store 18 blue chillis zaika-->
-    <!--<color name="colorTransRed_65">#729caf</color>-->
-    <!--<color name="colorTransRed_70">#427b94</color>-->
-    <!--<color name="colorTransRed_80">#316f8a</color>-->
+    <color name="colorTransRed_65">#729caf</color>
+    <color name="colorTransRed_70">#427b94</color>
+    <color name="colorTransRed_80">#316f8a</color>
 
     <!--color code e grocers-->
     <color name="color_theme_19_orange">#ec522c</color>

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:weightSum="4">
 
-    <View
+    <!--<View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@android:color/white" />
@@ -287,6 +287,6 @@
         android:layout_weight="1"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        android:src="@drawable/theme_5_home_banner" />
+        android:src="@drawable/theme_5_home_banner" />-->
 
 </LinearLayout>

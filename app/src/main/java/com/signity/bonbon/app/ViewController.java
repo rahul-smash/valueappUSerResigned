@@ -250,7 +250,9 @@ public class ViewController {
                 break;
             case 13:
                 //Khane Khaas
-                layoutId = R.layout.home_activity_theme_13;
+//                layoutId = R.layout.home_activity_theme_13;
+                //Bikanervala
+                layoutId = R.layout.home_activity_theme_13_bikanervala;
                 break;
             case 14:
                 //Lazeez Rasoi

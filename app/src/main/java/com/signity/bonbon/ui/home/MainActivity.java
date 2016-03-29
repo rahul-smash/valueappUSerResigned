@@ -50,6 +50,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.AboutUs.AboutUsFragment;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
+import com.signity.bonbon.ui.fragment.LoyalityFragment;
 import com.signity.bonbon.ui.fragment.Profile;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.order.OrderHistory;
@@ -432,6 +433,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     logOutUser();
                 }
                 adapter.notifyDataSetChanged();
+                break;
+
+            case 9:
+
+                if (userId.isEmpty()) {
+                    Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
+                    intent9.putExtra(AppConstant.FROM, "menu");
+                    startActivity(intent9);
+                    AnimUtil.slideUpAnim(MainActivity.this);
+                } else {
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
+                    title.setText("Loyality Points");
+                    fragment = new LoyalityFragment();
+                    replace(fragment);
+                }
                 break;
 
         }

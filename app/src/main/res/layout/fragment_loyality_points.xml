@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dp"
+            android:background="@android:color/white"
+            android:elevation="4dp"
+            android:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/loyality_banner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/top_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/redem_banner"
+                android:visibility="visible" />
+
+            <ListView
+                android:id="@+id/offersList"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_below="@+id/loyality_banner"
+                android:layout_marginTop="@dimen/top_margin"
+                android:divider="@android:color/white"
+                android:dividerHeight="3dp">
+
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/offersList"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text=""
+                    android:textColor="@color/color_light_blue"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/customerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_toRightOf="@+id/nameTxt"
+                    android:text="AVAILABLE POINTS"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_large" />
+
+            </LinearLayout>
+
+
+            <!-- </RelativeLayout>-->
+
+            <TextView
+                android:id="@+id/bottomTxt"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_corner_button1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Log In"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_normal"
+                android:visibility="gone">
+
+
+            </TextView>
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:text="You are not authorized to see this feature."
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>

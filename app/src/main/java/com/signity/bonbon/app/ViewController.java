@@ -278,7 +278,10 @@ public class ViewController {
                 break;
             case 18:
                 //Cafe sweet
-                layoutId = R.layout.home_activity_theme_18;
+//                layoutId = R.layout.home_activity_theme_18;
+
+                //Chawlas2 Chandigarh
+                layoutId = R.layout.home_activity_theme_18_chawlas2;
                 break;
 
             case 19:

@@ -6,12 +6,12 @@
     android:background="@drawable/theme_18_home_bg">
 
 
-   <!-- <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:adjustViewBounds="true"
-    android:scaleType="fitXY"
-    android:src="@drawable/theme_18_home_bg" />-->
+    <!-- <ImageView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:adjustViewBounds="true"
+     android:scaleType="fitXY"
+     android:src="@drawable/theme_18_home_bg" />-->
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/shape_theme_18_home_menu_bg"
+        android:background="@drawable/shape_theme_18_home_menu_bg_2"
         android:orientation="vertical">
 
         <LinearLayout
@@ -31,7 +31,8 @@
                 android:id="@+id/relCategory"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="33">
+                android:layout_weight="33"
+                >
 
                 <com.signity.bonbon.view.FontTextView
                     android:id="@+id/imgCategory"
@@ -40,7 +41,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text="@string/font_home_cat"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/menu_bg_color"
                     android:textSize="30sp" />
 
                 <TextView
@@ -49,19 +50,19 @@
                     android:layout_below="@+id/imgCategory"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_theme_17_home_menu_text_yellow_"
+                    android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="CATEGORIES"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/divider"></View>
+                android:background="@color/ColorPrimary"></View>
 
             <RelativeLayout
                 android:id="@+id/relOffers"
@@ -76,7 +77,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text="@string/font_home_offer"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/menu_bg_color"
                     android:textSize="30sp" />
 
 
@@ -86,19 +87,19 @@
                     android:layout_below="@+id/imgOffers"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_theme_17_home_menu_text_yellow_"
+                    android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="OFFERS"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/divider"></View>
+                android:background="@color/ColorPrimary"></View>
 
             <RelativeLayout
                 android:id="@+id/relMyCart"
@@ -113,7 +114,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text="@string/font_home_my_cart"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/menu_bg_color"
                     android:textSize="30sp" />
 
 
@@ -123,12 +124,12 @@
                     android:layout_below="@+id/imgCart"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_theme_17_home_menu_text_yellow_"
+                    android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="MY CART"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/home_text_size" />
 
 
@@ -166,7 +167,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text="@string/font_home_book"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/menu_bg_color"
                     android:textSize="30sp" />
 
 
@@ -176,19 +177,19 @@
                     android:layout_below="@+id/imgBookNow"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_theme_17_home_menu_text_yellow_"
+                    android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="BOOK NOW"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/divider"></View>
+                android:background="@color/ColorPrimary"></View>
 
             <RelativeLayout
                 android:id="@+id/relMyOrders"
@@ -203,7 +204,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text="@string/font_home_order"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/menu_bg_color"
                     android:textSize="30sp" />
 
 
@@ -213,19 +214,19 @@
                     android:layout_below="@+id/imgOrderHistory"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_theme_17_home_menu_text_yellow_"
+                    android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="DELIVERY AREA"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/divider"></View>
+                android:background="@color/ColorPrimary"></View>
 
             <RelativeLayout
                 android:id="@+id/relContact"
@@ -240,7 +241,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text="@string/font_home_contact"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/menu_bg_color"
                     android:textSize="30sp" />
 
 
@@ -250,12 +251,12 @@
                     android:layout_below="@+id/imgContact"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
-                    android:background="@color/color_theme_17_home_menu_text_yellow_"
+                    android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="CONTACT"
-                    android:textColor="@color/ColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/home_text_size" />
             </RelativeLayout>
         </LinearLayout>

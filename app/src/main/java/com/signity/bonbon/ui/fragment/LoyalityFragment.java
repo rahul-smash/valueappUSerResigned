@@ -76,9 +76,6 @@ public class LoyalityFragment extends Fragment {
 
 
 
-
-
-
         callNetworkForLoyalityPoints();
 
         return rootView;

@@ -76,12 +76,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView profilePic;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     String[] labels = {"Home", "My Profile", "Delivery Address", "My Order",
-            "Book Now", "My Favorites", "About Us", "Share", "Log In"};
+            "Book Now", "My Favorites", "About Us", "Share", "Loyality Points","Log In"};
 
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
             R.drawable.order_icon,
             R.drawable.my_shopping_list_icon, R.drawable.my_fav_icon,
-            R.drawable.faq, R.drawable.ic_share, R.drawable.sign_out};
+            R.drawable.faq, R.drawable.ic_share,R.drawable.loyality, R.drawable.sign_out};
     ArrayList<SliderObject> viewList = new ArrayList<SliderObject>();
 
     AppDatabase appDb;
@@ -416,7 +416,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra(Intent.EXTRA_SUBJECT, store.getStoreName());
                 startActivity(Intent.createChooser(intent, "Share with"));
                 break;
+
             case 8:
+
+                if (userId.isEmpty()) {
+                    Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
+                    intent9.putExtra(AppConstant.FROM, "menu");
+                    startActivity(intent9);
+                    AnimUtil.slideUpAnim(MainActivity.this);
+                } else {
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
+                    title.setText("Loyality Points");
+                    fragment = new LoyalityFragment();
+                    replace(fragment);
+                }
+                break;
+
+
+            case 9:
 
                 title.setText(store.getStoreName());
                 if (userId.isEmpty()) {
@@ -435,21 +453,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.notifyDataSetChanged();
                 break;
 
-            case 9:
 
-                if (userId.isEmpty()) {
-                    Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
-                    intent9.putExtra(AppConstant.FROM, "menu");
-                    startActivity(intent9);
-                    AnimUtil.slideUpAnim(MainActivity.this);
-                } else {
-                    title.setVisibility(View.VISIBLE);
-                    citySelect.setVisibility(View.GONE);
-                    title.setText("Loyality Points");
-                    fragment = new LoyalityFragment();
-                    replace(fragment);
-                }
-                break;
 
         }
     }
@@ -519,14 +523,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (userId.isEmpty()) {
                 att.labels = "Log In";
-                att.icons = icons[8];
-                viewList.set(8, att);
+                att.icons = icons[9];
+                viewList.set(9, att);
                 holder.labels.setText(viewList.get(position).labels);
                 login = true;
             } else if (!userId.isEmpty()) {
                 att.labels = "Log out";
-                att.icons = icons[8];
-                viewList.set(8, att);
+                att.icons = icons[9];
+                viewList.set(9, att);
                 holder.labels.setText(viewList.get(position).labels);
                 login = false;
             }

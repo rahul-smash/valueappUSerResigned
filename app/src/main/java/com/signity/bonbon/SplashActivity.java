@@ -34,7 +34,6 @@ import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -61,7 +60,6 @@ public class SplashActivity extends Activity {
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
-
 
 //        startAnimationProcess()
 //
@@ -196,23 +194,10 @@ public class SplashActivity extends Activity {
 
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
                         getMainActivity();
-
-
-                    if (openTime(store)) {
-                        if (store.getStoreStatus().equalsIgnoreCase("1")) {
-
-                            getMainActivity();
-//                        moveToCitySelection();
-
-                        } else {
-                            String msg = "" + store.getStoreMsg();
-                            showAlertDialog(SplashActivity.this, "Message", msg);
-                        }
                     } else {
-                        String msg = "" + store.getClosehoursMessage();
+                        String msg = "" + store.getStoreMsg();
                         showAlertDialog(SplashActivity.this, "Message", msg);
                     }
-
 
                 } else {
                     showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
@@ -229,40 +214,6 @@ public class SplashActivity extends Activity {
     }
 
 
-    private boolean openTime(Store store){
-
-
-        if(store.getOpenhoursFrom().isEmpty() || store.getClosehoursMessage().isEmpty()){
-            return true;
-        }else {
-
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
-            String currentDate=formatter.format(calendar.getTime());
-
-            String strOpenHrs = store.getOpenhoursFrom();
-            String strCloseHrs=store.getOpenhoursTo();
-
-            SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
-            Date openDate = null,closeDate=null,currentTime=null;
-            try {
-                openDate = format.parse(strOpenHrs);
-
-                closeDate=format.parse(strCloseHrs);
-
-                currentTime=format.parse(currentDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-//            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
-//            String date = format.format(newDate);
-        }
-
-
-        return true;
-    }
-
     private void moveToCitySelection() {
 
 //        boolean x=prefManager.getBoolean(AppConstant.CITY_SELECTED);
@@ -270,17 +221,13 @@ public class SplashActivity extends Activity {
         if (prefManager.getBoolean(AppConstant.AREA_SELECTED)) {
             getMainActivity();
         } else {
-
             getAllAreaDetail();
-
         }
 
     }
 
     private void getAllAreaDetail() {
-
         ProgressDialogUtil.showProgressDialog(SplashActivity.this);
-
         NetworkAdaper.getInstance().getNetworkServices().getStoreAreaList(new Callback<GetStoreArea>() {
             @Override
             public void success(GetStoreArea getStoreArea, Response response) {
@@ -288,8 +235,7 @@ public class SplashActivity extends Activity {
 
                     if (getStoreArea.getData() != null && getStoreArea.getData().size() != 0) {
                         ProgressDialogUtil.hideProgressDialog();
-
-                        DataAdapter.getInstance().setStoreArea(getStoreArea);
+//                        DataAdapter.getInstance().setStoreArea(getStoreArea);
                         Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
                         startActivity(intent_location);
                         finish();
@@ -340,7 +286,8 @@ public class SplashActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        int icon = R.mipmap.ic_launcher;
+
+        int icon = R.drawable.baliram;
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(title)
@@ -356,7 +303,7 @@ public class SplashActivity extends Activity {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify((new Random(100).nextInt()) /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
     }
 
 

@@ -44,7 +44,11 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class SplashActivity extends Activity {
+/**
+ * Created by root on 1/4/16.
+ */
+public class SplashActivity_  extends Activity{
+
 
     private int SPLASH_TIME_OUT = 500;
     private GCMClientManager pushClientManager;
@@ -63,7 +67,7 @@ public class SplashActivity extends Activity {
         prefManager = new PrefManager(this);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         appDb = DbAdapter.getInstance().getDb();
-        deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
+        deviceToken = pushClientManager.getRegistrationId(SplashActivity_.this);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
 
 
@@ -88,7 +92,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if (Util.checkInternetConnection(SplashActivity.this)) {
+                if (Util.checkInternetConnection(SplashActivity_.this)) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -96,7 +100,7 @@ public class SplashActivity extends Activity {
                         }
                     }, SPLASH_TIME_OUT);
                 } else {
-                    showAlertDialogForInternetConnection(SplashActivity.this);
+                    showAlertDialogForInternetConnection(SplashActivity_.this);
                 }
             }
 
@@ -116,7 +120,7 @@ public class SplashActivity extends Activity {
                 }
             }, SPLASH_TIME_OUT);
         } else {
-            showAlertDialogForInternetConnection(SplashActivity.this);
+            showAlertDialogForInternetConnection(SplashActivity_.this);
         }
     }
 
@@ -144,22 +148,22 @@ public class SplashActivity extends Activity {
         if (Util.checkInternetConnection(this)) {
             initSplash();
         } else {
-            showAlertDialogForInternetConnection(SplashActivity.this);
+            showAlertDialogForInternetConnection(SplashActivity_.this);
         }
     }
 
 
     private void getMainActivity() {
-        Intent intent_home = new Intent(SplashActivity.this, MainActivity.class);
+        Intent intent_home = new Intent(SplashActivity_.this, MainActivity.class);
         startActivity(intent_home);
         finish();
     }
 
     private void getStoreServices() {
 
-        ProgressDialogUtil.showProgressDialog(SplashActivity.this);
-        String deviceid = Settings.Secure.getString(SplashActivity.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
+        ProgressDialogUtil.showProgressDialog(SplashActivity_.this);
+        String deviceid = Settings.Secure.getString(SplashActivity_.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceToken = pushClientManager.getRegistrationId(SplashActivity_.this);
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceid);
@@ -205,23 +209,23 @@ public class SplashActivity extends Activity {
 
                         } else {
                             String msg = "" + store.getStoreMsg();
-                            showAlertDialog(SplashActivity.this, "Message", msg);
+                            showAlertDialog(SplashActivity_.this, "Message", msg);
                         }
                     } else {
                         String msg = "" + store.getClosehoursMessage();
-                        showAlertDialog(SplashActivity.this, "Message", msg);
+                        showAlertDialog(SplashActivity_.this, "Message", msg);
                     }
 
 
                 } else {
-                    showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
+                    showAlertDialog(SplashActivity_.this, "Failed", "Server not responding.");
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
+                showAlertDialog(SplashActivity_.this, "Failed", "Server not responding.");
             }
         });
 
@@ -285,7 +289,7 @@ public class SplashActivity extends Activity {
 
     private void getAllAreaDetail() {
 
-        ProgressDialogUtil.showProgressDialog(SplashActivity.this);
+        ProgressDialogUtil.showProgressDialog(SplashActivity_.this);
 
         NetworkAdaper.getInstance().getNetworkServices().getStoreAreaList(new Callback<GetStoreArea>() {
             @Override
@@ -296,7 +300,7 @@ public class SplashActivity extends Activity {
                         ProgressDialogUtil.hideProgressDialog();
 
                         DataAdapter.getInstance().setStoreArea(getStoreArea);
-                        Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
+                        Intent intent_location = new Intent(SplashActivity_.this, SelectLocationActivity.class);
                         startActivity(intent_location);
                         finish();
 
@@ -321,7 +325,7 @@ public class SplashActivity extends Activity {
 
     public void showAlertDialogForInternetConnection(Context context) {
 
-        final DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
+        final DialogHandler dialogHandler = new DialogHandler(SplashActivity_.this);
         dialogHandler.setDialog("Internet Connection", "Internet connection is not available");
         dialogHandler.setPostiveButton("Ok", true)
                 .setOnClickListener(new View.OnClickListener() {
@@ -364,6 +368,7 @@ public class SplashActivity extends Activity {
 
         notificationManager.notify((new Random(100).nextInt()) /* ID of notification */, notificationBuilder.build());
     }
+
 
 
 }

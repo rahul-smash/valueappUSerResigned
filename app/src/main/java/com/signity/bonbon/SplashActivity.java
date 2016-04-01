@@ -194,8 +194,9 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setForceDownloadModel(store.getForceDownload().get(0));
                     }
 
-
-
+                    if (!prefManager.getGeoFenceEnableStatus().equalsIgnoreCase("0")) {
+                        DataAdapter.getInstance().setListGeoFence(store.getGeofenceObjects());
+                    }
 
                     if (openTime(store)) {
                         if (store.getStoreStatus().equalsIgnoreCase("1")) {

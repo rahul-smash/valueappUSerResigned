@@ -32,6 +32,10 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -190,15 +194,24 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setForceDownloadModel(store.getForceDownload().get(0));
                     }
 
-                    if (store.getStoreStatus().equalsIgnoreCase("1")) {
 
-                        getMainActivity();
+
+
+                    if (openTime(store)) {
+                        if (store.getStoreStatus().equalsIgnoreCase("1")) {
+
+                            getMainActivity();
 //                        moveToCitySelection();
 
+                        } else {
+                            String msg = "" + store.getStoreMsg();
+                            showAlertDialog(SplashActivity.this, "Message", msg);
+                        }
                     } else {
-                        String msg = "" + store.getStoreMsg();
+                        String msg = "" + store.getClosehoursMessage();
                         showAlertDialog(SplashActivity.this, "Message", msg);
                     }
+
 
                 } else {
                     showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
@@ -214,6 +227,40 @@ public class SplashActivity extends Activity {
 
     }
 
+
+    private boolean openTime(Store store){
+
+
+        if(store.getOpenhoursFrom().isEmpty() || store.getClosehoursMessage().isEmpty()){
+            return true;
+        }else {
+
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
+            String currentDate=formatter.format(calendar.getTime());
+
+            String strOpenHrs = store.getOpenhoursFrom();
+            String strCloseHrs=store.getOpenhoursTo();
+
+            SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
+            Date openDate = null,closeDate=null,currentTime=null;
+            try {
+                openDate = format.parse(strOpenHrs);
+
+                closeDate=format.parse(strCloseHrs);
+
+                currentTime=format.parse(currentDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+//            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
+//            String date = format.format(newDate);
+        }
+
+
+        return true;
+    }
 
     private void moveToCitySelection() {
 

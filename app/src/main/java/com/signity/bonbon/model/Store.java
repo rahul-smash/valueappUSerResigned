@@ -75,6 +75,43 @@ public class Store {
     private String otpSkip;
 
 
+    public String getOpenhoursFrom() {
+        return openhoursFrom;
+    }
+
+    public void setOpenhoursFrom(String openhoursFrom) {
+        this.openhoursFrom = openhoursFrom;
+    }
+
+    @SerializedName("openhours_from")
+    @Expose
+    private String openhoursFrom;
+
+    public String getOpenhoursTo() {
+        return openhoursTo;
+    }
+
+    public void setOpenhoursTo(String openhoursTo) {
+        this.openhoursTo = openhoursTo;
+    }
+
+    public String getClosehoursMessage() {
+        return closehoursMessage;
+    }
+
+    public void setClosehoursMessage(String closehoursMessage) {
+        this.closehoursMessage = closehoursMessage;
+    }
+
+    @SerializedName("openhours_to")
+    @Expose
+    private String openhoursTo;
+    @SerializedName("closehours_message")
+    @Expose
+    private String closehoursMessage;
+
+
+
     @SerializedName("banners")
     @Expose
     private List<Banner> banners = new ArrayList<Banner>();

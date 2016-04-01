@@ -1,4 +1,4 @@
-package com.signity.bonbon.ui.restaurant.storetheme13.fragment;
+package com.signity.bonbon.ui.restaurant.storetheme25.fragment;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -27,28 +27,28 @@ import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
 import com.signity.bonbon.ui.book.BookNowActivity;
 import com.signity.bonbon.ui.category.CategoryActivity;
 import com.signity.bonbon.ui.contacts.ContactActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;
+import com.signity.bonbon.ui.order.OrderListActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 
 import java.util.Calendar;
 
 /**
- * Created by root on 17/2/16.
+ * Created by root on 28/3/16.
  */
-public class HomeFragmentKhaneTheme13 extends Fragment implements View.OnClickListener {
+public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClickListener {
 
-
-    RelativeLayout relCategory, relOffers, relBookNow, relMyOrders, relContact, relMyCart;
-    Button buttonCart;
-    View mView;
-    String storeId;
+    RelativeLayout relCategory, relOffers, relFavorites, relMyOrders, relContact, relMyCart;
     String userId;
+    String storeId;
     Store store;
     AppDatabase appDb;
     PrefManager prefManager;
+    View mView;
+    private Button buttonCart;
     private PendingIntent pendingIntent;
     ViewController viewController;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,21 +68,23 @@ public class HomeFragmentKhaneTheme13 extends Fragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         mView = inflater.inflate(viewController.getHomeResourceLayout(), container, false);
         relCategory = (RelativeLayout) mView.findViewById(R.id.relCategory);
+        buttonCart = (Button) mView.findViewById(R.id.buttonCart);
         relOffers = (RelativeLayout) mView.findViewById(R.id.relOffers);
-        relBookNow = (RelativeLayout) mView.findViewById(R.id.relBookNow);
+        relMyCart = (RelativeLayout) mView.findViewById(R.id.relMyCart);
+        relFavorites = (RelativeLayout) mView.findViewById(R.id.relFavorites);
         relMyOrders = (RelativeLayout) mView.findViewById(R.id.relMyOrders);
         relContact = (RelativeLayout) mView.findViewById(R.id.relContact);
-        relMyCart = (RelativeLayout) mView.findViewById(R.id.relMyCart);
-        buttonCart = (Button) mView.findViewById(R.id.buttonCart);
         relCategory.setOnClickListener(this);
         relOffers.setOnClickListener(this);
-        relBookNow.setOnClickListener(this);
+        relFavorites.setOnClickListener(this);
         relMyOrders.setOnClickListener(this);
         relContact.setOnClickListener(this);
         relMyCart.setOnClickListener(this);
         store = appDb.getStore(storeId);
+
         return mView;
     }
 
@@ -116,11 +118,20 @@ public class HomeFragmentKhaneTheme13 extends Fragment implements View.OnClickLi
                 startActivity(new Intent(getActivity(), OfferListActivity.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
-            case R.id.relBookNow:
+            case R.id.relFavorites:
                 startActivity(new Intent(getActivity(), BookNowActivity.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
             case R.id.relMyOrders:
+                /*if (userId.isEmpty()) {
+                    Intent intent = new Intent(getActivity(), LoginScreenActivity.class);
+                    intent.putExtra(AppConstant.FROM, "menu");
+                    startActivity(intent);
+                    AnimUtil.slideUpAnim(getActivity());
+                } else {
+                    startActivity(new Intent(getActivity(), OrderListActivity.class));
+                    AnimUtil.slideFromRightAnim(getActivity());
+                }*/
                 Intent intent = new Intent(getActivity(), DeliveryAreaActivity.class);
                 startActivity(intent);
                 AnimUtil.slideFromRightAnim(getActivity());

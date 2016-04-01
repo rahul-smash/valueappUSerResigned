@@ -5,288 +5,288 @@
     android:orientation="vertical"
     android:weightSum="4">
 
-    <!--<View-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="@android:color/white" />-->
+    <!--<View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:weightSum="3">-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/relCategory"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@color/colorTransRed_65">-->
+        <RelativeLayout
+            android:id="@+id/relCategory"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransRed_65">
 
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true">-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/imgCategory"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/theme_5_home_cat" />-->
+                <ImageView
+                    android:id="@+id/imgCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/theme_5_home_cat" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/category_name"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/imgCategory"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:text="Categories"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:textSize="@dimen/text_size_normal" />-->
-            <!--</RelativeLayout>-->
-        <!--</RelativeLayout>-->
+                <TextView
+                    android:id="@+id/category_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgCategory"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Categories"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_normal" />
+            </RelativeLayout>
+        </RelativeLayout>
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/relMyOrders"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@color/colorTransRed_70">-->
+        <RelativeLayout
+            android:id="@+id/relMyOrders"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransRed_70">
 
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true">-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/imgMyOrder"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/theme_5_home_delivery" />-->
+                <ImageView
+                    android:id="@+id/imgMyOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/theme_5_home_delivery" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/myOrder"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/imgMyOrder"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:text="Delivery Area"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:textSize="@dimen/text_size_normal" />-->
+                <TextView
+                    android:id="@+id/myOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgMyOrder"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Delivery Area"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_normal" />
 
-            <!--</RelativeLayout>-->
-        <!--</RelativeLayout>-->
+            </RelativeLayout>
+        </RelativeLayout>
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/relMyCart"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@color/colorTransRed_80">-->
+        <RelativeLayout
+            android:id="@+id/relMyCart"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransRed_80">
 
-            <!--<RelativeLayout-->
-                <!--android:id="@+id/relativeInnerMycart"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true">-->
+            <RelativeLayout
+                android:id="@+id/relativeInnerMycart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/imgCart"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/theme_5_home_cart" />-->
+                <ImageView
+                    android:id="@+id/imgCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/theme_5_home_cart" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/myCart"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/imgCart"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:text="My Cart"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:textSize="@dimen/text_size_normal" />-->
-            <!--</RelativeLayout>-->
+                <TextView
+                    android:id="@+id/myCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgCart"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="My Cart"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_normal" />
+            </RelativeLayout>
 
-            <!--<View-->
-                <!--android:id="@+id/dot"-->
-                <!--android:layout_width="1dp"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_alignRight="@+id/relativeInnerMycart"-->
-                <!--android:layout_alignTop="@+id/relativeInnerMycart"-->
-                <!--android:layout_marginTop="10dp" />-->
+            <View
+                android:id="@+id/dot"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_alignRight="@+id/relativeInnerMycart"
+                android:layout_alignTop="@+id/relativeInnerMycart"
+                android:layout_marginTop="10dp" />
 
-            <!--<Button-->
-                <!--android:id="@+id/buttonCart"-->
-                <!--android:layout_width="25dp"-->
-                <!--android:layout_height="25dp"-->
-                <!--android:layout_alignBottom="@+id/dot"-->
-                <!--android:layout_alignRight="@+id/relativeInnerMycart"-->
-                <!--android:layout_marginBottom="0dp"-->
-                <!--android:layout_marginRight="5dp"-->
-                <!--android:layout_marginTop="0dp"-->
-                <!--android:background="@drawable/red_noto"-->
-                <!--android:clickable="false"-->
-                <!--android:gravity="center"-->
-                <!--android:text="0"-->
-                <!--android:textColor="#ffffff"-->
-                <!--android:textSize="13sp"-->
-                <!--android:visibility="gone" />-->
-        <!--</RelativeLayout>-->
-    <!--</LinearLayout>-->
+            <Button
+                android:id="@+id/buttonCart"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/dot"
+                android:layout_alignRight="@+id/relativeInnerMycart"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/red_noto"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@color/color_white">-->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_white">
 
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:adjustViewBounds="true"-->
-            <!--android:src="@drawable/theme_5_home_logo" />-->
-    <!--</RelativeLayout>-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/theme_5_home_logo" />
+    </RelativeLayout>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:weightSum="3">-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/relOffers"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@color/colorTransRed_65">-->
+        <RelativeLayout
+            android:id="@+id/relOffers"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransRed_65">
 
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true">-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/imgOffers"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/theme_5_home_offers" />-->
+                <ImageView
+                    android:id="@+id/imgOffers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/theme_5_home_offers" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/offers"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/imgOffers"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:text="Offers"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:textSize="@dimen/text_size_normal" />-->
-            <!--</RelativeLayout>-->
+                <TextView
+                    android:id="@+id/offers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgOffers"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Offers"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_normal" />
+            </RelativeLayout>
 
-        <!--</RelativeLayout>-->
+        </RelativeLayout>
 
-        <!--<RelativeLayout-->
+        <RelativeLayout
 
-            <!--android:id="@+id/relBookNow"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@color/colorTransRed_70">-->
+            android:id="@+id/relBookNow"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransRed_70">
 
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true">-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/imgBookNow"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/theme_5_home_book_now" />-->
+                <ImageView
+                    android:id="@+id/imgBookNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/theme_5_home_book_now" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/bookNow"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/imgBookNow"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:text="Book Now"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:textSize="@dimen/text_size_normal" />-->
-            <!--</RelativeLayout>-->
-        <!--</RelativeLayout>-->
-
-
-        <!--<RelativeLayout-->
-
-            <!--android:id="@+id/relContact"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@color/colorTransRed_80"-->
-            <!--android:paddingBottom="5dp">-->
-
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_centerVertical="true">-->
+                <TextView
+                    android:id="@+id/bookNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgBookNow"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Book Now"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_normal" />
+            </RelativeLayout>
+        </RelativeLayout>
 
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/imgContact"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/theme_5_home_contact" />-->
+        <RelativeLayout
 
-                <!--<TextView-->
-                    <!--android:id="@+id/contact"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/imgContact"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:text="Contact Us"-->
-                    <!--android:textColor="@android:color/white"-->
-                    <!--android:textSize="@dimen/text_size_normal" />-->
+            android:id="@+id/relContact"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/colorTransRed_80"
+            android:paddingBottom="5dp">
 
-            <!--</RelativeLayout>-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
 
-        <!--</RelativeLayout>-->
 
-    <!--</LinearLayout>-->
+                <ImageView
+                    android:id="@+id/imgContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/theme_5_home_contact" />
 
-    <!--<ImageView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:scaleType="fitXY"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:src="@drawable/theme_5_home_banner" />-->
+                <TextView
+                    android:id="@+id/contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgContact"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Contact Us"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_normal" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@drawable/theme_5_home_banner" />-->
 
 </LinearLayout>

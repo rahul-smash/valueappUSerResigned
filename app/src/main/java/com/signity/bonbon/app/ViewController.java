@@ -36,6 +36,7 @@ import com.signity.bonbon.ui.restaurant.storetheme21.HomeFragmentWahTheme21;
 import com.signity.bonbon.ui.restaurant.storetheme22.HomeFragmentBeliramTheme22;
 import com.signity.bonbon.ui.restaurant.storetheme23.HomeFragmentChawlasTheme23;
 import com.signity.bonbon.ui.restaurant.storetheme24.HomeFragmentCrazyTheme24;
+import com.signity.bonbon.ui.restaurant.storetheme25.fragment.HomeFragmentBigChefTheme25;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
@@ -166,6 +167,10 @@ public class ViewController {
                 fragment = new HomeFragmentCrazyTheme24();
                 break;
 
+            case 25:
+                fragment = new HomeFragmentBigChefTheme25();
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;
@@ -250,7 +255,9 @@ public class ViewController {
                 break;
             case 13:
                 //Khane Khaas
-                layoutId = R.layout.home_activity_theme_13;
+//                layoutId = R.layout.home_activity_theme_13;
+                //Bikanervala
+                layoutId = R.layout.home_activity_theme_13_bikanervala;
                 break;
             case 14:
                 //Lazeez Rasoi
@@ -271,7 +278,10 @@ public class ViewController {
                 break;
             case 18:
                 //Cafe sweet
-                layoutId = R.layout.home_activity_theme_18;
+//                layoutId = R.layout.home_activity_theme_18;
+
+                //Chawlas2 Chandigarh
+                layoutId = R.layout.home_activity_theme_18_chawlas2;
                 break;
 
             case 19:
@@ -298,6 +308,10 @@ public class ViewController {
             case 24:
                 //Crazy Chicken
                 layoutId = R.layout.home_activity_theme_24;
+                break;
+            case 25:
+                //Big Chef
+                layoutId = R.layout.home_activity_theme_25;
                 break;
 
 

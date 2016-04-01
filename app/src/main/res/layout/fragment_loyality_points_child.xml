@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@color/colorGray"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/rupeeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="₹"
+        android:textSize="@dimen/text_size_normal"/>
+
+    <TextView
+        android:id="@+id/amountTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rupeeTxt"
+        android:layout_marginLeft="3dp"
+        android:text=""
+        android:textSize="@dimen/text_size_normal"/>
+
+
+    <TextView
+        android:id="@+id/pointsTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text=""
+        android:textSize="@dimen/text_size_normal"/>
+
+
+</RelativeLayout>

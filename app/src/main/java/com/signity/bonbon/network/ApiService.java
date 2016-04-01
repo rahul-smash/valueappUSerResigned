@@ -12,6 +12,7 @@ import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.GetValidCouponResponse;
+import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.ProductListModel;
 import com.signity.bonbon.model.ResponseData;
@@ -136,5 +137,8 @@ public interface ApiService {
     @GET("/getGeofencingMessage")
     void getGeofencingMessage(Callback<GeoFenceModel> response);
 
+    @FormUrlEncoded
+    @POST("/getLoyalityPoints")
+    void getLoyalityPoints(@FieldMap Map<String, String> parameters, Callback<LoyalityModel> response);
 
 }

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Order Number:"
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/order_number"
@@ -29,7 +29,7 @@
             android:layout_toRightOf="@+id/order_number_text"
             android:text="sd"
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/order_date_text"
@@ -38,7 +38,7 @@
             android:layout_below="@+id/order_number_text"
             android:text="Order date:"
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/order_date"
@@ -49,7 +49,7 @@
             android:layout_toRightOf="@+id/order_date_text"
             android:text=""
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_marginTop="5dp"
             android:text="Order Price:"
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/order_price"
@@ -72,7 +72,7 @@
             android:layout_toRightOf="@+id/lbl_order_total_price"
             android:text=""
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
 
         <TextView
@@ -83,7 +83,7 @@
             android:layout_marginTop="5dp"
             android:text="Ship to:"
             android:textColor="#2f2f2f"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:visibility="gone" />
 
         <TextView
@@ -96,7 +96,7 @@
             android:layout_toRightOf="@+id/ship_to"
             android:text=""
             android:textColor="#2f2f2f"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_small"
             android:visibility="gone" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_marginTop="5dp"
             android:text="Status:"
             android:textColor="@color/ColorPrimary"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/status"
@@ -119,7 +119,7 @@
             android:layout_toRightOf="@+id/status_text"
             android:text="In progress"
             android:textColor="@color/ColorPrimary"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
 
     <RelativeLayout

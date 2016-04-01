@@ -18,22 +18,9 @@ import com.google.gson.JsonSyntaxException;
 import com.signity.bonbon.R;
 import com.signity.bonbon.SplashActivity;
 import com.signity.bonbon.Utilities.PrefManager;
-import com.signity.bonbon.Utilities.Util;
-import com.signity.bonbon.model.GeoFenceModel;
-import com.signity.bonbon.network.NetworkAdaper;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class AreWeThereIntentService extends IntentService {
 
@@ -44,6 +31,7 @@ public class AreWeThereIntentService extends IntentService {
     private SharedPreferences prefs;
     private Gson gson;
     String geofenceName = "";
+    String geofenceMessage = "";
     private String contextText = "";
 
     // endregion
@@ -88,99 +76,33 @@ public class AreWeThereIntentService extends IntentService {
 
     private void onEnteredGeofences(List<String> geofenceIds) {
 
+
         for (String geofenceId : geofenceIds) {
 
+            String[] notificationIds = geofenceId.split("_");
+            Integer notifId = Integer.parseInt(notificationIds[1]);
 
-            // Loop over all geofence keys in prefs and retrieve NamedGeofence from SharedPreference
-            Map<String, ?> keys = prefs.getAll();
-            for (Map.Entry<String, ?> entry : keys.entrySet()) {
-                String jsonString = prefs.getString(entry.getKey(), null);
-                try {
-                    NamedGeofence namedGeofence = gson.fromJson(jsonString, NamedGeofence.class);
-                    if (namedGeofence.id.equals(geofenceId)) {
-                        geofenceName = namedGeofence.name;
-                        break;
-                    }
-                } catch (JsonSyntaxException e) {
-                    e.printStackTrace();
+            Log.e(TAG, geofenceId);
+            String jsonString = prefs.getString(geofenceId, null);
+            try {
+                NamedGeofence namedGeofence = gson.fromJson(jsonString, NamedGeofence.class);
+                if (namedGeofence.id.equals(geofenceId)) {
+                    geofenceName = namedGeofence.name;
+                    geofenceMessage = namedGeofence.message;
                 }
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
             }
 
-            if (Util.checkInternetConnection(this)) {
 
-                NetworkAdaper.getInstance().getNetworkServices().getGeofencingMessage(new Callback<GeoFenceModel>() {
-                    @Override
-                    public void success(GeoFenceModel geoFenceModel, Response response) {
-
-                        try {
-                            Scanner scanner = new Scanner(response.getBody().in());
-                            StringBuilder stringBuilder = new StringBuilder();
-                            while (scanner.hasNext()) {
-                                stringBuilder.append(scanner.next());
-                            }
-                            try {
-                                JSONObject mJob = new JSONObject(stringBuilder.toString());
-                                if (mJob != null) {
-                                    boolean success;
-                                    if (mJob.has("success")) {
-                                        success = mJob.getBoolean("success");
-                                    } else {
-                                        success = false;
-                                    }
-                                    if (success) {
-                                        if (mJob.has("data")) {
-                                            JSONObject jDataObject = null;
-                                            try {
-                                                jDataObject = mJob.getJSONObject("data");
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                            if (jDataObject != null) {
-                                                if (jDataObject.has("message")) {
-                                                    String message = jDataObject.getString("message");
-                                                    contextText = message;
-                                                }
-
-                                            } else {
-                                                contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
-                                            }
-                                        } else {
-                                            contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
-                                        }
-                                    } else {
-                                        contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
-                                    }
-
-                                    sendNotificationWithMessage(contextText);
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.e("Error", error.getMessage());
-                    }
-                });
-//
-            } else {
-                // Set the notification text and send the notification
+            if (!(geofenceName.isEmpty() && geofenceMessage.isEmpty())) {
                 contextText = String.format(this.getResources().getString(R.string.Notification_Text), geofenceName);
-                sendNotificationWithMessage(contextText);
+                sendNotificationWithMessage(geofenceMessage, notifId);
             }
-
-
         }
     }
 
-    private void sendNotificationWithMessage(String contextText) {
+    private void sendNotificationWithMessage(String contextText, int id) {
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -196,7 +118,7 @@ public class AreWeThereIntentService extends IntentService {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .build();
-        notificationManager.notify(0, notification);
+        notificationManager.notify(id, notification);
     }
 
     private void onError(int i) {
@@ -206,3 +128,87 @@ public class AreWeThereIntentService extends IntentService {
     // endregion
 }
 
+
+// Loop over all geofence keys in prefs and retrieve NamedGeofence from SharedPreference
+//            Map<String, ?> keys = prefs.getAll();
+//            for (Map.Entry<String, ?> entry : keys.entrySet()) {
+//                String jsonString = prefs.getString(entry.getKey(), null);
+//                try {
+//                    NamedGeofence namedGeofence = gson.fromJson(jsonString, NamedGeofence.class);
+//                    if (namedGeofence.id.equals(geofenceId)) {
+//                        geofenceName = namedGeofence.name;
+//                        break;
+//                    }
+//                } catch (JsonSyntaxException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+
+//            if (Util.checkInternetConnection(this)) {
+//
+//                NetworkAdaper.getInstance().getNetworkServices().getGeofencingMessage(new Callback<GeoFenceModel>() {
+//                    @Override
+//                    public void success(GeoFenceModel geoFenceModel, Response response) {
+//
+//                        try {
+//                            Scanner scanner = new Scanner(response.getBody().in());
+//                            StringBuilder stringBuilder = new StringBuilder();
+//                            while (scanner.hasNext()) {
+//                                stringBuilder.append(scanner.next());
+//                            }
+//                            try {
+//                                JSONObject mJob = new JSONObject(stringBuilder.toString());
+//                                if (mJob != null) {
+//                                    boolean success;
+//                                    if (mJob.has("success")) {
+//                                        success = mJob.getBoolean("success");
+//                                    } else {
+//                                        success = false;
+//                                    }
+//                                    if (success) {
+//                                        if (mJob.has("data")) {
+//                                            JSONObject jDataObject = null;
+//                                            try {
+//                                                jDataObject = mJob.getJSONObject("data");
+//                                            } catch (JSONException e) {
+//                                                e.printStackTrace();
+//                                            }
+//                                            if (jDataObject != null) {
+//                                                if (jDataObject.has("message")) {
+//                                                    String message = jDataObject.getString("message");
+//                                                    contextText = message;
+//                                                }
+//
+//                                            } else {
+//                                                contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
+//                                            }
+//                                        } else {
+//                                            contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
+//                                        }
+//                                    } else {
+//                                        contextText = String.format(AreWeThereIntentService.this.getResources().getString(R.string.Notification_Text), geofenceName);
+//                                    }
+//
+//                                    sendNotificationWithMessage(contextText);
+//                                }
+//
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void failure(RetrofitError error) {
+//                        Log.e("Error", error.getMessage());
+//                    }
+//                });
+////
+//            } else {
+//                // Set the notification text and send the notification
+//
+//            }

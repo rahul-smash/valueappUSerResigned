@@ -2,6 +2,7 @@ package com.signity.bonbon.app;
 
 import com.signity.bonbon.model.Banner;
 import com.signity.bonbon.model.ForceDownloadModel;
+import com.signity.bonbon.model.GeofenceObjectModel;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.OrderHistoryModel;
 import com.signity.bonbon.model.Product;
@@ -20,6 +21,7 @@ public class DataAdapter {
     public HashMap<String, List<Product>> mapCategroy;
     public HashMap<String, String> mapCategroyId;
     public OrderHistoryModel orderHistoryModel;
+    public List<GeofenceObjectModel> listGeoFence;
 
     public boolean isCartUpdated;
 
@@ -54,6 +56,14 @@ public class DataAdapter {
 
     public ForceDownloadModel getForceDownloadModel() {
         return forceDownloadModel;
+    }
+
+    public List<GeofenceObjectModel> getListGeoFence() {
+        return listGeoFence;
+    }
+
+    public void setListGeoFence(List<GeofenceObjectModel> listGeoFence) {
+        this.listGeoFence = listGeoFence;
     }
 
     /* Static 'instance' method */

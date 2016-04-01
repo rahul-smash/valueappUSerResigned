@@ -7,5 +7,6 @@ product_id TEXT,
 version TEXT,
 old_version TEXT,
 image_small TEXT,
-image_medium TEXT
+image_medium TEXT,
+sort_order INTEGER DEFAULT (0)
 );

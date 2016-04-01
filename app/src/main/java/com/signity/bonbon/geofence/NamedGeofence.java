@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.google.android.gms.location.Geofence;
 
-import java.util.UUID;
-
 public class NamedGeofence implements Comparable {
 
     // region Properties
@@ -13,6 +11,7 @@ public class NamedGeofence implements Comparable {
     public String id;
     public String name;
     public String storeId;
+    public String message;
     public double latitude;
     public double longitude;
     public float radius;
@@ -22,11 +21,6 @@ public class NamedGeofence implements Comparable {
     // region Public
 
     public Geofence geofence() {
-        if ((id != null && !id.isEmpty())) {
-
-        } else {
-            id = UUID.randomUUID().toString();
-        }
         return new Geofence.Builder()
                 .setRequestId(id)
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)

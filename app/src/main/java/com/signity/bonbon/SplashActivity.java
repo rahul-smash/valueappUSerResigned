@@ -34,7 +34,6 @@ import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -61,7 +60,6 @@ public class SplashActivity extends Activity {
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
-
 
 //        startAnimationProcess()
 //
@@ -190,11 +188,12 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setForceDownloadModel(store.getForceDownload().get(0));
                     }
 
+                    if (!prefManager.getGeoFenceEnableStatus().equalsIgnoreCase("0")) {
+                        DataAdapter.getInstance().setListGeoFence(store.getGeofenceObjects());
+                    }
+
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
-
                         getMainActivity();
-//                        moveToCitySelection();
-
                     } else {
                         String msg = "" + store.getStoreMsg();
                         showAlertDialog(SplashActivity.this, "Message", msg);
@@ -222,17 +221,13 @@ public class SplashActivity extends Activity {
         if (prefManager.getBoolean(AppConstant.AREA_SELECTED)) {
             getMainActivity();
         } else {
-
             getAllAreaDetail();
-
         }
 
     }
 
     private void getAllAreaDetail() {
-
         ProgressDialogUtil.showProgressDialog(SplashActivity.this);
-
         NetworkAdaper.getInstance().getNetworkServices().getStoreAreaList(new Callback<GetStoreArea>() {
             @Override
             public void success(GetStoreArea getStoreArea, Response response) {
@@ -240,8 +235,7 @@ public class SplashActivity extends Activity {
 
                     if (getStoreArea.getData() != null && getStoreArea.getData().size() != 0) {
                         ProgressDialogUtil.hideProgressDialog();
-
-                        DataAdapter.getInstance().setStoreArea(getStoreArea);
+//                        DataAdapter.getInstance().setStoreArea(getStoreArea);
                         Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
                         startActivity(intent_location);
                         finish();
@@ -254,9 +248,7 @@ public class SplashActivity extends Activity {
                     ProgressDialogUtil.hideProgressDialog();
                     getMainActivity();
                 }
-
             }
-
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
@@ -292,7 +284,8 @@ public class SplashActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        int icon = R.mipmap.ic_launcher;
+
+        int icon = R.drawable.baliram;
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(title)
@@ -308,7 +301,7 @@ public class SplashActivity extends Activity {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify((new Random(100).nextInt()) /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
     }
 
 

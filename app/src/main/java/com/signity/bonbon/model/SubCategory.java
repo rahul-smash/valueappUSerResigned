@@ -34,12 +34,15 @@ public class SubCategory {
     @Expose
     private String parentId;
 
-
     private String productId;
 
     @SerializedName("products")
     @Expose
     private List<Product> products = new ArrayList<Product>();
+
+    @SerializedName("sort")
+    @Expose
+    private String sortOrder;
 
     /**
      * @return The id
@@ -143,5 +146,13 @@ public class SubCategory {
 
     public void setImageMedium(String imageMedium) {
         this.imageMedium = imageMedium;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

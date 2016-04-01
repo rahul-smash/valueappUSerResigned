@@ -113,7 +113,7 @@ public class PrefManager {
         editor.commit();
     }
 
-    public String getsetGeoFenceEnableStatus() {
+    public String getGeoFenceEnableStatus() {
         return sharedpreferences.getString(GEOFENCE_ENABLE, "0");
     }
 

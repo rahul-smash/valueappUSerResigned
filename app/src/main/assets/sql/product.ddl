@@ -14,6 +14,6 @@ image_300_200 TEXT,
 variants TEXT,
 selectedVariant TEXT,
 is_enable TEXT DEFAULT (1),
-is_deleted TEXT DEFAULT (0)
+is_deleted TEXT DEFAULT (0),
+sort_order INTEGER DEFAULT (0)
 );
-

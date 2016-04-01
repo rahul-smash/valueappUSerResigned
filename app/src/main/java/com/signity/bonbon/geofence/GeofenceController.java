@@ -45,7 +45,9 @@ public class GeofenceController {
     private List<NamedGeofence> namedGeofencesToRemove;
 
     private Geofence geofenceToAdd;
+    private Geofence geofenceToRemove;
     private NamedGeofence namedGeofenceToAdd;
+    private NamedGeofence namedGeofenceToRemove;
 
     // endregion
 
@@ -81,6 +83,14 @@ public class GeofenceController {
         this.listener = listener;
 
         connectWithCallbacks(connectionAddListener);
+    }
+
+    public void removeGeofence(NamedGeofence namedGeofenceToRemove, GeofenceControllerListener listener) {
+        this.namedGeofenceToRemove = namedGeofenceToRemove;
+        this.geofenceToRemove = namedGeofenceToRemove.geofence();
+        this.listener = listener;
+
+        connectWithCallbacks(connectionRemoveSingleListener);
     }
 
     public void removeGeofences(List<NamedGeofence> namedGeofencesToRemove, GeofenceControllerListener listener) {
@@ -150,7 +160,7 @@ public class GeofenceController {
         String json = gson.toJson(namedGeofenceToAdd);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(namedGeofenceToAdd.id, json);
-        editor.putString(PrefManager.SharedPrefs.Geofences + "_" + namedGeofenceToAdd.storeId, namedGeofenceToAdd.id);
+//        editor.putString(PrefManager.SharedPrefs.Geofences + "_" + namedGeofenceToAdd.storeId, namedGeofenceToAdd.id);
         editor.apply();
     }
 
@@ -160,7 +170,6 @@ public class GeofenceController {
         for (NamedGeofence namedGeofence : namedGeofencesToRemove) {
             int index = namedGeofences.indexOf(namedGeofence);
             editor.remove(namedGeofence.id);
-            editor.remove(PrefManager.SharedPrefs.Geofences + "_" + namedGeofence.storeId);
             namedGeofences.remove(index);
             editor.apply();
         }
@@ -168,6 +177,18 @@ public class GeofenceController {
         if (listener != null) {
             listener.onGeofencesUpdated();
         }
+    }
+
+    private void removeSavedGeofence(List<String> removeIds) {
+        SharedPreferences.Editor editor = prefs.edit();
+        for (String id : removeIds) {
+            editor.remove(id);
+            editor.apply();
+        }
+        if (listener != null) {
+            listener.onGeofencesUpdated();
+        }
+        loadGeofences();
     }
 
     private void sendError() {
@@ -228,6 +249,39 @@ public class GeofenceController {
                             if (status.isSuccess()) {
                                 Log.e(TAG, "Fence Removed");
                                 removeSavedGeofences();
+                            } else {
+                                Log.e(TAG, "Removing geofence failed: " + status.getStatusMessage());
+                                sendError();
+                            }
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onConnectionSuspended(int i) {
+            Log.e(TAG, "Connecting to GoogleApiClient suspended.");
+            sendError();
+        }
+    };
+    private GoogleApiClient.ConnectionCallbacks connectionRemoveSingleListener = new GoogleApiClient.ConnectionCallbacks() {
+        @Override
+        public void onConnected(Bundle bundle) {
+            try {
+                final List<String> removeIds = new ArrayList<>();
+                removeIds.add(namedGeofenceToRemove.id);
+
+                if (removeIds.size() > 0) {
+                    PendingResult<Status> result = LocationServices.GeofencingApi.removeGeofences(googleApiClient, removeIds);
+                    result.setResultCallback(new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            if (status.isSuccess()) {
+                                Log.e(TAG, "Fence Removed");
+                                removeSavedGeofence(removeIds);
                             } else {
                                 Log.e(TAG, "Removing geofence failed: " + status.getStatusMessage());
                                 sendError();

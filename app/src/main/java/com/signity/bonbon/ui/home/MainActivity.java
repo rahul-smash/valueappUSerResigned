@@ -25,8 +25,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
@@ -43,6 +41,7 @@ import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.geofence.NamedGeofence;
 import com.signity.bonbon.model.ForceDownloadModel;
+import com.signity.bonbon.model.GeofenceObjectModel;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.SliderObject;
 import com.signity.bonbon.model.Store;
@@ -164,68 +163,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         store = appDb.getStore(storeId);
         updateStoreInfo(store);
 
-        setUpFenceAroundStore(store);
+        setUpFenceAroundStore();
 
         Fragment fragment = viewController.getHomeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
     }
 
-    private void setUpFenceAroundStore(final Store store) {
+    private void setUpFenceAroundStore() {
 
-        try {
-            if (dataIsValid(store)) {
-
-                SharedPreferences localSharedPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
-                String fenceId = localSharedPref.getString(PrefManager.SharedPrefs.Geofences + "_" + storeId, "");
-                if (!fenceId.isEmpty()) {
-                    NamedGeofence namedGeofence = null;
-                    List<NamedGeofence> listNamedGeofenceToRemove = new ArrayList<>();
-                    String getFenceString = localSharedPref.getString(fenceId, "");
-                    Gson gson = new Gson();
-                    try {
-                        namedGeofence = gson.fromJson(getFenceString, NamedGeofence.class);
-                    } catch (JsonSyntaxException e) {
-                        e.printStackTrace();
+        if (prefManager.getGeoFenceEnableStatus().equalsIgnoreCase("1")) {
+            List<GeofenceObjectModel> listFences = DataAdapter.getInstance().getListGeoFence();
+            if (listFences != null && listFences.size() != 0) {
+                for (GeofenceObjectModel geofenceObjectModel : listFences) {
+                    if (geofenceObjectModel.getStatus()) {
+                        addFence(geofenceObjectModel);
+                    } else {
+                        removeFence(geofenceObjectModel);
                     }
-
-                    if (namedGeofence != null) {
-                        namedGeofence.name = store.getStoreName();
-                        namedGeofence.storeId = store.getId();
-                        // for testing at signity software
-                        //                    namedGeofence.latitude = Double.parseDouble("30.723774");
-                        //                    namedGeofence.longitude = Double.parseDouble("76.846933");
-                        namedGeofence.latitude = Double.parseDouble(store.getLat());
-                        namedGeofence.longitude = Double.parseDouble(store.getLng());
-                        namedGeofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
-                        GeofenceController.getInstance().addGeofence(namedGeofence, geofenceControllerListener);
-                    }
-                } else {
-                    NamedGeofence geofence = new NamedGeofence();
-                    geofence.name = store.getStoreName();
-                    geofence.storeId = store.getId();
-                    // for testing at signity software
-                    //                geofence.latitude = Double.parseDouble("30.723774");
-                    //                geofence.longiontude = Double.parseDouble("76.846933");
-                    geofence.latitude = Double.parseDouble(store.getLat());
-                    geofence.longitude = Double.parseDouble(store.getLng());
-                    geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
-                    GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
                 }
+            }
+            DataAdapter.getInstance().setListGeoFence(null);
+        }
+    }
+
+    private void removeFence(GeofenceObjectModel geofenceObjectModel) {
+
+
+        SharedPreferences geoPref = getSharedPreferences(PrefManager.SharedPrefs.Geofences, Context.MODE_PRIVATE);
+        try {
+            NamedGeofence geofence = new NamedGeofence();
+            geofence.id = store.getId() + "_" + geofenceObjectModel.getId();
+            geofence.name = store.getStoreName();
+            geofence.message = geofenceObjectModel.getMessage();
+            geofence.storeId = store.getId();
+            geofence.latitude = Double.parseDouble(geofenceObjectModel.getLat());
+            geofence.longitude = Double.parseDouble(geofenceObjectModel.getLng());
+            geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+            if (!(geoPref.getString(geofence.id, "").equalsIgnoreCase(""))) {
+                GeofenceController.getInstance().removeGeofence(geofence, geofenceControllerListener);
+                Log.e(TAG, "GeoFence with " + geofence.id + " " + geofence.latitude + " " + geofence.longitude + " at Location " + geofence.name + " Removed");
+            }
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void addFence(GeofenceObjectModel geofenceObjectModel) {
+        try {
+            if (dataIsValid(geofenceObjectModel)) {
+                NamedGeofence geofence = new NamedGeofence();
+                geofence.id = store.getId() + "_" + geofenceObjectModel.getId();
+                geofence.name = store.getStoreName();
+                geofence.message = geofenceObjectModel.getMessage();
+                geofence.storeId = store.getId();
+                geofence.latitude = Double.parseDouble(geofenceObjectModel.getLat());
+                geofence.longitude = Double.parseDouble(geofenceObjectModel.getLng());
+                geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+                GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
+                Log.e(TAG, "GeoFence with " + geofence.id + " " + geofence.latitude + " " + geofence.longitude + " at Location " + geofence.name + " created");
 
             } else {
-                Log.e(TAG, "Fence already created or unable to create");
+                Log.e(TAG, "No latitude longitude available for geofence");
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+
     }
 
-    private boolean dataIsValid(Store store) {
+    private boolean dataIsValid(GeofenceObjectModel geofenceObjectModel) {
         boolean status = false;
 
-        if (store.getLat() != null && store.getLng() != null && !(store.getLat().isEmpty()) && !(store.getLng().isEmpty())
-                && !(store.getLat().equalsIgnoreCase("0")) && !(store.getLng().equalsIgnoreCase("0"))) {
+        if (geofenceObjectModel.getLat() != null && geofenceObjectModel.getLng() != null && !(geofenceObjectModel.getLat().isEmpty()) && !(geofenceObjectModel.getLng().isEmpty())
+                && !(geofenceObjectModel.getLat().equalsIgnoreCase("0")) && !(geofenceObjectModel.getLng().equalsIgnoreCase("0"))) {
             status = true;
         }
         return status;
@@ -234,10 +248,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
         int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         Log.i(MainActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
-
         if (googlePlayServicesCode == 1 || googlePlayServicesCode == 2 || googlePlayServicesCode == 3) {
             GooglePlayServicesUtil.getErrorDialog(googlePlayServicesCode, this, 0).show();
         } else {
@@ -247,7 +259,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isActivityLoadsFirstTime = false;
             }
         }
-
         checkForAppVersion(DataAdapter.getInstance().getForceDownloadModel());
 
     }

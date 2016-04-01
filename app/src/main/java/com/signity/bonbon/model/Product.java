@@ -67,6 +67,9 @@ public class Product {
     @SerializedName("status")
     @Expose
     private String isEnable;
+    @SerializedName("sort")
+    @Expose
+    private String sortOrder;
 
     /**
      * @return The selectedVariant
@@ -280,6 +283,14 @@ public class Product {
 
     public void setIsEnable(String isEnable) {
         this.isEnable = isEnable;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 
     @Override

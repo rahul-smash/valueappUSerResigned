@@ -63,6 +63,8 @@ public class AppDatabase {
                     values.put("sub_category", gsonHelper.getSubCategory(category.getSubCategoryList()));
                     values.put("is_enable", category.getIsEnable());
                     values.put("is_deleted", category.isDeleted() ? "1" : "0");
+                    values.put("is_enable", category.getIsEnable());
+                    values.put("sort_order", Integer.parseInt(category.getSortOrder()));
                     Category dbCategory = getCategoryById(category.getId());
                     if (dbCategory != null) {
                         if (!((dbCategory.getVersion()).equals(category.getVersion()))) {
@@ -90,7 +92,7 @@ public class AppDatabase {
 
         Cursor cursor = null;
         try {
-            String sql = String.format(Locale.US, "SELECT * FROM category where is_enable=%s AND is_deleted=%s", "1", "0");
+            String sql = String.format(Locale.US, "SELECT * FROM category where is_enable=%s AND is_deleted=%s ORDER BY sort_order ASC", "1", "0");
             cursor = db.rawQuery(sql, null);
             cursor.moveToFirst();
             while (cursor.isAfterLast() == false) {
@@ -104,6 +106,7 @@ public class AppDatabase {
                 category.setImageMedium(cursor.getString(6));
                 category.setIsEnable(cursor.getString(7));
                 category.setIsDeleted(cursor.getString(8).equals("1") ? true : false);
+                category.setSortOrder(String.valueOf(cursor.getString(9)));
                 cursor.moveToNext();
                 list.add(category);
             }
@@ -135,6 +138,7 @@ public class AppDatabase {
                 category.setImageMedium(cursor.getString(6));
                 category.setIsEnable(cursor.getString(7));
                 category.setIsDeleted(cursor.getString(8).equals("1") ? true : false);
+                category.setSortOrder(String.valueOf(cursor.getString(9)));
             }
             cursor.close();
         } catch (Exception e) {
@@ -169,6 +173,7 @@ public class AppDatabase {
             values.put("version", subCategory.getVersion());
             values.put("image_small", subCategory.getImageSmall());
             values.put("image_medium", subCategory.getImageMedium());
+            values.put("sort_order", Integer.parseInt(subCategory.getSortOrder()));
             SubCategory subCategoryDb = getSubCategoryById(subCategory.getId());
             if (subCategoryDb != null) {
                 if (!(subCategory.getVersion()).equals(subCategoryDb.getOldVersion())) {
@@ -225,7 +230,7 @@ public class AppDatabase {
         Cursor cursor = null;
         try {
             String sql = String.format(Locale.US,
-                    "SELECT * FROM sub_category where id=%s", id);
+                    "SELECT * FROM sub_category where id=%s ORDER BY sort_order ASC", id);
             cursor = db.rawQuery(sql, null);
             if (cursor.moveToFirst()) {
                 subCategory = new SubCategory();
@@ -238,6 +243,7 @@ public class AppDatabase {
                 subCategory.setOldVersion(cursor.getString(6));
                 subCategory.setImageSmall(cursor.getString(7));
                 subCategory.setImageMedium(cursor.getString(8));
+                subCategory.setSortOrder(String.valueOf(cursor.getString(9)));
             }
             cursor.close();
         } catch (Exception e) {
@@ -247,7 +253,6 @@ public class AppDatabase {
         }
         return subCategory;
     }
-
 
 
     // SUB_CATEGORY OPERATION ENDS HERE
@@ -293,6 +298,7 @@ public class AppDatabase {
                     values.put("is_deleted", product.isDeleted() ? "1" : "0");
                     values.put("image_100_80", product.getImageSmall());
                     values.put("image_300_200", product.getImageMedium());
+                    values.put("sort_order", Integer.parseInt(product.getSortOrder()));
                     values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                     Product pro = getProduct(product.getId());
                     if (pro != null) {
@@ -335,39 +341,6 @@ public class AppDatabase {
         return selectedVariant;
     }
 
-    public String addProduct(Product product) {
-
-        String productId = "";
-        try {
-            if (product != null) {
-                ContentValues values = new ContentValues();
-                values.put("id", product.getId());
-                values.put("store_id", product.getStoreId());
-                values.put("category_ids", product.getCategoryIds());
-                values.put("title", product.getTitle());
-                values.put("brand", product.getBrand());
-                values.put("nutrient", product.getNutrient());
-                values.put("description", product.getDescription());
-                values.put("image", product.getImage());
-                values.put("show_price", product.getShowPrice());
-                values.put("favorites", product.isFavorites() ? "1" : "0");
-                values.put("is_enable", product.getIsEnable());
-                values.put("is_deleted", product.isDeleted() ? "1" : "0");
-                values.put("image_100_80", product.getImageSmall());
-                values.put("image_300_200", product.getImageMedium());
-                values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
-                values.put("selectedVariant", gsonHelper.getSelectedVarient(product.getSelectedVariant()));
-                long l = db.insert("product", null, values);
-                if (l != -1) {
-                    productId = product.getId();
-                }
-                //                values.put("sub_category", gsonHelper.getSubCategory(category.getSubCategoryList()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return productId;
-    }
 
     public void updateProduct(Product product) {
 
@@ -386,6 +359,7 @@ public class AppDatabase {
                 values.put("favorites", product.isFavorites() ? "1" : "0");
                 values.put("image_100_80", product.getImageSmall());
                 values.put("image_300_200", product.getImageMedium());
+                values.put("sort_order", Integer.parseInt(product.getSortOrder()));
                 values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                 values.put("selectedVariant", gsonHelper.getSelectedVarient(product.getSelectedVariant()));
                 long l = db.update("product", values, "id" + "=?", new String[]{String.valueOf(product.getId())});
@@ -446,6 +420,7 @@ public class AppDatabase {
                 product.setSelectedVariant(gsonHelper.getSelectedVarient(cursor.getString(13)));
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
+                product.setSortOrder(String.valueOf(cursor.getString(16)));
             }
             cursor.close();
         } catch (Exception e) {
@@ -494,7 +469,7 @@ public class AppDatabase {
         Cursor cursor = null;
         try {
             String sql = String.format(Locale.US,
-                    "SELECT * FROM product where category_ids=%s AND is_enable=%s AND is_deleted=%s", subCategoryId, "1", "0");
+                    "SELECT * FROM product where category_ids=%s AND is_enable=%s AND is_deleted=%s ORDER BY sort_order ASC", subCategoryId, "1", "0");
             cursor = db.rawQuery(sql, null);
             cursor.moveToFirst();
             while (cursor.isAfterLast() == false) {
@@ -515,6 +490,7 @@ public class AppDatabase {
                 product.setSelectedVariant(gsonHelper.getSelectedVarient(cursor.getString(13)));
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
+                product.setSortOrder(String.valueOf(cursor.getString(16)));
                 cursor.moveToNext();
                 listProduct.add(product);
             }
@@ -556,6 +532,7 @@ public class AppDatabase {
                 product.setSelectedVariant(gsonHelper.getSelectedVarient(cursor.getString(13)));
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
+                product.setSortOrder(String.valueOf(cursor.getString(16)));
                 cursor.moveToNext();
                 listProduct.add(product);
 

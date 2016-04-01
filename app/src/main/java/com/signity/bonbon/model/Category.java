@@ -42,8 +42,11 @@ public class Category {
     private boolean isDeleted;
 
 
-
     private String oldVersion = "";
+
+    @SerializedName("sort")
+    @Expose
+    private String sortOrder;
 
     /**
      * @return The id
@@ -141,5 +144,14 @@ public class Category {
 
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

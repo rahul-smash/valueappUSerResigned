@@ -210,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-
     }
 
     private void addFence(GeofenceObjectModel geofenceObjectModel) {

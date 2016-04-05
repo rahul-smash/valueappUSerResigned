@@ -32,13 +32,8 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -65,7 +60,6 @@ public class SplashActivity extends Activity {
         appDb = DbAdapter.getInstance().getDb();
         deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
-
 
 //        startAnimationProcess()
 //
@@ -180,9 +174,6 @@ public class SplashActivity extends Activity {
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
-                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
-                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME,store.getOpenhoursTo());
-                    prefManager.storeSharedValue(AppConstant.MESSAGE,store.getClosehoursMessage());
 
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
@@ -201,18 +192,12 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setListGeoFence(store.getGeofenceObjects());
                     }
 
-
-                        if (store.getStoreStatus().equalsIgnoreCase("1")) {
-
-                            getMainActivity();
-//                        moveToCitySelection();
-
-                        } else {
-                            String msg = "" + store.getStoreMsg();
-                            showAlertDialog(SplashActivity.this, "Message", msg);
-                        }
-
-
+                    if (store.getStoreStatus().equalsIgnoreCase("1")) {
+                        getMainActivity();
+                    } else {
+                        String msg = "" + store.getStoreMsg();
+                        showAlertDialog(SplashActivity.this, "Message", msg);
+                    }
 
                 } else {
                     showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
@@ -229,47 +214,6 @@ public class SplashActivity extends Activity {
     }
 
 
-    private boolean openTime(Store store){
-
-        boolean status = false;
-        if(store.getOpenhoursFrom().isEmpty() || store.getClosehoursMessage().isEmpty()){
-            return true;
-        }else {
-
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
-            String currentDate=formatter.format(calendar.getTime());
-
-            String strOpenHrs = store.getOpenhoursFrom();
-            String strCloseHrs=store.getOpenhoursTo();
-
-            SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
-            Date openDate = null,closeDate=null,currentTime=null;
-            try {
-                openDate = format.parse(strOpenHrs);
-
-                closeDate=format.parse(strCloseHrs);
-
-                currentTime=format.parse(currentDate);
-
-                if(currentTime.compareTo(openDate)>0 && currentTime.compareTo(closeDate)<0){
-                    status=true;
-                }
-                else {
-                    status=false;
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-
-//            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
-//            String date = format.format(newDate);
-        }
-        return status;
-
-    }
-
     private void moveToCitySelection() {
 
 //        boolean x=prefManager.getBoolean(AppConstant.CITY_SELECTED);
@@ -277,17 +221,13 @@ public class SplashActivity extends Activity {
         if (prefManager.getBoolean(AppConstant.AREA_SELECTED)) {
             getMainActivity();
         } else {
-
             getAllAreaDetail();
-
         }
 
     }
 
     private void getAllAreaDetail() {
-
         ProgressDialogUtil.showProgressDialog(SplashActivity.this);
-
         NetworkAdaper.getInstance().getNetworkServices().getStoreAreaList(new Callback<GetStoreArea>() {
             @Override
             public void success(GetStoreArea getStoreArea, Response response) {
@@ -295,8 +235,7 @@ public class SplashActivity extends Activity {
 
                     if (getStoreArea.getData() != null && getStoreArea.getData().size() != 0) {
                         ProgressDialogUtil.hideProgressDialog();
-
-                        DataAdapter.getInstance().setStoreArea(getStoreArea);
+//                        DataAdapter.getInstance().setStoreArea(getStoreArea);
                         Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
                         startActivity(intent_location);
                         finish();
@@ -347,7 +286,8 @@ public class SplashActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        int icon = R.mipmap.ic_launcher;
+
+        int icon = R.drawable.baliram;
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(title)
@@ -363,7 +303,7 @@ public class SplashActivity extends Activity {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify((new Random(100).nextInt()) /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
     }
 
 

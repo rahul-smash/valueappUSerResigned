@@ -180,6 +180,9 @@ public class SplashActivity extends Activity {
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
+                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
+                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME,store.getOpenhoursTo());
+                    prefManager.storeSharedValue(AppConstant.MESSAGE,store.getClosehoursMessage());
 
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
@@ -198,7 +201,7 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setListGeoFence(store.getGeofenceObjects());
                     }
 
-                    if (openTime(store)) {
+
                         if (store.getStoreStatus().equalsIgnoreCase("1")) {
 
                             getMainActivity();
@@ -208,10 +211,7 @@ public class SplashActivity extends Activity {
                             String msg = "" + store.getStoreMsg();
                             showAlertDialog(SplashActivity.this, "Message", msg);
                         }
-                    } else {
-                        String msg = "" + store.getClosehoursMessage();
-                        showAlertDialog(SplashActivity.this, "Message", msg);
-                    }
+
 
 
                 } else {

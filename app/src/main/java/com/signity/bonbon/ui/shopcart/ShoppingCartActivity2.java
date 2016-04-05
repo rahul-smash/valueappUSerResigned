@@ -52,6 +52,10 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -373,15 +377,21 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 onBackPressed();
                 break;
             case com.signity.bonbon.R.id.placeorder:
-                if (appDb.getCartSize() != 0) {
-                    if (isForPickUpStatus.equalsIgnoreCase("yes")) {
-                        callNetworkServiceForPlaceOrderForPickup(userId, addressId);
+                if (openTime()) {
+                    if (appDb.getCartSize() != 0) {
+                        if (isForPickUpStatus.equalsIgnoreCase("yes")) {
+                            callNetworkServiceForPlaceOrderForPickup(userId, addressId);
+                        } else {
+                            callNetworkServiceForPlaceOrder(userId, addressId);
+                        }
                     } else {
-                        callNetworkServiceForPlaceOrder(userId, addressId);
-                    }
-                } else {
 //                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
-                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", "You have a empty cart", false);
+                        new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", "You have a empty cart", false);
+                    }
+                }
+                else {
+                    String message=prefManager.getSharedValue(AppConstant.MESSAGE);
+                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Error", message, false);
                 }
                 break;
 
@@ -412,6 +422,53 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 startActivity(intent);
                 break;
         }
+    }
+
+
+
+    private boolean openTime(){
+
+        boolean status = false;
+
+        String openTime=prefManager.getSharedValue(AppConstant.OPEN_TIME);
+        String closeTime=prefManager.getSharedValue(AppConstant.CLOSE_TIME);
+
+        if(openTime.isEmpty() || closeTime.isEmpty()){
+            return true;
+        }else {
+
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
+            String currentDate=formatter.format(calendar.getTime());
+
+            String strOpenHrs = openTime;
+            String strCloseHrs=closeTime;
+
+            SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
+            Date openDate = null,closeDate=null,currentTime=null;
+            try {
+                openDate = format.parse(strOpenHrs);
+
+                closeDate=format.parse(strCloseHrs);
+
+                currentTime=format.parse(currentDate);
+
+                if(currentTime.compareTo(openDate)>0 && currentTime.compareTo(closeDate)<0){
+                    status=true;
+                }
+                else {
+                    status=false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+//            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
+//            String date = format.format(newDate);
+        }
+        return status;
+
     }
 
 

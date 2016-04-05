@@ -54,7 +54,11 @@ import com.signity.bonbon.ui.fragment.Profile;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.order.OrderHistory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -602,10 +606,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
                     Log.e("Store Version", store.getVersion());
-                    if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
-                        String msg = "" + store.getStoreMsg();
-                        new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
-                    }
+
+
+                        if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
+                            String msg = "" + store.getStoreMsg();
+                            new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
+                        }
+
 
 
                 } else {
@@ -618,6 +625,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("Error", error.getMessage());
             }
         });
+
+    }
+
+
+
+    private boolean openTime(Store store){
+
+        boolean status = false;
+        if(store.getOpenhoursFrom().isEmpty() || store.getClosehoursMessage().isEmpty()){
+            return true;
+        }else {
+
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
+            String currentDate=formatter.format(calendar.getTime());
+
+            String strOpenHrs = store.getOpenhoursFrom();
+            String strCloseHrs=store.getOpenhoursTo();
+
+            SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
+            Date openDate = null,closeDate=null,currentTime=null;
+            try {
+                openDate = format.parse(strOpenHrs);
+
+                closeDate=format.parse(strCloseHrs);
+
+                currentTime=format.parse(currentDate);
+
+                if(currentTime.compareTo(openDate)>0 && currentTime.compareTo(closeDate)<0){
+                    status=true;
+                }
+                else {
+                    status=false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+//            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
+//            String date = format.format(newDate);
+        }
+        return status;
 
     }
 

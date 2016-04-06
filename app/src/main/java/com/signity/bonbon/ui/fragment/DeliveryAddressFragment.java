@@ -277,7 +277,29 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
             double minprice = Double.parseDouble(minmumCartString);
             if (shipingCharges != null
                     && !shipingCharges.isEmpty()) {
-                if (minprice > cartprice) {
+
+                if(shipingCharges.equalsIgnoreCase("0")){
+
+                    if (minprice <= cartprice) {
+                        String message = noteText + "\nAre you sure to continue?";
+                        showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                                addressId, shipingCharges, minmumCartString, userAddress
+                        );
+                    }
+                    else {
+
+                        String message = "There will be  minimum ₹ " + minprice +
+                                " need to place this order. Please add some item to your bucket ";
+                        showAlertDialogForMinAmount(getActivity(), "Message", message
+                        );
+                    }
+
+
+
+                }
+
+
+                else if (minprice > cartprice) {
                     String message = "There will be  ₹ " + shipingCharges +
                             " shipping charges for the order amount less then ₹ " + minprice + ""
                             + noteText + "\nAre you sure to continue?";

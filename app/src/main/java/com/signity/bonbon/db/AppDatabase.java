@@ -173,7 +173,8 @@ public class AppDatabase {
             values.put("version", subCategory.getVersion());
             values.put("image_small", subCategory.getImageSmall());
             values.put("image_medium", subCategory.getImageMedium());
-            values.put("sort_order", Integer.parseInt(subCategory.getSortOrder()));
+            values.put("sort_order", Integer.parseInt((subCategory.getSortOrder() != null &&
+                    !(subCategory.getSortOrder().equalsIgnoreCase(""))) ? subCategory.getSortOrder() : "0"));
             SubCategory subCategoryDb = getSubCategoryById(subCategory.getId());
             if (subCategoryDb != null) {
                 if (!(subCategory.getVersion()).equals(subCategoryDb.getOldVersion())) {

@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -199,7 +198,6 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
             String subCategoryId = subCategoryList.get(position).getId();
             currentPosition = position;
-            Log.e("--data--", currentPosition + "-----" + subCategoryId + "---" + subCategoryList.get(position).getTitle());
             Bundle arg = new Bundle();
             arg.putInt("position", position);
             arg.putString("subCategoryId", subCategoryId);

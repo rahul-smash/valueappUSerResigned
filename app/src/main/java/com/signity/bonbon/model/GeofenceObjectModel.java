@@ -20,9 +20,14 @@ public class GeofenceObjectModel {
     @SerializedName("lng")
     @Expose
     private String lng;
+
     @SerializedName("status")
     @Expose
     private Boolean status;
+
+    @SerializedName("radius")
+    @Expose
+    private String radius;
 
 
     public String getId() {
@@ -63,5 +68,13 @@ public class GeofenceObjectModel {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getRadius() {
+        return radius;
+    }
+
+    public void setRadius(String radius) {
+        this.radius = radius;
     }
 }

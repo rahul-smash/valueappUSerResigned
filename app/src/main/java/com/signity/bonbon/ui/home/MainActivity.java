@@ -69,7 +69,6 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     private String TAG = MainActivity.class.getSimpleName();
     SlidingPaneLayout mSlidingPanel;
     ListView mMenuList;
@@ -79,12 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView profilePic;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     String[] labels = {"Home", "My Profile", "Delivery Address", "My Order",
-            "Book Now", "My Favorites", "About Us", "Share", "Loyality Points","Log In"};
+            "Book Now", "My Favorites", "About Us", "Share", "Loyality Points", "Log In"};
 
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
             R.drawable.order_icon,
             R.drawable.my_shopping_list_icon, R.drawable.my_fav_icon,
-            R.drawable.faq, R.drawable.ic_share,R.drawable.loyality, R.drawable.sign_out};
+            R.drawable.faq, R.drawable.ic_share, R.drawable.loyality, R.drawable.sign_out};
     ArrayList<SliderObject> viewList = new ArrayList<SliderObject>();
 
     AppDatabase appDb;
@@ -155,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             viewList.add(att);
         }
 
-
         adapter = new Adapter(MainActivity.this);
         mMenuList.setAdapter(adapter);
 
@@ -206,7 +204,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             geofence.storeId = store.getId();
             geofence.latitude = Double.parseDouble(geofenceObjectModel.getLat());
             geofence.longitude = Double.parseDouble(geofenceObjectModel.getLng());
-            geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+            geofence.radius = Float.parseFloat(geofenceObjectModel.getRadius()) * 1.0f;
+//            geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
             if (!(geoPref.getString(geofence.id, "").equalsIgnoreCase(""))) {
                 GeofenceController.getInstance().removeGeofence(geofence, geofenceControllerListener);
                 Log.e(TAG, "GeoFence with " + geofence.id + " " + geofence.latitude + " " + geofence.longitude + " at Location " + geofence.name + " Removed");
@@ -228,7 +227,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 geofence.storeId = store.getId();
                 geofence.latitude = Double.parseDouble(geofenceObjectModel.getLat());
                 geofence.longitude = Double.parseDouble(geofenceObjectModel.getLng());
-                geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
+                geofence.radius = Float.parseFloat(geofenceObjectModel.getRadius()) * 1.0f;
+//                geofence.radius = Float.parseFloat(context.getString(R.string.fence_radius)) * 1000.0f;
                 GeofenceController.getInstance().addGeofence(geofence, geofenceControllerListener);
                 Log.e(TAG, "GeoFence with " + geofence.id + " " + geofence.latitude + " " + geofence.longitude + " at Location " + geofence.name + " created");
 
@@ -470,7 +470,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
-
         }
     }
 
@@ -579,7 +578,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        fm.getBackStackEntryCount();
         mSlidingPanel.closePane();
 
-        if(!title.getText().toString().equalsIgnoreCase(store.getStoreName())){
+        if (!title.getText().toString().equalsIgnoreCase(store.getStoreName())) {
             if (store != null) {
                 if (store.getStoreName() != null && !store.getStoreName().isEmpty()) {
                     title.setVisibility(View.VISIBLE);
@@ -590,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
             replace(viewController.getHomeFragment());
-        }else {
+        } else {
             MainActivity.super.onBackPressed();
         }
 
@@ -626,11 +625,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.e("Store Version", store.getVersion());
 
 
-                        if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
-                            String msg = "" + store.getStoreMsg();
-                            new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
-                        }
-
+                    if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
+                        String msg = "" + store.getStoreMsg();
+                        new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
+                    }
 
 
                 } else {
@@ -647,35 +645,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-    private boolean openTime(Store store){
+    private boolean openTime(Store store) {
 
         boolean status = false;
-        if(store.getOpenhoursFrom().isEmpty() || store.getClosehoursMessage().isEmpty()){
+        if (store.getOpenhoursFrom().isEmpty() || store.getClosehoursMessage().isEmpty()) {
             return true;
-        }else {
+        } else {
 
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
-            String currentDate=formatter.format(calendar.getTime());
+            String currentDate = formatter.format(calendar.getTime());
 
             String strOpenHrs = store.getOpenhoursFrom();
-            String strCloseHrs=store.getOpenhoursTo();
+            String strCloseHrs = store.getOpenhoursTo();
 
             SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
-            Date openDate = null,closeDate=null,currentTime=null;
+            Date openDate = null, closeDate = null, currentTime = null;
             try {
                 openDate = format.parse(strOpenHrs);
 
-                closeDate=format.parse(strCloseHrs);
+                closeDate = format.parse(strCloseHrs);
 
-                currentTime=format.parse(currentDate);
+                currentTime = format.parse(currentDate);
 
-                if(currentTime.compareTo(openDate)>0 && currentTime.compareTo(closeDate)<0){
-                    status=true;
-                }
-                else {
-                    status=false;
+                if (currentTime.compareTo(openDate) > 0 && currentTime.compareTo(closeDate) < 0) {
+                    status = true;
+                } else {
+                    status = false;
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

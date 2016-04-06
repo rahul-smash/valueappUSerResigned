@@ -124,6 +124,20 @@ public class Store {
         this.banners = banners;
     }
 
+
+    public List<AppLabel> getAppLabels() {
+        return appLabels;
+    }
+
+    public void setAppLabels(List<AppLabel> appLabels) {
+        this.appLabels = appLabels;
+    }
+
+    @SerializedName("app_labels")
+    @Expose
+    private List<AppLabel> appLabels = new ArrayList<AppLabel>();
+
+
     @SerializedName("currency")
     @Expose
     private String currency;

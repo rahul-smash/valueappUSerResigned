@@ -32,6 +32,8 @@ public class AppConstant {
     public static final String SELECTED_STORE = "com.android.bonbon.Utilities.SELECTED_STORE";
     public static final String AREA_NAME = "com.android.bonbon.Utilities.AREA_NAME";
 
-
+    public static final String OPEN_TIME = "com.android.bonbon.Utilities.OPEN_TIME";
+    public static final String CLOSE_TIME = "com.android.bonbon.Utilities.CLOSE_TIME";
+    public static final String MESSAGE = "com.android.bonbon.Utilities.MESSAGE";
 
 }

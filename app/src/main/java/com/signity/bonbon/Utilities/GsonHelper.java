@@ -11,6 +11,8 @@ import com.signity.bonbon.model.UserRecord;
 import com.signity.bonbon.model.Variant;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +37,26 @@ public class GsonHelper {
         Type type = new TypeToken<List<SubCategory>>() {
         }.getType();
         list = gson.fromJson(subCategoryList, type);
+        Collections.sort(list, new Comparator<SubCategory>() {
+            @Override
+            public int compare(SubCategory subCategory, SubCategory subCategory2) {
+                Integer sort1, sort2;
+                try {
+                    sort1 = Integer.parseInt(subCategory.getSortOrder());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    sort1 = 0;
+                }
+                try {
+                    sort2 = Integer.parseInt(subCategory2.getSortOrder());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    sort2 = 0;
+                }
+
+                return sort1.compareTo(sort2);
+            }
+        });
         return list;
     }
 

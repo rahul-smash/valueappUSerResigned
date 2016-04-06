@@ -145,7 +145,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMenuList = (ListView) findViewById(R.id.menulist);
         shopingcart = (ImageButton) findViewById(R.id.shopingcart);
         profilePic = (ImageView) findViewById(R.id.profile_pic);
+
         labels[4] = AppController.getInstance().getViewController().getMenuTextBookNow();
+
         for (int i = 0; i < labels.length; i++) {
             SliderObject att = new SliderObject();
             att.labels = labels[i];
@@ -571,11 +573,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
 //        FragmentManager fm = getSupportFragmentManager();
 //        fm.getFragments();
 //        fm.getBackStackEntryCount();
         mSlidingPanel.closePane();
+
+        if(!title.getText().toString().equalsIgnoreCase(store.getStoreName())){
+            if (store != null) {
+                if (store.getStoreName() != null && !store.getStoreName().isEmpty()) {
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
+                    title.setText("" + store.getStoreName());
+                } else {
+                    title.setText("");
+                }
+            }
+            replace(viewController.getHomeFragment());
+        }else {
+            MainActivity.super.onBackPressed();
+        }
+
     }
 
 

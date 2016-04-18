@@ -52,11 +52,13 @@
 
     <ImageView
         android:id="@+id/imageArrowNext"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:src="@drawable/arrow_right_32" />
+        android:src="@drawable/arrow_right_32"
+        android:background="@android:color/transparent"
+        android:padding="12dp"/>
 
 </RelativeLayout>

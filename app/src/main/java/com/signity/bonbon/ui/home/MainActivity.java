@@ -450,6 +450,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
+
             case 9:
 
                 title.setText(store.getStoreName());

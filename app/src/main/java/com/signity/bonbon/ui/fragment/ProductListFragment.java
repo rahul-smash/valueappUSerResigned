@@ -192,12 +192,14 @@ public final class ProductListFragment extends Fragment {
             String mrpPrice = "0.0";
             String txtQuant = "";
             String txtQuantCount = "";
+            String unitType="";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
                 txtQuant = selectedVariant.getWeight();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
+                unitType=selectedVariant.getUnitType();
             } else {
                 Variant variant = product.getVariants().get(0);
                 selectedVariant.setVariantId(variant.getId());
@@ -212,6 +214,7 @@ public final class ProductListFragment extends Fragment {
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
+                unitType=selectedVariant.getUnitType();
             }
 
 
@@ -244,6 +247,7 @@ public final class ProductListFragment extends Fragment {
             if (txtQuant != null && !txtQuant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
+
             } else {
                 holder.btnVarient.setVisibility(View.GONE);
             }

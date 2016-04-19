@@ -45,12 +45,11 @@
             android:id="@+id/order_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/order_date"
             android:layout_below="@+id/order_date"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/order_number_text"
-            android:text=""
+            android:layout_toRightOf="@+id/order_number_rupya"
+            android:text="200"
             android:textColor="#2f2f2f"
             android:textSize="15sp" />
 
@@ -58,11 +57,12 @@
             android:id="@+id/order_number_rupya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/order_date"
             android:layout_below="@+id/order_date"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/order_number"
-            android:text="\u20B9"
+            android:layout_toRightOf="@+id/order_number_text"
+            android:text="$"
             android:textColor="#2f2f2f"
             android:textSize="15sp" />
 

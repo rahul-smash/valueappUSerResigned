@@ -77,10 +77,12 @@
 
         <RelativeLayout
             android:id="@+id/total_layout"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/shipping_layout"
+            android:layout_toRightOf="@+id/total_text"
+            android:gravity="right"
             android:layout_margin="10dp">
 
             <TextView
@@ -89,13 +91,14 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/rupee"/>
 
             <TextView
+                android:id="@+id/rupee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/total"
                 android:text="\u20B9"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />

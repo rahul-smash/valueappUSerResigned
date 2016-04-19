@@ -67,6 +67,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     private RelativeLayout mRelativeProceed;
 
     int selectedPostion = -1;
+    String currency;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         prefManager = new PrefManager(getActivity());
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = getArguments().getString(AppConstant.FROM, "");
+        currency = prefManager.getSharedValue(AppConstant.CURRENCY);
     }
 
     public static Fragment newInstance(Context context) {
@@ -273,6 +275,18 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         String noteText = (addressModel.getNote() != null && !addressModel.getNote().isEmpty())
                 ? "\n" + addressModel.getNote() : "";
 
+
+
+        String currencySymbol;
+
+        if (currency.contains("\\")) {
+            currencySymbol=unescapeJavaString(currency);
+        }
+        else {
+            currencySymbol=currency;
+        }
+
+
         if (minmumCartString != null && !minmumCartString.isEmpty()) {
             double minprice = Double.parseDouble(minmumCartString);
             if (shipingCharges != null
@@ -288,7 +302,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     }
                     else {
 
-                        String message = "There will be  minimum ₹ " + minprice +
+                        String message = "There will be  minimum  "+currencySymbol+" " + minmumCartString +
                                 " need to place this order. Please add some item to your bucket ";
                         showAlertDialogForMinAmount(getActivity(), "Message", message
                         );
@@ -300,9 +314,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
 
                 else if (minprice > cartprice) {
-                    String message = "There will be  ₹ " + shipingCharges +
-                            " shipping charges for the order amount less then ₹ " + minprice + ""
-                            + noteText + "\nAre you sure to continue?";
+                    String message = "There will be "+currencySymbol+" " + shipingCharges +
+                            " shipping charges for the order amount less then "+currencySymbol+" " + minmumCartString + ""
+                            + noteText + "\nAre you sure you want to continue ?";
                     showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
                             addressId, shipingCharges, minmumCartString, userAddress
                     );
@@ -318,7 +332,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 }
             } else {
                 if (minprice > cartprice) {
-                    String message = "There will be  minimum ₹ " + minprice +
+                    String message = "There will be  minimum "+currencySymbol+" " + minmumCartString +
                             " need to place this order. Please add some item to your bucket ";
                     showAlertDialogForMinAmount(getActivity(), "Message", message
                     );
@@ -336,7 +350,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         } else {
             if (shipingCharges != null
                     && !shipingCharges.isEmpty()) {
-                String message = "There will be  ₹ " + shipingCharges +
+                String message = "There will be "+currencySymbol+" " + shipingCharges +
                         " shipping charges for this order" + noteText;
                 showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress);
             } else {
@@ -501,6 +515,75 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
         inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
+    public String unescapeJavaString(String st) {
 
+        StringBuilder sb = new StringBuilder(st.length());
+
+        for (int i = 0; i < st.length(); i++) {
+            char ch = st.charAt(i);
+            if (ch == '\\') {
+                char nextChar = (i == st.length() - 1) ? '\\' : st
+                        .charAt(i + 1);
+// Octal escape?
+                if (nextChar >= '0' && nextChar <= '7') {
+                    String code = "" + nextChar;
+                    i++;
+                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                            && st.charAt(i + 1) <= '7') {
+                        code += st.charAt(i + 1);
+                        i++;
+                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                                && st.charAt(i + 1) <= '7') {
+                            code += st.charAt(i + 1);
+                            i++;
+                        }
+                    }
+                    sb.append((char) Integer.parseInt(code, 8));
+                    continue;
+                }
+                switch (nextChar) {
+                    case '\\':
+                        ch = '\\';
+                        break;
+                    case 'b':
+                        ch = '\b';
+                        break;
+                    case 'f':
+                        ch = '\f';
+                        break;
+                    case 'n':
+                        ch = '\n';
+                        break;
+                    case 'r':
+                        ch = '\r';
+                        break;
+                    case 't':
+                        ch = '\t';
+                        break;
+                    case '\"':
+                        ch = '\"';
+                        break;
+                    case '\'':
+                        ch = '\'';
+                        break;
+// Hex Unicode: u????
+                    case 'u':
+                        if (i >= st.length() - 5) {
+                            ch = 'u';
+                            break;
+                        }
+                        int code = Integer.parseInt(
+                                "" + st.charAt(i + 2) + st.charAt(i + 3)
+                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
+                        sb.append(Character.toChars(code));
+                        i += 5;
+                        continue;
+                }
+                i++;
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
 
 }

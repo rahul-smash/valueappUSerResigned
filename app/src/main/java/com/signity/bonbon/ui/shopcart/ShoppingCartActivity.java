@@ -42,7 +42,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     ListView listViewCart;
     ProductListAdapter adapter;
 
-    TextView total, title, emptyCart;
+    TextView total, title, emptyCart,rupee;
     Button placeorder;
     List<Product> listProduct;
     private GCMClientManager pushClientManager;
@@ -61,6 +61,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
         listViewCart = (ListView) findViewById(R.id.items_list);
+        rupee=(TextView)findViewById(R.id.rupee);
         total = (TextView) findViewById(R.id.total);
         total.setTypeface(typeFaceRobotoRegular);
         title = (TextView) findViewById(R.id.textTitle);
@@ -69,6 +70,19 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         title.setTypeface(typeFaceRobotoRegular);
         placeorder = (Button) findViewById(R.id.placeorder);
         backButton = (Button) findViewById(R.id.backButton);
+
+
+        String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+
+        if (currency.contains("\\")) {
+            rupee.setText(unescapeJavaString(currency));
+        }
+        else {
+            rupee.setText(currency);
+        }
+
+
         backButton.setOnClickListener(this);
         placeorder.setOnClickListener(this);
         ShoppingCartActivity.this.getWindow().setSoftInputMode(
@@ -147,7 +161,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 holder.number_text = (TextView) convertView.findViewById(R.id.number_text);
                 holder.number_text.setTypeface(typeFaceRobotoRegular);
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
-                holder.rupee.setTypeface(typeFaceRobotoRegular);
+                holder.rupee2 = (TextView) convertView.findViewById(R.id.rupee2);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -189,6 +203,18 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 holder.btnVarient.setVisibility(View.VISIBLE);
             } else {
                 holder.btnVarient.setVisibility(View.GONE);
+            }
+
+            String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+
+            if (currency.contains("\\")) {
+                holder.rupee.setText(unescapeJavaString(currency));
+                holder.rupee2.setText(unescapeJavaString(currency));
+            }
+            else {
+                holder.rupee.setText(currency);
+                holder.rupee2.setText(currency);
             }
 
 
@@ -272,7 +298,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         class ViewHolder {
             RelativeLayout parent;
             Button btnVarient;
-            TextView items_name, items_price, number_text, rupee;
+            TextView items_name, items_price, number_text, rupee,rupee2;
             public ImageButton add_button, remove_button;
             public RelativeLayout rel_mrp_offer_price;
             public TextView items_mrp_price;
@@ -332,5 +358,76 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     public void showAlertDialog(Context context, String title,
                                 String message) {
         new DialogHandler(context).setdialogForFinish(title, message, true);
+    }
+
+    public String unescapeJavaString(String st) {
+
+        StringBuilder sb = new StringBuilder(st.length());
+
+        for (int i = 0; i < st.length(); i++) {
+            char ch = st.charAt(i);
+            if (ch == '\\') {
+                char nextChar = (i == st.length() - 1) ? '\\' : st
+                        .charAt(i + 1);
+// Octal escape?
+                if (nextChar >= '0' && nextChar <= '7') {
+                    String code = "" + nextChar;
+                    i++;
+                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                            && st.charAt(i + 1) <= '7') {
+                        code += st.charAt(i + 1);
+                        i++;
+                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                                && st.charAt(i + 1) <= '7') {
+                            code += st.charAt(i + 1);
+                            i++;
+                        }
+                    }
+                    sb.append((char) Integer.parseInt(code, 8));
+                    continue;
+                }
+                switch (nextChar) {
+                    case '\\':
+                        ch = '\\';
+                        break;
+                    case 'b':
+                        ch = '\b';
+                        break;
+                    case 'f':
+                        ch = '\f';
+                        break;
+                    case 'n':
+                        ch = '\n';
+                        break;
+                    case 'r':
+                        ch = '\r';
+                        break;
+                    case 't':
+                        ch = '\t';
+                        break;
+                    case '\"':
+                        ch = '\"';
+                        break;
+                    case '\'':
+                        ch = '\'';
+                        break;
+// Hex Unicode: u????
+                    case 'u':
+                        if (i >= st.length() - 5) {
+                            ch = 'u';
+                            break;
+                        }
+                        int code = Integer.parseInt(
+                                "" + st.charAt(i + 2) + st.charAt(i + 3)
+                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
+                        sb.append(Character.toChars(code));
+                        i += 5;
+                        continue;
+                }
+                i++;
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
     }
 }

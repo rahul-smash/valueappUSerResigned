@@ -619,6 +619,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
+
+
+                    if(store.getCurrency().isEmpty()){
+                        prefManager.storeSharedValue(AppConstant.CURRENCY,"$");
+                    }
+                    else {
+                        prefManager.storeSharedValue(AppConstant.CURRENCY,store.getCurrency());
+//                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
+                    }
+
+
+
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());

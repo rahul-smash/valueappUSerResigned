@@ -175,6 +175,16 @@ public class SplashActivity extends Activity {
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
 
+
+                    if(store.getCurrency().isEmpty()){
+                        prefManager.storeSharedValue(AppConstant.CURRENCY,"$");
+                    }
+                    else {
+                        prefManager.storeSharedValue(AppConstant.CURRENCY,store.getCurrency());
+//                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
+                    }
+
+
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());

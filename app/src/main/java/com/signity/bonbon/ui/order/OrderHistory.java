@@ -370,7 +370,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void confirmReorderOrderDialog(final OrderHistoryModel orderHistoryModel) {
 
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setDialog("Re Order", "Are you sure to re-submit the order");
+        dialogHandler.setDialog("Re Order", "Do you want to reorder these items?");
         dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

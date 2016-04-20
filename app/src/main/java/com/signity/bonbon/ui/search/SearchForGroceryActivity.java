@@ -248,7 +248,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 holder.number_text = (TextView) convertView.findViewById(R.id.number_text);
                 holder.number_text.setTypeface(typeFaceRobotoRegular);
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
-                holder.rupee.setTypeface(typeFaceRobotoRegular);
+                holder.rupee2 = (TextView) convertView.findViewById(R.id.rupee2);
                 holder.heart = (ImageButton) convertView.findViewById(R.id.heart);
                 convertView.setTag(holder);
             } else {
@@ -290,6 +290,18 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             }
 
             holder.heart.setVisibility(View.GONE);
+
+            String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+
+            if (currency.contains("\\")) {
+                holder.rupee.setText(unescapeJavaString(currency));
+                holder.rupee2.setText(unescapeJavaString(currency));
+            }
+            else {
+                holder.rupee.setText(currency);
+                holder.rupee2.setText(currency);
+            }
 
             if (product.getVariants().size() <= 1) {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -440,6 +452,16 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 TextView weights = (TextView) convertView.findViewById(R.id.weights);
                 weights.setText(weight + " " + unit);
 
+                TextView rupee_tag = (TextView) convertView.findViewById(R.id.rupee_tag);
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+
+                if (currency.contains("\\")) {
+                    rupee_tag.setText(unescapeJavaString(currency));
+                }
+                else {
+                    rupee_tag.setText(currency);
+                }
                 TextView price = (TextView) convertView.findViewById(R.id.price);
                 price.setText(prices);
 
@@ -454,9 +476,78 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             RelativeLayout parent;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
-            TextView items_name, items_mrp_price, items_price, number_text, rupee;
+            TextView items_name, items_mrp_price, items_price, number_text, rupee,rupee2;
             public ImageButton add_button, remove_button, heart;
         }
     }
+    public String unescapeJavaString(String st) {
 
+        StringBuilder sb = new StringBuilder(st.length());
+
+        for (int i = 0; i < st.length(); i++) {
+            char ch = st.charAt(i);
+            if (ch == '\\') {
+                char nextChar = (i == st.length() - 1) ? '\\' : st
+                        .charAt(i + 1);
+// Octal escape?
+                if (nextChar >= '0' && nextChar <= '7') {
+                    String code = "" + nextChar;
+                    i++;
+                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                            && st.charAt(i + 1) <= '7') {
+                        code += st.charAt(i + 1);
+                        i++;
+                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                                && st.charAt(i + 1) <= '7') {
+                            code += st.charAt(i + 1);
+                            i++;
+                        }
+                    }
+                    sb.append((char) Integer.parseInt(code, 8));
+                    continue;
+                }
+                switch (nextChar) {
+                    case '\\':
+                        ch = '\\';
+                        break;
+                    case 'b':
+                        ch = '\b';
+                        break;
+                    case 'f':
+                        ch = '\f';
+                        break;
+                    case 'n':
+                        ch = '\n';
+                        break;
+                    case 'r':
+                        ch = '\r';
+                        break;
+                    case 't':
+                        ch = '\t';
+                        break;
+                    case '\"':
+                        ch = '\"';
+                        break;
+                    case '\'':
+                        ch = '\'';
+                        break;
+// Hex Unicode: u????
+                    case 'u':
+                        if (i >= st.length() - 5) {
+                            ch = 'u';
+                            break;
+                        }
+                        int code = Integer.parseInt(
+                                "" + st.charAt(i + 2) + st.charAt(i + 3)
+                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
+                        sb.append(Character.toChars(code));
+                        i += 5;
+                        continue;
+                }
+                i++;
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
 }

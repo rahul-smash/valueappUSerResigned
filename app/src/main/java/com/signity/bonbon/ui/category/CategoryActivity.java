@@ -29,6 +29,8 @@ import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.GetCategory;
 import com.signity.bonbon.network.NetworkAdaper;
@@ -213,9 +215,12 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
 
                     if (category.getSubCategoryList() != null && category.getSubCategoryList().size() != 0) {
                         ViewController viewController = AppController.getInstance().getViewController();
+                        GATrackers.getInstance().trackEvent(GAConstant.EVENT_CAT + "_" + category.getId(), GAConstant.VIEW, "Category with title " +
+                                category.getTitle() + " is view on " + getString(R.string.app_name));
                         Intent i = new Intent(CategoryActivity.this, viewController.getCategoryDetailActivity());
                         i.putExtra("categoryId", category.getId());
                         i.putExtra("title", category.getTitle());
+
                         startActivity(i);
                         AnimUtil.slideFromRightAnim(CategoryActivity.this);
                     } else {

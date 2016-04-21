@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 
 /**
  * Created by rajesh on 9/12/15.
@@ -21,6 +23,8 @@ public class OfferListActivity extends FragmentActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.offer_list_activity);
+        GATrackers.getInstance().trackEvent(GAConstant.EVENT_OFFER, GAConstant.VIEW, "There is offer on "
+                + getString(R.string.app_name));
         Fragment fragment = OfferFragment.newInstance(this);
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);

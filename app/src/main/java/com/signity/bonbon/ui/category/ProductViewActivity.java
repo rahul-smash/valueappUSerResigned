@@ -27,6 +27,8 @@ import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
@@ -40,8 +42,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     public static final String TAG = ProductViewActivity.class.getSimpleName();
     private GCMClientManager pushClientManager;
-    Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text;
-    TextView description, item_name, price, number_text, title, price_text,rupee;
+    Button backButton, btnVarient, btnShopList, btnShopcart, shoppinglist_text;
+    TextView description, item_name, price, number_text, title, price_text, rupee;
     TextView textTitle;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private Product product;
@@ -68,17 +70,16 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         btnVarient = (Button) findViewById(com.signity.bonbon.R.id.btnVarient);
         textTitle = (TextView) findViewById(com.signity.bonbon.R.id.textTitle);
         btnShopList = (Button) findViewById(com.signity.bonbon.R.id.btnShopList);
-        btnShopcart=(Button)findViewById(R.id.btnShopcart);
-        shoppinglist_text=(Button)findViewById(R.id.shoppinglist_text);
-        rupee=(TextView)findViewById(R.id.rupee);
+        btnShopcart = (Button) findViewById(R.id.btnShopcart);
+        shoppinglist_text = (Button) findViewById(R.id.shoppinglist_text);
+        rupee = (TextView) findViewById(R.id.rupee);
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
 
         if (currency.contains("\\")) {
             rupee.setText(unescapeJavaString(currency));
-        }
-        else {
+        } else {
             rupee.setText(currency);
         }
 
@@ -148,6 +149,10 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     private void initProduct() {
         String product_id = getIntent().getStringExtra("product_id");
+
+        GATrackers.getInstance().trackEvent(GAConstant.PRODUCT + "_" + product_id, GAConstant.VIEW, "A product  with id " + product_id +
+                "is view on " + getString(R.string.app_name));
+
         product = appDb.getProduct(product_id);
         if (product == null) {
             product = gsonHelper.getProduct(prefManager.getSharedValue(PrefManager.PREF_SEARCH_PRODUCT));
@@ -158,10 +163,10 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     public void checkCartValue() {
         cartSize = appDb.getCartSize();
 
-        if(cartSize!=0){
+        if (cartSize != 0) {
             shoppinglist_text.setVisibility(View.VISIBLE);
-            shoppinglist_text.setText(""+cartSize);
-        }else {
+            shoppinglist_text.setText("" + cartSize);
+        } else {
             shoppinglist_text.setVisibility(View.GONE);
         }
     }
@@ -294,8 +299,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
             if (currency.contains("\\")) {
                 rupee_tag.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 rupee_tag.setText(currency);
             }
 

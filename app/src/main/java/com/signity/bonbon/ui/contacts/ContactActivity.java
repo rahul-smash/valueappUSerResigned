@@ -28,6 +28,8 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Store;
 
 import java.util.List;
@@ -50,6 +52,9 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_activity);
         ((Button) findViewById(R.id.btnSearch)).setVisibility(View.GONE);
+
+        GATrackers.getInstance().trackEvent(GAConstant.EVENT_CONTACT, GAConstant.VIEW,
+                "Contact us view on " + getString(R.string.app_name));
 
         prefManager = new PrefManager(this);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
@@ -112,7 +117,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     public void onMapReady(GoogleMap map) {
         this.map = map;
         String latitudeString = store.getLat();
-        String longitudeString =store.getLng();
+        String longitudeString = store.getLng();
         String address = store.getLocation() + "," + store.getCity() + "," + store.getState() + "," + store.getCountry() + "," + store.getZipcode();
         LatLng bonbon = null;
         Log.e("Location", store.getLocation());

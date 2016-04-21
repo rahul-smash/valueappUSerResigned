@@ -2,6 +2,8 @@ package com.signity.bonbon.app;
 
 import android.app.Application;
 
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
@@ -23,6 +25,8 @@ public class MyApplication extends Application {
         DataAdapter.initInstance();
         AppController.initInstance(this);
         DbAdapter.initInstance(this);
+        AnalyticsTrackers.initInstance(this);
+        GATrackers.getInstance().setDefaultAppTracker(GAConstant.GA_TRACK_ID_LIVE);
     }
 
     private void initPicasso() {

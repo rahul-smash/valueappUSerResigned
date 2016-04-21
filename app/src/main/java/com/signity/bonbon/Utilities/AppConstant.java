@@ -8,6 +8,7 @@ import com.signity.bonbon.BuildConfig;
 public class AppConstant {
 
     public static final String PROJECT_NUMBER = BuildConfig.PROJECT_NUMBER;  // for tangerine
+    ;  // for tangerine
     public final static String PLATFORM = "android";
     public static String ID = "com.android.bonbon.Utilities.ID";
 

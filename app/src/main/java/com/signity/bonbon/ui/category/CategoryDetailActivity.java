@@ -140,6 +140,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
                 adapter.notifyDataSetChanged();
             }
         });
+
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +34,7 @@ import com.signity.bonbon.model.UserAddressList;
 import com.signity.bonbon.model.UserAddressModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2;
+import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2WithoutLoyality;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -415,6 +417,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
                         intent.putExtra("addressId", addressId);
                         intent.putExtra("userId", userId);
@@ -424,6 +427,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                         startActivity(intent);
                         AnimUtil.slideFromRightAnim(getActivity());
                         dialogHandler.dismiss();
+
                     }
                 });
 

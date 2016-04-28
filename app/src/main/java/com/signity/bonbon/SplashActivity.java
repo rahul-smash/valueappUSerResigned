@@ -174,6 +174,12 @@ public class SplashActivity extends Activity {
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
+                    if(store.getLoyality()!=null && !store.getLoyality().isEmpty()){
+                        prefManager.storeSharedValue(AppConstant.LOYALITY,store.getLoyality());
+                    }else {
+                        prefManager.storeSharedValue(AppConstant.LOYALITY,"0");
+                    }
+
 
 
                     if(store.getCurrency().isEmpty()){

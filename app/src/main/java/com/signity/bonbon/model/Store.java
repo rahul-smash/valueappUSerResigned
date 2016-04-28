@@ -74,6 +74,9 @@ public class Store {
     @SerializedName("otp_skip")
     private String otpSkip;
 
+    @SerializedName("loyality")
+    @Expose
+    private String loyality;
 
     public String getOpenhoursFrom() {
         return openhoursFrom;
@@ -429,4 +432,15 @@ public class Store {
     public void setForceDownload(List<ForceDownloadModel> forceDownload) {
         this.forceDownload = forceDownload;
     }
+
+
+    public String getLoyality() {
+        return loyality;
+    }
+
+    public void setLoyality(String loyality) {
+        this.loyality = loyality;
+    }
+
+
 }

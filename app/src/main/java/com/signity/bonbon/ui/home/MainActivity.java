@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     boolean isActivityLoadsFirstTime = true;
 
+    private String loyalityStatus;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = prefManager.getSharedValue(AppConstant.NAME);
         phone = prefManager.getSharedValue(AppConstant.PHONE);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
+        loyalityStatus=prefManager.getSharedValue(AppConstant.LOYALITY);
 
         typeFaceRobotoRegular = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_BOLD);
@@ -152,6 +155,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             att.labels = labels[i];
             att.icons = icons[i];
             viewList.add(att);
+        }
+
+        if(loyalityStatus.equalsIgnoreCase("0")){
+            viewList.remove(8);
         }
 
         adapter = new Adapter(MainActivity.this);
@@ -266,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         checkForAppVersion(DataAdapter.getInstance().getForceDownloadModel());
+
 
     }
 
@@ -435,18 +443,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case 8:
 
-                if (userId.isEmpty()) {
-                    Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
-                    intent9.putExtra(AppConstant.FROM, "menu");
-                    startActivity(intent9);
-                    AnimUtil.slideUpAnim(MainActivity.this);
-                } else {
-                    title.setVisibility(View.VISIBLE);
-                    citySelect.setVisibility(View.GONE);
-                    title.setText("Loyality Points");
-                    fragment = new LoyalityFragment();
-                    replace(fragment);
+                if(loyalityStatus.equalsIgnoreCase("0")){
+                    title.setText(store.getStoreName());
+                    if (userId.isEmpty()) {
+                        Intent intentLogin = new Intent(MainActivity.this, LoginScreenActivity.class);
+                        intentLogin.putExtra(AppConstant.FROM, "menu");
+                        startActivity(intentLogin);
+                        AnimUtil.slideUpAnim(MainActivity.this);
+                    } else {
+
+                        title.setVisibility(View.VISIBLE);
+                        citySelect.setVisibility(View.GONE);
+
+                        replace(viewController.getHomeFragment());
+                        logOutUser();
+                    }
+                    adapter.notifyDataSetChanged();
                 }
+                else if(loyalityStatus.equalsIgnoreCase("1")){
+                    if (userId.isEmpty()) {
+                        Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
+                        intent9.putExtra(AppConstant.FROM, "menu");
+                        startActivity(intent9);
+                        AnimUtil.slideUpAnim(MainActivity.this);
+                    } else {
+                        title.setVisibility(View.VISIBLE);
+                        citySelect.setVisibility(View.GONE);
+                        title.setText("Loyality Points");
+                        fragment = new LoyalityFragment();
+                        replace(fragment);
+                    }
+                }
+
                 break;
 
 
@@ -537,19 +565,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             SliderObject att = new SliderObject();
 
-            if (userId.isEmpty()) {
-                att.labels = "Log In";
-                att.icons = icons[9];
-                viewList.set(9, att);
-                holder.labels.setText(viewList.get(position).labels);
-                login = true;
-            } else if (!userId.isEmpty()) {
-                att.labels = "Log out";
-                att.icons = icons[9];
-                viewList.set(9, att);
-                holder.labels.setText(viewList.get(position).labels);
-                login = false;
+
+            if(loyalityStatus.equalsIgnoreCase("0")){
+                if (userId.isEmpty()) {
+                    att.labels = "Log In";
+                    att.icons = icons[9];
+                    viewList.set(8, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = true;
+                } else if (!userId.isEmpty()) {
+                    att.labels = "Log out";
+                    att.icons = icons[9];
+                    viewList.set(8, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = false;
+                }
+            }else if(loyalityStatus.equalsIgnoreCase("1")) {
+                if (userId.isEmpty()) {
+                    att.labels = "Log In";
+                    att.icons = icons[9];
+                    viewList.set(9, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = true;
+                } else if (!userId.isEmpty()) {
+                    att.labels = "Log out";
+                    att.icons = icons[9];
+                    viewList.set(9, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = false;
+                }
             }
+
+
 
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -64,7 +64,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
+public class ShoppingCartActivity2WithoutLoyality extends Activity implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
     TextView items_price, discountVal, total, title, customerPts, note,rs1,rs2,rs3,rs4;
@@ -85,32 +85,28 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     ListOfferAdapter mAdapter;
     ListView offerList;
     TextView messageTxt;
-    Dialog dialog, redeemDialog;
+    Dialog dialog;
     ListView list_view;
-    Adapter pointAdapter;
     private GCMClientManager pushClientManager;
     private Button backButton, btnSearch;
     private TextView shipping_charges;
     private AppDatabase appDb;
-    private Button applyCoupon,applyCoupon_1, applyOffer,applyOffer_1, redeemPoints;
-    private EditText editCoupon,editCoupon_1;
+    private Button applyCoupon, applyOffer;
+    private EditText editCoupon;
     private EditText edtBar;
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
-    private double loyalityPoints;
-    RelativeLayout relCoupon_1;
-    LinearLayout relCoupon;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.signity.bonbon.R.layout.shopping_cart_activity2);
-        ShoppingCartActivity2.this.getWindow().setSoftInputMode(
+        setContentView(R.layout.shopping_cart_activity2_without_loyality);
+        ShoppingCartActivity2WithoutLoyality.this.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
         appDb = DbAdapter.getInstance().getDb();
-        prefManager = new PrefManager(ShoppingCartActivity2.this);
+        prefManager = new PrefManager(ShoppingCartActivity2WithoutLoyality.this);
         userId = getIntent().getStringExtra("userId");
         addressId = getIntent().getStringExtra("addressId");
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
@@ -130,18 +126,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         final View activityRootView = findViewById(R.id.activityRoot);
         relativeLayout = (RelativeLayout) findViewById(R.id.listLayout);
-        relCoupon=(LinearLayout)findViewById(R.id.relCoupon);
-        relCoupon_1=(RelativeLayout)findViewById(R.id.relCoupon_1);
-
-        String loyalityStatus=prefManager.getSharedValue(AppConstant.LOYALITY);
-        if(loyalityStatus.equalsIgnoreCase("0")){
-            relCoupon.setVisibility(View.GONE);
-            relCoupon_1.setVisibility(View.VISIBLE);
-        }else if(loyalityStatus.equalsIgnoreCase("1")){
-            relCoupon.setVisibility(View.VISIBLE);
-            relCoupon_1.setVisibility(View.GONE);
-        }
-
         homeBtn = (ImageButton) findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(this);
 
@@ -161,18 +145,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         backButton.setOnClickListener(this);
         placeorder.setOnClickListener(this);
         editCoupon = (EditText) findViewById(R.id.editCoupon);
-        editCoupon_1 = (EditText) findViewById(R.id.editCoupon_1);
         applyCoupon = (Button) findViewById(R.id.applyCoupen);
-        applyCoupon_1 = (Button) findViewById(R.id.applyCoupen_1);
         applyOffer = (Button) findViewById(R.id.applyOffer);
-        applyOffer_1 = (Button) findViewById(R.id.applyOffer_1);
-        redeemPoints = (Button) findViewById(R.id.redeemPoints);
         applyCoupon.setTag("apply");
         applyCoupon.setOnClickListener(this);
-        applyCoupon_1.setOnClickListener(this);
         applyOffer.setOnClickListener(this);
-        applyOffer_1.setOnClickListener(this);
-        redeemPoints.setOnClickListener(this);
         rs1=(TextView)findViewById(R.id.rs1);
         rs2=(TextView)findViewById(R.id.rs2);
         rs3=(TextView)findViewById(R.id.rs3);
@@ -199,7 +176,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         listProduct = appDb.getCartListProduct();
 
         if (listProduct != null && listProduct.size() != 0) {
-            adapter = new ProductListAdapter(ShoppingCartActivity2.this, listProduct);
+            adapter = new ProductListAdapter(ShoppingCartActivity2WithoutLoyality.this, listProduct);
             listViewCart.setAdapter(adapter);
             listViewCart.setVisibility(View.VISIBLE);
             updateCartPrice();
@@ -304,9 +281,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private void callNetworkServiceForPlaceOrder(String id, String addressId) {
 
-        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-        String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2WithoutLoyality.this);
+        String deviceId = Settings.Secure.getString(ShoppingCartActivity2WithoutLoyality.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2WithoutLoyality.this);
 //        String order = appDb.getOrderStringForSubmit();
         PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
@@ -339,9 +316,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialog(ShoppingCartActivity2WithoutLoyality.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
-                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
                     dialogHandler.setdialogForFinish("Failure", "" + responseData.getMessage(), false);
                 }
             }
@@ -349,7 +326,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(ShoppingCartActivity2.this, "Server not responding.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Server not responding.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -357,9 +334,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void callNetworkServiceForPlaceOrderForPickup(String id, String addressId) {
-        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-        String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2WithoutLoyality.this);
+        String deviceId = Settings.Secure.getString(ShoppingCartActivity2WithoutLoyality.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2WithoutLoyality.this);
 //        String order = appDb.getOrderStringForSubmit();
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
@@ -389,9 +366,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialog(ShoppingCartActivity2WithoutLoyality.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
-                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
                     dialogHandler.setdialogForFinish("Failure", "" + responseData.getMessage(), false);
                 }
             }
@@ -399,7 +376,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(ShoppingCartActivity2.this, "Server not responding.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Server not responding.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -407,7 +384,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+        AnimUtil.slideFromLeftAnim(ShoppingCartActivity2WithoutLoyality.this);
     }
 
     @Override
@@ -426,13 +403,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                             callNetworkServiceForPlaceOrder(userId, addressId);
                         }
                     } else {
-//                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
-                        new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", "You have a empty cart", false);
+//                    Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Empty Cart", Toast.LENGTH_SHORT).show();
+                        new DialogHandler(ShoppingCartActivity2WithoutLoyality.this).setdialogForFinish("Message", "You have a empty cart", false);
                     }
                 }
                 else {
                     String message=prefManager.getSharedValue(AppConstant.MESSAGE);
-                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Error", message, false);
+                    new DialogHandler(ShoppingCartActivity2WithoutLoyality.this).setdialogForFinish("Error", message, false);
                 }
                 break;
 
@@ -444,14 +421,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 }
                 break;
 
-            case R.id.applyCoupen_1:
-                if (applyCoupon_1.getTag().equals("apply")) {
-                    onApplyCoupon1();
-                } else if (applyCoupon_1.getTag().equals("remove")) {
-                    onRemoveCoupon1();
-                }
-                break;
-
             case R.id.applyOffer:
                 if (dialog != null) {
                     dialog = null;
@@ -459,24 +428,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 callNetworkForOffers();
                 break;
 
-
-            case R.id.applyOffer_1:
-                if (dialog != null) {
-                    dialog = null;
-                }
-                callNetworkForOffers();
-                break;
-
-
-            case R.id.redeemPoints:
-                if (redeemDialog != null) {
-                    redeemDialog = null;
-                }
-                callNetworkForLoyalityPoints();
-                break;
-
             case R.id.homeBtn:
-                Intent intent = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                Intent intent = new Intent(ShoppingCartActivity2WithoutLoyality.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -529,70 +482,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
-
-    private void callNetworkForLoyalityPoints() {
-
-        try {
-
-            ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-
-            Map<String, String> param = new HashMap<String, String>();
-            param.put("user_id", userId);
-
-
-            NetworkAdaper.getInstance().getNetworkServices().getLoyalityPoints(param, new Callback<LoyalityModel>() {
-
-                @Override
-                public void success(LoyalityModel loyalityModel, Response response) {
-
-                    if (loyalityModel.getSuccess()) {
-                        ProgressDialogUtil.hideProgressDialog();
-
-                        redeemDialog = new Dialog(ShoppingCartActivity2.this);
-                        redeemDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        redeemDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                        redeemDialog.setContentView(R.layout.loyality_points_layout);
-
-                        RelativeLayout header = (RelativeLayout) findViewById(R.id.header);
-                        list_view = (ListView) redeemDialog.findViewById(R.id.loyalityList);
-                        customerPts = (TextView) redeemDialog.findViewById(R.id.customerPts);
-                        note = (TextView) redeemDialog.findViewById(R.id.note);
-
-                        if (loyalityModel.getLoyalityPoints().isEmpty()) {
-                            customerPts.setText("You have NIL points.");
-                            loyalityPoints = Double.parseDouble(loyalityModel.getLoyalityPoints());
-                        } else {
-                            loyalityPoints = Double.parseDouble(loyalityModel.getLoyalityPoints());
-                            customerPts.setText("You have " + loyalityModel.getLoyalityPoints() + " points.");
-                        }
-
-
-                        if (loyalityModel.getData() != null && loyalityModel.getData().size() != 0) {
-                            pointAdapter = new Adapter(ShoppingCartActivity2.this, loyalityModel.getData());
-                            list_view.setAdapter(pointAdapter);
-                        }
-
-                        redeemDialog.setCanceledOnTouchOutside(true);
-                        redeemDialog.show();
-
-                    } else {
-                        ProgressDialogUtil.hideProgressDialog();
-                    }
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    ProgressDialogUtil.hideProgressDialog();
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
-
-
     private void callNetworkForOffers() {
-        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2WithoutLoyality.this);
 
         Store store = appDb.getStore(prefManager.getSharedValue(AppConstant.STORE_ID));
         String storeId = store.getId();
@@ -607,7 +498,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 if (getOfferResponse.getSuccess() != null ? getOfferResponse.getSuccess() : false) {
                     listOfferData = getOfferResponse.getData();
                 }
-                dialog = new Dialog(ShoppingCartActivity2.this);
+                dialog = new Dialog(ShoppingCartActivity2WithoutLoyality.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.setContentView(R.layout.offers_screen);
@@ -615,7 +506,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 offerList = (ListView) dialog.findViewById(R.id.offerList);
                 messageTxt = (TextView) dialog.findViewById(R.id.messageTxt);
                 if (listOfferData != null && listOfferData.size() != 0) {
-                    mAdapter = new ListOfferAdapter(ShoppingCartActivity2.this, listOfferData);
+                    mAdapter = new ListOfferAdapter(ShoppingCartActivity2WithoutLoyality.this, listOfferData);
                     offerList.setAdapter(mAdapter);
                     offerList.setVisibility(View.VISIBLE);
                     messageTxt.setVisibility(View.GONE);
@@ -648,31 +539,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalVal)));
             discountVal.setText("0");
-            applyCoupon.setVisibility(View.GONE);
-            editCoupon.setVisibility(View.GONE);
-            applyOffer.setVisibility(View.VISIBLE);
-            redeemPoints.setVisibility(View.VISIBLE);
             applyCoupon.setText("Apply Coupon");
             applyCoupon.setTag("apply");
             editCoupon.setText("");
-            applyCoupon_1.setText("Apply Coupon");
-            applyCoupon_1.setTag("apply");
-            editCoupon_1.setText("");
-        }
-    }
-    private void onRemoveCoupon1() {
-
-        if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
-            coupenCode = "";
-            double discount = Double.parseDouble(discountVal.getText().toString());
-            double totalval = Double.parseDouble(total.getText().toString());
-            double finalVal = totalval + discount;
-            DecimalFormat df = new DecimalFormat("###.##");
-            total.setText(String.valueOf(df.format(finalVal)));
-            discountVal.setText("0");
-            applyCoupon_1.setText("Apply Coupon");
-            applyCoupon_1.setTag("apply");
-            editCoupon_1.setText("");
         }
     }
 
@@ -689,111 +558,20 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             discountVal.setText(String.valueOf(discount));
             applyCoupon.setText("Remove Coupon");
             applyCoupon.setTag("remove");
-            applyCoupon.setVisibility(View.VISIBLE);
-            editCoupon.setVisibility(View.VISIBLE);
-            applyOffer.setVisibility(View.GONE);
-            redeemPoints.setVisibility(View.GONE);
-            applyCoupon_1.setText("Remove Coupon");
-            applyCoupon_1.setTag("remove");
 
         } else {
-            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
+            Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "This offer is valid for minimum price order: "
                     + offerMinimumPrice, Toast.LENGTH_SHORT).show();
         }
 
     }
 
-
-    private void applyDiscount_2(String discountPercent, String strOfferMinimumPrice) {
-        double totalPrice = getTotalPrice();
-        double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
-        double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
-
-        if (offerMinimumPrice < totalPrice) {
-            double finalPrice = totalPrice - discount + shippingCharge;
-            DecimalFormat df = new DecimalFormat("###.##");
-            total.setText(String.valueOf(df.format(finalPrice)));
-            discountVal.setText(String.valueOf(discount));
-            applyCoupon_1.setText("Remove Coupon");
-            applyCoupon_1.setTag("remove");
-
-        } else {
-            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
-                    + offerMinimumPrice, Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private void applyPointsDiscount(String discountAmount) {
-        double totalPrice = getTotalPrice();
-        double discount = Double.parseDouble(discountAmount);
-
-
-        double finalPrice = totalPrice - discount + shippingCharge;
-        DecimalFormat df = new DecimalFormat("###.##");
-        total.setText(String.valueOf(df.format(finalPrice)));
-        discountVal.setText(String.valueOf(discount));
-        applyCoupon.setText("Remove Coupon");
-        applyCoupon.setTag("remove");
-        applyCoupon.setVisibility(View.VISIBLE);
-        editCoupon.setVisibility(View.VISIBLE);
-        applyOffer.setVisibility(View.GONE);
-        redeemPoints.setVisibility(View.GONE);
-
-    }
-
-
-    private void onApplyCoupon1() {
-
-        final String couponCode = editCoupon_1.getText().toString();
-        if (!couponCode.isEmpty()) {
-            String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-            String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
-            String plaform = AppConstant.PLATFORM;
-            String uId = userId;
-            Map<String, String> params = new HashMap<>();
-            params.put("device_id", deviceId);
-            params.put("user_id", uId);
-            params.put("device_token", deviceToken);
-            params.put("platform", plaform);
-            params.put("coupon_code", couponCode);
-            ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-            NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<GetValidCouponResponse>() {
-                @Override
-                public void success(GetValidCouponResponse getValidCouponResponse, Response response) {
-
-                    ProgressDialogUtil.hideProgressDialog();
-                    if (getValidCouponResponse.getSuccess()) {
-                        coupenCode = couponCode;
-                        OfferData offerData = getValidCouponResponse.getData();
-                        String discountPercent = offerData.getDiscount();
-                        String offerMinimumPrice = offerData.getMinimumOrderAmount();
-                        applyDiscount_2(discountPercent, offerMinimumPrice);
-                    } else {
-                        coupenCode = "";
-                        Log.e("Tag", getValidCouponResponse.getMessage());
-                        Toast.makeText(ShoppingCartActivity2.this, getValidCouponResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    coupenCode = "";
-                    ProgressDialogUtil.hideProgressDialog();
-                }
-            });
-
-        } else {
-            Toast.makeText(ShoppingCartActivity2.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();
-        }
-
-    }
     private void onApplyCoupon() {
 
         final String couponCode = editCoupon.getText().toString();
         if (!couponCode.isEmpty()) {
-            String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-            String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+            String deviceId = Settings.Secure.getString(ShoppingCartActivity2WithoutLoyality.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+            String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2WithoutLoyality.this);
             String plaform = AppConstant.PLATFORM;
             String uId = userId;
             Map<String, String> params = new HashMap<>();
@@ -802,7 +580,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             params.put("device_token", deviceToken);
             params.put("platform", plaform);
             params.put("coupon_code", couponCode);
-            ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+            ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2WithoutLoyality.this);
             NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<GetValidCouponResponse>() {
                 @Override
                 public void success(GetValidCouponResponse getValidCouponResponse, Response response) {
@@ -814,11 +592,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         String discountPercent = offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
                         applyDiscount(discountPercent, offerMinimumPrice);
-                        applyDiscount_2(discountPercent, offerMinimumPrice);
                     } else {
                         coupenCode = "";
                         Log.e("Tag", getValidCouponResponse.getMessage());
-                        Toast.makeText(ShoppingCartActivity2.this, getValidCouponResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, getValidCouponResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -830,25 +607,25 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             });
 
         } else {
-            Toast.makeText(ShoppingCartActivity2.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     public void showAlertDialog(Context context, String title,
                                 String message) {
-        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
         dialogHandler.setDialog(title, message);
         dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
                 appDb.deleteCartElement();
-                Intent intent_home = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                Intent intent_home = new Intent(ShoppingCartActivity2WithoutLoyality.this, MainActivity.class);
                 intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent_home);
                 finish();
-                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2WithoutLoyality.this);
             }
         });
     }
@@ -1068,10 +845,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 public void onClick(View v) {
                     editCoupon.setText("");
                     editCoupon.setText(data.getCouponCode());
-                    editCoupon_1.setText("");
-                    editCoupon_1.setText(data.getCouponCode());
                     onApplyCoupon();
-                    onApplyCoupon1();
                     dialog.dismiss();
                     dialog = null;
                 }
@@ -1088,99 +862,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
-    class Adapter extends BaseAdapter {
 
-        Activity context;
-        LayoutInflater l;
-        List<LoyalityDataModel> pointsList;
-        ViewHolder holder;
-
-
-        public Adapter(Activity context, List<LoyalityDataModel> pointsList) {
-            this.pointsList = pointsList;
-            this.context = context;
-            l = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        }
-
-        @Override
-        public int getCount() {
-            return pointsList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return pointsList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            holder = null;
-            if (convertView == null) {
-                convertView = l.inflate(R.layout.loyality_points_child, null);
-                holder = new ViewHolder();
-                holder.rupees = (TextView) convertView.findViewById(R.id.rupees);
-                holder.points = (TextView) convertView.findViewById(R.id.points);
-                holder.redeemNow = (TextView) convertView.findViewById(R.id.redeemNow);
-                holder.needTxt = (TextView) convertView.findViewById(R.id.needTxt);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-
-            String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
-
-
-            if (currency.contains("\\")) {
-                holder.rupees.setText(unescapeJavaString(currency) +" "+ pointsList.get(position).getAmount() + " OFF");
-            }
-            else {
-                holder.rupees.setText(""+currency +" "+ pointsList.get(position).getAmount() + " OFF");
-            }
-
-            holder.points.setText("" + pointsList.get(position).getPoints() + " Points");
-            final double points = Double.parseDouble(pointsList.get(position).getPoints());
-
-            if (points >= loyalityPoints) {
-                holder.redeemNow.setVisibility(View.GONE);
-                holder.needTxt.setVisibility(View.VISIBLE);
-                holder.needTxt.setText("You need " + (points - loyalityPoints) + " more points.");
-
-            } else {
-                holder.redeemNow.setVisibility(View.VISIBLE);
-                holder.needTxt.setVisibility(View.GONE);
-            }
-
-
-            holder.redeemNow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    editCoupon.setText("");
-                    editCoupon.setText(pointsList.get(position).getCouponCode());
-//                    onApplyCoupon();
-                    applyPointsDiscount(pointsList.get(position).getAmount());
-                    redeemDialog.dismiss();
-                    redeemDialog = null;
-                }
-            });
-
-
-            return convertView;
-        }
-
-        class ViewHolder {
-            TextView rupees, points, redeemNow, needTxt;
-        }
-
-    }
     public String unescapeJavaString(String st) {
 
         StringBuilder sb = new StringBuilder(st.length());

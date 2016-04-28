@@ -26,6 +26,7 @@ import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.model.PickupAdressModel;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2;
+import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2WithoutLoyality;
 
 /**
  * Created by root on 14/10/15.
@@ -135,6 +136,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 startActivity(intent);
                 getActivity().finish();
                 AnimUtil.slideFromRightAnim(getActivity());
+
                 break;
 
             case R.id.btnCall:

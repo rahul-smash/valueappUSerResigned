@@ -37,6 +37,8 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetOfferResponse;
 import com.signity.bonbon.model.GetValidCouponResponse;
@@ -67,7 +69,7 @@ import retrofit.client.Response;
 public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
-    TextView items_price, discountVal, total, title, customerPts, note,rs1,rs2,rs3,rs4;
+    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4;
     Button placeorder;
     String userId;
     String addressId;
@@ -173,10 +175,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         applyOffer.setOnClickListener(this);
         applyOffer_1.setOnClickListener(this);
         redeemPoints.setOnClickListener(this);
-        rs1=(TextView)findViewById(R.id.rs1);
-        rs2=(TextView)findViewById(R.id.rs2);
-        rs3=(TextView)findViewById(R.id.rs3);
-        rs4=(TextView)findViewById(R.id.rs4);
+        rs1 = (TextView) findViewById(R.id.rs1);
+        rs2 = (TextView) findViewById(R.id.rs2);
+        rs3 = (TextView) findViewById(R.id.rs3);
+        rs4 = (TextView) findViewById(R.id.rs4);
 
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
@@ -187,8 +189,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             rs2.setText(unescapeJavaString(currency));
             rs3.setText(unescapeJavaString(currency));
             rs4.setText(unescapeJavaString(currency));
-        }
-        else {
+        } else {
             rs1.setText(currency);
             rs2.setText(currency);
             rs3.setText(currency);
@@ -303,6 +304,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void callNetworkServiceForPlaceOrder(String id, String addressId) {
+
+        GATrackers.getInstance().trackEvent(GAConstant.EVENT_ORDER, GAConstant.PLACED,
+                "There is one order is placed for the address_id" + addressId);
+
 
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -429,9 +434,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 //                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
                         new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", "You have a empty cart", false);
                     }
-                }
-                else {
-                    String message=prefManager.getSharedValue(AppConstant.MESSAGE);
+                } else {
+                    String message = prefManager.getSharedValue(AppConstant.MESSAGE);
                     new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Error", message, false);
                 }
                 break;
@@ -483,39 +487,37 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
-
-    private boolean openTime(){
+    private boolean openTime() {
 
         boolean status = false;
 
-        String openTime=prefManager.getSharedValue(AppConstant.OPEN_TIME);
-        String closeTime=prefManager.getSharedValue(AppConstant.CLOSE_TIME);
+        String openTime = prefManager.getSharedValue(AppConstant.OPEN_TIME);
+        String closeTime = prefManager.getSharedValue(AppConstant.CLOSE_TIME);
 
-        if(openTime.isEmpty() || closeTime.isEmpty()){
+        if (openTime.isEmpty() || closeTime.isEmpty()) {
             return true;
-        }else {
+        } else {
 
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
-            String currentDate=formatter.format(calendar.getTime());
+            String currentDate = formatter.format(calendar.getTime());
 
             String strOpenHrs = openTime;
-            String strCloseHrs=closeTime;
+            String strCloseHrs = closeTime;
 
             SimpleDateFormat format = new SimpleDateFormat("hh:mmaa");
-            Date openDate = null,closeDate=null,currentTime=null;
+            Date openDate = null, closeDate = null, currentTime = null;
             try {
                 openDate = format.parse(strOpenHrs);
 
-                closeDate=format.parse(strCloseHrs);
+                closeDate = format.parse(strCloseHrs);
 
-                currentTime=format.parse(currentDate);
+                currentTime = format.parse(currentDate);
 
-                if(currentTime.compareTo(openDate)>0 && currentTime.compareTo(closeDate)<0){
-                    status=true;
-                }
-                else {
-                    status=false;
+                if (currentTime.compareTo(openDate) > 0 && currentTime.compareTo(closeDate) < 0) {
+                    status = true;
+                } else {
+                    status = false;
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -901,7 +903,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
                 holder.rupee2 = (TextView) convertView.findViewById(R.id.rupee2);
                 holder.totalValue = (TextView) convertView.findViewById(R.id.totalValue);
-                holder.rupeeTxt=(TextView)convertView.findViewById(R.id.rupeeTxt);
+                holder.rupeeTxt = (TextView) convertView.findViewById(R.id.rupeeTxt);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -937,7 +939,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
 
 
-
             String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
 
@@ -945,8 +946,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
                 holder.rupeeTxt.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
                 holder.rupeeTxt.setText(currency);
@@ -1001,7 +1001,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public RelativeLayout rel_mrp_offer_price;
             public TextView items_mrp_price, totalValue;
             RelativeLayout parent;
-            TextView items_name, items_price, number_text, rupee,rupee2,rupeeTxt;
+            TextView items_name, items_price, number_text, rupee, rupee2, rupeeTxt;
         }
     }
 
@@ -1139,10 +1139,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
             if (currency.contains("\\")) {
-                holder.rupees.setText(unescapeJavaString(currency) +" "+ pointsList.get(position).getAmount() + " OFF");
-            }
-            else {
-                holder.rupees.setText(""+currency +" "+ pointsList.get(position).getAmount() + " OFF");
+                holder.rupees.setText(unescapeJavaString(currency) + " " + pointsList.get(position).getAmount() + " OFF");
+            } else {
+                holder.rupees.setText("" + currency + " " + pointsList.get(position).getAmount() + " OFF");
             }
 
             holder.points.setText("" + pointsList.get(position).getPoints() + " Points");
@@ -1181,6 +1180,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }
 
     }
+
     public String unescapeJavaString(String st) {
 
         StringBuilder sb = new StringBuilder(st.length());

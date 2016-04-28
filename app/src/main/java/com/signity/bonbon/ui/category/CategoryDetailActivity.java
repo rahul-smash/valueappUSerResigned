@@ -20,6 +20,8 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
@@ -42,7 +44,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
     private LinearLayout linearShopCart;
     Button backButton, btnSearch, btnShopCart, btnCartCount, proceed, btnShopList;
     TextView textTitle;
-    TextView cartTotalPrice,rupee;
+    TextView cartTotalPrice, rupee;
     TabLayout tabLayout;
     ViewPager viewPager;
     PagerAdapter adapter;
@@ -59,10 +61,10 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         setContentView(R.layout.activity_category_detail);
         appDb = DbAdapter.getInstance().getDb();
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
-        prefManager= new PrefManager(CategoryDetailActivity.this);
+        prefManager = new PrefManager(CategoryDetailActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");
-        rupee=(TextView)findViewById(R.id.rupee);
+        rupee = (TextView) findViewById(R.id.rupee);
         backButton = (Button) findViewById(R.id.backButton);
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnShopCart = (Button) findViewById(R.id.shopingcart);
@@ -87,8 +89,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
         if (currency.contains("\\")) {
             rupee.setText(unescapeJavaString(currency));
-        }
-        else {
+        } else {
             rupee.setText(currency);
         }
 
@@ -216,6 +217,8 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         public Fragment getItem(int position) {
 
             String subCategoryId = subCategoryList.get(position).getId();
+            GATrackers.getInstance().trackEvent(GAConstant.EVENT_SUB_CAT + "_" + subCategoryId, GAConstant.VIEW,
+                    "Sub Category with Title " + subCategoryList.get(position).getTitle() + " is view on " + getString(R.string.app_name));
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);

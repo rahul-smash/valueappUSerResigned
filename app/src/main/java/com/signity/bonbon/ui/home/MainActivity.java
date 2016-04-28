@@ -37,6 +37,8 @@ import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.geofence.NamedGeofence;
@@ -430,6 +432,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case 7:
+                GATrackers.getInstance().trackEvent(GAConstant.EVENT_SHARE, GAConstant.SHARED, getString(R.string.app_name) + " Link shared");
                 String shareContent =
                         "Kindly download " + store.getStoreName() + " app from " +
                                 store.getAndroidAppShareLink() + "\nThanks and Regards\n " +
@@ -476,7 +479,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 break;
-
 
 
             case 9:
@@ -668,14 +670,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
 
 
-                    if(store.getCurrency().isEmpty()){
-                        prefManager.storeSharedValue(AppConstant.CURRENCY,"$");
-                    }
-                    else {
-                        prefManager.storeSharedValue(AppConstant.CURRENCY,store.getCurrency());
+                    if (store.getCurrency().isEmpty()) {
+                        prefManager.storeSharedValue(AppConstant.CURRENCY, "$");
+                    } else {
+                        prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
 //                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
                     }
-
 
 
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);

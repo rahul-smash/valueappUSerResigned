@@ -16,6 +16,8 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
@@ -55,6 +57,11 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.about_us, container, false);
+
+        GATrackers.getInstance()
+                .trackEvent(GAConstant.EVENT_ABOUT_US, GAConstant.VIEW,
+                        "About Us view for " + getString(R.string.app_name));
+
         webview = (WebView) mView.findViewById(R.id.webview);
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
 

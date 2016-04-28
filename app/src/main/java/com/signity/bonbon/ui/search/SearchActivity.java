@@ -35,6 +35,8 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
@@ -87,6 +89,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                GATrackers.getInstance().trackEvent(GAConstant.EVENT_SEARCH, GAConstant.CLICKED, "Search for item " +
+                        mSearchEdit.getText().toString() + " On" + getString(R.string.app_name));
                 getSearchList(mSearchEdit.getText().toString());
                 return false;
             }
@@ -286,12 +290,10 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
             }
-
 
 
             if (product.isFavorites()) {
@@ -454,8 +456,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
                 if (currency.contains("\\")) {
                     rupee_tag.setText(unescapeJavaString(currency));
-                }
-                else {
+                } else {
                     rupee_tag.setText(currency);
                 }
 
@@ -473,7 +474,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             LinearLayout block2;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
-            TextView items_name, items_price, items_mrp_price, number_text, rupee,rupee2;
+            TextView items_name, items_price, items_mrp_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
         }
     }

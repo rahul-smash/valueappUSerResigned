@@ -321,11 +321,10 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                             showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
                                     addressId, shipingCharges, minmumCartString, userAddress
                             );
-                        } else if (minprice > cartprice){
-                            String message = ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
-                                    "\nAre you sure you want to keep this as your Delivery Address ?";
-                            showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                                    addressId, shipingCharges, minmumCartString, userAddress
+                        } else {
+                            String message = "There will be  minimum  " + currencySymbol + " " + minmumCartString +
+                                    " need to place this order. Please add some item to your bucket ";
+                            showAlertDialogForMinAmount(getActivity(), "Message", message
                             );
                         }
                     } else if (minprice > cartprice) {

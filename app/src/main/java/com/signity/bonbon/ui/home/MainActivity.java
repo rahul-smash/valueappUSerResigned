@@ -669,7 +669,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
-
+                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursTo());
+                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursFrom());
+                    prefManager.storeSharedValue(AppConstant.MESSAGE, store.getClosehoursMessage());
 
                     if (store.getCurrency().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.CURRENCY, "\\u20B9");

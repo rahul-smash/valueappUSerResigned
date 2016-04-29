@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -671,9 +672,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     if (store.getCurrency().isEmpty()) {
-                        prefManager.storeSharedValue(AppConstant.CURRENCY, "$");
+                        prefManager.storeSharedValue(AppConstant.CURRENCY, "\\u20B9");
                     } else {
-                        prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
+
+                        if (store.getCurrency().contains("\\")) {
+                            prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
+                        } else {
+                            String ruppee= String.valueOf(Html.fromHtml(store.getCurrency()));
+                            prefManager.storeSharedValue(AppConstant.CURRENCY, ruppee);
+                        }
+
 //                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
                     }
 
@@ -682,7 +690,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
-                    Log.e("Store Version", store.getVersion());
+//                    Log.e("Store Version", store.getVersion());
 
 
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
@@ -698,7 +706,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("Error", error.getMessage());
+//                Log.e("Error", error.getMessage());
             }
         });
 

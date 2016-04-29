@@ -287,68 +287,13 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         }
 
 
-        if (minmumCartString != null && !minmumCartString.isEmpty() && !minmumCartString.equalsIgnoreCase("0")) {
+        if(addressModel.getNotAllow()){
             double minprice = Double.parseDouble(minmumCartString);
-            if (shipingCharges != null
-                    && !shipingCharges.isEmpty()) {
-                if (shipingCharges.equalsIgnoreCase("0")) {
-                    if (minprice <= cartprice) {
-                        String message = "";
-                        if (noteText != null && !(noteText.isEmpty())) {
-                            message = noteText + "\nAre you sure you want to keep this as your Delivery Address ?";
-                        } else {
-                            message = "Are you sure you want to keep this as your Delivery Address ?";
-                        }
-                        showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                                addressId, shipingCharges, minmumCartString, userAddress
-                        );
-                    } else {
-                        String message = "There will be  minimum  " + currencySymbol + " " + minmumCartString +
-                                " need to place this order. Please add some item to your bucket ";
-                        showAlertDialogForMinAmount(getActivity(), "Message", message
-                        );
-                    }
-                } else if (minprice > cartprice) {
-                    String message = "There will be " + currencySymbol + " " + shipingCharges +
-                            " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
-                            "\nAre you sure you want to keep this as your Delivery Address ?";
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                            addressId, shipingCharges, minmumCartString, userAddress
-                    );
-                } else {
-                    String message = noteText.trim();
-                    if (message != null && !message.isEmpty()) {
-                        message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
-                    } else {
-                        message = "Are you sure you want to keep this as your Delivery Address ?";
-                    }
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                            addressId, shipingCharges, minmumCartString, userAddress);
-                }
-            } else {
-                if (minprice > cartprice) {
-                    String message = "There will be  minimum " + currencySymbol + " " + minmumCartString +
-                            " need to place this order. Please add some item to your bucket ";
-                    showAlertDialogForMinAmount(getActivity(), "Message", message
-                    );
-                } else {
-                    String message = noteText.trim();
-                    if (message != null && !message.isEmpty()) {
-                        message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
-                    } else {
-                        message = "Are you sure you want to keep this as your Delivery Address ?";
-                    }
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", minmumCartString, userAddress);
-                }
-            }
-
-        } else {
-            if (shipingCharges != null
-                    && !shipingCharges.isEmpty() && !(shipingCharges.equalsIgnoreCase("0"))) {
-                String message = "There will be " + currencySymbol + " " + shipingCharges +
-                        " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
-                        "\nAre you sure you want to keep this as your Delivery Address ?";
-                showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress);
+            if (minprice > cartprice) {
+                String message = "There will be  minimum " + currencySymbol + " " + minmumCartString +
+                        " need to place this order. Please add some item to your bucket ";
+                showAlertDialogForMinAmount(getActivity(), "Message", message
+                );
             } else {
                 String message = noteText.trim();
                 if (message != null && !message.isEmpty()) {
@@ -356,9 +301,72 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 } else {
                     message = "Are you sure you want to keep this as your Delivery Address ?";
                 }
-                showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", "", userAddress);
+                showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", minmumCartString, userAddress);
             }
         }
+
+        else {
+            if (minmumCartString != null && !minmumCartString.isEmpty() && !minmumCartString.equalsIgnoreCase("0")) {
+                double minprice = Double.parseDouble(minmumCartString);
+                if (shipingCharges != null
+                        && !shipingCharges.isEmpty()) {
+                    if (shipingCharges.equalsIgnoreCase("0")) {
+                        if (minprice <= cartprice) {
+                            String message = "";
+                            if (noteText != null && !(noteText.isEmpty())) {
+                                message = noteText + "\nAre you sure you want to keep this as your Delivery Address ?";
+                            } else {
+                                message = "Are you sure you want to keep this as your Delivery Address ?";
+                            }
+                            showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                                    addressId, shipingCharges, minmumCartString, userAddress
+                            );
+                        } else if (minprice > cartprice){
+                            String message = ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
+                                    "\nAre you sure you want to keep this as your Delivery Address ?";
+                            showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                                    addressId, shipingCharges, minmumCartString, userAddress
+                            );
+                        }
+                    } else if (minprice > cartprice) {
+                        String message = "There will be " + currencySymbol + " " + shipingCharges +
+                                " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
+                                "\nAre you sure you want to keep this as your Delivery Address ?";
+                        showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                                addressId, shipingCharges, minmumCartString, userAddress
+                        );
+                    } else {
+                        String message = noteText.trim();
+                        if (message != null && !message.isEmpty()) {
+                            message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
+                        } else {
+                            message = "Are you sure you want to keep this as your Delivery Address ?";
+                        }
+                        showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                                addressId, shipingCharges, minmumCartString, userAddress);
+                    }
+                }
+
+            } else {
+                if (shipingCharges != null
+                        && !shipingCharges.isEmpty() && !(shipingCharges.equalsIgnoreCase("0"))) {
+                    String message = "There will be " + currencySymbol + " " + shipingCharges +
+                            " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
+                            "\nAre you sure you want to keep this as your Delivery Address ?";
+                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress);
+                } else {
+                    String message = noteText.trim();
+                    if (message != null && !message.isEmpty()) {
+                        message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
+                    } else {
+                        message = "Are you sure you want to keep this as your Delivery Address ?";
+                    }
+                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", "", userAddress);
+                }
+            }
+        }
+
+
     }
 
     private void callNetworkServiceForDelete(String id, String addressId, final int position) {

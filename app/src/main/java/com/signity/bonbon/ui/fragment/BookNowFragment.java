@@ -261,7 +261,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void failure(RetrofitError error) {
                             ProgressDialogUtil.hideProgressDialog();
-                            Log.e("Log", error.getMessage());
+//                            Log.e("Log", error.getMessage());
                         }
                     });
 

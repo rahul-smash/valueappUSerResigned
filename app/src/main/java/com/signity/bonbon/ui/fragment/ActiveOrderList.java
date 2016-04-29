@@ -213,7 +213,7 @@ public class ActiveOrderList extends Fragment {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(getActivity(), "No Data found." + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
             }
         });
     }

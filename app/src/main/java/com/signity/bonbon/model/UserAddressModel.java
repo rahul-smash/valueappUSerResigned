@@ -59,6 +59,21 @@ public class UserAddressModel implements Serializable {
     @Expose
     private String note;
 
+    @SerializedName("city_id")
+    @Expose
+    private String cityId;
+
+    @SerializedName("not_allow")
+    @Expose
+    private boolean notAllow;
+
+    public boolean getNotAllow() {
+        return notAllow;
+    }
+
+    public void setNotAllow(boolean notAllow) {
+        this.notAllow = notAllow;
+    }
 
     public String getCityId() {
         return cityId;
@@ -68,9 +83,7 @@ public class UserAddressModel implements Serializable {
         this.cityId = cityId;
     }
 
-    @SerializedName("city_id")
-    @Expose
-    private String cityId;
+
 
     /**
      * @return The id

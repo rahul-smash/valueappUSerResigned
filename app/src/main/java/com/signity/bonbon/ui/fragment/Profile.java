@@ -139,7 +139,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 //                    MobData data = mobResponse.getData();
 //                    proceedToMobileOtpGeneration(data);
                 } else {
-                    Toast.makeText(getActivity(), emailResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), ""+emailResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }

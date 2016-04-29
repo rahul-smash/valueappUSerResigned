@@ -239,7 +239,7 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                showAlertDialog(getActivity(), "Error", error.getMessage());
+                showAlertDialog(getActivity(), "Error", "Server not responding.");
             }
         });
 

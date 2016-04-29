@@ -50,6 +50,10 @@ public class AppDatabase {
     // operation related to category table
     public void addCategoryList(List<Category> data) {
         if (data != null && data.size() != 0) {
+
+            deleteOperationForVersionUpdate(data);
+            deleteCategoryAll();
+
             for (Category category : data) {
                 try {
                     ContentValues values = new ContentValues();
@@ -63,8 +67,12 @@ public class AppDatabase {
                     values.put("sub_category", gsonHelper.getSubCategory(category.getSubCategoryList()));
                     values.put("is_enable", category.getIsEnable());
                     values.put("is_deleted", category.isDeleted() ? "1" : "0");
-                    values.put("is_enable", category.getIsEnable());
-                    values.put("sort_order", Integer.parseInt(category.getSortOrder()));
+                    try {
+                        values.put("sort_order", Integer.parseInt((category.getSortOrder() != null && !
+                                (category.getSortOrder().isEmpty())) ? category.getSortOrder() : "0"));
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
                     Category dbCategory = getCategoryById(category.getId());
                     if (dbCategory != null) {
                         if (!((dbCategory.getVersion()).equals(category.getVersion()))) {
@@ -86,10 +94,8 @@ public class AppDatabase {
         }
     }
 
-
     public List<Category> getCategoryList() {
         List<Category> list = new ArrayList<>();
-
         Cursor cursor = null;
         try {
             String sql = String.format(Locale.US, "SELECT * FROM category where is_enable=%s AND is_deleted=%s ORDER BY sort_order ASC", "1", "0");
@@ -149,7 +155,68 @@ public class AppDatabase {
         return category;
     }
 
-    ///-------------------- ends here category operation
+
+    /*End Category operations here*/
+
+
+    /*Delete Operation for any version change*/
+
+    private void deleteOperationForVersionUpdate(List<Category> data) {
+
+        if (data != null && data.size() != 0) {
+            for (Category cat : data) {
+                Category dbCategory = getCategoryById(cat.getId());
+                if (dbCategory != null)
+                    if (!((dbCategory.getVersion()).equals(cat.getVersion()))) {
+                        deleteSubCategoryForVersionUpdate(cat.getSubCategoryList());
+                        deleteSubCategoryForCategroryId(cat.getId());
+                    }
+
+
+            }
+        }
+
+    }
+
+    private void deleteSubCategoryForVersionUpdate(List<SubCategory> subCategoryList) {
+        if (subCategoryList != null && subCategoryList.size() != 0) {
+            for (SubCategory subCategory : subCategoryList) {
+                SubCategory dbSubCategory = getSubCategoryById(subCategory.getId());
+                if (dbSubCategory != null)
+                    if (!((dbSubCategory.getVersion()).equals(subCategory.getVersion()))) {
+                        deleteProductForSubCategoryChange(subCategory.getId());
+                    }
+            }
+        }
+
+    }
+
+    private void deleteProductForSubCategoryChange(String sub_cat_id) {
+        try {
+            db.delete("product", "category_ids = ?", new String[]{sub_cat_id});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteSubCategoryForCategroryId(String catId) {
+        try {
+            db.delete("sub_category", "parent_id = ?", new String[]{catId});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteCategoryAll() {
+        try {
+            db.delete("category", null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /*Delete operation ends here*/
 
 
     // Operation related to Sub category and Product table

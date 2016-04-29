@@ -119,7 +119,6 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
         NetworkAdaper.getInstance().getNetworkServices().getCategoryList(new Callback<GetCategory>() {
             @Override
             public void success(GetCategory getCategory, Response response) {
-
                 if (getCategory.getSuccess()) {
                     appDb.addCategoryList(getCategory.getData());
                     listCategory = appDb.getCategoryList();
@@ -139,7 +138,6 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                     mGridView.setVisibility(View.GONE);
                     noRecord.setVisibility(View.VISIBLE);
                 }
-
             }
 
             @Override

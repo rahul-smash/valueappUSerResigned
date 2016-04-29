@@ -111,8 +111,7 @@ public final class ProductListFragment extends Fragment {
                     listView.setVisibility(View.VISIBLE);
                     no_record.setVisibility(View.GONE);
                 } else {
-                    listView.setVisibility(View.GONE);
-                    no_record.setVisibility(View.VISIBLE);
+                    getSubCategoryList(subCategoryId);
                 }
             } else {
                 getSubCategoryList(subCategoryId);
@@ -192,14 +191,14 @@ public final class ProductListFragment extends Fragment {
             String mrpPrice = "0.0";
             String txtQuant = "";
             String txtQuantCount = "";
-            String unitType="";
+            String unitType = "";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
-                unitType=selectedVariant.getUnitType();
+                unitType = selectedVariant.getUnitType();
             } else {
                 Variant variant = product.getVariants().get(0);
                 selectedVariant.setVariantId(variant.getId());
@@ -210,11 +209,11 @@ public final class ProductListFragment extends Fragment {
                 selectedVariant.setDiscount(variant.getDiscount());
                 selectedVariant.setUnitType(variant.getUnitType());
                 selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
-                unitType=selectedVariant.getUnitType();
+                unitType = selectedVariant.getUnitType();
             }
 
 
@@ -224,8 +223,7 @@ public final class ProductListFragment extends Fragment {
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
             }
@@ -244,10 +242,9 @@ public final class ProductListFragment extends Fragment {
             }
 
 
-            if (txtQuant != null && !txtQuant.isEmpty()) {
+            if (!(selectedVariant.getWeight().isEmpty()) && !(selectedVariant.getUnitType().isEmpty())) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
-
             } else {
                 holder.btnVarient.setVisibility(View.GONE);
             }
@@ -260,7 +257,6 @@ public final class ProductListFragment extends Fragment {
             }
             holder.items_mrp_price.setText(mrpPrice);
             holder.number_text.setText(txtQuantCount);
-
 
             holder.add_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -397,8 +393,7 @@ public final class ProductListFragment extends Fragment {
 
                 if (currency.contains("\\")) {
                     rupee_tag.setText(unescapeJavaString(currency));
-                }
-                else {
+                } else {
                     rupee_tag.setText(currency);
                 }
 
@@ -414,7 +409,7 @@ public final class ProductListFragment extends Fragment {
             LinearLayout block2;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
-            TextView items_name, items_mrp_price, items_price, number_text, rupee,rupee2;
+            TextView items_name, items_mrp_price, items_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
         }
     }

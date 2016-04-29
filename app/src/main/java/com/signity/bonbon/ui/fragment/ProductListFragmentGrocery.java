@@ -116,8 +116,7 @@ public final class ProductListFragmentGrocery extends Fragment {
                     listView.setVisibility(View.VISIBLE);
                     no_record.setVisibility(View.GONE);
                 } else {
-                    listView.setVisibility(View.GONE);
-                    no_record.setVisibility(View.VISIBLE);
+                    getSubCategoryList(subCategoryId);
                 }
             } else {
                 getSubCategoryList(subCategoryId);
@@ -235,8 +234,7 @@ public final class ProductListFragmentGrocery extends Fragment {
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
             }
@@ -256,7 +254,7 @@ public final class ProductListFragmentGrocery extends Fragment {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
 
-            if (txtQuant != null && !txtQuant.isEmpty()) {
+            if (!(selectedVariant.getWeight().isEmpty()) && !(selectedVariant.getUnitType().isEmpty())) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
             } else {
@@ -371,7 +369,6 @@ public final class ProductListFragmentGrocery extends Fragment {
             });
 
 
-
             holder.heart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -417,8 +414,7 @@ public final class ProductListFragmentGrocery extends Fragment {
 
                 if (currency.contains("\\")) {
                     rupee_tag.setText(unescapeJavaString(currency));
-                }
-                else {
+                } else {
                     rupee_tag.setText(currency);
                 }
 
@@ -435,7 +431,7 @@ public final class ProductListFragmentGrocery extends Fragment {
             RelativeLayout parent;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
-            TextView items_name, items_mrp_price, items_price, number_text, rupee,rupee2;
+            TextView items_name, items_mrp_price, items_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
         }
     }

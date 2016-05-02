@@ -29,9 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Delivery Address"
+            android:text="Delivery Addresses"
             android:textColor="@color/color_white"
-            android:textSize="24sp"
+            android:textSize="@dimen/text_size_large"
             android:visibility="visible" />
     </RelativeLayout>
 

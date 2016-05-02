@@ -111,7 +111,7 @@ public class AboutUsFragment extends Fragment {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
 
-                Toast.makeText(getActivity(), "No Data found." + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -175,7 +175,7 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e(TAG, "" + error.getMessage());
+//                Log.e(TAG, "" + error.getMessage());
                 alertDailogForNoPickup();
             }
 

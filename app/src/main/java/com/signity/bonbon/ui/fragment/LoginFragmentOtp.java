@@ -311,7 +311,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     userDetailSave(true);
                     proceedtoActivity();
                 } else {
-                    showDialogForMessage(getActivity(), "Error", verifyOtpResponse.getMessage());
+                    showDialogForMessage(getActivity(), "Error", ""+verifyOtpResponse.getMessage());
                 }
             }
 
@@ -350,7 +350,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     status = mobResponse.getData().getStatus();
                     showDialogForMessage(getActivity(), "Message", "OTP sent to your registered mobile");
                 } else {
-                    showDialogForMessage(getActivity(), "Error", mobResponse.getMessage());
+                    showDialogForMessage(getActivity(), "Error", ""+mobResponse.getMessage());
                 }
             }
 

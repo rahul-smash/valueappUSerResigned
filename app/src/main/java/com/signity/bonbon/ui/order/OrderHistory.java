@@ -261,7 +261,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
 
-                Log.e("Error", error.getMessage());
+//                Log.e("Error", error.getMessage());
             }
         });
     }
@@ -343,7 +343,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                 ProgressDialogUtil.hideProgressDialog();
                 no_record.setVisibility(View.VISIBLE);
                 order_history_list.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "No Data found." + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
             }
         });
     }

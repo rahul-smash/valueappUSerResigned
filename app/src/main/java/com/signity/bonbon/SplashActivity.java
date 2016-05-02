@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -181,18 +182,30 @@ public class SplashActivity extends Activity {
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
+                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursTo());
+                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME,store.getOpenhoursFrom());
+                    prefManager.storeSharedValue(AppConstant.MESSAGE,store.getClosehoursMessage());
                     if(store.getLoyality()!=null && !store.getLoyality().isEmpty()){
-                        prefManager.storeSharedValue(AppConstant.LOYALITY,store.getLoyality());
+                        prefManager.storeSharedValue(AppConstant.LOYALITY, store.getLoyality());
                     }else {
-                        prefManager.storeSharedValue(AppConstant.LOYALITY,"0");
+                        prefManager.storeSharedValue(AppConstant.LOYALITY, "0");
                     }
 
 
 
+
+
                     if (store.getCurrency().isEmpty()) {
-                        prefManager.storeSharedValue(AppConstant.CURRENCY, "$");
+                        prefManager.storeSharedValue(AppConstant.CURRENCY, "\\u20B9");
                     } else {
-                        prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
+
+                        if (store.getCurrency().contains("\\")) {
+                            prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
+                        } else {
+                            String ruppee= String.valueOf(Html.fromHtml(store.getCurrency()));
+                            prefManager.storeSharedValue(AppConstant.CURRENCY, ruppee);
+                        }
+
 //                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
                     }
 

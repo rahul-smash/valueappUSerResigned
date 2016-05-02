@@ -28,7 +28,7 @@
             android:drawableLeft="@drawable/add1"
             android:drawablePadding="15dp"
             android:gravity="center"
-            android:text="Add Delivery Addresses"
+            android:text="Add Delivery Address"
             android:textColor="#ffffff"
             android:textSize="18sp"
             android:textStyle="bold" />

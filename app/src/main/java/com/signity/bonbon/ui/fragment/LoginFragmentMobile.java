@@ -160,7 +160,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Error", mobResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Error", ""+mobResponse.getMessage(), false);
                 }
             }
 

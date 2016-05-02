@@ -627,7 +627,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        fm.getFragments();
 //        fm.getBackStackEntryCount();
         mSlidingPanel.closePane();
-
         if (!title.getText().toString().equalsIgnoreCase(store.getStoreName())) {
             if (store != null) {
                 if (store.getStoreName() != null && !store.getStoreName().isEmpty()) {

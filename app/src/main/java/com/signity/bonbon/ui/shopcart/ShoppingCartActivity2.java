@@ -523,7 +523,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 e.printStackTrace();
             }
 
-
 //            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
 //            String date = format.format(newDate);
         }

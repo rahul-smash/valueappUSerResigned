@@ -35,6 +35,7 @@ public class AppConstant {
 
     public static final String OPEN_TIME = "com.android.bonbon.Utilities.OPEN_TIME";
     public static final String CLOSE_TIME = "com.android.bonbon.Utilities.CLOSE_TIME";
+    public static final String OPEN_DAYS = "com.android.bonbon.Utilities.OPEN_DAYS";
     public static final String MESSAGE = "com.android.bonbon.Utilities.MESSAGE";
     public static final String CURRENCY = "com.android.bonbon.Utilities.CURRENCY";
     public static final String LOYALITY = "com.android.bonbon.Utilities.LOYALITY";

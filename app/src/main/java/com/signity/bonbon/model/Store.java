@@ -78,6 +78,11 @@ public class Store {
     @Expose
     private String loyality;
 
+    @SerializedName("store_open_days")
+    @Expose
+    private String storeOpenDays;
+
+
     public String getOpenhoursFrom() {
         return openhoursFrom;
     }
@@ -112,7 +117,6 @@ public class Store {
     @SerializedName("closehours_message")
     @Expose
     private String closehoursMessage;
-
 
 
     @SerializedName("banners")
@@ -442,5 +446,11 @@ public class Store {
         this.loyality = loyality;
     }
 
+    public String getStoreOpenDays() {
+        return storeOpenDays;
+    }
 
+    public void setStoreOpenDays(String storeOpenDays) {
+        this.storeOpenDays = storeOpenDays;
+    }
 }

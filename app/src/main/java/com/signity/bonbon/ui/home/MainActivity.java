@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = prefManager.getSharedValue(AppConstant.NAME);
         phone = prefManager.getSharedValue(AppConstant.PHONE);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
-        loyalityStatus=prefManager.getSharedValue(AppConstant.LOYALITY);
+        loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
 
         typeFaceRobotoRegular = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_BOLD);
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             viewList.add(att);
         }
 
-        if(loyalityStatus.equalsIgnoreCase("0")){
+        if (loyalityStatus.equalsIgnoreCase("0")) {
             viewList.remove(8);
         }
 
@@ -447,7 +447,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case 8:
 
-                if(loyalityStatus.equalsIgnoreCase("0")){
+                if (loyalityStatus.equalsIgnoreCase("0")) {
                     title.setText(store.getStoreName());
                     if (userId.isEmpty()) {
                         Intent intentLogin = new Intent(MainActivity.this, LoginScreenActivity.class);
@@ -463,8 +463,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         logOutUser();
                     }
                     adapter.notifyDataSetChanged();
-                }
-                else if(loyalityStatus.equalsIgnoreCase("1")){
+                } else if (loyalityStatus.equalsIgnoreCase("1")) {
                     if (userId.isEmpty()) {
                         Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
                         intent9.putExtra(AppConstant.FROM, "menu");
@@ -569,7 +568,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SliderObject att = new SliderObject();
 
 
-            if(loyalityStatus.equalsIgnoreCase("0")){
+            if (loyalityStatus.equalsIgnoreCase("0")) {
                 if (userId.isEmpty()) {
                     att.labels = "Log In";
                     att.icons = icons[9];
@@ -583,7 +582,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     holder.labels.setText(viewList.get(position).labels);
                     login = false;
                 }
-            }else if(loyalityStatus.equalsIgnoreCase("1")) {
+            } else if (loyalityStatus.equalsIgnoreCase("1")) {
                 if (userId.isEmpty()) {
                     att.labels = "Log In";
                     att.icons = icons[9];
@@ -598,7 +597,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     login = false;
                 }
             }
-
 
 
             convertView.setOnClickListener(new View.OnClickListener() {
@@ -668,9 +666,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
-                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursTo());
-                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursFrom());
+                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
+                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());
+                    prefManager.storeSharedValue(AppConstant.OPEN_DAYS, store.getStoreOpenDays());
                     prefManager.storeSharedValue(AppConstant.MESSAGE, store.getClosehoursMessage());
+
 
                     if (store.getCurrency().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.CURRENCY, "\\u20B9");
@@ -679,7 +679,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (store.getCurrency().contains("\\")) {
                             prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
                         } else {
-                            String ruppee= String.valueOf(Html.fromHtml(store.getCurrency()));
+                            String ruppee = String.valueOf(Html.fromHtml(store.getCurrency()));
                             prefManager.storeSharedValue(AppConstant.CURRENCY, ruppee);
                         }
 

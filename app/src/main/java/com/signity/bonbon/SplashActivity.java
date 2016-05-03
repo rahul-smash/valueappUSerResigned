@@ -182,17 +182,15 @@ public class SplashActivity extends Activity {
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
-                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursTo());
-                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME,store.getOpenhoursFrom());
-                    prefManager.storeSharedValue(AppConstant.MESSAGE,store.getClosehoursMessage());
-                    if(store.getLoyality()!=null && !store.getLoyality().isEmpty()){
+                    prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
+                    prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());
+                    prefManager.storeSharedValue(AppConstant.MESSAGE, store.getClosehoursMessage());
+                    prefManager.storeSharedValue(AppConstant.OPEN_DAYS, store.getStoreOpenDays());
+                    if (store.getLoyality() != null && !store.getLoyality().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.LOYALITY, store.getLoyality());
-                    }else {
+                    } else {
                         prefManager.storeSharedValue(AppConstant.LOYALITY, "0");
                     }
-
-
-
 
 
                     if (store.getCurrency().isEmpty()) {
@@ -202,7 +200,7 @@ public class SplashActivity extends Activity {
                         if (store.getCurrency().contains("\\")) {
                             prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
                         } else {
-                            String ruppee= String.valueOf(Html.fromHtml(store.getCurrency()));
+                            String ruppee = String.valueOf(Html.fromHtml(store.getCurrency()));
                             prefManager.storeSharedValue(AppConstant.CURRENCY, ruppee);
                         }
 

@@ -94,8 +94,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private Button backButton, btnSearch;
     private TextView shipping_charges;
     private AppDatabase appDb;
-    private Button applyCoupon,applyCoupon_1, applyOffer,applyOffer_1, redeemPoints;
-    private EditText editCoupon,editCoupon_1;
+    private Button applyCoupon, applyCoupon_1, applyOffer, applyOffer_1, redeemPoints;
+    private EditText editCoupon, editCoupon_1;
     private EditText edtBar;
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
@@ -132,14 +132,14 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         final View activityRootView = findViewById(R.id.activityRoot);
         relativeLayout = (RelativeLayout) findViewById(R.id.listLayout);
-        relCoupon=(LinearLayout)findViewById(R.id.relCoupon);
-        relCoupon_1=(RelativeLayout)findViewById(R.id.relCoupon_1);
+        relCoupon = (LinearLayout) findViewById(R.id.relCoupon);
+        relCoupon_1 = (RelativeLayout) findViewById(R.id.relCoupon_1);
 
-        String loyalityStatus=prefManager.getSharedValue(AppConstant.LOYALITY);
-        if(loyalityStatus.equalsIgnoreCase("0")){
+        String loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
+        if (loyalityStatus.equalsIgnoreCase("0")) {
             relCoupon.setVisibility(View.GONE);
             relCoupon_1.setVisibility(View.VISIBLE);
-        }else if(loyalityStatus.equalsIgnoreCase("1")){
+        } else if (loyalityStatus.equalsIgnoreCase("1")) {
             relCoupon.setVisibility(View.VISIBLE);
             relCoupon_1.setVisibility(View.GONE);
         }
@@ -417,7 +417,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case com.signity.bonbon.R.id.backButton:
                 onBackPressed();
@@ -436,7 +435,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     }
                 } else {
                     String message = prefManager.getSharedValue(AppConstant.MESSAGE);
-                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Error", message, false);
+                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", message, false);
                 }
                 break;
 
@@ -488,15 +487,17 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     private boolean openTime() {
-
         boolean status = false;
-
         String openTime = prefManager.getSharedValue(AppConstant.OPEN_TIME);
         String closeTime = prefManager.getSharedValue(AppConstant.CLOSE_TIME);
+        String openDays = prefManager.getSharedValue(AppConstant.OPEN_DAYS);
 
         if (openTime.isEmpty() || closeTime.isEmpty()) {
             return true;
         } else {
+            if (isStoreClosedToday(openDays)) {
+                return false;
+            }
 
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat formatter = new SimpleDateFormat("hh:mmaa");
@@ -509,9 +510,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             Date openDate = null, closeDate = null, currentTime = null;
             try {
                 openDate = format.parse(strOpenHrs);
-
                 closeDate = format.parse(strCloseHrs);
-
                 currentTime = format.parse(currentDate);
 
                 if (currentTime.compareTo(openDate) > 0 && currentTime.compareTo(closeDate) < 0) {
@@ -522,27 +521,61 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
 //            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
 //            String date = format.format(newDate);
         }
         return status;
-
     }
 
+    private boolean isStoreClosedToday(String openDays) {
+        Calendar calendar = Calendar.getInstance();
+        boolean result = false;
+        switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+            case 1:
+                if (!openDays.contains("sun")) {
+                    result = true;
+                }
+                break;
+            case 2:
+                if (!openDays.contains("mon")) {
+                    result = true;
+                }
+                break;
+            case 3:
+                if (!openDays.contains("tue")) {
+                    result = true;
+                }
+                break;
+            case 4:
+                if (!openDays.contains("wed")) {
+                    result = true;
+                }
+                break;
+            case 5:
+                if (!openDays.contains("thu")) {
+                    result = true;
+                }
+                break;
+            case 6:
+                if (!openDays.contains("fri")) {
+                    result = true;
+                }
+                break;
+            case 7:
+                if (!openDays.contains("sat")) {
+                    result = true;
+                }
+                break;
+        }
+        return result;
+    }
 
     private void callNetworkForLoyalityPoints() {
-
         try {
-
             ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-
             Map<String, String> param = new HashMap<String, String>();
             param.put("user_id", userId);
-
-
             NetworkAdaper.getInstance().getNetworkServices().getLoyalityPoints(param, new Callback<LoyalityModel>() {
-
                 @Override
                 public void success(LoyalityModel loyalityModel, Response response) {
 
@@ -580,7 +613,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         ProgressDialogUtil.hideProgressDialog();
                     }
                 }
-
                 @Override
                 public void failure(RetrofitError error) {
                     ProgressDialogUtil.hideProgressDialog();
@@ -661,6 +693,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             editCoupon_1.setText("");
         }
     }
+
     private void onRemoveCoupon1() {
 
         if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
@@ -789,6 +822,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }
 
     }
+
     private void onApplyCoupon() {
 
         final String couponCode = editCoupon.getText().toString();

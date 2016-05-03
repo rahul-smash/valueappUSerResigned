@@ -233,14 +233,16 @@ public class SplashActivity extends Activity {
                     }
 
                 } else {
-                    showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
+                    DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                showAlertDialog(SplashActivity.this, "Failed", "Server not responding.");
+                DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

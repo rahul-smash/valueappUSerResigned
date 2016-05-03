@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -182,6 +183,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(SearchActivity.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

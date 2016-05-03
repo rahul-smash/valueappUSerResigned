@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -182,6 +183,8 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(SearchForGroceryActivity.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -297,8 +300,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
             }
@@ -458,8 +460,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
                 if (currency.contains("\\")) {
                     rupee_tag.setText(unescapeJavaString(currency));
-                }
-                else {
+                } else {
                     rupee_tag.setText(currency);
                 }
                 TextView price = (TextView) convertView.findViewById(R.id.price);
@@ -476,10 +477,11 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             RelativeLayout parent;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
-            TextView items_name, items_mrp_price, items_price, number_text, rupee,rupee2;
+            TextView items_name, items_mrp_price, items_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
         }
     }
+
     public String unescapeJavaString(String st) {
 
         StringBuilder sb = new StringBuilder(st.length());

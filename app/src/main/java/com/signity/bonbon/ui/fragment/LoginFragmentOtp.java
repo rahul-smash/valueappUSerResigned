@@ -311,7 +311,8 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     userDetailSave(true);
                     proceedtoActivity();
                 } else {
-                    showDialogForMessage(getActivity(), "Error", ""+verifyOtpResponse.getMessage());
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -350,13 +351,16 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     status = mobResponse.getData().getStatus();
                     showDialogForMessage(getActivity(), "Message", "OTP sent to your registered mobile");
                 } else {
-                    showDialogForMessage(getActivity(), "Error", ""+mobResponse.getMessage());
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

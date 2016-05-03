@@ -40,8 +40,6 @@ import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetOfferResponse;
 import com.signity.bonbon.model.GetValidCouponResponse;
-import com.signity.bonbon.model.LoyalityDataModel;
-import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.OfferData;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.ResponseData;
@@ -319,14 +317,15 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
                     showAlertDialog(ShoppingCartActivity2WithoutLoyality.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                    dialogHandler.setdialogForFinish("Failure", "" + responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Server not responding.", Toast.LENGTH_SHORT).show();
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -369,14 +368,15 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
                     showAlertDialog(ShoppingCartActivity2WithoutLoyality.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                    dialogHandler.setdialogForFinish("Failure", "" + responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Server not responding.", Toast.LENGTH_SHORT).show();
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -523,7 +523,8 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-//                showAlertDialog(getActivity(), "Error", error.getMessage());
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

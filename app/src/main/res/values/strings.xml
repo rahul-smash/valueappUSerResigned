@@ -49,4 +49,9 @@
     <string name="Notification.Text">We\'re at %1$s!!!</string>
     <string name="fence_radius">.200</string>
     <string name="title_activity_pick_up">PickUpActivity</string>
+
+
+    <!--Error code-->
+    <string name="error_code_message">We are reviewing the error. Kindly check your network connection and try again after sometime.</string>
+
 </resources>

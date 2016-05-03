@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
@@ -101,7 +102,6 @@ public class AboutUsFragment extends Fragment {
                     webview.loadData(getStoreModel.getStore().getAboutUs(), "text/html", "UTF-8");
                     ProgressDialogUtil.hideProgressDialog();
                 } else {
-
                     ProgressDialogUtil.hideProgressDialog();
                     Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
                 }
@@ -111,7 +111,8 @@ public class AboutUsFragment extends Fragment {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
 
-                Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

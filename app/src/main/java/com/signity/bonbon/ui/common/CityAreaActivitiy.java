@@ -102,7 +102,6 @@ public class CityAreaActivitiy extends FragmentActivity {
         areamain = new ArrayList<>();
         NetworkAdaper.getInstance().apiService.getStoreAreaList(new Callback<GetStoreArea>() {
 
-
             @Override
             public void success(GetStoreArea getStoreArea, Response response) {
 

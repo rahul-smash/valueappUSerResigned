@@ -251,8 +251,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                 if (responseStatus.getSuccess()) {
                     getOrderHistory();
                 } else {
-
-                    Log.e("Message", "Success:false");
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", responseStatus.getMessage(), false);
                 }
 
             }
@@ -260,8 +260,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-
-//                Log.e("Error", error.getMessage());
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -333,7 +333,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                     no_record.setVisibility(View.VISIBLE);
                     order_history_list.setVisibility(View.GONE);
                     ProgressDialogUtil.hideProgressDialog();
-                    Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
 
             }

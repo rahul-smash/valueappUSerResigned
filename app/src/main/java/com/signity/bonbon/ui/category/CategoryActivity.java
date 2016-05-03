@@ -143,6 +143,8 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(CategoryActivity.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

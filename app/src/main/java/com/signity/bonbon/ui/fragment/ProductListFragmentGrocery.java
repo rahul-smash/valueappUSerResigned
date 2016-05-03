@@ -507,8 +507,9 @@ public final class ProductListFragmentGrocery extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Server not resonding", Toast.LENGTH_SHORT).show();
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

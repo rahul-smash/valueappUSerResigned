@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -34,7 +33,6 @@ import com.signity.bonbon.model.UserAddressList;
 import com.signity.bonbon.model.UserAddressModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2;
-import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2WithoutLoyality;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -389,12 +387,16 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     adapter.notifyDataSetChanged();
                 } else {
 //                    Toast.makeText(getActivity(), responseData.getMessage(), Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

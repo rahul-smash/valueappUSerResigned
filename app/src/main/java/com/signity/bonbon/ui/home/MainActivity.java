@@ -707,7 +707,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void failure(RetrofitError error) {
-//                Log.e("Error", error.getMessage());
+                DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

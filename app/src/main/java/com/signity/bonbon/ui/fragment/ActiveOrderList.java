@@ -16,11 +16,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
@@ -205,7 +205,6 @@ public class ActiveOrderList extends Fragment {
                 } else {
                     activeOrderList.setVisibility(View.GONE);
                     ProgressDialogUtil.hideProgressDialog();
-                    Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -213,7 +212,8 @@ public class ActiveOrderList extends Fragment {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

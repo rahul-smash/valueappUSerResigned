@@ -139,7 +139,8 @@ public class Profile extends Fragment implements View.OnClickListener {
 //                    MobData data = mobResponse.getData();
 //                    proceedToMobileOtpGeneration(data);
                 } else {
-                    Toast.makeText(getActivity(), ""+emailResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
 
             }
@@ -147,6 +148,8 @@ public class Profile extends Fragment implements View.OnClickListener {
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 

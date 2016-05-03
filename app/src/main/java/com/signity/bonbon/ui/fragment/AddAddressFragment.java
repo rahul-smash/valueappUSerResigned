@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -161,9 +162,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         if (zipCode.isEmpty()) {
             zipCode = "0";
         }
-
         Map<String, String> param = new HashMap<String, String>();
-
         param.put("user_id", userId);
         param.put("address_id", addressId);
         param.put("area_id", areaID);
@@ -176,8 +175,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("state", stateName);
         param.put("zipcode", zipCode);
         param.put("area_name", areaName);
-
-
         NetworkAdaper.getInstance().getNetworkServices().updateDeliveryAddress(param, new Callback<EmailResponse>() {
 
 
@@ -188,16 +185,17 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                     getActivity().onBackPressed();
                     InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(done_text.getWindowToken(), 0);
-
-
                 } else {
-//                    Toast.makeText(getActivity(), emailResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -254,13 +252,16 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                     mgr.hideSoftInputFromWindow(done_text.getWindowToken(), 0);
 
                 } else {
-                    Toast.makeText(getActivity(), "Failed to connect", Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

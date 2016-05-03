@@ -146,7 +146,8 @@ public class LoginFragmentEmail extends Fragment {
 
 
                 } else {
-                    Toast.makeText(getActivity(), "Response:" + emailResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
 
             }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,7 +175,8 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
             @Override
             public void failure(RetrofitError error) {
 //                Log.e(TAG, "" + error.getMessage());
-                alertDailogForNoPickup();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
 
             private void alertDailogForNoPickup() {

@@ -116,5 +116,7 @@
 
     <dimen name="cart_size">58dp</dimen>
 
+    <!--Nanu'z Garments-->
+    <dimen name="padding_home_icon">13dp</dimen>
 
 </resources>

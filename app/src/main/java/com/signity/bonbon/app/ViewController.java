@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.ui.Others.storetheme27.HomeFragmentNanuTheme27;
 import com.signity.bonbon.ui.category.CategoryDetailActivity;
 import com.signity.bonbon.ui.category.CategoryDetailGroceryActivity;
 import com.signity.bonbon.ui.category.ProductViewActivity;
@@ -171,6 +172,10 @@ public class ViewController {
                 fragment = new HomeFragmentBigChefTheme25();
                 break;
 
+            case 27:
+                fragment = new HomeFragmentNanuTheme27();
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;
@@ -313,6 +318,12 @@ public class ViewController {
                 //Big Chef
                 layoutId = R.layout.home_activity_theme_25;
                 break;
+
+            case 27:
+                //Nanu'z Garments
+                layoutId = R.layout.home_activity_theme_27;
+                break;
+
 
 
             default:

@@ -47,4 +47,7 @@
     <color name="color_ligh_black">#292929</color>
 
     <color name="color_light_blue">#4ca1d2</color>
+
+    <color name="color_text_menu">#DDB798</color>
+    <color name="color_black_transparen_shade">#99000000</color>
 </resources>

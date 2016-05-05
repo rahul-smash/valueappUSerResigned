@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.ui.Jewellers.storetheme28.HomeFragmentAppleTheme28;
 import com.signity.bonbon.ui.Others.storetheme27.HomeFragmentNanuTheme27;
 import com.signity.bonbon.ui.category.CategoryDetailActivity;
 import com.signity.bonbon.ui.category.CategoryDetailGroceryActivity;
+import com.signity.bonbon.ui.category.CategoryDetailJewellersActivity;
 import com.signity.bonbon.ui.category.ProductViewActivity;
 import com.signity.bonbon.ui.category.ProductViewGroceryActivity;
 import com.signity.bonbon.ui.fragment.BookNowFragment;
@@ -176,6 +178,12 @@ public class ViewController {
                 fragment = new HomeFragmentNanuTheme27();
                 break;
 
+            case 28:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+                    fragment = new HomeFragmentAppleTheme28();
+                }
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;
@@ -320,8 +328,16 @@ public class ViewController {
                 break;
 
             case 27:
+
                 //Nanu'z Garments
                 layoutId = R.layout.home_activity_theme_27;
+                break;
+
+            case 28:
+                //Apple Diamond
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+                    layoutId = R.layout.home_activity_theme_28_apple;
+                }
                 break;
 
 
@@ -341,7 +357,11 @@ public class ViewController {
 
         if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
             return CategoryDetailGroceryActivity.class;
-        } else {
+        } else if(storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS))
+        {
+            return CategoryDetailJewellersActivity.class;
+        }
+        else {
             return CategoryDetailActivity.class;
         }
     }

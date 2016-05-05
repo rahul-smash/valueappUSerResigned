@@ -53,5 +53,6 @@
 
     <!--Error code-->
     <string name="error_code_message">We are reviewing the error. Kindly check your network connection and try again after sometime.</string>
+    <string name="title_activity_category_detail_jewellers">CategoryDetailJewellersActivity</string>
 
 </resources>

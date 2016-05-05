@@ -39,7 +39,7 @@
             android:text=""
             android:maxLines="2"
             android:textColor="@color/color_white"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 
         <Button

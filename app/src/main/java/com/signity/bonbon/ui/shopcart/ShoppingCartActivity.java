@@ -322,7 +322,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 if (appDb.getCartSize() != 0) {
                     proceedToPlaceOrder();
                 } else {
-                    Toast.makeText(ShoppingCartActivity.this, "Empty Cart", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShoppingCartActivity.this, "Please add items to your cart.", Toast.LENGTH_SHORT).show();
                 }
                 break;
 

@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/ColorPrimary"
-            android:text="Proceed"
+            android:text="Ok"
             android:textColor="@color/color_white" />
     </RelativeLayout>
 

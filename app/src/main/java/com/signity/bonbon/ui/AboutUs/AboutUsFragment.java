@@ -46,6 +46,8 @@ public class AboutUsFragment extends Fragment {
     String storeId;
     private Store store;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

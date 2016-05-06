@@ -9,7 +9,7 @@ public class GAConstant {
 
 
     public static final String GA_TRACK_ID_DEBUG = "UA-76344996-2";  // for tangerine
-    public static final String GA_TRACK_ID_LIVE = "UA-76368883-2";
+    public static final String GA_TRACK_ID_LIVE = "UA-77008261-1";
     public static final String SPLASH_SCREEN = "Splash screen";
 
 

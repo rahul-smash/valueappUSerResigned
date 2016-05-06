@@ -141,4 +141,8 @@ public interface ApiService {
     @POST("/getLoyalityPoints")
     void getLoyalityPoints(@FieldMap Map<String, String> parameters, Callback<LoyalityModel> response);
 
+    @FormUrlEncoded
+    @POST("/jewellers/setJewellerQuery")
+    void submitQuery(@FieldMap Map<String, String> parameters, Callback<EmailResponse> response);
+
 }

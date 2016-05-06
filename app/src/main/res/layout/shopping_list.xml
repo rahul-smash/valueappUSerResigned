@@ -62,9 +62,10 @@
 
         <EditText
             android:id="@+id/searchBar"
-            android:layout_width="255dp"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/add_list"
             android:background="@drawable/edittext_round_corners"
             android:hint="@string/hint1"
             android:maxLength="30"

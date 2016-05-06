@@ -109,5 +109,6 @@
     <dimen name="margin_left_my_delivery">35dp</dimen>
     <dimen name="margin_right_my_cart">35dp</dimen>
 
-
+    <!--Nanu'z Garments-->
+    <dimen name="padding_home_icon">20dp</dimen>
 </resources>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/theme_27_home_background" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:background="@color/ColorPrimary"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_home_icon"
+        android:weightSum="3">
+
+
+        <RelativeLayout
+            android:id="@+id/relOffers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgOffers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/theme_27_home_offers" />
+
+
+            <TextView
+                android:id="@+id/offers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgOffers"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:text="OFFERS"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/white" />
+
+
+        <RelativeLayout
+            android:id="@+id/relCategory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/theme_27_home_categories" />
+
+            <TextView
+                android:id="@+id/category_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgCategory"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:text="CATEGORIES"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_size_small" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/white" />
+
+        <RelativeLayout
+            android:id="@+id/relContact"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/theme_27_home_contact" />
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgContact"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:text="CONTACT"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_size_small" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

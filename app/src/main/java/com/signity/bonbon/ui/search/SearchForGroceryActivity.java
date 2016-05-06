@@ -44,6 +44,7 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,8 +61,8 @@ import retrofit.client.Response;
  */
 public class SearchForGroceryActivity extends Activity implements View.OnClickListener {
 
-    TextView mHeaderText;
-    Button mBackButton;
+    TextView mHeaderText,shoppinglist_text;
+    Button mBackButton,btnShopcart;
     EditText mSearchEdit;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private GCMClientManager pushClientManager;
@@ -76,6 +77,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
     PrefManager prefManager;
     String searchStr;
 
+    public int cartSize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +88,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
         initialize();
         clickListeners();
+        checkCartValue();
         setTypeFaces();
 
         mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -117,6 +120,8 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
         mHeaderText = (TextView) findViewById(R.id.headerText);
         mBackButton = (Button) findViewById(R.id.backButton);
         mSearchEdit = (EditText) findViewById(R.id.searchEdit);
+        btnShopcart = (Button) findViewById(R.id.btnShopcart);
+        shoppinglist_text = (Button) findViewById(R.id.shoppinglist_text);
         typeFaceRobotoRegular = FontUtil.getTypeface(SearchForGroceryActivity.this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(SearchForGroceryActivity.this, FontUtil.FONT_ROBOTO_BOLD);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
@@ -125,11 +130,23 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
     private void clickListeners() {
         mBackButton.setOnClickListener(this);
+        btnShopcart.setOnClickListener(this);
     }
 
     private void setTypeFaces() {
 
         mHeaderText.setTypeface(typeFaceRobotoRegular);
+    }
+
+    public void checkCartValue() {
+        cartSize = appDb.getCartSize();
+
+        if (cartSize != 0) {
+            shoppinglist_text.setVisibility(View.VISIBLE);
+            shoppinglist_text.setText("" + cartSize);
+        } else {
+            shoppinglist_text.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -138,6 +155,11 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.backButton:
                 onBackPressed();
+                break;
+
+            case R.id.btnShopcart:
+                startActivity(new Intent(SearchForGroceryActivity.this, ShoppingCartActivity.class));
+                AnimUtil.slideFromRightAnim(SearchForGroceryActivity.this);
                 break;
         }
     }
@@ -341,6 +363,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                     notifyDataSetChanged();
                     appDb.updateProduct(product);
                     appDb.updateToCart(product);
+                    checkCartValue();
                 }
             });
 
@@ -355,6 +378,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                         notifyDataSetChanged();
                         appDb.updateProduct(product);
                         appDb.updateToCart(product);
+                        checkCartValue();
                     }
                 }
             });

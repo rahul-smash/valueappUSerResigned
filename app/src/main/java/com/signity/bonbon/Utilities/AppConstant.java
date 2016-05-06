@@ -28,6 +28,7 @@ public class AppConstant {
 
     public static final String APP_TYPE_GROCERY = "grocery";
     public static final String APP_TYPE_RESTAURANT = "restaurant";
+    public static final String APP_TYPE_JEWELLERS = "jewellery";
 
     public static final String AREA_SELECTED = "Area";
     public static final String SELECTED_STORE = "com.android.bonbon.Utilities.SELECTED_STORE";

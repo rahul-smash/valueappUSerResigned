@@ -28,6 +28,7 @@ import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.ui.fragment.ProductListFragmentGrocery;
+import com.signity.bonbon.ui.fragment.ProductListFragmentJewellers;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 
@@ -217,7 +218,7 @@ public class CategoryDetailJewellersActivity extends FragmentActivity implements
             Bundle arg = new Bundle();
             arg.putInt("position", position);
             arg.putString("subCategoryId", subCategoryId);
-            ProductListFragmentGrocery fragment = new ProductListFragmentGrocery();
+            ProductListFragmentJewellers fragment = new ProductListFragmentJewellers();
             fragment.setArguments(arg);
             return fragment;
         }

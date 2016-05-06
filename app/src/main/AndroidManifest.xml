@@ -202,6 +202,10 @@
             android:name=".ui.category.CategoryDetailJewellersActivity"
             android:label="@string/title_activity_category_detail_jewellers" >
         </activity>
+        <activity
+            android:name=".ui.category.ProductViewJewellersActivity"
+            android:label="@string/title_activity_product_view_jewellers" >
+        </activity>
     </application>
 
 </manifest>

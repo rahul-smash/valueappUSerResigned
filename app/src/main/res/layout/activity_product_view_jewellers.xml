@@ -1,0 +1,433 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="grocersapp.android.com.grocersapp.ItemDetail">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/header_image">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+
+            android:background="@android:color/transparent"
+            android:contentDescription=""
+            android:drawableLeft="@drawable/left"
+            android:paddingLeft="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btnShopList"
+            android:layout_toRightOf="@+id/backButton"
+            android:gravity="center_horizontal"
+            android:paddingRight="15dp"
+            android:text=""
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnShopList"
+            android:layout_width="38dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/my_shopping_list_icon"
+            android:paddingLeft="8dp"
+            android:visibility="gone" />
+
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:contentDescription=""
+            android:drawableLeft="@drawable/search"
+            android:paddingLeft="5dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:background="#ffffff"
+                android:elevation="3dp"
+                android:padding="12dp" />
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_image"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@+id/remove_button"
+                android:gravity="center|center_vertical"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="Saffola"
+                android:textColor="#353535"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/block1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_name"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/priceBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/price_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:gravity="left|center_vertical"
+                        android:text="Price : "
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/rupee"
+                        android:gravity="left|center_vertical"
+                        android:text="15.00 "
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/rupee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/price_text"
+                        android:gravity="left|center_vertical"
+                        android:text="\u20B9 "
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/goldWeightBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/priceBlock"
+                    android:layout_marginTop="8dp">
+
+
+                    <TextView
+                        android:id="@+id/sku"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:text="Gold Weight :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/goldWeightVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/sku"
+                        android:text="11"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <Button
+                        android:id="@+id/btnVarient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_alignTop="@+id/sku"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/sku"
+                        android:background="#e2e2e2"
+                        android:drawSelectorOnTop="true"
+                        android:drawablePadding="8dp"
+                        android:drawableRight="@drawable/arrow_spinner_down_24"
+                        android:gravity="center_vertical"
+                        android:paddingRight="8dp"
+                        android:spinnerMode="dialog"
+                        android:text="Select Quant"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/goldPurityBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/goldWeightBlock"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/goldpurity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="6"
+                        android:text="Gold Purity :"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/goldpurityVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/goldpurity"
+                        android:text="11"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/block2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/block1">
+
+
+                <RelativeLayout
+                    android:id="@+id/diamondWeightBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/diamondWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="8"
+                        android:text="Diamond Weight : "
+                        android:textColor="#6f6f6f"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/diamondWeightVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/diamondWeight"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/stoneWeightBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/diamondWeightBlock"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/stoneWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="8"
+                        android:text="Stone Weight : "
+                        android:textColor="#6f6f6f"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/stoneWeightVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/stoneWeight"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/colorBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/stoneWeightBlock"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="8"
+                        android:text="Color : "
+                        android:textColor="#6f6f6f"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/colorVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/color"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/clarityBlock"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/colorBlock"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/clarity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="8"
+                        android:text="Clarity : "
+                        android:textColor="#6f6f6f"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/clarityVal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/clarity"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnContact"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/block2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/round_corner1"
+                android:ems="10"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Consult"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/add_button"
+                android:layout_alignTop="@+id/add_button"
+                android:layout_toLeftOf="@+id/add_button"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/item_image"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/add" />
+
+            <ImageButton
+                android:id="@+id/remove_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignTop="@+id/add_button"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/number_text"
+                android:background="@drawable/remove" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/photoZoomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/transparent_bg"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/cross" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/close"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@color/color_white">
+
+            <com.signity.bonbon.view.TouchImageViewA
+                android:id="@+id/zoomImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

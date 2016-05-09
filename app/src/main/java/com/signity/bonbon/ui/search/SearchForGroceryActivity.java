@@ -283,9 +283,9 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
             if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                Picasso.with(SearchForGroceryActivity.this).load(product.getImageMedium()).error(R.drawable.no_image).into(holder.items);
+                Picasso.with(SearchForGroceryActivity.this).load(product.getImageMedium()).error(R.mipmap.ic_launcher).into(holder.items);
             } else {
-                holder.items.setImageResource(R.drawable.no_image);
+                holder.items.setImageResource(R.mipmap.ic_launcher);
             }
 
             String productPrice = "0.0";

@@ -613,6 +613,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     } else {
                         ProgressDialogUtil.hideProgressDialog();
+                        Toast.makeText(ShoppingCartActivity2.this,"Record not found!",Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override

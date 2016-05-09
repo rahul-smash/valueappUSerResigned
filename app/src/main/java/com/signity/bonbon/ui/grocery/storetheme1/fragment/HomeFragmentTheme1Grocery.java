@@ -93,12 +93,12 @@ public class HomeFragmentTheme1Grocery extends Fragment implements View.OnClickL
         if (store != null) {
             String banner = store.getBanner();
             if (store.getBanner() != null && !store.getBanner().isEmpty()) {
-                Picasso.with(getActivity()).load(banner).error(R.drawable.no_image).into(imageView);
+                Picasso.with(getActivity()).load(banner).error(R.mipmap.ic_launcher).into(imageView);
             } else {
-                imageView.setImageResource(R.drawable.no_image);
+                imageView.setImageResource(R.mipmap.ic_launcher);
             }
         } else {
-            imageView.setImageResource(R.drawable.no_image);
+            imageView.setImageResource(R.mipmap.ic_launcher);
         }
 
         return mView;

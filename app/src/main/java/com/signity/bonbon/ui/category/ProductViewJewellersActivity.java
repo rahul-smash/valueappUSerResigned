@@ -152,9 +152,9 @@ public class ProductViewJewellersActivity extends AppCompatActivity implements V
         btnVarient.setText(txtQuant);
 
         if (product.getImage() != null && !product.getImage().isEmpty()) {
-            Picasso.with(ProductViewJewellersActivity.this).load(product.getImage()).resize(400, 400).error(com.signity.bonbon.R.drawable.no_image).into(item_image);
+            Picasso.with(ProductViewJewellersActivity.this).load(product.getImage()).resize(400, 400).error(R.mipmap.ic_launcher).into(item_image);
         } else {
-            item_image.setImageResource(com.signity.bonbon.R.drawable.no_image);
+            item_image.setImageResource(R.mipmap.ic_launcher);
         }
     }
 

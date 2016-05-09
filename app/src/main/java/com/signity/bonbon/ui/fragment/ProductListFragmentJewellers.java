@@ -194,9 +194,9 @@ public class ProductListFragmentJewellers extends Fragment{
 
 
             if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                Picasso.with(getActivity()).load(product.getImageMedium()).error(R.drawable.no_image).into(holder.items);
+                Picasso.with(getActivity()).load(product.getImageMedium()).error(R.mipmap.ic_launcher).into(holder.items);
             } else {
-                holder.items.setImageResource(R.drawable.no_image);
+                holder.items.setImageResource(R.mipmap.ic_launcher);
             }
 
 

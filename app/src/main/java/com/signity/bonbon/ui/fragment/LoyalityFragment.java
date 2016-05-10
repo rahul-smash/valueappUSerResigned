@@ -123,7 +123,7 @@ public class LoyalityFragment extends Fragment {
                     }
                     else {
                         ProgressDialogUtil.hideProgressDialog();
-                        Toast.makeText(getActivity(), "Record not found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "There are no coupons to redeem.", Toast.LENGTH_SHORT).show();
                     }
                 }
 

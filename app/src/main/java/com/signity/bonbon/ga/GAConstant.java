@@ -13,6 +13,7 @@ public class GAConstant {
     public static final String SPLASH_SCREEN = "Splash screen";
 
 
+
     /*Category*/
     public static final String OFFER = "_offers";
     public static final String ORDER = "_order";

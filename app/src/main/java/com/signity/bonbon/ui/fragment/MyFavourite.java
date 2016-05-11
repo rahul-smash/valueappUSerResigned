@@ -201,7 +201,7 @@ public class MyFavourite extends Fragment {
             String txtQuantCount = "";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
@@ -215,7 +215,7 @@ public class MyFavourite extends Fragment {
                 selectedVariant.setDiscount(variant.getDiscount());
                 selectedVariant.setUnitType(variant.getUnitType());
                 selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
@@ -247,7 +247,9 @@ public class MyFavourite extends Fragment {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
 
-            if (txtQuant != null && !txtQuant.isEmpty()) {
+            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+
+            if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
             } else {

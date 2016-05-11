@@ -335,7 +335,9 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
 
-            if (txtQuant != null && !txtQuant.isEmpty()) {
+            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+
+            if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
             } else {

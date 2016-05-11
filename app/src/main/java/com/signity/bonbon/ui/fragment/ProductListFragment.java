@@ -243,12 +243,16 @@ public final class ProductListFragment extends Fragment {
             }
 
 
-            if (!(selectedVariant.getWeight().isEmpty()) && !(selectedVariant.getUnitType().isEmpty())) {
+            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+
+            if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
             } else {
                 holder.btnVarient.setVisibility(View.GONE);
             }
+
+
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
             if (productPrice.equalsIgnoreCase(mrpPrice)) {

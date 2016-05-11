@@ -141,7 +141,10 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             description.setText(product.getDescription());
         }
         number_text.setText(txtQuantCount);
-        if (txtQuant != null && !txtQuant.isEmpty()) {
+
+        String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+        if (!variant.isEmpty()) {
+            btnVarient.setVisibility(View.VISIBLE);
             btnVarient.setText(txtQuant);
         } else {
             btnVarient.setVisibility(View.GONE);

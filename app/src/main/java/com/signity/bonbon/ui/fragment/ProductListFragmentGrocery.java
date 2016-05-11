@@ -254,7 +254,9 @@ public final class ProductListFragmentGrocery extends Fragment {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
 
-            if (!(selectedVariant.getWeight().isEmpty()) && !(selectedVariant.getUnitType().isEmpty())) {
+            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+
+            if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
             } else {

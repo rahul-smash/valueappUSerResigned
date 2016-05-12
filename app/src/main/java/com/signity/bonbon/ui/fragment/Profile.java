@@ -43,7 +43,7 @@ public class Profile extends Fragment implements View.OnClickListener {
     PrefManager prefManager;
     String userId, name, email;
     GCMClientManager pushClientManager;
-    public TextView mobilenumber;
+    public EditText mobilenumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,10 @@ public class Profile extends Fragment implements View.OnClickListener {
 
         rootView = inflater.inflate(R.layout.profile, container, false);
 
-        mobilenumber = (TextView) rootView.findViewById(R.id.mobilenumber);
+        mobilenumber = (EditText) rootView.findViewById(R.id.mobilenumber);
+        mobilenumber.setFocusable(false);
+        mobilenumber.setClickable(false);
+        mobilenumber.setEnabled(false);
         mobilenumber.setText(prefManager.getSharedValue(AppConstant.PHONE));
         edtName = (EditText) rootView.findViewById(R.id.edtName);
         edtName.setTypeface(typeFaceRobotoRegular);

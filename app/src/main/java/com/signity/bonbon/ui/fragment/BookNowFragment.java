@@ -195,7 +195,11 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
         if (phoneNumber.getText().toString().trim().equalsIgnoreCase("")) {
             phoneNumber.setError("Enter Mobile Number");
             return false;
+        }else if (phoneNumber.getText().toString().trim().length()!=10){
+            phoneNumber.setError("Mobile No. should be of 10 digits");
+            return false;
         }
+
         if (email.getText().toString().trim().equalsIgnoreCase("")) {
             email.setError("Enter Email");
             return false;

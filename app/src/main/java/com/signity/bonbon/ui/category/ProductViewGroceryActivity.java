@@ -55,6 +55,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
     public int cartSize;
 
+    String productViewTitle="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,11 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         backButton.setOnClickListener(this);
         btnShopcart.setOnClickListener(this);
 
-        textTitle.setText(product.getTitle());
+        if(productViewTitle==null){
+            textTitle.setText(product.getTitle());
+        }else {
+            textTitle.setText(productViewTitle);
+        }
 
         item_image = (ImageView) findViewById(com.signity.bonbon.R.id.item_image);
         item_name = (TextView) findViewById(com.signity.bonbon.R.id.item_name);
@@ -160,6 +166,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
     private void initProduct() {
         String product_id = getIntent().getStringExtra("product_id");
+        productViewTitle = getIntent().getStringExtra("productViewTitle");
         product = appDb.getProduct(product_id);
         if (product == null) {
             product = gsonHelper.getProduct(prefManager.getSharedValue(PrefManager.PREF_SEARCH_PRODUCT));

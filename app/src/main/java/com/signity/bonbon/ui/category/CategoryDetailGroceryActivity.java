@@ -50,6 +50,7 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
     List<SubCategory> subCategoryList;
     boolean isActivityFirstTime = true;
     PrefManager prefManager;
+    String productViewTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -211,6 +212,14 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
 
         @Override
         public Fragment getItem(int position) {
+
+
+            if (subCategoryList.size() <= 1) {
+                productViewTitle = getIntent().getStringExtra("title");
+            }
+            else {
+                productViewTitle=subCategoryList.get(position).getTitle();
+            }
 
             String subCategoryId = subCategoryList.get(position).getId();
             currentPosition = position;

@@ -666,6 +666,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
+                    prefManager.storeSharedValue(AppConstant.is24x7_open, store.getIs24x7_open());
                     prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
                     prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());
                     prefManager.storeSharedValue(AppConstant.OPEN_DAYS, store.getStoreOpenDays());

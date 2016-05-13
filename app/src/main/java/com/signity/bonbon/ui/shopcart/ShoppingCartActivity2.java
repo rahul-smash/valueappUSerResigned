@@ -490,11 +490,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private boolean openTime() {
         boolean status = false;
+        String is24x7_open = prefManager.getSharedValue(AppConstant.is24x7_open);
         String openTime = prefManager.getSharedValue(AppConstant.OPEN_TIME);
         String closeTime = prefManager.getSharedValue(AppConstant.CLOSE_TIME);
         String openDays = prefManager.getSharedValue(AppConstant.OPEN_DAYS);
 
-        if (openTime.isEmpty() || closeTime.isEmpty()) {
+        if(is24x7_open.equalsIgnoreCase("0")){
+            return true;
+        }
+        else if (openTime.isEmpty() || closeTime.isEmpty()) {
             return true;
         } else {
             if (isStoreClosedToday(openDays)) {

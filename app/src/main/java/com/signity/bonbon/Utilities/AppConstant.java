@@ -35,6 +35,7 @@ public class AppConstant {
     public static final String AREA_NAME = "com.android.bonbon.Utilities.AREA_NAME";
 
     public static final String OPEN_TIME = "com.android.bonbon.Utilities.OPEN_TIME";
+    public static final String is24x7_open = "com.android.bonbon.Utilities.is24x7_open";
     public static final String CLOSE_TIME = "com.android.bonbon.Utilities.CLOSE_TIME";
     public static final String OPEN_DAYS = "com.android.bonbon.Utilities.OPEN_DAYS";
     public static final String MESSAGE = "com.android.bonbon.Utilities.MESSAGE";

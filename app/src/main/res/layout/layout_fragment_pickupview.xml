@@ -59,8 +59,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/ColorPrimary"
-            android:text="Ok"
+            android:text="Proceed"
             android:textColor="@color/color_white" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/ColorPrimary"
+            android:text="Ok"
+            android:textColor="@color/color_white"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -20,6 +20,7 @@ import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -162,6 +163,7 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                 if (getPickupApiResponse.getSuccess() != null ? getPickupApiResponse.getSuccess() : false) {
                     List<PickupAdressModel> list = getPickupApiResponse.getData();
                     if (list != null && list.size() != 0) {
+                        DataAdapter.getInstance().setPickupAdressModel(list.get(0));
                         openPickUpDisplayFragment(list.get(0));
                     } else {
                         alertDailogForNoPickup();

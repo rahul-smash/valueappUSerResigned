@@ -51,6 +51,7 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 import java.text.DecimalFormat;
@@ -395,7 +396,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
@@ -882,6 +883,39 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+
+
+    public void showAlertDialogwithPickUp(Context context, String title,
+                                String message) {
+        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+        dialogHandler.setDialog(title, message);
+        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                appDb.deleteCartElement();
+                Intent intent_home = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent_home);
+                finish();
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+            }
+        });
+
+        dialogHandler.setNegativeButton("Guide Me", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                appDb.deleteCartElement();
+                Intent intent_home = new Intent(ShoppingCartActivity2.this, DeliveryPickupActivity.class);
+                intent_home.putExtra(AppConstant.FROM,"shopping_cart2");
+                startActivity(intent_home);
+                finish();
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+            }
+        });
+    }
+
     public void showAlertDialog(Context context, String title,
                                 String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
@@ -898,6 +932,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
             }
         });
+
     }
 
     class ProductListAdapter extends BaseAdapter {

@@ -24,7 +24,11 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.model.PickupAdressModel;
+import com.signity.bonbon.ui.Delivery.DeliveryActivity;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
+import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2WithoutLoyality;
 
@@ -44,7 +48,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     GoogleMap map;
     private PickupAdressModel pickupAdressModel;
     private TextView textViewAddress;
-    private Button buttonProceed;
+    private Button buttonProceed,buttonOk;
     private Button btnCall;
 
 
@@ -76,17 +80,25 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
         textViewAddress = (TextView) rootView.findViewById(R.id.textViewAddress);
 
         buttonProceed = (Button) rootView.findViewById(R.id.buttonProceed);
+        buttonOk = (Button) rootView.findViewById(R.id.buttonOk);
         btnCall = (Button) rootView.findViewById(R.id.btnCall);
         textViewAddress.setText(pickupAdressModel.getPickupAdd() != null ?
                 pickupAdressModel.getPickupAdd() : "");
         buttonProceed.setOnClickListener(this);
         btnCall.setOnClickListener(this);
+        buttonOk.setOnClickListener(this);
         return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        from = getArguments().getString(AppConstant.FROM, "");
+        if(from.equalsIgnoreCase("shopping_cart2")){
+            buttonProceed.setVisibility(View.INVISIBLE);
+            buttonOk.setVisibility(View.VISIBLE);
+            ((DeliveryPickupActivity)getActivity()).disableBackButton();
+        }
     }
 
     @Override
@@ -134,7 +146,6 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 intent.putExtra("minimum_charges", "0");
                 intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
                 startActivity(intent);
-                getActivity().finish();
                 AnimUtil.slideFromRightAnim(getActivity());
 
                 break;
@@ -156,8 +167,15 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 }
 
                 break;
+
+            case R.id.buttonOk:
+                getActivity().onBackPressed();
+
+                break;
         }
     }
+
+
 
 
 }

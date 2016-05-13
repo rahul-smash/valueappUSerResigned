@@ -54,6 +54,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private PrefManager prefManager;
     public int cartSize;
 
+    String productViewTitle="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +103,13 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         remove_button = (ImageButton) findViewById(com.signity.bonbon.R.id.remove_button);
         add_button.setOnClickListener(this);
         remove_button.setOnClickListener(this);
-        textTitle.setText(product.getTitle());
+
+        if(productViewTitle==null){
+            textTitle.setText(product.getTitle());
+        }else {
+            textTitle.setText(productViewTitle);
+        }
+
 
         if (product.getVariants().size() > 1) {
             btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, com.signity.bonbon.R.drawable.arrow_spinner_down_24, 0);
@@ -153,6 +161,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     private void initProduct() {
         String product_id = getIntent().getStringExtra("product_id");
+        productViewTitle = getIntent().getStringExtra("productViewTitle");
 
         GATrackers.getInstance().trackEvent(GAConstant.PRODUCT + "_" + product_id, GAConstant.VIEW, "A product  with id " + product_id +
                 "is view on " + getString(R.string.app_name));

@@ -72,6 +72,7 @@ public final class ProductListFragment extends Fragment {
     String subCategoryId;
     private AppDatabase appDb;
     PrefManager prefManager;
+    String productViewTitle;
 
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context, ProductListFragment.class.getSimpleName());
@@ -90,6 +91,7 @@ public final class ProductListFragment extends Fragment {
         typeFaceRobotoRegular = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_BOLD);
         subCategoryId = getArguments().getString("subCategoryId");
+        productViewTitle = getArguments().getString("productViewTitle","");
         listProduct = new ArrayList<>();
     }
 
@@ -348,6 +350,7 @@ public final class ProductListFragment extends Fragment {
                 public void onClick(View view) {
                     Intent i = new Intent(getActivity(), AppController.getInstance().getViewController().getProductViewActivity());
                     i.putExtra("product_id", product.getId());
+                    i.putExtra("productViewTitle", productViewTitle);
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(getActivity());
                 }

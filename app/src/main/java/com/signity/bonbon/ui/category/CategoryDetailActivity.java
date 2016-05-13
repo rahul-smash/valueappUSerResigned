@@ -54,6 +54,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
     boolean isActivityFirstTime = true;
 
     PrefManager prefManager;
+    String productViewTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -216,6 +217,14 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         @Override
         public Fragment getItem(int position) {
 
+
+            if (subCategoryList.size() <= 1) {
+                productViewTitle = getIntent().getStringExtra("title");
+            }
+            else {
+                productViewTitle=subCategoryList.get(position).getTitle();
+            }
+
             String subCategoryId = subCategoryList.get(position).getId();
             GATrackers.getInstance().trackEvent(GAConstant.EVENT_SUB_CAT + "_" + subCategoryId, GAConstant.VIEW,
                     "Sub Category with Title " + subCategoryList.get(position).getTitle() + " is view on " + getString(R.string.app_name));
@@ -223,6 +232,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
             Bundle arg = new Bundle();
             arg.putInt("position", position);
             arg.putString("subCategoryId", subCategoryId);
+            arg.putString("productViewTitle", productViewTitle);
             ProductListFragment fragment = new ProductListFragment();
             fragment.setArguments(arg);
             return fragment;

@@ -70,7 +70,7 @@ import retrofit.client.Response;
 public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
-    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4;
+    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4,rs5,tax_value,tax_label;
     Button placeorder;
     String userId;
     String addressId;
@@ -101,9 +101,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
     private double loyalityPoints;
-    RelativeLayout relCoupon_1;
+    RelativeLayout relCoupon_1,tax_layout;
     LinearLayout relCoupon;
-
+    String isTaxEnable,taxLabel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -170,6 +170,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         applyOffer = (Button) findViewById(R.id.applyOffer);
         applyOffer_1 = (Button) findViewById(R.id.applyOffer_1);
         redeemPoints = (Button) findViewById(R.id.redeemPoints);
+        tax_value = (TextView) findViewById(R.id.tax_value);
+        tax_layout = (RelativeLayout) findViewById(R.id.tax_layout);
+        tax_label = (TextView) findViewById(R.id.tax_label);
         applyCoupon.setTag("apply");
         applyCoupon.setOnClickListener(this);
         applyCoupon_1.setOnClickListener(this);
@@ -180,6 +183,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         rs2 = (TextView) findViewById(R.id.rs2);
         rs3 = (TextView) findViewById(R.id.rs3);
         rs4 = (TextView) findViewById(R.id.rs4);
+        rs5 = (TextView) findViewById(R.id.rs5);
 
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
@@ -190,11 +194,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             rs2.setText(unescapeJavaString(currency));
             rs3.setText(unescapeJavaString(currency));
             rs4.setText(unescapeJavaString(currency));
+            rs5.setText(unescapeJavaString(currency));
         } else {
             rs1.setText(currency);
             rs2.setText(currency);
             rs3.setText(currency);
             rs4.setText(currency);
+            rs5.setText(currency);
         }
 
 
@@ -205,6 +211,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             listViewCart.setAdapter(adapter);
             listViewCart.setVisibility(View.VISIBLE);
             updateCartPrice();
+            updateTaxPrice();
         }
 
 
@@ -264,6 +271,26 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         });
 
         listViewCart.setSelection(0);
+
+    }
+
+    private void updateTaxPrice() {
+
+        isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
+        taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
+        tax_label.setText(""+taxLabel);
+
+        if(isTaxEnable.equalsIgnoreCase("0")){
+            tax_label.setVisibility(View.GONE);
+            tax_layout.setVisibility(View.GONE);
+        }else {
+            tax_label.setVisibility(View.VISIBLE);
+            tax_layout.setVisibility(View.VISIBLE);
+            String totalCartValue = appDb.getTotalTax();
+            DecimalFormat df = new DecimalFormat("###.##");
+            tax_value.setText(String.valueOf(df.format(Double.parseDouble(totalCartValue))));
+        }
+
 
     }
 

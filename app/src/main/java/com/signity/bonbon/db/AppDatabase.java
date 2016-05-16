@@ -11,7 +11,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.signity.bonbon.BuildConfig;
+import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.GsonHelper;
+import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
@@ -24,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -38,13 +41,14 @@ public class AppDatabase {
     Context context;
     GsonHelper gsonHelper;
     private String TAG = AppDatabase.class.getSimpleName();
-
+    public PrefManager prefManager;
 
     public AppDatabase(Context context) {
         this.context = context;
         this.opener = new DBHelper(context);
         db = opener.getWritableDatabase();
         gsonHelper = new GsonHelper();
+        prefManager=new PrefManager(context);
     }
 
     // operation related to category table
@@ -616,6 +620,12 @@ public class AppDatabase {
     }
 
 
+    public double countTax(String tax,String price){
+        double tax_amount = ((Double.parseDouble(price) * Double.parseDouble(tax) / 100));
+        return tax_amount;
+    }
+
+
     public void updateToCart(Product product) {
         boolean isAlreadyExit = false;
         isAlreadyExit = isProductInCart(product);
@@ -637,6 +647,21 @@ public class AppDatabase {
                     values.put("discount", selectedVarient.getDiscount());
                     values.put("unit_type", selectedVarient.getUnitType());
                     values.put("quantity", selectedVarient.getQuantity());
+
+                    String isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
+
+                    if(isTaxEnable.equalsIgnoreCase("0")){
+                        values.put("tax", "0");
+                    }else if(isTaxEnable.equalsIgnoreCase("1")){
+
+                        if(product.getIsTaxEnable().equalsIgnoreCase("0")){
+                            values.put("tax", "0");
+                        }else {
+                            String tax=prefManager.getSharedValue(AppConstant.tax_rate);
+                            values.put("tax", String.valueOf(countTax(tax,selectedVarient.getPrice())));
+                        }
+                    }
+
                     if (isAlreadyExit) {
                         long l = db.update("cart_table", values, "variant_id=?", new String[]{
                                 selectedVarient.getVariantId()
@@ -810,6 +835,7 @@ public class AppDatabase {
                 updateCartModel.setUnitType(cursor.getString(6));
                 updateCartModel.setQuantity(cursor.getString(7));
                 updateCartModel.setProductName(getProductName(cursor.getString(1)));
+                updateCartModel.setTax(cursor.getString(8));
                 cursor.moveToNext();
                 list.add(updateCartModel);
             }
@@ -904,6 +930,19 @@ public class AppDatabase {
             totalPrice = totalPrice + productPrice;
         }
         return String.valueOf(totalPrice);
+    }
+
+    public String getTotalTax() {
+        double totalTax = 0.0;
+        List<UpdateCartModel> listCartModel = getCartList();
+
+        for (UpdateCartModel updateCartModel : listCartModel) {
+            int quan = Integer.parseInt(updateCartModel.getQuantity());
+            double tax = Double.parseDouble(updateCartModel.getTax());
+            double productPrice = quan * tax;
+            totalTax = totalTax + productPrice;
+        }
+        return String.valueOf(totalTax);
     }
 
 

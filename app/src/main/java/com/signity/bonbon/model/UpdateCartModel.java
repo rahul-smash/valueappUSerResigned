@@ -34,6 +34,19 @@ public class UpdateCartModel {
     @Expose
     private String productName;
 
+    @SerializedName("tax")
+    @Expose
+    private String tax;
+
+
+    public String getTax() {
+        return tax;
+    }
+
+    public void setTax(String tax) {
+        this.tax = tax;
+    }
+
 
     /**
      * @return The productId

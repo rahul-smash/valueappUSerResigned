@@ -218,12 +218,51 @@
                         android:textSize="@dimen/text_size_normal" />
                 </RelativeLayout>
 
+
+                <TextView
+                    android:id="@+id/tax_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/discountLblText"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Tax"
+                    android:textSize="@dimen/text_size_normal"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/tax_layout"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/discount_layout"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:id="@+id/tax_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/rs5"
+                        android:text="0.00"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/rs5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="\u20B9"
+                        android:textSize="@dimen/text_size_normal" />
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/total_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/discountLblText"
+                    android:layout_below="@+id/tax_label"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Total"
@@ -234,7 +273,7 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/discount_layout"
+                    android:layout_below="@+id/tax_layout"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp">
 
@@ -318,7 +357,7 @@
                     android:layout_below="@+id/editCoupon_1"
                     android:paddingLeft="5dp"
                     android:text="*Tax extra if applicable."
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

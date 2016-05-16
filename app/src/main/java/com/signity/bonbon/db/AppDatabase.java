@@ -495,6 +495,7 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
+                product.setIsTaxEnable(cursor.getString(17));
             }
             cursor.close();
         } catch (Exception e) {
@@ -608,6 +609,7 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
+                product.setIsTaxEnable(cursor.getString(17));
                 cursor.moveToNext();
                 listProduct.add(product);
 
@@ -692,6 +694,9 @@ public class AppDatabase {
             values.put("discount", updateCartModel.getDiscount());
             values.put("unit_type", updateCartModel.getUnitType());
             values.put("quantity", updateCartModel.getQuantity());
+
+
+
             if (isAlreadyExit) {
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
                         updateCartModel.getVariantId()
@@ -725,6 +730,21 @@ public class AppDatabase {
                 values.put("discount", selectedVarient.getDiscount());
                 values.put("unit_type", selectedVarient.getUnitType());
                 values.put("quantity", selectedVarient.getQuantity());
+
+                String isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
+
+                if(isTaxEnable.equalsIgnoreCase("0")){
+                    values.put("tax", "0");
+                }else if(isTaxEnable.equalsIgnoreCase("1")){
+
+                    if(product.getIsTaxEnable().equalsIgnoreCase("0")){
+                        values.put("tax", "0");
+                    }else {
+                        String tax=prefManager.getSharedValue(AppConstant.tax_rate);
+                        values.put("tax", String.valueOf(countTax(tax,selectedVarient.getPrice())));
+                    }
+                }
+
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
                         selectedVarient.getVariantId()
                 });

@@ -274,6 +274,19 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+
+    private String getTaxAmount(){
+
+        String taxValue="0";
+        isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
+        if(isTaxEnable.equalsIgnoreCase("0")){
+            taxValue="0";
+        }else if(isTaxEnable.equalsIgnoreCase("1")){
+            taxValue = appDb.getTotalTax();
+        }
+        return taxValue;
+    }
+
     private void updateTaxPrice() {
 
         isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
@@ -286,7 +299,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }else {
             tax_label.setVisibility(View.VISIBLE);
             tax_layout.setVisibility(View.VISIBLE);
-            String totalCartValue = appDb.getTotalTax();
+            String totalCartValue = getTaxAmount();
             DecimalFormat df = new DecimalFormat("###.##");
             tax_value.setText(String.valueOf(df.format(Double.parseDouble(totalCartValue))));
         }
@@ -295,7 +308,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void updateShippingCharges() {
-        double totalPrice = getTotalPrice();
+        double taxValue = Double.parseDouble(getTaxAmount());
+        double totalPrice = getTotalPrice()+taxValue;
 
         if (shippingCharge != 0.0) {
             if (minimumCharges != 0.0) {

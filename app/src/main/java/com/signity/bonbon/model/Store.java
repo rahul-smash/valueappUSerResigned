@@ -83,6 +83,17 @@ public class Store {
     private String storeOpenDays;
 
 
+    @SerializedName("istaxenable")
+    @Expose
+    private String istaxenable;
+    @SerializedName("tax_label_name")
+    @Expose
+    private String taxLabelName;
+    @SerializedName("tax_rate")
+    @Expose
+    private String taxRate;
+
+
     public String getOpenhoursFrom() {
         return openhoursFrom;
     }
@@ -466,5 +477,30 @@ public class Store {
 
     public void setStoreOpenDays(String storeOpenDays) {
         this.storeOpenDays = storeOpenDays;
+    }
+
+
+    public String getIstaxenable() {
+        return istaxenable;
+    }
+
+    public void setIstaxenable(String istaxenable) {
+        this.istaxenable = istaxenable;
+    }
+
+    public String getTaxLabelName() {
+        return taxLabelName;
+    }
+
+    public void setTaxLabelName(String taxLabelName) {
+        this.taxLabelName = taxLabelName;
+    }
+
+    public String getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(String taxRate) {
+        this.taxRate = taxRate;
     }
 }

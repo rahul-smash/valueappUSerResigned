@@ -367,6 +367,7 @@ public class AppDatabase {
                     values.put("image_100_80", product.getImageSmall());
                     values.put("image_300_200", product.getImageMedium());
                     values.put("sort_order", Integer.parseInt(product.getSortOrder()));
+                    values.put("isTaxEnable", product.getIsTaxEnable());
                     values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                     Product pro = getProduct(product.getId());
                     if (pro != null) {
@@ -428,6 +429,7 @@ public class AppDatabase {
                 values.put("image_100_80", product.getImageSmall());
                 values.put("image_300_200", product.getImageMedium());
                 values.put("sort_order", Integer.parseInt(product.getSortOrder()));
+                values.put("isTaxEnable", product.getIsTaxEnable());
                 values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                 values.put("selectedVariant", gsonHelper.getSelectedVarient(product.getSelectedVariant()));
                 long l = db.update("product", values, "id" + "=?", new String[]{String.valueOf(product.getId())});
@@ -559,6 +561,7 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
+                product.setIsTaxEnable(cursor.getString(17));
                 cursor.moveToNext();
                 listProduct.add(product);
             }

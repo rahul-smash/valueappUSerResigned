@@ -41,5 +41,8 @@ public class AppConstant {
     public static final String MESSAGE = "com.android.bonbon.Utilities.MESSAGE";
     public static final String CURRENCY = "com.android.bonbon.Utilities.CURRENCY";
     public static final String LOYALITY = "com.android.bonbon.Utilities.LOYALITY";
+    public static final String istaxenable = "com.android.bonbon.Utilities.istaxenable";
+    public static final String tax_label_name = "com.android.bonbon.Utilities.tax_label_name";
+    public static final String tax_rate = "com.android.bonbon.Utilities.tax_rate";
 
 }

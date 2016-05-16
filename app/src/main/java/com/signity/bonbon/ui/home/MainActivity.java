@@ -671,6 +671,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());
                     prefManager.storeSharedValue(AppConstant.OPEN_DAYS, store.getStoreOpenDays());
                     prefManager.storeSharedValue(AppConstant.MESSAGE, store.getClosehoursMessage());
+                    prefManager.storeSharedValue(AppConstant.istaxenable, store.getIstaxenable());
+                    prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
+                    prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
 
 
                     if (store.getCurrency().isEmpty()) {

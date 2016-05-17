@@ -285,6 +285,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                     updateCartModel.setDiscount(orderModel.getDiscount());
                     updateCartModel.setUnitType(orderModel.getUnitType());
                     updateCartModel.setQuantity(orderModel.getQuantity());
+                    updateCartModel.setIsTaxEnable(product.getIsTaxEnable());
                     appDb.addToCart(updateCartModel);
                     addedtoCartItem++;
                 }

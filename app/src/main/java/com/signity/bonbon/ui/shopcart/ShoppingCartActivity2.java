@@ -70,7 +70,7 @@ import retrofit.client.Response;
 public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
-    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4,rs5,tax_value,tax_label;
+    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4,rs5,tax_value,tax_label,taxTag;
     Button placeorder;
     String userId;
     String addressId;
@@ -103,7 +103,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private double loyalityPoints;
     RelativeLayout relCoupon_1,tax_layout;
     LinearLayout relCoupon;
-    String isTaxEnable,taxLabel;
+    String isTaxEnable,taxLabel,taxRate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -173,6 +173,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         tax_value = (TextView) findViewById(R.id.tax_value);
         tax_layout = (RelativeLayout) findViewById(R.id.tax_layout);
         tax_label = (TextView) findViewById(R.id.tax_label);
+        taxTag = (TextView) findViewById(R.id.taxTag);
         applyCoupon.setTag("apply");
         applyCoupon.setOnClickListener(this);
         applyCoupon_1.setOnClickListener(this);
@@ -192,13 +193,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         if (currency.contains("\\")) {
             rs1.setText(unescapeJavaString(currency));
             rs2.setText(unescapeJavaString(currency));
-            rs3.setText(unescapeJavaString(currency));
+            rs3.setText("-"+unescapeJavaString(currency));
             rs4.setText(unescapeJavaString(currency));
             rs5.setText(unescapeJavaString(currency));
         } else {
             rs1.setText(currency);
             rs2.setText(currency);
-            rs3.setText(currency);
+            rs3.setText("-"+currency);
             rs4.setText(currency);
             rs5.setText(currency);
         }
@@ -291,14 +292,17 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
         taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
-        tax_label.setText(""+taxLabel);
+        taxRate=prefManager.getSharedValue(AppConstant.tax_rate);
+        tax_label.setText(""+taxLabel+"("+taxRate+"%)");
 
         if(isTaxEnable.equalsIgnoreCase("0")){
             tax_label.setVisibility(View.GONE);
             tax_layout.setVisibility(View.GONE);
+            taxTag.setVisibility(View.VISIBLE);
         }else {
             tax_label.setVisibility(View.VISIBLE);
             tax_layout.setVisibility(View.VISIBLE);
+            taxTag.setVisibility(View.GONE);
             String totalCartValue = getTaxAmount();
             DecimalFormat df = new DecimalFormat("###.##");
             tax_value.setText(String.valueOf(df.format(Double.parseDouble(totalCartValue))));
@@ -309,25 +313,25 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private void updateShippingCharges() {
         double taxValue = Double.parseDouble(getTaxAmount());
-        double totalPrice = getTotalPrice()+taxValue;
+        double totalPrice = getTotalPrice();
 
         if (shippingCharge != 0.0) {
             if (minimumCharges != 0.0) {
                 if (minimumCharges > totalPrice) {
                     shipping_charges.setText(String.valueOf(shippingCharge));
-                    total.setText(String.valueOf(totalPrice + shippingCharge));
+                    total.setText(String.valueOf(totalPrice + shippingCharge+taxValue));
                 } else {
                     shippingCharge = 0.0;
                     shipping_charges.setText(String.valueOf(0.0));
-                    total.setText(String.valueOf(totalPrice));
+                    total.setText(String.valueOf(totalPrice+taxValue));
                 }
             } else {
                 shipping_charges.setText(String.valueOf(shippingCharge));
-                total.setText(String.valueOf(totalPrice + shippingCharge));
+                total.setText(String.valueOf(totalPrice + shippingCharge+taxValue));
             }
         } else {
             shipping_charges.setText(String.valueOf(shippingCharge));
-            total.setText(String.valueOf(totalPrice + shippingCharge));
+            total.setText(String.valueOf(totalPrice + shippingCharge+taxValue));
         }
     }
 
@@ -762,7 +766,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     private void applyDiscount(String discountPercent, String strOfferMinimumPrice) {
-        double totalPrice = getTotalPrice();
+        double taxValue = Double.parseDouble(getTaxAmount());
+        double totalPrice = getTotalPrice()+taxValue;
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
 
@@ -770,7 +775,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             double finalPrice = totalPrice - discount + shippingCharge;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));
-            discountVal.setText(String.valueOf(discount));
+            discountVal.setText(String.valueOf(df.format(discount)));
             applyCoupon.setText("Remove Coupon");
             applyCoupon.setTag("remove");
             applyCoupon.setVisibility(View.VISIBLE);
@@ -789,7 +794,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     private void applyDiscount_2(String discountPercent, String strOfferMinimumPrice) {
-        double totalPrice = getTotalPrice();
+        double taxValue = Double.parseDouble(getTaxAmount());
+        double totalPrice = getTotalPrice()+taxValue;
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
 
@@ -797,7 +803,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             double finalPrice = totalPrice - discount + shippingCharge;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));
-            discountVal.setText(String.valueOf(discount));
+            discountVal.setText(String.valueOf(df.format(discount)));
             applyCoupon_1.setText("Remove Coupon");
             applyCoupon_1.setTag("remove");
 
@@ -809,14 +815,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void applyPointsDiscount(String discountAmount) {
-        double totalPrice = getTotalPrice();
+        double taxValue = Double.parseDouble(getTaxAmount());
+        double totalPrice = getTotalPrice()+taxValue;
         double discount = Double.parseDouble(discountAmount);
 
 
         double finalPrice = totalPrice - discount + shippingCharge;
         DecimalFormat df = new DecimalFormat("###.##");
         total.setText(String.valueOf(df.format(finalPrice)));
-        discountVal.setText(String.valueOf(discount));
+        discountVal.setText(String.valueOf(df.format(discount)));
         applyCoupon.setText("Remove Coupon");
         applyCoupon.setTag("remove");
         applyCoupon.setVisibility(View.VISIBLE);

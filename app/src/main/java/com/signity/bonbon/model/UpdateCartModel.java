@@ -39,6 +39,20 @@ public class UpdateCartModel {
     private String tax;
 
 
+
+    @SerializedName("isTaxEnable")
+    @Expose
+    private String isTaxEnable;
+
+    public String getIsTaxEnable() {
+        return isTaxEnable;
+    }
+
+    public void setIsTaxEnable(String isTaxEnable) {
+        this.isTaxEnable = isTaxEnable;
+    }
+
+
     public String getTax() {
         return tax;
     }

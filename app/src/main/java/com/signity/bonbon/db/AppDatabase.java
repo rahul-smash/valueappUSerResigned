@@ -695,7 +695,19 @@ public class AppDatabase {
             values.put("unit_type", updateCartModel.getUnitType());
             values.put("quantity", updateCartModel.getQuantity());
 
+            String isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
 
+            if(isTaxEnable.equalsIgnoreCase("0")){
+                values.put("tax", "0");
+            }else if(isTaxEnable.equalsIgnoreCase("1")){
+
+                if(updateCartModel.getIsTaxEnable().equalsIgnoreCase("0")){
+                    values.put("tax", "0");
+                }else {
+                    String tax=prefManager.getSharedValue(AppConstant.tax_rate);
+                    values.put("tax", String.valueOf(countTax(tax,updateCartModel.getPrice())));
+                }
+            }
 
             if (isAlreadyExit) {
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{

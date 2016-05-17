@@ -212,7 +212,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             listViewCart.setAdapter(adapter);
             listViewCart.setVisibility(View.VISIBLE);
             updateCartPrice();
-            updateTaxPrice();
         }
 
 
@@ -276,7 +275,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
-    private String getTaxAmount(){
+   /* private String getTaxAmount(){
 
         String taxValue="0";
         isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
@@ -286,9 +285,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             taxValue = appDb.getTotalTax();
         }
         return taxValue;
-    }
+    }*/
 
-    private void updateTaxPrice() {
+    /*private void updateTaxPrice() {
 
         isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
         taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
@@ -310,28 +309,29 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     }
+*/
 
     private void updateShippingCharges() {
-        double taxValue = Double.parseDouble(getTaxAmount());
+//        double taxValue = Double.parseDouble(getTaxAmount());
         double totalPrice = getTotalPrice();
 
         if (shippingCharge != 0.0) {
             if (minimumCharges != 0.0) {
                 if (minimumCharges > totalPrice) {
                     shipping_charges.setText(String.valueOf(shippingCharge));
-                    total.setText(String.valueOf(totalPrice + shippingCharge+taxValue));
+                    total.setText(String.valueOf(totalPrice + shippingCharge));
                 } else {
                     shippingCharge = 0.0;
                     shipping_charges.setText(String.valueOf(0.0));
-                    total.setText(String.valueOf(totalPrice+taxValue));
+                    total.setText(String.valueOf(totalPrice));
                 }
             } else {
                 shipping_charges.setText(String.valueOf(shippingCharge));
-                total.setText(String.valueOf(totalPrice + shippingCharge+taxValue));
+                total.setText(String.valueOf(totalPrice + shippingCharge));
             }
         } else {
             shipping_charges.setText(String.valueOf(shippingCharge));
-            total.setText(String.valueOf(totalPrice + shippingCharge+taxValue));
+            total.setText(String.valueOf(totalPrice + shippingCharge));
         }
     }
 
@@ -766,8 +766,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     private void applyDiscount(String discountPercent, String strOfferMinimumPrice) {
-        double taxValue = Double.parseDouble(getTaxAmount());
-        double totalPrice = getTotalPrice()+taxValue;
+        double totalPrice = getTotalPrice();
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
 
@@ -794,8 +793,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     private void applyDiscount_2(String discountPercent, String strOfferMinimumPrice) {
-        double taxValue = Double.parseDouble(getTaxAmount());
-        double totalPrice = getTotalPrice()+taxValue;
+        double totalPrice = getTotalPrice();
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
 
@@ -815,8 +813,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void applyPointsDiscount(String discountAmount) {
-        double taxValue = Double.parseDouble(getTaxAmount());
-        double totalPrice = getTotalPrice()+taxValue;
+        double totalPrice = getTotalPrice();
         double discount = Double.parseDouble(discountAmount);
 
 

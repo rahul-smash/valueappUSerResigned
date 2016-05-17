@@ -71,18 +71,6 @@ public class Product {
     @Expose
     private String sortOrder;
 
-    @SerializedName("isTaxEnable")
-    @Expose
-    private String isTaxEnable;
-
-
-    public String getIsTaxEnable() {
-        return isTaxEnable;
-    }
-
-    public void setIsTaxEnable(String isTaxEnable) {
-        this.isTaxEnable = isTaxEnable;
-    }
 
 
     /**

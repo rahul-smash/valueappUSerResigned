@@ -371,7 +371,6 @@ public class AppDatabase {
                     values.put("image_100_80", product.getImageSmall());
                     values.put("image_300_200", product.getImageMedium());
                     values.put("sort_order", Integer.parseInt(product.getSortOrder()));
-                    values.put("isTaxEnable", product.getIsTaxEnable());
                     values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                     Product pro = getProduct(product.getId());
                     if (pro != null) {
@@ -433,7 +432,6 @@ public class AppDatabase {
                 values.put("image_100_80", product.getImageSmall());
                 values.put("image_300_200", product.getImageMedium());
                 values.put("sort_order", Integer.parseInt(product.getSortOrder()));
-                values.put("isTaxEnable", product.getIsTaxEnable());
                 values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                 values.put("selectedVariant", gsonHelper.getSelectedVarient(product.getSelectedVariant()));
                 long l = db.update("product", values, "id" + "=?", new String[]{String.valueOf(product.getId())});
@@ -495,7 +493,6 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
-                product.setIsTaxEnable(cursor.getString(17));
             }
             cursor.close();
         } catch (Exception e) {
@@ -566,7 +563,6 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
-                product.setIsTaxEnable(cursor.getString(17));
                 cursor.moveToNext();
                 listProduct.add(product);
             }
@@ -609,7 +605,6 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
-                product.setIsTaxEnable(cursor.getString(17));
                 cursor.moveToNext();
                 listProduct.add(product);
 
@@ -650,19 +645,6 @@ public class AppDatabase {
                     values.put("unit_type", selectedVarient.getUnitType());
                     values.put("quantity", selectedVarient.getQuantity());
 
-                    String isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
-
-                    if(isTaxEnable.equalsIgnoreCase("0")){
-                        values.put("tax", "0");
-                    }else if(isTaxEnable.equalsIgnoreCase("1")){
-
-                        if(product.getIsTaxEnable().equalsIgnoreCase("0")){
-                            values.put("tax", "0");
-                        }else {
-                            String tax=prefManager.getSharedValue(AppConstant.tax_rate);
-                            values.put("tax", String.valueOf(countTax(tax,selectedVarient.getPrice())));
-                        }
-                    }
 
                     if (isAlreadyExit) {
                         long l = db.update("cart_table", values, "variant_id=?", new String[]{
@@ -695,19 +677,6 @@ public class AppDatabase {
             values.put("unit_type", updateCartModel.getUnitType());
             values.put("quantity", updateCartModel.getQuantity());
 
-            String isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
-
-            if(isTaxEnable.equalsIgnoreCase("0")){
-                values.put("tax", "0");
-            }else if(isTaxEnable.equalsIgnoreCase("1")){
-
-                if(updateCartModel.getIsTaxEnable().equalsIgnoreCase("0")){
-                    values.put("tax", "0");
-                }else {
-                    String tax=prefManager.getSharedValue(AppConstant.tax_rate);
-                    values.put("tax", String.valueOf(countTax(tax,updateCartModel.getPrice())));
-                }
-            }
 
             if (isAlreadyExit) {
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
@@ -743,19 +712,7 @@ public class AppDatabase {
                 values.put("unit_type", selectedVarient.getUnitType());
                 values.put("quantity", selectedVarient.getQuantity());
 
-                String isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
 
-                if(isTaxEnable.equalsIgnoreCase("0")){
-                    values.put("tax", "0");
-                }else if(isTaxEnable.equalsIgnoreCase("1")){
-
-                    if(product.getIsTaxEnable().equalsIgnoreCase("0")){
-                        values.put("tax", "0");
-                    }else {
-                        String tax=prefManager.getSharedValue(AppConstant.tax_rate);
-                        values.put("tax", String.valueOf(countTax(tax,selectedVarient.getPrice())));
-                    }
-                }
 
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
                         selectedVarient.getVariantId()
@@ -867,7 +824,6 @@ public class AppDatabase {
                 updateCartModel.setUnitType(cursor.getString(6));
                 updateCartModel.setQuantity(cursor.getString(7));
                 updateCartModel.setProductName(getProductName(cursor.getString(1)));
-                updateCartModel.setTax(cursor.getString(8));
                 cursor.moveToNext();
                 list.add(updateCartModel);
             }
@@ -964,7 +920,7 @@ public class AppDatabase {
         return String.valueOf(totalPrice);
     }
 
-    public String getTotalTax() {
+   /* public String getTotalTax() {
         double totalTax = 0.0;
         List<UpdateCartModel> listCartModel = getCartList();
 
@@ -975,7 +931,7 @@ public class AppDatabase {
             totalTax = totalTax + productPrice;
         }
         return String.valueOf(totalTax);
-    }
+    }*/
 
 
     ///--------------------------------------------Store Table---------------------------

@@ -186,6 +186,12 @@ public class ViewController {
                 }
                 break;
 
+            case 30:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentAppleTheme28();
+                }
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;
@@ -338,6 +344,13 @@ public class ViewController {
             case 28:
                 //Apple Diamond
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+                    layoutId = R.layout.home_activity_theme_28_apple;
+                }
+                break;
+
+            case 31:
+                //Suruchi Bhog
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_28_apple;
                 }
                 break;

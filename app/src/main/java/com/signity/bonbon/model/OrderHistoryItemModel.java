@@ -63,6 +63,21 @@ public class OrderHistoryItemModel {
     @Expose
     private String productBrand;
 
+
+    @SerializedName("isTaxEnable")
+    @Expose
+    private String isTaxEnable;
+
+
+    public String getIsTaxEnable() {
+        return isTaxEnable;
+    }
+
+    public void setIsTaxEnable(String isTaxEnable) {
+        this.isTaxEnable = isTaxEnable;
+    }
+
+
     /**
      * @return The id
      */

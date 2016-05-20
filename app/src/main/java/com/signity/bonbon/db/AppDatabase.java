@@ -19,6 +19,7 @@ import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.model.SubCategory;
+import com.signity.bonbon.model.UpdateCartItemModel;
 import com.signity.bonbon.model.UpdateCartModel;
 import com.signity.bonbon.model.Variant;
 
@@ -372,6 +373,7 @@ public class AppDatabase {
                     values.put("image_300_200", product.getImageMedium());
                     values.put("sort_order", Integer.parseInt(product.getSortOrder()));
                     values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
+                    values.put("isTaxEnable", product.getIsTaxEnable());
                     Product pro = getProduct(product.getId());
                     if (pro != null) {
                         SelectedVariant selectedVariantUpdate = changeSelectedVarientForProductUpdate(product.getVariants(), pro.getSelectedVariant());
@@ -434,6 +436,8 @@ public class AppDatabase {
                 values.put("sort_order", Integer.parseInt(product.getSortOrder()));
                 values.put("variants", gsonHelper.getProductVarientsArray(product.getVariants()));
                 values.put("selectedVariant", gsonHelper.getSelectedVarient(product.getSelectedVariant()));
+                values.put("isTaxEnable", product.getIsTaxEnable());
+
                 long l = db.update("product", values, "id" + "=?", new String[]{String.valueOf(product.getId())});
                 if (l == 0) {
                     long l2 = db.insert("product", null, values);
@@ -493,6 +497,7 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
+                product.setIsTaxEnable(cursor.getString(17));
             }
             cursor.close();
         } catch (Exception e) {
@@ -563,6 +568,7 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
+                product.setIsTaxEnable(cursor.getString(17));
                 cursor.moveToNext();
                 listProduct.add(product);
             }
@@ -605,6 +611,7 @@ public class AppDatabase {
                 product.setIsEnable(cursor.getString(14));
                 product.setIsDeleted(cursor.getString(15).equals("1") ? true : false);
                 product.setSortOrder(String.valueOf(cursor.getString(16)));
+                product.setIsTaxEnable(cursor.getString(17));
                 cursor.moveToNext();
                 listProduct.add(product);
 
@@ -644,6 +651,7 @@ public class AppDatabase {
                     values.put("discount", selectedVarient.getDiscount());
                     values.put("unit_type", selectedVarient.getUnitType());
                     values.put("quantity", selectedVarient.getQuantity());
+                    values.put("isTaxEnable", product.getIsTaxEnable());
 
 
                     if (isAlreadyExit) {
@@ -676,7 +684,7 @@ public class AppDatabase {
             values.put("discount", updateCartModel.getDiscount());
             values.put("unit_type", updateCartModel.getUnitType());
             values.put("quantity", updateCartModel.getQuantity());
-
+            values.put("isTaxEnable", updateCartModel.getIsTaxEnable());
 
             if (isAlreadyExit) {
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
@@ -711,7 +719,7 @@ public class AppDatabase {
                 values.put("discount", selectedVarient.getDiscount());
                 values.put("unit_type", selectedVarient.getUnitType());
                 values.put("quantity", selectedVarient.getQuantity());
-
+                values.put("isTaxEnable", product.getIsTaxEnable());
 
 
                 long l = db.update("cart_table", values, "variant_id=?", new String[]{
@@ -824,6 +832,7 @@ public class AppDatabase {
                 updateCartModel.setUnitType(cursor.getString(6));
                 updateCartModel.setQuantity(cursor.getString(7));
                 updateCartModel.setProductName(getProductName(cursor.getString(1)));
+                updateCartModel.setIsTaxEnable(cursor.getString(8));
                 cursor.moveToNext();
                 list.add(updateCartModel);
             }
@@ -880,6 +889,28 @@ public class AppDatabase {
         Type type = new TypeToken<List<UpdateCartModel>>() {
         }.getType();
         jsonString = gson.toJson(updateCartModelList, type);
+        Log.i("TAG", jsonString);
+        return jsonString;
+    }
+
+    public String getCartItemsListStringJson() {
+        String jsonString = "";
+        List<UpdateCartModel> updateCartModelList = getCartList();
+        List<UpdateCartItemModel> updateCartItemList=new ArrayList<>();
+
+        for(UpdateCartModel updateCartModel:updateCartModelList){
+            UpdateCartItemModel model=new UpdateCartItemModel();
+            model.setProductId(updateCartModel.getProductId());
+            model.setVariantId(updateCartModel.getVariantId());
+            model.setIsTaxEnable(updateCartModel.getIsTaxEnable());
+            model.setPrice(updateCartModel.getPrice());
+            model.setQuantity(updateCartModel.getQuantity());
+            updateCartItemList.add(model);
+        }
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<UpdateCartItemModel>>() {
+        }.getType();
+        jsonString = gson.toJson(updateCartItemList, type);
         Log.i("TAG", jsonString);
         return jsonString;
     }

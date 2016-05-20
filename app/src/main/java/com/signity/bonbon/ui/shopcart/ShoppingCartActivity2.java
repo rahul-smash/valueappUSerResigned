@@ -49,6 +49,7 @@ import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Store;
+import com.signity.bonbon.model.TaxCalculationModel;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
@@ -104,6 +105,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     RelativeLayout relCoupon_1,tax_layout;
     LinearLayout relCoupon;
     String isTaxEnable,taxLabel,taxRate;
+    String discount="0",fixed_discount_amount="0";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,12 +116,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         );
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(ShoppingCartActivity2.this);
+
+
+
         userId = getIntent().getStringExtra("userId");
         addressId = getIntent().getStringExtra("addressId");
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
         minmimumChargesText = getIntent().getStringExtra("minimum_charges");
         user_address = getIntent().getStringExtra("user_address");
         isForPickUpStatus = getIntent().getStringExtra("isForPickup") != null ? getIntent().getStringExtra("isForPickup") : "no";
+
         if (shippingChargeText != null && !shippingChargeText.isEmpty()) {
             shippingCharge = Double.parseDouble(shippingChargeText);
         }
@@ -813,6 +819,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void applyPointsDiscount(String discountAmount) {
+        fixed_discount_amount=discountAmount;
         double totalPrice = getTotalPrice();
         double discount = Double.parseDouble(discountAmount);
 
@@ -855,6 +862,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         coupenCode = couponCode;
                         OfferData offerData = getValidCouponResponse.getData();
                         String discountPercent = offerData.getDiscount();
+                        discount= offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
                         applyDiscount_2(discountPercent, offerMinimumPrice);
                     } else {
@@ -903,6 +911,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         coupenCode = couponCode;
                         OfferData offerData = getValidCouponResponse.getData();
                         String discountPercent = offerData.getDiscount();
+                        discount= offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
                         applyDiscount(discountPercent, offerMinimumPrice);
                         applyDiscount_2(discountPercent, offerMinimumPrice);
@@ -929,6 +938,63 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        callNetworkForTaxCalculations();
+
+    }
+
+    private void callNetworkForTaxCalculations() {
+
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+        PrefManager prefManager = new PrefManager(this);
+        taxRate=prefManager.getSharedValue(AppConstant.tax_rate); //getting tax rate from prefrencees
+
+        String shippingcharge = shipping_charges.getText().toString();
+
+        String order = appDb.getCartItemsListStringJson();
+
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("shipping", shippingcharge);
+        param.put("discount", discount);
+        param.put("tax", taxRate);
+        param.put("fixed_discount_amount", fixed_discount_amount);
+        param.put("order_detail", order);
+
+        NetworkAdaper.getInstance().getNetworkServices().getTaxCalculations(param, new Callback<TaxCalculationModel>() {
+           /* @Override
+            public void success(ResponseData responseData, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
+                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                } else {
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                }
+            }*/
+
+            @Override
+            public void success(TaxCalculationModel taxCalculationModel, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+                if (taxCalculationModel.getSuccess() != null ? taxCalculationModel.getSuccess() : false) {
+//                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                } else {
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Error", ""+taxCalculationModel.getMessage(), false);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+            }
+        });
+
+    }
 
     public void showAlertDialogwithPickUp(Context context, String title,
                                 String message) {

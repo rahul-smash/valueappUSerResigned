@@ -6,5 +6,6 @@ mrp_price TEXT,
 price TEXT,
 discount TEXT,
 unit_type TEXT,
-quantity TEXT
+quantity TEXT,
+isTaxEnable TEXT DEFAULT (0)
 );

@@ -314,8 +314,9 @@ public class ViewController {
                 layoutId = R.layout.home_activity_theme_20;
                 break;
             case 21:
-                //Wah ji Wah
-                layoutId = R.layout.home_activity_theme_21;
+                //Wah ji Wah and 56 Street.
+//                layoutId = R.layout.home_activity_theme_21;
+                layoutId = R.layout.home_activity_theme_21_56street;
                 break;
             case 22:
                 //Beliran Degchiwala

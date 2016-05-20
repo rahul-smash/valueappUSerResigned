@@ -43,7 +43,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="33"
-                        android:background="@color/color_blue_dark"
+                        android:background="@color/color_orange_dark"
                         android:gravity="center">
 
                         <com.signity.bonbon.view.FontTextView
@@ -79,7 +79,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="33"
-                        android:background="@color/color_blue_dark"
+                        android:background="@color/color_orange_dark"
                         android:gravity="center">
 
 
@@ -117,7 +117,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="33"
-                        android:background="@color/color_blue_dark"
+                        android:background="@color/color_orange_dark"
                         android:gravity="center">
 
                         <com.signity.bonbon.view.FontTextView
@@ -173,7 +173,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="33"
-                        android:background="@color/color_blue_dark"
+                        android:background="@color/color_orange_dark"
                         android:gravity="center">
 
                         <com.signity.bonbon.view.FontTextView
@@ -209,7 +209,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="33"
-                        android:background="@color/color_blue_dark"
+                        android:background="@color/color_orange_dark"
                         android:gravity="center">
 
 
@@ -247,7 +247,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="33"
-                        android:background="@color/color_blue_dark"
+                        android:background="@color/color_orange_dark"
                         android:gravity="center">
 
                         <com.signity.bonbon.view.FontTextView

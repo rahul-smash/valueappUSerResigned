@@ -195,7 +195,12 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             public void success(GetSubCategory getSubCategory, Response response) {
                 if (getSubCategory.getSuccess()) {
                     ProgressDialogUtil.hideProgressDialog();
-                    setupListProduct(getSubCategory.getData());
+                    if(getSubCategory.getData().size()!=0){
+                        setupListProduct(getSubCategory.getData());
+                    }else {
+                        Toast.makeText(SearchForGroceryActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     ProgressDialogUtil.hideProgressDialog();
                     Toast.makeText(SearchForGroceryActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();

@@ -297,21 +297,26 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
         taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
-        taxRate=prefManager.getSharedValue(AppConstant.tax_rate);
-        tax_label.setText(""+taxLabel+"("+taxRate+"%)");
 
         if(isTaxEnable.equalsIgnoreCase("0")){
             tax_label.setVisibility(View.GONE);
             tax_layout.setVisibility(View.GONE);
             taxTag.setVisibility(View.VISIBLE);
+            taxRate="0";
         }else {
             tax_label.setVisibility(View.VISIBLE);
             tax_layout.setVisibility(View.VISIBLE);
             taxTag.setVisibility(View.GONE);
+            taxRate=prefManager.getSharedValue(AppConstant.tax_rate);
+            tax_label.setText("" + taxLabel + "(" + taxRate + "%)");
         }
 
+        callNetworkForTaxCalculations();
 
     }
+
+
+
 
     private void updateShippingCharges() {
 //        double taxValue = Double.parseDouble(getTaxAmount());
@@ -959,15 +964,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
 
-        callNetworkForTaxCalculations();
 
     }
+
 
     private void callNetworkForTaxCalculations() {
 
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         PrefManager prefManager = new PrefManager(this);
-        taxRate=prefManager.getSharedValue(AppConstant.tax_rate); //getting tax rate from prefrencees
+//        taxRate=prefManager.getSharedValue(AppConstant.tax_rate); //getting tax rate from prefrencees
 
         String shippingcharge = shipping_charges.getText().toString();
 

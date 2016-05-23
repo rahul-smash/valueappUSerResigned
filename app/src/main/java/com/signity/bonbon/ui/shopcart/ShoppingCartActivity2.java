@@ -118,7 +118,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         prefManager = new PrefManager(ShoppingCartActivity2.this);
 
 
-
         userId = getIntent().getStringExtra("userId");
         addressId = getIntent().getStringExtra("addressId");
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
@@ -218,6 +217,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             listViewCart.setAdapter(adapter);
             listViewCart.setVisibility(View.VISIBLE);
             updateCartPrice();
+            updateTaxPrice();
         }
 
 
@@ -293,7 +293,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         return taxValue;
     }*/
 
-    /*private void updateTaxPrice() {
+    private void updateTaxPrice() {
 
         isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
         taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
@@ -308,14 +308,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             tax_label.setVisibility(View.VISIBLE);
             tax_layout.setVisibility(View.VISIBLE);
             taxTag.setVisibility(View.GONE);
-            String totalCartValue = getTaxAmount();
-            DecimalFormat df = new DecimalFormat("###.##");
-            tax_value.setText(String.valueOf(df.format(Double.parseDouble(totalCartValue))));
         }
 
 
     }
-*/
 
     private void updateShippingCharges() {
 //        double taxValue = Double.parseDouble(getTaxAmount());
@@ -372,6 +368,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
+        String tax = tax_value.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
@@ -382,6 +379,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("payment_method", "cod");
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
+        param.put("tax", tax);
+        param.put("tax_rate", taxRate);
         param.put("note", note);
         param.put("orders", order);
         param.put("coupon_code", coupenCode);
@@ -425,6 +424,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
+        String tax = tax_value.getText().toString();
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -434,6 +434,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("payment_method", "cod");
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
+        param.put("tax", tax);
+        param.put("tax_rate", taxRate);
         param.put("note", note);
         param.put("orders", order);
         param.put("checkout", orderPrice);
@@ -735,6 +737,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
             coupenCode = "";
+            discount="0";
+            fixed_discount_amount="0";
             double discount = Double.parseDouble(discountVal.getText().toString());
             double totalval = Double.parseDouble(total.getText().toString());
             double finalVal = totalval + discount;
@@ -751,6 +755,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             applyCoupon_1.setText("Apply Coupon");
             applyCoupon_1.setTag("apply");
             editCoupon_1.setText("");
+
+            callNetworkForTaxCalculations();
         }
     }
 
@@ -758,6 +764,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
             coupenCode = "";
+            discount="0";
+            fixed_discount_amount="0";
             double discount = Double.parseDouble(discountVal.getText().toString());
             double totalval = Double.parseDouble(total.getText().toString());
             double finalVal = totalval + discount;
@@ -767,6 +775,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             applyCoupon_1.setText("Apply Coupon");
             applyCoupon_1.setTag("apply");
             editCoupon_1.setText("");
+
+            callNetworkForTaxCalculations();
         }
     }
 
@@ -790,6 +800,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             applyCoupon_1.setText("Remove Coupon");
             applyCoupon_1.setTag("remove");
 
+            callNetworkForTaxCalculations();
+
         } else {
             Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
                     + offerMinimumPrice, Toast.LENGTH_SHORT).show();
@@ -810,6 +822,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             discountVal.setText(String.valueOf(df.format(discount)));
             applyCoupon_1.setText("Remove Coupon");
             applyCoupon_1.setTag("remove");
+
+            callNetworkForTaxCalculations();
 
         } else {
             Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
@@ -834,6 +848,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         editCoupon.setVisibility(View.VISIBLE);
         applyOffer.setVisibility(View.GONE);
         redeemPoints.setVisibility(View.GONE);
+
+        callNetworkForTaxCalculations();
 
     }
 
@@ -913,6 +929,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         String discountPercent = offerData.getDiscount();
                         discount= offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
+
                         applyDiscount(discountPercent, offerMinimumPrice);
                         applyDiscount_2(discountPercent, offerMinimumPrice);
                     } else {
@@ -964,25 +981,26 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("order_detail", order);
 
         NetworkAdaper.getInstance().getNetworkServices().getTaxCalculations(param, new Callback<TaxCalculationModel>() {
-           /* @Override
-            public void success(ResponseData responseData, Response response) {
-                ProgressDialogUtil.hideProgressDialog();
-                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
-                } else {
-                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
-                }
-            }*/
 
             @Override
             public void success(TaxCalculationModel taxCalculationModel, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (taxCalculationModel.getSuccess() != null ? taxCalculationModel.getSuccess() : false) {
 //                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+
+                    String itemsPrice=taxCalculationModel.getData().getItemSubTotal();
+                    String tax=taxCalculationModel.getData().getTax();
+                    String discount=taxCalculationModel.getData().getDiscount();
+                    String shippingCharge=taxCalculationModel.getData().getShipping();
+                    String totalPrice=taxCalculationModel.getData().getTotal();
+                    items_price.setText(""+itemsPrice);
+                    tax_value.setText(""+tax);
+                    discountVal.setText(""+discount);
+                    shipping_charges.setText(""+shippingCharge);
+                    total.setText(""+totalPrice);
                 } else {
-                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Error", ""+taxCalculationModel.getMessage(), false);
+
+                    showAlertDialog(ShoppingCartActivity2.this, "Error", ""+taxCalculationModel.getMessage());
                 }
             }
 
@@ -1356,6 +1374,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     editCoupon.setText("");
                     editCoupon.setText(pointsList.get(position).getCouponCode());
 //                    onApplyCoupon();
+
                     applyPointsDiscount(pointsList.get(position).getAmount());
                     redeemDialog.dismiss();
                     redeemDialog = null;

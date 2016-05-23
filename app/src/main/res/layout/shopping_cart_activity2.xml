@@ -154,7 +154,7 @@
                     android:layout_marginTop="5dp"
                     android:text="Tax"
                     android:textSize="@dimen/text_size_normal"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     />
 
                 <RelativeLayout
@@ -165,7 +165,7 @@
                     android:layout_below="@+id/price_layout"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tax_value"
@@ -235,7 +235,7 @@
 
                 <RelativeLayout
                     android:id="@+id/discount_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="86dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/shipping_layout"
@@ -249,8 +249,6 @@
                         android:layout_toRightOf="@+id/rs3"
                         android:text="0.00"
                         android:textSize="@dimen/text_size_normal" />
-
-
 
                     <TextView
                         android:id="@+id/rs3"

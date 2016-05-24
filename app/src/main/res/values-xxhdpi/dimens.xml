@@ -11,6 +11,7 @@
     <!--common constant-->
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_normal">18sp</dimen>
+    <dimen name="text_size">16sp</dimen>
     <dimen name="text_size_sub_normal">14sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
 

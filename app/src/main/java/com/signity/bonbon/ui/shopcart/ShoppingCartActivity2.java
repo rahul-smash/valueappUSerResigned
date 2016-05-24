@@ -198,13 +198,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         if (currency.contains("\\")) {
             rs1.setText(unescapeJavaString(currency));
             rs2.setText(unescapeJavaString(currency));
-            rs3.setText("-"+unescapeJavaString(currency));
+            rs3.setText("- "+unescapeJavaString(currency));
             rs4.setText(unescapeJavaString(currency));
             rs5.setText(unescapeJavaString(currency));
         } else {
             rs1.setText(currency);
             rs2.setText(currency);
-            rs3.setText("-"+currency);
+            rs3.setText("- "+currency);
             rs4.setText(currency);
             rs5.setText(currency);
         }

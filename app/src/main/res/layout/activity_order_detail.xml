@@ -251,6 +251,45 @@
                     android:text="USD"
                     android:textSize="@dimen/text_size_normal" />
             </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/taxLblText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/discountLblText"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Tax"
+                android:textSize="@dimen/text_size_normal" />
+
+            <RelativeLayout
+                android:id="@+id/taxlayout"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/discount_layout"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="left">
+
+                <TextView
+                    android:id="@+id/taxVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/rs4"
+                    android:text="0.00"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    android:id="@+id/rs4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="USD"
+                    android:textSize="@dimen/text_size_normal" />
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 

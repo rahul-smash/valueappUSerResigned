@@ -46,9 +46,23 @@ public class OrderHistoryModel {
     @Expose
     private String address;
 
+
+    @SerializedName("tax")
+    @Expose
+    private String tax;
+
     @SerializedName("order_items")
     @Expose
     private List<OrderHistoryItemModel> orderItems = new ArrayList<OrderHistoryItemModel>();
+
+
+    public String getTax() {
+        return tax;
+    }
+
+    public void setTax(String tax) {
+        this.tax = tax;
+    }
 
     /**
      * @return The orderId

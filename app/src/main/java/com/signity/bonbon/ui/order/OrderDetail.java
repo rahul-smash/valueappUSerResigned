@@ -32,7 +32,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     ListView order_history_list;
     TextView no_record,currencyTxt,rs1,rs2,rs3;
 
-    TextView textAddress, textCheckOut, textDiscount, textShipping, textTOtal, textlblNote, textNote;
+    TextView textAddress, textCheckOut, textDiscount, textShipping, textTOtal, textlblNote, textNote,taxLblText,taxVal,rs4;
 
     ImageView ic_down_up;
 
@@ -46,7 +46,8 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
     Animation slideUpAnim;
     Animation slideDownAnim;
-    RelativeLayout layout_total;
+    RelativeLayout layout_total,taxlayout;
+    String isTaxEnable,taxLabel,taxRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +62,14 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         textlblNote = (TextView) findViewById(R.id.lblNote);
         textNote = (TextView) findViewById(R.id.note);
         currencyTxt=(TextView)findViewById(R.id.currency);
+        taxLblText=(TextView)findViewById(R.id.taxLblText);
+        taxVal=(TextView)findViewById(R.id.taxVal);
+        taxlayout=(RelativeLayout)findViewById(R.id.taxlayout);
+
         rs1=(TextView)findViewById(R.id.rs1);
         rs2=(TextView)findViewById(R.id.rs2);
         rs3=(TextView)findViewById(R.id.rs3);
+        rs4=(TextView)findViewById(R.id.rs4);
 
         slideUpAnim = AnimationUtils.loadAnimation(OrderDetail.this
                 .getApplicationContext(), R.anim.slide_up_activity);
@@ -89,6 +95,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         if (orderHistoryModel != null) {
 
             updateUiBlock(orderHistoryModel);
+            updateTaxPrice(orderHistoryModel);
 
             listOrderHistoryItemModel = orderHistoryModel.getOrderItems();
             if (listOrderHistoryItemModel != null && listOrderHistoryItemModel.size() != 0) {
@@ -111,16 +118,25 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
             rs1.setText(unescapeJavaString(currency));
             rs2.setText(unescapeJavaString(currency));
             rs3.setText(unescapeJavaString(currency));
+            rs4.setText(unescapeJavaString(currency));
         }
         else {
             currencyTxt.setText(currency);
             rs1.setText(currency);
             rs2.setText(currency);
             rs3.setText(currency);
-
+            rs4.setText(currency);
         }
 
 
+
+    }
+
+    private void updateTaxPrice(OrderHistoryModel orderHistoryModel) {
+
+        taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
+        taxLblText.setText(""+taxLabel);
+        taxVal.setText(""+orderHistoryModel.getTax());
 
     }
 

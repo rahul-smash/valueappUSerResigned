@@ -43,6 +43,7 @@ import com.signity.bonbon.ui.restaurant.storetheme23.HomeFragmentChawlasTheme23;
 import com.signity.bonbon.ui.restaurant.storetheme24.HomeFragmentCrazyTheme24;
 import com.signity.bonbon.ui.restaurant.storetheme25.fragment.HomeFragmentBigChefTheme25;
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
+import com.signity.bonbon.ui.restaurant.storetheme31.HomeFragmentSuruchiTheme31;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
@@ -188,7 +189,14 @@ public class ViewController {
 
             case 30:
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
-                    fragment = new HomeFragmentAppleTheme28();
+                    fragment = new HomeFragmentSuruchiTheme31();
+                }
+                break;
+
+
+            case 31:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentSuruchiTheme31();
                 }
                 break;
 
@@ -348,6 +356,14 @@ public class ViewController {
                     layoutId = R.layout.home_activity_theme_28_apple;
                 }
                 break;
+
+            case 30:
+                //Manjeet
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    layoutId = R.layout.home_activity_theme_28_apple;
+                }
+                break;
+
 
             case 31:
                 //Suruchi Bhog

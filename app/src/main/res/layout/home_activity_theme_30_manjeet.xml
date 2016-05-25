@@ -157,7 +157,7 @@
                 android:layout_weight="50">
 
                 <RelativeLayout
-                    android:id="@+id/relBook"
+                    android:id="@+id/relBookNow"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="33"

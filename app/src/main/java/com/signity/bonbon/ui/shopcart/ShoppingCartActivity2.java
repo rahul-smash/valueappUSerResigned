@@ -999,13 +999,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     double shippingCharge= Double.parseDouble(taxCalculationModel.getData().getShipping());
                     double totalPrice= Double.parseDouble(taxCalculationModel.getData().getTotal());
 
-                    DecimalFormat df = new DecimalFormat("###.##");
 
-                    items_price.setText(""+String.valueOf(df.format(itemsPrice)));
-                    tax_value.setText(""+String.valueOf(df.format(tax)));
-                    discountVal.setText(""+String.valueOf(df.format(discount)));
-                    shipping_charges.setText(""+String.valueOf(df.format(shippingCharge)));
-                    total.setText(""+String.valueOf(df.format(totalPrice)));
+                    items_price.setText(""+String.format("%.2f",itemsPrice));
+                    tax_value.setText(""+String.format("%.2f", tax));
+                    discountVal.setText(""+String.format("%.2f", discount));
+                    shipping_charges.setText(""+String.format("%.2f", shippingCharge));
+                    total.setText(""+String.format("%.2f", totalPrice));
                 } else {
 
                     showAlertDialog(ShoppingCartActivity2.this, "Error", ""+taxCalculationModel.getMessage());

@@ -993,16 +993,19 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 if (taxCalculationModel.getSuccess() != null ? taxCalculationModel.getSuccess() : false) {
 //                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
 
-                    String itemsPrice=taxCalculationModel.getData().getItemSubTotal();
-                    String tax=taxCalculationModel.getData().getTax();
-                    String discount=taxCalculationModel.getData().getDiscount();
-                    String shippingCharge=taxCalculationModel.getData().getShipping();
-                    String totalPrice=taxCalculationModel.getData().getTotal();
-                    items_price.setText(""+itemsPrice);
-                    tax_value.setText(""+tax);
-                    discountVal.setText(""+discount);
-                    shipping_charges.setText(""+shippingCharge);
-                    total.setText(""+totalPrice);
+                    double itemsPrice= Double.parseDouble(taxCalculationModel.getData().getItemSubTotal());
+                    double tax= Double.parseDouble(taxCalculationModel.getData().getTax());
+                    double discount= Double.parseDouble(taxCalculationModel.getData().getDiscount());
+                    double shippingCharge= Double.parseDouble(taxCalculationModel.getData().getShipping());
+                    double totalPrice= Double.parseDouble(taxCalculationModel.getData().getTotal());
+
+                    DecimalFormat df = new DecimalFormat("###.##");
+
+                    items_price.setText(""+String.valueOf(df.format(itemsPrice)));
+                    tax_value.setText(""+String.valueOf(df.format(tax)));
+                    discountVal.setText(""+String.valueOf(df.format(discount)));
+                    shipping_charges.setText(""+String.valueOf(df.format(shippingCharge)));
+                    total.setText(""+String.valueOf(df.format(totalPrice)));
                 } else {
 
                     showAlertDialog(ShoppingCartActivity2.this, "Error", ""+taxCalculationModel.getMessage());

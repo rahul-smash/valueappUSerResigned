@@ -25,6 +25,7 @@ import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
@@ -50,6 +51,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     private Button backButton;
     private AppDatabase appDb;
     private PrefManager prefManager;
+    ImageButton search;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
         listViewCart = (ListView) findViewById(R.id.items_list);
+        search=(ImageButton)findViewById(R.id.search);
         rupee=(TextView)findViewById(R.id.rupee);
         total = (TextView) findViewById(R.id.total);
         total.setTypeface(typeFaceRobotoRegular);
@@ -85,6 +88,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
         backButton.setOnClickListener(this);
         placeorder.setOnClickListener(this);
+        search.setOnClickListener(this);
         ShoppingCartActivity.this.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -318,12 +322,18 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             case R.id.backButton:
                 onBackPressed();
                 break;
+
             case R.id.placeorder:
                 if (appDb.getCartSize() != 0) {
                     proceedToPlaceOrder();
                 } else {
                     Toast.makeText(ShoppingCartActivity.this, "Please add items to your cart.", Toast.LENGTH_SHORT).show();
                 }
+                break;
+
+            case R.id.search:
+                startActivity(new Intent(ShoppingCartActivity.this, AppController.getInstance().getViewController().getSearchActivity()));
+                AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
                 break;
 
         }

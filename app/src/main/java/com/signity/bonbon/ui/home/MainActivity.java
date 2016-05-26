@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button menu, citySelect;
     ImageView profilePic;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
-    String[] labels = {"Home", "My Profile", "Delivery Address", "My Order",
+    String[] labels = {"Home", "My Profile", "Delivery Address", "My Orders",
             "Book Now", "My Favorites", "About Us", "Share", "Loyality Points", "Log In"};
 
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
@@ -276,8 +276,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         checkForAppVersion(DataAdapter.getInstance().getForceDownloadModel());
-
-
     }
 
     private void updateUserName() {
@@ -406,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     title.setVisibility(View.VISIBLE);
                     citySelect.setVisibility(View.GONE);
-                    title.setText("Active Order");
+                    title.setText("My Orders");
                     fragment = new OrderHistory();
                     replace(fragment);
                 }

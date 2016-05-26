@@ -41,7 +41,7 @@ public class DeliveryPickupActivity extends FragmentActivity {
                 onBackPressed();
             }
         });
-        ((TextView) findViewById(R.id.textTitle)).setText("Pick up locations");
+        ((TextView) findViewById(R.id.textTitle)).setText("Place Order");
 
         from = getIntent().getStringExtra(AppConstant.FROM);
 

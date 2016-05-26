@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.signity.bonbon.R;
+import com.signity.bonbon.SplashActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 /**
@@ -59,7 +60,7 @@ public class GCMNotificationIntentService extends IntentService {
     }
 
     private void sendNotification(String title, String message) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

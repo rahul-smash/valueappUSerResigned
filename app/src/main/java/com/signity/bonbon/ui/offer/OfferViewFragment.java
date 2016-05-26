@@ -34,6 +34,7 @@ public class OfferViewFragment extends Fragment {
     //data object
     OfferData data;
 
+
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context,
                 OfferViewFragment.class.getName());

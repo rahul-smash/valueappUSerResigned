@@ -211,6 +211,9 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("store_id", storeId);
+        param.put("user_id", ""+userId);
+        param.put("area_id", "");
+        param.put("order_facility", "");
 
         NetworkAdaper.getInstance().getNetworkServices().getStoreOffer(param, new Callback<GetOfferResponse>() {
             @Override

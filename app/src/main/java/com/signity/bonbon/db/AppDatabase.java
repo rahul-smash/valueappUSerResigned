@@ -35,19 +35,19 @@ import java.util.Locale;
  */
 public class AppDatabase {
 
-    private DBHelper opener;
-    private SQLiteDatabase db;
+    public PrefManager prefManager;
     Context context;
     GsonHelper gsonHelper;
+    private DBHelper opener;
+    private SQLiteDatabase db;
     private String TAG = AppDatabase.class.getSimpleName();
-    public PrefManager prefManager;
 
     public AppDatabase(Context context) {
         this.context = context;
         this.opener = new DBHelper(context);
         db = opener.getWritableDatabase();
         gsonHelper = new GsonHelper();
-        prefManager=new PrefManager(context);
+        prefManager = new PrefManager(context);
     }
 
     // operation related to category table
@@ -622,7 +622,7 @@ public class AppDatabase {
     }
 
 
-    public double countTax(String tax,String price){
+    public double countTax(String tax, String price) {
         double tax_amount = ((Double.parseDouble(price) * Double.parseDouble(tax) / 100));
         return tax_amount;
     }
@@ -894,10 +894,10 @@ public class AppDatabase {
     public String getCartItemsListStringJson() {
         String jsonString = "";
         List<UpdateCartModel> updateCartModelList = getCartList();
-        List<UpdateCartItemModel> updateCartItemList=new ArrayList<>();
+        List<UpdateCartItemModel> updateCartItemList = new ArrayList<>();
 
-        for(UpdateCartModel updateCartModel:updateCartModelList){
-            UpdateCartItemModel model=new UpdateCartItemModel();
+        for (UpdateCartModel updateCartModel : updateCartModelList) {
+            UpdateCartItemModel model = new UpdateCartItemModel();
             model.setProductId(updateCartModel.getProductId());
             model.setVariantId(updateCartModel.getVariantId());
             model.setIsTaxEnable(updateCartModel.getIsTaxEnable());
@@ -1073,6 +1073,10 @@ public class AppDatabase {
 
     class DBHelper extends SQLiteOpenHelper {
 
+        public DBHelper(Context context) {
+            super(context, BuildConfig.DATABASE_NAME, null, BuildConfig.DB_VERSION);
+        }
+
         public String stringFromAssets(String fileName) {
             StringBuilder ReturnString = new StringBuilder();
             InputStream fIn = null;
@@ -1104,10 +1108,6 @@ public class AppDatabase {
             return ReturnString.toString();
         }
 
-        public DBHelper(Context context) {
-            super(context, BuildConfig.DATABASE_NAME, null, BuildConfig.DB_VERSION);
-        }
-
         // onCreate is called once if database not exists.
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -1125,8 +1125,7 @@ public class AppDatabase {
             // some of the store element are added so better to drop the store table and  recreate this
             if (newVersion != oldVersion) {
 
-
-                String script = this.stringFromAssets("sql/alter_tables_cmd_for_db_changes.ddl");
+                String script = this.stringFromAssets("sql/drop_all.ddl");
                 String[] queriesForProduct = script.split(";");
                 for (String query : queriesForProduct) {
                     try {
@@ -1137,6 +1136,7 @@ public class AppDatabase {
                         Log.e("Sqlite Error", e.getMessage());
                     }
                 }
+                onCreate(db);
             }
         }
 

@@ -25,7 +25,7 @@ public class OfferViewFragment extends Fragment {
 
     //ui element
     ImageView imageViewItem;
-    TextView date1, date2, minimumAmout, discount, coupon, notification;
+    TextView date1, date2, minimumAmout, discount, coupon, notification,usageLimit;
 
     //helper manager
     GsonHelper gsonHelper;
@@ -58,7 +58,7 @@ public class OfferViewFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_offer_view, container, false);
         date1 = (TextView) rootView.findViewById(R.id.date1);
         date2 = (TextView) rootView.findViewById(R.id.date2);
-//        usageLimit = (TextView) rootView.findViewById(R.id.txtUsageLimit);
+        usageLimit = (TextView) rootView.findViewById(R.id.txtUsageLimit);
         minimumAmout = (TextView) rootView.findViewById(R.id.txtMinimumOrder);
         discount = (TextView) rootView.findViewById(R.id.txtDiscount);
         coupon = (TextView) rootView.findViewById(R.id.txtCoupon);

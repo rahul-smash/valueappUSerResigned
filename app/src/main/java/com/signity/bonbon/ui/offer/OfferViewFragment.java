@@ -89,7 +89,7 @@ public class OfferViewFragment extends Fragment {
         String percent = getString(R.string.text_percent);
         date1.setText(data.getValidFrom());
         date2.setText(data.getValidTo());
-//        usageLimit.setText(data.getUsageLimit());
+        usageLimit.setText(data.getUsageLimit());
         minimumAmout.setText(rs + " " + data.getMinimumOrderAmount());
         discount.setText(data.getDiscount() + " " + percent);
         coupon.setText(data.getCouponCode());

@@ -157,13 +157,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         items_price = (TextView) findViewById(com.signity.bonbon.R.id.items_price);
         discountVal = (TextView) findViewById(R.id.discountVal);
         edtBar = (EditText) findViewById(R.id.edtBar);
-        items_price.setTypeface(typeFaceRobotoRegular);
         total = (TextView) findViewById(com.signity.bonbon.R.id.total);
-        total.setTypeface(typeFaceRobotoRegular);
         title = (TextView) findViewById(com.signity.bonbon.R.id.textTitle);
         shipping_charges = (TextView) findViewById(com.signity.bonbon.R.id.shipping_charges);
         title.setText("Confirm Order");
-        title.setTypeface(typeFaceRobotoRegular);
         placeorder = (Button) findViewById(com.signity.bonbon.R.id.placeorder);
         backButton = (Button) findViewById(com.signity.bonbon.R.id.backButton);
         backButton.setOnClickListener(this);

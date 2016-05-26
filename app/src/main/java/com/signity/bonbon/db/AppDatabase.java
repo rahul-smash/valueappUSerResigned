@@ -11,7 +11,6 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.signity.bonbon.BuildConfig;
-import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.model.Category;
@@ -27,7 +26,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -1126,19 +1124,10 @@ public class AppDatabase {
                     + "  New Version:" + newVersion + "------------");
             // some of the store element are added so better to drop the store table and  recreate this
             if (newVersion != oldVersion) {
-                String script = this.stringFromAssets("sql/alter_store_version_two.ddl");
-                String[] queries = script.split(";");
-                for (String query : queries) {
-                    try {
-                        db.execSQL(query);
-                    } catch (SQLException e) {
-                        Log.e("Sqlite Error", e.getMessage());
-                    } catch (Exception e) {
-                        Log.e("Sqlite Error", e.getMessage());
-                    }
-                }
-                String scriptForProduct = this.stringFromAssets("sql/alter_tables_version_three.ddl");
-                String[] queriesForProduct = scriptForProduct.split(";");
+
+
+                String script = this.stringFromAssets("sql/alter_tables_cmd_for_db_changes.ddl");
+                String[] queriesForProduct = script.split(";");
                 for (String query : queriesForProduct) {
                     try {
                         db.execSQL(query);

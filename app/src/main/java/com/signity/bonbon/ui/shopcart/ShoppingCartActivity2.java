@@ -75,7 +75,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     Button placeorder;
     String userId;
     String addressId;
-    String shippingChargeText, minmimumChargesText, user_address;
+    String shippingChargeText, minmimumChargesText, user_address,areaId;
     ProductListAdapter adapter;
     List<Product> listProduct;
     double shippingCharge = 0.0;
@@ -123,6 +123,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
         minmimumChargesText = getIntent().getStringExtra("minimum_charges");
         user_address = getIntent().getStringExtra("user_address");
+        areaId = getIntent().getStringExtra("area_id");
         isForPickUpStatus = getIntent().getStringExtra("isForPickup") != null ? getIntent().getStringExtra("isForPickup") : "no";
 
         if (shippingChargeText != null && !shippingChargeText.isEmpty()) {
@@ -157,13 +158,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         items_price = (TextView) findViewById(com.signity.bonbon.R.id.items_price);
         discountVal = (TextView) findViewById(R.id.discountVal);
         edtBar = (EditText) findViewById(R.id.edtBar);
-        items_price.setTypeface(typeFaceRobotoRegular);
         total = (TextView) findViewById(com.signity.bonbon.R.id.total);
-        total.setTypeface(typeFaceRobotoRegular);
         title = (TextView) findViewById(com.signity.bonbon.R.id.textTitle);
         shipping_charges = (TextView) findViewById(com.signity.bonbon.R.id.shipping_charges);
         title.setText("Confirm Order");
-        title.setTypeface(typeFaceRobotoRegular);
         placeorder = (Button) findViewById(com.signity.bonbon.R.id.placeorder);
         backButton = (Button) findViewById(com.signity.bonbon.R.id.backButton);
         backButton.setOnClickListener(this);
@@ -698,6 +696,17 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("store_id", storeId);
+        param.put("user_id", userId);
+
+
+        if(isForPickUpStatus.equalsIgnoreCase("yes")){
+            param.put("order_facility", "Pickup");
+            param.put("area_id", addressId);
+        }else if(isForPickUpStatus.equalsIgnoreCase("no")){
+            param.put("order_facility", "Delivery");
+            param.put("area_id", areaId);
+        }
+
 
         NetworkAdaper.getInstance().getNetworkServices().getStoreOffer(param, new Callback<GetOfferResponse>() {
             @Override

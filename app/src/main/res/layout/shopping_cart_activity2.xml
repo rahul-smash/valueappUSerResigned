@@ -117,14 +117,14 @@
                     android:layout_marginTop="5dp"
                     android:text="Items Price"
                     android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"/>
+                    />
 
                 <RelativeLayout
                     android:id="@+id/price_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp">
 
                     <TextView
@@ -134,7 +134,7 @@
                         android:layout_toRightOf="@+id/rs1"
                         android:text="00.00"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
 
                     <TextView
                         android:id="@+id/rs1"
@@ -143,7 +143,7 @@
                         android:layout_marginRight="5dp"
                         android:text="\u20B9"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
                 </RelativeLayout>
 
 
@@ -158,16 +158,15 @@
                     android:text="Tax"
                     android:textSize="@dimen/text_size"
                     android:visibility="visible"
-                    android:textColor="@android:color/black"
                     />
 
                 <RelativeLayout
                     android:id="@+id/tax_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/price_layout"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp"
                     android:visibility="visible">
 
@@ -178,7 +177,7 @@
                         android:layout_toRightOf="@+id/rs5"
                         android:text="0.00"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
 
                     <TextView
                         android:id="@+id/rs5"
@@ -187,7 +186,7 @@
                         android:layout_marginRight="5dp"
                         android:text="\u20B9"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
                 </RelativeLayout>
 
                 <TextView
@@ -200,15 +199,15 @@
                     android:layout_marginTop="5dp"
                     android:text="Shipping Charges"
                     android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"/>
+                    />
 
                 <RelativeLayout
                     android:id="@+id/shipping_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/tax_layout"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp">
 
                     <TextView
@@ -218,7 +217,7 @@
                         android:layout_toRightOf="@+id/rs2"
                         android:text="0.00"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
 
                     <TextView
                         android:id="@+id/rs2"
@@ -227,7 +226,7 @@
                         android:layout_marginRight="5dp"
                         android:text="\u20B9"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
                 </RelativeLayout>
 
                 <TextView
@@ -240,15 +239,15 @@
                     android:layout_marginTop="5dp"
                     android:text="Discount"
                     android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"/>
+                    />
 
                 <RelativeLayout
                     android:id="@+id/discount_layout"
-                    android:layout_width="88dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/shipping_layout"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp">
 
                     <TextView
@@ -258,7 +257,7 @@
                         android:layout_toRightOf="@+id/rs3"
                         android:text="0.00"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
 
                     <TextView
                         android:id="@+id/rs3"
@@ -267,7 +266,7 @@
                         android:layout_marginRight="5dp"
                         android:text="\u20B9"
                         android:textSize="@dimen/text_size"
-                        android:textColor="@android:color/black"/>
+                        />
                 </RelativeLayout>
 
 
@@ -282,16 +281,17 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Total"
-                    android:textSize="@dimen/text_size"
+                    android:textSize="@dimen/total_size"
+                    android:textStyle="bold"
                     android:textColor="@android:color/black"/>
 
                 <RelativeLayout
                     android:id="@+id/total_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/discount_layout"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp">
 
                     <TextView
@@ -300,7 +300,8 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/rs4"
                         android:text="234"
-                        android:textSize="@dimen/text_size"
+                        android:textSize="@dimen/total_size"
+                        android:textStyle="bold"
                         android:textColor="@android:color/black"/>
 
                     <TextView
@@ -309,7 +310,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:text="\u20B9"
-                        android:textSize="@dimen/text_size"
+                        android:textSize="@dimen/total_size"
+                        android:textStyle="bold"
                         android:textColor="@android:color/black"/>
 
                 </RelativeLayout>

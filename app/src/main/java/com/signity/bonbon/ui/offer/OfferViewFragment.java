@@ -25,7 +25,7 @@ public class OfferViewFragment extends Fragment {
 
     //ui element
     ImageView imageViewItem;
-    TextView date1, date2, minimumAmout, discount, coupon, notification;
+    TextView date1, date2, minimumAmout, discount, coupon, notification,usageLimit;
 
     //helper manager
     GsonHelper gsonHelper;
@@ -33,6 +33,7 @@ public class OfferViewFragment extends Fragment {
 
     //data object
     OfferData data;
+
 
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context,
@@ -58,7 +59,7 @@ public class OfferViewFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_offer_view, container, false);
         date1 = (TextView) rootView.findViewById(R.id.date1);
         date2 = (TextView) rootView.findViewById(R.id.date2);
-//        usageLimit = (TextView) rootView.findViewById(R.id.txtUsageLimit);
+        usageLimit = (TextView) rootView.findViewById(R.id.txtUsageLimit);
         minimumAmout = (TextView) rootView.findViewById(R.id.txtMinimumOrder);
         discount = (TextView) rootView.findViewById(R.id.txtDiscount);
         coupon = (TextView) rootView.findViewById(R.id.txtCoupon);
@@ -89,7 +90,7 @@ public class OfferViewFragment extends Fragment {
         String percent = getString(R.string.text_percent);
         date1.setText(data.getValidFrom());
         date2.setText(data.getValidTo());
-//        usageLimit.setText(data.getUsageLimit());
+        usageLimit.setText(data.getUsageLimit());
         minimumAmout.setText(rs + " " + data.getMinimumOrderAmount());
         discount.setText(data.getDiscount() + " " + percent);
         coupon.setText(data.getCouponCode());

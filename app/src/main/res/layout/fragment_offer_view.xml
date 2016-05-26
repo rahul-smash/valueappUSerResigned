@@ -71,34 +71,34 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!--<TextView-->
-            <!--android:id="@+id/txtLbl3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/txtLbl1"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="Usage Limit :"-->
-            <!--android:textAppearance="?android:textAppearanceSmall"-->
-            <!--android:textSize="16sp"-->
-            <!--android:textStyle="bold" />-->
+            <TextView
+            android:id="@+id/txtLbl3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLbl1"
+            android:layout_marginTop="10dp"
+            android:text="Usage Limit :"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-            <!--<TextView-->
-            <!--android:id="@+id/txtUsageLimit"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/txtLbl1"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_toRightOf="@+id/txtLbl3"-->
-            <!--android:text="Usage Limit :"-->
-            <!--android:textAppearance="?android:textAppearanceSmall"-->
-            <!--android:textSize="16sp" />-->
+            <TextView
+            android:id="@+id/txtUsageLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLbl1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/txtLbl3"
+            android:text="Usage Limit :"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtLbl4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtLbl2"
+                android:layout_below="@+id/txtLbl3"
                 android:layout_marginTop="10dp"
                 android:text="Mimimum order amount :"
                 android:textAppearance="?android:textAppearanceSmall"
@@ -109,13 +109,15 @@
                 android:id="@+id/txtMinimumOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtLbl2"
+                android:layout_below="@+id/txtLbl3"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/txtLbl4"
                 android:text="500 :"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textSize="16sp" />
+
+
 
             <TextView
                 android:id="@+id/txtLbl5"
@@ -167,6 +169,30 @@
                 android:textColor="@android:color/white"
                 android:textIsSelectable="true"
                 android:textSize="16sp" />
+
+
+           <!-- <TextView
+                android:id="@+id/txtLbl7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl6"
+                android:layout_marginTop="10dp"
+                android:text="Usage Limit:"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/usageValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl6"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/txtLbl7"
+                android:text="500 :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp" />-->
 
             <TextView
                 android:id="@+id/notification"

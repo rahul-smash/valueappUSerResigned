@@ -35,10 +35,14 @@ public class AppConstant {
     public static final String AREA_NAME = "com.android.bonbon.Utilities.AREA_NAME";
 
     public static final String OPEN_TIME = "com.android.bonbon.Utilities.OPEN_TIME";
+    public static final String is24x7_open = "com.android.bonbon.Utilities.is24x7_open";
     public static final String CLOSE_TIME = "com.android.bonbon.Utilities.CLOSE_TIME";
     public static final String OPEN_DAYS = "com.android.bonbon.Utilities.OPEN_DAYS";
     public static final String MESSAGE = "com.android.bonbon.Utilities.MESSAGE";
     public static final String CURRENCY = "com.android.bonbon.Utilities.CURRENCY";
     public static final String LOYALITY = "com.android.bonbon.Utilities.LOYALITY";
+    public static final String istaxenable = "com.android.bonbon.Utilities.istaxenable";
+    public static final String tax_label_name = "com.android.bonbon.Utilities.tax_label_name";
+    public static final String tax_rate = "com.android.bonbon.Utilities.tax_rate";
 
 }

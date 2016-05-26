@@ -28,7 +28,10 @@
         android:layout_alignParentBottom="true"
         android:background="@color/ColorPrimary"
         android:elevation="3dp"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:text="Start Ordering"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@android:color/white"
         />
 
 </RelativeLayout>

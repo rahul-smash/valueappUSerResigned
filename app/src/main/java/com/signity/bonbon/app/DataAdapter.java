@@ -5,6 +5,7 @@ import com.signity.bonbon.model.ForceDownloadModel;
 import com.signity.bonbon.model.GeofenceObjectModel;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.OrderHistoryModel;
+import com.signity.bonbon.model.PickupAdressModel;
 import com.signity.bonbon.model.Product;
 
 import java.util.HashMap;
@@ -40,6 +41,18 @@ public class DataAdapter {
     private List<Banner> banners;
 
     private ForceDownloadModel forceDownloadModel;
+
+    public PickupAdressModel pickupAdressModel;
+
+    public PickupAdressModel getPickupAdressModel() {
+        return pickupAdressModel;
+    }
+
+    public void setPickupAdressModel(PickupAdressModel pickupAdressModel) {
+        this.pickupAdressModel = pickupAdressModel;
+    }
+
+
 
 
     public List<Banner> getBanners() {

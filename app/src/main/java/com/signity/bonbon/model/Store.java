@@ -83,6 +83,17 @@ public class Store {
     private String storeOpenDays;
 
 
+    @SerializedName("istaxenable")
+    @Expose
+    private String istaxenable;
+    @SerializedName("tax_label_name")
+    @Expose
+    private String taxLabelName;
+    @SerializedName("tax_rate")
+    @Expose
+    private String taxRate;
+
+
     public String getOpenhoursFrom() {
         return openhoursFrom;
     }
@@ -119,6 +130,12 @@ public class Store {
     private String closehoursMessage;
 
 
+
+    @SerializedName("is24x7_open")
+    @Expose
+    private String is24x7_open;
+
+
     @SerializedName("banners")
     @Expose
     private List<Banner> banners = new ArrayList<Banner>();
@@ -143,7 +160,6 @@ public class Store {
     @SerializedName("app_labels")
     @Expose
     private List<AppLabel> appLabels = new ArrayList<AppLabel>();
-
 
     @SerializedName("currency")
     @Expose
@@ -189,6 +205,15 @@ public class Store {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+
+    public String getIs24x7_open() {
+        return is24x7_open;
+    }
+
+    public void setIs24x7_open(String is24x7_open) {
+        this.is24x7_open = is24x7_open;
     }
 
     /**
@@ -452,5 +477,30 @@ public class Store {
 
     public void setStoreOpenDays(String storeOpenDays) {
         this.storeOpenDays = storeOpenDays;
+    }
+
+
+    public String getIstaxenable() {
+        return istaxenable;
+    }
+
+    public void setIstaxenable(String istaxenable) {
+        this.istaxenable = istaxenable;
+    }
+
+    public String getTaxLabelName() {
+        return taxLabelName;
+    }
+
+    public void setTaxLabelName(String taxLabelName) {
+        this.taxLabelName = taxLabelName;
+    }
+
+    public String getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(String taxRate) {
+        this.taxRate = taxRate;
     }
 }

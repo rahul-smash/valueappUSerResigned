@@ -34,7 +34,8 @@
                     android:layout_marginLeft="10dp"
                     android:text="Name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@android:color/black"/>
 
                 <EditText
                     android:id="@+id/edtName"
@@ -43,16 +44,15 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/edittext_round_corners"
                     android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="Name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingTop="8dp"
-                    android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:paddingBottom="8dp"
+                    android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
             </LinearLayout>
@@ -73,7 +73,8 @@
                     android:layout_marginLeft="10dp"
                     android:text="Email"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@android:color/black" />
 
                 <EditText
                     android:id="@+id/edtEmail"
@@ -84,14 +85,13 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Email(Optional)"
-                    android:background="@drawable/edittext_round_corners"
+                    android:hint="Email (Optional)"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
                     android:paddingTop="8dp"
-                    android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:paddingBottom="8dp"
+                    android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
 
@@ -111,9 +111,10 @@
                     android:layout_marginLeft="10dp"
                     android:text="Mobile Number"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@android:color/black" />
 
-                <TextView
+                <EditText
                     android:id="@+id/mobilenumber"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -126,8 +127,8 @@
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="2dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_size_large"/>
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@android:color/black"/>
 
 
             </LinearLayout>

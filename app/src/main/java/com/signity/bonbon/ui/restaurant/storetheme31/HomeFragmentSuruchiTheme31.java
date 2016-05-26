@@ -1,4 +1,4 @@
-package com.signity.bonbon.ui.restaurant.storetangerine9.fragment;
+package com.signity.bonbon.ui.restaurant.storetheme31;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.signity.bonbon.R;
@@ -30,17 +29,16 @@ import com.signity.bonbon.ui.category.CategoryActivity;
 import com.signity.bonbon.ui.contacts.ContactActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
-
-public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClickListener {
-
+/**
+ * Created by root on 19/5/16.
+ */
+public class HomeFragmentSuruchiTheme31 extends Fragment implements View.OnClickListener{
 
     RelativeLayout relCategory, relOffers, relBookNow, relMyOrders, relContact, relMyCart;
     Button buttonCart;
-    ImageView imageView;
     View mView;
     String storeId;
     String userId;
@@ -48,7 +46,6 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
     AppDatabase appDb;
     PrefManager prefManager;
     private PendingIntent pendingIntent;
-
     ViewController viewController;
 
     @Override
@@ -63,12 +60,13 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
         if (!prefManager.isCartSetLocalNotification()) {
             setUpLocalNotificationForCart();
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(viewController.getHomeResourceLayout(), container, false);
-        imageView = (ImageView) mView.findViewById(R.id.imageView);
         relCategory = (RelativeLayout) mView.findViewById(R.id.relCategory);
         relOffers = (RelativeLayout) mView.findViewById(R.id.relOffers);
         relBookNow = (RelativeLayout) mView.findViewById(R.id.relBookNow);
@@ -83,17 +81,6 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
         relContact.setOnClickListener(this);
         relMyCart.setOnClickListener(this);
         store = appDb.getStore(storeId);
-        if (store != null) {
-            String banner = store.getBanner();
-            if (store.getBanner() != null && !store.getBanner().isEmpty()) {
-                Picasso.with(getActivity()).load(banner).resize(500, 500).error(R.mipmap.ic_launcher).into(imageView);
-            } else {
-                imageView.setImageResource(R.mipmap.ic_launcher);
-            }
-        } else {
-            imageView.setImageResource(R.mipmap.ic_launcher);
-        }
-
         return mView;
     }
 
@@ -107,7 +94,6 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
             buttonCart.setVisibility(View.GONE);
         }
     }
-
 
 
     @Override
@@ -129,15 +115,14 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
             case R.id.relBookNow:
-                Intent intentBookmark = new Intent(getActivity(), BookNowActivity.class);
-                intentBookmark.putExtra(AppConstant.FROM, "home");
-                startActivity(intentBookmark);
+                startActivity(new Intent(getActivity(), BookNowActivity.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
             case R.id.relMyOrders:
                 Intent intent = new Intent(getActivity(), DeliveryAreaActivity.class);
                 startActivity(intent);
                 AnimUtil.slideFromRightAnim(getActivity());
+
                 break;
             case R.id.relContact:
                 startActivity(new Intent(getActivity(), ContactActivity.class));
@@ -169,6 +154,7 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
     }
+
 
 
 }

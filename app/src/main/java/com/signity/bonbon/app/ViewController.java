@@ -13,10 +13,12 @@ import com.signity.bonbon.ui.category.CategoryDetailGroceryActivity;
 import com.signity.bonbon.ui.category.CategoryDetailJewellersActivity;
 import com.signity.bonbon.ui.category.ProductViewActivity;
 import com.signity.bonbon.ui.category.ProductViewGroceryActivity;
+import com.signity.bonbon.ui.category.ProductViewJewellersActivity;
 import com.signity.bonbon.ui.fragment.BookNowFragment;
 import com.signity.bonbon.ui.fragment.HomeFragment;
 import com.signity.bonbon.ui.fragment.MyFavourite;
 import com.signity.bonbon.ui.fragment.MyFavouriteGroceryFragment;
+import com.signity.bonbon.ui.fragment.MyFavouriteJewellers;
 import com.signity.bonbon.ui.grocery.storetheme1.fragment.HomeFragmentTheme1Grocery;
 import com.signity.bonbon.ui.grocery.storetheme10.fragment.HomeFragmentTheme10Grocery;
 import com.signity.bonbon.ui.grocery.storetheme19.fragment.HomeFragmentEgrocersTheme19;
@@ -184,6 +186,12 @@ public class ViewController {
                 }
                 break;
 
+            case 30:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentAppleTheme28();
+                }
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;
@@ -306,8 +314,9 @@ public class ViewController {
                 layoutId = R.layout.home_activity_theme_20;
                 break;
             case 21:
-                //Wah ji Wah
-                layoutId = R.layout.home_activity_theme_21;
+                //Wah ji Wah and 56 Street.
+//                layoutId = R.layout.home_activity_theme_21;
+                layoutId = R.layout.home_activity_theme_21_56street;
                 break;
             case 22:
                 //Beliran Degchiwala
@@ -340,6 +349,12 @@ public class ViewController {
                 }
                 break;
 
+            case 31:
+                //Suruchi Bhog
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    layoutId = R.layout.home_activity_theme_28_apple;
+                }
+                break;
 
 
             default:
@@ -357,11 +372,9 @@ public class ViewController {
 
         if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
             return CategoryDetailGroceryActivity.class;
-        } else if(storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS))
-        {
+        } else if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
             return CategoryDetailJewellersActivity.class;
-        }
-        else {
+        } else {
             return CategoryDetailActivity.class;
         }
     }
@@ -383,6 +396,8 @@ public class ViewController {
         String storeType = prefManager.getProjectType();
         if (storeType.equalsIgnoreCase("grocery")) {
             return ProductViewGroceryActivity.class;
+        } else if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+            return ProductViewJewellersActivity.class;
         } else {
             return ProductViewActivity.class;
         }
@@ -393,7 +408,9 @@ public class ViewController {
         String storeType = prefManager.getProjectType();
         if (storeType.equalsIgnoreCase("grocery")) {
             return new MyFavouriteGroceryFragment();
-        } else {
+        } else if(storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)){
+            return new MyFavouriteJewellers();
+        }else {
             return new MyFavourite();
         }
     }

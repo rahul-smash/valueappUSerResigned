@@ -71,6 +71,8 @@ public class Product {
     @Expose
     private String sortOrder;
 
+
+
     /**
      * @return The selectedVariant
      */

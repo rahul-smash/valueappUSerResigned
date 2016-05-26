@@ -172,14 +172,12 @@ public class ProductListFragmentJewellers extends Fragment{
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
                 holder.block2 = (LinearLayout) convertView.findViewById(R.id.block2);
+                holder.items = (ImageView) convertView.findViewById(R.id.items_image);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
                 holder.items_name.setTypeface(typeFaceRobotoBold);
                 holder.items_price = (TextView) convertView.findViewById(R.id.items_price);
                 holder.items_price.setTypeface(typeFaceRobotoRegular);
                 holder.items_mrp_price.setTypeface(typeFaceRobotoRegular);
-                holder.btnVarient = (Button) convertView.findViewById(R.id.btnVarient);
-                holder.btnVarient.setClickable(true);
-                holder.btnVarient.setFocusable(true);
                 holder.add_button = (ImageButton) convertView.findViewById(R.id.add_button);
                 holder.remove_button = (ImageButton) convertView.findViewById(R.id.remove_button);
                 holder.number_text = (TextView) convertView.findViewById(R.id.number_text);
@@ -194,6 +192,14 @@ public class ProductListFragmentJewellers extends Fragment{
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
+
+            if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
+                Picasso.with(getActivity()).load(product.getImageMedium()).error(R.mipmap.ic_launcher).into(holder.items);
+            } else {
+                holder.items.setImageResource(R.mipmap.ic_launcher);
+            }
+
+
             String productPrice = "0.0";
             String mrpPrice = "0.0";
             String txtQuant = "";
@@ -201,11 +207,10 @@ public class ProductListFragmentJewellers extends Fragment{
             String unitType = "";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
+                txtQuant = selectedVariant.getWeight();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
-                unitType = selectedVariant.getUnitType();
             } else {
                 Variant variant = product.getVariants().get(0);
                 selectedVariant.setVariantId(variant.getId());
@@ -216,11 +221,10 @@ public class ProductListFragmentJewellers extends Fragment{
                 selectedVariant.setDiscount(variant.getDiscount());
                 selectedVariant.setUnitType(variant.getUnitType());
                 selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
+                txtQuant = selectedVariant.getWeight();
                 productPrice = selectedVariant.getPrice();
                 mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
-                unitType = selectedVariant.getUnitType();
             }
 
 
@@ -242,19 +246,7 @@ public class ProductListFragmentJewellers extends Fragment{
                 holder.heart.setSelected(false);
             }
 
-            if (product.getVariants().size() <= 1) {
-                holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-            } else {
-                holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
-            }
 
-
-            if (!(selectedVariant.getWeight().isEmpty()) && !(selectedVariant.getUnitType().isEmpty())) {
-                holder.btnVarient.setVisibility(View.VISIBLE);
-                holder.btnVarient.setText(txtQuant);
-            } else {
-                holder.btnVarient.setVisibility(View.GONE);
-            }
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
             if (productPrice.equalsIgnoreCase(mrpPrice)) {
@@ -294,56 +286,6 @@ public class ProductListFragmentJewellers extends Fragment{
                     }
                 }
             });
-            if (product.getVariants().size() > 1) {
-
-                holder.btnVarient.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        final Dialog dialog = new Dialog(getActivity());
-
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                        dialog.setContentView(R.layout.layout_popup_window_varient);
-                        ListView lv = (ListView) dialog.findViewById(R.id.listViewCategory);
-                        Button btnCross = (Button) dialog.findViewById(R.id.btnCross);
-                        madapter = new MyAdapter(getActivity(), R.layout.custom_spinner, product.getVariants());
-                        lv.setAdapter(madapter);
-
-                        dialog.setCanceledOnTouchOutside(true);
-                        btnCross.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                dialog.dismiss();
-                            }
-                        });
-
-                        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-                                dialog.dismiss();
-                                selectedVariant.setVarientPosition(pos);
-                                Variant variant = product.getVariants().get(pos);
-                                selectedVariant.setVariantId(variant.getId());
-                                selectedVariant.setSku(variant.getSku());
-                                selectedVariant.setWeight(variant.getWeight());
-                                selectedVariant.setMrpPrice(variant.getMrpPrice());
-                                selectedVariant.setPrice(variant.getPrice());
-                                selectedVariant.setDiscount(variant.getDiscount());
-                                selectedVariant.setUnitType(variant.getUnitType());
-                                selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                                appDb.updateProduct(product);
-                                notifyDataSetChanged();
-                            }
-                        });
-                        dialog.show();
-                    }
-                });
-            } else {
-                holder.btnVarient.setClickable(false);
-                holder.btnVarient.setFocusable(false);
-            }
-
 
             holder.block2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -412,10 +354,10 @@ public class ProductListFragmentJewellers extends Fragment{
         }
 
         class ViewHolder {
-            RelativeLayout parent;
+
+            ImageView items;
+            RelativeLayout parent, rel_mrp_offer_price;
             LinearLayout block2;
-            Button btnVarient;
-            RelativeLayout rel_mrp_offer_price;
             TextView items_name, items_mrp_price, items_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
         }

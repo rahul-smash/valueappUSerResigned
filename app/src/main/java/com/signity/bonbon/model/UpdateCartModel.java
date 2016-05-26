@@ -35,6 +35,9 @@ public class UpdateCartModel {
     private String productName;
 
 
+
+
+
     /**
      * @return The productId
      */

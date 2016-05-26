@@ -55,6 +55,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
     public int cartSize;
 
+    String productViewTitle="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,11 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         backButton.setOnClickListener(this);
         btnShopcart.setOnClickListener(this);
 
-        textTitle.setText(product.getTitle());
+        if(productViewTitle==null){
+            textTitle.setText(product.getTitle());
+        }else {
+            textTitle.setText(productViewTitle);
+        }
 
         item_image = (ImageView) findViewById(com.signity.bonbon.R.id.item_image);
         item_name = (TextView) findViewById(com.signity.bonbon.R.id.item_name);
@@ -141,7 +147,10 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             description.setText(product.getDescription());
         }
         number_text.setText(txtQuantCount);
-        if (txtQuant != null && !txtQuant.isEmpty()) {
+
+        String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+        if (!variant.isEmpty()) {
+            btnVarient.setVisibility(View.VISIBLE);
             btnVarient.setText(txtQuant);
         } else {
             btnVarient.setVisibility(View.GONE);
@@ -149,14 +158,15 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         btnVarient.setText(txtQuant);
 
         if (product.getImage() != null && !product.getImage().isEmpty()) {
-            Picasso.with(ProductViewGroceryActivity.this).load(product.getImage()).resize(400, 400).error(com.signity.bonbon.R.drawable.no_image).into(item_image);
+            Picasso.with(ProductViewGroceryActivity.this).load(product.getImage()).resize(400, 400).error(R.mipmap.ic_launcher).into(item_image);
         } else {
-            item_image.setImageResource(com.signity.bonbon.R.drawable.no_image);
+            item_image.setImageResource(R.mipmap.ic_launcher);
         }
     }
 
     private void initProduct() {
         String product_id = getIntent().getStringExtra("product_id");
+        productViewTitle = getIntent().getStringExtra("productViewTitle");
         product = appDb.getProduct(product_id);
         if (product == null) {
             product = gsonHelper.getProduct(prefManager.getSharedValue(PrefManager.PREF_SEARCH_PRODUCT));

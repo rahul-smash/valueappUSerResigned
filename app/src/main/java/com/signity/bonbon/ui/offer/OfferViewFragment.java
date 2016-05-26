@@ -96,9 +96,9 @@ public class OfferViewFragment extends Fragment {
         notification.setText(data.getOfferNotification());
 
         if (data.getImage() != null && !data.getImage().isEmpty()) {
-            Picasso.with(getActivity()).load(data.getImage()).resize(400, 400).error(com.signity.bonbon.R.drawable.no_image).into(imageViewItem);
+            Picasso.with(getActivity()).load(data.getImage()).resize(400, 400).error(R.mipmap.ic_launcher).into(imageViewItem);
         } else {
-            imageViewItem.setImageResource(com.signity.bonbon.R.drawable.no_image);
+            imageViewItem.setImageResource(R.mipmap.ic_launcher);
         }
 
     }

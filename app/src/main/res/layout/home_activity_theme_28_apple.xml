@@ -28,7 +28,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"></RelativeLayout>
+            android:layout_weight="50"></RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,8 +160,7 @@
                 android:id="@+id/relFavorites"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="18"
-                >
+                android:layout_weight="18">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -269,6 +268,7 @@
         android:gravity="center"
         android:text="Today's 24Kt Gold Price : Rs 0000 per 10 Grams"
         android:textColor="@color/color_text_menu"
-        android:textSize="@dimen/text_size_sub_normal" />
+        android:textSize="@dimen/text_size_sub_normal"
+        android:visibility="gone" />
 
 </RelativeLayout>

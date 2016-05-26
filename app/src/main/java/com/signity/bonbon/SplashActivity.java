@@ -182,10 +182,16 @@ public class SplashActivity extends Activity {
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
+                    prefManager.storeSharedValue(AppConstant.is24x7_open, store.getIs24x7_open());
                     prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
                     prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());
                     prefManager.storeSharedValue(AppConstant.MESSAGE, store.getClosehoursMessage());
                     prefManager.storeSharedValue(AppConstant.OPEN_DAYS, store.getStoreOpenDays());
+                    prefManager.storeSharedValue(AppConstant.istaxenable, store.getIstaxenable());
+                    prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
+                    prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
+
+
                     if (store.getLoyality() != null && !store.getLoyality().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.LOYALITY, store.getLoyality());
                     } else {

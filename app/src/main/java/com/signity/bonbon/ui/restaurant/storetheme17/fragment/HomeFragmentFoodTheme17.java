@@ -254,7 +254,7 @@ public class HomeFragmentFoodTheme17 extends Fragment implements View.OnClickLis
 
             try
             {
-                Picasso.with(getActivity()).load(banners.get(position).getImage()).error(R.drawable.no_image).into(imageView);
+                Picasso.with(getActivity()).load(banners.get(position).getImage()).error(R.mipmap.ic_launcher).into(imageView);
             }
             catch (Exception e)
             {

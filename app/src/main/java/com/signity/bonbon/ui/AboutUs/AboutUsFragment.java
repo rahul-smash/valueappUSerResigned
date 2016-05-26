@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.signity.bonbon.R;
@@ -23,6 +24,7 @@ import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +49,7 @@ public class AboutUsFragment extends Fragment {
     private Store store;
 
 
+    Button startOrder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,8 @@ public class AboutUsFragment extends Fragment {
                         "About Us view for " + getString(R.string.app_name));
 
         webview = (WebView) mView.findViewById(R.id.webview);
+        startOrder=(Button)mView.findViewById(R.id.startOrder);
+
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
 
         WebSettings webSettings = webview.getSettings();
@@ -80,6 +85,13 @@ public class AboutUsFragment extends Fragment {
         } else {
             getAboutUsStatus();
         }
+
+        startOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).onBackPressed();
+            }
+        });
 
         return mView;
     }

@@ -51,6 +51,7 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 import java.text.DecimalFormat;
@@ -69,7 +70,7 @@ import retrofit.client.Response;
 public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
-    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4;
+    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4,rs5,tax_value,tax_label,taxTag;
     Button placeorder;
     String userId;
     String addressId;
@@ -100,9 +101,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
     private double loyalityPoints;
-    RelativeLayout relCoupon_1;
+    RelativeLayout relCoupon_1,tax_layout;
     LinearLayout relCoupon;
-
+    String isTaxEnable,taxLabel,taxRate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -169,6 +170,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         applyOffer = (Button) findViewById(R.id.applyOffer);
         applyOffer_1 = (Button) findViewById(R.id.applyOffer_1);
         redeemPoints = (Button) findViewById(R.id.redeemPoints);
+        tax_value = (TextView) findViewById(R.id.tax_value);
+        tax_layout = (RelativeLayout) findViewById(R.id.tax_layout);
+        tax_label = (TextView) findViewById(R.id.tax_label);
+        taxTag = (TextView) findViewById(R.id.taxTag);
         applyCoupon.setTag("apply");
         applyCoupon.setOnClickListener(this);
         applyCoupon_1.setOnClickListener(this);
@@ -179,6 +184,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         rs2 = (TextView) findViewById(R.id.rs2);
         rs3 = (TextView) findViewById(R.id.rs3);
         rs4 = (TextView) findViewById(R.id.rs4);
+        rs5 = (TextView) findViewById(R.id.rs5);
 
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
@@ -187,13 +193,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         if (currency.contains("\\")) {
             rs1.setText(unescapeJavaString(currency));
             rs2.setText(unescapeJavaString(currency));
-            rs3.setText(unescapeJavaString(currency));
+            rs3.setText("-"+unescapeJavaString(currency));
             rs4.setText(unescapeJavaString(currency));
+            rs5.setText(unescapeJavaString(currency));
         } else {
             rs1.setText(currency);
             rs2.setText(currency);
-            rs3.setText(currency);
+            rs3.setText("-"+currency);
             rs4.setText(currency);
+            rs5.setText(currency);
         }
 
 
@@ -266,7 +274,45 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+
+   /* private String getTaxAmount(){
+
+        String taxValue="0";
+        isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
+        if(isTaxEnable.equalsIgnoreCase("0")){
+            taxValue="0";
+        }else if(isTaxEnable.equalsIgnoreCase("1")){
+            taxValue = appDb.getTotalTax();
+        }
+        return taxValue;
+    }*/
+
+    /*private void updateTaxPrice() {
+
+        isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
+        taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
+        taxRate=prefManager.getSharedValue(AppConstant.tax_rate);
+        tax_label.setText(""+taxLabel+"("+taxRate+"%)");
+
+        if(isTaxEnable.equalsIgnoreCase("0")){
+            tax_label.setVisibility(View.GONE);
+            tax_layout.setVisibility(View.GONE);
+            taxTag.setVisibility(View.VISIBLE);
+        }else {
+            tax_label.setVisibility(View.VISIBLE);
+            tax_layout.setVisibility(View.VISIBLE);
+            taxTag.setVisibility(View.GONE);
+            String totalCartValue = getTaxAmount();
+            DecimalFormat df = new DecimalFormat("###.##");
+            tax_value.setText(String.valueOf(df.format(Double.parseDouble(totalCartValue))));
+        }
+
+
+    }
+*/
+
     private void updateShippingCharges() {
+//        double taxValue = Double.parseDouble(getTaxAmount());
         double totalPrice = getTotalPrice();
 
         if (shippingCharge != 0.0) {
@@ -395,7 +441,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
@@ -490,11 +536,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private boolean openTime() {
         boolean status = false;
+        String is24x7_open = prefManager.getSharedValue(AppConstant.is24x7_open);
         String openTime = prefManager.getSharedValue(AppConstant.OPEN_TIME);
         String closeTime = prefManager.getSharedValue(AppConstant.CLOSE_TIME);
         String openDays = prefManager.getSharedValue(AppConstant.OPEN_DAYS);
 
-        if (openTime.isEmpty() || closeTime.isEmpty()) {
+        if(is24x7_open.equalsIgnoreCase("0")){
+            return true;
+        }
+        else if (openTime.isEmpty() || closeTime.isEmpty()) {
             return true;
         } else {
             if (isStoreClosedToday(openDays)) {
@@ -613,6 +663,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     } else {
                         ProgressDialogUtil.hideProgressDialog();
+                        Toast.makeText(ShoppingCartActivity2.this,"There are no coupons to redeem.",Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
@@ -723,7 +774,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             double finalPrice = totalPrice - discount + shippingCharge;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));
-            discountVal.setText(String.valueOf(discount));
+            discountVal.setText(String.valueOf(df.format(discount)));
             applyCoupon.setText("Remove Coupon");
             applyCoupon.setTag("remove");
             applyCoupon.setVisibility(View.VISIBLE);
@@ -750,7 +801,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             double finalPrice = totalPrice - discount + shippingCharge;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));
-            discountVal.setText(String.valueOf(discount));
+            discountVal.setText(String.valueOf(df.format(discount)));
             applyCoupon_1.setText("Remove Coupon");
             applyCoupon_1.setTag("remove");
 
@@ -769,7 +820,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         double finalPrice = totalPrice - discount + shippingCharge;
         DecimalFormat df = new DecimalFormat("###.##");
         total.setText(String.valueOf(df.format(finalPrice)));
-        discountVal.setText(String.valueOf(discount));
+        discountVal.setText(String.valueOf(df.format(discount)));
         applyCoupon.setText("Remove Coupon");
         applyCoupon.setTag("remove");
         applyCoupon.setVisibility(View.VISIBLE);
@@ -877,6 +928,39 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+
+
+    public void showAlertDialogwithPickUp(Context context, String title,
+                                String message) {
+        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+        dialogHandler.setDialog(title, message);
+        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                appDb.deleteCartElement();
+                Intent intent_home = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent_home);
+                finish();
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+            }
+        });
+
+        dialogHandler.setNegativeButton("Guide Me", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                appDb.deleteCartElement();
+                Intent intent_home = new Intent(ShoppingCartActivity2.this, DeliveryPickupActivity.class);
+                intent_home.putExtra(AppConstant.FROM,"shopping_cart2");
+                startActivity(intent_home);
+                finish();
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+            }
+        });
+    }
+
     public void showAlertDialog(Context context, String title,
                                 String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
@@ -893,6 +977,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
             }
         });
+
     }
 
     class ProductListAdapter extends BaseAdapter {

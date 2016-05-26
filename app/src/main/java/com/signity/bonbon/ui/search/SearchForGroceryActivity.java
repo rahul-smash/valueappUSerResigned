@@ -195,7 +195,12 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             public void success(GetSubCategory getSubCategory, Response response) {
                 if (getSubCategory.getSuccess()) {
                     ProgressDialogUtil.hideProgressDialog();
-                    setupListProduct(getSubCategory.getData());
+                    if(getSubCategory.getData().size()!=0){
+                        setupListProduct(getSubCategory.getData());
+                    }else {
+                        Toast.makeText(SearchForGroceryActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     ProgressDialogUtil.hideProgressDialog();
                     Toast.makeText(SearchForGroceryActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
@@ -283,9 +288,9 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
             if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                Picasso.with(SearchForGroceryActivity.this).load(product.getImageMedium()).error(R.drawable.no_image).into(holder.items);
+                Picasso.with(SearchForGroceryActivity.this).load(product.getImageMedium()).error(R.mipmap.ic_launcher).into(holder.items);
             } else {
-                holder.items.setImageResource(R.drawable.no_image);
+                holder.items.setImageResource(R.mipmap.ic_launcher);
             }
 
             String productPrice = "0.0";
@@ -335,7 +340,9 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
 
-            if (txtQuant != null && !txtQuant.isEmpty()) {
+            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+
+            if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);
                 holder.btnVarient.setText(txtQuant);
             } else {

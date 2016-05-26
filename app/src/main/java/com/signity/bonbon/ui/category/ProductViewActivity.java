@@ -54,6 +54,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private PrefManager prefManager;
     public int cartSize;
 
+    String productViewTitle="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +103,14 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         remove_button = (ImageButton) findViewById(com.signity.bonbon.R.id.remove_button);
         add_button.setOnClickListener(this);
         remove_button.setOnClickListener(this);
-        textTitle.setText(product.getTitle());
+
+        if(productViewTitle==null){
+            textTitle.setText(product.getTitle());
+        }else {
+            textTitle.setText(productViewTitle);
+        }
+
+
         if (product.getVariants().size() > 1) {
             btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, com.signity.bonbon.R.drawable.arrow_spinner_down_24, 0);
             btnVarient.setOnClickListener(this);
@@ -117,7 +126,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         SelectedVariant selectedVariant = product.getSelectedVariant();
         String txtQuant, productPrice, txtQuantCount;
         if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-            txtQuant = selectedVariant.getWeight();
+            txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
             productPrice = selectedVariant.getPrice();
             txtQuantCount = appDb.getCartQuantity(selectedVariant.getVariantId());
         } else {
@@ -130,7 +139,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             selectedVariant.setDiscount(variant.getDiscount());
             selectedVariant.setUnitType(variant.getUnitType());
             selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-            txtQuant = selectedVariant.getWeight();
+            txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
             productPrice = selectedVariant.getPrice();
             txtQuantCount = selectedVariant.getQuantity();
         }
@@ -140,7 +149,10 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             description.setText(product.getDescription());
         }
         number_text.setText(txtQuantCount);
-        if (txtQuant != null && !txtQuant.isEmpty()) {
+        String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+
+        if (!variant.isEmpty()) {
+            btnVarient.setVisibility(View.VISIBLE);
             btnVarient.setText(txtQuant);
         } else {
             btnVarient.setVisibility(View.GONE);
@@ -149,6 +161,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     private void initProduct() {
         String product_id = getIntent().getStringExtra("product_id");
+        productViewTitle = getIntent().getStringExtra("productViewTitle");
 
         GATrackers.getInstance().trackEvent(GAConstant.PRODUCT + "_" + product_id, GAConstant.VIEW, "A product  with id " + product_id +
                 "is view on " + getString(R.string.app_name));

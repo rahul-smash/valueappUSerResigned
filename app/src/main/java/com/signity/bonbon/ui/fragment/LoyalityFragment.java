@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -122,6 +123,7 @@ public class LoyalityFragment extends Fragment {
                     }
                     else {
                         ProgressDialogUtil.hideProgressDialog();
+                        Toast.makeText(getActivity(), "There are no coupons to redeem.", Toast.LENGTH_SHORT).show();
                     }
                 }
 

@@ -45,6 +45,7 @@ import com.signity.bonbon.ui.restaurant.storetheme25.fragment.HomeFragmentBigChe
 import com.signity.bonbon.ui.restaurant.storetheme3.fragment.HomeFragmentTheme3;
 import com.signity.bonbon.ui.restaurant.storetheme30.HomeFragmentManjeetTheme30;
 import com.signity.bonbon.ui.restaurant.storetheme31.HomeFragmentSuruchiTheme31;
+import com.signity.bonbon.ui.restaurant.storetheme32.HomeFragmentBurgerTheme32;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
@@ -198,6 +199,12 @@ public class ViewController {
             case 31:
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentSuruchiTheme31();
+                }
+                break;
+
+            case 32:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentBurgerTheme32();
                 }
                 break;
 
@@ -365,11 +372,17 @@ public class ViewController {
                 }
                 break;
 
-
             case 31:
                 //Suruchi Bhog
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_28_apple;
+                }
+                break;
+
+            case 32:
+                //Burger Point chd
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    layoutId = R.layout.home_activity_theme_32_burger;
                 }
                 break;
 

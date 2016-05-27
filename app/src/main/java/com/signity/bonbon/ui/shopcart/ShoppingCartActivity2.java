@@ -699,16 +699,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("store_id", storeId);
-        param.put("user_id", userId);
-
-
-        if(isForPickUpStatus.equalsIgnoreCase("yes")){
-            param.put("order_facility", "Pickup");
-            param.put("area_id", addressId);
-        }else if(isForPickUpStatus.equalsIgnoreCase("no")){
-            param.put("order_facility", "Delivery");
-            param.put("area_id", areaId);
-        }
+//        param.put("user_id", userId);
+//
+//
+//        if(isForPickUpStatus.equalsIgnoreCase("yes")){
+//            param.put("order_facility", "Pickup");
+//            param.put("area_id", addressId);
+//        }else if(isForPickUpStatus.equalsIgnoreCase("no")){
+//            param.put("order_facility", "Delivery");
+//            param.put("area_id", areaId);
+//        }
 
 
         NetworkAdaper.getInstance().getNetworkServices().getStoreOffer(param, new Callback<GetOfferResponse>() {

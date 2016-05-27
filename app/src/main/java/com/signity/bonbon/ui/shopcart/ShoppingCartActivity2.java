@@ -552,7 +552,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String closeTime = prefManager.getSharedValue(AppConstant.CLOSE_TIME);
         String openDays = prefManager.getSharedValue(AppConstant.OPEN_DAYS);
 
-        if(is24x7_open.equalsIgnoreCase("0")){
+        if(is24x7_open.equalsIgnoreCase("1")){
             return true;
         }
         else if (openTime.isEmpty() || closeTime.isEmpty()) {

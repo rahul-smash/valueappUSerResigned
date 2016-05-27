@@ -375,7 +375,7 @@ public class ViewController {
             case 31:
                 //Suruchi Bhog
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
-                    layoutId = R.layout.home_activity_theme_28_apple;
+                    layoutId = R.layout.home_activity_theme_31_suruchi;
                 }
                 break;
 

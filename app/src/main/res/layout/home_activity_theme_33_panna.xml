@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/theme_31_home_background"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -8,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -16,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="@integer/weight_banner"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/theme_33_home_background">
 
         </LinearLayout>
 
@@ -24,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="@integer/weight_menu_section"
-            android:background="@android:color/transparent"
+            android:background="@color/ColorPrimary"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -48,9 +47,9 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/font_home_cat"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/ColorPrimary"
                         android:textSize="32dp"
-                        android:background="@drawable/theme_31_home_icon_background"/>
+                        android:background="@drawable/theme_33_home_icon_background"/>
 
                     <TextView
                         android:id="@+id/category_name"
@@ -67,7 +66,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relOffers"
@@ -85,9 +85,9 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/font_home_offer"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/ColorPrimary"
                         android:textSize="32dp"
-                        android:background="@drawable/theme_31_home_icon_background"/>
+                        android:background="@drawable/theme_33_home_icon_background"/>
 
 
                     <TextView
@@ -105,7 +105,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relMyCart"
@@ -122,9 +123,9 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/font_home_my_cart"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/ColorPrimary"
                         android:textSize="32dp"
-                        android:background="@drawable/theme_31_home_icon_background"/>
+                        android:background="@drawable/theme_33_home_icon_background"/>
 
                     <TextView
                         android:id="@+id/myCart"
@@ -156,7 +157,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_white"></View>
+                android:background="@color/color_white"
+                android:visibility="gone"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -178,9 +180,9 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/font_home_book"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/ColorPrimary"
                         android:textSize="32dp"
-                        android:background="@drawable/theme_31_home_icon_background"/>
+                        android:background="@drawable/theme_33_home_icon_background"/>
 
                     <TextView
                         android:id="@+id/bookNow"
@@ -197,7 +199,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relMyOrders"
@@ -215,9 +218,9 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/font_home_order"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/ColorPrimary"
                         android:textSize="32dp"
-                        android:background="@drawable/theme_31_home_icon_background"/>
+                        android:background="@drawable/theme_33_home_icon_background"/>
 
 
                     <TextView
@@ -235,7 +238,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relContact"
@@ -252,9 +256,9 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="@string/font_home_contact"
-                        android:textColor="@color/color_white"
+                        android:textColor="@color/ColorPrimary"
                         android:textSize="32dp"
-                        android:background="@drawable/theme_31_home_icon_background"/>
+                        android:background="@drawable/theme_33_home_icon_background"/>
 
                     <TextView
                         android:id="@+id/contact"

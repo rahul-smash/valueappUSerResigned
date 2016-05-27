@@ -25,6 +25,8 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetOfferResponse;
 import com.signity.bonbon.model.OfferData;
 import com.signity.bonbon.model.Store;
@@ -73,7 +75,7 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
         prefManager = new PrefManager(getActivity());
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
-
+        GATrackers.getInstance().trackScreenView(GAConstant.OFFER_SCREEN);
     }
 
     public static Fragment newInstance(Context context) {
@@ -161,6 +163,8 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
                     String offerName = data.getName();
+                    String offerGac = getActivity().getString(R.string.app_name) + GAConstant.GAC_OFFER;
+                    GATrackers.getInstance().trackEvent(offerGac, offerGac + GAConstant.VIEW, "OFFER NAME: " + offerName);
                     String offerDataString = gsonHelper.getOfferDataString(data);
                     prefManager.storeSharedValue(AppConstant.OFFER_VIEW, offerDataString);
                     Intent intentOfferView = new Intent(getActivity(), OfferViewActivity.class);
@@ -211,7 +215,7 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("store_id", storeId);
-        param.put("user_id", ""+userId);
+        param.put("user_id", "" + userId);
         param.put("area_id", "");
         param.put("order_facility", "");
 

@@ -78,16 +78,15 @@ public class GATrackers {
             switch (target) {
                 case APP:
                     tracker = GoogleAnalytics.getInstance(mContext).newTracker(trackId);
-                    String trackerName = mContext.getString(R.string.app_name) +
-                            "-Store_id" + BuildConfig.STORE_ID +
-                            "-Version:" + BuildConfig.VERSION_CODE + "." + BuildConfig.VERSION_NAME +
-                            "-DB_VERSION" + BuildConfig.DB_VERSION;
+                    String trackerName = "GA- " + mContext.getString(R.string.app_name);
                     tracker.setAppName(trackerName);
-                    tracker.setAppVersion(BuildConfig.VERSION_CODE + "." + BuildConfig.VERSION_NAME);
+                    tracker.setAppVersion(BuildConfig.VERSION_CODE + "." + BuildConfig.VERSION_NAME + "-" + BuildConfig.DB_VERSION);
                     tracker.setAppId(BuildConfig.APPLICATION_ID);
                     tracker.setSessionTimeout(300);
                     tracker.enableExceptionReporting(true);
-//                    tracker.enableAutoActivityTracking(true);
+                    if (BuildConfig.DEBUG) {
+                        tracker.enableAutoActivityTracking(true);
+                    }
                     break;
                 default:
                     throw new IllegalArgumentException("Unhandled analytics target " + target);
@@ -121,11 +120,11 @@ public class GATrackers {
         if (e != null) {
 
             t.send(new HitBuilders.ExceptionBuilder()
-                            .setDescription(
-                                    new StandardExceptionParser(mContext, null)
-                                            .getDescription(Thread.currentThread().getName(), e))
-                            .setFatal(false)
-                            .build()
+                    .setDescription(
+                            new StandardExceptionParser(mContext, null)
+                                    .getDescription(Thread.currentThread().getName(), e))
+                    .setFatal(false)
+                    .build()
             );
         }
     }
@@ -163,13 +162,12 @@ public class GATrackers {
      */
     public void trackException(Exception e) {
         if (e != null) {
-
             defaultAppTracker.send(new HitBuilders.ExceptionBuilder()
-                            .setDescription(
-                                    new StandardExceptionParser(mContext, null)
-                                            .getDescription(Thread.currentThread().getName(), e))
-                            .setFatal(false)
-                            .build()
+                    .setDescription(
+                            new StandardExceptionParser(mContext, null)
+                                    .getDescription(Thread.currentThread().getName(), e))
+                    .setFatal(false)
+                    .build()
             );
         }
     }
@@ -186,6 +184,5 @@ public class GATrackers {
         // Build and send an Event.
         defaultAppTracker.send(new HitBuilders.EventBuilder().setCategory(category).setAction(action).setLabel(label).build());
     }
-
 
 }

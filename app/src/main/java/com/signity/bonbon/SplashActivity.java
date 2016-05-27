@@ -50,7 +50,6 @@ public class SplashActivity extends Activity {
     PrefManager prefManager;
     String deviceToken;
     ImageView splash_screen;
-
     GATrackers trackers;
 
 
@@ -59,9 +58,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         trackers = GATrackers.getInstance();
-
         trackers.trackScreenView(GAConstant.SPLASH_SCREEN);
-
         GeofenceController.getInstance().init(this);
         prefManager = new PrefManager(this);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
@@ -70,8 +67,6 @@ public class SplashActivity extends Activity {
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
 
 //        startAnimationProcess()
-//
-//
     }
 
     @Override

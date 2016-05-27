@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slider_pane);
         context = this;
+        GATrackers.getInstance().
+                trackScreenView(GAConstant.HOME_SCREEN);
         prefManager = new PrefManager(MainActivity.this);
         viewController = AppController.getInstance().getViewController();
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
@@ -428,10 +430,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 citySelect.setVisibility(View.GONE);
                 title.setText("About Us");
                 replace(new AboutUsFragment());
-
                 break;
             case 7:
-                GATrackers.getInstance().trackEvent(GAConstant.EVENT_SHARE, GAConstant.SHARED, getString(R.string.app_name) + " Link shared");
+                String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
+                GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
+                        getString(R.string.app_name) + " App Shared");
                 String shareContent =
                         "Kindly download " + store.getStoreName() + " app from " +
                                 store.getAndroidAppShareLink() + "\nThanks and Regards\n " +

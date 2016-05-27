@@ -1,51 +1,43 @@
 package com.signity.bonbon.ga;
 
 import com.signity.bonbon.BuildConfig;
+import com.signity.bonbon.R;
 
 /**
  * Created by rajesh on 21/4/16.
  */
 public class GAConstant {
 
-
     public static final String GA_TRACK_ID_DEBUG = "UA-76344996-2";  // for tangerine
     public static final String GA_TRACK_ID_LIVE = "UA-77008261-1";
-    public static final String SPLASH_SCREEN = "Splash screen";
-
-
-
-    /*Category*/
-    public static final String OFFER = "_offers";
-    public static final String ORDER = "_order";
-    public static final String PRODUCT = "_product";
-    public static final String CONTACT = "_contact_us";
-    public static final String CAT = "_cat";
-    public static final String SUB_CAT = "_sub_cat";
-    public static final String ABOUT = "_about_us";
-    public static final String SEARCH = "_search";
-    public static final String SHARE = "_share_app";
-
-
+    /*All Screen Tracker*/
+    public static final String SPLASH_SCREEN = "SPLASH SCREEN";
+    public static final String HOME_SCREEN = "HOME_SCREEN";
+    public static final String ABOUT_US_SCREEN = "ABOUT_US_SCREEN";
+    public static final String OFFER_SCREEN = "OFFER_SCREEN";
+    public static final String SEARCH_SCREEN = "SEARCH_SCREEN";
+    public static final String CONTACT_SCREEN = "CONTACT_SCREEN";
+    public static final String CHECKOUT_SCREEN = "CHECKOUT_SCREEN";
+    public static final String CATEGORY_SCREEN = "CATEGORY_SCREEN";
+    public static final String PRODUCT_SCREEN = "PRODUCT_SCREEN";
     /*Platform*/
     public static final String PLATFORM = "_ANDROID";
-
-
+    /*Category*/
+    public static final String GAC_OFFER = PLATFORM + "_OFFERS";
+    public static final String ORDER = PLATFORM + "_ORDER";
+    public static final String PRODUCT = PLATFORM + "_PRODUCT";
+    public static final String GAC_CONTACT = PLATFORM + "_CONTACT_US";
+    public static final String GAC_CAT = PLATFORM + "_CATEGORY";
+    public static final String SUB_CAT = PLATFORM + "_SUB_CATEGORY";
+    public static final String GAC_ABOUT = PLATFORM + "_ABOUT_US";
+    public static final String GAC_SEARCH = PLATFORM + "_SEARCH";
+    public static final String GAC_SHARE = PLATFORM + "_SHARE_APP";
     /*ACTIONS*/
     public static final String VIEW = "_VIEW";
     public static final String CLICKED = "_CLICKED";
     public static final String PLACED = "_PLACED";
     public static final String SHARED = "_SHARED";
-
     /*GA EVENT CATEGORY*/
-    public static final String EVENT_OFFER = BuildConfig.STORE_ID + PLATFORM + OFFER + CLICKED;
-    public static final String EVENT_ORDER = BuildConfig.STORE_ID + PLATFORM + ORDER + PLACED;
-    public static final String EVENT_PRODUCT = BuildConfig.STORE_ID + PLATFORM + PRODUCT + VIEW;
-    public static final String EVENT_CONTACT = BuildConfig.STORE_ID + PLATFORM + CONTACT + VIEW;
-    public static final String EVENT_CAT = BuildConfig.STORE_ID + PLATFORM + CAT + VIEW;
     public static final String EVENT_SUB_CAT = BuildConfig.STORE_ID + PLATFORM + SUB_CAT + VIEW;
-    public static final String EVENT_ABOUT_US = BuildConfig.STORE_ID + PLATFORM + ABOUT + VIEW;
-    public static final String EVENT_SEARCH = BuildConfig.STORE_ID + PLATFORM + SEARCH + CLICKED;
-    public static final String EVENT_SHARE = BuildConfig.STORE_ID + PLATFORM + SHARE;
-
 
 }

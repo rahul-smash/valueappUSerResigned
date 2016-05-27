@@ -57,19 +57,21 @@ public class AboutUsFragment extends Fragment {
         prefManager = new PrefManager(getActivity());
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
         appDb = DbAdapter.getInstance().getDb();
+        GATrackers.getInstance().trackScreenView(GAConstant.ABOUT_US_SCREEN);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         mView = inflater.inflate(R.layout.about_us, container, false);
 
+        String aboutUsGAC = getString(R.string.app_name) + GAConstant.GAC_ABOUT;
+
         GATrackers.getInstance()
-                .trackEvent(GAConstant.EVENT_ABOUT_US, GAConstant.VIEW,
-                        "About Us view for " + getString(R.string.app_name));
+                .trackEvent(aboutUsGAC, aboutUsGAC + GAConstant.VIEW,
+                        "ABOUT US VIEW");
 
         webview = (WebView) mView.findViewById(R.id.webview);
-        startOrder=(Button)mView.findViewById(R.id.startOrder);
+        startOrder = (Button) mView.findViewById(R.id.startOrder);
 
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
 
@@ -89,7 +91,7 @@ public class AboutUsFragment extends Fragment {
         startOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).onBackPressed();
+                ((MainActivity) getActivity()).onBackPressed();
             }
         });
 

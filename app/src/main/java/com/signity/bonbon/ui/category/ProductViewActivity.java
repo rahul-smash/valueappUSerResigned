@@ -54,13 +54,16 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private PrefManager prefManager;
     public int cartSize;
 
-    String productViewTitle="";
+    String productViewTitle = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.signity.bonbon.R.layout.activity_product_view);
+
+        GATrackers.getInstance().trackScreenView(GAConstant.PRODUCT_SCREEN);
+
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
         prefManager = new PrefManager(ProductViewActivity.this);
@@ -104,9 +107,9 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         add_button.setOnClickListener(this);
         remove_button.setOnClickListener(this);
 
-        if(productViewTitle==null){
+        if (productViewTitle == null) {
             textTitle.setText(product.getTitle());
-        }else {
+        } else {
             textTitle.setText(productViewTitle);
         }
 
@@ -149,7 +152,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             description.setText(product.getDescription());
         }
         number_text.setText(txtQuantCount);
-        String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+        String variant = selectedVariant.getWeight().trim() + selectedVariant.getUnitType().trim();
 
         if (!variant.isEmpty()) {
             btnVarient.setVisibility(View.VISIBLE);
@@ -162,20 +165,16 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private void initProduct() {
         String product_id = getIntent().getStringExtra("product_id");
         productViewTitle = getIntent().getStringExtra("productViewTitle");
-
-        GATrackers.getInstance().trackEvent(GAConstant.PRODUCT + "_" + product_id, GAConstant.VIEW, "A product  with id " + product_id +
-                "is view on " + getString(R.string.app_name));
-
+        String productGac = getString(R.string.app_name) + GAConstant.PRODUCT;
+        GATrackers.getInstance().trackEvent(productGac, productGac + GAConstant.VIEW, productViewTitle + " is view on " + getString(R.string.app_name));
         product = appDb.getProduct(product_id);
         if (product == null) {
             product = gsonHelper.getProduct(prefManager.getSharedValue(PrefManager.PREF_SEARCH_PRODUCT));
         }
     }
 
-
     public void checkCartValue() {
         cartSize = appDb.getCartSize();
-
         if (cartSize != 0) {
             shoppinglist_text.setVisibility(View.VISIBLE);
             shoppinglist_text.setText("" + cartSize);

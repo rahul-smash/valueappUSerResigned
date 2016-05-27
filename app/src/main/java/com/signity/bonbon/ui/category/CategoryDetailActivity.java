@@ -220,14 +220,14 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
             if (subCategoryList.size() <= 1) {
                 productViewTitle = getIntent().getStringExtra("title");
-            }
-            else {
-                productViewTitle=subCategoryList.get(position).getTitle();
+            } else {
+                productViewTitle = subCategoryList.get(position).getTitle();
             }
 
             String subCategoryId = subCategoryList.get(position).getId();
-            GATrackers.getInstance().trackEvent(GAConstant.EVENT_SUB_CAT + "_" + subCategoryId, GAConstant.VIEW,
-                    "Sub Category with Title " + subCategoryList.get(position).getTitle() + " is view on " + getString(R.string.app_name));
+            String subCatGAC = getString(R.string.app_name) + GAConstant.SUB_CAT;
+            GATrackers.getInstance().trackEvent(subCatGAC, subCatGAC + GAConstant.VIEW,
+                    subCategoryList.get(position).getTitle() + " under " + title + " is view on " + getString(R.string.app_name));
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);

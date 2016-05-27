@@ -23,8 +23,6 @@ public class OfferListActivity extends FragmentActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.offer_list_activity);
-        GATrackers.getInstance().trackEvent(GAConstant.EVENT_OFFER, GAConstant.VIEW, "There is offer on "
-                + getString(R.string.app_name));
         Fragment fragment = OfferFragment.newInstance(this);
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);

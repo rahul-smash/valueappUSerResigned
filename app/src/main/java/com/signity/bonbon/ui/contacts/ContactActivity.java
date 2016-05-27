@@ -52,8 +52,10 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_activity);
         ((Button) findViewById(R.id.btnSearch)).setVisibility(View.GONE);
+        GATrackers.getInstance().trackScreenView(GAConstant.CONTACT_SCREEN);
 
-        GATrackers.getInstance().trackEvent(GAConstant.EVENT_CONTACT, GAConstant.VIEW,
+        String contactGAC = getString(R.string.app_name) + GAConstant.GAC_CONTACT;
+        GATrackers.getInstance().trackEvent(contactGAC, contactGAC + GAConstant.VIEW,
                 "Contact us view on " + getString(R.string.app_name));
 
         prefManager = new PrefManager(this);

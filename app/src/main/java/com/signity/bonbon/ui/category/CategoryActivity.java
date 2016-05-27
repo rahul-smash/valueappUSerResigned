@@ -69,6 +69,9 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_activity);
+
+        GATrackers.getInstance().trackScreenView(GAConstant.CATEGORY_SCREEN);
+
         getDisplayMetrics();
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(this);
@@ -215,8 +218,8 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
 
                     if (category.getSubCategoryList() != null && category.getSubCategoryList().size() != 0) {
                         ViewController viewController = AppController.getInstance().getViewController();
-                        GATrackers.getInstance().trackEvent(GAConstant.EVENT_CAT + "_" + category.getId(), GAConstant.VIEW, "Category with title " +
-                                category.getTitle() + " is view on " + getString(R.string.app_name));
+                        String categoryGAC = getString(R.string.app_name) + GAConstant.GAC_CAT;
+                        GATrackers.getInstance().trackEvent(categoryGAC, categoryGAC + GAConstant.VIEW, category.getTitle() + " is view on " + getString(R.string.app_name));
                         Intent i = new Intent(CategoryActivity.this, viewController.getCategoryDetailActivity());
                         i.putExtra("categoryId", category.getId());
                         i.putExtra("title", category.getTitle());

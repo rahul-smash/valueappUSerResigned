@@ -91,7 +91,7 @@ public final class ProductListFragment extends Fragment {
         typeFaceRobotoRegular = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_BOLD);
         subCategoryId = getArguments().getString("subCategoryId");
-        productViewTitle = getArguments().getString("productViewTitle","");
+        productViewTitle = getArguments().getString("productViewTitle", "");
         listProduct = new ArrayList<>();
     }
 
@@ -245,7 +245,7 @@ public final class ProductListFragment extends Fragment {
             }
 
 
-            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+            String variant = selectedVariant.getWeight().trim() + selectedVariant.getUnitType().trim();
 
             if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);

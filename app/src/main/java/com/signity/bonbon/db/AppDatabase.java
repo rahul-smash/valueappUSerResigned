@@ -1150,7 +1150,5 @@ public class AppDatabase {
                 }
             }
         }
-
     }
-
 }

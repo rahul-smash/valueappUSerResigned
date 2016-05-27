@@ -62,8 +62,8 @@ import retrofit.client.Response;
  */
 public class SearchActivity extends Activity implements View.OnClickListener {
 
-    TextView mHeaderText,shoppinglist_text;
-    Button mBackButton,btnShopcart;
+    TextView mHeaderText, shoppinglist_text;
+    Button mBackButton, btnShopcart;
     EditText mSearchEdit;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private GCMClientManager pushClientManager;
@@ -83,6 +83,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
         prefManager = new PrefManager(SearchActivity.this);
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
@@ -94,7 +95,9 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                GATrackers.getInstance().trackEvent(GAConstant.EVENT_SEARCH, GAConstant.CLICKED, "Search for item " +
+
+                String searchGAC = getString(R.string.app_name) + GAConstant.GAC_SEARCH;
+                GATrackers.getInstance().trackEvent(searchGAC, searchGAC + GAConstant.CLICKED, "There is a search for item " +
                         mSearchEdit.getText().toString() + " On" + getString(R.string.app_name));
                 getSearchList(mSearchEdit.getText().toString());
                 return false;
@@ -334,7 +337,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             } else {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
-            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
+            String variant = selectedVariant.getWeight().trim() + selectedVariant.getUnitType().trim();
 
             if (!variant.isEmpty()) {
                 holder.btnVarient.setVisibility(View.VISIBLE);

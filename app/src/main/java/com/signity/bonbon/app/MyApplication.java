@@ -38,5 +38,4 @@ public class MyApplication extends Application {
         built.setLoggingEnabled(false);
         Picasso.setSingletonInstance(built);
     }
-
 }

@@ -704,7 +704,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
                     }
 
-
                 } else {
                     Log.e("Error", "Error success false");
                 }

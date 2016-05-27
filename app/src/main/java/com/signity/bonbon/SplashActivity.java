@@ -214,6 +214,12 @@ public class SplashActivity extends Activity {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
 
+                    oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
+                    String appVersion = prefManager.getSharedValue(AppConstant.APP_VERISON);
+                    if (!appVersion.equalsIgnoreCase(oldVerision)) {
+                        appDb.deleteCartAll();
+                    }
+
                     if (store.getBanners() != null && store.getBanners().size() != 0) {
                         DataAdapter.getInstance().setBanners(store.getBanners());
                     }

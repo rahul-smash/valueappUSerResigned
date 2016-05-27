@@ -21,11 +21,11 @@ android {
     }
 
     defaultConfig {
-        applicationId 'com.signity.tangerine'
+        applicationId "${app_id}"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 4
-        versionName "1.4"
+        versionCode java.lang.Integer.parseInt("${version_code}")
+        versionName "${version_name}"
 
         //These are the values for the authorities and account types.
         //Reference them in the java files with e.g. BuildConfig.ACCOUNT_TYPE.
@@ -37,7 +37,6 @@ android {
 
         //Reference them in .xml files.
 
-        resValue "string", "map_api_key", "${map_key}"
         resValue "color", "ColorPrimary", "${color_primary}"
         resValue "color", "ColorPrimaryDark", "${color_primary_dark}"
 
@@ -50,6 +49,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "NETWORK_URL", "\"${network_url}${store_id}/${api_version}\""
             resValue "string", "app_name", "${app_name}"
+            resValue "string", "map_api_key", "${map_key}"
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def apk = output.outputFile;
@@ -58,7 +58,7 @@ android {
                     def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}-${api_version}-"
                     def newName = output.outputFile.name
                     newName = newName.replace("app-", "${app_name}-") // //"MyAppName" -> I set my app variables in the root project
-                    newName = newName.replace("-release", "-release-" +version+ formattedDate)
+                    newName = newName.replace("-release", "-release-" + version + formattedDate)
                     output.outputFile = new File(apk.parentFile, newName);
                 }
             }
@@ -71,6 +71,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "NETWORK_URL", "\"${network_url_dev}${store_id}/${api_version}\""
             resValue "string", "app_name", "${app_name_dev}"
+            resValue "string", "map_api_key", "${map_key_dev}"
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def apk = output.outputFile;
@@ -92,6 +93,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "NETWORK_URL", "\"${network_url_stag}${store_id}/${api_version}\""
             resValue "string", "app_name", "${app_name_beta}"
+            resValue "string", "map_api_key", "${map_key_dev}"
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def apk = output.outputFile;
@@ -100,7 +102,7 @@ android {
                     def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}-${api_version}-"
                     def newName = output.outputFile.name
                     newName = newName.replace("app-", "${app_name}-") //"MyAppName" -> I set my app variables in the root project
-                    newName = newName.replace("-staging", "-beta-"+version + formattedDate)
+                    newName = newName.replace("-staging", "-beta-" + version + formattedDate)
                     output.outputFile = new File(apk.parentFile, newName);
                 }
             }

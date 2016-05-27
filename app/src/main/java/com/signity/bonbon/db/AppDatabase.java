@@ -57,7 +57,6 @@ public class AppDatabase {
             deleteOperationForVersionUpdate(data);
             deleteCategoryAll();
             deleteCartAll();
-
             for (Category category : data) {
                 try {
                     ContentValues values = new ContentValues();

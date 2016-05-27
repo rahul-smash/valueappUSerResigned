@@ -56,6 +56,7 @@ public class AppDatabase {
 
             deleteOperationForVersionUpdate(data);
             deleteCategoryAll();
+            deleteCartAll();
 
             for (Category category : data) {
                 try {
@@ -627,6 +628,13 @@ public class AppDatabase {
         return tax_amount;
     }
 
+    public void deleteCartAll() {
+        try {
+            db.delete("cart_table", null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void updateToCart(Product product) {
         boolean isAlreadyExit = false;

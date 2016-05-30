@@ -180,6 +180,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         tax_label = (TextView) findViewById(R.id.tax_label);
         taxTag = (TextView) findViewById(R.id.taxTag);
         applyCoupon.setTag("apply");
+        applyCoupon_1.setTag("apply");
         applyCoupon.setOnClickListener(this);
         applyCoupon_1.setOnClickListener(this);
         applyOffer.setOnClickListener(this);

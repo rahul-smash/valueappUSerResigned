@@ -208,6 +208,12 @@ public class ViewController {
                 }
                 break;
 
+            case 36:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentBeliramTheme22();
+                }
+                break;
+
             default:
                 fragment = new HomeFragment();
                 break;
@@ -383,6 +389,13 @@ public class ViewController {
                 //Burger Point chd
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_32_burger;
+                }
+                break;
+
+            case 36:
+                //Garden Chef
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    layoutId = R.layout.home_activity_theme_36_garden;
                 }
                 break;
 

@@ -42,32 +42,10 @@ android {
 
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            debuggable false
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NETWORK_URL", "\"${network_url}${store_id}/${api_version}\""
-            resValue "string", "app_name", "${app_name}"
-            resValue "string", "map_api_key", "${map_key}"
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def apk = output.outputFile;
-                    def date = new Date();
-                    def formattedDate = date.format('MMM-d-yyyy')
-                    def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}-${api_version}-"
-                    def newName = output.outputFile.name
-                    newName = newName.replace("app-", "${app_name}-") // //"MyAppName" -> I set my app variables in the root project
-                    newName = newName.replace("-release", "-release-" + version + formattedDate)
-                    output.outputFile = new File(apk.parentFile, newName);
-                }
-            }
-        }
         debug {
             minifyEnabled false
             debuggable true
             signingConfig signingConfigs.debug
-            applicationIdSuffix ".dev"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "NETWORK_URL", "\"${network_url_dev}${store_id}/${api_version}\""
             resValue "string", "app_name", "${app_name_dev}"
@@ -85,28 +63,49 @@ android {
                 }
             }
         }
-        staging {
-            debuggable true
-            signingConfig signingConfigs.debug
-            minifyEnabled false
-            applicationIdSuffix ".beta"
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NETWORK_URL", "\"${network_url_stag}${store_id}/${api_version}\""
-            resValue "string", "app_name", "${app_name_beta}"
-            resValue "string", "map_api_key", "${map_key_dev}"
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def apk = output.outputFile;
-                    def date = new Date();
-                    def formattedDate = date.format('MMM-d-yyyy')
-                    def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}-${api_version}-"
-                    def newName = output.outputFile.name
-                    newName = newName.replace("app-", "${app_name}-") //"MyAppName" -> I set my app variables in the root project
-                    newName = newName.replace("-staging", "-beta-" + version + formattedDate)
-                    output.outputFile = new File(apk.parentFile, newName);
-                }
-            }
-        }
+//        staging {
+//            debuggable true
+//            signingConfig signingConfigs.debug
+//            minifyEnabled false
+//            applicationIdSuffix ".beta"
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "String", "NETWORK_URL", "\"${network_url_stag}${store_id}/${api_version}\""
+//            resValue "string", "app_name", "${app_name_beta}"
+//            resValue "string", "map_api_key", "${map_key_dev}"
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def apk = output.outputFile;
+//                    def date = new Date();
+//                    def formattedDate = date.format('MMM-d-yyyy')
+//                    def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}-${api_version}-"
+//                    def newName = output.outputFile.name
+//                    newName = newName.replace("app-", "${app_name}-") //"MyAppName" -> I set my app variables in the root project
+//                    newName = newName.replace("-staging", "-beta-" + version + formattedDate)
+//                    output.outputFile = new File(apk.parentFile, newName);
+//                }
+//            }
+//        }
+//        release {
+//            minifyEnabled false
+//            debuggable false
+//            signingConfig signingConfigs.release
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "String", "NETWORK_URL", "\"${network_url}${store_id}/${api_version}\""
+//            resValue "string", "app_name", "${app_name}"
+//            resValue "string", "map_api_key", "${map_key}"
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def apk = output.outputFile;
+//                    def date = new Date();
+//                    def formattedDate = date.format('MMM-d-yyyy')
+//                    def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}-${api_version}-"
+//                    def newName = output.outputFile.name
+//                    newName = newName.replace("app-", "${app_name}-") // //"MyAppName" -> I set my app variables in the root project
+//                    newName = newName.replace("-release", "-release-" + version + formattedDate)
+//                    output.outputFile = new File(apk.parentFile, newName);
+//                }
+//            }
+//        }
     }
 
     compileOptions {
@@ -114,23 +113,23 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
-    sourceSets.debug {
-        resources {
-            srcDir 'config/images'
-        }
-
-        sourceSets.release {
-            resources {
-                srcDir 'config/images'
-            }
-        }
-
-        sourceSets.staging {
-            resources {
-                srcDir 'config/images'
-            }
-        }
-    }
+//    sourceSets.debug {
+//        resources {
+//            srcDir 'config/images'
+//        }
+//
+//        sourceSets.release {
+//            resources {
+//                srcDir 'config/images'
+//            }
+//        }
+//
+//        sourceSets.staging {
+//            resources {
+//                srcDir 'config/images'
+//            }
+//        }
+//    }
 }
 
 ext {

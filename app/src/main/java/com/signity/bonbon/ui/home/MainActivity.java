@@ -517,6 +517,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     public void replace(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();

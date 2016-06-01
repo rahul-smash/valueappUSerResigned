@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        task.enabled = false
+    }
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"

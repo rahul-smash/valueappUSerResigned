@@ -1,28 +1,8 @@
 apply plugin: 'com.android.application'
 
-tasks.whenTaskAdded { task ->
-    if (task.name.equals("lint")) {
-        task.enabled = false
-    }
-}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-    signingConfigs {
-        debug {
-            storeFile file("config/debug/debug.keystore")
-            storePassword DEV_STORE_PASSWORD
-            keyAlias DEV_KEY_ALIAS
-            keyPassword DEV_KEY_PASSWORD
-        }
-
-        release {
-            storeFile file("config/release/maas_release_key.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-    }
     defaultConfig {
         applicationId "${app_id}"
         minSdkVersion 15
@@ -37,21 +17,24 @@ android {
         buildConfigField "String", "STORE_ID", "\"${store_id}\""
         buildConfigField "String", "STORE_TYPE", "\"${store_type}\""
         buildConfigField "int", "DB_VERSION", "${db_version}"
+        buildConfigField "String", "NETWORK_URL", "\"${network_url}${store_id}/${api_version}\""
 
         //Reference them in .xml files.
-
+        resValue "string", "app_name", "${app_name}"
         resValue "color", "ColorPrimary", "${color_primary}"
         resValue "color", "ColorPrimaryDark", "${color_primary_dark}"
 
+    }
+    tasks.whenTaskAdded { task ->
+        if (task.name.equals("lint")) {
+            task.enabled = false
+        }
     }
     buildTypes {
         debug {
             minifyEnabled false
             debuggable true
-            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NETWORK_URL", "\"${network_url_stag}${store_id}/${api_version}\""
-            resValue "string", "app_name", "${app_name_dev}"
             resValue "string", "map_api_key", "${map_key_dev}"
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
@@ -63,31 +46,10 @@ android {
                 }
             }
         }
-        staging {
-            debuggable true
-            signingConfig signingConfigs.debug
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NETWORK_URL", "\"${network_url_stag}${store_id}/${api_version}\""
-            resValue "string", "app_name", "${app_name_beta}"
-            resValue "string", "map_api_key", "${map_key_dev}"
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def apk = output.outputFile;
-                    def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}"
-                    def newName = output.outputFile.name
-                    newName = newName.replace("-staging", "-beta-" + version)
-                    output.outputFile = new File(apk.parentFile, newName);
-                }
-            }
-        }
         release {
             minifyEnabled false
             debuggable false
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "NETWORK_URL", "\"${network_url}${store_id}/${api_version}\""
-            resValue "string", "app_name", "${app_name}"
             resValue "string", "map_api_key", "${map_key}"
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->

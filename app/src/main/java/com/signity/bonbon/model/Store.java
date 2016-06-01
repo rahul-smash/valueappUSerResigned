@@ -93,70 +93,6 @@ public class Store {
     @Expose
     private String taxRate;
 
-
-    public String getOpenhoursFrom() {
-        return openhoursFrom;
-    }
-
-    public void setOpenhoursFrom(String openhoursFrom) {
-        this.openhoursFrom = openhoursFrom;
-    }
-
-    @SerializedName("openhours_from")
-    @Expose
-    private String openhoursFrom;
-
-    public String getOpenhoursTo() {
-        return openhoursTo;
-    }
-
-    public void setOpenhoursTo(String openhoursTo) {
-        this.openhoursTo = openhoursTo;
-    }
-
-    public String getClosehoursMessage() {
-        return closehoursMessage;
-    }
-
-    public void setClosehoursMessage(String closehoursMessage) {
-        this.closehoursMessage = closehoursMessage;
-    }
-
-    @SerializedName("openhours_to")
-    @Expose
-    private String openhoursTo;
-    @SerializedName("closehours_message")
-    @Expose
-    private String closehoursMessage;
-
-
-
-    @SerializedName("is24x7_open")
-    @Expose
-    private String is24x7_open;
-
-
-    @SerializedName("banners")
-    @Expose
-    private List<Banner> banners = new ArrayList<Banner>();
-
-    public List<Banner> getBanners() {
-        return banners;
-    }
-
-    public void setBanners(List<Banner> banners) {
-        this.banners = banners;
-    }
-
-
-    public List<AppLabel> getAppLabels() {
-        return appLabels;
-    }
-
-    public void setAppLabels(List<AppLabel> appLabels) {
-        this.appLabels = appLabels;
-    }
-
     @SerializedName("app_labels")
     @Expose
     private List<AppLabel> appLabels = new ArrayList<AppLabel>();
@@ -177,6 +113,76 @@ public class Store {
     @Expose
     private List<GeofenceObjectModel> geofenceObjects = new ArrayList<GeofenceObjectModel>();
 
+    @SerializedName("openhours_to")
+    @Expose
+    private String openhoursTo;
+    @SerializedName("closehours_message")
+    @Expose
+    private String closehoursMessage;
+
+    @SerializedName("is24x7_open")
+    @Expose
+    private String is24x7_open;
+
+    @SerializedName("banners")
+    @Expose
+    private List<Banner> banners = new ArrayList<Banner>();
+
+    @SerializedName("openhours_from")
+    @Expose
+    private String openhoursFrom;
+
+    @SerializedName("force_download")
+    @Expose
+    private List<ForceDownloadModel> forceDownload = new ArrayList<ForceDownloadModel>();
+
+    @SerializedName("ga_code")
+    @Expose
+    private String gaCode;
+
+    public String getOpenhoursFrom() {
+        return openhoursFrom;
+    }
+
+    public void setOpenhoursFrom(String openhoursFrom) {
+        this.openhoursFrom = openhoursFrom;
+    }
+
+
+    public String getOpenhoursTo() {
+        return openhoursTo;
+    }
+
+    public void setOpenhoursTo(String openhoursTo) {
+        this.openhoursTo = openhoursTo;
+    }
+
+    public String getClosehoursMessage() {
+        return closehoursMessage;
+    }
+
+    public void setClosehoursMessage(String closehoursMessage) {
+        this.closehoursMessage = closehoursMessage;
+    }
+
+
+    public List<Banner> getBanners() {
+        return banners;
+    }
+
+    public void setBanners(List<Banner> banners) {
+        this.banners = banners;
+    }
+
+
+    public List<AppLabel> getAppLabels() {
+        return appLabels;
+    }
+
+    public void setAppLabels(List<AppLabel> appLabels) {
+        this.appLabels = appLabels;
+    }
+
 
     public List<GeofenceObjectModel> getGeofenceObjects() {
         return geofenceObjects;
@@ -185,10 +191,6 @@ public class Store {
     public void setGeofenceObjects(List<GeofenceObjectModel> geofenceObjects) {
         this.geofenceObjects = geofenceObjects;
     }
-
-    @SerializedName("force_download")
-    @Expose
-    private List<ForceDownloadModel> forceDownload = new ArrayList<ForceDownloadModel>();
 
     public String getStoreMsg() {
         return storeMsg;
@@ -502,5 +504,13 @@ public class Store {
 
     public void setTaxRate(String taxRate) {
         this.taxRate = taxRate;
+    }
+
+    public String getGaCode() {
+        return gaCode;
+    }
+
+    public void setGaCode(String gaCode) {
+        this.gaCode = gaCode;
     }
 }

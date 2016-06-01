@@ -193,18 +193,15 @@ public class SplashActivity extends Activity {
                         prefManager.storeSharedValue(AppConstant.LOYALITY, "0");
                     }
 
-
                     if (store.getCurrency().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.CURRENCY, "\\u20B9");
                     } else {
-
                         if (store.getCurrency().contains("\\")) {
                             prefManager.storeSharedValue(AppConstant.CURRENCY, store.getCurrency());
                         } else {
                             String ruppee = String.valueOf(Html.fromHtml(store.getCurrency()));
                             prefManager.storeSharedValue(AppConstant.CURRENCY, ruppee);
                         }
-
 //                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
                     }
 

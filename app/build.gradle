@@ -4,11 +4,11 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "${app_id}"
+        applicationId 'com.signity.tangerine'
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode java.lang.Integer.parseInt("${version_code}")
-        versionName "${version_name}"
+        versionCode 4
+        versionName "1.4"
 
         //These are the values for the authorities and account types.
         //Reference them in the java files with e.g. BuildConfig.ACCOUNT_TYPE.

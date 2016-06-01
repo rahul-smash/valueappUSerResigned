@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    android:weightSum="10">
+
+<!--
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_weight="2"
+        android:scaleType="fitXY"
+        android:src="@drawable/theme_36_home_upper"/>
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/theme_22_home_bg"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/bottomLayout"
         android:scaleType="fitXY"
-        android:layout_above="@+id/bottomLayout"/>
-
-
+        android:src="@drawable/theme_36_home_bg"
+        android:layout_weight="4"/>
 
 
     <RelativeLayout
@@ -21,28 +29,39 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#330202"
+        android:background="@drawable/theme_36_home_down"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="30dp">
+        android:layout_weight="3"
+        >
 
+
+        <ImageButton
+            android:id="@+id/categoriesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-24dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/theme_36_home_menu" />
         <ImageButton
             android:id="@+id/cartBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/theme_22_home_cart"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:background="@android:color/transparent"
             android:padding="5dp"
-            android:layout_alignParentLeft="true"/>
+            android:src="@drawable/theme_36_home_cart" />
 
         <Button
             android:id="@+id/buttonCart"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_alignRight="@+id/cartBtn"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_above="@+id/cartBtn"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="-15dp"
             android:background="@drawable/red_noto"
             android:clickable="false"
             android:gravity="center"
@@ -52,74 +71,69 @@
             android:visibility="visible" />
 
         <TextView
-            android:layout_alignRight="@+id/cartBtn"
-            android:layout_below="@+id/cartBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cart"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/cartBtn"
+            android:layout_below="@+id/cartBtn"
             android:gravity="center_horizontal"
             android:padding="5dp"
-            android:textSize="@dimen/text_size_normal"
+            android:text="Cart"
             android:textColor="@android:color/white"
-            android:layout_alignParentLeft="true"/>
+            android:textSize="@dimen/text_size_normal" />
 
         <ImageButton
             android:id="@+id/historyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/theme_22_home_history"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:background="@android:color/transparent"
             android:padding="5dp"
-            android:layout_centerHorizontal="true"/>
+            android:src="@drawable/theme_36_home_history" />
+
         <TextView
-            android:layout_below="@+id/historyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History"
+            android:layout_below="@+id/historyBtn"
+            android:layout_centerHorizontal="true"
             android:padding="5dp"
-            android:textSize="@dimen/text_size_normal"
+            android:text="History"
             android:textColor="@android:color/white"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="@dimen/text_size_normal" />
 
         <ImageButton
             android:id="@+id/offersBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/theme_22_home_offers"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:background="@android:color/transparent"
             android:padding="5dp"
-            android:layout_alignParentRight="true"/>
+            android:src="@drawable/theme_36_home_offers" />
 
         <TextView
-            android:layout_alignLeft="@+id/offersBtn"
-            android:layout_below="@+id/offersBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Offers"
+            android:layout_alignLeft="@+id/offersBtn"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/offersBtn"
             android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:textSize="@dimen/text_size_normal"
+            android:text="Offers"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:singleLine="true"
             android:textColor="@android:color/white"
-            android:layout_alignParentRight="true"/>
-
-
-
+            android:textSize="@dimen/text_size_normal" />
 
     </RelativeLayout>
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="5dp"
-        android:background="#F6D920"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="#451b0b"
+        android:layout_weight="1"/>-->
 
-    <ImageButton
-        android:id="@+id/categoriesBtn"
-        android:layout_marginBottom="-24dp"
-        android:layout_above="@+id/bottomLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/theme_22_home_menu"
-        android:background="@android:color/transparent"
-        android:layout_centerHorizontal="true"/>
 
-</RelativeLayout>
+</LinearLayout>

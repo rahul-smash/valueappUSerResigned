@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<ImageView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:adjustViewBounds="true"-->
-    <!--android:scaleType="fitXY"-->
-    <!--android:src="@drawable/theme_18_home_bg" />-->
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:adjustViewBounds="true"
+    android:scaleType="fitXY"
+    android:src="@drawable/theme_18_home_bg" />
 
 
-<!--    <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -266,6 +266,6 @@
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>-->
+    </LinearLayout>
 
 </RelativeLayout>

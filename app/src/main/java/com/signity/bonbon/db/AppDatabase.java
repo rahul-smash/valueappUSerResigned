@@ -53,10 +53,9 @@ public class AppDatabase {
     // operation related to category table
     public void addCategoryList(List<Category> data) {
         if (data != null && data.size() != 0) {
-
+            deleteCartElement();
             deleteOperationForVersionUpdate(data);
             deleteCategoryAll();
-            deleteCartAll();
             for (Category category : data) {
                 try {
                     ContentValues values = new ContentValues();
@@ -191,7 +190,6 @@ public class AppDatabase {
                     }
             }
         }
-
     }
 
     private void deleteProductForSubCategoryChange(String sub_cat_id) {
@@ -851,22 +849,24 @@ public class AppDatabase {
     }
 
     public void deleteCartElement() {
-
         List<UpdateCartModel> updateCartModelList = getCartList();
         for (UpdateCartModel updateCartModel : updateCartModelList) {
             Product product = getProduct(updateCartModel.getProductId());
-            SelectedVariant selectedVariant = product.getSelectedVariant();
-            selectedVariant.setQuantity("0");
-            selectedVariant.setVariantId(updateCartModel.getVariantId());
-            updateToCart(product);
-            selectedVariant.setVariantId("0");
-            selectedVariant.setSku("0");
-            selectedVariant.setWeight("0");
-            selectedVariant.setMrpPrice("0");
-            selectedVariant.setPrice("0");
-            selectedVariant.setDiscount("0");
-            selectedVariant.setUnitType("0");
-            updateProduct(product);
+            if (product != null) {
+                SelectedVariant selectedVariant = product.getSelectedVariant();
+                selectedVariant.setQuantity("0");
+                selectedVariant.setVariantId(updateCartModel.getVariantId());
+                updateToCart(product);
+                selectedVariant.setVariantId("0");
+                selectedVariant.setSku("0");
+                selectedVariant.setWeight("0");
+                selectedVariant.setMrpPrice("0");
+                selectedVariant.setPrice("0");
+                selectedVariant.setDiscount("0");
+                selectedVariant.setUnitType("0");
+                updateProduct(product);
+            }
+
         }
     }
 
@@ -937,7 +937,6 @@ public class AppDatabase {
                 selectedVariant.setUnitType(variant.getUnitType());
                 break;
             }
-
         }
 
         return selectedVariant;
@@ -978,7 +977,6 @@ public class AppDatabase {
 //            about_us TEXT,    version TEXT
 //    );
     public void addStore(Store store) {
-
         String productId = "";
         try {
             if (store != null) {

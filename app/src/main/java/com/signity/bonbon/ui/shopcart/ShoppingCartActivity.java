@@ -43,7 +43,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     ListView listViewCart;
     ProductListAdapter adapter;
 
-    TextView total, title, emptyCart,rupee;
+    TextView total, title, emptyCart, rupee;
     Button placeorder;
     List<Product> listProduct;
     private GCMClientManager pushClientManager;
@@ -63,8 +63,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
         listViewCart = (ListView) findViewById(R.id.items_list);
-        search=(ImageButton)findViewById(R.id.search);
-        rupee=(TextView)findViewById(R.id.rupee);
+        search = (ImageButton) findViewById(R.id.search);
+        rupee = (TextView) findViewById(R.id.rupee);
         total = (TextView) findViewById(R.id.total);
         total.setTypeface(typeFaceRobotoRegular);
         title = (TextView) findViewById(R.id.textTitle);
@@ -80,8 +80,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
         if (currency.contains("\\")) {
             rupee.setText(unescapeJavaString(currency));
-        }
-        else {
+        } else {
             rupee.setText(currency);
         }
 
@@ -215,8 +214,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
-            }
-            else {
+            } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
             }
@@ -302,7 +300,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         class ViewHolder {
             RelativeLayout parent;
             Button btnVarient;
-            TextView items_name, items_price, number_text, rupee,rupee2;
+            TextView items_name, items_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button;
             public RelativeLayout rel_mrp_offer_price;
             public TextView items_mrp_price;

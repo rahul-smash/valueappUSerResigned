@@ -8,13 +8,19 @@
         android:id="@+id/header"
         layout="@layout/layout_header_category_activity"></include>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <GridView
+        android:id="@+id/gridlist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/header"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+        android:layout_margin="5dp"
+        android:background="@android:color/transparent"
+        android:elevation="2dp"
+        android:horizontalSpacing="8dp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp"></GridView>
 
     <TextView
         android:id="@+id/no_record"

@@ -185,6 +185,7 @@ public class SplashActivity extends Activity {
                     prefManager.storeSharedValue(AppConstant.istaxenable, store.getIstaxenable());
                     prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
                     prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
+                    prefManager.storeSharedValue(AppConstant.CATEGORY_LAYOUT_TYPE, store.getCategoryLayoutType());
 
 
                     if (store.getLoyality() != null && !store.getLoyality().isEmpty()) {

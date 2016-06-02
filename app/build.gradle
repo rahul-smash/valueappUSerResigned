@@ -25,49 +25,26 @@ android {
         resValue "color", "ColorPrimaryDark", "${color_primary_dark}"
 
     }
-    tasks.whenTaskAdded { task ->
-        if (task.name.equals("lint")) {
-            task.enabled = false
-        }
-    }
     buildTypes {
         debug {
             minifyEnabled false
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string", "map_api_key", "${map_key_dev}"
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def apk = output.outputFile;
-                    def version = "ver.${variant.versionCode}.${variant.versionName}.${db_version}"
-                    def newName = output.outputFile.name
-                    newName = newName.replace("-debug", "-dev-" + version)
-                    output.outputFile = new File(apk.parentFile, newName);
-                }
-            }
         }
         release {
             minifyEnabled false
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string", "map_api_key", "${map_key}"
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def apk = output.outputFile;
-                    def version = "ver.${variant.versionCode}.${variant.versionName}-db.${db_version}"
-                    def newName = output.outputFile.name
-                    newName = newName.replace("-release", "-release-" + version)
-                    output.outputFile = new File(apk.parentFile, newName);
-                }
-            }
         }
     }
 
 }
 
+
 ext {
     supportLibVersion = '23.0.1'
-    playLibVersion = '7.8.0'
     playLibVersion = '7.8.0'
     okhttpLibVersion = '2.0.0'
     retrofitLibVersion = '1.9.0'
@@ -78,6 +55,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    compile "com.android.support:cardview-v7:${supportLibVersion}"
     compile "com.squareup.retrofit:retrofit:${retrofitLibVersion}"
     compile "com.squareup.okhttp:okhttp:${okhttpLibVersion}"
     compile "com.squareup.okhttp:okhttp-urlconnection:${okhttpLibVersion}"

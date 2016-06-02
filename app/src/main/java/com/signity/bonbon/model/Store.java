@@ -73,6 +73,8 @@ public class Store {
 
     @SerializedName("otp_skip")
     private String otpSkip;
+    @SerializedName("category_layout")
+    private String categoryLayoutType;   //0 for gird 1 for linear
 
     @SerializedName("loyality")
     @Expose
@@ -512,5 +514,13 @@ public class Store {
 
     public void setGaCode(String gaCode) {
         this.gaCode = gaCode;
+    }
+
+    public String getCategoryLayoutType() {
+        return categoryLayoutType;
+    }
+
+    public void setCategoryLayoutType(String categoryLayoutType) {
+        this.categoryLayoutType = categoryLayoutType;
     }
 }

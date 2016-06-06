@@ -146,6 +146,7 @@ public class SplashActivity extends Activity {
     }
 
 
+
     private void getMainActivity() {
         Intent intent_home = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent_home);

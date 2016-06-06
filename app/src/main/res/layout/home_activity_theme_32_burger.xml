@@ -2,15 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/theme_32_home_bg">
     >
 
-
-    <RelativeLayout
+    <!--android:background="@drawable/theme_32_home_bg"-->
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <ImageView
+&lt;!&ndash;        <ImageView
             android:id="@+id/logoTop"
             android:layout_width="@dimen/dimen_logo_width"
             android:layout_height="@dimen/dimen_logo_height"
@@ -27,7 +26,7 @@
             android:layout_marginTop="@dimen/labl1margintop"
             android:text="All Time Favourite Pizza's"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/dimen_big_text_size" />-->
+            android:textSize="@dimen/dimen_big_text_size" />&ndash;&gt;
 
         <View
             android:id="@+id/center_dot"
@@ -160,7 +159,7 @@
             android:layout_alignTop="@+id/center_dot3"
             android:layout_centerHorizontal="true"
             android:src="@drawable/theme_32_contact" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
 </RelativeLayout>

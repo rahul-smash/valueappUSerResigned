@@ -1,10 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/theme_31_home_background"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--android:background="@drawable/theme_31_home_background"-->
-   <!-- <LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
@@ -66,7 +67,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relOffers"
@@ -104,7 +106,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relMyCart"
@@ -155,7 +158,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_white"></View>
+                android:background="@color/color_white"
+                android:visibility="gone"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -196,7 +200,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relMyOrders"
@@ -234,7 +239,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/color_white"></View>
+                    android:background="@color/color_white"
+                    android:visibility="gone"></View>
 
                 <RelativeLayout
                     android:id="@+id/relContact"
@@ -271,5 +277,5 @@
 
         </LinearLayout>
 
-    </LinearLayout>-->
+    </LinearLayout>
 </RelativeLayout>

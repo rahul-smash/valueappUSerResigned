@@ -41,7 +41,7 @@ import java.util.Calendar;
 public class HomeFragmentBurgerTheme32 extends Fragment implements View.OnClickListener {
 
 
-    ImageView imageViewCategories, imageViewOffers, imageViewDelivery, imageViewOrder, imageViewContact, imageViewCart,imageViewRing;
+   /* ImageView imageViewCategories, imageViewOffers, imageViewDelivery, imageViewOrder, imageViewContact, imageViewCart,imageViewRing;
     Button buttonCart;
     View mView;
     String storeId;
@@ -177,11 +177,11 @@ public class HomeFragmentBurgerTheme32 extends Fragment implements View.OnClickL
     public void onResume() {
         super.onResume();
         checkCartCount();
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+       /* switch (v.getId()) {
 
             case R.id.imageViewCategories:
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
@@ -222,10 +222,10 @@ public class HomeFragmentBurgerTheme32 extends Fragment implements View.OnClickL
                 openShopCartActivity();
                 break;
 
-        }
+        }*/
     }
 
-    public void openShopCartActivity() {
+   /* public void openShopCartActivity() {
         Intent intentShopCartActivity = new Intent(getActivity(), ShoppingCartActivity.class);
         startActivity(intentShopCartActivity);
         AnimUtil.slideFromRightAnim(getActivity());
@@ -244,6 +244,6 @@ public class HomeFragmentBurgerTheme32 extends Fragment implements View.OnClickL
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
     }
-
+*/
 
 }

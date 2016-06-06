@@ -386,9 +386,10 @@ public class ViewController {
                 break;
 
             case 31:
-                //Suruchi Bhog
+                //Suruchi Bhog and big wich
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
-                    layoutId = R.layout.home_activity_theme_31_suruchi;
+//                    layoutId = R.layout.home_activity_theme_31_suruchi;
+                    layoutId = R.layout.home_activity_theme_31_bigwich;
                 }
                 break;
 

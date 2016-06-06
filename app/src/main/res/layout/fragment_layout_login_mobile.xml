@@ -48,7 +48,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Please enter your Mobile No. to proceed further"
+        android:text="Please enter your mobile no to proceed further"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="18sp" />
 

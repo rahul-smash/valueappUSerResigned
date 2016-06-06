@@ -2,9 +2,11 @@
 package com.signity.bonbon.Utilities;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.signity.bonbon.model.OfferData;
 import com.signity.bonbon.model.Product;
+import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.UserRecord;
@@ -123,10 +125,32 @@ public class GsonHelper {
     }
 
     public HashMap<String, UserRecord> getUserRecordData(String string) {
-        HashMap<String, UserRecord> object;
-        Type type = new TypeToken<HashMap<String, UserRecord>>() {
-        }.getType();
-        object = gson.fromJson(string, type);
+        HashMap<String, UserRecord> object = null;
+        try {
+            Type type = new TypeToken<HashMap<String, UserRecord>>() {
+            }.getType();
+            object = gson.fromJson(string, type);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
         return object;
     }
+
+//    public String getReferData(ReferAndEarn referAndEarn) {
+//        Type type = new TypeToken<ReferAndEarn>() {
+//        }.getType();
+//        return gson.toJson(referAndEarn, type);
+//    }
+//
+//    public ReferAndEarn getReferData(String referAndEarnStr) {
+//        ReferAndEarn object = null;
+//        try {
+//            Type type = new TypeToken<ReferAndEarn>() {
+//            }.getType();
+//            object = gson.fromJson(referAndEarnStr, type);
+//        } catch (JsonSyntaxException e) {
+//            e.printStackTrace();
+//        }
+//        return object;
+//    }
 }

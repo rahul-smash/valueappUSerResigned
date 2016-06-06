@@ -52,7 +52,6 @@ public class SplashActivity extends Activity {
     ImageView splash_screen;
     GATrackers trackers;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -185,8 +184,9 @@ public class SplashActivity extends Activity {
                     prefManager.storeSharedValue(AppConstant.istaxenable, store.getIstaxenable());
                     prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
                     prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
+                    prefManager.setReferEarnFn(store.getReferFnEnable());
+                    prefManager.setReferEarnFnEnableForDevice(store.getReferForDeviceEnable());
                     prefManager.storeSharedValue(AppConstant.CATEGORY_LAYOUT_TYPE, store.getCategoryLayoutType());
-
 
                     if (store.getLoyality() != null && !store.getLoyality().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.LOYALITY, store.getLoyality());
@@ -205,8 +205,6 @@ public class SplashActivity extends Activity {
                         }
 //                        prefManager.storeSharedValue(AppConstant.CURRENCY,"\uFF04");
                     }
-
-
                     String oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
                     if (oldVerision.isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());

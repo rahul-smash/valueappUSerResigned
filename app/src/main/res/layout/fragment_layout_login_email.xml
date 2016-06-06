@@ -82,10 +82,10 @@
                     android:hint="Name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
             </LinearLayout>
@@ -115,16 +115,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
+                    android:background="@drawable/edittext_round_corners"
                     android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="Email(Optional)"
-                    android:background="@drawable/edittext_round_corners"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
 
@@ -138,7 +138,8 @@
                 android:layout_below="@+id/nameLayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,16 +156,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
+                    android:background="@drawable/edittext_round_corners"
                     android:ems="10"
                     android:gravity="center_vertical"
                     android:hint="Enter Referal code here"
-                    android:background="@drawable/edittext_round_corners"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
 
@@ -200,7 +201,7 @@
                     android:inputType="textEmailAddress"
                     android:paddingLeft="2dp"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_size_large"/>
+                    android:textSize="@dimen/text_size_large" />
 
 
             </LinearLayout>

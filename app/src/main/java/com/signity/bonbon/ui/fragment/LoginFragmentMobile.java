@@ -84,7 +84,6 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     btnNext.performClick();
                 }
-
                 return false;
             }
         });
@@ -201,7 +200,15 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
         PrefManager prefManager = new PrefManager(getActivity());
         prefManager.storeSharedValue(AppConstant.ID, data.getId());
         prefManager.storeSharedValue(AppConstant.PHONE, data.getPhone());
-
+        if (data.getRefererEnable() != null ? data.getRefererEnable() : false) {
+            prefManager.setReferEarnFn(data.getRefererEnable());
+            prefManager.setReferEarnFnEnableForDevice(data.getReferAndEarn().getDeviceUnique());
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, data.getReferAndEarn().getMessage());
+        } else {
+            prefManager.setReferEarnFn(false);
+            prefManager.setReferEarnFnEnableForDevice(false);
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
+        }
         String name = data.getFullName();
         String email = data.getEmail();
         if (name != null && !name.isEmpty()) {
@@ -232,7 +239,15 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
     }
 
     private void proceedToMobileOtpGeneration(MobData data) {
-//        Log.e("OTP", data.getOtp());
+        if (data.getRefererEnable() != null ? data.getRefererEnable() : false) {
+            prefManager.setReferEarnFn(data.getRefererEnable());
+            prefManager.setReferEarnFnEnableForDevice(data.getReferAndEarn().getDeviceUnique());
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, data.getReferAndEarn().getMessage());
+        } else {
+            prefManager.setReferEarnFn(false);
+            prefManager.setReferEarnFnEnableForDevice(false);
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
+        }
         Fragment fragment = LoginFragmentOtp.newInstance(getActivity());
         Bundle bundle = new Bundle();
         bundle.putString("id", data.getId());

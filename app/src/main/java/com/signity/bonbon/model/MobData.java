@@ -44,6 +44,15 @@ public class MobData {
     @Expose
     private List<UserAddressModel> deliverAddress;
 
+    @SerializedName("is_referer_fn_enable")
+    @Expose
+    private Boolean isRefererEnable;
+
+
+    @SerializedName("ReferEarn")
+    private ReferAndEarn referAndEarn;
+
+
     /**
      * @return The id
      */
@@ -190,5 +199,22 @@ public class MobData {
 
     public void setDeliverAddress(List<UserAddressModel> deliverAddress) {
         this.deliverAddress = deliverAddress;
+    }
+
+
+    public Boolean getRefererEnable() {
+        return isRefererEnable;
+    }
+
+    public void setRefererEnable(Boolean refererEnable) {
+        isRefererEnable = refererEnable;
+    }
+
+    public ReferAndEarn getReferAndEarn() {
+        return referAndEarn;
+    }
+
+    public void setReferAndEarn(ReferAndEarn referAndEarn) {
+        this.referAndEarn = referAndEarn;
     }
 }

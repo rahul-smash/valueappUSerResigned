@@ -32,6 +32,7 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
+import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
@@ -46,6 +47,7 @@ import com.signity.bonbon.geofence.NamedGeofence;
 import com.signity.bonbon.model.ForceDownloadModel;
 import com.signity.bonbon.model.GeofenceObjectModel;
 import com.signity.bonbon.model.GetStoreModel;
+import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.model.SliderObject;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
@@ -432,20 +434,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 replace(new AboutUsFragment());
                 break;
             case 7:
-                String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
-                GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                        getString(R.string.app_name) + " App Shared");
-                String shareContent =
-                        "Kindly download " + store.getStoreName() + " app from " +
-                                store.getAndroidAppShareLink() + "\nThanks and Regards\n " +
-                                store.getStoreName() + "\n" + store.getCity() + " , " + store.getState();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, shareContent);
-                intent.putExtra(Intent.EXTRA_SUBJECT, store.getStoreName());
-                startActivity(Intent.createChooser(intent, "Share with"));
+                if (userId.isEmpty()) {
+                    String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
+                    GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
+                            getString(R.string.app_name) + " App Shared");
+                    String shareContent =
+                            "Kindly download " + store.getStoreName() + " app from " +
+                                    store.getAndroidAppShareLink() + "\nThanks and Regards\n " +
+                                    store.getStoreName() + "\n" + store.getCity() + " , " + store.getState();
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, shareContent);
+                    intent.putExtra(Intent.EXTRA_SUBJECT, store.getStoreName());
+                    startActivity(Intent.createChooser(intent, "Share with"));
+                } else {
+                    String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
+                    GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
+                            getString(R.string.app_name) + " Shared And Earn");
+                    String sharemessage = prefManager.getSharedValue(PrefManager.REFER_OBJ_MSG);
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, sharemessage);
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Refer and Earn");
+                    startActivity(Intent.createChooser(intent, "Share with"));
+                }
                 break;
-
             case 8:
 
                 if (loyalityStatus.equalsIgnoreCase("0")) {
@@ -478,12 +491,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         replace(fragment);
                     }
                 }
-
                 break;
 
-
             case 9:
-
                 title.setText(store.getStoreName());
                 if (userId.isEmpty()) {
                     Intent intentLogin = new Intent(MainActivity.this, LoginScreenActivity.class);
@@ -491,10 +501,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intentLogin);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
-
                     title.setVisibility(View.VISIBLE);
                     citySelect.setVisibility(View.GONE);
-
                     replace(viewController.getHomeFragment());
                     logOutUser();
                 }
@@ -563,13 +571,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 holder = (ViewHolder) convertView.getTag();
             }
 
-
             holder.icons.setImageResource(viewList.get(position).icons);
             holder.labels.setText(viewList.get(position).labels);
 
             SliderObject att = new SliderObject();
-
-
             if (loyalityStatus.equalsIgnoreCase("0")) {
                 if (userId.isEmpty()) {
                     att.labels = "Log In";
@@ -598,6 +603,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     holder.labels.setText(viewList.get(position).labels);
                     login = false;
                 }
+            }
+            if (!userId.isEmpty() && prefManager.isReferEarnFn()) {
+                SliderObject atts = new SliderObject();
+                atts.labels = "Refer And Earn";
+                atts.icons = icons[7];
+                viewList.set(7, atts);
+                holder.labels.setText(viewList.get(position).labels);
+            } else {
+                SliderObject atts = new SliderObject();
+                atts.labels = "Share";
+                atts.icons = icons[7];
+                viewList.set(7, atts);
+                holder.labels.setText(viewList.get(position).labels);
             }
 
 
@@ -676,7 +694,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.storeSharedValue(AppConstant.istaxenable, store.getIstaxenable());
                     prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
                     prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
-
+                    prefManager.setReferEarnFn(store.getReferFnEnable());
+                    prefManager.setReferEarnFnEnableForDevice(store.getReferForDeviceEnable());
 
                     if (store.getCurrency().isEmpty()) {
                         prefManager.storeSharedValue(AppConstant.CURRENCY, "\\u20B9");

@@ -57,7 +57,6 @@
                     android:textCursorDrawable="@null" />
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/emailLayout"
                 android:layout_width="match_parent"
@@ -97,6 +96,47 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/referanddone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Referal code"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="@dimen/text_size_large" />
+
+                <EditText
+                    android:id="@+id/edtReferCode"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edittext_round_corners"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="Enter Referal code here"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="8dp"
+                    android:textColor="@android:color/black"
+                    android:textCursorDrawable="@null" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/phoneLayout"

@@ -25,6 +25,11 @@ public class PrefManager {
     public static final String PICKUP_STATUS = BuildConfig.APPLICATION_ID + ".PICKUP_STATUS";
     public static final String GEOFENCE_ENABLE = BuildConfig.APPLICATION_ID + ".GEOFENCE_ENABLE";
     public static final String APP_VERSION = BuildConfig.APPLICATION_ID + ".APP_VERSION";
+    public static final String IS_REFER_FN = BuildConfig.APPLICATION_ID + ".is_refer_fn";
+    public static final String IS_REFER_FN_ENABLE_FOR_DEVICE = BuildConfig.APPLICATION_ID + ".is_refer_fn_enable_device";
+    public static final String REFER_OBJ = BuildConfig.APPLICATION_ID + ".refer_obj";
+    public static final String REFER_OBJ_MSG = BuildConfig.APPLICATION_ID + ".refer_obj_msg";
+
 
     public static class SharedPrefs {
         public static String Geofences = "SHARED_PREFS_GEOFENCES";
@@ -151,6 +156,27 @@ public class PrefManager {
     public String getAppVersion() {
         return sharedpreferences.getString(APP_VERSION, "");
 //        return "1";
+    }
+
+
+    public boolean isReferEarnFn() {
+        return sharedpreferences.getBoolean(IS_REFER_FN, false);
+    }
+
+    public void setReferEarnFn(boolean refer) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putBoolean(IS_REFER_FN, refer);
+        editor.commit();
+    }
+
+    public boolean isReferEarnFnEnableForDevice() {
+        return sharedpreferences.getBoolean(IS_REFER_FN_ENABLE_FOR_DEVICE, false);
+    }
+
+    public void setReferEarnFnEnableForDevice(boolean refer) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putBoolean(IS_REFER_FN_ENABLE_FOR_DEVICE, refer);
+        editor.commit();
     }
 
 }

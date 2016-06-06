@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +19,12 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
+import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
+import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
@@ -42,7 +45,8 @@ import retrofit.client.Response;
 public class LoginFragmentEmail extends Fragment {
 
     Button updateButton, backButton;
-    EditText edtName, edtEmail;
+    EditText edtName, edtEmail, edtReferal;
+    LinearLayout referalBlock;
     private GCMClientManager pushClientManager;
     private PrefManager prefManager;
 
@@ -58,7 +62,6 @@ public class LoginFragmentEmail extends Fragment {
         from = bundle.getString(AppConstant.FROM);
         fullName = bundle.getString("full_name");
         email = bundle.getString("email");
-
     }
 
     public static Fragment newInstance(Context context) {
@@ -71,10 +74,12 @@ public class LoginFragmentEmail extends Fragment {
         View rootView = inflater.inflate(com.signity.bonbon.R.layout.fragment_layout_login_email, container, false);
         mobilenumber = (TextView) rootView.findViewById(R.id.mobilenumber);
         mobilenumber.setText(prefManager.getSharedValue(AppConstant.PHONE));
-        updateButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.updateButton);
-        backButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.backButton);
-        edtName = (EditText) rootView.findViewById(com.signity.bonbon.R.id.edtName);
-        edtEmail = (EditText) rootView.findViewById(com.signity.bonbon.R.id.edtEmail);
+        updateButton = (Button) rootView.findViewById(R.id.updateButton);
+        backButton = (Button) rootView.findViewById(R.id.backButton);
+        edtName = (EditText) rootView.findViewById(R.id.edtName);
+        edtEmail = (EditText) rootView.findViewById(R.id.edtEmail);
+        edtReferal = (EditText) rootView.findViewById(R.id.edtReferCode);
+        referalBlock = (LinearLayout) rootView.findViewById(R.id.referanddone);
 
         edtEmail.setText("" + email.toString());
         edtName.setText("" + fullName.toString());
@@ -92,12 +97,26 @@ public class LoginFragmentEmail extends Fragment {
             }
         });
 
+        setUpReferalBlock();
+
         return rootView;
+    }
+
+    private void setUpReferalBlock() {
+        if (prefManager.isReferEarnFn()) {
+            if (prefManager.isReferEarnFnEnableForDevice()) {
+                referalBlock.setVisibility(View.VISIBLE);
+            } else {
+                referalBlock.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void updateProfile() {
         String emailtxt = edtEmail.getText().toString().trim();
         String nameTxt = edtName.getText().toString().trim();
+
+        String referCode = edtReferal.getText().toString().trim();
 
         if (nameTxt.isEmpty()) {
             Toast.makeText(getActivity(), "Please Enter Name", Toast.LENGTH_SHORT).show();
@@ -120,9 +139,10 @@ public class LoginFragmentEmail extends Fragment {
         param.put("platform", AppConstant.PLATFORM);
         param.put("full_name", nameTxt);
         param.put("email", emailtxt);
+        if (!referCode.isEmpty()) {
+            param.put("user_refer_code", referCode);
+        }
         NetworkAdaper.getInstance().getNetworkServices().updateProfile(param, new Callback<EmailResponse>() {
-
-
             @Override
             public void success(EmailResponse emailResponse, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
@@ -144,13 +164,10 @@ public class LoginFragmentEmail extends Fragment {
                         getActivity().finish();
                         AnimUtil.slideFromRightAnim(getActivity());
                     }
-
-
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
                     dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
                 }
-
             }
 
             @Override
@@ -158,10 +175,7 @@ public class LoginFragmentEmail extends Fragment {
                 ProgressDialogUtil.hideProgressDialog();
             }
         });
-
-
     }
-
 
     public void showAlertDialogForLogin(Context context, String title,
                                         String message) {

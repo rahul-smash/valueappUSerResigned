@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +18,12 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
+import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
+import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 
@@ -33,7 +36,8 @@ import retrofit.client.Response;
 
 public class Profile extends Fragment implements View.OnClickListener {
 
-    public EditText edtName, edtEmail;
+    public EditText edtName, edtEmail, edtReferal;
+    LinearLayout referalBlock;
     Button btnUpdate;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
 
@@ -71,12 +75,28 @@ public class Profile extends Fragment implements View.OnClickListener {
         edtName.setTypeface(typeFaceRobotoRegular);
         edtEmail = (EditText) rootView.findViewById(R.id.edtEmail);
         edtEmail.setTypeface(typeFaceRobotoRegular);
+
+        edtReferal = (EditText) rootView.findViewById(R.id.edtReferCode);
+        referalBlock = (LinearLayout) rootView.findViewById(R.id.referanddone);
+
         btnUpdate = (Button) rootView.findViewById(R.id.updateButton);
         edtEmail.setTypeface(typeFaceRobotoRegular);
         btnUpdate.setOnClickListener(this);
         edtName.setText(name);
         edtEmail.setText(email);
+        setUpReferalBlock();
         return rootView;
+    }
+
+
+    private void setUpReferalBlock() {
+        if (prefManager.isReferEarnFn()) {
+            if (prefManager.isReferEarnFnEnableForDevice()) {
+                referalBlock.setVisibility(View.VISIBLE);
+            } else {
+                referalBlock.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
@@ -92,6 +112,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
         String emailtxt = edtEmail.getText().toString();
         String nameTxt = edtName.getText().toString();
+
 
         if (nameTxt.isEmpty()) {
             Toast.makeText(getActivity(), "Please Update Name", Toast.LENGTH_SHORT).show();
@@ -114,6 +135,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
         final String name = edtName.getText().toString();
         String email = edtEmail.getText().toString();
+        String referCode = edtReferal.getText().toString().trim();
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = pushClientManager.getRegistrationId(getActivity());
         Map<String, String> param = new HashMap<String, String>();
@@ -124,6 +146,9 @@ public class Profile extends Fragment implements View.OnClickListener {
         param.put("platform", AppConstant.PLATFORM);
         param.put("full_name", name);
         param.put("email", email);
+        if (!referCode.isEmpty()) {
+            param.put("user_refer_code", referCode);
+        }
 
         NetworkAdaper.getInstance().getNetworkServices().updateProfile(param, new Callback<EmailResponse>() {
 
@@ -134,7 +159,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
                     try {
                         ((MainActivity) getActivity()).user.setText(name);
-                        showAlertDialog(getActivity(), "Success", "You have Successfully updated your profile");
+                        showAlertDialog(getActivity(), "Success", emailResponse.getMessage());
                     } catch (Exception e) {
                         e.getMessage();
                     }
@@ -143,9 +168,8 @@ public class Profile extends Fragment implements View.OnClickListener {
 //                    proceedToMobileOtpGeneration(data);
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Error", emailResponse.getMessage(), false);
                 }
-
             }
 
             @Override

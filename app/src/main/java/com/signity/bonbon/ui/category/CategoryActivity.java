@@ -1,6 +1,5 @@
 package com.signity.bonbon.ui.category;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -11,14 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,7 +32,6 @@ import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.GetCategory;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +62,6 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
     int screenWidth;
 
     private boolean isTypeList = false;
-
 
     private RecyclerView recyclerView;
 
@@ -178,7 +169,6 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
     public void getCategoryList() {
 
         ProgressDialogUtil.showProgressDialog(CategoryActivity.this);
-
         NetworkAdaper.getInstance().getNetworkServices().getCategoryList(new Callback<GetCategory>() {
             @Override
             public void success(GetCategory getCategory, Response response) {

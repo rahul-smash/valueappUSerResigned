@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="grocersapp.android.com.grocersapp.MyFavourite.MyFavourite">
+    android:background="@android:color/white">
 
     <ListView
         android:id="@+id/items_list"
@@ -39,6 +38,7 @@
                 android:text="Total"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/rupeeTxt"
                 android:layout_width="wrap_content"
@@ -49,6 +49,7 @@
                 android:text="\u20B9"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
@@ -58,7 +59,6 @@
                 android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
-
 
 
         </LinearLayout>

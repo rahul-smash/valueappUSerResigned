@@ -142,6 +142,15 @@ public class Store {
     @Expose
     private String gaCode;
 
+
+    @SerializedName("is_referer_fn_enable")
+    @Expose
+    private Boolean isReferFnEnable;
+    @SerializedName("bl_device_id_unique")
+    @Expose
+    private Boolean isReferForDeviceEnable;
+
+
     public String getOpenhoursFrom() {
         return openhoursFrom;
     }
@@ -522,5 +531,21 @@ public class Store {
 
     public void setCategoryLayoutType(String categoryLayoutType) {
         this.categoryLayoutType = categoryLayoutType;
+    }
+
+    public Boolean getReferForDeviceEnable() {
+        return isReferForDeviceEnable;
+    }
+
+    public void setReferForDeviceEnable(Boolean referForDeviceEnable) {
+        isReferForDeviceEnable = referForDeviceEnable;
+    }
+
+    public Boolean getReferFnEnable() {
+        return isReferFnEnable;
+    }
+
+    public void setReferFnEnable(Boolean referFnEnable) {
+        isReferFnEnable = referFnEnable;
     }
 }

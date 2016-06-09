@@ -82,7 +82,7 @@ public class DialogHandler {
         titleTxt.setText(title);
         messageText.setText(message);
         dialog.setCanceledOnTouchOutside(false);
-        positveButton.setText("Ok");
+        positveButton.setText("OK");
         positveButton.setVisibility(View.VISIBLE);
         positveButton.setOnClickListener(new View.OnClickListener() {
             @Override

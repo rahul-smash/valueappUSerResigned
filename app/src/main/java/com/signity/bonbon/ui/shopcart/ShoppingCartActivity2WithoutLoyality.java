@@ -617,7 +617,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
                                 String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();

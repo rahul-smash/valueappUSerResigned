@@ -267,7 +267,7 @@ public class CategoryActivity_ extends FragmentActivity implements View.OnClickL
         final DialogHandler dialogHandler = new DialogHandler(context);
 
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Ok", true)
+        dialogHandler.setPostiveButton("OK", true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -303,7 +303,7 @@ public class SplashActivity extends Activity {
 
         final DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
         dialogHandler.setDialog("Internet Connection", "Internet connection is not available");
-        dialogHandler.setPostiveButton("Ok", true)
+        dialogHandler.setPostiveButton("OK", true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

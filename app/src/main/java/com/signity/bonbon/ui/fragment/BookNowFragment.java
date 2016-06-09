@@ -282,7 +282,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
     private void showSuccessFailureMessage(Context activity, String title, String message, final boolean isFinish) {
         final DialogHandler dialog = new DialogHandler(activity);
         dialog.setDialog(title, message);
-        dialog.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+        dialog.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isFinish) {

@@ -392,7 +392,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void showAlertDialog(Context context, String title, String message, final int addedItem) {
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (addedItem != 0) {

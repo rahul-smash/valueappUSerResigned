@@ -1038,7 +1038,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                 String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -1069,7 +1069,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                 String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Ok", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();

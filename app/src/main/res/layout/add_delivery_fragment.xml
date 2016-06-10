@@ -9,13 +9,14 @@
         android:id="@+id/horizontalLine1"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white" />
+
     <RelativeLayout
-        android:layout_below="@+id/horizontalLine1"
         android:id="@+id/add_address"
         android:layout_width="fill_parent"
         android:layout_height="45dp"
+        android:layout_below="@+id/horizontalLine1"
         android:background="@color/ColorPrimary"
         android:padding="6dp">
 

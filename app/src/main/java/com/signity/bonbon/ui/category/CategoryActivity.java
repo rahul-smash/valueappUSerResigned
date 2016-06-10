@@ -150,7 +150,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(CategoryActivity.this);
                 } else {
-                    showAlertDialog(CategoryActivity.this, "Message", "No Subcategories available");
+                    showAlertDialog(CategoryActivity.this, "Message", "No subcategories available");
                 }
             }
         });
@@ -162,7 +162,6 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
-        Log.e("Screen dimention ", screenWidth + " x " + screenHeight);
     }
 
 

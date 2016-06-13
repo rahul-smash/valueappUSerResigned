@@ -296,9 +296,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
             } else {
                 String message = noteText.trim();
                 if (message != null && !message.isEmpty()) {
-                    message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
+                    message = message + "\n";
                 } else {
-                    message = "Are you sure you want to keep this as your Delivery Address ?";
+                    message = "";
                 }
                 showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", minmumCartString, userAddress,areaId);
             }
@@ -313,9 +313,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                         if (minprice <= cartprice) {
                             String message = "";
                             if (noteText != null && !(noteText.isEmpty())) {
-                                message = noteText + "\nAre you sure you want to keep this as your Delivery Address ?";
+                                message = noteText + "\n";
                             } else {
-                                message = "Are you sure you want to keep this as your Delivery Address ?";
+                                message = "";
                             }
                             showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
                                     addressId, shipingCharges, minmumCartString, userAddress,areaId
@@ -329,16 +329,16 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     } else if (minprice > cartprice) {
                         String message = "There will be " + currencySymbol + " " + shipingCharges +
                                 " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
-                                "\nAre you sure you want to keep this as your Delivery Address ?";
+                                "\n";
                         showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
                                 addressId, shipingCharges, minmumCartString, userAddress,areaId
                         );
                     } else {
                         String message = noteText.trim();
                         if (message != null && !message.isEmpty()) {
-                            message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
+                            message = message + "\n";
                         } else {
-                            message = "Are you sure you want to keep this as your Delivery Address ?";
+                            message = "";
                         }
                         showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
                                 addressId, shipingCharges, minmumCartString, userAddress,areaId);
@@ -350,14 +350,14 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                         && !shipingCharges.isEmpty() && !(shipingCharges.equalsIgnoreCase("0"))) {
                     String message = "There will be " + currencySymbol + " " + shipingCharges +
                             " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
-                            "\nAre you sure you want to keep this as your Delivery Address ?";
+                            "\n";
                     showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress,areaId);
                 } else {
                     String message = noteText.trim();
                     if (message != null && !message.isEmpty()) {
-                        message = message + "\n" + "Are you sure you want to keep this as your Delivery Address ?";
+                        message = message + "\n";
                     } else {
-                        message = "Are you sure you want to keep this as your Delivery Address ?";
+                        message = "";
                     }
                     showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", "", userAddress,areaId);
                 }
@@ -423,7 +423,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                                           final String shipingCharges, final String minimumCharges, final String userAddress,final String areaId) {
         final DialogHandler dialogHandler = new DialogHandler(context);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Yes", true)
+        dialogHandler.setPostiveButton("Proceed", true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -442,7 +442,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     }
                 });
 
-        dialogHandler.setNegativeButton("No", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();

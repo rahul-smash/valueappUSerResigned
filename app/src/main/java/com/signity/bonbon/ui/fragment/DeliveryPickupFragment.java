@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.signity.bonbon.R;
@@ -49,6 +50,7 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
 
     private Button buttonCityName, buttonAreaName;
     private ImageView buttonDelivery, buttonPickup;
+    private RelativeLayout relative0address;
 
     private GCMClientManager pushClientManager;
 
@@ -79,8 +81,8 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View mView = inflater.inflate(R.layout.layout_select_pickup, container, false);
+        relative0address = (RelativeLayout) mView.findViewById(R.id.relative0address);
         buttonCityName = (Button) mView.findViewById(R.id.buttonCityName);
         buttonAreaName = (Button) mView.findViewById(R.id.buttonAreaName);
         buttonDelivery = (ImageView) mView.findViewById(R.id.buttonDelivery);
@@ -89,7 +91,6 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
         buttonAreaName.setOnClickListener(this);
         buttonDelivery.setOnClickListener(this);
         buttonPickup.setOnClickListener(this);
-
         return mView;
     }
 
@@ -123,8 +124,10 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                 }
                 break;
             case R.id.buttonDelivery:
+
                 buttonPickup.setSelected(false);
                 buttonDelivery.setSelected(true);
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -136,17 +139,11 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                 }, 500);
                 break;
             case R.id.buttonPickup:
-                if (areaID != null && !areaID.isEmpty()) {
+
+                if (!buttonPickup.isSelected()) {
                     buttonPickup.setSelected(true);
                     buttonDelivery.setSelected(false);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            checkForPickupLocation(areaID);
-                        }
-                    }, 500);
-                } else {
-                    Toast.makeText(getActivity(), "Please select your area for the pickup location", Toast.LENGTH_SHORT).show();
+                    relative0address.setVisibility(View.VISIBLE);
                 }
                 break;
         }
@@ -228,7 +225,12 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                     areaID = code;
                     areaName = title;
                     buttonAreaName.setText(title);
-//                    buttonCountryCode.setText(code);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            checkForPickupLocation(areaID);
+                        }
+                    }, 500);
                 }
             }
         }

@@ -163,6 +163,7 @@ public class ViewController {
             case 21:
                 fragment = new HomeFragmentWahTheme21();
                 break;
+
             case 22:
                 fragment = new HomeFragmentBeliramTheme22();
                 break;

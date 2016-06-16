@@ -148,7 +148,7 @@ public class LoginFragmentMobile_jan25 extends Fragment implements View.OnClickL
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Error", ""+mobResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", ""+mobResponse.getMessage(), false);
                 }
             }
 

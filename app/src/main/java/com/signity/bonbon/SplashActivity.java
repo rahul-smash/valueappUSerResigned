@@ -239,7 +239,7 @@ public class SplashActivity extends Activity {
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -247,7 +247,7 @@ public class SplashActivity extends Activity {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
 

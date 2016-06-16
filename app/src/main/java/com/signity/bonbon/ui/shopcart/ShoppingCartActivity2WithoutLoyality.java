@@ -317,7 +317,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
                     showAlertDialog(ShoppingCartActivity2WithoutLoyality.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -325,7 +325,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -368,7 +368,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
                     showAlertDialog(ShoppingCartActivity2WithoutLoyality.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -376,7 +376,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -524,7 +524,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2WithoutLoyality.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
 

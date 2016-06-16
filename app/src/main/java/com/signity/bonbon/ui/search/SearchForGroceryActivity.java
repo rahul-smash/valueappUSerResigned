@@ -211,7 +211,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(SearchForGroceryActivity.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

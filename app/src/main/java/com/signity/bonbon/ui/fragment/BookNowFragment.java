@@ -258,7 +258,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                                 showSuccessFailureMessage(getActivity(), "Success", "Your request is successfully submitted",
                                         isFinsish);
                             } else {
-                                showSuccessFailureMessage(getActivity(), "Error", "Sorry we are unable to submit your request. Please try later", isFinsish);
+                                showSuccessFailureMessage(getActivity(), "Message", "Sorry we are unable to submit your request. Please try later", isFinsish);
                             }
                         }
 

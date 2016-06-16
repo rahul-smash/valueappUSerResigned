@@ -213,7 +213,7 @@ public class ActiveOrderList extends Fragment {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

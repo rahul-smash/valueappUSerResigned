@@ -404,7 +404,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -412,7 +412,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -458,7 +458,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -466,7 +466,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -745,7 +745,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -911,7 +911,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     coupenCode = "";
                     ProgressDialogUtil.hideProgressDialog();
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             });
 
@@ -962,7 +962,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     coupenCode = "";
                     ProgressDialogUtil.hideProgressDialog();
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
             });
 
@@ -1020,7 +1020,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     total.setText(""+String.format("%.2f", totalPrice));
                 } else {
 
-                    showAlertDialog(ShoppingCartActivity2.this, "Error", ""+taxCalculationModel.getMessage());
+                    showAlertDialog(ShoppingCartActivity2.this, "Message", ""+taxCalculationModel.getMessage());
                 }
             }
 
@@ -1028,7 +1028,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -1195,8 +1195,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
             holder.items_mrp_price.setText(mrpPrice);
             Double totalPrice = Double.parseDouble(txtQuantCount) * Double.parseDouble(productPrice);
-
-            holder.totalValue.setText(String.valueOf(totalPrice));
+            holder.totalValue.setText(""+String.format("%.2f",totalPrice));
 
             return convertView;
         }

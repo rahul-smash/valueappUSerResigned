@@ -17,7 +17,7 @@
             android:id="@+id/order_number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Number:"
+            android:text="Order Number :"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_number_text"
-            android:text="Order date:"
+            android:text="Order date :"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_date_text"
             android:layout_marginTop="5dp"
-            android:text="Order Price:"
+            android:text="Order Price :"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/lbl_order_total_price"
             android:layout_marginTop="5dp"
-            android:text="Ship to:"
+            android:text="Ship to :"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small"
             android:visibility="gone" />
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ship_to"
             android:layout_marginTop="5dp"
-            android:text="Status:"
+            android:text="Status :"
             android:textColor="@color/ColorPrimary"
             android:textSize="@dimen/text_size_small" />
 

@@ -223,10 +223,11 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
             holder.number_text.setText(txtQuantCount);
-
             if (productPrice.equalsIgnoreCase(mrpPrice)) {
+                holder.rupee.setVisibility(View.VISIBLE);
                 holder.rel_mrp_offer_price.setVisibility(View.GONE);
             } else {
+                holder.rupee.setVisibility(View.GONE);
                 holder.rel_mrp_offer_price.setVisibility(View.VISIBLE);
             }
             holder.items_mrp_price.setText(mrpPrice);

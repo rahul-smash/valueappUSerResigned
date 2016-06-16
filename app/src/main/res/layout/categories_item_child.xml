@@ -34,7 +34,7 @@
                 android:id="@+id/rel_mrp_offer_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:id="@+id/rupee2"
@@ -59,7 +59,7 @@
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@+id/rupee2"
+                    android:layout_alignLeft="@+id/items_mrp_price"
                     android:layout_alignRight="@+id/items_mrp_price"
                     android:layout_centerVertical="true"
                     android:background="@color/divider" />
@@ -87,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:text="\u20B9"
                     android:textColor="#2f2f2f"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="@dimen/text_size_small"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
         </RelativeLayout>

@@ -65,7 +65,7 @@
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
-                    android:layout_alignLeft="@+id/rupee2"
+                    android:layout_alignLeft="@+id/items_mrp_price"
                     android:layout_alignRight="@+id/items_mrp_price"
                     android:layout_centerVertical="true"
 

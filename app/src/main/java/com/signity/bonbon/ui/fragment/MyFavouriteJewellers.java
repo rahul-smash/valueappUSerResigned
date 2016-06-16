@@ -262,8 +262,10 @@ public class MyFavouriteJewellers extends Fragment {
             holder.number_text.setText(txtQuantCount);
             holder.items_price.setText(productPrice);
             if (productPrice.equalsIgnoreCase(mrpPrice)) {
+                holder.rupee.setVisibility(View.VISIBLE);
                 holder.rel_mrp_offer_price.setVisibility(View.GONE);
             } else {
+                holder.rupee.setVisibility(View.GONE);
                 holder.rel_mrp_offer_price.setVisibility(View.VISIBLE);
             }
             holder.items_mrp_price.setText(mrpPrice);

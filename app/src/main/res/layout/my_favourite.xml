@@ -2,17 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    >
 
     <ListView
         android:id="@+id/items_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/bottom_layout"
+        android:layout_above="@+id/divider"
         android:background="@color/color_white"
         android:divider="@color/divider"
         android:dividerHeight="1dp"></ListView>
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/bottom_layout"
+        android:background="@color/ColorPrimary"/>
 
     <LinearLayout
         android:id="@+id/bottom_layout"
@@ -35,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Total"
+                android:text="Total:"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
 

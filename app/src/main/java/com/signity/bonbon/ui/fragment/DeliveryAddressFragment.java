@@ -66,7 +66,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     UserAddressModel selectedUserAddress;
     private RelativeLayout mRelativeProceed;
 
-    int selectedPostion = -1;
+    int selectedPostion = 0;
     String currency;
 
     @Override
@@ -192,7 +192,16 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
             if (from.equals("shop_cart")) {
                 holder.btnNext.setVisibility(View.VISIBLE);
-                if (selectedPostion != -1) {
+
+
+                if(selectedPostion==position){
+                    holder.btnNext.setSelected(true);
+                    selectedUserAddress = deliveryAddress.get(position);
+                }else {
+                    holder.btnNext.setSelected(false);
+                }
+
+               /* if (selectedPostion != -1) {
                     if (position == selectedPostion) {
                         holder.btnNext.setSelected(true);
                     } else {
@@ -200,7 +209,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     }
                 } else {
                     holder.btnNext.setSelected(false);
-                }
+                }*/
             } else {
                 holder.btnNext.setVisibility(View.GONE);
             }
@@ -511,7 +520,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         super.onResume();
 
         selectedUserAddress = null;
-        selectedPostion = -1;
+        selectedPostion = 0;
         getDeliveryAddress();
 
         InputMethodManager inputManager = (InputMethodManager) getActivity()

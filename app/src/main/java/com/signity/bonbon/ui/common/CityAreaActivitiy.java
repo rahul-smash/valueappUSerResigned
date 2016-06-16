@@ -99,6 +99,7 @@ public class CityAreaActivitiy extends FragmentActivity {
 
     private void getStoreArea() {
 
+        ProgressDialogUtil.showProgressDialog(CityAreaActivitiy.this);
         areamain = new ArrayList<>();
         NetworkAdaper.getInstance().apiService.getStoreAreaList(new Callback<GetStoreArea>() {
 
@@ -117,6 +118,7 @@ public class CityAreaActivitiy extends FragmentActivity {
                     }
                     setupList(areamain);
                 }
+                ProgressDialogUtil.hideProgressDialog();
             }
 
             @Override

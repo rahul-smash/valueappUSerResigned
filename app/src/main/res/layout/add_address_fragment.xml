@@ -123,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
                 android:singleLine="true"
+                android:inputType="number"
                 android:textColor="#3a3a3a" />
 
             <TextView

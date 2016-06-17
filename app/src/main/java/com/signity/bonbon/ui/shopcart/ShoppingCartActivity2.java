@@ -804,7 +804,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
 
-        if (offerMinimumPrice < totalPrice) {
+        if (offerMinimumPrice <= totalPrice) {
             double finalPrice = totalPrice - discount + shippingCharge;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));
@@ -833,7 +833,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
 
-        if (offerMinimumPrice < totalPrice) {
+        if (offerMinimumPrice <= totalPrice) {
             double finalPrice = totalPrice - discount + shippingCharge;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));

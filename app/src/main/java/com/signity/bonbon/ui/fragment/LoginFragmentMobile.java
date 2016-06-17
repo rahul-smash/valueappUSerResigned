@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.signity.bonbon.R;
@@ -45,6 +46,7 @@ import retrofit.client.Response;
 public class LoginFragmentMobile extends Fragment implements View.OnClickListener {
 
     Button btnNext, backButton;
+    ImageButton backBtn;
     EditText edtPhone;
     private GCMClientManager pushClientManager;
     String from;
@@ -70,8 +72,10 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
         btnNext = (Button) rootView.findViewById(com.signity.bonbon.R.id.btnNext);
         edtPhone = (EditText) rootView.findViewById(com.signity.bonbon.R.id.edtPhone);
         backButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.backButton);
+        backBtn = (ImageButton) rootView.findViewById(com.signity.bonbon.R.id.backBtn);
         btnNext.setOnClickListener(this);
         backButton.setOnClickListener(this);
+        backBtn.setOnClickListener(this);
         addActionDoneEvet(edtPhone);
         return rootView;
     }
@@ -126,6 +130,9 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                 }
                 break;
             case R.id.backButton:
+                getActivity().onBackPressed();
+                break;
+            case R.id.backBtn:
                 getActivity().onBackPressed();
                 break;
         }

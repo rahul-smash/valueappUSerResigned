@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.signity.bonbon.R;
@@ -60,6 +61,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
     boolean isEmailExist = false, isNameExist = false;
 
     Button btnDone, backButton;
+    ImageButton backBtn;
     Button resend;
     EditText edtOTp;
     private GCMClientManager pushClientManager;
@@ -90,6 +92,8 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
         resend = (Button) rootView.findViewById(R.id.resend);
 //        skipOtp = (Button) rootView.findViewById(R.id.skipOtp);
         backButton = (Button) rootView.findViewById(R.id.backButton);
+        backBtn = (ImageButton) rootView.findViewById(com.signity.bonbon.R.id.backBtn);
+        backBtn.setOnClickListener(this);
         edtOTp = (EditText) rootView.findViewById(R.id.edtOTp);
         btnDone.setOnClickListener(this);
         backButton.setOnClickListener(this);
@@ -165,6 +169,9 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.backButton:
+                getActivity().onBackPressed();
+                break;
+            case R.id.backBtn:
                 getActivity().onBackPressed();
                 break;
             case R.id.resend:

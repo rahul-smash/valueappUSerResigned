@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ColorPrimary">
+        android:background="@color/ColorPrimary"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/backButton"
@@ -54,19 +56,50 @@
 
     </RelativeLayout>
 
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/close"
+        android:background="@android:color/transparent"
+        android:padding="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"/>
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/backBtn"
+        android:src="@drawable/otp"
+        android:scaleType="fitCenter"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textLb2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Verification"
+        android:textSize="@dimen/text_size_large"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/ColorPrimary"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"/>
+
     <TextView
         android:id="@+id/textLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/textLb2"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp"
         android:gravity="center"
+        android:padding="5dp"
         android:text="Please enter your One Time Password. We have sent the same to your number"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="18sp" />
+        android:textSize="@dimen/text_size" />
 
 
     <EditText
@@ -79,16 +112,18 @@
         android:ems="10"
         android:gravity="center"
         android:hint="OTP"
+        android:textColorHint="@color/colorGray"
         android:imeOptions="actionDone"
         android:inputType="phone"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_normal"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtOTp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:gravity="center_horizontal">
 
         <Button
@@ -102,7 +137,7 @@
             android:padding="5dp"
             android:text="@string/text_resend"
             android:textColor="@color/color_white"
-            android:textSize="18dp" />
+            android:textSize="@dimen/text_size_normal" />
 
         <Button
             android:id="@+id/btnDone"
@@ -116,7 +151,7 @@
             android:ems="6"
             android:text="Done"
             android:textColor="@color/color_white"
-            android:textSize="18dp"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 
 

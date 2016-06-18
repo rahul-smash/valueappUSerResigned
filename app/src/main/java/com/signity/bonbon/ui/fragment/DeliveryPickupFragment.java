@@ -47,21 +47,22 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
     private static final String TAG = DeliveryPickupFragment.class.getSimpleName();
     private static final int CITY = 328;
     private static final int AREA = 329;
-
-    private Button buttonCityName, buttonAreaName;
-    private ImageView buttonDelivery, buttonPickup;
-    private RelativeLayout relative0address;
-
-    private GCMClientManager pushClientManager;
-
+    public String addressId;
     String from;
     String userId;
+    private Button buttonCityName, buttonAreaName;
+    private ImageView buttonDelivery, buttonPickup;
+    private RelativeLayout relative0address,relative1PickUpOtion;
+    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     private AppDatabase appDb;
-
     private String cityId = "", cityName = "";
     private String areaID = "", areaName = "";
-    public String addressId;
+
+    public static Fragment newInstance(Context context) {
+        return Fragment.instantiate(context,
+                DeliveryPickupFragment.class.getName());
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,15 +75,11 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
         from = getArguments().getString(AppConstant.FROM, "");
     }
 
-    public static Fragment newInstance(Context context) {
-        return Fragment.instantiate(context,
-                DeliveryPickupFragment.class.getName());
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.layout_select_pickup, container, false);
         relative0address = (RelativeLayout) mView.findViewById(R.id.relative0address);
+        relative1PickUpOtion = (RelativeLayout) mView.findViewById(R.id.relative1PickUpOtion);
         buttonCityName = (Button) mView.findViewById(R.id.buttonCityName);
         buttonAreaName = (Button) mView.findViewById(R.id.buttonAreaName);
         buttonDelivery = (ImageView) mView.findViewById(R.id.buttonDelivery);
@@ -91,6 +88,21 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
         buttonAreaName.setOnClickListener(this);
         buttonDelivery.setOnClickListener(this);
         buttonPickup.setOnClickListener(this);
+
+
+        String pickUpStatus = prefManager.getPickupFacilityStatus();
+        String deliveryStatus = prefManager.getDeliveryFacilityStatus();
+
+        if (deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")) {
+            relative1PickUpOtion.setVisibility(View.VISIBLE);
+        } else if (deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")) {
+        } else if (deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")) {
+            relative1PickUpOtion.setVisibility(View.GONE);
+            relative0address.setVisibility(View.VISIBLE);
+        } else {
+        }
+
+
         return mView;
     }
 

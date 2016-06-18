@@ -1058,6 +1058,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 appDb.deleteCartElement();
                 Intent intent_home = new Intent(ShoppingCartActivity2.this, DeliveryPickupActivity.class);
                 intent_home.putExtra(AppConstant.FROM,"shopping_cart2");
+                intent_home.putExtra("title","Pick Up Locations");
                 startActivity(intent_home);
                 finish();
                 AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);

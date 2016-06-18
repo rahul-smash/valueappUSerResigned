@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.model.PickupAdressModel;
 import com.signity.bonbon.ui.fragment.DeliveryPickupFragment;
@@ -26,11 +27,13 @@ public class DeliveryPickupActivity extends FragmentActivity {
     Button backButton;
     TextView textTitle;
     ImageButton homeBtn;
-    String from;
+    String from,title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.signity.bonbon.R.layout.delivery_activity);
+        title = getIntent().getStringExtra("title");
 
         backButton = (Button) findViewById(com.signity.bonbon.R.id.backButton);
         homeBtn = (ImageButton) findViewById(com.signity.bonbon.R.id.homeBtn);
@@ -41,7 +44,7 @@ public class DeliveryPickupActivity extends FragmentActivity {
                 onBackPressed();
             }
         });
-        ((TextView) findViewById(R.id.textTitle)).setText("Deliver or Pickup");
+        ((TextView) findViewById(R.id.textTitle)).setText(""+title);
 
         from = getIntent().getStringExtra(AppConstant.FROM);
 

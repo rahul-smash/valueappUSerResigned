@@ -1280,6 +1280,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         jsonString = gson.toJson(list, type);
         Log.i("TAG", jsonString);
 
+        if (list==null){
+            return "";
+        }
+
         return jsonString;
     }
 
@@ -1287,11 +1291,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String jsonString = "";
         List<TaxDetail> taxDetails = DataAdapter.getInstance().getTaxDetail();
 
+
         Gson gson = new Gson();
         Type type = new TypeToken<List<TaxDetail>>() {
         }.getType();
         jsonString = gson.toJson(taxDetails, type);
         Log.i("TAG", jsonString);
+
+        if (taxDetails==null){
+            return "";
+        }
 
         return jsonString;
     }
@@ -1305,6 +1314,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }.getType();
         jsonString = gson.toJson(fixedTaxDetails, type);
         Log.i("TAG", jsonString);
+
+        if (fixedTaxDetails==null){
+            return "";
+        }
 
         return jsonString;
     }

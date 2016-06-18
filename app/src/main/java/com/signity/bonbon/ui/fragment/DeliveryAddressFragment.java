@@ -48,26 +48,27 @@ import retrofit.client.Response;
  */
 public class DeliveryAddressFragment extends Fragment implements View.OnClickListener {
 
+    public TextView address;
     RelativeLayout add_address;
     TextView mTxtProceed;
-    public TextView address;
     ListView address_list;
     Adapter adapter;
     View mView;
-    private GCMClientManager pushClientManager;
-
     String from;
     String userId;
-    private List<UserAddressModel> listOfDeliveryAddress;
-    private PrefManager prefManager;
-
-    private AppDatabase appDb;
-
     UserAddressModel selectedUserAddress;
-    private RelativeLayout mRelativeProceed;
-
     int selectedPostion = 0;
     String currency;
+    private GCMClientManager pushClientManager;
+    private List<UserAddressModel> listOfDeliveryAddress;
+    private PrefManager prefManager;
+    private AppDatabase appDb;
+    private RelativeLayout mRelativeProceed;
+
+    public static Fragment newInstance(Context context) {
+        return Fragment.instantiate(context,
+                DeliveryAddressFragment.class.getName());
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,11 +80,6 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = getArguments().getString(AppConstant.FROM, "");
         currency = prefManager.getSharedValue(AppConstant.CURRENCY);
-    }
-
-    public static Fragment newInstance(Context context) {
-        return Fragment.instantiate(context,
-                DeliveryAddressFragment.class.getName());
     }
 
     @Override
@@ -137,138 +133,6 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         });
     }
 
-
-    class Adapter extends BaseAdapter {
-        Activity context;
-        LayoutInflater l;
-
-        public List<UserAddressModel> deliveryAddress;
-
-        public Adapter(Activity context, List<UserAddressModel> deliveryAddress) {
-            this.deliveryAddress = deliveryAddress;
-            this.context = context;
-            l = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return deliveryAddress.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        ViewHolder holder;
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = l.inflate(R.layout.delivery_address_child, null);
-                holder = new ViewHolder();
-                holder.phone_number = (TextView) convertView.findViewById(R.id.phone_number1);
-                holder.btnNext = (ImageView) convertView.findViewById(R.id.btnNext);
-                holder.full_name = (TextView) convertView.findViewById(R.id.full_name);
-                holder.location = (TextView) convertView.findViewById(R.id.location);
-                holder.mail = (TextView) convertView.findViewById(R.id.mail);
-                holder.edit_button = (Button) convertView.findViewById(R.id.edit_button);
-                holder.remove_button = (Button) convertView.findViewById(R.id.remove_button);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            holder.phone_number.setText(deliveryAddress.get(position).getMobile());
-            holder.full_name.setText(deliveryAddress.get(position).getFirstName());
-            holder.location.setText(deliveryAddress.get(position).getAddress());
-            holder.mail.setText(deliveryAddress.get(position).getEmail());
-
-            if (from.equals("shop_cart")) {
-                holder.btnNext.setVisibility(View.VISIBLE);
-
-
-                if(selectedPostion==position){
-                    holder.btnNext.setSelected(true);
-                    selectedUserAddress = deliveryAddress.get(position);
-                }else {
-                    holder.btnNext.setSelected(false);
-                }
-
-               /* if (selectedPostion != -1) {
-                    if (position == selectedPostion) {
-                        holder.btnNext.setSelected(true);
-                    } else {
-                        holder.btnNext.setSelected(false);
-                    }
-                } else {
-                    holder.btnNext.setSelected(false);
-                }*/
-            } else {
-                holder.btnNext.setVisibility(View.GONE);
-            }
-
-            holder.edit_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Fragment fragment = AddAddressFragment.newInstance(getActivity());
-                    Bundle bundle = new Bundle();
-                    bundle.putString(AppConstant.FROM, from);
-                    bundle.putString(AppConstant.ACTION, "EDIT");
-                    bundle.putSerializable("object", deliveryAddress.get(position));
-                    fragment.setArguments(bundle);
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.setCustomAnimations(R.anim.right_to_center_slide,
-                            R.anim.center_to_left_slide,
-                            R.anim.left_to_center_slide,
-                            R.anim.center_to_right_slide);
-                    ft.replace(R.id.container, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                }
-            });
-
-            holder.remove_button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UserAddressModel addressModel = deliveryAddress.get(position);
-                    String userId = prefManager.getSharedValue(AppConstant.ID);
-                    String addressId = addressModel.getId();
-                    showAlertDialogForDelete(getActivity(), "Confirmation", "Are you sure you want to delete this address?", userId, addressId, position);
-                    notifyDataSetChanged();
-                }
-            });
-
-
-            if (from.equals("shop_cart")) {
-                convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        selectedUserAddress = deliveryAddress.get(position);
-                        selectedPostion = position;
-                        notifyDataSetChanged();
-                    }
-                });
-            }
-
-            return convertView;
-        }
-
-
-        class ViewHolder {
-            public TextView phone_number, full_name, location, mail;
-            ImageView btnNext;
-            public Button edit_button, remove_button;
-        }
-    }
-
     private void confirmUserForDeliveryAddress(UserAddressModel addressModel) {
 
         String totalPriceString = appDb.getCartTotalPrice();
@@ -277,7 +141,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         String shipingCharges = addressModel.getAreaShipingCharges();
         String note = addressModel.getNote();
         String addressId = addressModel.getId();
-        String areaId= addressModel.getAreaId();
+        String areaId = addressModel.getAreaId();
         String userAddress = addressModel.getAddress() + ", "
                 + addressModel.getAreaName() + ", " + addressModel.getCity() + ", " + addressModel.getZipcode();
 
@@ -295,12 +159,16 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         }
 
 
-        if(addressModel.getNotAllow()){
+        if (addressModel.getNotAllow()) {
             double minprice = Double.parseDouble(minmumCartString);
             if (minprice > cartprice) {
-                String message = "There will be  minimum " + currencySymbol + " " + minmumCartString +
-                        " need to place this order. Please add some item to your bucket ";
-                showAlertDialogForMinAmount(getActivity(), "Message", message
+
+                double diff = minprice - cartprice;
+                String shortPrice = String.format("%.2f", diff);
+
+                String message = "You are currently " + currencySymbol + " " + shortPrice +
+                        " short, please add few more items to your cart.";
+                showAlertDialogForMinAmount(getActivity(), "Alert", message
                 );
             } else {
                 String message = noteText.trim();
@@ -309,11 +177,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 } else {
                     message = "";
                 }
-                showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", minmumCartString, userAddress,areaId);
+                showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", minmumCartString, userAddress, areaId);
             }
-        }
-
-        else {
+        } else {
             if (minmumCartString != null && !minmumCartString.isEmpty() && !minmumCartString.equalsIgnoreCase("0")) {
                 double minprice = Double.parseDouble(minmumCartString);
                 if (shipingCharges != null
@@ -327,12 +193,15 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                                 message = "";
                             }
                             showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                                    addressId, shipingCharges, minmumCartString, userAddress,areaId
+                                    addressId, shipingCharges, minmumCartString, userAddress, areaId
                             );
                         } else {
-                            String message = "There will be  minimum  " + currencySymbol + " " + minmumCartString +
-                                    " need to place this order. Please add some item to your bucket ";
-                            showAlertDialogForMinAmount(getActivity(), "Message", message
+                            double diff = minprice - cartprice;
+                            String shortPrice = String.format("%.2f", diff);
+
+                            String message = "You are currently " + currencySymbol + " " + shortPrice +
+                                    " short, please add few more items to your cart.";
+                            showAlertDialogForMinAmount(getActivity(), "Alert", message
                             );
                         }
                     } else if (minprice > cartprice) {
@@ -340,7 +209,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                                 " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
                                 "\n";
                         showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                                addressId, shipingCharges, minmumCartString, userAddress,areaId
+                                addressId, shipingCharges, minmumCartString, userAddress, areaId
                         );
                     } else {
                         String message = noteText.trim();
@@ -350,7 +219,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                             message = "";
                         }
                         showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
-                                addressId, shipingCharges, minmumCartString, userAddress,areaId);
+                                addressId, shipingCharges, minmumCartString, userAddress, areaId);
                     }
                 }
 
@@ -360,7 +229,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     String message = "There will be " + currencySymbol + " " + shipingCharges +
                             " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
                             "\n";
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress,areaId);
+                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress, areaId);
                 } else {
                     String message = noteText.trim();
                     if (message != null && !message.isEmpty()) {
@@ -368,7 +237,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     } else {
                         message = "";
                     }
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", "", userAddress,areaId);
+                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", "", userAddress, areaId);
                 }
             }
         }
@@ -429,7 +298,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
     public void showAlertDialogForConfirm(Context context, String title,
                                           String message, final String userId, final String addressId,
-                                          final String shipingCharges, final String minimumCharges, final String userAddress,final String areaId) {
+                                          final String shipingCharges, final String minimumCharges, final String userAddress, final String areaId) {
         final DialogHandler dialogHandler = new DialogHandler(context);
         dialogHandler.setDialog(title, message);
         dialogHandler.setPostiveButton("Proceed", true)
@@ -603,6 +472,135 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
             sb.append(ch);
         }
         return sb.toString();
+    }
+
+    class Adapter extends BaseAdapter {
+        public List<UserAddressModel> deliveryAddress;
+        Activity context;
+        LayoutInflater l;
+        ViewHolder holder;
+
+        public Adapter(Activity context, List<UserAddressModel> deliveryAddress) {
+            this.deliveryAddress = deliveryAddress;
+            this.context = context;
+            l = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return deliveryAddress.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = l.inflate(R.layout.delivery_address_child, null);
+                holder = new ViewHolder();
+                holder.phone_number = (TextView) convertView.findViewById(R.id.phone_number1);
+                holder.btnNext = (ImageView) convertView.findViewById(R.id.btnNext);
+                holder.full_name = (TextView) convertView.findViewById(R.id.full_name);
+                holder.location = (TextView) convertView.findViewById(R.id.location);
+                holder.mail = (TextView) convertView.findViewById(R.id.mail);
+                holder.edit_button = (Button) convertView.findViewById(R.id.edit_button);
+                holder.remove_button = (Button) convertView.findViewById(R.id.remove_button);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.phone_number.setText(deliveryAddress.get(position).getMobile());
+            holder.full_name.setText(deliveryAddress.get(position).getFirstName());
+            holder.location.setText(deliveryAddress.get(position).getAddress());
+            holder.mail.setText(deliveryAddress.get(position).getEmail());
+
+            if (from.equals("shop_cart")) {
+                holder.btnNext.setVisibility(View.VISIBLE);
+
+
+                if (selectedPostion == position) {
+                    holder.btnNext.setSelected(true);
+                    selectedUserAddress = deliveryAddress.get(position);
+                } else {
+                    holder.btnNext.setSelected(false);
+                }
+
+               /* if (selectedPostion != -1) {
+                    if (position == selectedPostion) {
+                        holder.btnNext.setSelected(true);
+                    } else {
+                        holder.btnNext.setSelected(false);
+                    }
+                } else {
+                    holder.btnNext.setSelected(false);
+                }*/
+            } else {
+                holder.btnNext.setVisibility(View.GONE);
+            }
+
+            holder.edit_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Fragment fragment = AddAddressFragment.newInstance(getActivity());
+                    Bundle bundle = new Bundle();
+                    bundle.putString(AppConstant.FROM, from);
+                    bundle.putString(AppConstant.ACTION, "EDIT");
+                    bundle.putSerializable("object", deliveryAddress.get(position));
+                    fragment.setArguments(bundle);
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.setCustomAnimations(R.anim.right_to_center_slide,
+                            R.anim.center_to_left_slide,
+                            R.anim.left_to_center_slide,
+                            R.anim.center_to_right_slide);
+                    ft.replace(R.id.container, fragment);
+                    ft.addToBackStack(null);
+                    ft.commit();
+                }
+            });
+
+            holder.remove_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserAddressModel addressModel = deliveryAddress.get(position);
+                    String userId = prefManager.getSharedValue(AppConstant.ID);
+                    String addressId = addressModel.getId();
+                    showAlertDialogForDelete(getActivity(), "Confirmation", "Are you sure you want to delete this address?", userId, addressId, position);
+                    notifyDataSetChanged();
+                }
+            });
+
+
+            if (from.equals("shop_cart")) {
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        selectedUserAddress = deliveryAddress.get(position);
+                        selectedPostion = position;
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+
+            return convertView;
+        }
+
+
+        class ViewHolder {
+            public TextView phone_number, full_name, location, mail;
+            public Button edit_button, remove_button;
+            ImageView btnNext;
+        }
     }
 
 }

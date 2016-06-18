@@ -23,6 +23,7 @@ public class PrefManager {
     public static final String OTP_SKIP = BuildConfig.APPLICATION_ID + ".OTP_SKIP";
     public static final String USER_RECORD_KEY = BuildConfig.APPLICATION_ID + "._KEY_USER";
     public static final String PICKUP_STATUS = BuildConfig.APPLICATION_ID + ".PICKUP_STATUS";
+    public static final String DELIVERY_STATUS = BuildConfig.APPLICATION_ID + ".DELIVERY_STATUS";
     public static final String GEOFENCE_ENABLE = BuildConfig.APPLICATION_ID + ".GEOFENCE_ENABLE";
     public static final String APP_VERSION = BuildConfig.APPLICATION_ID + ".APP_VERSION";
     public static final String IS_REFER_FN = BuildConfig.APPLICATION_ID + ".is_refer_fn";
@@ -107,8 +108,19 @@ public class PrefManager {
         editor.commit();
     }
 
+    public void setDeliveryFacilityStatus(String deliveryStatus) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(DELIVERY_STATUS, deliveryStatus);
+        editor.commit();
+    }
+
     public String getPickupFacilityStatus() {
         return sharedpreferences.getString(PICKUP_STATUS, "0");
+//        return "1";
+    }
+
+    public String getDeliveryFacilityStatus() {
+        return sharedpreferences.getString(DELIVERY_STATUS, "0");
 //        return "1";
     }
 

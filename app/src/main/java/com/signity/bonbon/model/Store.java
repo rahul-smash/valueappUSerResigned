@@ -106,6 +106,11 @@ public class Store {
     @Expose
     private String pickUpFacility;
 
+
+    @SerializedName("delivery_facility")
+    @Expose
+    private String deliveryFacility;
+
     @SerializedName("geofencing")
     @Expose
     private String geoFenceStatus;
@@ -150,6 +155,14 @@ public class Store {
     @Expose
     private Boolean isReferForDeviceEnable;
 
+
+    public String getDeliveryFacility() {
+        return deliveryFacility;
+    }
+
+    public void setDeliveryFacility(String deliveryFacility) {
+        this.deliveryFacility = deliveryFacility;
+    }
 
     public String getOpenhoursFrom() {
         return openhoursFrom;

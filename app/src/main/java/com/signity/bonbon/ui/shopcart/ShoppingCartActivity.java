@@ -344,14 +344,31 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         PrefManager prefManager = new PrefManager(ShoppingCartActivity.this);
         String userId = prefManager.getSharedValue(AppConstant.ID);
         String pickUpStatus = prefManager.getPickupFacilityStatus();
+        String deliveryStatus= prefManager.getDeliveryFacilityStatus();
         if (!userId.isEmpty()) {
 
             Intent intentDelivery = null;
-            if (pickUpStatus.equalsIgnoreCase("0")) {
+            if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")){
+                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
+                intentDelivery.putExtra("title", "Deliver or PickUp");
+            }
+            else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")){
+                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+            }
+            else if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")){
+                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
+                intentDelivery.putExtra("title", "PickUp");
+            }
+            else {
+                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+            }
+
+
+            /*if (pickUpStatus.equalsIgnoreCase("0")) {
                 intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
             } else {
                 intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
-            }
+            }*/
             intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
             startActivity(intentDelivery);
             AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);

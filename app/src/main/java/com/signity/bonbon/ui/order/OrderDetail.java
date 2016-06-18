@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,9 +23,12 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.DataAdapter;
+import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.OrderHistoryItemModel;
 import com.signity.bonbon.model.OrderHistoryModel;
+import com.signity.bonbon.model.TaxDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetail extends AppCompatActivity implements View.OnClickListener {
@@ -32,7 +36,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     ListView order_history_list;
     TextView no_record,currencyTxt,rs1,rs2,rs3;
 
-    TextView textAddress, textCheckOut, textDiscount, textShipping, textTOtal, textlblNote, textNote,taxLblText,taxVal,rs4;
+    TextView textAddress, textCheckOut, textDiscount, textShipping, textTOtal, textlblNote, textNote,taxLblText,taxVal;
 
     ImageView ic_down_up;
 
@@ -48,6 +52,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     Animation slideDownAnim;
     RelativeLayout layout_total,taxlayout;
     String isTaxEnable,taxLabel,taxRate;
+    LinearLayout linearFixedTaxLayout,linearTaxLayout,linearFixedTaxLayoutDisable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +67,14 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         textlblNote = (TextView) findViewById(R.id.lblNote);
         textNote = (TextView) findViewById(R.id.note);
         currencyTxt=(TextView)findViewById(R.id.currency);
-        taxLblText=(TextView)findViewById(R.id.taxLblText);
-        taxVal=(TextView)findViewById(R.id.taxVal);
-        taxlayout=(RelativeLayout)findViewById(R.id.taxlayout);
+        linearFixedTaxLayout=(LinearLayout)findViewById(R.id.linearFixedTaxLayout);
+        linearTaxLayout=(LinearLayout)findViewById(R.id.linearTaxLayout);
+        linearFixedTaxLayoutDisable=(LinearLayout)findViewById(R.id.linearFixedTaxLayoutDisable);
 
         rs1=(TextView)findViewById(R.id.rs1);
         rs2=(TextView)findViewById(R.id.rs2);
         rs3=(TextView)findViewById(R.id.rs3);
-        rs4=(TextView)findViewById(R.id.rs4);
+//        rs4=(TextView)findViewById(R.id.rs4);
 
         slideUpAnim = AnimationUtils.loadAnimation(OrderDetail.this
                 .getApplicationContext(), R.anim.slide_up_activity);
@@ -117,26 +122,40 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
             currencyTxt.setText(unescapeJavaString(currency));
             rs1.setText(unescapeJavaString(currency));
             rs2.setText(unescapeJavaString(currency));
-            rs3.setText(unescapeJavaString(currency));
-            rs4.setText(unescapeJavaString(currency));
+            rs3.setText("- "+unescapeJavaString(currency));
+//            rs4.setText(unescapeJavaString(currency));
         }
         else {
             currencyTxt.setText(currency);
             rs1.setText(currency);
             rs2.setText(currency);
-            rs3.setText(currency);
-            rs4.setText(currency);
+            rs3.setText("- "+currency);
+//            rs4.setText(currency);
         }
-
-
 
     }
 
     private void updateTaxPrice(OrderHistoryModel orderHistoryModel) {
 
-        taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
-        taxLblText.setText(""+taxLabel);
-        taxVal.setText(""+orderHistoryModel.getTax());
+        List<FixedTaxDetail> listWithTaxEnable=new ArrayList<>();
+        List<FixedTaxDetail> listWithTaxdisable=new ArrayList<>();
+
+        if(orderHistoryModel.getStoreFixedTaxDetail()!=null && orderHistoryModel.getStoreFixedTaxDetail().size()!=0){
+
+            for(FixedTaxDetail fixedTaxDetail:orderHistoryModel.getStoreFixedTaxDetail()){
+                if(fixedTaxDetail.getIsTaxEnable().equalsIgnoreCase("1")){
+                    listWithTaxEnable.add(fixedTaxDetail);
+                }
+                else {
+                    listWithTaxdisable.add(fixedTaxDetail);
+                }
+            }
+
+        }
+
+        addTaxRow(orderHistoryModel.getCalculatedTaxDetail());
+        addFixedTaxRowEnable(listWithTaxEnable);
+        addFixedTaxRowDisable(listWithTaxdisable);
 
     }
 
@@ -152,6 +171,79 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
             textNote.setVisibility(View.GONE);
             textlblNote.setVisibility(View.GONE);
         }
+    }
+
+
+    private void addFixedTaxRowEnable(List<FixedTaxDetail> fixedTaxDetail) {
+        if(!fixedTaxDetail.isEmpty()){
+
+            for (int i = 0; i < fixedTaxDetail.size(); i++) {
+                View child = getLayoutInflater().inflate(R.layout.tax_row_detail_layout, null);
+                TextView tax_label = (TextView) child.findViewById(R.id.tax_label);
+                TextView tax_value = (TextView) child.findViewById(R.id.tax_value);
+                TextView rs5 = (TextView) child.findViewById(R.id.rs5);
+
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+                if (currency.contains("\\")) {
+                    rs5.setText(unescapeJavaString(currency));
+                } else {
+                    rs5.setText(currency);
+                }
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
+                linearFixedTaxLayout.addView(child);
+            }
+        }
+
+    }
+
+    private void addFixedTaxRowDisable(List<FixedTaxDetail> fixedTaxDetail) {
+
+        if(!fixedTaxDetail.isEmpty()){
+
+            for (int i = 0; i < fixedTaxDetail.size(); i++) {
+                View child = getLayoutInflater().inflate(R.layout.tax_row_detail_layout, null);
+                TextView tax_label = (TextView) child.findViewById(R.id.tax_label);
+                TextView tax_value = (TextView) child.findViewById(R.id.tax_value);
+                TextView rs5 = (TextView) child.findViewById(R.id.rs5);
+
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+                if (currency.contains("\\")) {
+                    rs5.setText(unescapeJavaString(currency));
+                } else {
+                    rs5.setText(currency);
+                }
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
+                linearFixedTaxLayoutDisable.addView(child);
+            }
+        }
+
+    }
+
+
+    private void addTaxRow(List<TaxDetails> detailsList) {
+
+        if(!detailsList.isEmpty()){
+
+            for (int i = 0; i < detailsList.size(); i++) {
+                View child = getLayoutInflater().inflate(R.layout.tax_row_detail_layout, null);
+                TextView tax_label = (TextView) child.findViewById(R.id.tax_label);
+                TextView tax_value = (TextView) child.findViewById(R.id.tax_value);
+                TextView rs5 = (TextView) child.findViewById(R.id.rs5);
+
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+                if (currency.contains("\\")) {
+                    rs5.setText(unescapeJavaString(currency));
+                } else {
+                    rs5.setText(currency);
+                }
+                tax_label.setText("" + detailsList.get(i).getLabel()+"("+detailsList.get(i).getRate()+"%)");
+                tax_value.setText("" + detailsList.get(i).getTax());
+                linearTaxLayout.addView(child);
+            }
+        }
+
     }
 
 

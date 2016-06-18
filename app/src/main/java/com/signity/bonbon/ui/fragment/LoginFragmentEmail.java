@@ -153,11 +153,22 @@ public class LoginFragmentEmail extends Fragment {
                     } else {
                         PrefManager prefManager = new PrefManager(getActivity());
                         String pickUpStatus = prefManager.getPickupFacilityStatus();
+                        String deliveryStatus= prefManager.getDeliveryFacilityStatus();
+
                         Intent intentDelivery = null;
-                        if (pickUpStatus.equalsIgnoreCase("0")) {
-                            intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-                        } else {
+                        if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")){
                             intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
+                            intentDelivery.putExtra("title", "Deliver or PickUp");
+                        }
+                        else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")){
+                            intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+                        }
+                        else if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")){
+                            intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
+                            intentDelivery.putExtra("title", "PickUp");
+                        }
+                        else {
+                            intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
                         }
                         intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
                         startActivity(intentDelivery);

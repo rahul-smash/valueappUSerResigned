@@ -3,6 +3,9 @@ package com.signity.bonbon.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by root on 20/5/16.
  */
@@ -30,6 +33,33 @@ public class TaxDataModel {
     @Expose
     private String shipping;
 
+
+
+    @SerializedName("tax_detail")
+    @Expose
+    private List<TaxDetails> taxDetail = new ArrayList<TaxDetails>();
+
+
+    @SerializedName("fixed_Tax")
+    @Expose
+    private List<FixedTaxDetail> fixedTaxDetail = new ArrayList<FixedTaxDetail>();
+
+
+    public List<FixedTaxDetail> getFixedTaxDetail() {
+        return fixedTaxDetail;
+    }
+
+    public void setFixedTaxDetail(List<FixedTaxDetail> fixedTaxDetail) {
+        this.fixedTaxDetail = fixedTaxDetail;
+    }
+
+    public List<TaxDetails> getTaxDetail() {
+        return taxDetail;
+    }
+
+    public void setTaxDetail(List<TaxDetails> taxDetail) {
+        this.taxDetail = taxDetail;
+    }
 
     public String getShipping() {
         return shipping;

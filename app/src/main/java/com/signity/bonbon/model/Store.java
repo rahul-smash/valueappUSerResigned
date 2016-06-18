@@ -156,6 +156,15 @@ public class Store {
     private Boolean isReferForDeviceEnable;
 
 
+    @SerializedName("tax_detail")
+    @Expose
+    private List<TaxDetail> taxDetail = new ArrayList<TaxDetail>();
+
+    @SerializedName("fixed_tax_detail")
+    @Expose
+    private List<FixedTaxDetail> fixedTaxDetail = new ArrayList<FixedTaxDetail>();
+
+
     public String getDeliveryFacility() {
         return deliveryFacility;
     }
@@ -216,6 +225,22 @@ public class Store {
         this.geofenceObjects = geofenceObjects;
     }
 
+
+    public List<FixedTaxDetail> getFixedTaxDetail() {
+        return fixedTaxDetail;
+    }
+
+    public void setFixedTaxDetail(List<FixedTaxDetail> fixedTaxDetail) {
+        this.fixedTaxDetail = fixedTaxDetail;
+    }
+
+    public List<TaxDetail> getTaxDetail() {
+        return taxDetail;
+    }
+
+    public void setTaxDetail(List<TaxDetail> taxDetail) {
+        this.taxDetail = taxDetail;
+    }
     public String getStoreMsg() {
         return storeMsg;
     }

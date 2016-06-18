@@ -56,6 +56,43 @@ public class OrderHistoryModel {
     private List<OrderHistoryItemModel> orderItems = new ArrayList<OrderHistoryItemModel>();
 
 
+    @SerializedName("store_tax_rate_detail")
+    @Expose
+    private List<TaxDetail> storeTaxRateDetail = new ArrayList<TaxDetail>();
+
+    @SerializedName("store_fixed_tax_detail")
+    @Expose
+    private List<FixedTaxDetail> storeFixedTaxDetail = new ArrayList<FixedTaxDetail>();
+
+
+    @SerializedName("calculated_tax_detail")
+    @Expose
+    private List<TaxDetails> calculatedTaxDetail = new ArrayList<TaxDetails>();
+
+    public List<TaxDetails> getCalculatedTaxDetail() {
+        return calculatedTaxDetail;
+    }
+
+    public void setCalculatedTaxDetail(List<TaxDetails> calculatedTaxDetail) {
+        this.calculatedTaxDetail = calculatedTaxDetail;
+    }
+
+    public List<FixedTaxDetail> getStoreFixedTaxDetail() {
+        return storeFixedTaxDetail;
+    }
+
+    public void setStoreFixedTaxDetail(List<FixedTaxDetail> storeFixedTaxDetail) {
+        this.storeFixedTaxDetail = storeFixedTaxDetail;
+    }
+
+    public List<TaxDetail> getStoreTaxRateDetail() {
+        return storeTaxRateDetail;
+    }
+
+    public void setStoreTaxRateDetail(List<TaxDetail> storeTaxRateDetail) {
+        this.storeTaxRateDetail = storeTaxRateDetail;
+    }
+
     public String getTax() {
         return tax;
     }

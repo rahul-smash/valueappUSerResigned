@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -220,7 +221,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             }
 
 
-            holder.items_name.setText(product.getTitle());
+            holder.items_name.setText(Html.fromHtml(product.getTitle()));
             holder.items_price.setText(productPrice);
             holder.number_text.setText(txtQuantCount);
             if (productPrice.equalsIgnoreCase(mrpPrice)) {

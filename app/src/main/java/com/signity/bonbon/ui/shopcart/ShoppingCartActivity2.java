@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -35,11 +38,13 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
+import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.GetOfferResponse;
 import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityDataModel;
@@ -50,14 +55,19 @@ import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.model.TaxCalculationModel;
+import com.signity.bonbon.model.TaxDataModel;
+import com.signity.bonbon.model.TaxDetail;
+import com.signity.bonbon.model.TaxDetails;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,11 +81,11 @@ import retrofit.client.Response;
 public class ShoppingCartActivity2 extends Activity implements View.OnClickListener {
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     ListView listViewCart;
-    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4,rs5,tax_value,tax_label,taxTag;
+    TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4, shipping_charges_text, discountLblText, taxTag;
     Button placeorder;
     String userId;
     String addressId;
-    String shippingChargeText, minmimumChargesText, user_address,areaId;
+    String shippingChargeText, minmimumChargesText, user_address, areaId;
     ProductListAdapter adapter;
     List<Product> listProduct;
     double shippingCharge = 0.0;
@@ -92,6 +102,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     Dialog dialog, redeemDialog;
     ListView list_view;
     Adapter pointAdapter;
+    RelativeLayout normalOfferScreen, shipping_layout, discount_layout;
+    LinearLayout loyalityScreen;
+    String isTaxEnable, taxLabel, taxRate;
+    String discount = "0", fixed_discount_amount = "0";
+    ViewGroup footerView;
+    LinearLayout layout, linearFixedTaxLayout,linearFixedTaxLayoutDisable;
     private GCMClientManager pushClientManager;
     private Button backButton, btnSearch;
     private TextView shipping_charges;
@@ -102,10 +118,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
     private double loyalityPoints;
-    RelativeLayout relCoupon_1,tax_layout;
-    LinearLayout relCoupon;
-    String isTaxEnable,taxLabel,taxRate;
-    String discount="0",fixed_discount_amount="0";
+    private String taxDetailsJson;
+    private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
+    private String couponCode = "";    // variable used to store couponcode applied by the User.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,28 +156,32 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         final View activityRootView = findViewById(R.id.activityRoot);
         relativeLayout = (RelativeLayout) findViewById(R.id.listLayout);
-        relCoupon = (LinearLayout) findViewById(R.id.relCoupon);
-        relCoupon_1 = (RelativeLayout) findViewById(R.id.relCoupon_1);
 
-        String loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
+        loyalityScreen = (LinearLayout) findViewById(R.id.loyalityScreen);  // getting id of loyality screen
+        normalOfferScreen = (RelativeLayout) findViewById(R.id.normalOfferScreen); // getting id of normal screen
+
+        loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
+
         if (loyalityStatus.equalsIgnoreCase("0")) {
-            relCoupon.setVisibility(View.GONE);
-            relCoupon_1.setVisibility(View.VISIBLE);
+            loyalityScreen.setVisibility(View.GONE);
+            normalOfferScreen.setVisibility(View.VISIBLE);
         } else if (loyalityStatus.equalsIgnoreCase("1")) {
-            relCoupon.setVisibility(View.VISIBLE);
-            relCoupon_1.setVisibility(View.GONE);
+            loyalityScreen.setVisibility(View.VISIBLE);
+            normalOfferScreen.setVisibility(View.GONE);
         }
 
         homeBtn = (ImageButton) findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(this);
 
+
         listViewCart = (ListView) findViewById(com.signity.bonbon.R.id.items_list);
-        items_price = (TextView) findViewById(com.signity.bonbon.R.id.items_price);
-        discountVal = (TextView) findViewById(R.id.discountVal);
+
+        prepareFooter();
+
         edtBar = (EditText) findViewById(R.id.edtBar);
         total = (TextView) findViewById(com.signity.bonbon.R.id.total);
         title = (TextView) findViewById(com.signity.bonbon.R.id.textTitle);
-        shipping_charges = (TextView) findViewById(com.signity.bonbon.R.id.shipping_charges);
+
         title.setText("Confirm Order");
         placeorder = (Button) findViewById(com.signity.bonbon.R.id.placeorder);
         backButton = (Button) findViewById(com.signity.bonbon.R.id.backButton);
@@ -175,9 +194,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         applyOffer = (Button) findViewById(R.id.applyOffer);
         applyOffer_1 = (Button) findViewById(R.id.applyOffer_1);
         redeemPoints = (Button) findViewById(R.id.redeemPoints);
-        tax_value = (TextView) findViewById(R.id.tax_value);
-        tax_layout = (RelativeLayout) findViewById(R.id.tax_layout);
-        tax_label = (TextView) findViewById(R.id.tax_label);
+
+
         taxTag = (TextView) findViewById(R.id.taxTag);
         applyCoupon.setTag("apply");
         applyCoupon_1.setTag("apply");
@@ -186,29 +204,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         applyOffer.setOnClickListener(this);
         applyOffer_1.setOnClickListener(this);
         redeemPoints.setOnClickListener(this);
-        rs1 = (TextView) findViewById(R.id.rs1);
-        rs2 = (TextView) findViewById(R.id.rs2);
-        rs3 = (TextView) findViewById(R.id.rs3);
-        rs4 = (TextView) findViewById(R.id.rs4);
-        rs5 = (TextView) findViewById(R.id.rs5);
-
-
-        String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
-
-
-        if (currency.contains("\\")) {
-            rs1.setText(unescapeJavaString(currency));
-            rs2.setText(unescapeJavaString(currency));
-            rs3.setText("- "+unescapeJavaString(currency));
-            rs4.setText(unescapeJavaString(currency));
-            rs5.setText(unescapeJavaString(currency));
-        } else {
-            rs1.setText(currency);
-            rs2.setText(currency);
-            rs3.setText("- "+currency);
-            rs4.setText(currency);
-            rs5.setText(currency);
-        }
 
 
         listProduct = appDb.getCartListProduct();
@@ -281,42 +276,163 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
+    private void initializeFooterView(TaxDataModel model) {
 
-   /* private String getTaxAmount(){
+        prepareFooter();
 
-        String taxValue="0";
-        isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
-        if(isTaxEnable.equalsIgnoreCase("0")){
-            taxValue="0";
-        }else if(isTaxEnable.equalsIgnoreCase("1")){
-            taxValue = appDb.getTotalTax();
+
+        double itemsPrice = Double.parseDouble(model.getItemSubTotal());
+        double tax = Double.parseDouble(model.getTax());
+        double discount = Double.parseDouble(model.getDiscount());
+        double shippingCharge = Double.parseDouble(model.getShipping());
+
+
+//        tax_value.setText(""+String.format("%.2f", tax));
+        items_price.setText("" + String.format("%.2f", itemsPrice));
+        discountVal.setText("" + String.format("%.2f", discount));
+        shipping_charges.setText("" + String.format("%.2f", shippingCharge));
+
+        if (shippingCharge == 0.0) {
+            shipping_charges_text.setVisibility(View.GONE);
+            shipping_layout.setVisibility(View.GONE);
+        } else {
+            shipping_charges_text.setVisibility(View.VISIBLE);
+            shipping_layout.setVisibility(View.VISIBLE);
         }
-        return taxValue;
-    }*/
+
+        if (discount == 0.0) {
+            discountLblText.setVisibility(View.GONE);
+            discount_layout.setVisibility(View.GONE);
+        } else {
+            discountLblText.setVisibility(View.VISIBLE);
+            discount_layout.setVisibility(View.VISIBLE);
+        }
+
+        addTaxRow(model.getTaxDetail());
+
+        List<FixedTaxDetail> listWithTaxEnable=new ArrayList<>();
+        List<FixedTaxDetail> listWithTaxdisable=new ArrayList<>();
+
+        if(model.getFixedTaxDetail()!=null && model.getFixedTaxDetail().size()!=0){
+
+            for(FixedTaxDetail fixedTaxDetail:model.getFixedTaxDetail()){
+                if(fixedTaxDetail.getIsTaxEnable().equalsIgnoreCase("1")){
+                    listWithTaxEnable.add(fixedTaxDetail);
+                }
+                else {
+                    listWithTaxdisable.add(fixedTaxDetail);
+                }
+            }
+
+        }
+        addFixedTaxRowEnable(listWithTaxEnable);
+        addFixedTaxRowDisable(listWithTaxdisable);
+
+    }
+
+    private void addFixedTaxRowEnable(List<FixedTaxDetail> fixedTaxDetail) {
+
+        /*View namebar = (LinearLayout)findViewById(R.id.linearFixedTaxLayout);
+        ((ViewGroup) namebar.getParent()).removeView(namebar);*/
+
+
+        if (!fixedTaxDetail.isEmpty()) {
+
+            for (int i = 0; i < fixedTaxDetail.size(); i++) {
+                View child = getLayoutInflater().inflate(R.layout.tax_row_layout, null);
+                TextView tax_label = (TextView) child.findViewById(R.id.tax_label);
+                TextView tax_value = (TextView) child.findViewById(R.id.tax_value);
+                TextView rs5 = (TextView) child.findViewById(R.id.rs5);
+
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+                if (currency.contains("\\")) {
+                    rs5.setText(unescapeJavaString(currency));
+                } else {
+                    rs5.setText(currency);
+                }
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
+                linearFixedTaxLayout.addView(child);
+            }
+        }
+
+    }
+
+    private void addFixedTaxRowDisable(List<FixedTaxDetail> fixedTaxDetail) {
+
+        /*View namebar = (LinearLayout)findViewById(R.id.linearFixedTaxLayout);
+        ((ViewGroup) namebar.getParent()).removeView(namebar);*/
+
+
+        if (!fixedTaxDetail.isEmpty()) {
+
+            for (int i = 0; i < fixedTaxDetail.size(); i++) {
+                View child = getLayoutInflater().inflate(R.layout.tax_row_layout, null);
+                TextView tax_label = (TextView) child.findViewById(R.id.tax_label);
+                TextView tax_value = (TextView) child.findViewById(R.id.tax_value);
+                TextView rs5 = (TextView) child.findViewById(R.id.rs5);
+
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+                if (currency.contains("\\")) {
+                    rs5.setText(unescapeJavaString(currency));
+                } else {
+                    rs5.setText(currency);
+                }
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
+                linearFixedTaxLayoutDisable.addView(child);
+            }
+        }
+
+    }
+
+
+    private void addTaxRow(List<TaxDetails> detailsList) {
+
+
+/*
+        View namebar = (LinearLayout)findViewById(R.id.linearTaxLayout);
+        ((ViewGroup) namebar.getParent()).removeView(namebar);*/
+
+        if (!detailsList.isEmpty()) {
+
+            for (int i = 0; i < detailsList.size(); i++) {
+                View child = getLayoutInflater().inflate(R.layout.tax_row_layout, null);
+                TextView tax_label = (TextView) child.findViewById(R.id.tax_label);
+                TextView tax_value = (TextView) child.findViewById(R.id.tax_value);
+                TextView rs5 = (TextView) child.findViewById(R.id.rs5);
+
+                String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+                if (currency.contains("\\")) {
+                    rs5.setText(unescapeJavaString(currency));
+                } else {
+                    rs5.setText(currency);
+                }
+                tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
+                tax_value.setText("" + detailsList.get(i).getTax());
+                layout.addView(child);
+            }
+        }
+
+    }
+
 
     private void updateTaxPrice() {
 
-        isTaxEnable=prefManager.getSharedValue(AppConstant.istaxenable);
-        taxLabel=prefManager.getSharedValue(AppConstant.tax_label_name);
+        isTaxEnable = prefManager.getSharedValue(AppConstant.istaxenable);
+        taxLabel = prefManager.getSharedValue(AppConstant.tax_label_name);
 
-        if(isTaxEnable.equalsIgnoreCase("0")){
-            tax_label.setVisibility(View.GONE);
-            tax_layout.setVisibility(View.GONE);
+        if (isTaxEnable.equalsIgnoreCase("0")) {
             taxTag.setVisibility(View.VISIBLE);
-            taxRate="0";
-        }else {
-            tax_label.setVisibility(View.VISIBLE);
-            tax_layout.setVisibility(View.VISIBLE);
+            taxRate = "0";
+        } else {
             taxTag.setVisibility(View.GONE);
-            taxRate=prefManager.getSharedValue(AppConstant.tax_rate);
-            tax_label.setText("" + taxLabel + "(" + taxRate + "%)");
+            taxRate = prefManager.getSharedValue(AppConstant.tax_rate);
         }
 
         callNetworkForTaxCalculations();
 
     }
-
-
 
 
     private void updateShippingCharges() {
@@ -371,8 +487,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
-        String tax = tax_value.getText().toString();
+//        String tax = tax_value.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
+
+        String taxDetailJson = getTaxDetailJson();
+        String fixedTaxJson = getFixedTaxDetailJson();
+
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -382,7 +502,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("payment_method", "cod");
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
-        param.put("tax", tax);
+//        param.put("tax", tax);
         param.put("tax_rate", taxRate);
         param.put("note", note);
         param.put("orders", order);
@@ -391,6 +511,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("discount", discount);
         param.put("total", amount);
         param.put("user_address", user_address);
+
+        param.put("store_tax_rate_detail", taxDetailJson);
+        param.put("store_fixed_tax_detail", fixedTaxJson);
+        param.put("calculated_tax_detail", taxDetailsJson);
+
 //        param.put("coupon_code", coupon_code);
         Log.e("params", param.toString());
         NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
@@ -430,7 +555,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
-        String tax = tax_value.getText().toString();
+//        String tax = tax_value.getText().toString();
+
+        String taxDetailJson = getTaxDetailJson();
+        String fixedTaxJson = getFixedTaxDetailJson();
+
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -440,7 +569,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("payment_method", "cod");
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
-        param.put("tax", tax);
+//        param.put("tax", tax);
         param.put("tax_rate", taxRate);
         param.put("note", note);
         param.put("orders", order);
@@ -449,6 +578,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("discount", discount);
         param.put("total", amount);
         param.put("user_address", user_address);
+
+        param.put("store_tax_rate_detail", taxDetailJson);
+        param.put("store_fixed_tax_detail", fixedTaxJson);
+        param.put("calculated_tax_detail", taxDetailsJson);
         Log.e("params", param.toString());
         NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
             @Override
@@ -511,9 +644,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
             case R.id.applyCoupen_1:
                 if (applyCoupon_1.getTag().equals("apply")) {
-                    onApplyCoupon1();
+                    onApplyCoupon();
                 } else if (applyCoupon_1.getTag().equals("remove")) {
-                    onRemoveCoupon1();
+                    onRemoveCoupon();
                 }
                 break;
 
@@ -555,10 +688,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String closeTime = prefManager.getSharedValue(AppConstant.CLOSE_TIME);
         String openDays = prefManager.getSharedValue(AppConstant.OPEN_DAYS);
 
-        if(is24x7_open.equalsIgnoreCase("1")){
+        if (is24x7_open.equalsIgnoreCase("1")) {
             return true;
-        }
-        else if (openTime.isEmpty() || closeTime.isEmpty()) {
+        } else if (openTime.isEmpty() || closeTime.isEmpty()) {
             return true;
         } else {
             if (isStoreClosedToday(openDays)) {
@@ -677,7 +809,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     } else {
                         ProgressDialogUtil.hideProgressDialog();
-                        Toast.makeText(ShoppingCartActivity2.this,"There are no coupons to redeem.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShoppingCartActivity2.this, "There are no coupons to redeem.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -703,10 +835,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("user_id", userId);
 
 
-        if(isForPickUpStatus.equalsIgnoreCase("yes")){
+        if (isForPickUpStatus.equalsIgnoreCase("yes")) {
             param.put("order_facility", "Pickup");
             param.put("area_id", addressId);
-        }else if(isForPickUpStatus.equalsIgnoreCase("no")){
+        } else if (isForPickUpStatus.equalsIgnoreCase("no")) {
             param.put("order_facility", "Delivery");
             param.put("area_id", areaId);
         }
@@ -755,35 +887,42 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
             coupenCode = "";
-            discount="0";
-            fixed_discount_amount="0";
+            discount = "0";
+            fixed_discount_amount = "0";
             double discount = Double.parseDouble(discountVal.getText().toString());
             double totalval = Double.parseDouble(total.getText().toString());
             double finalVal = totalval + discount;
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalVal)));
             discountVal.setText("0");
-            applyCoupon.setVisibility(View.GONE);
-            editCoupon.setVisibility(View.GONE);
-            applyOffer.setVisibility(View.VISIBLE);
-            redeemPoints.setVisibility(View.VISIBLE);
-            applyCoupon.setText("Apply Coupon");
-            applyCoupon.setTag("apply");
-            editCoupon.setText("");
-            applyCoupon_1.setText("Apply Coupon");
-            applyCoupon_1.setTag("apply");
-            editCoupon_1.setText("");
+
+            if (loyalityStatus.equalsIgnoreCase("0")) {
+                applyCoupon_1.setText("Apply Coupon");
+                applyCoupon_1.setTag("apply");
+                editCoupon_1.setText("");
+            } else if (loyalityStatus.equalsIgnoreCase("1")) {
+                applyCoupon.setVisibility(View.GONE);
+                editCoupon.setVisibility(View.GONE);
+                applyOffer.setVisibility(View.VISIBLE);
+                redeemPoints.setVisibility(View.VISIBLE);
+                applyCoupon.setText("Apply Coupon");
+                applyCoupon.setTag("apply");
+                editCoupon.setText("");
+                applyCoupon_1.setText("Apply Coupon");
+                applyCoupon_1.setTag("apply");
+                editCoupon_1.setText("");
+            }
 
             callNetworkForTaxCalculations();
         }
     }
 
-    private void onRemoveCoupon1() {
+    /*private void onRemoveCoupon1() {
 
         if (!discountVal.getText().toString().isEmpty() && !discountVal.getText().toString().equalsIgnoreCase("0")) {
             coupenCode = "";
-            discount="0";
-            fixed_discount_amount="0";
+            discount = "0";
+            fixed_discount_amount = "0";
             double discount = Double.parseDouble(discountVal.getText().toString());
             double totalval = Double.parseDouble(total.getText().toString());
             double finalVal = totalval + discount;
@@ -794,9 +933,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             applyCoupon_1.setTag("apply");
             editCoupon_1.setText("");
 
+
             callNetworkForTaxCalculations();
         }
-    }
+    }*/
 
 
     private void applyDiscount(String discountPercent, String strOfferMinimumPrice) {
@@ -809,26 +949,32 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             DecimalFormat df = new DecimalFormat("###.##");
             total.setText(String.valueOf(df.format(finalPrice)));
             discountVal.setText(String.valueOf(df.format(discount)));
-            applyCoupon.setText("Remove Coupon");
-            applyCoupon.setTag("remove");
-            applyCoupon.setVisibility(View.VISIBLE);
-            editCoupon.setVisibility(View.VISIBLE);
-            applyOffer.setVisibility(View.GONE);
-            redeemPoints.setVisibility(View.GONE);
-            applyCoupon_1.setText("Remove Coupon");
-            applyCoupon_1.setTag("remove");
+
+            if (loyalityStatus.equalsIgnoreCase("0")) {
+                applyCoupon_1.setText("Remove Coupon");
+                applyCoupon_1.setTag("remove");
+            } else if (loyalityStatus.equalsIgnoreCase("1")) {
+                applyCoupon.setText("Remove Coupon");
+                applyCoupon.setTag("remove");
+                applyCoupon_1.setText("Remove Coupon");
+                applyCoupon_1.setTag("remove");
+                applyCoupon.setVisibility(View.VISIBLE);
+                editCoupon.setVisibility(View.VISIBLE);
+                applyOffer.setVisibility(View.GONE);
+                redeemPoints.setVisibility(View.GONE);
+            }
 
             callNetworkForTaxCalculations();
 
         } else {
-            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
+            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order."
                     + offerMinimumPrice, Toast.LENGTH_SHORT).show();
         }
 
     }
 
 
-    private void applyDiscount_2(String discountPercent, String strOfferMinimumPrice) {
+    /*private void applyDiscountForNormalScreen(String discountPercent, String strOfferMinimumPrice) {
         double totalPrice = getTotalPrice();
         double discount = ((totalPrice * Double.parseDouble(discountPercent) / 100));
         double offerMinimumPrice = Double.parseDouble(strOfferMinimumPrice);
@@ -844,14 +990,14 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             callNetworkForTaxCalculations();
 
         } else {
-            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order: "
+            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order."
                     + offerMinimumPrice, Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
     private void applyPointsDiscount(String discountAmount) {
-        fixed_discount_amount=discountAmount;
+        fixed_discount_amount = discountAmount;
         double totalPrice = getTotalPrice();
         double discount = Double.parseDouble(discountAmount);
 
@@ -872,7 +1018,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
-    private void onApplyCoupon1() {
+   /* private void onApplyCoupon1() {
 
         final String couponCode = editCoupon_1.getText().toString();
         if (!couponCode.isEmpty()) {
@@ -896,7 +1042,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         coupenCode = couponCode;
                         OfferData offerData = getValidCouponResponse.getData();
                         String discountPercent = offerData.getDiscount();
-                        discount= offerData.getDiscount();
+                        discount = offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
                         applyDiscount_2(discountPercent, offerMinimumPrice);
                     } else {
@@ -919,11 +1065,18 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             Toast.makeText(ShoppingCartActivity2.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
     private void onApplyCoupon() {
 
-        final String couponCode = editCoupon.getText().toString();
+
+        if (loyalityStatus.equalsIgnoreCase("0")) {
+            couponCode = editCoupon_1.getText().toString();
+        } else if (loyalityStatus.equalsIgnoreCase("1")) {
+            couponCode = editCoupon.getText().toString();
+        }
+
+
         if (!couponCode.isEmpty()) {
             String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
             String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
@@ -945,11 +1098,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         coupenCode = couponCode;
                         OfferData offerData = getValidCouponResponse.getData();
                         String discountPercent = offerData.getDiscount();
-                        discount= offerData.getDiscount();
+                        discount = offerData.getDiscount();
                         String offerMinimumPrice = offerData.getMinimumOrderAmount();
 
                         applyDiscount(discountPercent, offerMinimumPrice);
-                        applyDiscount_2(discountPercent, offerMinimumPrice);
+//                        applyDiscountForNormalScreen(discountPercent, offerMinimumPrice);
                     } else {
                         coupenCode = "";
                         Log.e("Tag", getValidCouponResponse.getMessage());
@@ -1006,36 +1159,51 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 if (taxCalculationModel.getSuccess() != null ? taxCalculationModel.getSuccess() : false) {
 //                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
 
-                    double itemsPrice= Double.parseDouble(taxCalculationModel.getData().getItemSubTotal());
-                    double tax= Double.parseDouble(taxCalculationModel.getData().getTax());
-                    double discount= Double.parseDouble(taxCalculationModel.getData().getDiscount());
-                    double shippingCharge= Double.parseDouble(taxCalculationModel.getData().getShipping());
-                    double totalPrice= Double.parseDouble(taxCalculationModel.getData().getTotal());
+                    double totalPrice = Double.parseDouble(taxCalculationModel.getData().getTotal());
+                    total.setText("" + String.format("%.2f", totalPrice));
+
+                    if (taxCalculationModel.getData().getTaxDetail() != null && taxCalculationModel.getData().getTaxDetail().size() != 0) {
+                        taxDetailsJson = getTaxDetail(taxCalculationModel.getData().getTaxDetail());
+                    } else {
+                        taxDetailsJson = "";
+                    }
+
+                    if (taxCalculationModel.getData().getFixedTaxDetail() != null && taxCalculationModel.getData().getFixedTaxDetail().size() != 0) {
+                        DataAdapter.getInstance().setFixedTaxDetail(taxCalculationModel.getData().getFixedTaxDetail());
+                    }
+
+                    TaxDataModel model = taxCalculationModel.getData();
+                    int i = listViewCart.getFooterViewsCount();
+
+                    if (i > 0) {
+                        for (int j = 0; j < i; j++) {
+                            listViewCart.removeFooterView(footerView);
+                        }
+                    }
+
+                    initializeFooterView(model);
 
 
-                    items_price.setText(""+String.format("%.2f",itemsPrice));
-                    tax_value.setText(""+String.format("%.2f", tax));
-                    discountVal.setText(""+String.format("%.2f", discount));
-                    shipping_charges.setText(""+String.format("%.2f", shippingCharge));
-                    total.setText(""+String.format("%.2f", totalPrice));
                 } else {
 
-                    showAlertDialog(ShoppingCartActivity2.this, "Message", ""+taxCalculationModel.getMessage());
+                    showAlertDialogOnTaxFailure(ShoppingCartActivity2.this, "Message", "" + taxCalculationModel.getMessage());
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                showAlertDialogOnTaxFailure(ShoppingCartActivity2.this, "Message", getResources().getString(R.string.error_code_message));
+//                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+//                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
         });
 
     }
 
+
     public void showAlertDialogwithPickUp(Context context, String title,
-                                String message) {
+                                          String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
         dialogHandler.setDialog(title, message);
         dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
@@ -1057,8 +1225,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 dialogHandler.dismiss();
                 appDb.deleteCartElement();
                 Intent intent_home = new Intent(ShoppingCartActivity2.this, DeliveryPickupActivity.class);
-                intent_home.putExtra(AppConstant.FROM,"shopping_cart2");
-                intent_home.putExtra("title","Pick Up Locations");
+                intent_home.putExtra(AppConstant.FROM, "shopping_cart2");
                 startActivity(intent_home);
                 finish();
                 AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
@@ -1080,9 +1247,180 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 startActivity(intent_home);
                 finish();
                 AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
+//                onBackPressed();
             }
         });
 
+    }
+
+
+    public void showAlertDialogOnTaxFailure(Context context, String title,
+                                            String message) {
+        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+        dialogHandler.setDialog(title, message);
+        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                appDb.deleteCartElement();
+                onBackPressed();
+            }
+        });
+
+    }
+
+
+    private String getTaxDetail(List<TaxDetails> detailsList) {
+        String jsonString = "";
+        List<TaxDetails> list = detailsList;
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<TaxDetails>>() {
+        }.getType();
+        jsonString = gson.toJson(list, type);
+        Log.i("TAG", jsonString);
+
+        return jsonString;
+    }
+
+    private String getTaxDetailJson() {
+        String jsonString = "";
+        List<TaxDetail> taxDetails = DataAdapter.getInstance().getTaxDetail();
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<TaxDetail>>() {
+        }.getType();
+        jsonString = gson.toJson(taxDetails, type);
+        Log.i("TAG", jsonString);
+
+        return jsonString;
+    }
+
+    private String getFixedTaxDetailJson() {
+        String jsonString = "";
+        List<FixedTaxDetail> fixedTaxDetails = DataAdapter.getInstance().getFixedTaxDetail();
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<FixedTaxDetail>>() {
+        }.getType();
+        jsonString = gson.toJson(fixedTaxDetails, type);
+        Log.i("TAG", jsonString);
+
+        return jsonString;
+    }
+
+    public String unescapeJavaString(String st) {
+
+        StringBuilder sb = new StringBuilder(st.length());
+
+        for (int i = 0; i < st.length(); i++) {
+            char ch = st.charAt(i);
+            if (ch == '\\') {
+                char nextChar = (i == st.length() - 1) ? '\\' : st
+                        .charAt(i + 1);
+// Octal escape?
+                if (nextChar >= '0' && nextChar <= '7') {
+                    String code = "" + nextChar;
+                    i++;
+                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                            && st.charAt(i + 1) <= '7') {
+                        code += st.charAt(i + 1);
+                        i++;
+                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
+                                && st.charAt(i + 1) <= '7') {
+                            code += st.charAt(i + 1);
+                            i++;
+                        }
+                    }
+                    sb.append((char) Integer.parseInt(code, 8));
+                    continue;
+                }
+                switch (nextChar) {
+                    case '\\':
+                        ch = '\\';
+                        break;
+                    case 'b':
+                        ch = '\b';
+                        break;
+                    case 'f':
+                        ch = '\f';
+                        break;
+                    case 'n':
+                        ch = '\n';
+                        break;
+                    case 'r':
+                        ch = '\r';
+                        break;
+                    case 't':
+                        ch = '\t';
+                        break;
+                    case '\"':
+                        ch = '\"';
+                        break;
+                    case '\'':
+                        ch = '\'';
+                        break;
+// Hex Unicode: u????
+                    case 'u':
+                        if (i >= st.length() - 5) {
+                            ch = 'u';
+                            break;
+                        }
+                        int code = Integer.parseInt(
+                                "" + st.charAt(i + 2) + st.charAt(i + 3)
+                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
+                        sb.append(Character.toChars(code));
+                        i += 5;
+                        continue;
+                }
+                i++;
+            }
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+
+    public void prepareFooter() {
+        LayoutInflater inflater = getLayoutInflater();
+        footerView = (ViewGroup) inflater.inflate(R.layout.list_footer_final_screen, null);
+        items_price = (TextView) footerView.findViewById(com.signity.bonbon.R.id.items_price);
+        shipping_charges_text = (TextView) footerView.findViewById(R.id.shipping_charges_text);
+        discountLblText = (TextView) footerView.findViewById(R.id.discountLblText);
+        shipping_charges = (TextView) footerView.findViewById(com.signity.bonbon.R.id.shipping_charges);
+        discountVal = (TextView) footerView.findViewById(R.id.discountVal);
+        shipping_layout = (RelativeLayout) footerView.findViewById(R.id.shipping_layout);
+        discount_layout = (RelativeLayout) footerView.findViewById(R.id.discount_layout);
+
+
+        rs1 = (TextView) footerView.findViewById(R.id.rs1);
+        rs2 = (TextView) footerView.findViewById(R.id.rs2);
+        rs3 = (TextView) footerView.findViewById(R.id.rs3);
+//        rs5 = (TextView) footerView.findViewById(R.id.rs5);
+        rs4 = (TextView) findViewById(R.id.rs4);
+
+
+        String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+
+        if (currency.contains("\\")) {
+            rs1.setText(unescapeJavaString(currency));
+            rs2.setText(unescapeJavaString(currency));
+            rs3.setText("- " + unescapeJavaString(currency));
+            rs4.setText(unescapeJavaString(currency));
+//            rs5.setText(unescapeJavaString(currency));
+        } else {
+            rs1.setText(currency);
+            rs2.setText(currency);
+            rs3.setText("- " + currency);
+            rs4.setText(currency);
+//            rs5.setText(currency);
+        }
+
+        layout = (LinearLayout) footerView.findViewById(R.id.linearTaxLayout);
+        linearFixedTaxLayout = (LinearLayout) footerView.findViewById(R.id.linearFixedTaxLayout);
+        linearFixedTaxLayoutDisable = (LinearLayout) footerView.findViewById(R.id.linearFixedTaxLayoutDisable);
+
+        listViewCart.addFooterView(footerView, null, false);
     }
 
     class ProductListAdapter extends BaseAdapter {
@@ -1183,7 +1521,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
 
 
-            holder.items_name.setText(product.getTitle());
+            holder.items_name.setText(Html.fromHtml(product.getTitle()));
             holder.items_price.setText(productPrice);
             holder.number_text.setText(txtQuantCount);
 
@@ -1196,7 +1534,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
             holder.items_mrp_price.setText(mrpPrice);
             Double totalPrice = Double.parseDouble(txtQuantCount) * Double.parseDouble(productPrice);
-            holder.totalValue.setText(""+String.format("%.2f",totalPrice));
+            holder.totalValue.setText("" + String.format("%.2f", totalPrice));
 
             return convertView;
         }
@@ -1235,7 +1573,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             TextView items_name, items_price, number_text, rupee, rupee2, rupeeTxt;
         }
     }
-
 
     class ListOfferAdapter extends BaseAdapter {
         Activity context;
@@ -1302,7 +1639,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     editCoupon_1.setText("");
                     editCoupon_1.setText(data.getCouponCode());
                     onApplyCoupon();
-                    onApplyCoupon1();
                     dialog.dismiss();
                     dialog = null;
                 }
@@ -1317,7 +1653,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             Button applyBtn;
         }
     }
-
 
     class Adapter extends BaseAdapter {
 
@@ -1411,77 +1746,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             TextView rupees, points, redeemNow, needTxt;
         }
 
-    }
-
-    public String unescapeJavaString(String st) {
-
-        StringBuilder sb = new StringBuilder(st.length());
-
-        for (int i = 0; i < st.length(); i++) {
-            char ch = st.charAt(i);
-            if (ch == '\\') {
-                char nextChar = (i == st.length() - 1) ? '\\' : st
-                        .charAt(i + 1);
-// Octal escape?
-                if (nextChar >= '0' && nextChar <= '7') {
-                    String code = "" + nextChar;
-                    i++;
-                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
-                            && st.charAt(i + 1) <= '7') {
-                        code += st.charAt(i + 1);
-                        i++;
-                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
-                                && st.charAt(i + 1) <= '7') {
-                            code += st.charAt(i + 1);
-                            i++;
-                        }
-                    }
-                    sb.append((char) Integer.parseInt(code, 8));
-                    continue;
-                }
-                switch (nextChar) {
-                    case '\\':
-                        ch = '\\';
-                        break;
-                    case 'b':
-                        ch = '\b';
-                        break;
-                    case 'f':
-                        ch = '\f';
-                        break;
-                    case 'n':
-                        ch = '\n';
-                        break;
-                    case 'r':
-                        ch = '\r';
-                        break;
-                    case 't':
-                        ch = '\t';
-                        break;
-                    case '\"':
-                        ch = '\"';
-                        break;
-                    case '\'':
-                        ch = '\'';
-                        break;
-// Hex Unicode: u????
-                    case 'u':
-                        if (i >= st.length() - 5) {
-                            ch = 'u';
-                            break;
-                        }
-                        int code = Integer.parseInt(
-                                "" + st.charAt(i + 2) + st.charAt(i + 3)
-                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
-                        sb.append(Character.toChars(code));
-                        i += 5;
-                        continue;
-                }
-                i++;
-            }
-            sb.append(ch);
-        }
-        return sb.toString();
     }
 
 }

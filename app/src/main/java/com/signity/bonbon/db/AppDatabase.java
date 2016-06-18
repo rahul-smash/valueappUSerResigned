@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.Html;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -60,7 +61,7 @@ public class AppDatabase {
                 try {
                     ContentValues values = new ContentValues();
                     values.put("id", category.getId());
-                    values.put("title", category.getTitle());
+                    values.put("title", String.valueOf(Html.fromHtml(category.getTitle())));
                     values.put("image", category.getImage());
                     values.put("image_small", category.getImageSmall());
                     values.put("image_medium", category.getImageMedium());
@@ -235,7 +236,7 @@ public class AppDatabase {
         try {
             ContentValues values = new ContentValues();
             values.put("id", subCategory.getId());
-            values.put("title", subCategory.getTitle());
+            values.put("title", String.valueOf(Html.fromHtml(subCategory.getTitle())));
             values.put("image", subCategory.getImage());
             values.put("parent_id", subCategory.getParentId());
             values.put("version", subCategory.getVersion());
@@ -356,7 +357,7 @@ public class AppDatabase {
                     values.put("id", product.getId());
                     values.put("store_id", product.getStoreId());
                     values.put("category_ids", cateId);
-                    values.put("title", product.getTitle());
+                    values.put("title", String.valueOf(Html.fromHtml(product.getTitle())));
                     values.put("brand", product.getBrand());
                     values.put("nutrient", product.getNutrient());
                     values.put("description", product.getDescription());
@@ -952,8 +953,7 @@ public class AppDatabase {
             double productPrice = quan * price;
             totalPrice = totalPrice + productPrice;
         }
-        return String.format("%.2f", totalPrice);
-
+        return String.valueOf(totalPrice);
     }
 
    /* public String getTotalTax() {

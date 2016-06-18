@@ -1,12 +1,14 @@
 package com.signity.bonbon.app;
 
 import com.signity.bonbon.model.Banner;
+import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.ForceDownloadModel;
 import com.signity.bonbon.model.GeofenceObjectModel;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.OrderHistoryModel;
 import com.signity.bonbon.model.PickupAdressModel;
 import com.signity.bonbon.model.Product;
+import com.signity.bonbon.model.TaxDetail;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +42,10 @@ public class DataAdapter {
 
     private List<Banner> banners;
 
+    private List<TaxDetail> taxDetail;
+
+    private List<FixedTaxDetail> fixedTaxDetail;
+
     private ForceDownloadModel forceDownloadModel;
 
     public PickupAdressModel pickupAdressModel;
@@ -54,6 +60,22 @@ public class DataAdapter {
 
 
 
+
+    public List<FixedTaxDetail> getFixedTaxDetail() {
+        return fixedTaxDetail;
+    }
+
+    public void setFixedTaxDetail(List<FixedTaxDetail> fixedTaxDetail) {
+        this.fixedTaxDetail = fixedTaxDetail;
+    }
+
+    public List<TaxDetail> getTaxDetail() {
+        return taxDetail;
+    }
+
+    public void setTaxDetail(List<TaxDetail> taxDetail) {
+        this.taxDetail = taxDetail;
+    }
 
     public List<Banner> getBanners() {
         return banners;

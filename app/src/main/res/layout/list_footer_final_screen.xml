@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/layout_total"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relCoupon"
+        android:visibility="visible">
+
+        <View
+            android:id="@+id/div1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"></View>
+
+        <TextView
+            android:id="@+id/items_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/div1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Items Price"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:id="@+id/price_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/items_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rs1"
+                android:text="00.00"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/rs1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="\u20B9"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_small" />
+        </RelativeLayout>
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/tax_label"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_below="@id/items_price_text"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:text="Tax"-->
+        <!--android:textSize="@dimen/text_size"-->
+        <!--android:visibility="visible" />-->
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/tax_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@+id/price_layout"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:visibility="visible">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tax_value"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toRightOf="@+id/rs5"-->
+        <!--android:text="0.00"-->
+        <!--android:textSize="@dimen/text_size" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/rs5"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:text="\u20B9"-->
+        <!--android:textSize="@dimen/text_size" />-->
+        <!--</RelativeLayout>-->
+
+        <TextView
+            android:id="@+id/shipping_charges_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/items_price_text"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Shipping Charges"
+            android:textSize="@dimen/text_size_small"
+            />
+
+        <RelativeLayout
+            android:id="@+id/shipping_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/price_layout"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/shipping_charges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rs2"
+                android:text="0.00"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/rs2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="\u20B9"
+                android:textSize="@dimen/text_size_small" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/discountLblText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/shipping_charges_text"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Discount"
+            android:textSize="@dimen/text_size_small" />
+
+        <RelativeLayout
+            android:id="@+id/discount_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/shipping_layout"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/discountVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rs3"
+                android:text="0.00"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/rs3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="\u20B9"
+                android:textSize="@dimen/text_size_small" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearFixedTaxLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/discountLblText"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearTaxLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearFixedTaxLayout"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearFixedTaxLayoutDisable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearTaxLayout"
+            android:orientation="vertical"></LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

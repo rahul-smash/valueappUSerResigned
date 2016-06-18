@@ -147,7 +147,12 @@ public interface ApiService {
     void submitQuery(@FieldMap Map<String, String> parameters, Callback<EmailResponse> response);
 
     @FormUrlEncoded
-    @POST("/tax_calculation")
+    @POST("/multiple_tax_calculation")
     void getTaxCalculations(@FieldMap Map<String, String> parameters, Callback<TaxCalculationModel> response);
+
+    @FormUrlEncoded
+    @POST("/productDetail")
+    void getProductDetails(@FieldMap Map<String, String> parameters, Callback<GetSubCategory> response);
+
 
 }

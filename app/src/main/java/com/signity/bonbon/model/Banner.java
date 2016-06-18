@@ -45,6 +45,57 @@ public class Banner {
     @Expose
     private String modified;
 
+
+    @SerializedName("category_id")
+    @Expose
+    private String categoryId;
+
+
+    @SerializedName("product_id")
+    @Expose
+    private String productId;
+
+    @SerializedName("offer_id")
+    @Expose
+    private String offerId;
+
+    @SerializedName("link_to")
+    @Expose
+    private String linkTo;
+
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(String offerId) {
+        this.offerId = offerId;
+    }
+
+    public String getLinkTo() {
+        return linkTo;
+    }
+
+    public void setLinkTo(String linkTo) {
+        this.linkTo = linkTo;
+    }
+
     /**
      *
      * @return

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_dialog_shape"
+    android:layout_margin="20dp"
+    android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter your mobile number to proceed further."
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"/>
+
+
+    <EditText
+        android:id="@+id/getEmail"
+        android:layout_below="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter mobile number."
+        android:background="@drawable/edittext_round_corners"
+        android:padding="5dp"
+        android:inputType="phone"
+        android:singleLine="true"
+        android:layout_margin="20dp"
+        />
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@+id/getEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/ColorPrimary"/>
+    <LinearLayout
+        android:layout_below="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:gravity="center"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/ColorPrimary"/>
+
+        <Button
+            android:id="@+id/okBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ok"
+            android:gravity="center"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

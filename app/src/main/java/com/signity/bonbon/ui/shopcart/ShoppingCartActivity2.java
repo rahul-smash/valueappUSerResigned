@@ -118,7 +118,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
     private double loyalityPoints;
-    private String taxDetailsJson;
+    private String taxDetailsJson,taxLabelJson,taxFixedTaxJson;
     private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
     private String couponCode = "";    // variable used to store couponcode applied by the User.
 
@@ -490,8 +490,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 //        String tax = tax_value.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
 
-        String taxDetailJson = getTaxDetailJson();
-        String fixedTaxJson = getFixedTaxDetailJson();
 
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
@@ -512,8 +510,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("total", amount);
         param.put("user_address", user_address);
 
-        param.put("store_tax_rate_detail", taxDetailJson);
-        param.put("store_fixed_tax_detail", fixedTaxJson);
+        param.put("store_tax_rate_detail", taxLabelJson);
+        param.put("store_fixed_tax_detail", taxFixedTaxJson);
         param.put("calculated_tax_detail", taxDetailsJson);
 
 //        param.put("coupon_code", coupon_code);
@@ -557,9 +555,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String note = edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
-        String taxDetailJson = getTaxDetailJson();
-        String fixedTaxJson = getFixedTaxDetailJson();
-
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -579,8 +574,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("total", amount);
         param.put("user_address", user_address);
 
-        param.put("store_tax_rate_detail", taxDetailJson);
-        param.put("store_fixed_tax_detail", fixedTaxJson);
+        param.put("store_tax_rate_detail", taxLabelJson);
+        param.put("store_fixed_tax_detail", taxFixedTaxJson);
         param.put("calculated_tax_detail", taxDetailsJson);
         Log.e("params", param.toString());
         NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
@@ -1169,7 +1164,17 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     }
 
                     if (taxCalculationModel.getData().getFixedTaxDetail() != null && taxCalculationModel.getData().getFixedTaxDetail().size() != 0) {
-                        DataAdapter.getInstance().setFixedTaxDetail(taxCalculationModel.getData().getFixedTaxDetail());
+                        taxFixedTaxJson=getFixedTaxDetailJson(taxCalculationModel.getData().getFixedTaxDetail());
+                    }
+                    else {
+                        taxFixedTaxJson="";
+                    }
+
+                    if (taxCalculationModel.getData().getTaxLabel() != null && taxCalculationModel.getData().getTaxLabel().size() != 0) {
+                        taxLabelJson=getTaxDetailJson(taxCalculationModel.getData().getTaxLabel());
+                    }
+                    else {
+                        taxLabelJson="";
                     }
 
                     TaxDataModel model = taxCalculationModel.getData();
@@ -1287,9 +1292,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         return jsonString;
     }
 
-    private String getTaxDetailJson() {
+    private String getTaxDetailJson(List<TaxDetail> list) {
         String jsonString = "";
-        List<TaxDetail> taxDetails = DataAdapter.getInstance().getTaxDetail();
+        List<TaxDetail> taxDetails = list;
 
 
         Gson gson = new Gson();
@@ -1305,9 +1310,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         return jsonString;
     }
 
-    private String getFixedTaxDetailJson() {
+    private String getFixedTaxDetailJson(List<FixedTaxDetail> list) {
         String jsonString = "";
-        List<FixedTaxDetail> fixedTaxDetails = DataAdapter.getInstance().getFixedTaxDetail();
+        List<FixedTaxDetail> fixedTaxDetails = list;
 
         Gson gson = new Gson();
         Type type = new TypeToken<List<FixedTaxDetail>>() {

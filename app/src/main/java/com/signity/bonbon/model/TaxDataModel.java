@@ -44,6 +44,18 @@ public class TaxDataModel {
     @Expose
     private List<FixedTaxDetail> fixedTaxDetail = new ArrayList<FixedTaxDetail>();
 
+    @SerializedName("tax_label")
+    @Expose
+    private List<TaxDetail> taxLabel = new ArrayList<TaxDetail>();
+
+
+    public List<TaxDetail> getTaxLabel() {
+        return taxLabel;
+    }
+
+    public void setTaxLabel(List<TaxDetail> taxLabel) {
+        this.taxLabel = taxLabel;
+    }
 
     public List<FixedTaxDetail> getFixedTaxDetail() {
         return fixedTaxDetail;

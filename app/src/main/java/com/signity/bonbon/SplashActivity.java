@@ -1,11 +1,13 @@
 package com.signity.bonbon;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +16,11 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -223,6 +229,7 @@ public class SplashActivity extends Activity {
                         DataAdapter.getInstance().setBanners(store.getBanners());
                     }
 
+
                     if (store.getForceDownload() != null && store.getForceDownload().size() > 0) {
                         DataAdapter.getInstance().setForceDownloadModel(store.getForceDownload().get(0));
                     }
@@ -232,6 +239,8 @@ public class SplashActivity extends Activity {
                     }
 
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
+
+                        showReferAndEarnDialog();
                         getMainActivity();
                     } else {
                         String msg = "" + store.getStoreMsg();
@@ -251,6 +260,46 @@ public class SplashActivity extends Activity {
                 dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
+
+    }
+
+    private void showReferAndEarnDialog() {
+
+         final Dialog dialog = new Dialog(SplashActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setContentView(R.layout.refer_n_earn_dialog);
+
+                Button cancelBtn = (Button) dialog.findViewById(R.id.cancelBtn);
+                Button okBtn = (Button) dialog.findViewById(R.id.okBtn);
+                final EditText getEmail = (EditText) dialog.findViewById(R.id.getEmail);
+
+
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                okBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        /*if (getEmail.getText().toString().trim().isEmpty()) {
+                            Toast.makeText(getActivity(), "Please enter an email id.", Toast.LENGTH_SHORT).show();
+                        } else if (checkValidEmail(getEmail.getText().toString().trim())) {
+                            callNetworkForForgotPassword(getEmail.getText().toString().trim());
+                        } else {
+                            Toast.makeText(getActivity(), "Please enter valid email id.", Toast.LENGTH_SHORT).show();
+                        }*/
+
+                    }
+                });
+
+
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
 
     }
 

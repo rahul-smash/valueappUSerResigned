@@ -11,7 +11,7 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please enter your mobile number to proceed further."
+        android:text="Do you have referal code?"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="@dimen/text_size_normal"
@@ -20,22 +20,23 @@
 
 
     <EditText
-        android:id="@+id/getEmail"
+        android:id="@+id/getCode"
         android:layout_below="@+id/label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter mobile number."
+        android:hint="Enter your referal code "
         android:background="@drawable/edittext_round_corners"
         android:padding="5dp"
-        android:inputType="phone"
+        android:inputType="text"
         android:singleLine="true"
         android:layout_margin="20dp"
+        android:visibility="gone"
         />
 
 
     <View
         android:id="@+id/line"
-        android:layout_below="@+id/getEmail"
+        android:layout_below="@+id/getCode"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@color/ColorPrimary"/>
@@ -48,11 +49,11 @@
 
 
         <Button
-            android:id="@+id/cancelBtn"
+            android:id="@+id/skipBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="Skip"
             android:gravity="center"
             android:background="@android:color/transparent"/>
 
@@ -66,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ok"
+            android:text="Yes"
             android:gravity="center"
             android:background="@android:color/transparent"/>
 

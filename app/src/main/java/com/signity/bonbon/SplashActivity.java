@@ -20,8 +20,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -38,8 +38,10 @@ import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,13 +52,13 @@ import retrofit.client.Response;
 
 public class SplashActivity extends Activity {
 
-    private int SPLASH_TIME_OUT = 500;
-    private GCMClientManager pushClientManager;
     AppDatabase appDb;
     PrefManager prefManager;
     String deviceToken;
     ImageView splash_screen;
     GATrackers trackers;
+    private int SPLASH_TIME_OUT = 500;
+    private GCMClientManager pushClientManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +153,6 @@ public class SplashActivity extends Activity {
     }
 
 
-
     private void getMainActivity() {
         Intent intent_home = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(intent_home);
@@ -240,8 +241,12 @@ public class SplashActivity extends Activity {
 
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
 
-                        showReferAndEarnDialog();
-                        getMainActivity();
+                        if(prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()){
+                            showReferAndEarnDialog(SplashActivity.this,"","Do you have referal code?");
+                        }else {
+                            getMainActivity();
+                        }
+
                     } else {
                         String msg = "" + store.getStoreMsg();
                         showAlertDialog(SplashActivity.this, "Message", msg);
@@ -263,44 +268,28 @@ public class SplashActivity extends Activity {
 
     }
 
-    private void showReferAndEarnDialog() {
+    public void showReferAndEarnDialog(Context context, String title,
+                                          String message) {
+        final DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
+        dialogHandler.setDialog(title, message);
+        dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                Intent intent = new Intent(SplashActivity.this, LoginScreenActivity.class);
+                intent.putExtra(AppConstant.FROM, "menu");
+                startActivity(intent);
+                AnimUtil.slideUpAnim(SplashActivity.this);
+            }
+        });
 
-         final Dialog dialog = new Dialog(SplashActivity.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                dialog.setContentView(R.layout.refer_n_earn_dialog);
-
-                Button cancelBtn = (Button) dialog.findViewById(R.id.cancelBtn);
-                Button okBtn = (Button) dialog.findViewById(R.id.okBtn);
-                final EditText getEmail = (EditText) dialog.findViewById(R.id.getEmail);
-
-
-                cancelBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                okBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        /*if (getEmail.getText().toString().trim().isEmpty()) {
-                            Toast.makeText(getActivity(), "Please enter an email id.", Toast.LENGTH_SHORT).show();
-                        } else if (checkValidEmail(getEmail.getText().toString().trim())) {
-                            callNetworkForForgotPassword(getEmail.getText().toString().trim());
-                        } else {
-                            Toast.makeText(getActivity(), "Please enter valid email id.", Toast.LENGTH_SHORT).show();
-                        }*/
-
-                    }
-                });
-
-
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.show();
-
+        dialogHandler.setNegativeButton("Skip", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                getMainActivity();
+            }
+        });
     }
 
 

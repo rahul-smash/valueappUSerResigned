@@ -113,4 +113,6 @@
 
     <!--Nanu'z Garments-->
     <dimen name="padding_home_icon">20dp</dimen>
+
+    <dimen name="grid_view_spacing">3dp</dimen>
 </resources>

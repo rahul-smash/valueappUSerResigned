@@ -7,13 +7,12 @@
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     card_view:cardCornerRadius="3dp"
-    card_view:cardElevation="5dp">
+    card_view:cardElevation="1dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="3dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="0dp">

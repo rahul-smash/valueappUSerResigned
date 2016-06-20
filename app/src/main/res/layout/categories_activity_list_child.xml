@@ -7,7 +7,7 @@
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     card_view:cardCornerRadius="3dp"
-    card_view:cardElevation="5dp">
+    card_view:cardElevation="1dp">
 
     <RelativeLayout
         android:layout_width="match_parent"

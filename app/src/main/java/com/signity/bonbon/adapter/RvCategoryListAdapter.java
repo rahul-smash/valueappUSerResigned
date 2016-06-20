@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,8 @@ public class RvCategoryListAdapter extends RecyclerView.Adapter<RvCategoryListAd
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screenHeight = metrics.heightPixels;
         screenWidth = metrics.widthPixels;
-        layoutParamsImageView = new RelativeLayout.LayoutParams(isType ? RelativeLayout.LayoutParams.MATCH_PARENT : (screenWidth / 2) - 10, isType ? 300 : (screenHeight / 4));
+        Log.e("Screen Dimen", screenWidth + "*" + screenHeight);
+        layoutParamsImageView = new RelativeLayout.LayoutParams(isType ? RelativeLayout.LayoutParams.MATCH_PARENT : (screenWidth / 2) - 10, isType ? screenHeight / 4 : (screenHeight / 4));
 
     }
 

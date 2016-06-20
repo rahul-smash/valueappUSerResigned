@@ -123,6 +123,8 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     public void showLocationOnMap(LatLng latLng, String address) {
         if (latLng != null) {
             String mAddress = address;
+
+
             map.setMyLocationEnabled(true);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));

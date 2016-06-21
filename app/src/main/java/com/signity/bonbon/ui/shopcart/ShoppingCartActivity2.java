@@ -1636,8 +1636,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
             final OfferData data = listOfferData.get(position);
             holder.discountValue.setText("" + data.getDiscount() + "% Off");
-            holder.minValue.setText("Min Order " + data.getMinimumOrderAmount());
-
+            if(data.getMinimumOrderAmount().equalsIgnoreCase("0")){
+                holder.minValue.setText(""+data.getName());
+            }else {
+                holder.minValue.setText("Min Order " + data.getMinimumOrderAmount());
+            }
             double totalPrice = getTotalPrice();
             double minimumCharges = Double.parseDouble(data.getMinimumOrderAmount());
             if (minimumCharges > totalPrice) {

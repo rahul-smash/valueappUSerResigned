@@ -193,7 +193,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(prefManager.getReferEarnPopupCheck()){
             if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
                 prefManager.setReferEarnPopupCheck(false);
-                showReferAndEarnDialog(MainActivity.this, "", "Do you have referal code?");
+                String msg="Kindly Login with Referral Code for "+store.getStoreName()+" and Earn Free Coupons.";
+                showReferAndEarnDialog(MainActivity.this, "Enter Referral Code", msg);
             }
         }
 
@@ -644,7 +645,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                        String message) {
         final DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton("Login", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();

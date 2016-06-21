@@ -346,8 +346,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                     no_record.setVisibility(View.VISIBLE);
                     order_history_list.setVisibility(View.GONE);
                     ProgressDialogUtil.hideProgressDialog();
-                    DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    /*DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);*/
                 }
 
             }

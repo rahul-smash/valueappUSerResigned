@@ -133,8 +133,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         prefManager = new PrefManager(ShoppingCartActivity2.this);
 
         GATrackers.getInstance().trackScreenView(GAConstant.CHECKOUT_SCREEN);
-
-
         userId = getIntent().getStringExtra("userId");
         addressId = getIntent().getStringExtra("addressId");
         shippingChargeText = getIntent().getStringExtra("shiping_charges");
@@ -229,7 +227,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         listViewCart.setOnTouchListener(new ListView.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
 
                 if (keyboardOpen) {
                     v.getParent().requestDisallowInterceptTouchEvent(false);
@@ -1064,13 +1061,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     private void onApplyCoupon() {
 
-
         if (loyalityStatus.equalsIgnoreCase("0")) {
             couponCode = editCoupon_1.getText().toString();
         } else if (loyalityStatus.equalsIgnoreCase("1")) {
             couponCode = editCoupon.getText().toString();
         }
-
 
         if (!couponCode.isEmpty()) {
             String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -1124,8 +1119,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
 
@@ -1296,8 +1289,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String getTaxDetailJson(List<TaxDetail> list) {
         String jsonString = "";
         List<TaxDetail> taxDetails = list;
-
-
         Gson gson = new Gson();
         Type type = new TypeToken<List<TaxDetail>>() {
         }.getType();

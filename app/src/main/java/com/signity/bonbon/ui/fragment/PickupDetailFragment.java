@@ -48,8 +48,10 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     GoogleMap map;
     private PickupAdressModel pickupAdressModel;
     private TextView textViewAddress;
-    private Button buttonProceed,buttonOk;
+    private Button buttonProceed, buttonOk;
     private Button btnCall;
+
+    double lat = 0.0, lng = 0.0;
 
 
     @Override
@@ -94,10 +96,10 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         from = getArguments().getString(AppConstant.FROM, "");
-        if(from.equalsIgnoreCase("shopping_cart2")){
+        if (from.equalsIgnoreCase("shopping_cart2")) {
             buttonProceed.setVisibility(View.INVISIBLE);
             buttonOk.setVisibility(View.VISIBLE);
-            ((DeliveryPickupActivity)getActivity()).disableBackButton();
+            buttonOk.setText("Get Directions");
         }
     }
 
@@ -112,8 +114,8 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
             String address = pickupAdressModel.getPickupAdd();
             LatLng latLng = null;
             if (latitudeString != null && !latitudeString.isEmpty() && longitudeString != null && !longitudeString.isEmpty()) {
-                double lat = Double.parseDouble(latitudeString);
-                double lng = Double.parseDouble(longitudeString);
+                lat = Double.parseDouble(latitudeString);
+                lng = Double.parseDouble(longitudeString);
                 latLng = new LatLng(lat, lng);
                 showLocationOnMap(latLng, address);
             }
@@ -124,8 +126,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
         if (latLng != null) {
             String mAddress = address;
 
-
-            map.setMyLocationEnabled(true);
+            //map.setMyLocationEnabled(true);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
             map.addMarker(new MarkerOptions()
@@ -148,8 +149,8 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 intent.putExtra("minimum_charges", "0");
                 intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
                 startActivity(intent);
+                getActivity().finish();
                 AnimUtil.slideFromRightAnim(getActivity());
-
                 break;
 
             case R.id.btnCall:
@@ -165,19 +166,21 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                     }
                 } else {
                     Toast.makeText(getActivity(), "Number not available", Toast.LENGTH_SHORT).show();
-
                 }
-
                 break;
 
             case R.id.buttonOk:
-                getActivity().onBackPressed();
-
+                if (lat != 0.0 && lng != 0.0) {
+                    String url = "http://maps.google.com/maps?daddr=" + lat + "," + lng;
+                    Intent intentMap = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse(url));
+                    startActivity(intentMap);
+                    getActivity().finish();
+                }
+//                getActivity().onBackPressed();
                 break;
         }
     }
-
-
 
 
 }

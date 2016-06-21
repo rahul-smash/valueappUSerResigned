@@ -190,9 +190,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .replace(R.id.container, fragment).commit();
 
 
-        if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
-            showReferAndEarnDialog(MainActivity.this, "", "Do you have referal code?");
+        if(prefManager.getReferEarnPopupCheck()){
+            if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
+                prefManager.setReferEarnPopupCheck(false);
+                showReferAndEarnDialog(MainActivity.this, "", "Do you have referal code?");
+            }
         }
+
 
     }
 

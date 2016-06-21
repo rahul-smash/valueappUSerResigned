@@ -30,7 +30,7 @@ public class PrefManager {
     public static final String IS_REFER_FN_ENABLE_FOR_DEVICE = BuildConfig.APPLICATION_ID + ".is_refer_fn_enable_device";
     public static final String REFER_OBJ = BuildConfig.APPLICATION_ID + ".refer_obj";
     public static final String REFER_OBJ_MSG = BuildConfig.APPLICATION_ID + ".refer_obj_msg";
-
+    public static final String REFER_N_EARN_POPUP_CHECK = BuildConfig.APPLICATION_ID +".REFER_N_EARN_POPUP_CHECK";
 
     public static class SharedPrefs {
         public static String Geofences = "SHARED_PREFS_GEOFENCES";
@@ -189,6 +189,16 @@ public class PrefManager {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putBoolean(IS_REFER_FN_ENABLE_FOR_DEVICE, refer);
         editor.commit();
+    }
+
+    public void setReferEarnPopupCheck(boolean refer) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putBoolean(REFER_N_EARN_POPUP_CHECK, refer);
+        editor.commit();
+    }
+
+    public boolean getReferEarnPopupCheck() {
+        return sharedpreferences.getBoolean(REFER_N_EARN_POPUP_CHECK, true);
     }
 
 }

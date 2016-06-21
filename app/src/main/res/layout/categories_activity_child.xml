@@ -24,7 +24,7 @@
             android:layout_width="@dimen/category_gird_image_width"
             android:layout_height="@dimen/category_gird_image_width"
             android:layout_marginTop="5dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/text_name"

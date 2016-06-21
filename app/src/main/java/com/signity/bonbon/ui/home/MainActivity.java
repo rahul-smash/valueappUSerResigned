@@ -32,7 +32,6 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
-import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
@@ -47,7 +46,6 @@ import com.signity.bonbon.geofence.NamedGeofence;
 import com.signity.bonbon.model.ForceDownloadModel;
 import com.signity.bonbon.model.GeofenceObjectModel;
 import com.signity.bonbon.model.GetStoreModel;
-import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.model.SliderObject;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
@@ -74,42 +72,45 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String TAG = MainActivity.class.getSimpleName();
+    public TextView title, user;
+    public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     SlidingPaneLayout mSlidingPanel;
     ListView mMenuList;
-    public TextView title, user;
     ImageButton search, shopingcart;
     Button menu, citySelect;
     ImageView profilePic;
-    public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     String[] labels = {"Home", "My Profile", "Delivery Address", "My Orders",
             "Book Now", "My Favorites", "About Us", "Share", "Loyality Points", "Log In"};
-
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
             R.drawable.order_icon,
             R.drawable.my_shopping_list_icon, R.drawable.my_fav_icon,
             R.drawable.faq, R.drawable.ic_share, R.drawable.loyality, R.drawable.sign_out};
     ArrayList<SliderObject> viewList = new ArrayList<SliderObject>();
-
     AppDatabase appDb;
     Adapter adapter;
     PrefManager prefManager;
-    private GCMClientManager pushClientManager;
     String userId;
     String storeId, areaName;
-
     String name;
     String phone;
     Context context;
     Store store;
-
     // Controller;
     ViewController viewController;
-
     boolean isActivityLoadsFirstTime = true;
-
+    private String TAG = MainActivity.class.getSimpleName();
+    private GCMClientManager pushClientManager;
     private String loyalityStatus;
+    private GeofenceController.GeofenceControllerListener geofenceControllerListener = new GeofenceController.GeofenceControllerListener() {
+        @Override
+        public void onGeofencesUpdated() {
+        }
 
+        @Override
+        public void onError() {
+            Log.i("Geo Fence", "Error on Fence Created");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +188,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fragment fragment = viewController.getHomeFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
+
+
+        if(prefManager.getReferEarnPopupCheck()){
+            if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
+                prefManager.setReferEarnPopupCheck(false);
+                String msg="Kindly Login with Referral Code for "+store.getStoreName()+" and Earn Free Coupons.";
+                showReferAndEarnDialog(MainActivity.this, "Enter Referral Code", msg);
+            }
+        }
+
+
     }
 
     private void setUpFenceAroundStore() {
@@ -346,7 +358,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fm = getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
-
 
     private void replaceFragment(int position) {
         Fragment fragment;
@@ -525,119 +536,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     public void replace(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment).commit();
     }
-
-    class Adapter extends BaseAdapter {
-        Activity context;
-        LayoutInflater l;
-        boolean login = false;
-
-        public Adapter(Activity context) {
-            this.context = context;
-            l = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return viewList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        ViewHolder holder;
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                convertView = l.inflate(R.layout.slider_child, null);
-                holder = new ViewHolder();
-                holder.icons = (ImageView) convertView.findViewById(R.id.icon);
-                holder.labels = (TextView) convertView.findViewById(R.id.labels);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            holder.icons.setImageResource(viewList.get(position).icons);
-            holder.labels.setText(viewList.get(position).labels);
-
-            SliderObject att = new SliderObject();
-            if (loyalityStatus.equalsIgnoreCase("0")) {
-                if (userId.isEmpty()) {
-                    att.labels = "Log In";
-                    att.icons = icons[9];
-                    viewList.set(8, att);
-                    holder.labels.setText(viewList.get(position).labels);
-                    login = true;
-                } else if (!userId.isEmpty()) {
-                    att.labels = "Log out";
-                    att.icons = icons[9];
-                    viewList.set(8, att);
-                    holder.labels.setText(viewList.get(position).labels);
-                    login = false;
-                }
-            } else if (loyalityStatus.equalsIgnoreCase("1")) {
-                if (userId.isEmpty()) {
-                    att.labels = "Log In";
-                    att.icons = icons[9];
-                    viewList.set(9, att);
-                    holder.labels.setText(viewList.get(position).labels);
-                    login = true;
-                } else if (!userId.isEmpty()) {
-                    att.labels = "Log out";
-                    att.icons = icons[9];
-                    viewList.set(9, att);
-                    holder.labels.setText(viewList.get(position).labels);
-                    login = false;
-                }
-            }
-            if (!userId.isEmpty() && prefManager.isReferEarnFn()) {
-                SliderObject atts = new SliderObject();
-                atts.labels = "Refer And Earn";
-                atts.icons = icons[7];
-                viewList.set(7, atts);
-                holder.labels.setText(viewList.get(position).labels);
-            } else {
-                SliderObject atts = new SliderObject();
-                atts.labels = "Share";
-                atts.icons = icons[7];
-                viewList.set(7, atts);
-                holder.labels.setText(viewList.get(position).labels);
-            }
-
-
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    replaceFragment(position);
-                    toggleSlidingMenu();
-                }
-            });
-
-            return convertView;
-        }
-
-
-        class ViewHolder {
-            ImageView icons;
-            TextView labels;
-
-        }
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -724,6 +626,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
                     }
 
+
                 } else {
                     Log.e("Error", "Error success false");
                 }
@@ -736,6 +639,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    public void showReferAndEarnDialog(Context context, String title,
+                                       String message) {
+        final DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
+        dialogHandler.setDialog(title, message);
+        dialogHandler.setPostiveButton("Login", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+                Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
+                intent.putExtra(AppConstant.FROM, "menu");
+                startActivity(intent);
+                AnimUtil.slideUpAnim(MainActivity.this);
+            }
+        });
+
+        dialogHandler.setNegativeButton("Skip", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogHandler.dismiss();
+            }
+        });
     }
 
 
@@ -846,16 +772,111 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private GeofenceController.GeofenceControllerListener geofenceControllerListener = new GeofenceController.GeofenceControllerListener() {
-        @Override
-        public void onGeofencesUpdated() {
+    class Adapter extends BaseAdapter {
+        Activity context;
+        LayoutInflater l;
+        boolean login = false;
+        ViewHolder holder;
+
+        public Adapter(Activity context) {
+            this.context = context;
+            l = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
-        public void onError() {
-            Log.i("Geo Fence", "Error on Fence Created");
+        public int getCount() {
+            return viewList.size();
         }
-    };
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = l.inflate(R.layout.slider_child, null);
+                holder = new ViewHolder();
+                holder.icons = (ImageView) convertView.findViewById(R.id.icon);
+                holder.labels = (TextView) convertView.findViewById(R.id.labels);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.icons.setImageResource(viewList.get(position).icons);
+            holder.labels.setText(viewList.get(position).labels);
+
+            SliderObject att = new SliderObject();
+            if (loyalityStatus.equalsIgnoreCase("0")) {
+                if (userId.isEmpty()) {
+                    att.labels = "Log In";
+                    att.icons = icons[9];
+                    viewList.set(8, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = true;
+                } else if (!userId.isEmpty()) {
+                    att.labels = "Log out";
+                    att.icons = icons[9];
+                    viewList.set(8, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = false;
+                }
+            } else if (loyalityStatus.equalsIgnoreCase("1")) {
+                if (userId.isEmpty()) {
+                    att.labels = "Log In";
+                    att.icons = icons[9];
+                    viewList.set(9, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = true;
+                } else if (!userId.isEmpty()) {
+                    att.labels = "Log out";
+                    att.icons = icons[9];
+                    viewList.set(9, att);
+                    holder.labels.setText(viewList.get(position).labels);
+                    login = false;
+                }
+            }
+            if (!userId.isEmpty() && prefManager.isReferEarnFn()) {
+                SliderObject atts = new SliderObject();
+                atts.labels = "Refer And Earn";
+                atts.icons = icons[7];
+                viewList.set(7, atts);
+                holder.labels.setText(viewList.get(position).labels);
+            } else {
+                SliderObject atts = new SliderObject();
+                atts.labels = "Share";
+                atts.icons = icons[7];
+                viewList.set(7, atts);
+                holder.labels.setText(viewList.get(position).labels);
+            }
+
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    replaceFragment(position);
+                    toggleSlidingMenu();
+                }
+            });
+
+            return convertView;
+        }
+
+
+        class ViewHolder {
+            ImageView icons;
+            TextView labels;
+
+        }
+    }
 
 }
 

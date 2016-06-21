@@ -241,11 +241,7 @@ public class SplashActivity extends Activity {
 
                     if (store.getStoreStatus().equalsIgnoreCase("1")) {
 
-                        if(prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()){
-                            showReferAndEarnDialog(SplashActivity.this,"","Do you have referal code?");
-                        }else {
-                            getMainActivity();
-                        }
+                        getMainActivity();
 
                     } else {
                         String msg = "" + store.getStoreMsg();
@@ -268,29 +264,7 @@ public class SplashActivity extends Activity {
 
     }
 
-    public void showReferAndEarnDialog(Context context, String title,
-                                          String message) {
-        final DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-        dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogHandler.dismiss();
-                Intent intent = new Intent(SplashActivity.this, LoginScreenActivity.class);
-                intent.putExtra(AppConstant.FROM, "menu");
-                startActivity(intent);
-                AnimUtil.slideUpAnim(SplashActivity.this);
-            }
-        });
 
-        dialogHandler.setNegativeButton("Skip", true).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogHandler.dismiss();
-                getMainActivity();
-            }
-        });
-    }
 
 
     private void moveToCitySelection() {

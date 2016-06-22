@@ -168,7 +168,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 //                    proceedToMobileOtpGeneration(data);
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", emailResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", ""+emailResponse.getMessage(), false);
                 }
             }
 

@@ -149,7 +149,7 @@ public class LoginFragmentEmail extends Fragment {
                 if (emailResponse.getSuccess()) {
 
                     if (from.equals("menu")) {
-                        showAlertDialogForLogin(getActivity(), "Success", "You have login successfully. Please continue.");
+                        showAlertDialogForLogin(getActivity(), "Success", ""+emailResponse.getMessage());
                     } else {
                         PrefManager prefManager = new PrefManager(getActivity());
                         String pickUpStatus = prefManager.getPickupFacilityStatus();
@@ -177,13 +177,15 @@ public class LoginFragmentEmail extends Fragment {
                     }
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message",""+emailResponse.getMessage(), false);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
             }
         });
     }

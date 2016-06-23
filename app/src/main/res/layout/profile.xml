@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="7"
+    android:background="@android:color/white"
     tools:context="com.signity.bonbon.ui.fragment.Profile">
 
     <ScrollView
@@ -19,20 +20,34 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:padding="15dp"
+                />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/black"/>
+
             <LinearLayout
                 android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Name"
+                    android:text="NAME"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"/>
@@ -46,12 +61,11 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Name"
+                    android:hint="Type here.."
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:paddingTop="8dp"
-                    android:paddingRight="3dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
@@ -70,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Email"
+                    android:text="EMAIL ID"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black" />
@@ -84,12 +98,11 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Email (Optional)"
+                    android:hint="Type here.."
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:paddingTop="8dp"
-                    android:paddingRight="3dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
@@ -111,9 +124,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Referal code"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="@dimen/text_size_large" />
+                    android:text="REFERRAL CODE"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_normal" />
 
                 <EditText
                     android:id="@+id/edtReferCode"
@@ -122,16 +135,14 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/edittext_round_corners"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Enter Referal code here"
+                    android:hint="Type here.."
                     android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:paddingTop="8dp"
+                    android:inputType="text"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
+                    android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"
                     android:textCursorDrawable="@null" />
 
@@ -149,10 +160,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Mobile Number"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="@dimen/text_size_normal"
-                    android:textColor="@android:color/black" />
+                    android:text="Phone Number"
+                    android:textSize="@dimen/text_size"
+                     />
 
                 <EditText
                     android:id="@+id/mobilenumber"
@@ -163,10 +173,11 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Mobile"
+                    android:hint="Type here.."
                     android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="2dp"
+                    android:inputType="phone"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="15dp"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"/>
 
@@ -175,16 +186,15 @@
 
             <Button
                 android:id="@+id/updateButton"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_below="@+id/emailLayout"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/round_corner"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/round_corner_button1"
                 android:text="Save"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/color_white" />
         </LinearLayout>
 

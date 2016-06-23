@@ -4,74 +4,70 @@
     android:layout_height="wrap_content"
     android:background="@drawable/custom_dialog_shape"
     android:layout_margin="20dp"
-    android:padding="10dp">
+    >
 
 
     <TextView
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Do you have referal code?"
+        android:text="Enter Referral Code"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="@dimen/text_size_normal"
-        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textColor="@color/color_light_blue"
         android:layout_alignParentTop="true"/>
 
 
-    <EditText
-        android:id="@+id/getCode"
-        android:layout_below="@+id/label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your referal code "
-        android:background="@drawable/edittext_round_corners"
-        android:padding="5dp"
-        android:inputType="text"
-        android:singleLine="true"
-        android:layout_margin="20dp"
-        android:visibility="gone"
-        />
 
 
     <View
         android:id="@+id/line"
-        android:layout_below="@+id/getCode"
+        android:layout_below="@+id/label"
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/ColorPrimary"/>
-    <LinearLayout
-        android:layout_below="@+id/line"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_height="2dp"
+        android:background="@color/color_light_blue"/>
 
+
+    <TextView
+        android:id="@+id/textMsg"
+        android:layout_below="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:gravity="center"
+        android:textSize="@dimen/text_size"
+        android:text="Kindly Login with Referral Code for and Earn Free Coupons."/>
+
+
+    <Button
+        android:id="@+id/okBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:text="LOGIN"
+        android:layout_below="@id/textMsg"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:background="@drawable/green_button_bg"/>
 
         <Button
             android:id="@+id/skipBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Skip"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_below="@+id/okBtn"
+            android:layout_centerHorizontal="true"
+            android:text="Skip >>"
             android:gravity="center"
             android:background="@android:color/transparent"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="@color/ColorPrimary"/>
-
-        <Button
-            android:id="@+id/okBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Yes"
-            android:gravity="center"
-            android:background="@android:color/transparent"/>
-
-    </LinearLayout>
 
 
 </RelativeLayout>

@@ -222,10 +222,12 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
             prefManager.setReferEarnFn(data.getRefererEnable());
             prefManager.setReferEarnFnEnableForDevice(data.getReferAndEarn().getDeviceUnique());
             prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, data.getReferAndEarn().getMessage());
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, data.getUserReferCode());
         } else {
             prefManager.setReferEarnFn(false);
             prefManager.setReferEarnFnEnableForDevice(false);
             prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, "");
         }
         String name = data.getFullName();
         String email = data.getEmail();
@@ -272,10 +274,12 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
             prefManager.setReferEarnFn(data.getRefererEnable());
             prefManager.setReferEarnFnEnableForDevice(data.getReferAndEarn().getDeviceUnique());
             prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, data.getReferAndEarn().getMessage());
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, data.getUserReferCode());
         } else {
             prefManager.setReferEarnFn(false);
             prefManager.setReferEarnFnEnableForDevice(false);
             prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
+            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, "");
         }
         Fragment fragment = LoginFragmentOtp.newInstance(getActivity());
         Bundle bundle = new Bundle();

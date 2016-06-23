@@ -51,7 +51,7 @@ public class LoginFragmentEmail extends Fragment {
     private PrefManager prefManager;
 
     String from, fullName, email;
-    public TextView mobilenumber;
+    public EditText mobilenumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,10 @@ public class LoginFragmentEmail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(com.signity.bonbon.R.layout.fragment_layout_login_email, container, false);
-        mobilenumber = (TextView) rootView.findViewById(R.id.mobilenumber);
+        mobilenumber = (EditText) rootView.findViewById(R.id.mobilenumber);
+        mobilenumber.setFocusable(false);
+        mobilenumber.setClickable(false);
+        mobilenumber.setEnabled(false);
         mobilenumber.setText(prefManager.getSharedValue(AppConstant.PHONE));
         updateButton = (Button) rootView.findViewById(R.id.updateButton);
         backButton = (Button) rootView.findViewById(R.id.backButton);

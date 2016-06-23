@@ -1,10 +1,12 @@
 package com.signity.bonbon.ui.home;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -24,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.signity.bonbon.BuildConfig;
@@ -52,6 +56,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.AboutUs.AboutUsFragment;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
+import com.signity.bonbon.ui.SharenEarn.ShareNEarnFragment;
 import com.signity.bonbon.ui.fragment.LoyalityFragment;
 import com.signity.bonbon.ui.fragment.Profile;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
@@ -445,7 +450,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 replace(new AboutUsFragment());
                 break;
             case 7:
-                if (userId.isEmpty()) {
+                if (!userId.isEmpty() && prefManager.isReferEarnFn()) {
+                    title.setVisibility(View.VISIBLE);
+                    citySelect.setVisibility(View.GONE);
+                    title.setText("Refer N Earn");
+                    replace(new ShareNEarnFragment());
+                } else {
                     String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
                     GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
                             getString(R.string.app_name) + " App Shared");
@@ -458,17 +468,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra(Intent.EXTRA_TEXT, shareContent);
                     intent.putExtra(Intent.EXTRA_SUBJECT, store.getStoreName());
                     startActivity(Intent.createChooser(intent, "Share with"));
-                } else {
-                    String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
-                    GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                            getString(R.string.app_name) + " Shared And Earn");
-                    String sharemessage = prefManager.getSharedValue(PrefManager.REFER_OBJ_MSG);
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, sharemessage);
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Refer and Earn");
-                    startActivity(Intent.createChooser(intent, "Share with"));
                 }
+
                 break;
             case 8:
 
@@ -643,25 +644,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void showReferAndEarnDialog(Context context, String title,
                                        String message) {
-        final DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
-        dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Login", true).setOnClickListener(new View.OnClickListener() {
+
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.refer_n_earn_dialog);
+
+        Button skipBtn = (Button) dialog.findViewById(R.id.skipBtn);
+        Button okBtn = (Button) dialog.findViewById(R.id.okBtn);
+        TextView textMsg = (TextView) dialog.findViewById(R.id.textMsg);
+        TextView label = (TextView) dialog.findViewById(R.id.label);
+        label.setText(""+title);
+        textMsg.setText(""+message);
+
+
+        skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                dialogHandler.dismiss();
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
                 Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
                 intent.putExtra(AppConstant.FROM, "menu");
                 startActivity(intent);
                 AnimUtil.slideUpAnim(MainActivity.this);
+
             }
         });
 
-        dialogHandler.setNegativeButton("Skip", true).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogHandler.dismiss();
-            }
-        });
+
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
     }
 
 

@@ -40,6 +40,11 @@ public class MobData {
     @SerializedName("platform")
     @Expose
     private String platform;
+
+    @SerializedName("user_refer_code")
+    @Expose
+    private String userReferCode;
+
     @SerializedName("deliveryAddress")
     @Expose
     private List<UserAddressModel> deliverAddress;
@@ -53,6 +58,14 @@ public class MobData {
     private ReferAndEarn referAndEarn;
 
 
+
+    public String getUserReferCode() {
+        return userReferCode;
+    }
+
+    public void setUserReferCode(String userReferCode) {
+        this.userReferCode = userReferCode;
+    }
     /**
      * @return The id
      */

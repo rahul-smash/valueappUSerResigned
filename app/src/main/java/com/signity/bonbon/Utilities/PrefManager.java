@@ -29,6 +29,7 @@ public class PrefManager {
     public static final String IS_REFER_FN = BuildConfig.APPLICATION_ID + ".is_refer_fn";
     public static final String IS_REFER_FN_ENABLE_FOR_DEVICE = BuildConfig.APPLICATION_ID + ".is_refer_fn_enable_device";
     public static final String REFER_OBJ = BuildConfig.APPLICATION_ID + ".refer_obj";
+    public static final String REFER_OBJ_CODE = BuildConfig.APPLICATION_ID + ".refer_obj_code";
     public static final String REFER_OBJ_MSG = BuildConfig.APPLICATION_ID + ".refer_obj_msg";
     public static final String REFER_N_EARN_POPUP_CHECK = BuildConfig.APPLICATION_ID +".REFER_N_EARN_POPUP_CHECK";
 

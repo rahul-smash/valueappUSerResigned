@@ -9,6 +9,7 @@
     <integer name="num_cols">1</integer>
 
     <!--common constant-->
+    <dimen name="text_size_extra_large">25sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_normal">18sp</dimen>
     <dimen name="text_size">15sp</dimen>

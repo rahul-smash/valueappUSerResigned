@@ -91,7 +91,7 @@ public class AboutUsFragment extends Fragment {
         startOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).onBackPressed();
+                ( getActivity()).onBackPressed();
             }
         });
 

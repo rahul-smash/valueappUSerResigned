@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context="com.signity.bonbon.ui.ReferNEarn.ReferNEarnActivity">
+
+    <!--<RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ColorPrimary">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:padding="12dp"
+            android:src="@drawable/left" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="Refer N Earn"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="visible" />
+
+    </RelativeLayout>-->
+
+    <TextView
+        android:id="@+id/label_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_extra_large"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:text="Grab Discount"/>
+
+    <TextView
+        android:id="@+id/label_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_extra_large"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/label_1"
+        android:textColor="@android:color/black"
+        android:text=" Coupons and Freebies"/>
+
+    <ImageView
+        android:id="@+id/gift_icon"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/label_2"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:src="@drawable/gift"/>
+
+    <TextView
+        android:id="@+id/label_3"
+        android:layout_below="@+id/gift_icon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="SHARE YOUR REFERRAL CODE"
+        android:textSize="@dimen/text_size"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:background="@drawable/textview_bg"/>
+
+
+    <TextView
+        android:id="@+id/codeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="JE123"
+        android:gravity="center"
+        android:layout_below="@+id/label_3"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_light_blue"
+        android:padding="10dp"/>
+
+
+    <TextView
+        android:id="@+id/label_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_below="@+id/codeTxt"
+        android:textColor="@android:color/black"
+        android:text="Share our App among your Friends and Relatives. They will receive the Coupon and you will get one too"/>
+
+
+    <Button
+        android:id="@+id/shareNearn"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:text="SHARE"
+        android:textColor="@android:color/white"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/label_4"
+        android:background="@drawable/round_corner_button1"/>
+
+
+</RelativeLayout>

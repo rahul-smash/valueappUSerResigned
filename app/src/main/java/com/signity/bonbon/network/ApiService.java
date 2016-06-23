@@ -15,6 +15,7 @@ import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.ProductListModel;
+import com.signity.bonbon.model.ReferNEarnModel;
 import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.TaxCalculationModel;
 import com.signity.bonbon.model.UserAddressList;
@@ -153,6 +154,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/productDetail")
     void getProductDetails(@FieldMap Map<String, String> parameters, Callback<GetSubCategory> response);
+
+    @FormUrlEncoded
+    @POST("/getReferDetails")
+    void getUserReferCode(@FieldMap Map<String, String> parameters, Callback<ReferNEarnModel> response);
 
 
 }

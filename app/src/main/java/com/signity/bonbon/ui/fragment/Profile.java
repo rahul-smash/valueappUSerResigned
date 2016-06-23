@@ -29,6 +29,8 @@ import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -90,12 +92,11 @@ public class Profile extends Fragment implements View.OnClickListener {
 
 
     private void setUpReferalBlock() {
-        if (prefManager.isReferEarnFn()) {
-            if (prefManager.isReferEarnFnEnableForDevice()) {
+        if (prefManager.isReferEarnFn() && prefManager.isReferEarnFnEnableForDevice()) {
                 referalBlock.setVisibility(View.VISIBLE);
-            } else {
-                referalBlock.setVisibility(View.GONE);
-            }
+        }
+        else {
+            referalBlock.setVisibility(View.GONE);
         }
     }
 
@@ -118,13 +119,27 @@ public class Profile extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), "Please Update Name", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if(emailtxt.isEmpty()){
+            prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
+            prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);
+            callUpdateProfileService();
+        }
+        else {
+            if(checkValidEmail(emailtxt.trim())){
+                prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
+                prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);
+                callUpdateProfileService();
+            }
+            else {
+                Toast.makeText(getActivity(), "Please enter valid email.", Toast.LENGTH_SHORT).show();
+            }
+        }
 //        if (emailtxt.isEmpty()) {
 //            Toast.makeText(getActivity(), "Please Update Email", Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
-        prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);
-        callUpdateProfileService();
+
     }
 
     private void callUpdateProfileService() {
@@ -186,5 +201,14 @@ public class Profile extends Fragment implements View.OnClickListener {
     public void showAlertDialog(Context context, String title,
                                 String message) {
         new DialogHandler(context).setdialogForFinish(title, message, false);
+    }
+
+    public boolean checkValidEmail(String email) {
+        boolean isValid = false;
+        String PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Pattern pattern = Pattern.compile(PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        isValid = matcher.matches();
+        return isValid;
     }
 }

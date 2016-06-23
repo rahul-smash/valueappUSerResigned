@@ -450,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 replace(new AboutUsFragment());
                 break;
             case 7:
-                if (!userId.isEmpty() && prefManager.isReferEarnFn()) {
+                if (prefManager.isReferEarnFn() && !userId.isEmpty()) {
                     title.setVisibility(View.VISIBLE);
                     citySelect.setVisibility(View.GONE);
                     title.setText("Refer N Earn");

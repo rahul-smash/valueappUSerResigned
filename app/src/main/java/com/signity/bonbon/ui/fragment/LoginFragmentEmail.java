@@ -106,12 +106,11 @@ public class LoginFragmentEmail extends Fragment {
     }
 
     private void setUpReferalBlock() {
-        if (prefManager.isReferEarnFn()) {
-            if (prefManager.isReferEarnFnEnableForDevice()) {
-                referalBlock.setVisibility(View.VISIBLE);
-            } else {
-                referalBlock.setVisibility(View.GONE);
-            }
+        if (prefManager.isReferEarnFn() && prefManager.isReferEarnFnEnableForDevice()) {
+            referalBlock.setVisibility(View.VISIBLE);
+        }
+        else {
+            referalBlock.setVisibility(View.GONE);
         }
     }
 
@@ -125,6 +124,14 @@ public class LoginFragmentEmail extends Fragment {
             Toast.makeText(getActivity(), "Please Enter Name", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if(!emailtxt.isEmpty()){
+            if(!checkValidEmail(emailtxt.trim())){
+                Toast.makeText(getActivity(), "Please enter valid email.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
         prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
         prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);
 

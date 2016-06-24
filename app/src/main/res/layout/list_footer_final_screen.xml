@@ -51,7 +51,6 @@
                 android:id="@+id/rs1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:text="\u20B9"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_small" />
@@ -130,7 +129,6 @@
                 android:id="@+id/rs2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:text="\u20B9"
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
@@ -167,7 +165,6 @@
                 android:id="@+id/rs3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:text="\u20B9"
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>

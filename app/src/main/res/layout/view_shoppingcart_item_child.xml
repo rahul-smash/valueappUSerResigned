@@ -78,7 +78,6 @@
                     android:id="@+id/items_mrp_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/rupee2"
                     android:text="95.00"
                     android:textColor="#2f2f2f"
@@ -111,7 +110,6 @@
                     android:id="@+id/items_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/rupee"
                     android:text="95.00"
                     android:textColor="#2f2f2f"
@@ -186,7 +184,6 @@
             android:layout_toRightOf="@+id/rupeeTxt"
             android:layout_centerVertical="true"
             android:text="100.0"
-            android:layout_marginRight="5dp"
             android:textSize="@dimen/text_size_normal"/>
 
 

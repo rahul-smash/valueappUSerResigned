@@ -67,7 +67,6 @@
                     android:text="95.00"
                     android:textColor="#2f2f2f"
                     android:layout_toRightOf="@+id/rupee2"
-                    android:layout_marginLeft="5dp"
                     android:textSize="@dimen/text_size_small" />
 
                 <View
@@ -90,7 +89,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="95.00"
-                    android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/rupee"
                     android:textColor="#2f2f2f"
                     android:textSize="@dimen/text_size_small" />

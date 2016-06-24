@@ -82,11 +82,7 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
 
 
         if (!userId.isEmpty()) {
-            if(!code.isEmpty()){
-                codeTxt.setText(code);
-            }else {
                 callNetworkForCode();
-            }
         }else {
             codeTxt.setText("Login to access your Code.");
         }

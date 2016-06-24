@@ -4,7 +4,7 @@
     android:orientation="vertical">
 
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/theme_21_home_bg">
@@ -278,5 +278,5 @@
             </LinearLayout>
 
         </LinearLayout>
-    </RelativeLayout>
+    </RelativeLayout>-->
 </RelativeLayout>

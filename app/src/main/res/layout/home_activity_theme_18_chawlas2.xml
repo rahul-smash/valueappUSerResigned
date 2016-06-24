@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
-    android:background="@drawable/theme_18_home_bg">
+    >
 
-
+    <!--android:background="@drawable/theme_18_home_bg"-->
     <!-- <ImageView
      android:layout_width="match_parent"
      android:layout_height="match_parent"
@@ -13,7 +13,7 @@
      android:scaleType="fitXY"
      android:src="@drawable/theme_18_home_bg" />-->
 
-    <LinearLayout
+  <!--  <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -261,7 +261,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 </RelativeLayout>

@@ -8,10 +8,14 @@ import com.google.gson.annotations.SerializedName;
 public class ReferNEarnModel {
 
     @SerializedName("status")
-    private String status;
+    private Boolean status;
 
     @SerializedName("message")
     private String message;
+
+    @SerializedName("user_refer_code")
+    private String userReferCode;
+
 
     @SerializedName("is_referer_fn_enable")
     private Boolean isRefererFnEnable;
@@ -45,12 +49,21 @@ public class ReferNEarnModel {
         this.isRefererFnEnable = isRefererFnEnable;
     }
 
-    public String getStatus() {
+    public String getUserReferCode() {
+        return userReferCode;
+    }
+
+    public void setUserReferCode(String userReferCode) {
+        this.userReferCode = userReferCode;
+    }
+
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
+
 
 }

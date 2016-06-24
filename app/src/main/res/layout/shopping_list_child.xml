@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" 
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:padding="10dp">
     
     <TextView
@@ -9,9 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List Name - 01"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_normal"
         android:textColor="#414141"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:padding="2dp"
+        android:maxLines="2"
+        android:minLines="1"
+        android:layout_toLeftOf="@id/removebutton"/>
     <Button
         android:id="@+id/removebutton"
         android:layout_width="60dp"
@@ -19,7 +24,7 @@
         android:text="Remove"
         android:textSize="12sp"
         android:textColor="#ffffff"
-       android:background="@drawable/round_corners"
+        android:background="@drawable/round_corners"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
 

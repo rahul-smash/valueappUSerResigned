@@ -114,22 +114,24 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
             @Override
             public void success(ReferNEarnModel referNEarnModel, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
-                if (referNEarnModel.getStatus().equalsIgnoreCase("1")) {
+                if (referNEarnModel.getStatus()) {
 
-//                    ReferNEarnCodeModel model = referNEarnModel.getReferAndEarn();
-//                    if (model != null) {
-//                        if (referNEarnModel.getIsRefererFnEnable() != null ? referNEarnModel.getIsRefererFnEnable() : false) {
-//                            prefManager.setReferEarnFn(referNEarnModel.getIsRefererFnEnable());
-//                            prefManager.setReferEarnFnEnableForDevice(model.get);
-//                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, data.getReferAndEarn().getMessage());
-//                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, data.getUserReferCode());
-//                        } else {
-//                            prefManager.setReferEarnFn(false);
-//                            prefManager.setReferEarnFnEnableForDevice(false);
-//                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
-//                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, "");
-//                        }
-//                    }
+                    ReferNEarnCodeModel model = referNEarnModel.getReferAndEarn();
+                    if (model != null) {
+                        if (referNEarnModel.getIsRefererFnEnable() != null ? referNEarnModel.getIsRefererFnEnable() : false) {
+                            prefManager.setReferEarnFn(referNEarnModel.getIsRefererFnEnable());
+                            prefManager.setReferEarnFnEnableForDevice(model.getBlDeviceIdUnique());
+                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, model.getSharedMessage());
+                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, referNEarnModel.getUserReferCode());
+                            codeTxt.setText(referNEarnModel.getUserReferCode());
+                        } else {
+                            prefManager.setReferEarnFn(false);
+                            prefManager.setReferEarnFnEnableForDevice(false);
+                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
+                            prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, "");
+                            codeTxt.setText("Login to access your Code.");
+                        }
+                    }
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());

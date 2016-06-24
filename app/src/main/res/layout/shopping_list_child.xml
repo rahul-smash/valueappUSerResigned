@@ -16,7 +16,7 @@
         android:padding="2dp"
         android:maxLines="2"
         android:minLines="1"
-        android:layout_toLeftOf="@id/removebutton"/>
+        android:layout_toLeftOf="@+id/removebutton"/>
     <Button
         android:id="@+id/removebutton"
         android:layout_width="60dp"

@@ -258,7 +258,7 @@ public class SplashActivity extends Activity {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), true);
             }
         });
 
@@ -320,8 +320,9 @@ public class SplashActivity extends Activity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        checkAgainProcess();
+//                        checkAgainProcess();
                         dialogHandler.dismiss();
+                        finish();
                     }
                 });
     }

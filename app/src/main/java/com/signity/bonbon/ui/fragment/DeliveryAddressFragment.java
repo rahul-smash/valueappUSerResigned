@@ -166,7 +166,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 double diff = minprice - cartprice;
                 String shortPrice = String.format("%.2f", diff);
 
-                String message = "You are currently " + currencySymbol + " " + shortPrice +
+                String message = "You are currently " + currencySymbol + "" + shortPrice +
                         " short, please add few more items to your cart.";
                 showAlertDialogForMinAmount(getActivity(), "Alert", message
                 );
@@ -199,13 +199,13 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                             double diff = minprice - cartprice;
                             String shortPrice = String.format("%.2f", diff);
 
-                            String message = "You are currently " + currencySymbol + " " + shortPrice +
+                            String message = "You are currently " + currencySymbol + "" + shortPrice +
                                     " short, please add few more items to your cart.";
                             showAlertDialogForMinAmount(getActivity(), "Alert", message
                             );
                         }
                     } else if (minprice > cartprice) {
-                        String message = "There will be " + currencySymbol + " " + shipingCharges +
+                        String message = "There will be " + currencySymbol + "" + shipingCharges +
                                 " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
                                 "\n";
                         showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,

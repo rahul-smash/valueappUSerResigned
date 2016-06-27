@@ -121,6 +121,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String taxDetailsJson,taxLabelJson,taxFixedTaxJson;
     private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
     private String couponCode = "";    // variable used to store couponcode applied by the User.
+    private String tax="" ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -500,7 +501,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("payment_method", "cod");
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
-//        param.put("tax", tax);
+        param.put("tax", tax);
         param.put("tax_rate", taxRate);
         param.put("note", note);
         param.put("orders", order);
@@ -564,7 +565,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("payment_method", "cod");
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
-//        param.put("tax", tax);
+        param.put("tax", tax);
         param.put("tax_rate", taxRate);
         param.put("note", note);
         param.put("orders", order);
@@ -1178,6 +1179,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     }
 
                     TaxDataModel model = taxCalculationModel.getData();
+
+                    if(!model.getTax().isEmpty()){
+                        tax=model.getTax();
+                    }
+
                     int i = listViewCart.getFooterViewsCount();
 
                     if (i > 0) {

@@ -90,25 +90,41 @@
 
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btnVarient"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/sku"
-            android:drawablePadding="5dp"
-            android:gravity="center_vertical"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:paddingBottom="3dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="10dp"
-            android:paddingTop="3dp"
-            android:singleLine="true"
-            android:text="Select Quant"
-            android:textSize="12sp"
-            android:textStyle="normal"
-            android:visibility="gone" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="QTY"
+                android:textColor="#a2a0a2"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnVarient"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/sku"
+                android:background="@drawable/button_varient_shape"
+                android:drawSelectorOnTop="true"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/arrow_spinner_down_24"
+                android:gravity="center_vertical"
+                android:minHeight="10dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:singleLine="true"
+                android:spinnerMode="dialog"
+                android:text="Select Quant"
+                android:textSize="@dimen/text_size_small"
+                android:textStyle="normal" />
+        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout

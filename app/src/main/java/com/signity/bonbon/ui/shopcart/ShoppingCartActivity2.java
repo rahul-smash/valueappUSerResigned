@@ -1484,6 +1484,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.items_name.setTypeface(typeFaceRobotoBold);
                 holder.items_price = (TextView) convertView.findViewById(com.signity.bonbon.R.id.items_price);
                 holder.items_price.setTypeface(typeFaceRobotoRegular);
+                holder.btnVarient = (Button) convertView.findViewById(R.id.btnVarient);
                 holder.number_text = (TextView) convertView.findViewById(com.signity.bonbon.R.id.number_text);
                 holder.number_text.setTypeface(typeFaceRobotoRegular);
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
@@ -1504,7 +1505,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             String txtQuantCount = "";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 txtQuantCount = selectedVariant.getQuantity();
                 mrpPrice = selectedVariant.getMrpPrice();
@@ -1518,12 +1519,25 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 selectedVariant.setDiscount(variant.getDiscount());
                 selectedVariant.setUnitType(variant.getUnitType());
                 selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                txtQuant = selectedVariant.getWeight();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
                 txtQuantCount = selectedVariant.getQuantity();
                 mrpPrice = selectedVariant.getMrpPrice();
             }
 
+
+            if (prefManager.getProjectType().equals(AppConstant.APP_TYPE_GROCERY)) {
+                holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                holder.btnVarient.setText(txtQuant);
+                holder.btnVarient.setVisibility(View.VISIBLE);
+            } else if(prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)){
+                holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                holder.btnVarient.setText(txtQuant);
+                holder.btnVarient.setVisibility(View.VISIBLE);
+            }
+            else {
+                holder.btnVarient.setVisibility(View.GONE);
+            }
 
             String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
@@ -1550,6 +1564,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.rupee.setVisibility(View.GONE);
                 holder.rel_mrp_offer_price.setVisibility(View.VISIBLE);
             }
+
             holder.items_mrp_price.setText(mrpPrice);
             Double totalPrice = Double.parseDouble(txtQuantCount) * Double.parseDouble(productPrice);
             holder.totalValue.setText("" + String.format("%.2f", totalPrice));
@@ -1586,6 +1601,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         class ViewHolder {
             public RelativeLayout rel_mrp_offer_price;
+            Button btnVarient;
             public TextView items_mrp_price, totalValue;
             RelativeLayout parent;
             TextView items_name, items_price, number_text, rupee, rupee2, rupeeTxt;

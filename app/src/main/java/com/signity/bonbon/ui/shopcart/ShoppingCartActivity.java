@@ -205,7 +205,12 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
-            } else {
+            } else if(prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)){
+                holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                holder.btnVarient.setText(txtQuant);
+                holder.btnVarient.setVisibility(View.VISIBLE);
+            }
+            else {
                 holder.btnVarient.setVisibility(View.GONE);
             }
 

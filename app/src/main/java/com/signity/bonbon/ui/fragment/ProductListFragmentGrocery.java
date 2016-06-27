@@ -313,6 +313,9 @@ public final class ProductListFragmentGrocery extends Fragment {
                     addToShopList(product.getTitle());
                 }
             });
+
+
+
             if (product.getVariants().size() > 1) {
 
                 holder.btnVarient.setOnClickListener(new View.OnClickListener() {

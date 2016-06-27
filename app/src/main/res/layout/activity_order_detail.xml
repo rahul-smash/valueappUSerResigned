@@ -169,7 +169,6 @@
                     android:id="@+id/items_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@+id/rs1"
                     android:text="0.00"
                     android:textSize="@dimen/text_size_small" />
@@ -202,7 +201,6 @@
                     android:id="@+id/shipping_charges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@+id/rs2"
                     android:text="0.00"
                     android:textSize="@dimen/text_size_small" />
@@ -240,7 +238,6 @@
                     android:id="@+id/discountVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@+id/rs3"
                     android:text="0.00"
                     android:textSize="@dimen/text_size_small" />
@@ -329,7 +326,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/total"
             android:text="$"
             android:textColor="#ffffff"

@@ -1726,9 +1726,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
             if (currency.contains("\\")) {
-                holder.rupees.setText(unescapeJavaString(currency) + " " + pointsList.get(position).getAmount() + " OFF");
+                holder.rupees.setText(unescapeJavaString(currency) + "" + pointsList.get(position).getAmount() + " OFF");
             } else {
-                holder.rupees.setText("" + currency + " " + pointsList.get(position).getAmount() + " OFF");
+                holder.rupees.setText("" + currency + "" + pointsList.get(position).getAmount() + " OFF");
             }
 
             holder.points.setText("" + pointsList.get(position).getPoints() + " Points");

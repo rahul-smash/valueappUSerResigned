@@ -91,8 +91,8 @@ public class OfferViewFragment extends Fragment {
         date1.setText(data.getValidFrom());
         date2.setText(data.getValidTo());
         usageLimit.setText(data.getUsageLimit());
-        minimumAmout.setText(rs + " " + data.getMinimumOrderAmount());
-        discount.setText(data.getDiscount() + " " + percent);
+        minimumAmout.setText(rs + "" + data.getMinimumOrderAmount());
+        discount.setText(data.getDiscount() + "" + percent);
         coupon.setText(data.getCouponCode());
         notification.setText(data.getOfferNotification());
 

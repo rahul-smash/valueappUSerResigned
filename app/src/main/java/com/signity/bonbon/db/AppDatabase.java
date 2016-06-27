@@ -953,7 +953,8 @@ public class AppDatabase {
             double productPrice = quan * price;
             totalPrice = totalPrice + productPrice;
         }
-        return String.valueOf(totalPrice);
+//        return String.valueOf(totalPrice);
+        return String.format("%.2f", totalPrice);
     }
 
    /* public String getTotalTax() {

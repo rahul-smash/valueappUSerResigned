@@ -121,7 +121,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String taxDetailsJson,taxLabelJson,taxFixedTaxJson;
     private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
     private String couponCode = "";    // variable used to store couponcode applied by the User.
-    private String tax="" ;
+    private String tax="0" ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

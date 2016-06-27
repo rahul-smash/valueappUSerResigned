@@ -39,7 +39,7 @@ import java.util.Calendar;
  */
 public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClickListener {
 
-    RelativeLayout relCategory, relOffers, relFavorites, relMyOrders, relContact, relMyCart;
+   /* RelativeLayout relCategory, relOffers, relFavorites, relMyOrders, relContact, relMyCart;
     String userId;
     String storeId;
     Store store;
@@ -105,10 +105,10 @@ public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClick
         super.onResume();
         checkCartCount();
     }
-
+*/
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        /*switch (v.getId()) {
 
             case R.id.relCategory:
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
@@ -123,7 +123,7 @@ public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClick
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
             case R.id.relMyOrders:
-                /*if (userId.isEmpty()) {
+                *//*if (userId.isEmpty()) {
                     Intent intent = new Intent(getActivity(), LoginScreenActivity.class);
                     intent.putExtra(AppConstant.FROM, "menu");
                     startActivity(intent);
@@ -131,7 +131,7 @@ public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClick
                 } else {
                     startActivity(new Intent(getActivity(), OrderListActivity.class));
                     AnimUtil.slideFromRightAnim(getActivity());
-                }*/
+                }*//*
                 Intent intent = new Intent(getActivity(), DeliveryAreaActivity.class);
                 startActivity(intent);
                 AnimUtil.slideFromRightAnim(getActivity());
@@ -145,10 +145,10 @@ public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClick
                 openShopCartActivity();
                 break;
 
-        }
+        }*/
     }
 
-    public void openShopCartActivity() {
+   /* public void openShopCartActivity() {
         Intent intentShopCartActivity = new Intent(getActivity(), ShoppingCartActivity.class);
         startActivity(intentShopCartActivity);
         AnimUtil.slideFromRightAnim(getActivity());
@@ -166,6 +166,6 @@ public class HomeFragmentBigChefTheme25 extends Fragment implements View.OnClick
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent);  //set repeating every 24 hours
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
-    }
+    }*/
 
 }

@@ -41,7 +41,7 @@ import java.util.Calendar;
  */
 public class HomeFragmentAppleTheme28 extends Fragment implements View.OnClickListener {
 
-    RelativeLayout relCategory, relOffers, relFavorites, relMyOrders, relContact, relMyCart;
+   /* RelativeLayout relCategory, relOffers, relFavorites, relMyOrders, relContact, relMyCart;
     String userId;
     ImageView imageView;
     GridView mGridView;
@@ -120,11 +120,11 @@ public class HomeFragmentAppleTheme28 extends Fragment implements View.OnClickLi
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+       /* switch (v.getId()) {
 
             case R.id.relCategory:
                 startActivity(new Intent(getActivity(), CategoryActivity.class));
@@ -163,10 +163,10 @@ public class HomeFragmentAppleTheme28 extends Fragment implements View.OnClickLi
                 openShopCartActivity();
                 break;
 
-        }
+        }*/
     }
 
-    public void openShopCartActivity() {
+    /*public void openShopCartActivity() {
         Intent intentShopCartActivity = new Intent(getActivity(), ShoppingCartActivity.class);
         startActivity(intentShopCartActivity);
         AnimUtil.slideFromRightAnim(getActivity());
@@ -184,7 +184,7 @@ public class HomeFragmentAppleTheme28 extends Fragment implements View.OnClickLi
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent);  //set repeating every 24 hours
         // Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
         prefManager.setCartLocalNotification(true);
-    }
+    }*/
 
 
 }

@@ -4,7 +4,7 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/linearBanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -269,6 +269,6 @@
         android:text="Today's 24Kt Gold Price : Rs 0000 per 10 Grams"
         android:textColor="@color/color_text_menu"
         android:textSize="@dimen/text_size_sub_normal"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
 </RelativeLayout>

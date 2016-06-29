@@ -1125,8 +1125,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
-
     }
 
 

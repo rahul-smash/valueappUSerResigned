@@ -112,8 +112,8 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
 
             case com.signity.bonbon.R.id.add_list:
-                String name = String.valueOf(searchBar.getText());
-                if (name.equals("")) {
+                String name = searchBar.getText().toString().trim();
+                if (name.isEmpty()) {
                     Toast.makeText(getActivity().getApplicationContext(), "Add List to Add Item", Toast.LENGTH_SHORT).show();
                 } else {
                     if (name.equalsIgnoreCase(temp)) {

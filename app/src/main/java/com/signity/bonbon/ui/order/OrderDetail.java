@@ -36,7 +36,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     ListView order_history_list;
     TextView no_record,currencyTxt,rs1,rs2,rs3;
 
-    TextView textAddress, textCheckOut, textDiscount, textShipping, textTOtal, textlblNote, textNote,taxLblText,taxVal;
+    TextView textAddress, textCheckOut, textDiscount, textShipping, textTOtal, textlblNote, textNote,taxLblText,taxVal,shipping_charges_text,discountLblText;
 
     ImageView ic_down_up;
 
@@ -50,7 +50,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
     Animation slideUpAnim;
     Animation slideDownAnim;
-    RelativeLayout layout_total,taxlayout;
+    RelativeLayout layout_total,taxlayout,shipping_layout,discount_layout;
     String isTaxEnable,taxLabel,taxRate;
     LinearLayout linearFixedTaxLayout,linearTaxLayout,linearFixedTaxLayoutDisable;
 
@@ -67,6 +67,10 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         textlblNote = (TextView) findViewById(R.id.lblNote);
         textNote = (TextView) findViewById(R.id.note);
         currencyTxt=(TextView)findViewById(R.id.currency);
+        shipping_charges_text=(TextView)findViewById(R.id.shipping_charges_text);
+        discountLblText=(TextView)findViewById(R.id.discountLblText);
+        shipping_layout=(RelativeLayout)findViewById(R.id.shipping_layout);
+        discount_layout=(RelativeLayout)findViewById(R.id.discount_layout);
         linearFixedTaxLayout=(LinearLayout)findViewById(R.id.linearFixedTaxLayout);
         linearTaxLayout=(LinearLayout)findViewById(R.id.linearTaxLayout);
         linearFixedTaxLayoutDisable=(LinearLayout)findViewById(R.id.linearFixedTaxLayoutDisable);
@@ -160,10 +164,31 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     }
 
     private void updateUiBlock(OrderHistoryModel orderHistoryModel) {
+
+        double discount = Double.parseDouble(orderHistoryModel.getDiscount());
+        double shippingCharge = Double.parseDouble(orderHistoryModel.getShipping());
+
         textTOtal.setText(orderHistoryModel.getTotalOrderVal());
         textCheckOut.setText(orderHistoryModel.getCheckOut());
         textDiscount.setText(orderHistoryModel.getDiscount());
         textShipping.setText(orderHistoryModel.getShipping());
+
+        if (shippingCharge == 0.0) {
+            shipping_charges_text.setVisibility(View.GONE);
+            shipping_layout.setVisibility(View.GONE);
+        } else {
+            shipping_charges_text.setVisibility(View.VISIBLE);
+            shipping_layout.setVisibility(View.VISIBLE);
+        }
+
+        if (discount == 0.0) {
+            discountLblText.setVisibility(View.GONE);
+            discount_layout.setVisibility(View.GONE);
+        } else {
+            discountLblText.setVisibility(View.VISIBLE);
+            discount_layout.setVisibility(View.VISIBLE);
+        }
+
         textAddress.setText(orderHistoryModel.getAddress());
         if (orderHistoryModel.getNote() != null && !orderHistoryModel.getNote().isEmpty()) {
             textNote.setText(orderHistoryModel.getNote());

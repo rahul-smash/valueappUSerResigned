@@ -341,7 +341,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     proceedtoActivity();
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", ""+verifyOtpResponse.getMessage(), false);
                 }
             }
 
@@ -381,7 +381,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     showDialogForMessage(getActivity(), "Message", "OTP sent to your registered mobile");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", ""+mobResponse.getMessage(), false);
                 }
             }
 

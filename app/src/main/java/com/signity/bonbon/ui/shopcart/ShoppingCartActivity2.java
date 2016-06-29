@@ -528,7 +528,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
                 }
             }
 
@@ -587,7 +587,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
                 }
             }
 

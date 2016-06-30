@@ -1285,7 +1285,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
-                appDb.deleteCartElement();
                 onBackPressed();
             }
         });

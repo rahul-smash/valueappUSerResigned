@@ -1785,7 +1785,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     editCoupon.setText("");
                     editCoupon.setText(pointsList.get(position).getCouponCode());
 //                    onApplyCoupon();
-
+                    coupenCode=pointsList.get(position).getCouponCode();
                     applyPointsDiscount(pointsList.get(position).getAmount());
                     redeemDialog.dismiss();
                     redeemDialog = null;

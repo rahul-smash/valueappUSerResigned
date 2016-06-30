@@ -187,7 +187,6 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
                 convertView = l.inflate(com.signity.bonbon.R.layout.shopping_list_child, null);
                 holder = new ViewHolder();
                 holder.itemName = (TextView) convertView.findViewById(com.signity.bonbon.R.id.itemName);
-                holder.itemName.setTypeface(_ProximaNovaLight);
                 holder.remove_button = (Button) convertView.findViewById(com.signity.bonbon.R.id.removebutton);
                 convertView.setTag(holder);
 

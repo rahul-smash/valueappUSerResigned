@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:text="Shopping List"
             android:textColor="@color/color_white"
-            android:textSize="25sp"
+            android:textSize="@dimen/header_toolbar_text_size"
             android:visibility="visible" />
 
 

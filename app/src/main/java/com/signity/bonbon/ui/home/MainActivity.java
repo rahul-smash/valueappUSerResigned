@@ -498,7 +498,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         title.setVisibility(View.VISIBLE);
                         citySelect.setVisibility(View.GONE);
-                        title.setText("Loyality Points");
+                        title.setText("Loyalty Points");
                         fragment = new LoyalityFragment();
                         replace(fragment);
                     }

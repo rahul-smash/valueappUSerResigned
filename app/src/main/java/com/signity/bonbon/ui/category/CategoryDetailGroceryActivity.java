@@ -20,6 +20,8 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
@@ -222,10 +224,14 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
             }
 
             String subCategoryId = subCategoryList.get(position).getId();
+            String subCatGAC = getString(R.string.app_name) + GAConstant.SUB_CAT;
+            GATrackers.getInstance().trackEvent(subCatGAC, subCatGAC + GAConstant.VIEW,
+                    subCategoryList.get(position).getTitle() + " under " + title + " is view on " + getString(R.string.app_name));
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);
             arg.putString("subCategoryId", subCategoryId);
+            arg.putString("productViewTitle", productViewTitle);
             ProductListFragmentGrocery fragment = new ProductListFragmentGrocery();
             fragment.setArguments(arg);
             return fragment;

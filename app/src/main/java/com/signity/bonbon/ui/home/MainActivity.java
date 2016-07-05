@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button menu, citySelect;
     ImageView profilePic;
     String[] labels = {"Home", "My Profile", "Delivery Address", "My Orders",
-            "Book Now", "My Favorites", "About Us", "Share", "loyalty Points", "Log In"};
+            "Book Now", "My Favorites", "About Us", "Share", "Loyalty Points", "Log In"};
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
             R.drawable.order_icon,
             R.drawable.my_shopping_list_icon, R.drawable.my_fav_icon,

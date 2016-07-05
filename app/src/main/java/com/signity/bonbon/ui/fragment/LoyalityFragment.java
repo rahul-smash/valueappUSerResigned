@@ -108,7 +108,9 @@ public class LoyalityFragment extends Fragment {
                         if (loyalityModel.getLoyalityPoints().isEmpty()) {
                             points.setText("NIL");
                         } else {
-                            points.setText("" + loyalityModel.getLoyalityPoints());
+
+                            int point= (int)Double.parseDouble(loyalityModel.getLoyalityPoints());
+                            points.setText(""+point);
                         }
 
 

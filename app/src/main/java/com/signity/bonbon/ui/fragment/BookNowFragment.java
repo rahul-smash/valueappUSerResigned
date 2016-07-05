@@ -29,6 +29,9 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
+import com.signity.bonbon.model.EnquiryDataModel;
+import com.signity.bonbon.model.EnquiryModel;
+import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.view.DateTimePicker;
 
@@ -99,7 +102,42 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
         btnSubmit.setOnClickListener(this);
         date.setOnClickListener(this);
         setDateTimeField();
+
+        callNetworkForEnquiryMessage();
+
         return rootView;
+    }
+
+    private void callNetworkForEnquiryMessage() {
+
+        ProgressDialogUtil.showProgressDialog(getActivity());
+
+        NetworkAdaper.getInstance().getNetworkServices().getEnquiryFormMessage(new Callback<EnquiryModel>() {
+
+            @Override
+            public void success(EnquiryModel enquiryModel, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+
+                if(enquiryModel.getSuccess()){
+
+                    if(enquiryModel.getEnquiryDataModel()!=null){
+                        EnquiryDataModel model=enquiryModel.getEnquiryDataModel();
+                        DialogHandler dialogHandler = new DialogHandler(getActivity());
+                        dialogHandler.setdialogForFinish("Message", ""+model.getMessage(), false);
+                    }
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+            }
+        });
+
+
     }
 
 

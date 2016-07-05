@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:text="Book Now"
             android:textColor="@color/color_white"
-            android:textSize="24sp"
+            android:textSize="@dimen/text_size_large"
             android:visibility="visible" />
     </RelativeLayout>
 

@@ -9,6 +9,7 @@
     <color name="bg_popupwindow">#ffd6d7d7</color>
     <color name="backgroundGray">#e2e2e2</color>
     <color name="colorGray">#e2e2e2</color>
+    <color name="colordarkGray">#808080</color>
     <color name="colorWhite">#ffffff</color>
 
     <!-- color store 15 townking code -->

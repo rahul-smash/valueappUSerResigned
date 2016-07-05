@@ -2,6 +2,7 @@ package com.signity.bonbon.network;
 
 import com.signity.bonbon.model.AboutUsModel1;
 import com.signity.bonbon.model.EmailResponse;
+import com.signity.bonbon.model.EnquiryModel;
 import com.signity.bonbon.model.GeoFenceModel;
 import com.signity.bonbon.model.GerOrderHistoryModel;
 import com.signity.bonbon.model.GetBigComCategory;
@@ -159,5 +160,6 @@ public interface ApiService {
     @POST("/getReferDetails")
     void getUserReferCode(@FieldMap Map<String, String> parameters, Callback<ReferNEarnModel> response);
 
-
+    @GET("/getEnquiryFormMessage")
+    void getEnquiryFormMessage(Callback<EnquiryModel> response);
 }

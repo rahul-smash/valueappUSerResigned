@@ -82,7 +82,7 @@ public class RvCategoryListAdapter extends RecyclerView.Adapter<RvCategoryListAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Category category = mData.get(position);
         holder.text.setText(category.getTitle());
-        holder.image.setLayoutParams(layoutParamsImageView);
+//        holder.image.setLayoutParams(layoutParamsImageView);
 //            holder.image.setImageResource(images[0]);
         if (category.getImageMedium() != null && !category.getImageMedium().isEmpty()) {
             Picasso.with(context).load(category.getImage()).

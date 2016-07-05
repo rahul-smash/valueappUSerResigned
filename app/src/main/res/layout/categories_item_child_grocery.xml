@@ -17,11 +17,13 @@
 
     <ImageButton
         android:id="@+id/heart"
-        android:layout_width="@dimen/category_item_heart_width"
-        android:layout_height="@dimen/category_item_heart_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/fav_button_selector_grocery" />
+        android:src="@drawable/fav_button_selector_grocery"
+        android:background="@android:color/transparent"
+        android:padding="8dp"/>
 
     <LinearLayout
         android:id="@+id/block2"

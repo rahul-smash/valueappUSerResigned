@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -725,7 +727,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void checkForAppVersion(ForceDownloadModel forceDownloadModel) {
 
+
+        PackageInfo pInfo = null;
+
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String appVersionName = pInfo.versionName;
+
         if (forceDownloadModel != null) {
+            String version = forceDownloadModel.getAndroidAppVerison() != null ?
+                    forceDownloadModel.getAndroidAppVerison() : "";
+            if (!version.isEmpty()) {
+
+                try {
+                    double appVersion=Double.parseDouble(version);
+                    double appVersionSystem=Double.parseDouble(appVersionName);
+                    if(appVersion>appVersionSystem){
+                        openDialogForVersion(forceDownloadModel);
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+       /* if (forceDownloadModel != null) {
             PrefManager prefManager = new PrefManager(MainActivity.this);
             String appVersion = prefManager.getAppVersion();
             if (appVersion.isEmpty()) {
@@ -745,7 +775,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
-        }
+        }*/
     }
 
     private void openDialogForVersion(ForceDownloadModel forceDownloadModel) {

@@ -43,7 +43,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
     public static final String TAG = ProductViewGroceryActivity.class.getSimpleName();
     private GCMClientManager pushClientManager;
     Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text;
-    TextView description, item_name, price, number_text, title, price_text,rupee;
+    TextView description, item_name, price, number_text, title, price_text,rupee, items_mrp_price;
     TextView textTitle;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private Product product;
@@ -56,6 +56,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
     public int cartSize;
 
     String productViewTitle="";
+    View divider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         btnShopcart=(Button)findViewById(R.id.btnShopcart);
         shoppinglist_text=(Button)findViewById(R.id.shoppinglist_text);
         rupee=(TextView)findViewById(R.id.rupee);
+        items_mrp_price = (TextView) findViewById(R.id.items_mrp_price);
+        divider = (View) findViewById(R.id.divider);
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
@@ -123,9 +126,11 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
         SelectedVariant selectedVariant = product.getSelectedVariant();
         String txtQuant, productPrice, txtQuantCount;
+        String mrpPrice = "0.0";
         if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
             txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
             productPrice = selectedVariant.getPrice();
+            mrpPrice = selectedVariant.getMrpPrice();
             txtQuantCount = appDb.getCartQuantity(selectedVariant.getVariantId());
         } else {
             Variant variant = product.getVariants().get(0);
@@ -139,10 +144,20 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
             txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
             productPrice = selectedVariant.getPrice();
+            mrpPrice = selectedVariant.getMrpPrice();
             txtQuantCount = selectedVariant.getQuantity();
         }
         item_name.setText(product.getTitle());
         price.setText(productPrice);
+        items_mrp_price.setText(mrpPrice);
+        if (productPrice.equalsIgnoreCase(mrpPrice)) {
+            divider.setVisibility(View.GONE);
+            items_mrp_price.setVisibility(View.GONE);
+        } else {
+            divider.setVisibility(View.VISIBLE);
+            items_mrp_price.setVisibility(View.VISIBLE);
+        }
+
         if (product.getDescription() != null && !product.getDescription().isEmpty()) {
             description.setText(product.getDescription());
         }

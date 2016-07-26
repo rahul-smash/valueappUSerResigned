@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,21 +42,19 @@ import java.util.List;
 public class ProductViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ProductViewActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
-    Button backButton, btnVarient, btnShopList, btnShopcart, shoppinglist_text;
-    TextView description, item_name, price, number_text, title, price_text, rupee;
-    TextView textTitle;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
+    public int cartSize;
+    Button backButton, btnVarient, btnShopList, btnShopcart, shoppinglist_text;
+    TextView description, item_name, price, number_text, title, price_text, rupee, items_mrp_price;
+    TextView textTitle;
+    String productViewTitle = "";
+    View divider;
+    private GCMClientManager pushClientManager;
     private Product product;
     private ImageButton add_button, remove_button;
     private AppDatabase appDb;
     private GsonHelper gsonHelper;
-
     private PrefManager prefManager;
-    public int cartSize;
-
-    String productViewTitle = "";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +77,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         btnShopcart = (Button) findViewById(R.id.btnShopcart);
         shoppinglist_text = (Button) findViewById(R.id.shoppinglist_text);
         rupee = (TextView) findViewById(R.id.rupee);
+        items_mrp_price = (TextView) findViewById(R.id.items_mrp_price);
+        divider = (View) findViewById(R.id.divider);
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
@@ -128,9 +129,11 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private void setupProductUi() {
         SelectedVariant selectedVariant = product.getSelectedVariant();
         String txtQuant, productPrice, txtQuantCount;
+        String mrpPrice = "0.0";
         if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
             txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
             productPrice = selectedVariant.getPrice();
+            mrpPrice = selectedVariant.getMrpPrice();
             txtQuantCount = appDb.getCartQuantity(selectedVariant.getVariantId());
         } else {
             Variant variant = product.getVariants().get(0);
@@ -144,12 +147,22 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
             txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
             productPrice = selectedVariant.getPrice();
+            mrpPrice = selectedVariant.getMrpPrice();
             txtQuantCount = selectedVariant.getQuantity();
         }
         item_name.setText(product.getTitle());
         price.setText(productPrice);
+        items_mrp_price.setText(mrpPrice);
+        if (productPrice.equalsIgnoreCase(mrpPrice)) {
+            divider.setVisibility(View.GONE);
+            items_mrp_price.setVisibility(View.GONE);
+        } else {
+            divider.setVisibility(View.VISIBLE);
+            items_mrp_price.setVisibility(View.VISIBLE);
+        }
+
         if (product.getDescription() != null && !product.getDescription().isEmpty()) {
-            description.setText(product.getDescription());
+            description.setText(Html.fromHtml(product.getDescription()));
         }
         number_text.setText(txtQuantCount);
         String variant = selectedVariant.getWeight().trim() + selectedVariant.getUnitType().trim();
@@ -284,45 +297,6 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-
-    class MyAdapter extends ArrayAdapter<Variant> {
-        LayoutInflater l;
-        List<Variant> listVariant;
-
-        public MyAdapter(Activity ctx, int txtViewResourceId, List<Variant> listVariant) {
-            super(ctx, txtViewResourceId, listVariant);
-            l = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            this.listVariant = listVariant;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Variant variant = listVariant.get(position);
-            convertView = l.inflate(com.signity.bonbon.R.layout.custom_spinner, parent, false);
-            String weight = variant.getWeight();
-            String prices = variant.getPrice();
-            String unit = variant.getUnitType();
-            TextView weights = (TextView) convertView.findViewById(com.signity.bonbon.R.id.weights);
-            weights.setText(weight + " " + unit);
-
-            TextView rupee_tag = (TextView) convertView.findViewById(R.id.rupee_tag);
-            String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
-
-
-            if (currency.contains("\\")) {
-                rupee_tag.setText(unescapeJavaString(currency));
-            } else {
-                rupee_tag.setText(currency);
-            }
-
-
-            TextView price = (TextView) convertView.findViewById(com.signity.bonbon.R.id.price);
-            price.setText(prices);
-
-            return convertView;
-        }
-    }
-
     @Override
     public void onBackPressed() {
 //        updateCartOnBack();
@@ -405,6 +379,44 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             sb.append(ch);
         }
         return sb.toString();
+    }
+
+    class MyAdapter extends ArrayAdapter<Variant> {
+        LayoutInflater l;
+        List<Variant> listVariant;
+
+        public MyAdapter(Activity ctx, int txtViewResourceId, List<Variant> listVariant) {
+            super(ctx, txtViewResourceId, listVariant);
+            l = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.listVariant = listVariant;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Variant variant = listVariant.get(position);
+            convertView = l.inflate(com.signity.bonbon.R.layout.custom_spinner, parent, false);
+            String weight = variant.getWeight();
+            String prices = variant.getPrice();
+            String unit = variant.getUnitType();
+            TextView weights = (TextView) convertView.findViewById(com.signity.bonbon.R.id.weights);
+            weights.setText(weight + " " + unit);
+
+            TextView rupee_tag = (TextView) convertView.findViewById(R.id.rupee_tag);
+            String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+
+            if (currency.contains("\\")) {
+                rupee_tag.setText(unescapeJavaString(currency));
+            } else {
+                rupee_tag.setText(currency);
+            }
+
+
+            TextView price = (TextView) convertView.findViewById(com.signity.bonbon.R.id.price);
+            price.setText(prices);
+
+            return convertView;
+        }
     }
 }
 

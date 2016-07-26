@@ -168,11 +168,36 @@
                         android:textSize="@dimen/text_size_normal" />
 
                     <TextView
-                        android:id="@+id/price"
+                        android:id="@+id/items_mrp_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/rupee"
                         android:gravity="left|center_vertical"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="155"
+                        android:textColor="@android:color/black"
+                        android:visibility="visible"
+                        android:textSize="@dimen/text_size_normal" />
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:visibility="visible"
+                        android:layout_alignLeft="@+id/items_mrp_price"
+                        android:layout_alignRight="@+id/items_mrp_price"
+                        android:background="@color/divider" />
+
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/items_mrp_price"
+                        android:gravity="left|center_vertical"
+                        android:layout_marginLeft="1dp"
                         android:paddingTop="3dp"
                         android:paddingBottom="3dp"
                         android:text="15.00 "

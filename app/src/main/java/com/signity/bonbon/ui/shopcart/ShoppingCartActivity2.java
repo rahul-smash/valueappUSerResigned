@@ -1673,7 +1673,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             if (minimumCharges > totalPrice) {
                 holder.applyBtn.setVisibility(View.GONE);
                 holder.needTxt.setVisibility(View.VISIBLE);
-                holder.needTxt.setText("You have " + (minimumCharges - totalPrice) + " amount short for this offer.");
+
+                holder.needTxt.setText("You have " + String.format("%.2f", (minimumCharges - totalPrice)) + " amount short for this offer.");
             } else {
                 holder.applyBtn.setVisibility(View.VISIBLE);
                 holder.needTxt.setVisibility(View.GONE);
@@ -1764,7 +1765,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             if (points >= loyalityPoints) {
                 holder.redeemNow.setVisibility(View.GONE);
                 holder.needTxt.setVisibility(View.VISIBLE);
-                holder.needTxt.setText("You need " + (points - loyalityPoints) + " more points.");
+                holder.needTxt.setText("You need " + String.format("%.2f", (points - loyalityPoints)) + " more points.");
 
             } else {
                 holder.redeemNow.setVisibility(View.VISIBLE);

@@ -206,7 +206,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                     prefManager.storeSharedValue(AppConstant.PHONE, mobLocalData.getPhone());
                     prefManager.storeSharedValue(AppConstant.NAME, mobLocalData.getFullName());
                     prefManager.storeSharedValue(AppConstant.EMAIL, mobLocalData.getEmail());
-                    return true;
+                    return false;
                 }
             }
         }

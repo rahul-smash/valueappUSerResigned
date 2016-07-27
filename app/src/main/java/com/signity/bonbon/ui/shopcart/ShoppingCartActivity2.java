@@ -348,10 +348,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else {
                     rs5.setText(currency);
                 }
-                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
-                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
-
                 double tax= Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + String.format("%.2f", tax));
+
                 if(tax!=0.0){
                     linearFixedTaxLayout.addView(child);
                 }
@@ -382,10 +382,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else {
                     rs5.setText(currency);
                 }
-                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
-                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
-
                 double tax= Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + String.format("%.2f", tax));
                 if(tax!=0.0){
                     linearFixedTaxLayoutDisable.addView(child);
                 }
@@ -416,10 +415,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else {
                     rs5.setText(currency);
                 }
-                tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
-                tax_value.setText("" + detailsList.get(i).getTax());
-
                 double tax= Double.parseDouble(detailsList.get(i).getTax());
+
+                tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
+                tax_value.setText("" + String.format("%.2f", tax));
+
                 if(tax!=0.0){
                     layout.addView(child);
                 }

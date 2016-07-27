@@ -165,13 +165,15 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
     private void updateUiBlock(OrderHistoryModel orderHistoryModel) {
 
+        double totalPrice = Double.parseDouble(orderHistoryModel.getTotalOrderVal());
+        double checkOut = Double.parseDouble(orderHistoryModel.getCheckOut());
         double discount = Double.parseDouble(orderHistoryModel.getDiscount());
         double shippingCharge = Double.parseDouble(orderHistoryModel.getShipping());
 
-        textTOtal.setText(orderHistoryModel.getTotalOrderVal());
-        textCheckOut.setText(orderHistoryModel.getCheckOut());
-        textDiscount.setText(orderHistoryModel.getDiscount());
-        textShipping.setText(orderHistoryModel.getShipping());
+        textTOtal.setText("" + String.format("%.2f", totalPrice));
+        textCheckOut.setText("" + String.format("%.2f", checkOut));
+        textDiscount.setText("" + String.format("%.2f", discount));
+        textShipping.setText("" + String.format("%.2f", shippingCharge));
 
         if (shippingCharge == 0.0) {
             shipping_charges_text.setVisibility(View.GONE);
@@ -214,10 +216,9 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                 } else {
                     rs5.setText(currency);
                 }
-                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
-                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
-
                 double tax= Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + String.format("%.2f", tax));
                 if(tax!=0.0){
                     linearFixedTaxLayout.addView(child);
                 }
@@ -242,11 +243,9 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                 } else {
                     rs5.setText(currency);
                 }
-                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
-                tax_value.setText("" + fixedTaxDetail.get(i).getFixedTaxAmount());
-
-
                 double tax= Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
+                tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
+                tax_value.setText("" + String.format("%.2f", tax));
                 if(tax!=0.0){
                     linearFixedTaxLayoutDisable.addView(child);
                 }
@@ -274,10 +273,10 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                 } else {
                     rs5.setText(currency);
                 }
-                tax_label.setText("" + detailsList.get(i).getLabel()+"("+detailsList.get(i).getRate()+"%)");
-                tax_value.setText("" + detailsList.get(i).getTax());
-
                 double tax= Double.parseDouble(detailsList.get(i).getTax());
+
+                tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
+                tax_value.setText("" + String.format("%.2f", tax));
                 if(tax!=0.0){
                     linearTaxLayout.addView(child);
                 }

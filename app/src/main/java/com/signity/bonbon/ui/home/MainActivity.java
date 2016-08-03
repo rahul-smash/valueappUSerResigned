@@ -199,9 +199,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(prefManager.getReferEarnPopupCheck()){
             if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
-                prefManager.setReferEarnPopupCheck(false);
-                String msg="Kindly Login with Referral Code for "+store.getStoreName()+" and Earn Free Coupons.";
-                showReferAndEarnDialog(MainActivity.this, "Enter Referral Code", msg);
+                if(userId.isEmpty()){
+                    prefManager.setReferEarnPopupCheck(false);
+                    String msg="Kindly Login with Referral Code for "+store.getStoreName()+" and Earn Free Coupons.";
+                    showReferAndEarnDialog(MainActivity.this, "Enter Referral Code", msg);
+                }
             }
         }
 
@@ -281,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && !(geofenceObjectModel.getLat().equalsIgnoreCase("0")) && !(geofenceObjectModel.getLng().equalsIgnoreCase("0"))) {
             status = true;
         }
-        return false;
+        return status;
     }
 
     @Override

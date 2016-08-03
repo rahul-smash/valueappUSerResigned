@@ -36,6 +36,8 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
@@ -82,6 +84,8 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
+        prefManager = new PrefManager(SearchForGroceryActivity.this);
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
         prefManager = new PrefManager(SearchForGroceryActivity.this);
@@ -95,6 +99,9 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
+                String searchGAC = getString(R.string.app_name) + GAConstant.GAC_SEARCH;
+                GATrackers.getInstance().trackEvent(searchGAC, searchGAC + GAConstant.CLICKED, "There is a search for item " +
+                        mSearchEdit.getText().toString() + " On" + getString(R.string.app_name));
                 getSearchList(mSearchEdit.getText().toString());
 
                 return false;
@@ -319,7 +326,6 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 txtQuantCount = selectedVariant.getQuantity();
             }
 
-            holder.heart.setVisibility(View.GONE);
 
             String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
@@ -330,6 +336,13 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             } else {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
+            }
+
+
+            if (product.isFavorites()) {
+                holder.heart.setSelected(true);
+            } else {
+                holder.heart.setSelected(false);
             }
 
             if (product.getVariants().size() <= 1) {
@@ -351,6 +364,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
+
             if (productPrice.equalsIgnoreCase(mrpPrice)) {
                 holder.rupee.setVisibility(View.VISIBLE);
                 holder.rel_mrp_offer_price.setVisibility(View.GONE);

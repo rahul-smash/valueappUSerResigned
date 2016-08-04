@@ -65,6 +65,7 @@ public final class ProductListFragmentGrocery extends Fragment {
     ListView listView;
     TextView no_record;
     ListDatabase db;
+    List<String> shoppingList = new ArrayList<String>();
 
     public static Activity context;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
@@ -106,6 +107,7 @@ public final class ProductListFragmentGrocery extends Fragment {
         View convertView = inflater.inflate(R.layout.categories_item, null);
         listView = (ListView) convertView.findViewById(R.id.list);
         no_record = (TextView) convertView.findViewById(R.id.no_record);
+        shoppingList = db.getAllContacts();
         subCategory = appDb.getSubCategoryById(subCategoryId);
         adapter = new ProductListAdapter(getActivity(), listProduct);
 
@@ -196,6 +198,7 @@ public final class ProductListFragmentGrocery extends Fragment {
 
             holder.imgBtnAddToShop.setVisibility(View.VISIBLE);
 
+
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
@@ -232,6 +235,12 @@ public final class ProductListFragmentGrocery extends Fragment {
 
             String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
+
+            if(shoppingList.contains(product.getTitle())){
+                holder.imgBtnAddToShop.setImageResource(R.drawable.list_on);
+            }else {
+                holder.imgBtnAddToShop.setImageResource(R.drawable.list_off);
+            }
 
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
@@ -310,7 +319,13 @@ public final class ProductListFragmentGrocery extends Fragment {
             holder.imgBtnAddToShop.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addToShopList(product.getTitle());
+
+                    if(shoppingList.contains(product.getTitle())){
+                        alreadyAddedToShopList();
+                    }else {
+                        holder.imgBtnAddToShop.setImageResource(R.drawable.list_on);
+                        addToShopList(product.getTitle());
+                    }
                 }
             });
 
@@ -449,19 +464,19 @@ public final class ProductListFragmentGrocery extends Fragment {
     private void addToShopList(final String title) {
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
 
-        dialogHandler.setDialog("Confirmation", "Are you sure to add this product to shopping list");
-        dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setDialog("Confirmation", "Do you want to add this item to your list?");
+        dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShoppingListObject att = new ShoppingListObject();
-                att.itemName = title;
-                db.addContact(att);
+                db.addContact(title);
+                shoppingList = db.getAllContacts();
+                adapter.notifyDataSetChanged();
                 Toast.makeText(getActivity(), "Added to Shopping List", Toast.LENGTH_SHORT).show();
                 dialogHandler.dismiss();
 
             }
         });
-        dialogHandler.setNegativeButton("No", true)
+        dialogHandler.setNegativeButton("Cancel", true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -470,6 +485,12 @@ public final class ProductListFragmentGrocery extends Fragment {
                 });
 
     }
+
+    private void alreadyAddedToShopList(){
+        DialogHandler dialogHandler = new DialogHandler(getActivity());
+        dialogHandler.setdialogForFinish("Message", "Already added to the list.", false);
+    }
+
     // All networking call here
 
     public void getSubCategoryList(String id) {

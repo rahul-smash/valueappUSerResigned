@@ -125,7 +125,7 @@
                 android:background="#ffffff"
                 android:elevation="3dp"
                 android:padding="12dp"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:visibility="visible" />
 
             <TextView

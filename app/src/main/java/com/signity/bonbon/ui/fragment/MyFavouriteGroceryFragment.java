@@ -22,10 +22,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
@@ -33,10 +35,13 @@ import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
+import com.signity.bonbon.model.ShoppingListObject;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
+import com.signity.bonbon.ui.shopping.ListDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,18 +62,21 @@ public class MyFavouriteGroceryFragment extends Fragment {
     public AppDatabase appDb;
     View mView;
     PrefManager prefManager;
+    ListDatabase db;
+    List<String> shoppingList = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.my_favourite, container, false);
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         prefManager=new PrefManager(getActivity());
-
+        db = new ListDatabase(getActivity());
         items_list = (ListView) mView.findViewById(R.id.items_list);
         showNoInfo = (TextView) mView.findViewById(R.id.show_now_text);
         cartTotalPrice = (TextView) mView.findViewById(R.id.price);
         btnCartCount = (Button) mView.findViewById(R.id.shoppingcart_text);
         linearShopCart = (LinearLayout) mView.findViewById(R.id.linearShopCart);
+        shoppingList = db.getAllContacts();
         adapter = new FavouriteItemAdapter(context, listProduct);
 
         rupeeTxt=(TextView)mView.findViewById(R.id.rupeeTxt);
@@ -178,7 +186,10 @@ public class MyFavouriteGroceryFragment extends Fragment {
             if (convertView == null) {
                 convertView = layoutInflater.inflate(R.layout.categories_item_child_grocery, null);
                 holder = new ViewHolder();
+                holder.rel_mrp_offer_price = (RelativeLayout) convertView.findViewById(R.id.rel_mrp_offer_price);
+                holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
                 holder.items = (ImageView) convertView.findViewById(R.id.items_image);
+                holder.imgBtnAddToShop = (ImageButton) convertView.findViewById(R.id.imgBtnAddToShop);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
                 holder.items_name.setTypeface(typeFaceRobotoBold);
@@ -196,6 +207,10 @@ public class MyFavouriteGroceryFragment extends Fragment {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
+
+            holder.imgBtnAddToShop.setVisibility(View.VISIBLE);
+
+
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
@@ -206,12 +221,14 @@ public class MyFavouriteGroceryFragment extends Fragment {
             }
 
             String productPrice = "0.0";
-            String txtQuant = "0";
-            String txtQuantCount = "0";
+            String mrpPrice = "0.0";
+            String txtQuant = "";
+            String txtQuantCount = "";
 
             if (selectedVariant != null && !selectedVariant.getVariantId().equals("0")) {
-                txtQuant = selectedVariant.getWeight() + " " + selectedVariant.getUnitType();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
+                mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
             } else {
                 Variant variant = product.getVariants().get(0);
@@ -223,14 +240,21 @@ public class MyFavouriteGroceryFragment extends Fragment {
                 selectedVariant.setDiscount(variant.getDiscount());
                 selectedVariant.setUnitType(variant.getUnitType());
                 selectedVariant.setQuantity(appDb.getCartQuantity(variant.getId()));
-                txtQuant = selectedVariant.getWeight() + " " + selectedVariant.getUnitType();
+                txtQuant = String.valueOf(selectedVariant.getWeight() + " " + selectedVariant.getUnitType()).trim();
                 productPrice = selectedVariant.getPrice();
+                mrpPrice = selectedVariant.getMrpPrice();
                 txtQuantCount = selectedVariant.getQuantity();
             }
 
 
             String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
+
+            if(shoppingList.contains(product.getTitle())){
+                holder.imgBtnAddToShop.setImageResource(R.drawable.list_on);
+            }else {
+                holder.imgBtnAddToShop.setImageResource(R.drawable.list_off);
+            }
 
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
@@ -241,6 +265,7 @@ public class MyFavouriteGroceryFragment extends Fragment {
                 holder.rupee2.setText(currency);
             }
 
+
             if (product.isFavorites()) {
                 holder.heart.setSelected(true);
             } else {
@@ -249,14 +274,31 @@ public class MyFavouriteGroceryFragment extends Fragment {
 
             if (product.getVariants().size() <= 1) {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                holder.btnVarient.setSelected(false);
             } else {
+                holder.btnVarient.setSelected(true);
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.arrow_spinner_down_24, 0);
             }
 
+            String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
 
-            holder.btnVarient.setText(txtQuant);
+            if (!variant.isEmpty()) {
+                holder.btnVarient.setVisibility(View.VISIBLE);
+                holder.btnVarient.setText(txtQuant);
+            } else {
+                holder.btnVarient.setVisibility(View.GONE);
+            }
+
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
+            if (productPrice.equalsIgnoreCase(mrpPrice)) {
+                holder.rupee.setVisibility(View.VISIBLE);
+                holder.rel_mrp_offer_price.setVisibility(View.GONE);
+            } else {
+                holder.rupee.setVisibility(View.GONE);
+                holder.rel_mrp_offer_price.setVisibility(View.VISIBLE);
+            }
+            holder.items_mrp_price.setText(mrpPrice);
             holder.number_text.setText(txtQuantCount);
 
 
@@ -286,6 +328,20 @@ public class MyFavouriteGroceryFragment extends Fragment {
                         appDb.updateProduct(product);
                         appDb.updateToCart(product);
                         onCartChangeListener();
+                    }
+                }
+            });
+
+
+            holder.imgBtnAddToShop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(shoppingList.contains(product.getTitle())){
+                        alreadyAddedToShopList();
+                    }else {
+                        holder.imgBtnAddToShop.setImageResource(R.drawable.list_on);
+                        addToShopList(product.getTitle());
                     }
                 }
             });
@@ -407,11 +463,43 @@ public class MyFavouriteGroceryFragment extends Fragment {
 
         class ViewHolder {
             ImageView items;
+            ImageButton imgBtnAddToShop;
             RelativeLayout parent;
             Button btnVarient;
-            TextView items_name, items_price, number_text, rupee,rupee2;
+            RelativeLayout rel_mrp_offer_price;
+            TextView items_name, items_mrp_price, items_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
         }
+    }
+    private void addToShopList(final String title) {
+        final DialogHandler dialogHandler = new DialogHandler(getActivity());
+
+        dialogHandler.setDialog("Confirmation", "Are you sure to add this product to shopping list");
+        dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShoppingListObject att = new ShoppingListObject();
+                db.addContact(title);
+                shoppingList = db.getAllContacts();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getActivity(), "Added to Shopping List", Toast.LENGTH_SHORT).show();
+                dialogHandler.dismiss();
+
+            }
+        });
+        dialogHandler.setNegativeButton("Cancel", true)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogHandler.dismiss();
+                    }
+                });
+
+    }
+
+    private void alreadyAddedToShopList(){
+        DialogHandler dialogHandler = new DialogHandler(getActivity());
+        dialogHandler.setdialogForFinish("Message", "Already added to the list.", false);
     }
     public String unescapeJavaString(String st) {
 

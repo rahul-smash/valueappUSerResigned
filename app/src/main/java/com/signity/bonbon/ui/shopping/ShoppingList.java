@@ -37,7 +37,7 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
     ListView shoppingList;
     EditText searchBar;
     Button add_list, backButton, btnSearch;
-    List<ShoppingListObject> viewList = new ArrayList<ShoppingListObject>();
+    List<String> viewList = new ArrayList<String>();
     Adapter adapter;
     String temp = null;
     ListDatabase db;
@@ -119,9 +119,7 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
                     if (name.equalsIgnoreCase(temp)) {
                         Toast.makeText(getActivity().getApplicationContext(), "Item Already Added", Toast.LENGTH_SHORT).show();
                     } else {
-                        ShoppingListObject att = new ShoppingListObject();
-                        att.itemName = name;
-                        db.addContact(att);
+                        db.addContact(name);
                         viewList = db.getAllContacts();
                         adapter.notifyDataSetChanged();
                         temp = name;
@@ -194,14 +192,12 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            holder.itemName.setText(viewList.get(position).itemName);
+            holder.itemName.setText(viewList.get(position));
 
             holder.remove_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ShoppingListObject att = new ShoppingListObject();
-                    att.itemName = viewList.get(position).itemName;
-                    db.deleteContact(att);
+                    db.deleteContact(viewList.get(position));
                     viewList.remove(position);
                     notifyDataSetChanged();
                 }
@@ -211,7 +207,7 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
                     Intent intentSearch = new Intent(getActivity(), AppController.getInstance().getViewController().getSearchActivity());
-                    intentSearch.putExtra("search_str", viewList.get(position).itemName);
+                    intentSearch.putExtra("search_str", viewList.get(position));
                     startActivity(intentSearch);
 
                 }

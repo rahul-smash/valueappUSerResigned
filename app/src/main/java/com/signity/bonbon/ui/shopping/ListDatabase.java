@@ -57,12 +57,12 @@ public class ListDatabase extends SQLiteOpenHelper {
      */
 
     // Adding new contact
-    public void addContact(ShoppingListObject att) {
+    public void addContact(String itemName) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 //        values.put(KEY_ID, att.id);
-        values.put(Items_Name, att.itemName); // Contact Phone
+        values.put(Items_Name, itemName); // Contact Phone
         // Inserting Row
         db.insert(TABLE_CONTACTS, null, values);
         db.close(); // Closing database connection
@@ -84,8 +84,8 @@ public class ListDatabase extends SQLiteOpenHelper {
 //    }
 
     // Getting All Contacts
-    public List<ShoppingListObject> getAllContacts() {
-        List<ShoppingListObject> list = new ArrayList<ShoppingListObject>();
+    public List<String> getAllContacts() {
+        List<String> list = new ArrayList<String>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_CONTACTS;
 
@@ -93,14 +93,11 @@ public class ListDatabase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        ShoppingListObject att = null;
         if (cursor.moveToFirst()) {
             do {
-                att = new ShoppingListObject();
 //                att.id=cursor.getInt(0);
-                att.itemName = (cursor.getString(0));
                 // Adding contact to list
-                list.add(att);
+                list.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
         db.close();
@@ -124,10 +121,10 @@ public class ListDatabase extends SQLiteOpenHelper {
 //    }
 //
 //    // Deleting single contact
-    public void deleteContact(ShoppingListObject att) {
+    public void deleteContact(String itemName) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CONTACTS, Items_Name + " = ?",
-                new String[]{String.valueOf(att.itemName)});
+                new String[]{String.valueOf(itemName)});
 
         db.close();
     }

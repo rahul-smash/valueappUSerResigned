@@ -43,10 +43,12 @@ import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
+import com.signity.bonbon.model.ShoppingListObject;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
+import com.signity.bonbon.ui.shopping.ListDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -80,6 +82,10 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
     String searchStr;
 
     public int cartSize;
+
+    ListDatabase db;
+    List<String> shoppingList = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,13 +93,15 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
         GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
         prefManager = new PrefManager(SearchForGroceryActivity.this);
         appDb = DbAdapter.getInstance().getDb();
+        db = new ListDatabase(SearchForGroceryActivity.this);
         gsonHelper = new GsonHelper();
         prefManager = new PrefManager(SearchForGroceryActivity.this);
+        shoppingList = db.getAllContacts();
 
         initialize();
         clickListeners();
-        checkCartValue();
         setTypeFaces();
+        checkCartValue();
 
         mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -103,10 +111,10 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 GATrackers.getInstance().trackEvent(searchGAC, searchGAC + GAConstant.CLICKED, "There is a search for item " +
                         mSearchEdit.getText().toString() + " On" + getString(R.string.app_name));
                 getSearchList(mSearchEdit.getText().toString());
-
                 return false;
             }
         });
+
         Bundle bundle = getIntent().getExtras();
         try {
             if (bundle != null) {
@@ -155,6 +163,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             shoppinglist_text.setVisibility(View.GONE);
         }
     }
+
 
     @Override
     public void onClick(View view) {
@@ -274,6 +283,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                 holder.rel_mrp_offer_price = (RelativeLayout) convertView.findViewById(R.id.rel_mrp_offer_price);
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
                 holder.items = (ImageView) convertView.findViewById(R.id.items_image);
+                holder.imgBtnAddToShop = (ImageButton) convertView.findViewById(R.id.imgBtnAddToShop);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
                 holder.items_name.setTypeface(typeFaceRobotoBold);
@@ -291,6 +301,9 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
+
+            holder.imgBtnAddToShop.setVisibility(View.VISIBLE);
+
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
@@ -330,6 +343,12 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
 
+            if(shoppingList.contains(product.getTitle())){
+                holder.imgBtnAddToShop.setImageResource(R.drawable.list_on);
+            }else {
+                holder.imgBtnAddToShop.setImageResource(R.drawable.list_off);
+            }
+
             if (currency.contains("\\")) {
                 holder.rupee.setText(unescapeJavaString(currency));
                 holder.rupee2.setText(unescapeJavaString(currency));
@@ -364,7 +383,6 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
             holder.items_name.setText(product.getTitle());
             holder.items_price.setText(productPrice);
-
             if (productPrice.equalsIgnoreCase(mrpPrice)) {
                 holder.rupee.setVisibility(View.VISIBLE);
                 holder.rel_mrp_offer_price.setVisibility(View.GONE);
@@ -405,6 +423,21 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                     }
                 }
             });
+
+
+            holder.imgBtnAddToShop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if(shoppingList.contains(product.getTitle())){
+                        alreadyAddedToShopList();
+                    }else {
+                        holder.imgBtnAddToShop.setImageResource(R.drawable.list_on);
+                        addToShopList(product.getTitle());
+                    }
+                }
+            });
+
             if (product.getVariants().size() > 1) {
                 holder.btnVarient.setOnClickListener(new View.OnClickListener() {
 
@@ -521,6 +554,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
         class ViewHolder {
             ImageView items;
+            ImageButton imgBtnAddToShop;
             RelativeLayout parent;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
@@ -528,7 +562,36 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             public ImageButton add_button, remove_button, heart;
         }
     }
+    private void addToShopList(final String title) {
+        final DialogHandler dialogHandler = new DialogHandler(SearchForGroceryActivity.this);
 
+        dialogHandler.setDialog("Confirmation", "Are you sure to add this product to shopping list");
+        dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShoppingListObject att = new ShoppingListObject();
+                db.addContact(title);
+                shoppingList = db.getAllContacts();
+                adapter.notifyDataSetChanged();
+                Toast.makeText(SearchForGroceryActivity.this, "Added to Shopping List", Toast.LENGTH_SHORT).show();
+                dialogHandler.dismiss();
+
+            }
+        });
+        dialogHandler.setNegativeButton("Cancel", true)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogHandler.dismiss();
+                    }
+                });
+
+    }
+
+    private void alreadyAddedToShopList(){
+        DialogHandler dialogHandler = new DialogHandler(SearchForGroceryActivity.this);
+        dialogHandler.setdialogForFinish("Message", "Already added to the list.", false);
+    }
     public String unescapeJavaString(String st) {
 
         StringBuilder sb = new StringBuilder(st.length());

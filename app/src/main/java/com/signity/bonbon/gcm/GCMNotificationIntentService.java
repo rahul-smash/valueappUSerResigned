@@ -14,6 +14,8 @@ import android.support.v4.app.NotificationCompat;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.signity.bonbon.R;
 import com.signity.bonbon.SplashActivity;
+import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.app.MyApplication;
 import com.signity.bonbon.ui.home.MainActivity;
 
 /**
@@ -60,10 +62,21 @@ public class GCMNotificationIntentService extends IntentService {
     }
 
     private void sendNotification(String title, String message) {
-        Intent intent = new Intent(this, SplashActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        PrefManager prefManager=new PrefManager(this);
+        Intent intent=null;
+        PendingIntent pendingIntent=null;
+        if(prefManager.getBoolean("applicationOnPause")){
+            intent = new Intent(this, SplashActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+
+        }else {
+            intent = new Intent();
+            pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+        }
 
 
         int icon = R.mipmap.ic_launcher;

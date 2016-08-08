@@ -583,6 +583,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                     @Override
                     public void onClick(View view) {
                         dialogHandler.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 

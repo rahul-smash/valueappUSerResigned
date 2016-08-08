@@ -481,6 +481,7 @@ public final class ProductListFragmentGrocery extends Fragment {
                     @Override
                     public void onClick(View view) {
                         dialogHandler.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 

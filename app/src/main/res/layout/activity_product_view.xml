@@ -173,6 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/rupee"
                         android:gravity="left|center_vertical"
+                        android:layout_marginRight="5dp"
                         android:paddingTop="3dp"
                         android:paddingBottom="3dp"
                         android:text="155"

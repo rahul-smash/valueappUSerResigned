@@ -85,6 +85,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
     ListDatabase db;
     List<String> shoppingList = new ArrayList<String>();
+    List<Product> favourite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,8 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
         typeFaceRobotoBold = FontUtil.getTypeface(SearchForGroceryActivity.this, FontUtil.FONT_ROBOTO_BOLD);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         mSearchList = (ListView) findViewById(R.id.searchList);
+
+        favourite = appDb.getUserFavProductList();
     }
 
     private void clickListeners() {
@@ -238,6 +241,15 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             listProduct.addAll(subCategory.getProducts());
         }
         if (listProduct != null) {
+
+            for(int i=0; i<favourite.size(); i++){
+                for (int j=0; j<listProduct.size();j++){
+                    if(favourite.get(i).getId().equalsIgnoreCase(listProduct.get(j).getId())){
+                        listProduct.get(j).setFavorites(true);
+                    }
+                }
+            }
+
             adapter = new ProductListAdapter(SearchForGroceryActivity.this, listProduct);
             mSearchList.setAdapter(adapter);
         }

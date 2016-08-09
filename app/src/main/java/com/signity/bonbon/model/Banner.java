@@ -50,6 +50,9 @@ public class Banner {
     @Expose
     private String categoryId;
 
+    @SerializedName("sub_category_id")
+    @Expose
+    private String subCategoryId;
 
     @SerializedName("product_id")
     @Expose
@@ -59,9 +62,30 @@ public class Banner {
     @Expose
     private String offerId;
 
+    @SerializedName("page_id")
+    @Expose
+    private String pagesId;
+
     @SerializedName("link_to")
     @Expose
     private String linkTo;
+
+
+    public String getPagesId() {
+        return pagesId;
+    }
+
+    public void setPagesId(String pagesId) {
+        this.pagesId = pagesId;
+    }
+
+    public String getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(String subCategoryId) {
+        this.subCategoryId = subCategoryId;
+    }
 
 
     public String getCategoryId() {

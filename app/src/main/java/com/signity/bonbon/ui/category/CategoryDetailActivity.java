@@ -49,12 +49,13 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
     ViewPager viewPager;
     PagerAdapter adapter;
     String title;
-    String id;
+    String id,subCategoryId;
     List<SubCategory> subCategoryList;
     boolean isActivityFirstTime = true;
 
     PrefManager prefManager;
     String productViewTitle;
+    int position;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,14 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         prefManager = new PrefManager(CategoryDetailActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");
+        try {
+            subCategoryId = getIntent().getStringExtra("subCategoryId");
+            if(subCategoryId==null){
+                subCategoryId="";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         rupee = (TextView) findViewById(R.id.rupee);
         backButton = (Button) findViewById(R.id.backButton);
         btnSearch = (Button) findViewById(R.id.btnSearch);
@@ -98,7 +107,16 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         checkCartValue();
         Category category = appDb.getCategoryById(id);
         subCategoryList = category.getSubCategoryList();
+
+
         if (subCategoryList != null && subCategoryList.size() != 0) {
+            if(!subCategoryId.isEmpty()){
+                for (int i=0; i<subCategoryList.size(); i++){
+                    if(subCategoryId.equalsIgnoreCase(subCategoryList.get(i).getId())){
+                        position=i;
+                    }
+                }
+            }
             setupTab(subCategoryList);
         }
 
@@ -142,6 +160,10 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
                 adapter.notifyDataSetChanged();
             }
         });
+
+        if(!subCategoryId.isEmpty()){
+            viewPager.setCurrentItem(position);
+        }
 
     }
 

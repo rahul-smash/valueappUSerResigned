@@ -82,6 +82,7 @@
     <dimen name="home_icon_size">27sp</dimen>
 
     <integer name="weight_banner">65</integer>
+    <dimen name="banner_height">350dp</dimen>
     <integer name="weight_menu_section">35</integer>
 
     <!--For Lazeez Rasoi-->

@@ -1,4 +1,4 @@
-<android.support.v4.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.signity.bonbon.view.PagerEnabledSlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/SlidingPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -91,4 +91,4 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-</android.support.v4.widget.SlidingPaneLayout>
+</com.signity.bonbon.view.PagerEnabledSlidingPaneLayout>

@@ -83,6 +83,7 @@
 
 
     <integer name="weight_banner">60</integer>
+    <dimen name="banner_height">300dp</dimen>
     <integer name="weight_menu_section">40</integer>
 
     <!--For Lazeez Rasoi-->

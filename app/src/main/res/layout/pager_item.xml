@@ -12,5 +12,5 @@
         android:focusable="true"
         android:clickable="true"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
+        android:scaleType="fitCenter" />
 </LinearLayout>

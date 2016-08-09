@@ -78,7 +78,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     String searchStr;
 
     public int cartSize;
-
+    List<Product> favourite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +130,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         typeFaceRobotoBold = FontUtil.getTypeface(SearchActivity.this, FontUtil.FONT_ROBOTO_BOLD);
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         mSearchList = (ListView) findViewById(R.id.searchList);
+
+        favourite = appDb.getUserFavProductList();
     }
 
     private void clickListeners() {
@@ -222,6 +224,14 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             listProduct.addAll(subCategory.getProducts());
         }
         if (listProduct != null) {
+
+            for(int i=0; i<favourite.size(); i++){
+                for (int j=0; j<listProduct.size();j++){
+                    if(favourite.get(i).getId().equalsIgnoreCase(listProduct.get(j).getId())){
+                        listProduct.get(j).setFavorites(true);
+                    }
+                }
+            }
             adapter = new ProductListAdapter(SearchActivity.this, listProduct);
             mSearchList.setAdapter(adapter);
         }

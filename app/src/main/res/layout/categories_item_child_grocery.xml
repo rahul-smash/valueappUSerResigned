@@ -153,9 +153,10 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="1dp"
         android:layout_toLeftOf="@+id/block3"
-        android:background="@drawable/ic_add_to_shopp"
-        android:paddingLeft="10dp"
-        android:visibility="gone" />
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/list_off"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/block3"

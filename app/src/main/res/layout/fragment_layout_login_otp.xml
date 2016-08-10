@@ -101,27 +101,34 @@
         android:text="Please enter your One Time Password. We have sent the same to your number"
         android:textSize="@dimen/text_size" />
 
-
-    <EditText
-        android:id="@+id/edtOTp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textLbl"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="OTP"
-        android:textColorHint="@color/colorGray"
-        android:imeOptions="actionDone"
-        android:inputType="phone"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size_normal"/>
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:id="@+id/edtOTp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:hint="OTP"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/colorGray"
+            android:textSize="@dimen/text_size_normal" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtOTp"
+        android:layout_below="@+id/input_layout_otp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:gravity="center_horizontal">

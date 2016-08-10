@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.telephony.SmsMessage;
@@ -65,6 +66,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
     Button resend;
     EditText edtOTp;
     private GCMClientManager pushClientManager;
+    private TextInputLayout input_layout_otp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
 //        skipOtp = (Button) rootView.findViewById(R.id.skipOtp);
         backButton = (Button) rootView.findViewById(R.id.backButton);
         backBtn = (ImageButton) rootView.findViewById(com.signity.bonbon.R.id.backBtn);
+        input_layout_otp = (TextInputLayout) rootView.findViewById(com.signity.bonbon.R.id.input_layout_otp);
         backBtn.setOnClickListener(this);
         edtOTp = (EditText) rootView.findViewById(R.id.edtOTp);
         btnDone.setOnClickListener(this);

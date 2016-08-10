@@ -7,7 +7,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,9 +59,9 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
     private DatePickerDialog toDatePickerDialog;
     private TimePickerDialog toTimePickerDialog;
 
-    EditText edtName, phoneNumber, email, city, message;
-    Button btnSubmit, date;
-
+    EditText edtName, phoneNumber, email, city, message,date;
+    Button btnSubmit;
+    private TextInputLayout input_layout_name, input_layout_phone, input_layout_email,input_layout_city,input_layout_message,input_layout_date;
 
     String storeId;
 
@@ -93,15 +96,29 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_book_now, container, false);
+        input_layout_name = (TextInputLayout)rootView.findViewById(R.id.input_layout_name);
+        input_layout_phone = (TextInputLayout) rootView.findViewById(R.id.input_layout_phone);
+        input_layout_email = (TextInputLayout) rootView.findViewById(R.id.input_layout_email);
+        input_layout_city = (TextInputLayout) rootView.findViewById(R.id.input_layout_city);
+        input_layout_message = (TextInputLayout) rootView.findViewById(R.id.input_layout_message);
+        input_layout_date = (TextInputLayout) rootView.findViewById(R.id.input_layout_date);
         edtName = (EditText) rootView.findViewById(R.id.edtName);
         phoneNumber = (EditText) rootView.findViewById(R.id.phoneNumber);
         email = (EditText) rootView.findViewById(R.id.email);
         city = (EditText) rootView.findViewById(R.id.city);
         message = (EditText) rootView.findViewById(R.id.message);
         btnSubmit = (Button) rootView.findViewById(R.id.btnSubmit);
-        date = (Button) rootView.findViewById(R.id.date);
+        date = (EditText) rootView.findViewById(R.id.date);
+
         btnSubmit.setOnClickListener(this);
         date.setOnClickListener(this);
+
+        edtName.addTextChangedListener(new MyTextWatcher(edtName));
+        phoneNumber.addTextChangedListener(new MyTextWatcher(phoneNumber));
+        email.addTextChangedListener(new MyTextWatcher(email));
+        city.addTextChangedListener(new MyTextWatcher(city));
+        message.addTextChangedListener(new MyTextWatcher(message));
+
         setDateTimeField();
 
         callNetworkForEnquiryMessage();
@@ -230,44 +247,106 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     private boolean validForm() {
 
-        if (edtName.getText().toString().trim().equalsIgnoreCase("")) {
-            edtName.setError("Enter Name");
-            return false;
-        }
-        if (phoneNumber.getText().toString().trim().equalsIgnoreCase("")) {
-            phoneNumber.setError("Enter Mobile Number");
-            return false;
-        }else if (phoneNumber.getText().toString().trim().length()!=10){
-            phoneNumber.setError("Mobile No. should be of 10 digits");
+        if (!validateName()) {
             return false;
         }
 
-        if (email.getText().toString().trim().equalsIgnoreCase("")) {
-            email.setError("Enter Email");
-            return false;
-        }
-        if (!Util.checkValidEmail(email.getText().toString().trim())) {
-            email.setError("Enter Valid Email");
+        if (!validatePhone()) {
             return false;
         }
 
+        if (!validateEmail()) {
+            return false;
+        }
 
-        if (city.getText().toString().trim().equalsIgnoreCase("")) {
-            city.setError("Enter City");
+        if (!validateCity()) {
             return false;
         }
-        if (date.getText().toString().trim().equalsIgnoreCase("")) {
-            date.setError("Please select date");
+        if (!validateDate()) {
             return false;
         }
-        if (message.getText().toString().trim().equalsIgnoreCase("")) {
-            message.setError("Enter Your Message");
+        if (!validateMessage()) {
             return false;
         }
 
         return true;
 
     }
+
+    private boolean validateName() {
+        if (edtName.getText().toString().trim().isEmpty()) {
+            input_layout_name.setError("Enter Name");
+            return false;
+        } else {
+            input_layout_name.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean validatePhone() {
+        if (phoneNumber.getText().toString().trim().isEmpty()) {
+            input_layout_phone.setError("Enter Mobile Number");
+            return false;
+        }
+        else if (phoneNumber.getText().toString().trim().length()!=10){
+            input_layout_phone.setError("Mobile No. should be of 10 digits");
+            return false;
+        }
+        else {
+            input_layout_phone.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+
+    private boolean validateEmail() {
+        String emailValue = email.getText().toString().trim();
+
+        if (emailValue.isEmpty() || !Util.checkValidEmail(emailValue)) {
+            input_layout_email.setError("Enter Valid Email");
+            return false;
+        } else {
+            input_layout_email.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean validateCity() {
+        if (city.getText().toString().trim().isEmpty()) {
+            input_layout_city.setError("Enter City");
+            return false;
+        } else {
+            input_layout_city.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
+    private boolean validateDate() {
+        if (date.getText().toString().trim().isEmpty()) {
+            input_layout_date.setError("Please select date");
+            return false;
+        }
+        else {
+            input_layout_date.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateMessage() {
+        if (message.getText().toString().trim().isEmpty()) {
+            input_layout_message.setError("Enter Your Message");
+            return false;
+        } else {
+            input_layout_message.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -333,6 +412,47 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                 dialog.dismiss();
             }
         });
+    }
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.edtName:
+                    validateName();
+
+                    break;
+                case R.id.phoneNumber:
+                    validatePhone();
+
+                    break;
+                case R.id.email:
+                    validateEmail();
+
+                    break;
+                case R.id.city:
+                    validateCity();
+
+                    break;
+                case R.id.message:
+                    validateMessage();
+
+                    break;
+
+            }
+        }
     }
 
 

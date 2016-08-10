@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/offer_bg"
     tools:context="grocersapp.android.com.grocersapp.ItemDetail">
+
+
 
 
     <ScrollView
@@ -15,7 +16,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/offer_bg"
+                android:alpha=".6"/>
 
             <LinearLayout
                 android:id="@+id/linear1"
@@ -25,33 +30,27 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:ems="5"
-                    android:padding="10dp"
-                    android:text="Name"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edtName"
-                    android:layout_width="fill_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorGray"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="Name"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"
-                    android:elevation="3dp"/>
+                    <EditText
+                        android:id="@+id/edtName"
+                        android:layout_width="fill_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="3dp"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -62,32 +61,28 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
 
-                <EditText
-                    android:id="@+id/phoneNumber"
-                    android:layout_width="fill_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorGray"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="Mobile Number"
-                    android:imeOptions="actionNext"
-                    android:inputType="phone"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"
-                    android:elevation="3dp"/>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/phoneNumber"
+                        android:layout_width="fill_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="3dp"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="Mobile Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -98,33 +93,28 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Email"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="fill_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorGray"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="Email"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"
-                    android:elevation="3dp"/>
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="fill_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="3dp"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="Email"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -135,33 +125,28 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="City"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/city"
-                    android:layout_width="fill_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorGray"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="City"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"
-                    android:elevation="3dp"/>
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="fill_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="3dp"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="City"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -172,31 +157,26 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="City"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/date"
-                    style="?android:textAppearance"
-                    android:layout_width="fill_parent"
-                    android:layout_height="42dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorGray"
-                    android:ems="10"
-                    android:gravity="center_vertical"
-                    android:hint="Select Date and Time of the Occasion"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/text_size"
-                    android:elevation="3dp"/>
+                    <EditText
+                        android:id="@+id/date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="3dp"
+                        android:ems="10"
+                        android:gravity="center_vertical"
+                        android:hint="Select Date and Time of the Occasion"
+                        android:clickable="true"
+                        android:editable="false"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/text_size" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -207,33 +187,27 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Message"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="20sp"
-                    android:visibility="gone" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/message"
-                    android:layout_width="fill_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/colorGray"
-                    android:gravity="top|left"
-                    android:hint="Your message Here"
-                    android:imeOptions="actionNone"
-                    android:inputType="text|textMultiLine"
-                    android:padding="10dp"
-                    android:textSize="@dimen/text_size"
-                    android:textColor="@android:color/black"
-                    android:elevation="3dp"/>
+
+                    <EditText
+                        android:id="@+id/message"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:elevation="3dp"
+                        android:gravity="top|left"
+                        android:hint="Your message Here"
+                        android:imeOptions="actionNone"
+                        android:inputType="text|textMultiLine"
+                        android:padding="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <Button

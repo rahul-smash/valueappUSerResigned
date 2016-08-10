@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +53,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
     EditText edtPhone;
     private GCMClientManager pushClientManager;
     String from;
+    private TextInputLayout input_layout_phone;
 
     PrefManager prefManager;
 
@@ -73,9 +77,11 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
         edtPhone = (EditText) rootView.findViewById(com.signity.bonbon.R.id.edtPhone);
         backButton = (Button) rootView.findViewById(com.signity.bonbon.R.id.backButton);
         backBtn = (ImageButton) rootView.findViewById(com.signity.bonbon.R.id.backBtn);
+        input_layout_phone = (TextInputLayout) rootView.findViewById(com.signity.bonbon.R.id.input_layout_phone);
         btnNext.setOnClickListener(this);
         backButton.setOnClickListener(this);
         backBtn.setOnClickListener(this);
+        edtPhone.addTextChangedListener(new MyTextWatcher(edtPhone));
         addActionDoneEvet(edtPhone);
         return rootView;
     }
@@ -98,7 +104,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
 
         switch (view.getId()) {
             case R.id.btnNext:
-                if (vallidPhone()) {
+                if (validatePhone()) {
                     String phone = edtPhone.getText().toString();
                     if (isUserValidFromDatabase(phone)) {
                         if (from.equals("menu")) {
@@ -301,20 +307,48 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
         ft.commit();
     }
 
-    private boolean vallidPhone() {
-        String phone = edtPhone.getText().toString();
-        if (phone.isEmpty()) {
-//            Toast.makeText(getActivity(), "Enter Phone No.", Toast.LENGTH_SHORT).show();
-//            showValidationFailedPopup(getActivity(), "Error", "Enter Phone");
-            edtPhone.setError("Enter Phone Number");
+    private boolean validatePhone() {
+        if (edtPhone.getText().toString().trim().isEmpty()) {
+            input_layout_phone.setError("Enter Mobile Number");
             return false;
         }
-        if (phone.length() != 10) {
-            edtPhone.setError("Phone No. should be of 10 digits");
-//            Toast.makeText(getActivity(), "Phone No. should be of 10 digits", Toast.LENGTH_SHORT).show();
+        else if (edtPhone.getText().toString().trim().length()!=10){
+            input_layout_phone.setError("Mobile No. should be of 10 digits");
             return false;
         }
+        else {
+            input_layout_phone.setErrorEnabled(false);
+        }
+
         return true;
+    }
+
+
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+
+                case R.id.edtPhone:
+                    validatePhone();
+
+                    break;
+
+
+            }
+        }
     }
 
 

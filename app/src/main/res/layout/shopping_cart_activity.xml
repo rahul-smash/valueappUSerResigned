@@ -32,7 +32,7 @@
             android:singleLine="true"
             android:text=""
             android:textColor="@color/color_white"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 
         <ImageButton

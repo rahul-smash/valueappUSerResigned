@@ -1,5 +1,6 @@
 package com.signity.bonbon.ui.contacts;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,7 +9,9 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +48,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     //    Adapter mAdapter;
     PrefManager prefManager;
     String storeId;
-
+    private  final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,16 +137,71 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     }
 
     public void showLocationOnMap(LatLng latLng) {
-        if (latLng != null) {
-            String address = store.getLocation() + "," + store.getCity() + "," + store.getState() + "," + store.getCountry() + "," + store.getZipcode();
-            map.setMyLocationEnabled(true);
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
-            map.addMarker(new MarkerOptions()
-                    .title(store.getStoreName())
-                    .snippet(address)
-                    .position(latLng));
+
+        if (!canAccessLocation()) {
+
+            requestPermission();
+
+        } else {
+            if (latLng != null) {
+                String address = store.getLocation() + "," + store.getCity() + "," + store.getState() + "," + store.getCountry() + "," + store.getZipcode();
+                map.setMyLocationEnabled(true);
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
+                map.addMarker(new MarkerOptions()
+                        .title(store.getStoreName())
+                        .snippet(address)
+                        .position(latLng));
+            }
         }
+
+    }
+
+
+    private void requestPermission(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+            Toast.makeText(ContactActivity.this,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    String latitudeString = store.getLat();
+                    String longitudeString = store.getLng();
+                    String address = store.getLocation() + "," + store.getCity() + "," + store.getState() + "," + store.getCountry() + "," + store.getZipcode();
+                    LatLng bonbon = null;
+                    Log.e("Location", store.getLocation());
+                    if (latitudeString != null && !latitudeString.isEmpty() && longitudeString != null && !longitudeString.isEmpty()) {
+                        double lat = Double.parseDouble(latitudeString);
+                        double lng = Double.parseDouble(longitudeString);
+                        bonbon = new LatLng(lat, lng);
+                        showLocationOnMap(bonbon);
+                    }
+                }
+                break;
+        }
+    }
+
+
+    private boolean canAccessLocation() {
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED){
+            return  true;
+        }
+        else return false;
     }
 
     class GetLatLngTask extends AsyncTask<String, Void, LatLng> {

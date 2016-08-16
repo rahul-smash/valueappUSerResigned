@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
     >
-
+<!--
 
      <ImageView
      android:layout_width="match_parent"
@@ -261,7 +261,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 </RelativeLayout>

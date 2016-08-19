@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,7 +160,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         }
 
         if (product.getDescription() != null && !product.getDescription().isEmpty()) {
-            description.setText(product.getDescription());
+            description.setText(Html.fromHtml(product.getDescription()));
         }
         number_text.setText(txtQuantCount);
 

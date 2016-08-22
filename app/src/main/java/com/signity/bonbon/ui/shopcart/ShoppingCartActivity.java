@@ -44,7 +44,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     ListView listViewCart;
     ProductListAdapter adapter;
 
-    TextView total, title, emptyCart, rupee;
+    TextView total, title, emptyCart, rupee,saving_rupee;
     Button placeorder;
     List<Product> listProduct;
     private GCMClientManager pushClientManager;
@@ -53,6 +53,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     private AppDatabase appDb;
     private PrefManager prefManager;
     ImageButton search;
+    String currency;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,11 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         title.setTypeface(typeFaceRobotoRegular);
         placeorder = (Button) findViewById(R.id.placeorder);
         backButton = (Button) findViewById(R.id.backButton);
+        saving_rupee = (TextView) findViewById(R.id.saving_rupee);
+        saving_rupee.setSelected(true);
 
 
-        String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+        currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
 
         if (currency.contains("\\")) {
@@ -108,6 +111,22 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             emptyCart.setVisibility(View.VISIBLE);
         }
         updateCartPrice();
+        updateSavingPrice();
+    }
+
+    private void updateSavingPrice() {
+
+        String totalSaving = appDb.getCartTotalSaving();
+        if(totalSaving.equalsIgnoreCase("0.00") || totalSaving.contains("-")){
+            saving_rupee.setVisibility(View.GONE);
+        }else {
+            saving_rupee.setVisibility(View.VISIBLE);
+            if (currency.contains("\\")) {
+                saving_rupee.setText("Congratulations you save "+unescapeJavaString(currency)+totalSaving);
+            } else {
+                saving_rupee.setText("Congratulations you save "+currency+totalSaving);
+            }
+        }
     }
 
     private void updateCartPrice() {
@@ -250,6 +269,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                     appDb.updateProduct(product);
                     appDb.updateToCart(product);
                     updateCartPrice();
+                    updateSavingPrice();
                 }
             });
 
@@ -264,6 +284,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                         appDb.updateProduct(product);
                         appDb.updateToCart(product);
                         updateCartPrice();
+                        updateSavingPrice();
                         if (!appDb.isProductInCart(selectedVariant.getVariantId())) {
                             listProduct.remove(product);
                             notifyDataSetChanged();

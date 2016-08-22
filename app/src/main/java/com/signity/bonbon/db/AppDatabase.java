@@ -957,6 +957,34 @@ public class AppDatabase {
         return String.format("%.2f", totalPrice);
     }
 
+    public String getCartTotalSaving() {
+        double totalSaving = 0.0;
+        double totalPrice = 0.0;
+        double totalMrpPrice = 0.0;
+        List<UpdateCartModel> listCartModel = getCartList();
+
+        try {
+            for (UpdateCartModel updateCartModel : listCartModel) {
+                if(!updateCartModel.getPrice().equalsIgnoreCase(updateCartModel.getMrpPrice())){
+                    int quan = Integer.parseInt(updateCartModel.getQuantity());
+                    double price = Double.parseDouble(updateCartModel.getPrice());
+                    double mrpprice = Double.parseDouble(updateCartModel.getMrpPrice());
+                    double productPrice = quan * price;
+                    double productMrpPrice = quan * mrpprice;
+                    totalPrice = totalPrice + productPrice;
+                    totalMrpPrice = totalMrpPrice + productMrpPrice;
+                }
+            }
+
+            totalSaving=(totalMrpPrice-totalPrice);
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            totalSaving=0.00;
+        }
+
+        return String.format("%.2f", totalSaving);
+    }
    /* public String getTotalTax() {
         double totalTax = 0.0;
         List<UpdateCartModel> listCartModel = getCartList();

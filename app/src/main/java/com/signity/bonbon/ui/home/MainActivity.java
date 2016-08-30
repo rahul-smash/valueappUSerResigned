@@ -295,10 +295,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GooglePlayServicesUtil.getErrorDialog(googlePlayServicesCode, this, 0).show();
         } else {
             if (!isActivityLoadsFirstTime) {
-                getStoreServicesForUpdate();
+//                getStoreServicesForUpdate();
             } else {
                 isActivityLoadsFirstTime = false;
             }
+            getStoreServicesForUpdate();
         }
         checkForAppVersion(DataAdapter.getInstance().getForceDownloadModel());
     }
@@ -624,7 +625,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
 //                    Log.e("Store Version", store.getVersion());
-
+                    oldVerision = prefManager.getSharedValue(AppConstant.APP_OLD_VERISON);
+                    String appVersion = prefManager.getSharedValue(AppConstant.APP_VERISON);
+                    if (!appVersion.equalsIgnoreCase(oldVerision)) {
+//                        appDb.deleteCartAll();
+                        appDb.deleteCartElement();
+                        prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
+                    }
 
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
                         String msg = "" + store.getStoreMsg();

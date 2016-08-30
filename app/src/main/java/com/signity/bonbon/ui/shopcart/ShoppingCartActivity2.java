@@ -1281,7 +1281,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
-                onBackPressed();
+                appDb.deleteCartElement();
+                Intent intent_home = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent_home);
+                finish();
+                AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);
             }
         });
 

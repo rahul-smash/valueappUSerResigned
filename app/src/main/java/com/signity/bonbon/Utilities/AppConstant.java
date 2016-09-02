@@ -45,6 +45,7 @@ public class AppConstant {
     public static final String tax_label_name = "com.android.bonbon.Utilities.tax_label_name";
     public static final String tax_rate = "com.android.bonbon.Utilities.tax_rate";
     public static final String CATEGORY_LAYOUT_TYPE = "com.android.bonbon.Utilities.categoryLayoutType";
+    public static final String ONLINE_PAYMENT = "com.android.bonbon.Utilities.ONLINE_PAYMENT";
 
 
 }

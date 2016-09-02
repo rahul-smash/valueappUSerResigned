@@ -16,6 +16,7 @@
     <dimen name="text_size">15sp</dimen>
     <dimen name="total_size">16sp</dimen>
     <dimen name="text_size_sub_normal">14sp</dimen>
+    <dimen name="text_size_extra_small">11sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
 
     <dimen name="image_thumbnail_size">100dp</dimen>
@@ -46,6 +47,7 @@
     <dimen name="category_grid_block_height">180dp</dimen>
     <dimen name="category_gird_image_width">150dp</dimen>
     <dimen name="category_gird_image_height">150dp</dimen>
+    <integer name="category_gird_image_width">154</integer>
 
     <!-- Product listView dimensions -->
     <dimen name="category_item_heart_width">30dp</dimen>
@@ -117,4 +119,5 @@
     <dimen name="padding_home_icon">20dp</dimen>
 
     <dimen name="grid_view_spacing">3dp</dimen>
+    <dimen name="pager_height">250dp</dimen>
 </resources>

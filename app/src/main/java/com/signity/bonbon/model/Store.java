@@ -155,7 +155,18 @@ public class Store {
     @Expose
     private Boolean isReferForDeviceEnable;
 
+    @SerializedName("online_payment")
+    @Expose
+    private String onlinePayment;
 
+
+    public String getOnlinePayment() {
+        return onlinePayment;
+    }
+
+    public void setOnlinePayment(String onlinePayment) {
+        this.onlinePayment = onlinePayment;
+    }
 
     public String getDeliveryFacility() {
         return deliveryFacility;

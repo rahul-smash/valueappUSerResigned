@@ -20,6 +20,7 @@ import com.signity.bonbon.model.ReferNEarnModel;
 import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.TaxCalculationModel;
 import com.signity.bonbon.model.UserAddressList;
+import com.signity.bonbon.model.ValidAllCouponsModel;
 import com.signity.bonbon.model.VerifyOtpResponse;
 
 import java.util.Map;
@@ -52,6 +53,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/searchProducts")
     void getSearchList(@FieldMap Map<String, String> parameters, Callback<GetSubCategory> response);
+
+    @FormUrlEncoded
+    @POST("/recommendedProduct")
+    void getRecommendProductList(@FieldMap Map<String, String> parameters, Callback<GetSubCategory> response);
 
     @FormUrlEncoded
     @POST("/addToCart")
@@ -121,9 +126,13 @@ public interface ApiService {
     @POST("/storeOffers")
     void getStoreOffer(@FieldMap Map<String, String> parameters, Callback<GetOfferResponse> response);
 
-    @FormUrlEncoded
+   /* @FormUrlEncoded
     @POST("/validateCoupon")
-    void validateCoupon(@FieldMap Map<String, String> parameters, Callback<GetValidCouponResponse> response);
+    void validateCoupon(@FieldMap Map<String, String> parameters, Callback<GetValidCouponResponse> response);*/
+
+    @FormUrlEncoded
+    @POST("/validateAllCoupons")
+    void validateCoupon(@FieldMap Map<String, String> parameters, Callback<ValidAllCouponsModel> response);
 
     @FormUrlEncoded
     @POST("/setStoreQuery")

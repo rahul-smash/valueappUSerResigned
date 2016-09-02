@@ -42,6 +42,8 @@ public class DataAdapter {
 
     private List<Banner> banners;
 
+    private List<Product> recommendProductList;
+
     private List<TaxDetail> taxDetail;
 
     private List<FixedTaxDetail> fixedTaxDetail;
@@ -145,5 +147,13 @@ public class DataAdapter {
 
     public void setIsCartUpdated(boolean isCartUpdated) {
         this.isCartUpdated = isCartUpdated;
+    }
+
+    public List<Product> getProductList() {
+        return recommendProductList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.recommendProductList = productList;
     }
 }

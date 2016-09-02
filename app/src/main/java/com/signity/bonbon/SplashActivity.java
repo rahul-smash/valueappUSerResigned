@@ -193,6 +193,7 @@ public class SplashActivity extends Activity {
                     prefManager.storeSharedValue(AppConstant.istaxenable, store.getIstaxenable());
                     prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
                     prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
+                    prefManager.storeSharedValue(AppConstant.ONLINE_PAYMENT, store.getOnlinePayment());
                     prefManager.setReferEarnFn(store.getReferFnEnable());
                     prefManager.setReferEarnFnEnableForDevice(store.getReferForDeviceEnable());
                     prefManager.storeSharedValue(AppConstant.CATEGORY_LAYOUT_TYPE, store.getCategoryLayoutType());

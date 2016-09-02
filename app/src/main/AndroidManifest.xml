@@ -206,6 +206,10 @@
             android:name=".ui.category.ProductViewJewellersActivity"
             android:label="@string/title_activity_product_view_jewellers" >
         </activity>
+        <activity
+            android:name=".ui.RecommendedProduct.RecommendProductsActivity"
+            android:label="@string/title_activity_recommend_products" >
+        </activity>
     </application>
 
 </manifest>

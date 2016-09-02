@@ -58,6 +58,8 @@ import com.signity.bonbon.model.TaxCalculationModel;
 import com.signity.bonbon.model.TaxDataModel;
 import com.signity.bonbon.model.TaxDetail;
 import com.signity.bonbon.model.TaxDetails;
+import com.signity.bonbon.model.ValidAllCouponData;
+import com.signity.bonbon.model.ValidAllCouponsModel;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
@@ -83,7 +85,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     ListView listViewCart;
     TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4, shipping_charges_text, discountLblText, taxTag;
     Button placeorder;
-    String userId;
+    String userId,payment_method;
     String addressId;
     String shippingChargeText, minmimumChargesText, user_address, areaId;
     ProductListAdapter adapter;
@@ -140,6 +142,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         minmimumChargesText = getIntent().getStringExtra("minimum_charges");
         user_address = getIntent().getStringExtra("user_address");
         areaId = getIntent().getStringExtra("area_id");
+        try {
+            payment_method = getIntent().getStringExtra("payment_method");
+        } catch (Exception e) {
+            e.printStackTrace();
+            payment_method="2";
+        }
         isForPickUpStatus = getIntent().getStringExtra("isForPickup") != null ? getIntent().getStringExtra("isForPickup") : "no";
 
         if (shippingChargeText != null && !shippingChargeText.isEmpty()) {
@@ -1087,14 +1095,18 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
             String plaform = AppConstant.PLATFORM;
             String uId = userId;
+            String orders = appDb.getCartItemsListStringJson();
+
             Map<String, String> params = new HashMap<>();
             params.put("device_id", deviceId);
             params.put("user_id", uId);
             params.put("device_token", deviceToken);
             params.put("platform", plaform);
             params.put("coupon_code", couponCode);
+            params.put("payment_method", payment_method);
+            params.put("orders", orders);
             ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-            NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<GetValidCouponResponse>() {
+            /*NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<GetValidCouponResponse>() {
                 @Override
                 public void success(GetValidCouponResponse getValidCouponResponse, Response response) {
 
@@ -1122,7 +1134,52 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
                 }
+            });*/
+
+
+            NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<ValidAllCouponsModel>() {
+                @Override
+                public void success(ValidAllCouponsModel validAllCouponsModel, Response response) {
+
+                    ProgressDialogUtil.hideProgressDialog();
+                    if (validAllCouponsModel.getSuccess()) {
+
+                        if(validAllCouponsModel.getDiscountAmount()!=0.00){
+                            coupenCode = couponCode;
+                            ValidAllCouponData data=validAllCouponsModel.getData();
+                            String discountPercent = data.getDiscount();
+                            fixed_discount_amount = String.valueOf(validAllCouponsModel.getDiscountAmount());
+                            discount="0";
+                            String offerMinimumPrice = data.getMinimumOrderAmount();
+
+                            applyDiscount(discountPercent, offerMinimumPrice);
+
+                        }else {
+                            coupenCode = couponCode;
+                            ValidAllCouponData data=validAllCouponsModel.getData();
+                            String discountPercent = data.getDiscount();
+                            discount = data.getDiscount();
+                            fixed_discount_amount="0";
+                            String offerMinimumPrice = data.getMinimumOrderAmount();
+
+                            applyDiscount(discountPercent, offerMinimumPrice);
+                        }
+
+                    } else {
+                        coupenCode = "";
+                        Toast.makeText(ShoppingCartActivity2.this, validAllCouponsModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    coupenCode = "";
+                    ProgressDialogUtil.hideProgressDialog();
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                }
             });
+
 
         } else {
             Toast.makeText(ShoppingCartActivity2.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();

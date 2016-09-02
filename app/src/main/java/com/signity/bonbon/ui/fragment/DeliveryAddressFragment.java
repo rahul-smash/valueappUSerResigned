@@ -1,8 +1,10 @@
 package com.signity.bonbon.ui.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -267,7 +271,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 } else {
 //                    Toast.makeText(getActivity(), responseData.getMessage(), Toast.LENGTH_SHORT).show();
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -299,33 +303,126 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     public void showAlertDialogForConfirm(Context context, String title,
                                           String message, final String userId, final String addressId,
                                           final String shipingCharges, final String minimumCharges, final String userAddress, final String areaId) {
-        final DialogHandler dialogHandler = new DialogHandler(context);
-        dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Proceed", true)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
-                        intent.putExtra("addressId", addressId);
-                        intent.putExtra("userId", userId);
-                        intent.putExtra("shiping_charges", shipingCharges);
-                        intent.putExtra("minimum_charges", minimumCharges);
-                        intent.putExtra("user_address", userAddress);
-                        intent.putExtra("area_id", areaId);
-                        startActivity(intent);
-                        AnimUtil.slideFromRightAnim(getActivity());
-                        dialogHandler.dismiss();
+        if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("0")){
+            final DialogHandler dialogHandler = new DialogHandler(context);
+            dialogHandler.setDialog(title, message);
+            dialogHandler.setPostiveButton("Proceed", true)
+                    .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                    }
-                });
+                            Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                            intent.putExtra("addressId", addressId);
+                            intent.putExtra("userId", userId);
+                            intent.putExtra("shiping_charges", shipingCharges);
+                            intent.putExtra("minimum_charges", minimumCharges);
+                            intent.putExtra("user_address", userAddress);
+                            intent.putExtra("area_id", areaId);
+                            intent.putExtra("payment_method", "2");
+                            startActivity(intent);
+                            AnimUtil.slideFromRightAnim(getActivity());
+                            dialogHandler.dismiss();
 
-        dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogHandler.dismiss();
-            }
-        });
+                        }
+                    });
+
+            dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialogHandler.dismiss();
+                }
+            });
+        }else if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("1")){
+
+            final Dialog dialog = new Dialog(getActivity());
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.custom_dialog);
+            TextView positveButton = (TextView) dialog.findViewById(R.id.yesBtn);
+            positveButton.setVisibility(View.VISIBLE);
+            TextView negativeButton = (TextView) dialog.findViewById(R.id.noBtn);
+            negativeButton.setVisibility(View.VISIBLE);
+            TextView titleTxt = (TextView) dialog.findViewById(R.id.title);
+            TextView messageText = (TextView) dialog.findViewById(R.id.message);
+            titleTxt.setText(""+title);
+            positveButton.setText("COD");
+            negativeButton.setText("Online");
+            messageText.setText(""+message+"Select Payment Method");
+
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            positveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                    intent.putExtra("addressId", addressId);
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("shiping_charges", shipingCharges);
+                    intent.putExtra("minimum_charges", minimumCharges);
+                    intent.putExtra("user_address", userAddress);
+                    intent.putExtra("area_id", areaId);
+                    intent.putExtra("payment_method", "2");
+                    startActivity(intent);
+                    AnimUtil.slideFromRightAnim(getActivity());
+                    dialog.dismiss();
+                }
+            });
+
+            negativeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                    intent.putExtra("addressId", addressId);
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("shiping_charges", shipingCharges);
+                    intent.putExtra("minimum_charges", minimumCharges);
+                    intent.putExtra("user_address", userAddress);
+                    intent.putExtra("area_id", areaId);
+                    intent.putExtra("payment_method", "3");
+                    startActivity(intent);
+                    AnimUtil.slideFromRightAnim(getActivity());
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        }
+        else {
+            final DialogHandler dialogHandler = new DialogHandler(context);
+            dialogHandler.setDialog(title, message);
+            dialogHandler.setPostiveButton("Proceed", true)
+                    .setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                            intent.putExtra("addressId", addressId);
+                            intent.putExtra("userId", userId);
+                            intent.putExtra("shiping_charges", shipingCharges);
+                            intent.putExtra("minimum_charges", minimumCharges);
+                            intent.putExtra("user_address", userAddress);
+                            intent.putExtra("area_id", areaId);
+                            intent.putExtra("payment_method", "2");
+                            startActivity(intent);
+                            AnimUtil.slideFromRightAnim(getActivity());
+                            dialogHandler.dismiss();
+
+                        }
+                    });
+
+            dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialogHandler.dismiss();
+                }
+            });
+        }
+
+
+
     }
 
     public void showAlertDialogForDelete(Context context, String title,

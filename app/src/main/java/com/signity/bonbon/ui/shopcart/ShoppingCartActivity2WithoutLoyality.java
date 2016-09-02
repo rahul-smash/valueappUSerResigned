@@ -582,7 +582,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
             params.put("platform", plaform);
             params.put("coupon_code", couponCode);
             ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2WithoutLoyality.this);
-            NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<GetValidCouponResponse>() {
+            /*NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<GetValidCouponResponse>() {
                 @Override
                 public void success(GetValidCouponResponse getValidCouponResponse, Response response) {
 
@@ -605,7 +605,7 @@ public class ShoppingCartActivity2WithoutLoyality extends Activity implements Vi
                     coupenCode = "";
                     ProgressDialogUtil.hideProgressDialog();
                 }
-            });
+            });*/
 
         } else {
             Toast.makeText(ShoppingCartActivity2WithoutLoyality.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();

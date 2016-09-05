@@ -624,7 +624,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
         public class MyViewHolder extends RecyclerView.ViewHolder  {
             TextView items_name,items_price,rupee,variant;
-            LinearLayout recommendLayout;
+            RelativeLayout recommendLayout;
             Button addBtn;
 
             public MyViewHolder(View view) {
@@ -634,7 +634,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 rupee = (TextView) view.findViewById(R.id.rupee);
                 variant = (TextView) view.findViewById(R.id.variant);
                 addBtn = (Button) view.findViewById(R.id.addBtn);
-                recommendLayout = (LinearLayout) view.findViewById(R.id.recommendLayout);
+                recommendLayout = (RelativeLayout) view.findViewById(R.id.recommendLayout);
 
             }
 

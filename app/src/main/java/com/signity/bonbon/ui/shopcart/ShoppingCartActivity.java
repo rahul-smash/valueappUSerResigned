@@ -223,9 +223,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         }else {
             saving_rupee.setVisibility(View.VISIBLE);
             if (currency.contains("\\")) {
-                saving_rupee.setText("Congratulations you save "+unescapeJavaString(currency)+totalSaving);
+                saving_rupee.setText("Congratulations you saved "+unescapeJavaString(currency)+totalSaving);
             } else {
-                saving_rupee.setText("Congratulations you save "+currency+totalSaving);
+                saving_rupee.setText("Congratulations you saved "+currency+totalSaving);
             }
         }
     }
@@ -528,7 +528,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
         public class MyViewHolder extends RecyclerView.ViewHolder  {
             TextView items_name,items_price,rupee,variant;
-            LinearLayout recommendLayout;
+            RelativeLayout recommendLayout;
             Button addBtn;
 
             public MyViewHolder(View view) {
@@ -538,8 +538,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 rupee = (TextView) view.findViewById(R.id.rupee);
                 variant = (TextView) view.findViewById(R.id.variant);
                 addBtn = (Button) view.findViewById(R.id.addBtn);
-                recommendLayout = (LinearLayout) view.findViewById(R.id.recommendLayout);
-
+                recommendLayout = (RelativeLayout) view.findViewById(R.id.recommendLayout);
             }
 
         }

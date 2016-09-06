@@ -210,6 +210,10 @@
             android:name=".ui.RecommendedProduct.RecommendProductsActivity"
             android:label="@string/title_activity_recommend_products" >
         </activity>
+        <activity
+            android:name=".ui.RecommendedProduct.RecommendProductsGroceryActivity"
+            android:label="@string/title_activity_recommend_products_grocery" >
+        </activity>
     </application>
 
 </manifest>

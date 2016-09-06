@@ -56,4 +56,6 @@
     <string name="title_activity_category_detail_jewellers">CategoryDetailJewellersActivity</string>
     <string name="title_activity_product_view_jewellers">ProductViewJewellersActivity</string>
     <string name="title_activity_recommend_products">RecommendProductsActivity</string>
+    <string name="title_activity_recommend_products_grocery">RecommendProductsGroceryActivity
+    </string>
 </resources>

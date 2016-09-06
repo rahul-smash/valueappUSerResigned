@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -53,9 +54,11 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.RecommendedProduct.RecommendProductsActivity;
+import com.signity.bonbon.ui.RecommendedProduct.RecommendProductsGroceryActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
+import com.squareup.picasso.Picasso;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -330,8 +333,13 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.viewAllBtn:
                 DataAdapter.getInstance().setProductList(listRecommendProduct);
-                startActivity(new Intent(ProductViewActivity.this, RecommendProductsActivity.class));
-                AnimUtil.slideFromRightAnim(ProductViewActivity.this);
+                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+                    startActivity(new Intent(ProductViewActivity.this, RecommendProductsGroceryActivity.class));
+                    AnimUtil.slideFromRightAnim(ProductViewActivity.this);
+                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)){
+                    startActivity(new Intent(ProductViewActivity.this, RecommendProductsActivity.class));
+                    AnimUtil.slideFromRightAnim(ProductViewActivity.this);
+                }
                 break;
 
         }
@@ -599,8 +607,22 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 holder.rupee.setText(currency);
             }
             holder.items_name.setText(product.getTitle());
+            holder.items_name.setSelected(true);
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
+
+            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+
+                holder.imageView.setVisibility(View.VISIBLE);
+                if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
+                    Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50,50).centerInside().error(R.mipmap.ic_launcher).into(holder.imageView);
+                } else {
+                    holder.imageView.setImageResource(R.mipmap.ic_launcher);
+                }
+            }
+            else {
+                holder.imageView.setVisibility(View.GONE);
+            }
 
 
             holder.addBtn.setOnClickListener(new View.OnClickListener() {
@@ -624,8 +646,9 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
         public class MyViewHolder extends RecyclerView.ViewHolder  {
             TextView items_name,items_price,rupee,variant;
-            RelativeLayout recommendLayout;
+            LinearLayout recommendLayout;
             Button addBtn;
+            ImageView imageView;
 
             public MyViewHolder(View view) {
                 super(view);
@@ -634,7 +657,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 rupee = (TextView) view.findViewById(R.id.rupee);
                 variant = (TextView) view.findViewById(R.id.variant);
                 addBtn = (Button) view.findViewById(R.id.addBtn);
-                recommendLayout = (RelativeLayout) view.findViewById(R.id.recommendLayout);
+                recommendLayout = (LinearLayout) view.findViewById(R.id.recommendLayout);
+                imageView = (ImageView) view.findViewById(R.id.imageView);
 
             }
 

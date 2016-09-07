@@ -625,7 +625,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             }
 
 
-            holder.addBtn.setOnClickListener(new View.OnClickListener() {
+            holder.recommendLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String productString = gsonHelper.getProduct(product);

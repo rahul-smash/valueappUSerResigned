@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Similiar Items"
+            android:text="Recommended Items"
             android:textSize="@dimen/text_size_small"
             android:padding="5dp"
             />

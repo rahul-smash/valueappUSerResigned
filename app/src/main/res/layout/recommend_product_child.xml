@@ -89,6 +89,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:clickable="false"
+        android:focusable="false"
         android:text="Add"
         android:textSize="@dimen/text_size_extra_small"
         android:textColor="@android:color/white"

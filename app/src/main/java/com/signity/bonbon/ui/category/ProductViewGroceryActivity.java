@@ -632,7 +632,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
                 holder.imageView.setVisibility(View.GONE);
             }
 
-            holder.addBtn.setOnClickListener(new View.OnClickListener() {
+            holder.recommendLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String productString = gsonHelper.getProduct(product);

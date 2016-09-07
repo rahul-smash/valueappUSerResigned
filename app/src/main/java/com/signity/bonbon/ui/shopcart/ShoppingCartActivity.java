@@ -522,7 +522,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             }
 
 
-            holder.addBtn.setOnClickListener(new View.OnClickListener() {
+            holder.recommendLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String productString = gsonHelper.getProduct(product);

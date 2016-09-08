@@ -225,7 +225,6 @@ public class SplashActivity extends Activity {
                     if (!appVersion.equalsIgnoreCase(oldVerision)) {
 //                        appDb.deleteCartAll();
                         appDb.deleteCartElement();
-                        prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
 
                     if (store.getBanners() != null && store.getBanners().size() != 0) {

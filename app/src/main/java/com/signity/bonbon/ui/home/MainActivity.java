@@ -630,7 +630,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (!appVersion.equalsIgnoreCase(oldVerision)) {
 //                        appDb.deleteCartAll();
                         appDb.deleteCartElement();
-                        prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
 
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {

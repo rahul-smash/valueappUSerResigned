@@ -194,6 +194,7 @@
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textSize="16sp" />-->
 
+
             <TextView
                 android:id="@+id/notification"
                 android:layout_width="wrap_content"
@@ -203,8 +204,30 @@
                 android:layout_marginTop="10dp"
                 android:text="3243"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone"/>
 
+
+            <TextView
+                android:id="@+id/txtLbl7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notification"
+                android:layout_marginTop="10dp"
+                android:text="Terms n Condition :"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtLbl7"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="ghjgjhjvvvjvjvjjgjgjhghjghjghjgjgjghjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
+                android:textSize="@dimen/text_size_small" />
 
         </RelativeLayout>
 

@@ -10,6 +10,7 @@ import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.UserRecord;
+import com.signity.bonbon.model.ValidAllCouponData;
 import com.signity.bonbon.model.Variant;
 
 import java.lang.reflect.Type;
@@ -96,6 +97,11 @@ public class GsonHelper {
         return gson.toJson(offerData, type);
     }
 
+    public String getOfferDataString(ValidAllCouponData data) {
+        Type type = new TypeToken<ValidAllCouponData>() {
+        }.getType();
+        return gson.toJson(data, type);
+    }
     public OfferData getOfferDataObject(String offerData) {
         OfferData object;
         Type type = new TypeToken<OfferData>() {

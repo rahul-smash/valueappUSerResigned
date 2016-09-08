@@ -25,7 +25,7 @@ public class OfferViewFragment extends Fragment {
 
     //ui element
     ImageView imageViewItem;
-    TextView date1, date2, minimumAmout, discount, coupon, notification,usageLimit;
+    TextView date1, date2, minimumAmout, discount, coupon, notification,usageLimit,txtTerms;
 
     //helper manager
     GsonHelper gsonHelper;
@@ -65,6 +65,7 @@ public class OfferViewFragment extends Fragment {
         coupon = (TextView) rootView.findViewById(R.id.txtCoupon);
         notification = (TextView) rootView.findViewById(R.id.notification);
         imageViewItem = (ImageView) rootView.findViewById(R.id.item_image);
+        txtTerms = (TextView) rootView.findViewById(R.id.txtTerms);
 
         if (data != null) {
             loadDataElement();
@@ -95,6 +96,7 @@ public class OfferViewFragment extends Fragment {
         discount.setText(data.getDiscount() + "" + percent);
         coupon.setText(data.getCouponCode());
         notification.setText(data.getOfferNotification());
+        txtTerms.setText(""+data.getOfferTermCondition());
 
         if (data.getImage() != null && !data.getImage().isEmpty()) {
             Picasso.with(getActivity()).load(data.getImage()).error(R.mipmap.ic_launcher).into(imageViewItem);

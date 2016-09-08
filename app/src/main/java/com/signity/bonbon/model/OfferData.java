@@ -48,6 +48,19 @@ public class OfferData {
     @Expose
     private String image;
 
+    @SerializedName("offer_term_condition")
+    @Expose
+    private String offerTermCondition;
+
+
+
+    public String getOfferTermCondition() {
+        return offerTermCondition;
+    }
+
+    public void setOfferTermCondition(String offerTermCondition) {
+        this.offerTermCondition = offerTermCondition;
+    }
     /**
      * @return The id
      */

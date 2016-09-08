@@ -36,6 +36,7 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
+import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DataAdapter;
@@ -64,6 +65,7 @@ import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.offer.OfferViewActivity;
 
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
@@ -124,6 +126,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
     private String couponCode = "";    // variable used to store couponcode applied by the User.
     private String tax="0" ;
+    GsonHelper gsonHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +136,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
         appDb = DbAdapter.getInstance().getDb();
+        gsonHelper = new GsonHelper();
         prefManager = new PrefManager(ShoppingCartActivity2.this);
 
         GATrackers.getInstance().trackScreenView(GAConstant.CHECKOUT_SCREEN);
@@ -603,6 +607,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
+                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
+                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
+                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
+
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
@@ -1139,7 +1147,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
             NetworkAdaper.getInstance().getNetworkServices().validateCoupon(params, new Callback<ValidAllCouponsModel>() {
                 @Override
-                public void success(ValidAllCouponsModel validAllCouponsModel, Response response) {
+                public void success(final ValidAllCouponsModel validAllCouponsModel, Response response) {
 
                     ProgressDialogUtil.hideProgressDialog();
                     if (validAllCouponsModel.getSuccess()) {
@@ -1167,7 +1175,32 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     } else {
                         coupenCode = "";
-                        Toast.makeText(ShoppingCartActivity2.this, validAllCouponsModel.getMessage(), Toast.LENGTH_SHORT).show();
+                        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                        dialogHandler.setDialog("Message", validAllCouponsModel.getMessage());
+                        dialogHandler.setPostiveButton("Details", true)
+                                .setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        dialogHandler.dismiss();
+
+                                        String offerName = validAllCouponsModel.getData().getName();
+                                        String offerDataString = gsonHelper.getOfferDataString(validAllCouponsModel.getData());
+                                        prefManager.storeSharedValue(AppConstant.OFFER_VIEW, offerDataString);
+                                        Intent intentOfferView = new Intent(ShoppingCartActivity2.this, OfferViewActivity.class);
+                                        intentOfferView.putExtra("offerName", offerName);
+                                        startActivity(intentOfferView);
+                                        finish();
+                                        AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
+
+                                    }
+                                });
+
+                        dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialogHandler.dismiss();
+                            }
+                        });
                     }
                 }
 

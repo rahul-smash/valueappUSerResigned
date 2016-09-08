@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
                         String msg = "" + store.getStoreMsg();
-                        new DialogHandler(MainActivity.this).setdialogForFinish("Error", msg, true);
+                        new DialogHandler(MainActivity.this).setdialogForFinish("Message", msg, true);
                     }
 
 

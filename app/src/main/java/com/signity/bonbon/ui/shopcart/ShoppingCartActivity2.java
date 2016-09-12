@@ -51,6 +51,7 @@ import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityDataModel;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.OfferData;
+import com.signity.bonbon.model.OnlinePaymentModel;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.SelectedVariant;
@@ -510,7 +511,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = edtBar.getText().toString();
+        String note = "cod "+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
 
@@ -627,6 +628,79 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         });
     }
 
+
+
+
+
+
+    private void callNetworkServiceForPlaceOrderForOnline(String id, String addressId,String payment_request_id,String payment_id) {
+
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+        String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+//        String order = appDb.getOrderStringForSubmit();
+        PrefManager prefManager = new PrefManager(this);
+        String shippingcharge = shipping_charges.getText().toString();
+        String orderPrice = items_price.getText().toString();
+        String discount = discountVal.getText().toString();
+        String amount = total.getText().toString();
+        String order = appDb.getCartListStringJson();
+        String note = "Online "+edtBar.getText().toString();
+        String coupon_code = "" + editCoupon.getText().toString();
+        Log.e("Order", order);
+        Map<String, String> param = new HashMap<String, String>();
+
+        param.put("payment_request_id", payment_request_id);
+        param.put("payment_id", payment_id);
+        param.put("device_id", deviceId);
+        param.put("user_id", id);
+        param.put("device_token", deviceToken);
+        param.put("platform", AppConstant.PLATFORM);
+        param.put("payment_method", "online");
+        param.put("user_address_id", addressId);
+        param.put("shipping_charges", shippingcharge);
+        param.put("tax", tax);
+        param.put("tax_rate", taxRate);
+        param.put("note", note);
+        param.put("orders", order);
+        param.put("coupon_code", coupenCode);
+        param.put("checkout", orderPrice);
+        param.put("discount", discount);
+        param.put("total", amount);
+        param.put("user_address", user_address);
+
+
+        param.put("store_tax_rate_detail", taxLabelJson);
+        param.put("store_fixed_tax_detail", taxFixedTaxJson);
+        param.put("calculated_tax_detail", taxDetailsJson);
+//        param.put("coupon_code", coupon_code);
+        Log.e("params", param.toString());
+        NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
+            @Override
+            public void success(ResponseData responseData, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
+                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
+                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
+                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
+
+                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                } else {
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+            }
+        });
+
+
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -645,7 +719,22 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         if (isForPickUpStatus.equalsIgnoreCase("yes")) {
                             callNetworkServiceForPlaceOrderForPickup(userId, addressId);
                         } else {
-                            callNetworkServiceForPlaceOrder(userId, addressId);
+
+                            if(payment_method.equalsIgnoreCase("2")){
+                                callNetworkServiceForPlaceOrder(userId, addressId);
+                            }else if(payment_method.equalsIgnoreCase("3")){
+                                callNetworkForOnlinepayment();
+                            }else {
+                                callNetworkServiceForPlaceOrder(userId, addressId);
+                            }
+                            /*String paymentOption=prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT);
+
+                            if(paymentOption.equalsIgnoreCase("0")){
+                                callNetworkServiceForPlaceOrder(userId, addressId);
+                            }else if(paymentOption.equalsIgnoreCase("1")){
+                                callForPaymentOptions();
+                            }*/
+//                            callNetworkServiceForPlaceOrder(userId, addressId);
                         }
                     } else {
 //                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
@@ -700,6 +789,95 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 Intent intent = new Intent(ShoppingCartActivity2.this, MainActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+
+    private void callForPaymentOptions() {
+        final Dialog dialog = new Dialog(ShoppingCartActivity2.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.choose_payment_options);
+
+        Button codBtn=(Button)dialog.findViewById(R.id.codBtn);
+        Button onlineBtn=(Button)dialog.findViewById(R.id.onlineBtn);
+
+        codBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                callNetworkServiceForPlaceOrder(userId, addressId);
+            }
+        });
+
+        onlineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                callNetworkForOnlinepayment();
+            }
+        });
+
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+    }
+
+
+
+    private void callNetworkForOnlinepayment(){
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+        String amount = total.getText().toString();
+        String user_name=prefManager.getSharedValue(AppConstant.NAME);
+        String email=prefManager.getSharedValue(AppConstant.EMAIL);
+        String phone=prefManager.getSharedValue(AppConstant.PHONE);
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("user_name", user_name);
+        param.put("email", email);
+        param.put("phone", phone);
+        param.put("total", amount);
+//        param.put("coupon_code", coupon_code);
+        Log.e("params", param.toString());
+        NetworkAdaper.getInstance().getNetworkServices().onlinePayment(param, new Callback<OnlinePaymentModel>() {
+
+
+            @Override
+            public void success(OnlinePaymentModel onlinePaymentModel, Response response) {
+
+                if (onlinePaymentModel.getSuccess()) {
+                    ProgressDialogUtil.hideProgressDialog();
+                    Intent intent = new Intent(ShoppingCartActivity2.this, PayOnlineActivity.class);
+                    intent.putExtra("url", onlinePaymentModel.getPaymentUrl());
+                    startActivityForResult(intent, 2);
+                    AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
+                } else {
+                    ProgressDialogUtil.hideProgressDialog();
+                    Toast.makeText(ShoppingCartActivity2.this, "" + onlinePaymentModel.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(resultCode==2)
+        {
+            String payment_request_id=data.getStringExtra("payment_request_id");
+            String payment_id=data.getStringExtra("payment_id");
+            callNetworkServiceForPlaceOrderForOnline(userId, addressId, payment_request_id, payment_id);
+        }
+        else if(resultCode==3){
+            showAlertDialog(ShoppingCartActivity2.this, "Message", "There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.");
         }
     }
 

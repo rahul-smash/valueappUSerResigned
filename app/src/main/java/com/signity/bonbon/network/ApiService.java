@@ -15,6 +15,7 @@ import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.MobResponse;
+import com.signity.bonbon.model.OnlinePaymentModel;
 import com.signity.bonbon.model.ProductListModel;
 import com.signity.bonbon.model.ReferNEarnModel;
 import com.signity.bonbon.model.ResponseData;
@@ -156,6 +157,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/jewellers/setJewellerQuery")
     void submitQuery(@FieldMap Map<String, String> parameters, Callback<EmailResponse> response);
+
+    @FormUrlEncoded
+    @POST("/onlinePayment")
+    void onlinePayment(@FieldMap Map<String, String> parameters, Callback<OnlinePaymentModel> response);
 
     @FormUrlEncoded
     @POST("/multiple_tax_calculation")

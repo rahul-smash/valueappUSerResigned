@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_dialog_shape"
+    android:layout_margin="20dp"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose your payment method"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/text_size_normal"
+        android:padding="5dp"/>
+
+    <Button
+        android:id="@+id/codBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@color/ColorPrimary"
+        android:layout_marginTop="10dp"
+        android:text="Cash On Delivery"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/onlineBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="@color/ColorPrimary"
+        android:layout_marginTop="15dp"
+        android:text="Pay Now"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>

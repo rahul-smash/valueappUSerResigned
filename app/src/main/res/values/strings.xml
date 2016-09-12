@@ -49,6 +49,7 @@
     <string name="Notification.Text">We\'re at %1$s!!!</string>
     <string name="fence_radius">.200</string>
     <string name="title_activity_pick_up">PickUpActivity</string>
+    <string name="title_activity_pay_online">PayOnlineActivity</string>
 
 
     <!--Error code-->

@@ -689,7 +689,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                     sb.append((char) Integer.parseInt(code, 8));
                     continue;
                 }
-
                 switch (nextChar) {
                     case '\\':
                         ch = '\\';

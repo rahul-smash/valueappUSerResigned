@@ -16,13 +16,17 @@
 
         <TextView
             android:id="@+id/discountValue"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:text="10 % Off"
             android:gravity="left"
             android:paddingLeft="5dp"
             android:paddingBottom="2dp"
-            android:maxLines="1"
-            android:textSize="@dimen/text_size_normal"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:textSize="@dimen/text_size_small"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"/>

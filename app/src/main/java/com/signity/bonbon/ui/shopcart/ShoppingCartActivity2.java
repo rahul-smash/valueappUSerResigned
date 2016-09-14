@@ -1935,7 +1935,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder = (ViewHolder) convertView.getTag();
             }
             final OfferData data = listOfferData.get(position);
-            holder.discountValue.setText("" + data.getDiscount() + "% Off");
+//            holder.discountValue.setText("" + data.getDiscount() + "% Off");
+            holder.discountValue.setText("" + data.getName());
+            holder.discountValue.setSelected(true);
             if(data.getMinimumOrderAmount().equalsIgnoreCase("0")){
                 holder.minValue.setText(""+data.getName());
             }else {

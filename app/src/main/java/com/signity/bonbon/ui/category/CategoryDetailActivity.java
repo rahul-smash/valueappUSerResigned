@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -141,6 +142,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
         adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), subCategoryList);
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new AccordionTransformer());
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 //

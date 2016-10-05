@@ -1,6 +1,8 @@
 package com.signity.bonbon.network;
 
 import com.signity.bonbon.model.AboutUsModel1;
+import com.signity.bonbon.model.AddressSelectModel;
+import com.signity.bonbon.model.AreaSwitchModel;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.EnquiryModel;
 import com.signity.bonbon.model.GeoFenceModel;
@@ -19,6 +21,7 @@ import com.signity.bonbon.model.OnlinePaymentModel;
 import com.signity.bonbon.model.ProductListModel;
 import com.signity.bonbon.model.ReferNEarnModel;
 import com.signity.bonbon.model.ResponseData;
+import com.signity.bonbon.model.StoreAreaModel;
 import com.signity.bonbon.model.TaxCalculationModel;
 import com.signity.bonbon.model.UserAddressList;
 import com.signity.bonbon.model.ValidAllCouponsModel;
@@ -115,6 +118,9 @@ public interface ApiService {
     @GET("/storearea")
     void getStoreAreaList(Callback<GetStoreArea> response);
 
+    @GET("/storedeliveryradius")
+    void getStoreAreasList(Callback<StoreAreaModel> response);
+
     @FormUrlEncoded
     @POST("/storedashboard")
     void getAboutUs(@FieldMap Map<String, String> parameters, Callback<AboutUsModel1> response);
@@ -176,4 +182,12 @@ public interface ApiService {
 
     @GET("/getEnquiryFormMessage")
     void getEnquiryFormMessage(Callback<EnquiryModel> response);
+
+    @GET("/deliveryAreaSwitches")
+    void getDeliveryAreaSwitch(Callback<AreaSwitchModel> response);
+
+    @FormUrlEncoded
+    @POST("/deliveryAreas/{typeName}")
+    void getAddressData(@FieldMap Map<String, String> parameters, @Path("typeName") String typeName, Callback<AddressSelectModel> response);
+
 }

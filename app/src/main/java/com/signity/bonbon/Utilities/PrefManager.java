@@ -64,6 +64,24 @@ public class PrefManager {
 
     }
 
+    public void storeAreaSwitch(String key, String value) {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public String getAreaSwitch(String key) {
+        return sharedpreferences.getString(key, "0");
+    }
+
+    public void clearAreaSwitch(String key) {
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove(key);
+        editor.commit();
+
+    }
+
     public static final String NOTIFICATION_CART_LOCAL = BuildConfig.APPLICATION_ID + ".NOTIFICATION_CART_LOCAL";
 
     public boolean isCartSetLocalNotification() {

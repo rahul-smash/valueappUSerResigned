@@ -30,7 +30,7 @@
             android:layout_below="@+id/edit_address"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="20dp">
@@ -46,50 +46,123 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/countryLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="10dp"
-                android:text="City"
-                android:textColor="#646464"
-                android:textSize="12sp" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/city_name"
-                android:layout_width="fill_parent"
-                android:layout_height="32dp"
-                android:background="#e5e5e5"
-                android:clickable="true"
-                android:editable="false"
-                android:gravity="left|center_vertical"
-                android:hint="City"
-                android:imeOptions="actionNext"
-                android:paddingLeft="5dp"
-                android:singleLine="true"
-                android:textColor="#3a3a3a" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Country"
+                    android:textColor="#646464"
+                    android:textSize="12sp" />
 
-            <TextView
+                <Button
+                    android:id="@+id/country_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#e5e5e5"
+                    android:paddingLeft="5dp"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:gravity="left|center_vertical"
+                    android:hint="Country"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="#3a3a3a" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/stateLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="10dp"
-                android:text="Area"
-                android:textColor="#646464"
-                android:textSize="12sp" />
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/state_name"
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="10dp"
+                    android:text="State"
+                    android:textColor="#646464"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/state_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#e5e5e5"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:gravity="left|center_vertical"
+                    android:hint="State"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+                    android:textColor="#3a3a3a" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/cityLayout"
                 android:layout_width="fill_parent"
-                android:layout_height="32dp"
-                android:background="#e5e5e5"
-                android:gravity="left|center_vertical"
-                android:hint="Area"
-                android:imeOptions="actionNext"
-                android:paddingLeft="5dp"
-                android:singleLine="true"
-                android:textColor="#3a3a3a" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="10dp"
+                    android:text="City"
+                    android:textColor="#646464"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/city_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#e5e5e5"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:gravity="left|center_vertical"
+                    android:hint="City"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+                    android:textColor="#3a3a3a" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/areaLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Area"
+                    android:textColor="#646464"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/area_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#e5e5e5"
+                    android:gravity="left|center_vertical"
+                    android:hint="Area"
+                    android:imeOptions="actionNext"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+                    android:textColor="#3a3a3a" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -122,8 +195,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
-                android:singleLine="true"
                 android:inputType="number"
+                android:singleLine="true"
                 android:textColor="#3a3a3a" />
 
             <TextView

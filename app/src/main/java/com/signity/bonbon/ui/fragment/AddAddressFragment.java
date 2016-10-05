@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +22,20 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.gcm.GCMClientManager;
+import com.signity.bonbon.model.AreaSwitchDataModel;
+import com.signity.bonbon.model.AreaSwitchModel;
 import com.signity.bonbon.model.EmailResponse;
+import com.signity.bonbon.model.StoreAreaListModel;
+import com.signity.bonbon.model.StoreAreaModel;
 import com.signity.bonbon.model.UserAddressModel;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.signity.bonbon.ui.common.AddressSelectActivity;
+import com.signity.bonbon.ui.Delivery.LocationAreaActivity;
 import com.signity.bonbon.ui.common.CityAreaActivitiy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit.Callback;
@@ -38,22 +47,24 @@ import retrofit.client.Response;
  */
 public class AddAddressFragment extends Fragment implements View.OnClickListener {
 
-    EditText address_line1, address_line2, zip_code;
-    Button city_name, state_name;
-    public TextView done_text;
-    View mView;
-    String cityId = "", cityName = "";
-    public String addressId;
-
+    private static final int COUNTRY = 326;
+    private static final int STATE = 327;
     private static final int CITY = 328;
     private static final int AREA = 329;
-
-
-    private GCMClientManager pushClientManager;
+    public TextView done_text;
+    public String addressId;
+    EditText address_line1, address_line2, zip_code;
+    Button country_name, state_name, city_name, area_name;
+    View mView;
     String action;
+    LinearLayout countryLayout, stateLayout, cityLayout, areaLayout;
+    private String countryID = "", countryName = "";
+    private String stateID = "", stateName = "";
+    private String cityId = "", cityName = "";
+    private String areaID = "", areaName = "";
+    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     private String userId;
-    private String areaID = "", areaName = "";
     private String from;
     private TextView edit_address;
 
@@ -77,12 +88,20 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(com.signity.bonbon.R.layout.add_address_fragment, container, false);
+        countryLayout = (LinearLayout) mView.findViewById(R.id.countryLayout);
+        stateLayout = (LinearLayout) mView.findViewById(R.id.stateLayout);
+        cityLayout = (LinearLayout) mView.findViewById(R.id.cityLayout);
+        areaLayout = (LinearLayout) mView.findViewById(R.id.areaLayout);
         edit_address = (TextView) mView.findViewById(com.signity.bonbon.R.id.edit_address);
         address_line1 = (EditText) mView.findViewById(com.signity.bonbon.R.id.address_line1);
-        city_name = (Button) mView.findViewById(com.signity.bonbon.R.id.city_name);
-        city_name.setOnClickListener(this);
+        country_name = (Button) mView.findViewById(com.signity.bonbon.R.id.country_name);
+        country_name.setOnClickListener(this);
         state_name = (Button) mView.findViewById(com.signity.bonbon.R.id.state_name);
         state_name.setOnClickListener(this);
+        city_name = (Button) mView.findViewById(com.signity.bonbon.R.id.city_name);
+        city_name.setOnClickListener(this);
+        area_name = (Button) mView.findViewById(com.signity.bonbon.R.id.area_name);
+        area_name.setOnClickListener(this);
         zip_code = (EditText) mView.findViewById(com.signity.bonbon.R.id.zip_code);
         done_text = (TextView) mView.findViewById(com.signity.bonbon.R.id.done_text);
         getActivity().getWindow().setSoftInputMode(
@@ -98,7 +117,9 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             edit_address.setText("Edit address");
 
             city_name.setText(object.getCity() != null ? object.getCity() : "");
+            area_name.setText(object.getAreaName() != null ? object.getAreaName() : "");
             state_name.setText(object.getState() != null ? object.getState() : "");
+            country_name.setText(object.getCountry() != null ? object.getCountry() : "");
 
             address_line1.setText(object.getAddress().toString());
             zip_code.setText(object.getZipcode().toString());
@@ -106,6 +127,8 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         } else if (action.equalsIgnoreCase("ADD")) {
             edit_address.setText("Add address");
         }
+
+        getDeliveryAreaSwitchesStatus();
 
         done_text.setOnClickListener(new View.OnClickListener() {
                                          @Override
@@ -123,7 +146,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                                                      address_line1.setError("Address Required");
                                                  } else if (areaID.isEmpty()) {
                                                      city_name.setError("City");
-                                                     state_name.setError("Area");
+                                                     area_name.setError("Area");
                                                  } else {
                                                      addNewDeliveryAddress();
                                                  }
@@ -137,6 +160,45 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 
         return mView;
     }
+
+    private void getDeliveryAreaSwitchesStatus() {
+
+
+        ProgressDialogUtil.showProgressDialog(getActivity());
+        NetworkAdaper.getInstance().getNetworkServices().getDeliveryAreaSwitch(new Callback<AreaSwitchModel>() {
+
+            @Override
+            public void success(AreaSwitchModel areaSwitchModel, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+                if (areaSwitchModel.getSuccess()) {
+
+                    AreaSwitchDataModel model = areaSwitchModel.getData();
+
+                    if (model != null) {
+                        prefManager.storeAreaSwitch(AppConstant.SHOW_MAP, (!model.getDeliveryArea().isEmpty() ? model.getDeliveryArea() : "0"));
+                        prefManager.storeAreaSwitch(AppConstant.CITY, (!model.getCity().isEmpty() ? model.getCity() : "0"));
+                        prefManager.storeAreaSwitch(AppConstant.STATE, (!model.getState().isEmpty() ? model.getState() : "0"));
+                        prefManager.storeAreaSwitch(AppConstant.COUNTRY, (!model.getCountry().isEmpty() ? model.getCountry() : "0"));
+                        prefManager.storeAreaSwitch(AppConstant.RADIUS_IN, (!model.getRadiusIn().isEmpty() ? model.getRadiusIn() : "km"));
+
+                        setLayout();
+                    }
+                } else {
+//                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+//                    dialogHandler.setdialogForFinish("Message", "" + areaSwitchModel.getMessage(), false);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(getActivity());
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+            }
+        });
+
+    }
+
 
     private void updateDeliveryAddress() {
 
@@ -158,6 +220,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         String addressLine1 = String.valueOf(address_line1.getText());
         String cityName = String.valueOf(city_name.getText());
         String stateName = String.valueOf(state_name.getText());
+        String countryName = String.valueOf(country_name.getText());
         String zipCode = String.valueOf(zip_code.getText());
         if (zipCode.isEmpty()) {
             zipCode = "0";
@@ -175,6 +238,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("state", stateName);
         param.put("zipcode", zipCode);
         param.put("area_name", areaName);
+        param.put("country", countryName);
         NetworkAdaper.getInstance().getNetworkServices().updateDeliveryAddress(param, new Callback<EmailResponse>() {
 
 
@@ -187,7 +251,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                     mgr.hideSoftInputFromWindow(done_text.getWindowToken(), 0);
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", ""+emailResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + emailResponse.getMessage(), false);
                 }
             }
 
@@ -220,6 +284,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         String addressLine1 = String.valueOf(address_line1.getText());
         String cityName = String.valueOf(city_name.getText());
         String stateName = String.valueOf(state_name.getText());
+        String countryName = String.valueOf(country_name.getText());
         String zipCode = String.valueOf(zip_code.getText());
         if (zipCode.isEmpty()) {
             zipCode = "0";
@@ -238,7 +303,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         param.put("state", stateName);
         param.put("zipcode", zipCode);
         param.put("area_name", areaName);
-
+        param.put("country", countryName);
         NetworkAdaper.getInstance().getNetworkServices().addNewDeliveryAddress(param, new Callback<EmailResponse>() {
 
 
@@ -253,7 +318,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", ""+emailResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + emailResponse.getMessage(), false);
                 }
             }
 
@@ -266,31 +331,135 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         });
     }
 
+    private void setLayout() {
+
+        if (prefManager.getAreaSwitch(AppConstant.COUNTRY).equalsIgnoreCase("0")) {
+            countryLayout.setVisibility(View.GONE);
+        } else {
+            countryLayout.setVisibility(View.VISIBLE);
+        }
+        if (prefManager.getAreaSwitch(AppConstant.STATE).equalsIgnoreCase("0")) {
+            stateLayout.setVisibility(View.GONE);
+        } else {
+            stateLayout.setVisibility(View.VISIBLE);
+        }
+        if (prefManager.getAreaSwitch(AppConstant.CITY).equalsIgnoreCase("0")) {
+            cityLayout.setVisibility(View.GONE);
+        } else {
+            cityLayout.setVisibility(View.VISIBLE);
+        }
+        /*if (prefManager.getAreaSwitch(AppConstant.SHOW_MAP).equalsIgnoreCase("0")) {
+            areaLayout.setVisibility(View.GONE);
+        } else {
+            areaLayout.setVisibility(View.VISIBLE);
+        }*/
+    }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.city_name:
-                Intent intentCity = new Intent(getActivity(),
-                        CityAreaActivitiy.class);
-                intentCity.putExtra("key", "city");
-                intentCity.putExtra("title", "City");
-                startActivityForResult(intentCity, CITY);
+
+            case R.id.country_name:
+                Intent intentCountry = new Intent(getActivity(),
+                        AddressSelectActivity.class);
+                intentCountry.putExtra("typeName", "Country");
+                intentCountry.putExtra("typeNameValue", "");
+                intentCountry.putExtra("id", "");
+                startActivityForResult(intentCountry, COUNTRY);
 //                AnimUtil.slideUpAnim(getActivity());
 
                 break;
+
             case R.id.state_name:
+                if (countryID.isEmpty()) {
+                    if (prefManager.getAreaSwitch(AppConstant.COUNTRY).equalsIgnoreCase("0")) {
+                        Intent intentState = new Intent(getActivity(),
+                                AddressSelectActivity.class);
+                        intentState.putExtra("typeName", "State");
+                        intentState.putExtra("typeNameValue", "");
+                        intentState.putExtra("id", "");
+                        startActivityForResult(intentState, STATE);
+                    } else {
+                        Toast.makeText(getActivity(), "Select Country First", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    Intent intentState = new Intent(getActivity(),
+                            AddressSelectActivity.class);
+                    intentState.putExtra("typeName", "State");
+                    intentState.putExtra("typeNameValue", countryName);
+                    intentState.putExtra("id", countryID);
+                    startActivityForResult(intentState, STATE);
+//                AnimUtil.slideUpAnim(getActivity());
+                }
+
+                break;
+
+            case R.id.city_name:
+                if (stateID.isEmpty()) {
+
+                    if (prefManager.getAreaSwitch(AppConstant.STATE).equalsIgnoreCase("0")) {
+                        Intent intentCity = new Intent(getActivity(),
+                                AddressSelectActivity.class);
+                        intentCity.putExtra("typeName", "City");
+                        intentCity.putExtra("typeNameValue", "");
+                        intentCity.putExtra("id", "");
+                        startActivityForResult(intentCity, CITY);
+                    } else {
+                        Toast.makeText(getActivity(), "Select State First", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Intent intentCity = new Intent(getActivity(),
+                            AddressSelectActivity.class);
+                    intentCity.putExtra("typeName", "City");
+                    intentCity.putExtra("typeNameValue", stateName);
+                    intentCity.putExtra("id", stateID);
+                    startActivityForResult(intentCity, CITY);
+//                AnimUtil.slideUpAnim(getActivity());
+                }
+
+                break;
+            case R.id.area_name:
 
                 if (cityId.isEmpty()) {
-                    Toast.makeText(getActivity(), "Select City First", Toast.LENGTH_SHORT).show();
+
+                    if (prefManager.getAreaSwitch(AppConstant.CITY).equalsIgnoreCase("0")) {
+                        if(prefManager.getAreaSwitch(AppConstant.SHOW_MAP).equalsIgnoreCase("0")){
+                            Intent intentArea = new Intent(getActivity(),
+                                    AddressSelectActivity.class);
+                            intentArea.putExtra("typeName", "Area");
+                            intentArea.putExtra("typeNameValue", "");
+                            intentArea.putExtra("id", "");
+                            startActivityForResult(intentArea, AREA);
+                        }
+                        else if(prefManager.getAreaSwitch(AppConstant.SHOW_MAP).equalsIgnoreCase("1")){
+
+                            Intent intentArea = new Intent(getActivity(),
+                                    LocationAreaActivity.class);
+                            startActivityForResult(intentArea, AREA);
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Select City First", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
-                    Intent intentArea = new Intent(getActivity(),
-                            CityAreaActivitiy.class);
-                    intentArea.putExtra("key", "area");
-                    intentArea.putExtra("city_id", cityId);
-                    intentArea.putExtra("title", cityName);
-                    intentArea.putExtra("city_name", cityName);
-                    startActivityForResult(intentArea, AREA);
+
+                 if(prefManager.getAreaSwitch(AppConstant.SHOW_MAP).equalsIgnoreCase("0")){
+                     Intent intentArea = new Intent(getActivity(),
+                             AddressSelectActivity.class);
+                     intentArea.putExtra("typeName", "Area");
+                     intentArea.putExtra("typeNameValue", cityName);
+                     intentArea.putExtra("id", cityId);
+                     startActivityForResult(intentArea, AREA);
+                 }
+                 else if(prefManager.getAreaSwitch(AppConstant.SHOW_MAP).equalsIgnoreCase("1")){
+
+                     Intent intentArea = new Intent(getActivity(),
+                             LocationAreaActivity.class);
+                     startActivityForResult(intentArea, AREA);
+                 }
 //                    AnimUtil.slideUpAnim(getActivity());
                 }
                 break;
@@ -300,16 +469,41 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CITY) {
+
+        if (requestCode == COUNTRY) {
+            if (resultCode == Activity.RESULT_OK) {
+                String id = data.getExtras().getString("id");
+                String typeName = data.getExtras().getString("typeName");
+
+                if (id != null) {
+                    countryID = id;
+                    countryName = typeName;
+                    country_name.setText(typeName);
+//                    buttonCountryCode.setText(code);
+                }
+            }
+        } else if (requestCode == STATE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String id = data.getExtras().getString("id");
+                String typeName = data.getExtras().getString("typeName");
+
+                if (id != null) {
+                    stateID = id;
+                    stateName = typeName;
+                    state_name.setText(typeName);
+//                    buttonCountryCode.setText(code);
+                }
+            }
+        } else if (requestCode == CITY) {
 
             if (resultCode == Activity.RESULT_OK) {
-                String code = data.getExtras().getString("code");
-                String title = data.getExtras().getString("title");
+                String id = data.getExtras().getString("id");
+                String typeName = data.getExtras().getString("typeName");
 
-                if (code != null) {
-                    cityId = code;
-                    cityName = title;
-                    city_name.setText(title);
+                if (id != null) {
+                    cityId = id;
+                    cityName = typeName;
+                    city_name.setText(typeName);
 //                    buttonCountryCode.setText(code);
                 }
             }
@@ -317,13 +511,13 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
         } else if (requestCode == AREA) {
 
             if (resultCode == Activity.RESULT_OK) {
-                String code = data.getExtras().getString("code");
-                String title = data.getExtras().getString("title");
+                String id = data.getExtras().getString("id");
+                String areaname = data.getExtras().getString("areaName");
 
-                if (code != null) {
-                    areaID = code;
-                    areaName = title;
-                    state_name.setText(title);
+                if (id != null) {
+                    areaID = id;
+                    areaName = areaname;
+                    area_name.setText(areaName);
 //                    buttonCountryCode.setText(code);
                 }
             }

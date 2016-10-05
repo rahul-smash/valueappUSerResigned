@@ -44,8 +44,16 @@ public class AppConstant {
     public static final String istaxenable = "com.android.bonbon.Utilities.istaxenable";
     public static final String tax_label_name = "com.android.bonbon.Utilities.tax_label_name";
     public static final String tax_rate = "com.android.bonbon.Utilities.tax_rate";
+    public static final String radiusIn = "com.android.bonbon.Utilities.radiusIn";
     public static final String CATEGORY_LAYOUT_TYPE = "com.android.bonbon.Utilities.categoryLayoutType";
+    public static final String CATEGORY_ID = "com.android.bonbon.Utilities.CATEGORY_ID";
     public static final String ONLINE_PAYMENT = "com.android.bonbon.Utilities.ONLINE_PAYMENT";
+    public static final String PRODUCT_IMAGE = "com.android.bonbon.Utilities.PRODUCT_IMAGE";
+    public static final String SHOW_MAP = "com.android.bonbon.Utilities.SHOW_MAP";
+    public static final String RADIUS_IN = "com.android.bonbon.Utilities.RADIUS_IN";
+    public static final String CITY = "com.android.bonbon.Utilities.CITY";
+    public static final String STATE = "com.android.bonbon.Utilities.STATE";
+    public static final String COUNTRY = "com.android.bonbon.Utilities.COUNTRY";
 
 
 }

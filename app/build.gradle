@@ -65,4 +65,5 @@ dependencies {
     compile "com.google.android.gms:play-services-location:${playLibVersion}"
     compile "com.google.android.gms:play-services-analytics:${playLibVersion}"
     compile "com.squareup.picasso:picasso:${picassoLibVersion}"
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 }

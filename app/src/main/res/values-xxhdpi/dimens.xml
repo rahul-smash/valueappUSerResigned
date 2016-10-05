@@ -46,9 +46,9 @@
     <!-- Dimension for Category grid view-->
     <dimen name="category_grid_block_width">200dp</dimen>
     <dimen name="category_grid_block_height">200dp</dimen>
-    <dimen name="category_gird_image_width">180dp</dimen>
-    <dimen name="category_gird_image_height">180dp</dimen>
-    <integer name="category_gird_image_width">188</integer>
+    <dimen name="category_gird_image_width">150dp</dimen>
+    <dimen name="category_gird_image_height">150dp</dimen>
+    <integer name="category_gird_image_width">154</integer>
 
     <!-- Product listView dimensions -->
     <dimen name="category_item_heart_width">30dp</dimen>

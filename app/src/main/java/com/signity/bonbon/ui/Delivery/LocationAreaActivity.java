@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,8 +21,10 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,6 +38,7 @@ import com.signity.bonbon.Utilities.AppUtils;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.model.GetStoreAreaModel1;
@@ -43,6 +47,7 @@ import com.signity.bonbon.model.StoreAreaListModel;
 import com.signity.bonbon.model.StoreAreaModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.service.FetchAddressIntentService;
+import com.signity.bonbon.ui.Location.SearchLocationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +93,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
     long radius=0;
     String code="";
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+    private  final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,8 +120,35 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
         textViewlocation.setOnClickListener(this);
 
         getStoreArea();
+
+        if (!canAccessLocation()) {
+
+            requestPermission();
+
+        }
     }
 
+    private void requestPermission(){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+//            Toast.makeText(LocationAreaActivity.this,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+        }
+    }
+
+
+    private boolean canAccessLocation() {
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED){
+            return  true;
+        }
+        else return false;
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -149,7 +182,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
 
     private void gettingAreaId() {
 
-
+        code="";
         radius=calculateDistance(radiusIn);
 
         for(int i=0; i<areaList.size(); i++){
@@ -252,11 +285,34 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
                 break;
 
             case R.id.backButton:
-                onBackPressed();
+                try {
+                    if(code.isEmpty()){
+
+                        if(areaList!=null && areaList.size()!=0){
+                            if(areaList.get(areaList.size()-1).getRadiusCircle().equalsIgnoreCase("Above")){
+                                code=areaList.get(areaList.size()-1).getAreaId();
+                                addAddress();
+                            }
+                            else {
+                                DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
+                                dialogHandler.setdialogForFinish("Message", "Sorry we do not deliver in this area.", true);
+                            }
+                        }
+
+
+                    }else {
+                        addAddress();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
 
             case R.id.location:
                 openAutocompleteActivity();
+//                Intent intent=new Intent(LocationAreaActivity.this, SearchLocationActivity.class);
+//                startActivity();
+//                AnimUtil.slideFromRightAnim(LocationAreaActivity.this);
                 break;
         }
     }
@@ -335,8 +391,13 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
         try {
             // The autocomplete activity requires Google Play Services to be available. The intent
             // builder checks this and throws an exception if it is not the case.
+            AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                    .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
+                    .build();
+
             Intent intent =
                     new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                            .setFilter(typeFilter)
                             .build(this);
             startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
 
@@ -365,7 +426,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
         if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
             if (resultCode == RESULT_OK) {
                 // Get the user's selected place from the Intent.
-                Place place = PlaceAutocomplete.getPlace(this, data);
+                Place place = PlacePicker.getPlace(this, data);
                 // TODO call location based filter
 
 
@@ -374,11 +435,13 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
 
 
                     latLong = place.getLatLng();
+                    textViewlocation.setText(place.getAddress());
 
                     //mLocationText.setText(place.getName() + "");
 
                     CameraPosition cameraPosition = new CameraPosition.Builder()
                             .target(latLong).zoom(19f).tilt(70).build();
+
 
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling

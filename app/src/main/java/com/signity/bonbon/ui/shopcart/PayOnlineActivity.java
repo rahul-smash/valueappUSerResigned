@@ -48,6 +48,9 @@ public class PayOnlineActivity extends AppCompatActivity {
 
     String storeId,url;
     private Store store;
+
+    boolean backButtonEnabled=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,7 @@ public class PayOnlineActivity extends AppCompatActivity {
         webview.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
+                backButtonEnabled=false;
                 Log.e("Should overriding",url);
 
                 if(url.contains("paymentReturn?") && url.contains("status")){
@@ -110,11 +114,13 @@ public class PayOnlineActivity extends AppCompatActivity {
 
             public void onPageFinished(WebView view, String url) {
                 ProgressDialogUtil.hideProgressDialog();
+                backButtonEnabled=true;
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                backButtonEnabled=false;
                 Log.e("onPageStarted", url);
             }
         });
@@ -124,8 +130,11 @@ public class PayOnlineActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        AnimUtil.slideFromLeftAnim(PayOnlineActivity.this);
+        if(backButtonEnabled){
+            super.onBackPressed();
+            finish();
+            AnimUtil.slideFromLeftAnim(PayOnlineActivity.this);
+        }
+
     }
 }

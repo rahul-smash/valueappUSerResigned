@@ -2,9 +2,12 @@ package com.signity.bonbon.view;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 
 /**
@@ -57,7 +60,7 @@ public class PagerEnabledSlidingPaneLayout extends SlidingPaneLayout {
                 final float y = ev.getY();
                 // The user should always be able to "close" the pane, so we only check
                 // for child scrollability if the pane is currently closed.
-                if (mInitialMotionX > mEdgeSlop && !isOpen() && canScroll(this, false,
+                if (mInitialMotionX > mEdgeSlop && mInitialMotionY > mInitialMotionX && !isOpen() || canScroll(this, false,
                         Math.round(x - mInitialMotionX), Math.round(x), Math.round(y))) {
 
                     // How do we set super.mIsUnableToDrag = true?
@@ -65,14 +68,26 @@ public class PagerEnabledSlidingPaneLayout extends SlidingPaneLayout {
                     // send the parent a cancel event
                     MotionEvent cancelEvent = MotionEvent.obtain(ev);
                     cancelEvent.setAction(MotionEvent.ACTION_CANCEL);
-//                    return super.onInterceptTouchEvent(cancelEvent);
+                    return super.onInterceptTouchEvent(cancelEvent);
 
-                    return false;
+//                    return false;
                 }
             }
         }
 
-//        return super.onInterceptTouchEvent(ev);
-        return false;
+        return super.onInterceptTouchEvent(ev);
+//        return false;
+    }
+
+
+    protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
+    /* special case ViewPagers, which don't properly implement the scrolling interface */
+        return checkV && (ViewCompat.canScrollHorizontally(v, -dx) ||
+                ((v instanceof ViewPager) && canViewPagerScrollHorizontally((ViewPager) v, -dx)));
+    }
+
+    boolean canViewPagerScrollHorizontally(ViewPager p, int dx) {
+        return !(dx < 0 && p.getCurrentItem() <= 0 ||
+                0 < dx && p.getAdapter().getCount() - 1 <= p.getCurrentItem());
     }
 }

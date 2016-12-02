@@ -614,10 +614,14 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
 
                 holder.imageView.setVisibility(View.VISIBLE);
-                if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
-                    Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50,50).centerInside().error(R.mipmap.ic_launcher).into(holder.imageView);
-                } else {
-                    holder.imageView.setImageResource(R.mipmap.ic_launcher);
+                try {
+                    if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
+                        Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50,50).centerInside().error(R.mipmap.ic_launcher).into(holder.imageView);
+                    } else {
+                        holder.imageView.setImageResource(R.mipmap.ic_launcher);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
             else {

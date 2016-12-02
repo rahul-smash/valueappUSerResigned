@@ -86,11 +86,15 @@ public class RvCategoryListAdapter extends RecyclerView.Adapter<RvCategoryListAd
         holder.text.setText(category.getTitle());
 //        holder.image.setLayoutParams(layoutParamsImageView);
 //            holder.image.setImageResource(images[0]);
-        if (category.getImageMedium() != null && !category.getImageMedium().isEmpty()) {
-            Picasso.with(context).load(category.getImage()).
-                    resize(300, 300).error(R.mipmap.ic_launcher).into(holder.image);
-        } else {
-            holder.image.setImageResource(R.mipmap.ic_launcher);
+        try {
+            if (category.getImageMedium() != null && !category.getImageMedium().isEmpty()) {
+                Picasso.with(context).load(category.getImage()).
+                        resize(300, 300).error(R.mipmap.ic_launcher).into(holder.image);
+            } else {
+                holder.image.setImageResource(R.mipmap.ic_launcher);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

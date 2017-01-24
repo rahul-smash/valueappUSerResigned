@@ -15,7 +15,8 @@
         android:src="@drawable/veg"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:padding="3dp"/>
+        android:padding="3dp"
+        android:visibility="gone"/>
 
 
     <LinearLayout

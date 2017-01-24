@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -188,6 +189,7 @@ public class MyFavourite extends Fragment {
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
                 holder.rupee2 = (TextView) convertView.findViewById(R.id.rupee2);
                 holder.heart = (ImageButton) convertView.findViewById(R.id.heart);
+                holder.food_type_tag = (ImageView) convertView.findViewById(R.id.food_type_tag);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -233,6 +235,17 @@ public class MyFavourite extends Fragment {
                 holder.rupee.setText(currency);
                 holder.rupee2.setText(currency);
             }
+
+            if(product.getNutrient().isEmpty()){
+                holder.food_type_tag.setVisibility(View.GONE);
+            }else if(product.getNutrient().equalsIgnoreCase("Veg")){
+                holder.food_type_tag.setVisibility(View.VISIBLE);
+                holder.food_type_tag.setImageResource(R.drawable.veg);
+            }else if(product.getNutrient().equalsIgnoreCase("Non Veg")){
+                holder.food_type_tag.setVisibility(View.VISIBLE);
+                holder.food_type_tag.setImageResource(R.drawable.non_veg);
+            }
+
 
 
             if (product.isFavorites()) {
@@ -420,6 +433,7 @@ public class MyFavourite extends Fragment {
             RelativeLayout rel_mrp_offer_price;
             TextView items_name, items_mrp_price, items_price, number_text, rupee,rupee2;
             public ImageButton add_button, remove_button, heart;
+            ImageView food_type_tag;
         }
     }
 

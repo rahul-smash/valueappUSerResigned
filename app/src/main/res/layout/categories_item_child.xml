@@ -8,10 +8,21 @@
     android:paddingTop="10dp">
 
 
+    <ImageView
+        android:id="@+id/food_type_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/veg"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:padding="3dp"/>
+
+
     <LinearLayout
         android:id="@+id/block2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/food_type_tag"
         android:layout_toLeftOf="@+id/heart"
         android:orientation="vertical"
         android:paddingLeft="5dp"

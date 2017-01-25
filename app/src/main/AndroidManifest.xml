@@ -144,10 +144,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.Delivery.DeliveryAreaActivity"
-            android:label="@string/title_activity_delivery_area" />
+            android:label="@string/title_activity_delivery_area"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.Delivery.DeliveryPickupActivity"
-            android:label="@string/title_activity_delivery_area" />
+            android:label="@string/title_activity_delivery_area"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.Location.SelectLocationActivity"
             android:label="@string/title_activity_select_location"
@@ -210,23 +212,28 @@
 
         <activity
             android:name=".ui.shopcart.PayOnlineActivity"
-            android:label="@string/title_activity_pay_online" >
+            android:label="@string/title_activity_pay_online"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.category.CategoryDetailJewellersActivity"
-            android:label="@string/title_activity_category_detail_jewellers" >
+            android:label="@string/title_activity_category_detail_jewellers"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.category.ProductViewJewellersActivity"
-            android:label="@string/title_activity_product_view_jewellers" >
+            android:label="@string/title_activity_product_view_jewellers"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.RecommendedProduct.RecommendProductsActivity"
-            android:label="@string/title_activity_recommend_products" >
+            android:label="@string/title_activity_recommend_products"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.RecommendedProduct.RecommendProductsGroceryActivity"
-            android:label="@string/title_activity_recommend_products_grocery" >
+            android:label="@string/title_activity_recommend_products_grocery"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.common.AddressSelectActivity"

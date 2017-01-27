@@ -204,7 +204,11 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
 
 
             holder.order_date.setText(orderHistoryModel.getOrderDate());
-            holder.order_number.setText(orderHistoryModel.getOrderId());
+            try {
+                holder.order_number.setText(""+orderHistoryModel.getDisplayOrderId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             holder.order_price.setText(orderHistoryModel.getTotalOrderVal());
 
             holder.view_order.setOnClickListener(new View.OnClickListener() {

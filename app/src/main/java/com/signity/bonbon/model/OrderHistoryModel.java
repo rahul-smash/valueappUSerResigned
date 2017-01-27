@@ -14,6 +14,9 @@ public class OrderHistoryModel {
     @SerializedName("order_id")
     @Expose
     private String orderId;
+    @SerializedName("display_order_id")
+    @Expose
+    private String displayOrderId;
     @SerializedName("paid")
     @Expose
     private Integer paid;
@@ -106,6 +109,16 @@ public class OrderHistoryModel {
      */
     public String getOrderId() {
         return orderId;
+    }
+
+
+
+    public String getDisplayOrderId() {
+        return displayOrderId;
+    }
+
+    public void setDisplayOrderId(String displayOrderId) {
+        this.displayOrderId = displayOrderId;
     }
 
     /**

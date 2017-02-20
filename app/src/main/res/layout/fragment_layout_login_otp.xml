@@ -33,7 +33,7 @@
             android:layout_centerInParent="true"
             android:singleLine="true"
             android:text="Mobile Verification"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="20sp"
             android:visibility="visible" />
 
@@ -157,7 +157,7 @@
             android:contentDescription=""
             android:ems="6"
             android:text="Done"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 

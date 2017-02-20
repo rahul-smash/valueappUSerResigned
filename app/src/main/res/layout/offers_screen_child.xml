@@ -56,7 +56,7 @@
             android:id="@+id/applyBtn"
             android:layout_width="wrap_content"
             android:text="Apply"
-            android:textColor="@android:color/white"
+            android:textColor="@color/app_text_color"
             android:background="@drawable/round_corner"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"

@@ -84,7 +84,7 @@
                 android:background="@drawable/round_corners"
                 android:padding="3dp"
                 android:text="Customize Basket"
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="10sp" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:background="@drawable/round_corner"
                 android:padding="3dp"
                 android:text="Add to cart"
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="10sp" />
 
         </RelativeLayout>

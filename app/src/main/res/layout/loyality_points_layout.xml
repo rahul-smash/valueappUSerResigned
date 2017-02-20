@@ -38,8 +38,8 @@
             android:singleLine="true"
             android:padding="8dp"
             android:text="Redeem Points"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 
     </RelativeLayout>

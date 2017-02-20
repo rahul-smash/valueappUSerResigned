@@ -46,7 +46,7 @@
         android:layout_toRightOf="@id/txtLblCode"
         android:background="@color/ColorPrimary"
         android:text="Code:"
-        android:textColor="@android:color/white"
+        android:textColor="@color/app_text_color"
         android:textIsSelectable="true"
         android:textSize="18sp" />
 

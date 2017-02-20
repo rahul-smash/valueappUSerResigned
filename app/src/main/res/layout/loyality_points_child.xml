@@ -53,7 +53,7 @@
         android:id="@+id/redeemNow"
         android:layout_width="wrap_content"
         android:text="Redeem Now"
-        android:textColor="@android:color/white"
+        android:textColor="@color/app_text_color"
         android:background="@drawable/round_corner"
         android:layout_centerInParent="true"
         android:padding="5dp"

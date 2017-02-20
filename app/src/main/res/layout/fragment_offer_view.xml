@@ -166,7 +166,7 @@
                 android:paddingRight="10dp"
                 android:text="3243"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="@android:color/white"
+                android:textColor="@color/app_text_color"
                 android:textIsSelectable="true"
                 android:textSize="16sp" />
 

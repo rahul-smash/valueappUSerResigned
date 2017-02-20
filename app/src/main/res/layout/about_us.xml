@@ -31,7 +31,7 @@
         android:visibility="visible"
         android:text="Start Ordering"
         android:textSize="@dimen/text_size_normal"
-        android:textColor="@android:color/white"
+        android:textColor="@color/app_text_color"
         />
 
 </RelativeLayout>

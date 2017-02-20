@@ -60,7 +60,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/ColorPrimary"
             android:text="Proceed"
-            android:textColor="@color/color_white" />
+            android:textColor="@color/app_text_color" />
 
         <Button
             android:id="@+id/buttonOk"
@@ -69,7 +69,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/ColorPrimary"
             android:text="Ok"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:visibility="gone"/>
     </RelativeLayout>
 

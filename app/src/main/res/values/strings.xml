@@ -56,6 +56,7 @@
     <string name="error_code_message">We are reviewing the error. Kindly check your network connection and try again after sometime.</string>
     <string name="title_activity_category_detail_jewellers">CategoryDetailJewellersActivity</string>
     <string name="title_activity_product_view_jewellers">ProductViewJewellersActivity</string>
+    <string name="spinner_title">Select your Nearest Store</string>
     <string name="title_activity_recommend_products">RecommendProductsActivity</string>
     <string name="title_activity_recommend_products_grocery">RecommendProductsGroceryActivity
     </string>
@@ -65,5 +66,6 @@
     <string name="service_not_available">Sorry, the service is not available</string>
     <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
     <string name="title_activity_search_location">SearchLocationActivity</string>
+    <string name="string_proceed">Proceed To Order</string>
 
 </resources>

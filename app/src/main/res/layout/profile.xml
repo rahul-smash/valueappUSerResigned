@@ -195,7 +195,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@drawable/round_corner_button1"
                 android:text="Save"
-                android:textColor="@color/color_white" />
+                android:textColor="@color/app_text_color" />
         </LinearLayout>
 
     </ScrollView>

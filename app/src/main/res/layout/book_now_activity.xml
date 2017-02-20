@@ -30,8 +30,8 @@
             android:layout_centerInParent="true"
             android:singleLine="true"
             android:text="Book Now"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/app_text_color"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
     </RelativeLayout>
 

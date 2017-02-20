@@ -34,7 +34,7 @@
             android:layout_marginLeft="8dp"
             android:singleLine="true"
             android:text="Order Details"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="20sp"
             android:visibility="visible" />
 

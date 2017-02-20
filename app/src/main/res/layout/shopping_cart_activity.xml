@@ -32,7 +32,7 @@
             android:layout_centerInParent="true"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 
@@ -166,7 +166,7 @@
             android:layout_below="@+id/shipping_charges_text"
             android:layout_margin="10dp"
             android:text="Total"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="18sp" />
 
         <RelativeLayout
@@ -184,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="18sp"
                 android:layout_toRightOf="@+id/rupee"/>
 
@@ -193,7 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="\u20B9"
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="18sp" />
 
         </RelativeLayout>
@@ -216,6 +216,6 @@
         android:background="@color/ColorPrimary"
         android:gravity="center"
         android:text="Place Order"
-        android:textColor="#ffffff"
+        android:textColor="@color/app_text_color"
         android:textSize="15sp" />
 </RelativeLayout>

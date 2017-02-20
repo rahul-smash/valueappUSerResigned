@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.signity.bonbon.ui.Location.LocationSelectActivity">
+    >
 
 
     <!--<ImageView-->
@@ -149,15 +149,16 @@
                 <!--android:drawableRight="@drawable/arrow_spinner_down_24"-->
                 <!--android:visibility="gone"/>&ndash;&gt;-->
 
-            <!--<Button-->
-                <!--android:id="@+id/submitBtn"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="35dp"-->
-                <!--android:layout_below="@+id/areaSelect"-->
-                <!--android:layout_margin="20dp"-->
-                <!--android:background="@color/ColorPrimary"-->
-                <!--android:text="Go"-->
-                <!--android:textSize="@dimen/text_size_normal" />-->
+           <!-- <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/areaSelect"
+                android:layout_margin="20dp"
+                android:background="@color/ColorPrimary"
+                android:text="Go"
+                android:textColor="@color/app_text_color"
+                android:textSize="@dimen/text_size_normal" />-->
 
 
         <!--</RelativeLayout>-->

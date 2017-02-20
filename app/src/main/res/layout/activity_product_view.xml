@@ -39,7 +39,7 @@
             android:paddingRight="15dp"
             android:text=""
             android:maxLines="2"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 

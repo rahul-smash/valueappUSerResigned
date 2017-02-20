@@ -34,7 +34,7 @@
             android:layout_centerInParent="true"
             android:singleLine="true"
             android:text="Hello"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="20sp"
             android:visibility="visible" />
 
@@ -332,7 +332,7 @@
                     android:background="@color/ColorPrimary"
                     android:gravity="center"
                     android:text="Confirm Order"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/app_text_color"
                     android:textSize="15sp" />
 
             </LinearLayout>

@@ -110,7 +110,7 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:text="SHARE"
-        android:textColor="@android:color/white"
+        android:textColor="@color/app_text_color"
         android:layout_margin="20dp"
         android:layout_below="@+id/label_4"
         android:background="@drawable/round_corner_button1"/>

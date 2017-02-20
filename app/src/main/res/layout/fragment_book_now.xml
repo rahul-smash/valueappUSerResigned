@@ -223,7 +223,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Submit"
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="visible" />

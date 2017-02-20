@@ -33,7 +33,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Shopping List"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/header_toolbar_text_size"
             android:visibility="visible" />
 
@@ -80,7 +80,7 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/round_corner"
             android:text="ADD"
-            android:textColor="#ffffff" />
+            android:textColor="@color/app_text_color" />
     </RelativeLayout>
 
     <ListView

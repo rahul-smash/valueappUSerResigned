@@ -34,7 +34,7 @@
             android:layout_marginRight="5dp"
             android:drawablePadding="5dp"
             android:text="Choose Location"
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_large" />
 
 

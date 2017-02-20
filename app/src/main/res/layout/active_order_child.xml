@@ -80,7 +80,7 @@
             android:background="@drawable/round_corners"
             android:layout_marginLeft="5dp"
             android:text="View Order"
-            android:textColor="#ffffff"
+            android:textColor="@color/app_text_color"
             android:textSize="9sp" />
 
     </RelativeLayout>

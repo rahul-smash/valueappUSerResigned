@@ -127,9 +127,9 @@
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:gravity="center"
-                android:text="Checkout"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
+                android:text="@string/string_proceed"
+                android:textColor="@color/app_text_color"
+                android:textSize="12sp" />
 
 
         </LinearLayout>

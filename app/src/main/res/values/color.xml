@@ -56,6 +56,7 @@
     <color name="color_black_transparen_shade">#99000000</color>
     <color name="color_green">#157a33</color>
     <color name="color_light_red">#ef3030</color>
+    <color name="app_text_color">#ffffff</color>
     <!--panna sweets-->
 
 </resources>

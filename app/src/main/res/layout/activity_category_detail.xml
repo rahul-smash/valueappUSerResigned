@@ -47,7 +47,7 @@
             android:paddingRight="15dp"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/color_white"
+            android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
 
@@ -217,9 +217,9 @@
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:gravity="center"
-                android:text="Check Out"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/text_size_normal" />
+                android:text="@string/string_proceed"
+                android:textColor="@color/app_text_color"
+                android:textSize="12sp" />
 
         </LinearLayout>
     </LinearLayout>

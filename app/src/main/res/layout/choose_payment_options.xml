@@ -23,7 +23,7 @@
         android:layout_marginTop="10dp"
         android:text="Cash On Delivery"
         android:textSize="@dimen/text_size_normal"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/app_text_color"/>
 
     <Button
         android:id="@+id/onlineBtn"
@@ -33,6 +33,6 @@
         android:layout_marginTop="15dp"
         android:text="Pay Now"
         android:textSize="@dimen/text_size_normal"
-        android:textColor="@android:color/white"/>
+        android:textColor="@color/app_text_color"/>
 
 </LinearLayout>

@@ -219,7 +219,7 @@
                 android:clickable="false"
                 android:gravity="center"
                 android:text="Check Out"
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="@dimen/text_size_normal" />
 
         </LinearLayout>

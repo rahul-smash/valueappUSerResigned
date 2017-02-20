@@ -209,7 +209,7 @@
                 android:background="@color/ColorPrimary"
                 android:gravity="center"
                 android:text="Done"
-                android:textColor="#ffffff"
+                android:textColor="@color/app_text_color"
                 android:textSize="18sp" />
         </LinearLayout>
 

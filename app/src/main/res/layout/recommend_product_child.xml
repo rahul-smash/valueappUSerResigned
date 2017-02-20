@@ -92,7 +92,7 @@
         android:focusable="false"
         android:text="Add"
         android:textSize="@dimen/text_size_extra_small"
-        android:textColor="@android:color/white"
+        android:textColor="@color/app_text_color"
         android:visibility="visible"
         android:background="@drawable/add_button_bg"/>
 </LinearLayout>

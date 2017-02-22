@@ -1353,32 +1353,45 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     } else {
                         coupenCode = "";
-                        final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                        dialogHandler.setDialog("Message", validAllCouponsModel.getMessage());
-                        dialogHandler.setPostiveButton("Details", true)
-                                .setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        dialogHandler.dismiss();
 
-                                        String offerName = validAllCouponsModel.getData().getName();
-                                        String offerDataString = gsonHelper.getOfferDataString(validAllCouponsModel.getData());
-                                        prefManager.storeSharedValue(AppConstant.OFFER_VIEW, offerDataString);
-                                        Intent intentOfferView = new Intent(ShoppingCartActivity2.this, OfferViewActivity.class);
-                                        intentOfferView.putExtra("offerName", offerName);
-                                        startActivity(intentOfferView);
-                                        finish();
-                                        AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
+                        if(validAllCouponsModel.getData()!=null){
+                            final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                            dialogHandler.setDialog("Message", validAllCouponsModel.getMessage());
+                            dialogHandler.setPostiveButton("Details", true)
+                                    .setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            dialogHandler.dismiss();
 
-                                    }
-                                });
+                                            try {
+                                                String offerName = validAllCouponsModel.getData().getName();
+                                                String offerDataString = gsonHelper.getOfferDataString(validAllCouponsModel.getData());
+                                                prefManager.storeSharedValue(AppConstant.OFFER_VIEW, offerDataString);
+                                                Intent intentOfferView = new Intent(ShoppingCartActivity2.this, OfferViewActivity.class);
+                                                intentOfferView.putExtra("offerName", offerName);
+                                                startActivity(intentOfferView);
+                                                finish();
+                                                AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
+                                            } catch (Exception e) {
+                                                Toast.makeText(ShoppingCartActivity2.this,""+validAllCouponsModel.getMessage(),Toast.LENGTH_SHORT).show();
+                                                e.printStackTrace();
+                                            }
 
-                        dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                dialogHandler.dismiss();
-                            }
-                        });
+                                        }
+                                    });
+
+                            dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialogHandler.dismiss();
+                                }
+                            });
+                        }else {
+                            DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                            dialogHandler.setdialogForFinish("Message",""+validAllCouponsModel.getMessage(), false);
+                        }
+
+
                     }
                 }
 

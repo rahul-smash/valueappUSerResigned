@@ -369,7 +369,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void confirmCancelOrderDialog(final String orderId) {
 
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setDialog("Cancel Order", "\"Are you sure to cancel the order");
+        dialogHandler.setDialog("Cancel Order", getResources().getString(R.string.cancel_order_txt));
         dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

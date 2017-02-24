@@ -83,7 +83,7 @@ public class AboutUsFragment extends Fragment {
 
         if (store != null && store.getAboutUs() != null) {
             String aboutus = store.getAboutUs().replaceAll("&nbsp;", " ").replaceAll("\\“", "\"").replaceAll("\\”", "\"");
-            webview.loadData(aboutus, "text/html", "UTF-8");
+            webview.loadData(aboutus, "text/html; charset=utf-8", "UTF-8");
         } else {
             getAboutUsStatus();
         }

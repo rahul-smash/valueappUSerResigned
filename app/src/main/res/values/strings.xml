@@ -67,5 +67,9 @@
     <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
     <string name="title_activity_search_location">SearchLocationActivity</string>
     <string name="string_proceed">Proceed To Order</string>
+    <string name="pincode">Pincode:</string>
+    <string name="select_pincode">Select your Pincode</string>
+    <string name="list_header">Choose your nearest outlet</string>
+    <string name="cancel_order_txt">Are you sure you want to cancel the order?</string>
 
 </resources>

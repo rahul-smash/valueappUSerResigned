@@ -1,5 +1,6 @@
 package com.signity.bonbon.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,9 +54,8 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
     ImageButton backBtn;
     EditText edtPhone;
     private GCMClientManager pushClientManager;
-    String from;
     private TextInputLayout input_layout_phone;
-
+    String from;
     PrefManager prefManager;
 
     @Override
@@ -107,7 +108,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                 if (validatePhone()) {
                     String phone = edtPhone.getText().toString();
                     if (isUserValidFromDatabase(phone)) {
-                        if (from.equals("menu")) {
+                      /*  if (from.equals("menu")) {
                             Intent intent_home = new Intent(getActivity(), MainActivity.class);
                             intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent_home);
@@ -136,7 +137,9 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
                             startActivity(intentDelivery);
                             getActivity().finish();
                             AnimUtil.slideFromRightAnim(getActivity());
-                        }
+                        }*/
+
+                        ((LoginScreenActivity) getActivity()).setResultForActivity(Activity.RESULT_OK);
                     } else {
                         callNetworkServiceForOtp();
                     }
@@ -243,7 +246,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
         if (email != null && !email.isEmpty()) {
             prefManager.storeSharedValue(AppConstant.EMAIL, email);
         }
-        if (from.equals("menu")) {
+        /*if (from.equals("menu")) {
             Intent intent_home = new Intent(getActivity(), MainActivity.class);
             intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent_home);
@@ -271,7 +274,9 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
             startActivity(intentDelivery);
             getActivity().finish();
             AnimUtil.slideFromRightAnim(getActivity());
-        }
+*/
+            ((LoginScreenActivity) getActivity()).setResultForActivity(Activity.RESULT_OK);
+
 
     }
 

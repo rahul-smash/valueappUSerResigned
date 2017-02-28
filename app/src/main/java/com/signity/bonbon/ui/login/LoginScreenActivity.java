@@ -32,8 +32,10 @@ public class LoginScreenActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent_home = new Intent(this, MainActivity.class);
-        intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent_home);
+    }
+
+    public void setResultForActivity(int result) {
+        setResult(result);
+        finish();
     }
 }

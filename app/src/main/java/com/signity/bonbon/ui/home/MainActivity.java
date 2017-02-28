@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +80,7 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int REQUESTCODE_FOR_SUCESS_LOGIN = 328;
     public TextView title, user;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     SlidingPaneLayout mSlidingPanel;
@@ -129,11 +131,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prefManager = new PrefManager(MainActivity.this);
         viewController = AppController.getInstance().getViewController();
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
-        userId = prefManager.getSharedValue(AppConstant.ID);
-        name = prefManager.getSharedValue(AppConstant.NAME);
-        phone = prefManager.getSharedValue(AppConstant.PHONE);
-        storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
-        loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
+
+        getPreferencesValues(); // getting values from prefrences
 
         typeFaceRobotoRegular = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_BOLD);
@@ -208,6 +207,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+    }
+
+    private void getPreferencesValues() {
+
+        userId = prefManager.getSharedValue(AppConstant.ID);
+        name = prefManager.getSharedValue(AppConstant.NAME);
+        phone = prefManager.getSharedValue(AppConstant.PHONE);
+        storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
+        loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
     }
 
     private void setUpFenceAroundStore() {
@@ -289,6 +297,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+
+        getPreferencesValues();
+        updateUserName();
+        adapter.notifyDataSetChanged();
+
         int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         Log.i(MainActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
         if (googlePlayServicesCode == 1 || googlePlayServicesCode == 2 || googlePlayServicesCode == 3) {
@@ -390,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (userId.isEmpty()) {
                     Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
                     intent.putExtra(AppConstant.FROM, "menu");
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUESTCODE_FOR_SUCESS_LOGIN);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
 
@@ -406,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (userId.isEmpty()) {
                     Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
                     intent.putExtra(AppConstant.FROM, "menu");
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUESTCODE_FOR_SUCESS_LOGIN);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
 //                    title.setText("Delivery Address");
@@ -424,7 +437,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (userId.isEmpty()) {
                     Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
                     intent.putExtra(AppConstant.FROM, "menu");
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUESTCODE_FOR_SUCESS_LOGIN);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
                     title.setVisibility(View.VISIBLE);
@@ -483,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (userId.isEmpty()) {
                         Intent intentLogin = new Intent(MainActivity.this, LoginScreenActivity.class);
                         intentLogin.putExtra(AppConstant.FROM, "menu");
-                        startActivity(intentLogin);
+                        startActivityForResult(intentLogin, REQUESTCODE_FOR_SUCESS_LOGIN);
                         AnimUtil.slideUpAnim(MainActivity.this);
                     } else {
 
@@ -498,7 +511,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (userId.isEmpty()) {
                         Intent intent9 = new Intent(MainActivity.this, LoginScreenActivity.class);
                         intent9.putExtra(AppConstant.FROM, "menu");
-                        startActivity(intent9);
+                        startActivityForResult(intent9, REQUESTCODE_FOR_SUCESS_LOGIN);
                         AnimUtil.slideUpAnim(MainActivity.this);
                     } else {
                         title.setVisibility(View.VISIBLE);
@@ -515,7 +528,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (userId.isEmpty()) {
                     Intent intentLogin = new Intent(MainActivity.this, LoginScreenActivity.class);
                     intentLogin.putExtra(AppConstant.FROM, "menu");
-                    startActivity(intentLogin);
+                    startActivityForResult(intentLogin, REQUESTCODE_FOR_SUCESS_LOGIN);
                     AnimUtil.slideUpAnim(MainActivity.this);
                 } else {
                     title.setVisibility(View.VISIBLE);
@@ -527,6 +540,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUESTCODE_FOR_SUCESS_LOGIN:
+                if (resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(context, "Login Successfully!", Toast.LENGTH_SHORT).show();
+                    getPreferencesValues();
+                    updateUserName();
+                    adapter.notifyDataSetChanged();
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    Toast.makeText(context, "Login Failed or Cancel", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 

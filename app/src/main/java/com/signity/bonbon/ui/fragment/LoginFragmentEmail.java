@@ -1,6 +1,7 @@
 
 package com.signity.bonbon.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -157,34 +159,7 @@ public class LoginFragmentEmail extends Fragment {
             public void success(EmailResponse emailResponse, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (emailResponse.getSuccess()) {
-
-                    if (from.equals("menu")) {
-                        showAlertDialogForLogin(getActivity(), "Success", ""+emailResponse.getMessage());
-                    } else {
-                        PrefManager prefManager = new PrefManager(getActivity());
-                        String pickUpStatus = prefManager.getPickupFacilityStatus();
-                        String deliveryStatus= prefManager.getDeliveryFacilityStatus();
-
-                        Intent intentDelivery = null;
-                        if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")){
-                            intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
-                            intentDelivery.putExtra("title", "Deliver or PickUp");
-                        }
-                        else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")){
-                            intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-                        }
-                        else if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")){
-                            intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
-                            intentDelivery.putExtra("title", "PickUp");
-                        }
-                        else {
-                            intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-                        }
-                        intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
-                        startActivity(intentDelivery);
-                        getActivity().finish();
-                        AnimUtil.slideFromRightAnim(getActivity());
-                    }
+                    ((LoginScreenActivity) getActivity()).setResultForActivity(Activity.RESULT_OK);
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
                     dialogHandler.setdialogForFinish("Message",""+emailResponse.getMessage(), false);

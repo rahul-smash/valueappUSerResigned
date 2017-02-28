@@ -75,6 +75,10 @@ public interface ApiService {
     void placeOrder(@FieldMap Map<String, String> parameters, Callback<ResponseData> response);
 
     @FormUrlEncoded
+    @POST("/pickupPlaceOrder")
+    void pickupPlaceOrder(@FieldMap Map<String, String> parameters, Callback<ResponseData> response);
+
+    @FormUrlEncoded
     @POST("/orderCancel")
     void cancelOrder(@FieldMap Map<String, String> parameters, Callback<EmailResponse> response);
 

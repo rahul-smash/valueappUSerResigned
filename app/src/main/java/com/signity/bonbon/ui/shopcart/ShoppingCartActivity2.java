@@ -599,11 +599,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("total", amount);
         param.put("user_address", user_address);
 
+
         param.put("store_tax_rate_detail", taxLabelJson);
         param.put("store_fixed_tax_detail", taxFixedTaxJson);
         param.put("calculated_tax_detail", taxDetailsJson);
         Log.e("params", param.toString());
-        NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
+        NetworkAdaper.getInstance().getNetworkServices().pickupPlaceOrder(param, new Callback<ResponseData>() {
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();

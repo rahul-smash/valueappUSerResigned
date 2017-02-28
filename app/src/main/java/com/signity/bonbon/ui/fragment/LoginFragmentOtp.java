@@ -1,5 +1,6 @@
 package com.signity.bonbon.ui.fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -189,83 +191,28 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
     private void skipAuthenticationProcess() {
         saveUserIdToPref();
         userDetailSave(false);
-        if (from.equals("menu")) {
             if (isNameExist && isEmailExist) {
-                Intent intent_home = new Intent(getActivity(), MainActivity.class);
+                /*Intent intent_home = new Intent(getActivity(), MainActivity.class);
                 intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent_home);
+                startActivity(intent_home);*/
+                ((LoginScreenActivity) getActivity()).setResultForActivity(Activity.RESULT_OK);
             } else {
                 proceedToEmail(from);
             }
-        } else if (from.equals("shop_cart")) {
-            PrefManager prefManager = new PrefManager(getActivity());
-            String pickUpStatus = prefManager.getPickupFacilityStatus();
-            String deliveryStatus= prefManager.getDeliveryFacilityStatus();
-
-            Intent intentDelivery = null;
-            if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")){
-                intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
-                intentDelivery.putExtra("title", "Deliver or PickUp");
-            }
-            else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")){
-                intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-            }
-            else if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")){
-                intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
-                intentDelivery.putExtra("title", "PickUp");
-            }
-            else {
-                intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-            }
-            intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
-            startActivity(intentDelivery);
-            getActivity().finish();
-            AnimUtil.slideFromRightAnim(getActivity());
-        }
-
 
     }
 
     private void proceedtoActivity() {
-        if (from.equals("menu")) {
             if (isNameExist && isEmailExist) {
 //                            showAlertDialogForLogin(getActivity(), "Sucess", "You have login successfully. Please continue.");
-                Intent intent_home = new Intent(getActivity(), MainActivity.class);
+                /*Intent intent_home = new Intent(getActivity(), MainActivity.class);
                 intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent_home);
+                startActivity(intent_home);*/
+                ((LoginScreenActivity) getActivity()).setResultForActivity(Activity.RESULT_OK);
             } else {
                 proceedToEmail(from);
             }
 
-        } else if (from.equals("shop_cart")) {
-            if (isNameExist && isEmailExist) {
-                PrefManager prefManager = new PrefManager(getActivity());
-                String pickUpStatus = prefManager.getPickupFacilityStatus();
-                String deliveryStatus= prefManager.getDeliveryFacilityStatus();
-
-                Intent intentDelivery = null;
-                if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")){
-                    intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
-                    intentDelivery.putExtra("title", "Deliver or PickUp");
-                }
-                else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")){
-                    intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-                }
-                else if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")){
-                    intentDelivery = new Intent(getActivity(), DeliveryPickupActivity.class);
-                    intentDelivery.putExtra("title", "PickUp");
-                }
-                else {
-                    intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-                }
-                intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
-                startActivity(intentDelivery);
-                getActivity().finish();
-                AnimUtil.slideFromRightAnim(getActivity());
-            } else {
-                proceedToEmail(from);
-            }
-        }
     }
 
     private void proceedToEmail(String from) {
@@ -360,42 +307,6 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
 
         final DialogHandler dialogHandler = new DialogHandler(context);
         dialogHandler.setdialogForFinish(error, message, false);
-    }
-
-    private void callNetworkServiceForOtp() {
-        ProgressDialogUtil.showProgressDialog(getActivity());
-
-        String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
-        Map<String, String> param = new HashMap<String, String>();
-        param.put("phone", phone);
-        param.put("device_id", deviceId);
-        param.put("device_token", deviceToken);
-        param.put("platform", AppConstant.PLATFORM);
-        NetworkAdaper.getInstance().getNetworkServices().moblieVerification(param, new Callback<MobResponse>() {
-
-            @Override
-            public void success(MobResponse mobResponse, Response response) {
-                ProgressDialogUtil.hideProgressDialog();
-                if (mobResponse.getSuccess()) {
-                    id = mobResponse.getData().getId();
-                    otp = mobResponse.getData().getOtp();
-                    status = mobResponse.getData().getStatus();
-                    showDialogForMessage(getActivity(), "Message", "OTP sent to your registered mobile");
-                } else {
-                    DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", ""+mobResponse.getMessage(), false);
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                ProgressDialogUtil.hideProgressDialog();
-                DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
-            }
-        });
-
     }
 
 

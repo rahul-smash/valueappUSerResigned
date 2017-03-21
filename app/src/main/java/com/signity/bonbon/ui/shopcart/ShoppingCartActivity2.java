@@ -1371,7 +1371,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                                 Intent intentOfferView = new Intent(ShoppingCartActivity2.this, OfferViewActivity.class);
                                                 intentOfferView.putExtra("offerName", offerName);
                                                 startActivity(intentOfferView);
-                                                finish();
                                                 AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
                                             } catch (Exception e) {
                                                 Toast.makeText(ShoppingCartActivity2.this,""+validAllCouponsModel.getMessage(),Toast.LENGTH_SHORT).show();

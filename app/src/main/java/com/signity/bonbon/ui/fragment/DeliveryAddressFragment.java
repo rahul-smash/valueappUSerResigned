@@ -268,6 +268,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 if (responseData.getSuccess()) {
                     listOfDeliveryAddress.remove(position);
                     adapter.notifyDataSetChanged();
+                    if(position==0){
+                        selectedUserAddress=null;
+                    }
                 } else {
 //                    Toast.makeText(getActivity(), responseData.getMessage(), Toast.LENGTH_SHORT).show();
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
@@ -673,7 +676,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     String userId = prefManager.getSharedValue(AppConstant.ID);
                     String addressId = addressModel.getId();
                     showAlertDialogForDelete(getActivity(), "Confirmation", "Are you sure you want to delete this address?", userId, addressId, position);
-                    notifyDataSetChanged();
+//                    notifyDataSetChanged();
                 }
             });
 

@@ -194,6 +194,7 @@ public class SplashActivity extends Activity {
                     prefManager.storeSharedValue(AppConstant.tax_label_name, store.getTaxLabelName());
                     prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
                     prefManager.storeSharedValue(AppConstant.ONLINE_PAYMENT, store.getOnlinePayment());
+                    prefManager.storeSharedValue(AppConstant.PRODUCT_IMAGE, store.getProductImage());
                     prefManager.setReferEarnFn(store.getReferFnEnable());
                     prefManager.setReferEarnFnEnableForDevice(store.getReferForDeviceEnable());
                     prefManager.storeSharedValue(AppConstant.CATEGORY_LAYOUT_TYPE, store.getCategoryLayoutType());
@@ -225,6 +226,10 @@ public class SplashActivity extends Activity {
                     if (!appVersion.equalsIgnoreCase(oldVerision)) {
 //                        appDb.deleteCartAll();
                         appDb.deleteCartElement();
+                        appDb.deleteCategoryAll();
+                        appDb.deleteSubcategoryAll();
+                        appDb.deleteProducts();
+//                        prefManager.storeSharedValue(AppConstant.APP_OLD_VERISON, store.getVersion());
                     }
 
                     if (store.getBanners() != null && store.getBanners().size() != 0) {

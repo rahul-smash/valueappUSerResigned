@@ -237,7 +237,7 @@ public class MyFavourite extends Fragment {
             }
 
             if(product.getNutrient().isEmpty()){
-                holder.food_type_tag.setVisibility(View.GONE);
+                holder.food_type_tag.setVisibility(View.INVISIBLE);
             }else if(product.getNutrient().equalsIgnoreCase("Veg")){
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.veg);
@@ -245,8 +245,6 @@ public class MyFavourite extends Fragment {
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.non_veg);
             }
-
-
 
             if (product.isFavorites()) {
                 holder.heart.setSelected(true);
@@ -422,11 +420,10 @@ public class MyFavourite extends Fragment {
 
                 return convertView;
             }
-
-
         }
 
         class ViewHolder {
+            ImageView items;
             RelativeLayout parent;
             LinearLayout block2;
             Button btnVarient;

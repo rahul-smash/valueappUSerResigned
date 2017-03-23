@@ -52,11 +52,11 @@ public class AppDatabase {
     }
 
     // operation related to category table
-    public void addCategoryList(List<Category> data) {
+    public void addCategoryList(List<Category> data,String categoryId) {
         if (data != null && data.size() != 0) {
-            deleteCartElement();
+//            deleteCartElement();
             deleteOperationForVersionUpdate(data);
-            deleteCategoryAll();
+//            deleteCategoryAll();
             for (Category category : data) {
                 try {
                     ContentValues values = new ContentValues();
@@ -76,6 +76,9 @@ public class AppDatabase {
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                     }
+
+                    values.put("master_category_id", categoryId);
+                    values.put("show_product_image", category.getShowProductImage());
                     Category dbCategory = getCategoryById(category.getId());
                     if (dbCategory != null) {
                         if (!((dbCategory.getVersion()).equals(category.getVersion()))) {
@@ -97,11 +100,35 @@ public class AppDatabase {
         }
     }
 
-    public List<Category> getCategoryList() {
+
+    public void dropDatabase() {
+
+
+        try {
+            db.execSQL("delete from " + "category");
+            db.execSQL("delete from " + "sub_category");
+            db.execSQL("delete from " + "product");
+            db.execSQL("delete from " + "cart_table");
+            db.execSQL("delete from " + "store");
+            /*db.delete("category", null, null);
+            db.delete("sub_category",null,null);
+            db.delete("product",null,null);
+            db.delete("cart_table",null,null);
+            db.delete("store",null,null);*/
+
+//            getCategoryList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public List<Category> getCategoryList(String master_category_id) {
         List<Category> list = new ArrayList<>();
         Cursor cursor = null;
         try {
-            String sql = String.format(Locale.US, "SELECT * FROM category where is_enable=%s AND is_deleted=%s ORDER BY sort_order ASC", "1", "0");
+            String sql = String.format(Locale.US, "SELECT * FROM category where is_enable=%s AND is_deleted=%s AND master_category_id=%s ORDER BY sort_order ASC", "1", "0",master_category_id);
             cursor = db.rawQuery(sql, null);
             cursor.moveToFirst();
             while (cursor.isAfterLast() == false) {
@@ -116,6 +143,8 @@ public class AppDatabase {
                 category.setIsEnable(cursor.getString(7));
                 category.setIsDeleted(cursor.getString(8).equals("1") ? true : false);
                 category.setSortOrder(String.valueOf(cursor.getString(9)));
+                category.setMasterCategoryId(cursor.getString(10));
+                category.setShowProductImage(cursor.getString(11));
                 cursor.moveToNext();
                 list.add(category);
             }
@@ -148,6 +177,8 @@ public class AppDatabase {
                 category.setIsEnable(cursor.getString(7));
                 category.setIsDeleted(cursor.getString(8).equals("1") ? true : false);
                 category.setSortOrder(String.valueOf(cursor.getString(9)));
+                category.setMasterCategoryId(String.valueOf(cursor.getString(10)));
+                category.setShowProductImage(String.valueOf(cursor.getString(11)));
             }
             cursor.close();
         } catch (Exception e) {
@@ -209,9 +240,25 @@ public class AppDatabase {
         }
     }
 
-    private void deleteCategoryAll() {
+    public void deleteCategoryAll() {
         try {
             db.delete("category", null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteSubcategoryAll() {
+        try {
+            db.delete("sub_category", null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteProducts() {
+        try {
+            db.delete("product", null, null);
         } catch (Exception e) {
             e.printStackTrace();
         }

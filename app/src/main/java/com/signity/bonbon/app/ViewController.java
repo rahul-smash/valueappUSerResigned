@@ -47,6 +47,7 @@ import com.signity.bonbon.ui.restaurant.storetheme30.HomeFragmentManjeetTheme30;
 import com.signity.bonbon.ui.restaurant.storetheme31.HomeFragmentSuruchiTheme31;
 import com.signity.bonbon.ui.restaurant.storetheme32.HomeFragmentBurgerTheme32;
 import com.signity.bonbon.ui.restaurant.storetheme4.fragment.HomeFragmentTheme4;
+import com.signity.bonbon.ui.restaurant.storetheme52.HomeFragmentKingShakeTheme52;
 import com.signity.bonbon.ui.restaurant.storetheme7.fragment.HomeFragmentHundredTheme7;
 import com.signity.bonbon.ui.restaurant.storetownking15.fragment.HomeFragmentTownkingTheme2;
 import com.signity.bonbon.ui.search.SearchActivity;
@@ -221,6 +222,17 @@ public class ViewController {
                     fragment = new HomeFragmentBeliramTheme22();
                 }
                 break;
+            case 52:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentKingShakeTheme52();
+                }
+                break;
+            case 53:
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    fragment = new HomeFragmentKingShakeTheme52();
+                }
+                break;
+
 
             default:
                 fragment = new HomeFragment();
@@ -415,6 +427,19 @@ public class ViewController {
                 }
                 break;
 
+            case 52:
+                //King of Shakes
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    layoutId = R.layout.home_activity_theme_52_king_shake;
+                }
+                break;
+
+            case 53:
+                //Rajpoot
+                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                    layoutId = R.layout.home_activity_theme_52_king_shake;
+                }
+                break;
 
             default:
                 layoutId = R.layout.home_activity;

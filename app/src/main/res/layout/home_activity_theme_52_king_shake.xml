@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bannerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/pager_height"
+        android:layout_alignParentTop="true"
+        >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"></android.support.v4.view.ViewPager>
+
+        <com.signity.bonbon.Utilities.PageIndicator
+            android:id="@+id/pageIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/menuLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bannerLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/theme_53_menu_background">
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/store_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/home_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/menuLayout"
+        android:layout_marginBottom="@dimen/bottom_margin_logo"
+        />
+
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/theme_53_home_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/offersBtn"
+        android:layout_marginBottom="@dimen/bottom_margin"
+        />
+
+
+    <ImageButton
+        android:id="@+id/offersBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/theme_53_home_btn_offer"
+        android:layout_above="@+id/orderBtn"/>
+
+    <ImageButton
+        android:id="@+id/orderBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/callBtn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/theme_53_home_btn_order" />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_orange"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="5">
+
+        <ImageView
+            android:id="@+id/contactBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="2"
+            android:src="@drawable/theme_53_home_tab_locate" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/bookNowBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="2"
+            android:src="@drawable/theme_53_home_tab_message" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/callBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/theme_53_home_tab_call" />
+
+
+</RelativeLayout>

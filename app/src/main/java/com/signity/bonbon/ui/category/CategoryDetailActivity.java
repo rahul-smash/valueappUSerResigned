@@ -55,7 +55,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
     boolean isActivityFirstTime = true;
 
     PrefManager prefManager;
-    String productViewTitle;
+    String productViewTitle,showProductImage="";
     int position;
 
     @Override
@@ -107,6 +107,8 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
         checkCartValue();
         Category category = appDb.getCategoryById(id);
+        showProductImage=category.getShowProductImage();
+
         subCategoryList = category.getSubCategoryList();
 
 
@@ -255,6 +257,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);
+            arg.putString("showProductImage", showProductImage);
             arg.putString("subCategoryId", subCategoryId);
             arg.putString("productViewTitle", productViewTitle);
             ProductListFragment fragment = new ProductListFragment();

@@ -32,6 +32,7 @@
             android:text="Offers"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
             android:visibility="visible" />
 
     </RelativeLayout>

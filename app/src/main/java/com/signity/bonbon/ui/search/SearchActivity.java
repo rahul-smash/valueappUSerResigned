@@ -19,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -276,6 +277,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 holder = new ViewHolder();
                 holder.rel_mrp_offer_price = (RelativeLayout) convertView.findViewById(R.id.rel_mrp_offer_price);
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
+                holder.items = (ImageView) convertView.findViewById(R.id.items_image);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
                 holder.block2 = (LinearLayout) convertView.findViewById(R.id.block2);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
@@ -290,12 +292,14 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
                 holder.rupee2 = (TextView) convertView.findViewById(R.id.rupee2);
                 holder.heart = (ImageButton) convertView.findViewById(R.id.heart);
+                holder.food_type_tag = (ImageView) convertView.findViewById(R.id.food_type_tag);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
+
 
             String productPrice = "0.0";
             String mrpPrice = "0.0";
@@ -335,6 +339,15 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 holder.rupee2.setText(currency);
             }
 
+            if(product.getNutrient().isEmpty()){
+                holder.food_type_tag.setVisibility(View.INVISIBLE);
+            }else if(product.getNutrient().equalsIgnoreCase("Veg")){
+                holder.food_type_tag.setVisibility(View.VISIBLE);
+                holder.food_type_tag.setImageResource(R.drawable.veg);
+            }else if(product.getNutrient().equalsIgnoreCase("Non Veg")){
+                holder.food_type_tag.setVisibility(View.VISIBLE);
+                holder.food_type_tag.setImageResource(R.drawable.non_veg);
+            }
 
             if (product.isFavorites()) {
                 holder.heart.setSelected(true);
@@ -517,12 +530,14 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         }
 
         class ViewHolder {
+            ImageView items;
             RelativeLayout parent;
             LinearLayout block2;
             Button btnVarient;
             RelativeLayout rel_mrp_offer_price;
             TextView items_name, items_price, items_mrp_price, number_text, rupee, rupee2;
             public ImageButton add_button, remove_button, heart;
+            ImageView food_type_tag;
         }
     }
 

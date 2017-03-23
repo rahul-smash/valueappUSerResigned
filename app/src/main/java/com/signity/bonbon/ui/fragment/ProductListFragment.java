@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,7 +75,7 @@ public final class ProductListFragment extends Fragment {
     String subCategoryId;
     private AppDatabase appDb;
     PrefManager prefManager;
-    String productViewTitle;
+    String productViewTitle,showProductImage;
 
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context, ProductListFragment.class.getSimpleName());
@@ -93,6 +95,7 @@ public final class ProductListFragment extends Fragment {
         typeFaceRobotoBold = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_BOLD);
         subCategoryId = getArguments().getString("subCategoryId");
         productViewTitle = getArguments().getString("productViewTitle", "");
+        showProductImage = getArguments().getString("showProductImage", "0");
         listProduct = new ArrayList<>();
     }
 
@@ -167,6 +170,7 @@ public final class ProductListFragment extends Fragment {
                 holder = new ViewHolder();
                 holder.rel_mrp_offer_price = (RelativeLayout) convertView.findViewById(R.id.rel_mrp_offer_price);
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
+                holder.items = (ImageView) convertView.findViewById(R.id.items_image);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
                 holder.block2 = (LinearLayout) convertView.findViewById(R.id.block2);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
@@ -191,6 +195,18 @@ public final class ProductListFragment extends Fragment {
             }
             final Product product = listProduct.get(position);
             final SelectedVariant selectedVariant = product.getSelectedVariant();
+
+
+            if (showProductImage.equalsIgnoreCase("0")) {
+                holder.items.setVisibility(View.GONE);
+            } else if (showProductImage.equalsIgnoreCase("1")) {
+                holder.items.setVisibility(View.VISIBLE);
+                if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
+                    Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
+                } else {
+                    holder.items.setImageResource(R.mipmap.ic_launcher);
+                }
+            }
 
             String productPrice = "0.0";
             String mrpPrice = "0.0";
@@ -234,7 +250,7 @@ public final class ProductListFragment extends Fragment {
             }
 
             if(product.getNutrient().isEmpty()){
-                holder.food_type_tag.setVisibility(View.GONE);
+                holder.food_type_tag.setVisibility(View.INVISIBLE);
             }else if(product.getNutrient().equalsIgnoreCase("Veg")){
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.veg);
@@ -364,11 +380,23 @@ public final class ProductListFragment extends Fragment {
                     Intent i = new Intent(getActivity(), AppController.getInstance().getViewController().getProductViewActivity());
                     i.putExtra("product_id", product.getId());
                     i.putExtra("productViewTitle", productViewTitle);
+                    i.putExtra("showProductImage", showProductImage);
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(getActivity());
                 }
             });
 
+            holder.items.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getActivity(), AppController.getInstance().getViewController().getProductViewActivity());
+                    i.putExtra("product_id", product.getId());
+                    i.putExtra("productViewTitle", productViewTitle);
+                    i.putExtra("showProductImage", showProductImage);
+                    startActivity(i);
+                    AnimUtil.slideFromRightAnim(getActivity());
+                }
+            });
 
             holder.heart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -426,6 +454,7 @@ public final class ProductListFragment extends Fragment {
         }
 
         class ViewHolder {
+            ImageView items;
             RelativeLayout parent;
             LinearLayout block2;
             Button btnVarient;
@@ -486,9 +515,13 @@ public final class ProductListFragment extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                ProgressDialogUtil.hideProgressDialog();
-                DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                try {
+                    ProgressDialogUtil.hideProgressDialog();
+                    DialogHandler dialogHandler = new DialogHandler(getActivity());
+                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                } catch (Resources.NotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

@@ -16,17 +16,29 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:padding="3dp"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/items_image"
+        android:layout_width="@dimen/category_item_image_width"
+        android:layout_height="@dimen/category_item_image_height"
+        android:layout_marginLeft="5dp"
+        android:padding="3dp"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:layout_toRightOf="@+id/food_type_tag"
+        />
 
 
     <LinearLayout
         android:id="@+id/block2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/food_type_tag"
+        android:layout_toRightOf="@+id/items_image"
         android:layout_toLeftOf="@+id/heart"
         android:orientation="vertical"
-        android:paddingLeft="5dp"
+        android:layout_centerVertical="true"
+        android:paddingLeft="10dp"
         android:paddingRight="5dp">
 
         <TextView
@@ -131,7 +143,6 @@
                 android:gravity="center_vertical"
                 android:minHeight="10dp"
                 android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:paddingTop="5dp"
                 android:singleLine="true"
@@ -165,30 +176,34 @@
 
         <TextView
             android:id="@+id/number_text"
-            android:layout_width="22dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/remove_button"
-            android:text="78"
-            android:gravity="center"
-            android:maxLength="2"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/text_size_normal" />
+            android:layout_marginRight="5dp"
+            android:text="19"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/text_size_large" />
 
         <ImageButton
             android:id="@+id/add_button"
-            android:layout_width="@dimen/category_icon_add_width"
-            android:layout_height="@dimen/category_icon_add_height"
-            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/number_text"
-            android:background="@drawable/add" />
+            android:src="@drawable/add"
+            android:background="@android:color/transparent"
+            android:padding="5dp"/>
 
         <ImageButton
             android:id="@+id/remove_button"
-            android:layout_width="@dimen/category_icon_add_width"
-            android:layout_height="@dimen/category_icon_add_height"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/remove" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_button"
+            android:layout_toRightOf="@+id/number_text"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/remove"
+            android:background="@android:color/transparent"
+            android:padding="5dp"/>
+
     </RelativeLayout>
 
 

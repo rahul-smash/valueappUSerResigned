@@ -57,6 +57,7 @@
     <color name="color_green">#157a33</color>
     <color name="color_light_red">#ef3030</color>
     <color name="app_text_color">#ffffff</color>
+    <color name="color_orange">#d63600</color>
     <!--panna sweets-->
 
 </resources>

@@ -13,6 +13,11 @@ public class Category {
     @SerializedName("id")
     @Expose
     private String id;
+
+    @SerializedName("master_category_id")
+    @Expose
+    private String masterCategoryId;
+
     @SerializedName("title")
     @Expose
     private String title;
@@ -48,6 +53,26 @@ public class Category {
     @Expose
     private String sortOrder;
 
+
+    @SerializedName("show_product_image")
+    @Expose
+    private String showProductImage;
+
+    public String getShowProductImage() {
+        return showProductImage;
+    }
+
+    public void setShowProductImage(String showProductImage) {
+        this.showProductImage = showProductImage;
+    }
+
+    public String getMasterCategoryId() {
+        return masterCategoryId;
+    }
+
+    public void setMasterCategoryId(String masterCategoryId) {
+        this.masterCategoryId = masterCategoryId;
+    }
     /**
      * @return The id
      */

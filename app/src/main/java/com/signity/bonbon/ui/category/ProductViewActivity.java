@@ -83,6 +83,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     View divider;
     private GCMClientManager pushClientManager;
     private Product product;
+    private ImageView item_image;
     private ImageButton add_button, remove_button;
     private AppDatabase appDb;
     private GsonHelper gsonHelper;
@@ -95,7 +96,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     HorizontalAdapter mAdapter;
     private RelativeLayout recommendItemLayout;
     private String[] productIds;
-    String product_id="";
+    String product_id="",showProductImage="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +143,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         btnShopcart.setOnClickListener(this);
         viewAllBtn.setOnClickListener(this);
 
+        item_image = (ImageView) findViewById(com.signity.bonbon.R.id.item_image);
         item_name = (TextView) findViewById(com.signity.bonbon.R.id.item_name);
         item_name.setTypeface(typeFaceRobotoRegular);
         price = (TextView) findViewById(com.signity.bonbon.R.id.price);
@@ -284,10 +286,39 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         } else {
             btnVarient.setVisibility(View.GONE);
         }
+        btnVarient.setText(txtQuant);
+
+        if (showProductImage==null){
+            if (product.getImage() != null && !product.getImage().isEmpty()) {
+                item_image.setVisibility(View.VISIBLE);
+                Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+            } else {
+                item_image.setVisibility(View.GONE);
+            }
+        }
+        else if(showProductImage.equalsIgnoreCase("0")){
+
+            item_image.setVisibility(View.GONE);
+
+        }else if(showProductImage.equalsIgnoreCase("1")){
+            item_image.setVisibility(View.VISIBLE);
+            if (product.getImage() != null && !product.getImage().isEmpty()) {
+                Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+            } else {
+                item_image.setImageResource(R.mipmap.ic_launcher);
+            }
+        }
+
     }
 
     private void initProduct() {
         product_id = getIntent().getStringExtra("product_id");
+        try {
+            showProductImage = getIntent().getStringExtra("showProductImage");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showProductImage=null;
+        }
         productViewTitle = getIntent().getStringExtra("productViewTitle");
         String productGac = getString(R.string.app_name) + GAConstant.PRODUCT;
         GATrackers.getInstance().trackEvent(productGac, productGac + GAConstant.VIEW, productViewTitle + " is view on " + getString(R.string.app_name));

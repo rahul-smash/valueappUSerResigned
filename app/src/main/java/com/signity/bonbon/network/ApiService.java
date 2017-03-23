@@ -43,6 +43,9 @@ public interface ApiService {
     @GET("/getCategories")
     void getCategoryList(Callback<GetCategory> response);
 
+    @GET("/getCategories/{category_id}")
+    void getCategoryList(@Path("category_id") String category_id,Callback<GetCategory> response);
+
     @GET("/categories")
     void getBCCategoryList(Callback<GetBigComCategory> response);
 

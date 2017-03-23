@@ -159,6 +159,19 @@ public class Store {
     @Expose
     private String onlinePayment;
 
+    @SerializedName("product_image")
+    @Expose
+    private String productImage;
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+
 
     public String getOnlinePayment() {
         return onlinePayment;

@@ -12,7 +12,6 @@
             android:id="@+id/order_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="Order date:"
             android:textColor="#2f2f2f"
             android:textSize="15sp" />
@@ -46,10 +45,6 @@
             android:text="1911575"
             android:textColor="#2f2f2f"
             android:textSize="15sp" />
-
-
-
-
 
 
         <TextView

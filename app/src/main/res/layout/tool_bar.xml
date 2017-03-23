@@ -26,6 +26,7 @@
         android:layout_centerVertical="true"
         android:text="Grocery App"
         android:textColor="@color/app_text_color"
+        android:textStyle="bold"
         android:textSize="@dimen/header_toolbar_text_size" />
 
 

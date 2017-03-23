@@ -217,6 +217,7 @@ public class ViewController {
                 }
                 break;
 
+
             case 36:
                 if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentBeliramTheme22();

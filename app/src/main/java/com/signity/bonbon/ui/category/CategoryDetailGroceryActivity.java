@@ -10,9 +10,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -30,6 +32,7 @@ import com.signity.bonbon.ui.fragment.ProductListFragmentGrocery;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -48,11 +51,13 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
     ViewPager viewPager;
     PagerAdapter adapter;
     String title;
-    String id;
+    String id,subCategoryId;
     List<SubCategory> subCategoryList;
     boolean isActivityFirstTime = true;
+
     PrefManager prefManager;
-    String productViewTitle;
+    String productViewTitle,showProductImage="";
+    int position;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,14 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
         prefManager= new PrefManager(CategoryDetailGroceryActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");
+        try {
+            subCategoryId = getIntent().getStringExtra("subCategoryId");
+            if(subCategoryId==null){
+                subCategoryId="";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         rupee=(TextView)findViewById(R.id.rupee);
         backButton = (Button) findViewById(R.id.backButton);
         btnSearch = (Button) findViewById(R.id.btnSearch);
@@ -96,8 +109,19 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
 
         checkCartValue();
         Category category = appDb.getCategoryById(id);
+        showProductImage=category.getShowProductImage();
+
         subCategoryList = category.getSubCategoryList();
+
+
         if (subCategoryList != null && subCategoryList.size() != 0) {
+            if(!subCategoryId.isEmpty()){
+                for (int i=0; i<subCategoryList.size(); i++){
+                    if(subCategoryId.equalsIgnoreCase(subCategoryList.get(i).getId())){
+                        position=i;
+                    }
+                }
+            }
             setupTab(subCategoryList);
         }
 
@@ -122,6 +146,7 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
 
         adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), subCategoryList);
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new AccordionTransformer());
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 //
@@ -141,6 +166,11 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
                 adapter.notifyDataSetChanged();
             }
         });
+
+        if(!subCategoryId.isEmpty()){
+            viewPager.setCurrentItem(position);
+        }
+
     }
 
     @Override
@@ -230,6 +260,7 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);
+            arg.putString("showProductImage", showProductImage);
             arg.putString("subCategoryId", subCategoryId);
             arg.putString("productViewTitle", productViewTitle);
             ProductListFragmentGrocery fragment = new ProductListFragmentGrocery();
@@ -266,7 +297,9 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
             btnCartCount.setVisibility(View.GONE);
         }
         String totalCartValue = appDb.getCartTotalPrice();
-        cartTotalPrice.setText(totalCartValue);
+        DecimalFormat df = new DecimalFormat("####0.00");
+        double doublePrice = Double.parseDouble(totalCartValue);
+        cartTotalPrice.setText(df.format(doublePrice));
     }
 
     public void openShopCartActivity() {

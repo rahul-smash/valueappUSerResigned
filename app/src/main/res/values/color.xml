@@ -11,6 +11,7 @@
     <color name="colorGray">#e2e2e2</color>
     <color name="colordarkGray">#808080</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
 
     <!-- color store 15 townking code -->
     <color name="colorTransWhite_65">#A6FFFFFF</color>
@@ -46,6 +47,8 @@
 
     <!--color code 56 Street-->
     <color name="color_orange_dark">#cd380d</color>
+
+    <color name="color_red_dark">#ED1B24</color>
 
     <!--chawla's-->
     <color name="color_ligh_black">#292929</color>

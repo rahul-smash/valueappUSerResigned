@@ -296,6 +296,7 @@ public class SplashActivity extends Activity {
                         ProgressDialogUtil.hideProgressDialog();
 //                        DataAdapter.getInstance().setStoreArea(getStoreArea);
                         Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
+                        intent_location.putExtra("from","splash");
                         startActivity(intent_location);
                         finish();
 

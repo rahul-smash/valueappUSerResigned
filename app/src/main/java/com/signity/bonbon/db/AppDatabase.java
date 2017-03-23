@@ -123,7 +123,6 @@ public class AppDatabase {
     }
 
 
-
     public List<Category> getCategoryList(String master_category_id) {
         List<Category> list = new ArrayList<>();
         Cursor cursor = null;

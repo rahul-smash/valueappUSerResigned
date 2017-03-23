@@ -8,6 +8,8 @@ image_small TEXT,
 image_medium TEXT,
 is_enable TEXT DEFAULT (1),
 is_deleted TEXT DEFAULT (0),
-sort_order INTEGER DEFAULT (0)
+sort_order INTEGER DEFAULT (0),
+master_category_id TEXT,
+show_product_image TEXT
 );
 

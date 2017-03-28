@@ -75,7 +75,7 @@ public final class ProductListFragment extends Fragment {
     String subCategoryId;
     private AppDatabase appDb;
     PrefManager prefManager;
-    String productViewTitle,showProductImage;
+    String productViewTitle,showProductImage,productImageSwitch;
 
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context, ProductListFragment.class.getSimpleName());
@@ -96,6 +96,14 @@ public final class ProductListFragment extends Fragment {
         subCategoryId = getArguments().getString("subCategoryId");
         productViewTitle = getArguments().getString("productViewTitle", "");
         showProductImage = getArguments().getString("showProductImage", "0");
+        try {
+            productImageSwitch=prefManager.getSharedValue(AppConstant.PRODUCT_IMAGE);
+            if(productImageSwitch==null){
+                productImageSwitch="1";
+            }
+        } catch (Exception e) {
+            productImageSwitch="1";
+        }
         listProduct = new ArrayList<>();
     }
 
@@ -197,16 +205,43 @@ public final class ProductListFragment extends Fragment {
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
 
-            if (showProductImage.equalsIgnoreCase("0")) {
-                holder.items.setVisibility(View.GONE);
-            } else if (showProductImage.equalsIgnoreCase("1")) {
-                holder.items.setVisibility(View.VISIBLE);
-                if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                    Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
-                } else {
-                    holder.items.setImageResource(R.mipmap.ic_launcher);
+                if(productImageSwitch.equalsIgnoreCase("1")){
+                    holder.items.setVisibility(View.GONE);
+                }else if(productImageSwitch.equalsIgnoreCase("2")){
+
+                    holder.items.setVisibility(View.VISIBLE);
+
+                    try {
+                        if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
+                            Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
+                        } else {
+                            holder.items.setImageResource(R.mipmap.ic_launcher);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }else if(productImageSwitch.equalsIgnoreCase("3")){
+
+                    if (showProductImage.equalsIgnoreCase("0")) {
+                        holder.items.setVisibility(View.GONE);
+                    } else if (showProductImage.equalsIgnoreCase("1")) {
+                        holder.items.setVisibility(View.VISIBLE);
+                        try {
+                            if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
+                                Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
+                            } else {
+                                holder.items.setImageResource(R.mipmap.ic_launcher);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }else {
+                    holder.items.setVisibility(View.GONE);
                 }
-            }
+
+
 
             String productPrice = "0.0";
             String mrpPrice = "0.0";

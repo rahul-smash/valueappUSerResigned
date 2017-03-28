@@ -54,6 +54,7 @@ public class AppConstant {
     public static final String CITY = "com.android.bonbon.Utilities.CITY";
     public static final String STATE = "com.android.bonbon.Utilities.STATE";
     public static final String COUNTRY = "com.android.bonbon.Utilities.COUNTRY";
+    public static final String RECOMMENDED_ITEMS = "com.android.bonbon.Utilities.RECOMMENDED_ITEMS";
 
 
 }

@@ -43,7 +43,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:src="@drawable/search"
+            android:src="@drawable/header_search"
             android:background="@android:color/transparent"
             android:padding="10dp"/>
 

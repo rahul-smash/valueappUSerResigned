@@ -210,7 +210,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
             productId=Arrays.toString(productIds);
 
-            getRecommendProductList(productId.replace("[","").replace("]",""));
+            checkRecommendedItems();
+
         } else {
             listViewCart.setVisibility(View.GONE);
             emptyCart.setVisibility(View.VISIBLE);
@@ -218,6 +219,19 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         }
         updateCartPrice();
         updateSavingPrice();
+    }
+
+    private void checkRecommendedItems() {
+
+        try {
+            String itemsSwitch= prefManager.getSharedValue(AppConstant.RECOMMENDED_ITEMS);
+            if(itemsSwitch!=null && !itemsSwitch.isEmpty() && itemsSwitch.equalsIgnoreCase("1")){
+                getRecommendProductList(productId.replace("[","").replace("]",""));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void updateSavingPrice() {

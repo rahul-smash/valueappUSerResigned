@@ -634,6 +634,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.storeSharedValue(AppConstant.tax_rate, store.getTaxRate());
                     prefManager.storeSharedValue(AppConstant.ONLINE_PAYMENT, store.getOnlinePayment());
                     prefManager.storeSharedValue(AppConstant.PRODUCT_IMAGE, store.getProductImage());
+                    prefManager.storeSharedValue(AppConstant.RECOMMENDED_ITEMS, store.getRecommendedProducts());
                     prefManager.setReferEarnFn(store.getReferFnEnable());
                     prefManager.setReferEarnFnEnableForDevice(store.getReferForDeviceEnable());
 
@@ -971,34 +972,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
-
-
-//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//            alertDialogBuilder.setTitle("Latest Update");
-//            alertDialogBuilder.setMessage(forceDownloadModel.getForceDownloadMessage());
-//            alertDialogBuilder.setCancelable(false);
-//
-//            if (forceDownloadModel.getForceDownload().equalsIgnoreCase("1")) {
-//                alertDialogBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        openPlayStoreLink();
-//                    }
-//                });
-//            } else {
-//                alertDialogBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        openPlayStoreLink();
-//                    }
-//                });
-//                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//            }
-//
-//            AlertDialog alertDialog = alertDialogBuilder.create();
-//            alertDialog.show();

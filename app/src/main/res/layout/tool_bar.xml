@@ -32,12 +32,14 @@
 
     <ImageButton
         android:id="@+id/search"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:background="@drawable/search" />
+        android:src="@drawable/header_search"
+        android:background="@android:color/transparent"
+        android:padding="5dp"/>
 
 
     <ImageButton

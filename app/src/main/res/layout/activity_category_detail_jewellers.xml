@@ -73,7 +73,7 @@
             android:layout_marginTop="5dp"
             android:background="@android:color/transparent"
             android:contentDescription=""
-            android:drawableLeft="@drawable/search"
+            android:drawableLeft="@drawable/header_search"
             android:paddingLeft="5dp"
             android:visibility="visible" />
 

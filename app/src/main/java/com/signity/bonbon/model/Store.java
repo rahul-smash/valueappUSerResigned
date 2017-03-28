@@ -163,6 +163,10 @@ public class Store {
     @Expose
     private String productImage;
 
+    @SerializedName("recommended_products")
+    @Expose
+    private String recommendedProducts;
+
     public String getProductImage() {
         return productImage;
     }
@@ -586,4 +590,13 @@ public class Store {
     public void setReferFnEnable(Boolean referFnEnable) {
         isReferFnEnable = referFnEnable;
     }
+
+    public String getRecommendedProducts() {
+        return recommendedProducts;
+    }
+
+    public void setRecommendedProducts(String recommendedProducts) {
+        this.recommendedProducts = recommendedProducts;
+    }
+
 }

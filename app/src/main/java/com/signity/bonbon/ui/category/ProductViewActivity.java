@@ -96,7 +96,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     HorizontalAdapter mAdapter;
     private RelativeLayout recommendItemLayout;
     private String[] productIds;
-    String product_id="",showProductImage="";
+    String product_id="",showProductImage="",productImageSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,26 +174,22 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         setupProductUi();
         checkCartValue();
 
-        getRecommendProductList(product_id);
-//        setupRecommendedProducts();
+//        this function will check whether items are recommended for a product or not
+        checkRecommendedItems();
+
     }
 
-    private void setupRecommendedProducts() {
-        listProduct = appDb.getCartListProduct();
-        if (listProduct != null && listProduct.size() != 0) {
+    private void checkRecommendedItems() {
 
-            productIds=new String[listProduct.size()];
-
-            for (int i=0; i<listProduct.size();i++){
-                productIds[i]=listProduct.get(i).getId();
+        try {
+            String itemsSwitch= prefManager.getSharedValue(AppConstant.RECOMMENDED_ITEMS);
+            if(itemsSwitch!=null && !itemsSwitch.isEmpty() && itemsSwitch.equalsIgnoreCase("1")){
+                getRecommendProductList(product_id);
             }
-
-            productId= Arrays.toString(productIds);
-
-            getRecommendProductList(product_id);
-        } else {
-            recommendItemLayout.setVisibility(View.GONE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
 
@@ -288,26 +284,58 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         }
         btnVarient.setText(txtQuant);
 
-        if (showProductImage==null){
-            if (product.getImage() != null && !product.getImage().isEmpty()) {
-                item_image.setVisibility(View.VISIBLE);
-                Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
-            } else {
-                item_image.setVisibility(View.GONE);
-            }
-        }
-        else if(showProductImage.equalsIgnoreCase("0")){
 
+        try {
+            checkImageStatus();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void checkImageStatus() {
+        try {
+            productImageSwitch=prefManager.getSharedValue(AppConstant.PRODUCT_IMAGE);
+            if(productImageSwitch==null){
+                productImageSwitch="1";
+            }
+        } catch (Exception e) {
+            productImageSwitch="1";
+        }
+
+        if(productImageSwitch.equalsIgnoreCase("1")){
             item_image.setVisibility(View.GONE);
-
-        }else if(showProductImage.equalsIgnoreCase("1")){
+        }else if(productImageSwitch.equalsIgnoreCase("2")){
             item_image.setVisibility(View.VISIBLE);
-            if (product.getImage() != null && !product.getImage().isEmpty()) {
-                Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
-            } else {
-                item_image.setImageResource(R.mipmap.ic_launcher);
+            try {
+                if (product.getImage() != null && !product.getImage().isEmpty()) {
+                    Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+                } else {
+                    item_image.setImageResource(R.mipmap.ic_launcher);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        }else if(productImageSwitch.equalsIgnoreCase("3")){
+
+            if(showProductImage.equalsIgnoreCase("0")){
+                item_image.setVisibility(View.GONE);
+            }else if(showProductImage.equalsIgnoreCase("1")){
+                item_image.setVisibility(View.VISIBLE);
+                try {
+                    if (product.getImage() != null && !product.getImage().isEmpty()) {
+                        Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+                    } else {
+                        item_image.setImageResource(R.mipmap.ic_launcher);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }else {
+            item_image.setVisibility(View.GONE);
         }
+
 
     }
 
@@ -317,7 +345,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             showProductImage = getIntent().getStringExtra("showProductImage");
         } catch (Exception e) {
             e.printStackTrace();
-            showProductImage=null;
+            showProductImage="0";
         }
         productViewTitle = getIntent().getStringExtra("productViewTitle");
         String productGac = getString(R.string.app_name) + GAConstant.PRODUCT;

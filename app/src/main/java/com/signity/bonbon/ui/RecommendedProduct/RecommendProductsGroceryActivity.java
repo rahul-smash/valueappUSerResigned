@@ -241,7 +241,8 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
             if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                Picasso.with(RecommendProductsGroceryActivity.this).load(product.getImageMedium()).error(R.mipmap.ic_launcher).into(holder.items);
+                Picasso.with(RecommendProductsGroceryActivity.this).load(product.getImageMedium())
+                        .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.items);
             } else {
                 holder.items.setImageResource(R.mipmap.ic_launcher);
             }

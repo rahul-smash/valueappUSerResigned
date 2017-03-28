@@ -309,7 +309,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             item_image.setVisibility(View.VISIBLE);
             try {
                 if (product.getImage() != null && !product.getImage().isEmpty()) {
-                    Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+                    Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(item_image);
                 } else {
                     item_image.setImageResource(R.mipmap.ic_launcher);
                 }
@@ -324,7 +324,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 item_image.setVisibility(View.VISIBLE);
                 try {
                     if (product.getImage() != null && !product.getImage().isEmpty()) {
-                        Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+                        Picasso.with(ProductViewActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(item_image);
                     } else {
                         item_image.setImageResource(R.mipmap.ic_launcher);
                     }
@@ -675,7 +675,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 holder.imageView.setVisibility(View.VISIBLE);
                 try {
                     if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
-                        Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50,50).centerInside().error(R.mipmap.ic_launcher).into(holder.imageView);
+                        Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50,50).centerInside()
+                                .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.imageView);
                     } else {
                         holder.imageView.setImageResource(R.mipmap.ic_launcher);
                     }

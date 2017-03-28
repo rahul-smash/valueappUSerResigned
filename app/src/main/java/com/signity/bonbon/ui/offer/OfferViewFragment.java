@@ -99,7 +99,8 @@ public class OfferViewFragment extends Fragment {
         txtTerms.setText(""+data.getOfferTermCondition());
 
         if (data.getImage() != null && !data.getImage().isEmpty()) {
-            Picasso.with(getActivity()).load(data.getImage()).error(R.mipmap.ic_launcher).into(imageViewItem);
+            Picasso.with(getActivity()).load(data.getImage())
+                    .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(imageViewItem);
         } else {
             imageViewItem.setImageResource(R.mipmap.ic_launcher);
         }

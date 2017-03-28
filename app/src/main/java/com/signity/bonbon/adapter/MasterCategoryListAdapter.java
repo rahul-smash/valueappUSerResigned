@@ -89,7 +89,7 @@ public class MasterCategoryListAdapter extends RecyclerView.Adapter<MasterCatego
         try {
             if (category.getImageMedium() != null && !category.getImageMedium().isEmpty()) {
                 Picasso.with(context).load(category.getImage()).
-                        resize(300, 300).error(R.mipmap.ic_launcher).into(holder.image);
+                        resize(300, 300).error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.image);
             } else {
                 holder.image.setImageResource(R.mipmap.ic_launcher);
             }

@@ -290,7 +290,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
         try {
             if (product.getImage() != null && !product.getImage().isEmpty()) {
-                Picasso.with(ProductViewGroceryActivity.this).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(item_image);
+                Picasso.with(ProductViewGroceryActivity.this).load(product.getImage()).fit().centerInside()
+                        .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(item_image);
             } else {
                 item_image.setImageResource(R.mipmap.ic_launcher);
             }
@@ -628,7 +629,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
                 holder.imageView.setVisibility(View.VISIBLE);
                 if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
                     try {
-                        Picasso.with(ProductViewGroceryActivity.this).load(product.getImageSmall()).resize(50,50).centerInside().error(R.mipmap.ic_launcher).into(holder.imageView);
+                        Picasso.with(ProductViewGroceryActivity.this).load(product.getImageSmall()).resize(50,50).centerInside()
+                                .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.imageView);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -530,7 +530,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
-                    Picasso.with(ShoppingCartActivity.this).load(product.getImageSmall()).resize(50,50).centerInside().error(R.mipmap.ic_launcher).into(holder.imageView);
+                    Picasso.with(ShoppingCartActivity.this).load(product.getImageSmall()).resize(50,50).centerInside()
+                            .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.imageView);
                 } else {
                     holder.imageView.setImageResource(R.mipmap.ic_launcher);
                 }

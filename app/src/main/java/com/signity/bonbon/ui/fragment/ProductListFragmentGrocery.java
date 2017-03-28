@@ -203,7 +203,8 @@ public final class ProductListFragmentGrocery extends Fragment {
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
             if (product.getImage() != null && !product.getImage().isEmpty()) {
-                Picasso.with(getActivity()).load(product.getImage()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
+                Picasso.with(getActivity()).load(product.getImage()).fit().centerInside()
+                        .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.items);
             } else {
                 holder.items.setImageResource(R.mipmap.ic_launcher);
             }

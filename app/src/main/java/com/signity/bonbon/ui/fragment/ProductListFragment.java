@@ -213,7 +213,8 @@ public final class ProductListFragment extends Fragment {
 
                     try {
                         if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                            Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
+                            Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside()
+                                    .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.items);
                         } else {
                             holder.items.setImageResource(R.mipmap.ic_launcher);
                         }
@@ -229,7 +230,8 @@ public final class ProductListFragment extends Fragment {
                         holder.items.setVisibility(View.VISIBLE);
                         try {
                             if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                                Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside().error(R.mipmap.ic_launcher).into(holder.items);
+                                Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside()
+                                        .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.items);
                             } else {
                                 holder.items.setImageResource(R.mipmap.ic_launcher);
                             }

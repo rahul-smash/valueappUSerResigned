@@ -310,7 +310,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
 
             if (totalOrderItem != addedtoCartItem) {
                 if (addedtoCartItem == 0) {
-                    message = "Sorry unable to process your order. Please try later";
+                    message = "Sorry, this order can't be processed. Please make a fresh order.";
                 } else {
                     message = "Some of the items are not available to add to your cart. Please check your cart to proceed";
                 }

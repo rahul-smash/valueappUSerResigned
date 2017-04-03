@@ -1,5 +1,6 @@
 package com.signity.bonbon.gcm;
 
+import android.app.Activity;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,13 +10,16 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.signity.bonbon.R;
 import com.signity.bonbon.SplashActivity;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.MyApplication;
+import com.signity.bonbon.ui.Notifications.NotificationsDetailActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 
 /**
@@ -65,21 +69,24 @@ public class GCMNotificationIntentService extends IntentService {
         PrefManager prefManager=new PrefManager(this);
         Intent intent=null;
         PendingIntent pendingIntent=null;
+        DataAdapter.getInstance().setNotificationMessage(message);
         if(prefManager.getBoolean("applicationOnPause")){
             intent = new Intent(this, SplashActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                     PendingIntent.FLAG_ONE_SHOT);
 
 
         }else {
-            intent = new Intent();
-            pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
+                intent = new Intent(this, NotificationsDetailActivity.class);
+                pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                        PendingIntent.FLAG_ONE_SHOT);
+
         }
 
 
-        int icon = R.mipmap.ic_launcher;
+        int icon = R.drawable.notifications;
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(title)

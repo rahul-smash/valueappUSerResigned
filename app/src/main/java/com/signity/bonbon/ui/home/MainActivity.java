@@ -59,6 +59,7 @@ import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.AboutUs.AboutUsFragment;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
+import com.signity.bonbon.ui.Notifications.NotificationsDetailActivity;
 import com.signity.bonbon.ui.SharenEarn.ShareNEarnFragment;
 import com.signity.bonbon.ui.fragment.LoyalityFragment;
 import com.signity.bonbon.ui.fragment.Profile;
@@ -206,7 +207,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+        showNotificationPopUp();
 
+
+    }
+
+    private void showNotificationPopUp() {
+        String message=null;
+        try {
+            message=DataAdapter.getInstance().getNotificationMessage();
+        } catch (Exception e) {
+            message=null;
+            e.printStackTrace();
+        }
+
+        if(message!=null && !message.isEmpty()){
+            Intent intent=new Intent(MainActivity.this, NotificationsDetailActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void getPreferencesValues() {

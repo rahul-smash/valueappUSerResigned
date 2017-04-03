@@ -56,6 +56,8 @@ public class DataAdapter {
         return pickupAdressModel;
     }
 
+    public String notificationMessage;
+
     public void setPickupAdressModel(PickupAdressModel pickupAdressModel) {
         this.pickupAdressModel = pickupAdressModel;
     }
@@ -156,4 +158,13 @@ public class DataAdapter {
     public void setProductList(List<Product> productList) {
         this.recommendProductList = productList;
     }
+
+    public String getNotificationMessage() {
+        return notificationMessage;
+    }
+
+    public void setNotificationMessage(String notificationMessage) {
+        this.notificationMessage = notificationMessage;
+    }
+
 }

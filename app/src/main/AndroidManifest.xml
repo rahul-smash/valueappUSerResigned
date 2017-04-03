@@ -241,6 +241,10 @@
             android:name=".ui.category.MasterCategory"
             android:label="@string/title_activity_master_category"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.Notifications.NotificationsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:excludeFromRecents="true"></activity>
     </application>
 
 </manifest>

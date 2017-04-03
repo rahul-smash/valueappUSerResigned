@@ -2,7 +2,6 @@ package com.signity.bonbon.ui.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TextInputLayout;
@@ -22,7 +21,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.signity.bonbon.R;
-import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.GsonHelper;
@@ -33,9 +31,6 @@ import com.signity.bonbon.model.MobData;
 import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.UserRecord;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
-import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.HashMap;

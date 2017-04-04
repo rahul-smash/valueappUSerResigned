@@ -73,4 +73,11 @@
     <string name="list_header">Choose your nearest outlet</string>
     <string name="cancel_order_txt">Are you sure you want to cancel the order?</string>
     <string name="dialog_title">Message</string>
+    <string name="select_table">Select Table</string>
+    <string name="error_no_table">No table available</string>
+    <string name="str_select">Pickup</string>
+    <string name="str_deliver">Deliver</string>
+    <string name="str_dining">Dining</string>
+    <string name="str_pickup">Pickup</string>
+
 </resources>

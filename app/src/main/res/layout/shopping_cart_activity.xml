@@ -218,4 +218,111 @@
         android:text="Place Order"
         android:textColor="@color/app_text_color"
         android:textSize="15sp" />
+
+
+    <RelativeLayout
+        android:id="@+id/delivery_option_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:id="@+id/delivery_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/deliver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_deliver"
+                android:textColor="@color/color_dark_green"
+                android:textSize="@dimen/text_size_small"
+                android:layout_margin="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/shape_delivery_option_text"
+                android:elevation="3dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/pickup_option"
+            android:layout_below="@+id/delivery_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pickup" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_pickup"
+                android:textColor="@color/color_dark_green"
+                android:textSize="@dimen/text_size_small"
+                android:layout_margin="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/shape_delivery_option_text"
+                android:elevation="3dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dinein_option"
+            android:layout_below="@+id/pickup_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pickup" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_dining"
+                android:textColor="@color/color_dark_green"
+                android:textSize="@dimen/text_size_small"
+                android:layout_margin="5dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/shape_delivery_option_text"
+                android:elevation="3dp"
+                android:alpha="1"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

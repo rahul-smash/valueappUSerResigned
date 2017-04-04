@@ -167,6 +167,11 @@ public class Store {
     @Expose
     private String recommendedProducts;
 
+    @SerializedName("in_store")
+    @Expose
+    private String inStore;
+
+
     public String getProductImage() {
         return productImage;
     }
@@ -597,6 +602,14 @@ public class Store {
 
     public void setRecommendedProducts(String recommendedProducts) {
         this.recommendedProducts = recommendedProducts;
+    }
+
+    public String getInStore() {
+        return inStore;
+    }
+
+    public void setInStore(String inStore) {
+        this.inStore = inStore;
     }
 
 }

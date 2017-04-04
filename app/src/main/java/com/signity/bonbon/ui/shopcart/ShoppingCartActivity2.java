@@ -126,7 +126,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String taxDetailsJson,taxLabelJson,taxFixedTaxJson;
     private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
     private String couponCode = "";    // variable used to store couponcode applied by the User.
-    private String tax="0" ;
+    private String tax="0" , dining_table="",dine_in="";
     GsonHelper gsonHelper;
 
     @Override
@@ -141,18 +141,37 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         prefManager = new PrefManager(ShoppingCartActivity2.this);
 
         GATrackers.getInstance().trackScreenView(GAConstant.CHECKOUT_SCREEN);
-        userId = getIntent().getStringExtra("userId");
-        addressId = getIntent().getStringExtra("addressId");
-        shippingChargeText = getIntent().getStringExtra("shiping_charges");
-        minmimumChargesText = getIntent().getStringExtra("minimum_charges");
-        user_address = getIntent().getStringExtra("user_address");
-        areaId = getIntent().getStringExtra("area_id");
+        try {
+            userId = getIntent().getStringExtra("userId");
+            addressId = getIntent().getStringExtra("addressId");
+            shippingChargeText = getIntent().getStringExtra("shiping_charges");
+            minmimumChargesText = getIntent().getStringExtra("minimum_charges");
+            user_address = getIntent().getStringExtra("user_address");
+            areaId = getIntent().getStringExtra("area_id");
+        } catch (Exception e) {
+            e.printStackTrace();
+            userId = prefManager.getSharedValue(AppConstant.ID);
+        }
         try {
             payment_method = getIntent().getStringExtra("payment_method");
         } catch (Exception e) {
             e.printStackTrace();
             payment_method="2";
         }
+
+        try {
+            dining_table = getIntent().getStringExtra("dining_table");
+        } catch (Exception e) {
+            e.printStackTrace();
+            dining_table="";
+        }
+        try {
+            dine_in = getIntent().getStringExtra("dine_in") != null ? getIntent().getStringExtra("dine_in") : "no";
+        } catch (Exception e) {
+            e.printStackTrace();
+            dine_in="no";
+        }
+
         isForPickUpStatus = getIntent().getStringExtra("isForPickup") != null ? getIntent().getStringExtra("isForPickup") : "no";
 
         if (shippingChargeText != null && !shippingChargeText.isEmpty()) {
@@ -629,7 +648,69 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         });
     }
 
+    private void callNetworkServiceForPlaceOrderForDineIn(String id, String addressId) {
+        ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
+        String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+//        String order = appDb.getOrderStringForSubmit();
+        String shippingcharge = shipping_charges.getText().toString();
+        String orderPrice = items_price.getText().toString();
+        String discount = discountVal.getText().toString();
+        String amount = total.getText().toString();
+        String order = appDb.getCartListStringJson();
+        String note = edtBar.getText().toString();
+//        String tax = tax_value.getText().toString();
 
+
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("device_id", deviceId);
+        param.put("user_id", id);
+        param.put("device_token", deviceToken);
+        param.put("platform", AppConstant.PLATFORM);
+        param.put("payment_method", "cod");
+        param.put("user_address_id", addressId);
+        param.put("shipping_charges", shippingcharge);
+        param.put("tax", tax);
+        param.put("tax_rate", taxRate);
+        param.put("note", note);
+        param.put("orders", order);
+        param.put("checkout", orderPrice);
+        param.put("coupon_code", coupenCode);
+        param.put("discount", discount);
+        param.put("total", amount);
+        param.put("user_address", user_address);
+        param.put("dining_table", dining_table);
+        param.put("order_facility", "Dining");
+
+
+        param.put("store_tax_rate_detail", taxLabelJson);
+        param.put("store_fixed_tax_detail", taxFixedTaxJson);
+        param.put("calculated_tax_detail", taxDetailsJson);
+        Log.e("params", param.toString());
+        NetworkAdaper.getInstance().getNetworkServices().pickupPlaceOrder(param, new Callback<ResponseData>() {
+            @Override
+            public void success(ResponseData responseData, Response response) {
+                ProgressDialogUtil.hideProgressDialog();
+                if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
+                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
+                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
+                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
+
+                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                } else {
+                    DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ProgressDialogUtil.hideProgressDialog();
+                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
+                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+            }
+        });
+    }
 
 
 
@@ -718,7 +799,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 if (openTime()) {
                     if (appDb.getCartSize() != 0) {
                         if (isForPickUpStatus.equalsIgnoreCase("yes")) {
-                            callNetworkServiceForPlaceOrderForPickup(userId, addressId);
+                            if(dine_in.equalsIgnoreCase("yes")){
+                                callNetworkServiceForPlaceOrderForDineIn(userId, addressId);
+                            }else {
+
+                                callNetworkServiceForPlaceOrderForPickup(userId, addressId);
+                            }
                         } else {
 
                             if(payment_method.equalsIgnoreCase("2")){
@@ -788,7 +874,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
             case R.id.homeBtn:
                 Intent intent = new Intent(ShoppingCartActivity2.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -1371,6 +1459,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                                 Intent intentOfferView = new Intent(ShoppingCartActivity2.this, OfferViewActivity.class);
                                                 intentOfferView.putExtra("offerName", offerName);
                                                 startActivity(intentOfferView);
+                                                finish();
                                                 AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
                                             } catch (Exception e) {
                                                 Toast.makeText(ShoppingCartActivity2.this,""+validAllCouponsModel.getMessage(),Toast.LENGTH_SHORT).show();

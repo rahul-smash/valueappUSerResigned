@@ -53,7 +53,7 @@
         </activity>
         <activity
             android:name=".ui.Delivery.LocationAreaActivity"
-            android:label="Location Area finder"></activity>
+            android:label="Location Area finder" />
         <activity
             android:name=".ui.home.MainActivity"
             android:label="@string/title_activity_slider_pane"
@@ -211,23 +211,23 @@
         <activity
             android:name=".ui.shopcart.PayOnlineActivity"
             android:label="@string/title_activity_pay_online"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.category.CategoryDetailJewellersActivity"
             android:label="@string/title_activity_category_detail_jewellers"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.category.ProductViewJewellersActivity"
             android:label="@string/title_activity_product_view_jewellers"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RecommendedProduct.RecommendProductsActivity"
             android:label="@string/title_activity_recommend_products"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RecommendedProduct.RecommendProductsGroceryActivity"
             android:label="@string/title_activity_recommend_products_grocery"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.common.AddressSelectActivity"
             android:screenOrientation="portrait"
@@ -236,15 +236,17 @@
             android:name=".ui.Location.SearchLocationActivity"
             android:label="@string/title_activity_search_location"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ui.category.MasterCategory"
             android:label="@string/title_activity_master_category"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.Notifications.NotificationsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Notifications.NotificationsDetailActivity"
+            android:excludeFromRecents="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog"
-            android:excludeFromRecents="true"></activity>
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".ui.Delivery.DineInTableActivity"></activity>
     </application>
 
 </manifest>

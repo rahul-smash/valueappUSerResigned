@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int REQUESTCODE_FOR_SUCESS_LOGIN = 328;
     public TextView title, user;
-    public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     SlidingPaneLayout mSlidingPanel;
     ListView mMenuList;
     ImageButton search, shopingcart;
@@ -135,8 +134,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         getPreferencesValues(); // getting values from prefrences
 
-        typeFaceRobotoRegular = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_REGULAR);
-        typeFaceRobotoBold = FontUtil.getTypeface(context, FontUtil.FONT_ROBOTO_BOLD);
 
         appDb = DbAdapter.getInstance().getDb();
 
@@ -157,8 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         updateUserName();
 
-        title.setTypeface(typeFaceRobotoBold);
-        user.setTypeface(typeFaceRobotoRegular);
         mMenuList = (ListView) findViewById(R.id.menulist);
         shopingcart = (ImageButton) findViewById(R.id.shopingcart);
         profilePic = (ImageView) findViewById(R.id.profile_pic);
@@ -642,6 +637,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     prefManager.setProjectType(store.getType());
                     prefManager.setOtoSkip(store.getOtpSkip());
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
+                    prefManager.setDeliveryFacilityStatus(store.getDeliveryFacility());
+                    prefManager.setInStoreFacilityStatus(store.getInStore());
                     prefManager.storeSharedValue(AppConstant.is24x7_open, store.getIs24x7_open());
                     prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
                     prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());

@@ -54,6 +54,7 @@ import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
+import com.signity.bonbon.ui.Delivery.DineInTableActivity;
 import com.signity.bonbon.ui.RecommendedProduct.RecommendProductsActivity;
 import com.signity.bonbon.ui.RecommendedProduct.RecommendProductsGroceryActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
@@ -81,7 +82,6 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     List<Product> listProduct;
     List<Product> listRecommendProduct;
     private GCMClientManager pushClientManager;
-    public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private Button backButton;
     private AppDatabase appDb;
     private PrefManager prefManager;
@@ -94,7 +94,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     GsonHelper gsonHelper;
     HorizontalAdapter mAdapter;
     private Context context;
-
+    private RelativeLayout deliveryOptionLayout;
+    private LinearLayout deliveryOption, pickupOption, dineinOption;
+    String pickUpStatus, deliveryStatus, inStoreStatus;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,8 +106,41 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         prefManager = new PrefManager(this);
         gsonHelper = new GsonHelper();
         pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
-        typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
-        typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
+        currency = prefManager.getSharedValue(AppConstant.CURRENCY);
+
+        pickUpStatus = prefManager.getPickupFacilityStatus();
+        deliveryStatus= prefManager.getDeliveryFacilityStatus();
+        inStoreStatus= prefManager.getInStoreFacilityStatus();
+
+
+        init();
+
+        initListeners();
+
+        if (currency.contains("\\")) {
+            rupee.setText(unescapeJavaString(currency));
+        } else {
+            rupee.setText(currency);
+        }
+
+
+
+        ShoppingCartActivity.this.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+    }
+
+    private void initListeners() {
+        backButton.setOnClickListener(this);
+        placeorder.setOnClickListener(this);
+        viewAllBtn.setOnClickListener(this);
+        search.setOnClickListener(this);
+        deliveryOption.setOnClickListener(this);
+        dineinOption.setOnClickListener(this);
+        pickupOption.setOnClickListener(this);
+    }
+
+    private void init() {
 
         recommendedItemsList= (RecyclerView) findViewById(R.id.recommendedItemsList);
         LinearLayoutManager horizontalLayoutManagaer
@@ -117,37 +152,18 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         search = (ImageButton) findViewById(R.id.search);
         rupee = (TextView) findViewById(R.id.rupee);
         total = (TextView) findViewById(R.id.total);
-        total.setTypeface(typeFaceRobotoRegular);
         title = (TextView) findViewById(R.id.textTitle);
         emptyCart = (TextView) findViewById(R.id.emptyCart);
         title.setText("My Cart");
-        title.setTypeface(typeFaceRobotoRegular);
         placeorder = (Button) findViewById(R.id.placeorder);
         backButton = (Button) findViewById(R.id.backButton);
         viewAllBtn = (Button) findViewById(R.id.viewAllBtn);
         saving_rupee = (TextView) findViewById(R.id.saving_rupee);
         saving_rupee.setSelected(true);
-
-
-        currency = prefManager.getSharedValue(AppConstant.CURRENCY);
-
-
-        if (currency.contains("\\")) {
-            rupee.setText(unescapeJavaString(currency));
-        } else {
-            rupee.setText(currency);
-        }
-
-
-        backButton.setOnClickListener(this);
-        placeorder.setOnClickListener(this);
-        viewAllBtn.setOnClickListener(this);
-        search.setOnClickListener(this);
-        ShoppingCartActivity.this.getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-        );
-
-
+        deliveryOptionLayout = (RelativeLayout) findViewById(R.id.delivery_option_layout);
+        deliveryOption = (LinearLayout) findViewById(R.id.delivery_option);
+        dineinOption = (LinearLayout) findViewById(R.id.dinein_option);
+        pickupOption = (LinearLayout) findViewById(R.id.pickup_option);
     }
 
     private void getRecommendProductList(String productId) {
@@ -295,14 +311,11 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 holder.items_mrp_price = (TextView) convertView.findViewById(R.id.items_mrp_price);
                 holder.parent = (RelativeLayout) convertView.findViewById(R.id.parent);
                 holder.items_name = (TextView) convertView.findViewById(R.id.items_name);
-                holder.items_name.setTypeface(typeFaceRobotoBold);
                 holder.items_price = (TextView) convertView.findViewById(R.id.items_price);
-                holder.items_price.setTypeface(typeFaceRobotoRegular);
                 holder.btnVarient = (Button) convertView.findViewById(R.id.btnVarient);
                 holder.add_button = (ImageButton) convertView.findViewById(R.id.add_button);
                 holder.remove_button = (ImageButton) convertView.findViewById(R.id.remove_button);
                 holder.number_text = (TextView) convertView.findViewById(R.id.number_text);
-                holder.number_text.setTypeface(typeFaceRobotoRegular);
                 holder.rupee = (TextView) convertView.findViewById(R.id.rupee);
                 holder.rupee2 = (TextView) convertView.findViewById(R.id.rupee2);
                 convertView.setTag(holder);
@@ -631,6 +644,55 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
                 break;
 
+            case R.id.delivery_option:
+
+                deliveryOptionLayout.setVisibility(View.GONE);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+                        intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+                        startActivity(intentDelivery);
+                        AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+                    }
+                }, 100);
+
+                break;
+
+            case R.id.pickup_option:
+
+                deliveryOptionLayout.setVisibility(View.GONE);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
+                        intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+                        intentDelivery.putExtra("title", getResources().getString(R.string.str_select));
+                        startActivity(intentDelivery);
+                        AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+                    }
+                }, 100);
+
+                break;
+
+            case R.id.dinein_option:
+
+                deliveryOptionLayout.setVisibility(View.GONE);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intentDelivery = new Intent(ShoppingCartActivity.this, DineInTableActivity.class);
+                        intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+                        startActivity(intentDelivery);
+                        AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+                    }
+                }, 100);
+
+                break;
+
         }
 
     }
@@ -647,31 +709,59 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     }
 
     private void callProceedToPlaceOrder() {
-        String pickUpStatus = prefManager.getPickupFacilityStatus();
-        String deliveryStatus= prefManager.getDeliveryFacilityStatus();
         Intent intentDelivery = null;
-        if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")){
+
+        if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("0") && inStoreStatus.equalsIgnoreCase("0")){
             intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
-            intentDelivery.putExtra("title", "Deliver or PickUp");
-        }
-        else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")){
+            intentDelivery.putExtra("title", getResources().getString(R.string.str_select));
+            intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+            startActivity(intentDelivery);
+            AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+        }else if(deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0") && inStoreStatus.equalsIgnoreCase("0")){
             intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+            intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+            startActivity(intentDelivery);
+            AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
         }
-        else if(deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")){
+        else if(inStoreStatus.equalsIgnoreCase("1") && deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("0")){
+            intentDelivery = new Intent(ShoppingCartActivity.this, DineInTableActivity.class);
+            intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+            startActivity(intentDelivery);
+            AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+        }
+        else if(pickUpStatus.equalsIgnoreCase("1") && inStoreStatus.equalsIgnoreCase("0") && deliveryStatus.equalsIgnoreCase("0")){
             intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
-            intentDelivery.putExtra("title", "PickUp");
+            intentDelivery.putExtra("title", getResources().getString(R.string.str_select));
+            intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+            startActivity(intentDelivery);
+            AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+        }else {
+            chooseDeliveryOptions();
         }
-        else {
-            intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
+
+
+    }
+
+    private void chooseDeliveryOptions() {
+        deliveryOptionLayout.setVisibility(View.VISIBLE);
+
+        if(pickUpStatus.equalsIgnoreCase("1")){
+            pickupOption.setVisibility(View.VISIBLE);
+        }else {
+            pickupOption.setVisibility(View.GONE);
         }
-            /*if (pickUpStatus.equalsIgnoreCase("0")) {
-                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryActivity.class);
-            } else {
-                intentDelivery = new Intent(ShoppingCartActivity.this, DeliveryPickupActivity.class);
-            }*/
-        intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
-        startActivity(intentDelivery);
-        AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
+
+        if(deliveryStatus.equalsIgnoreCase("1")){
+            deliveryOption.setVisibility(View.VISIBLE);
+        }else {
+            deliveryOption.setVisibility(View.GONE);
+        }
+
+        if(inStoreStatus.equalsIgnoreCase("1")){
+            dineinOption.setVisibility(View.VISIBLE);
+        }else {
+            dineinOption.setVisibility(View.GONE);
+        }
 
     }
 

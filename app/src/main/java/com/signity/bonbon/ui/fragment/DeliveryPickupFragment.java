@@ -29,6 +29,7 @@ import com.signity.bonbon.model.GetPickupApiResponse;
 import com.signity.bonbon.model.PickupAdressModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.Delivery.DeliveryActivity;
+import com.signity.bonbon.ui.Delivery.DineInTableActivity;
 import com.signity.bonbon.ui.common.CityAreaActivitiy;
 
 import java.util.HashMap;
@@ -51,13 +52,14 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
     String from;
     String userId;
     private Button buttonCityName, buttonAreaName;
-    private ImageView buttonDelivery, buttonPickup;
-    private RelativeLayout relative0address,relative1PickUpOtion;
+    private ImageView buttonDelivery, buttonPickup, buttonDineIn;
+    private RelativeLayout relative0address,relative1PickUpOtion, dineLayout, pickupLayout, deliveryLayout;
     private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     private AppDatabase appDb;
     private String cityId = "", cityName = "";
     private String areaID = "", areaName = "";
+    String pickUpStatus, deliveryStatus, inStoreStatus;
 
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context,
@@ -73,6 +75,9 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
         prefManager = new PrefManager(getActivity());
         pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = getArguments().getString(AppConstant.FROM, "");
+        pickUpStatus = prefManager.getPickupFacilityStatus();
+        deliveryStatus = prefManager.getDeliveryFacilityStatus();
+        inStoreStatus = prefManager.getInStoreFacilityStatus();
     }
 
     @Override
@@ -80,31 +85,26 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
         View mView = inflater.inflate(R.layout.layout_select_pickup, container, false);
         relative0address = (RelativeLayout) mView.findViewById(R.id.relative0address);
         relative1PickUpOtion = (RelativeLayout) mView.findViewById(R.id.relative1PickUpOtion);
+        dineLayout = (RelativeLayout) mView.findViewById(R.id.dineLayout);
+        pickupLayout = (RelativeLayout) mView.findViewById(R.id.pickupLayout);
+        deliveryLayout = (RelativeLayout) mView.findViewById(R.id.deliveryLayout);
         buttonCityName = (Button) mView.findViewById(R.id.buttonCityName);
         buttonAreaName = (Button) mView.findViewById(R.id.buttonAreaName);
         buttonDelivery = (ImageView) mView.findViewById(R.id.buttonDelivery);
         buttonPickup = (ImageView) mView.findViewById(R.id.buttonPickup);
+        buttonDineIn = (ImageView) mView.findViewById(R.id.buttonDineIn);
         buttonCityName.setOnClickListener(this);
         buttonAreaName.setOnClickListener(this);
         buttonDelivery.setOnClickListener(this);
         buttonPickup.setOnClickListener(this);
+        buttonDineIn.setOnClickListener(this);
 
-
-        String pickUpStatus = prefManager.getPickupFacilityStatus();
-        String deliveryStatus = prefManager.getDeliveryFacilityStatus();
-
-        if (deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("1")) {
-            relative1PickUpOtion.setVisibility(View.VISIBLE);
-        } else if (deliveryStatus.equalsIgnoreCase("1") && pickUpStatus.equalsIgnoreCase("0")) {
-        } else if (deliveryStatus.equalsIgnoreCase("0") && pickUpStatus.equalsIgnoreCase("1")) {
-            relative1PickUpOtion.setVisibility(View.GONE);
-            relative0address.setVisibility(View.VISIBLE);
-        } else {
-        }
-
+        relative1PickUpOtion.setVisibility(View.GONE);
+        relative0address.setVisibility(View.VISIBLE);
 
         return mView;
     }
+
 
     @Override
     public void onResume() {
@@ -137,25 +137,52 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.buttonDelivery:
 
-                buttonPickup.setSelected(false);
-                buttonDelivery.setSelected(true);
+                if(!buttonDelivery.isSelected()){
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
-                        intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
-                        startActivity(intentDelivery);
-                        AnimUtil.slideFromRightAnim(getActivity());
-                    }
-                }, 500);
+                    buttonPickup.setSelected(false);
+                    buttonDineIn.setSelected(false);
+                    buttonDelivery.setSelected(true);
+                    relative0address.setVisibility(View.GONE);
+
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intentDelivery = new Intent(getActivity(), DeliveryActivity.class);
+                            intentDelivery.putExtra(AppConstant.FROM, "shop_cart");
+                            startActivity(intentDelivery);
+                            AnimUtil.slideFromRightAnim(getActivity());
+                        }
+                    }, 500);
+                }
+
                 break;
             case R.id.buttonPickup:
 
                 if (!buttonPickup.isSelected()) {
                     buttonPickup.setSelected(true);
                     buttonDelivery.setSelected(false);
+                    buttonDineIn.setSelected(false);
                     relative0address.setVisibility(View.VISIBLE);
+                }
+                break;
+
+            case R.id.buttonDineIn:
+
+                if(!buttonDineIn.isSelected()){
+                    buttonPickup.setSelected(false);
+                    buttonDelivery.setSelected(false);
+                    buttonDineIn.setSelected(true);
+                    relative0address.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intentDelivery = new Intent(getActivity(), DineInTableActivity.class);
+                            startActivity(intentDelivery);
+                            AnimUtil.slideFromRightAnim(getActivity());
+                        }
+                    }, 500);
                 }
                 break;
         }

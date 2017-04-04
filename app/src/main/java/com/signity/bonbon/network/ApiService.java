@@ -3,6 +3,7 @@ package com.signity.bonbon.network;
 import com.signity.bonbon.model.AboutUsModel1;
 import com.signity.bonbon.model.AddressSelectModel;
 import com.signity.bonbon.model.AreaSwitchModel;
+import com.signity.bonbon.model.DineInModel;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.EnquiryModel;
 import com.signity.bonbon.model.GeoFenceModel;
@@ -197,4 +198,7 @@ public interface ApiService {
     @POST("/deliveryAreas/{typeName}")
     void getAddressData(@FieldMap Map<String, String> parameters, @Path("typeName") String typeName, Callback<AddressSelectModel> response);
 
+//    Added by Pardeep for getting Dine In Table List
+    @GET("/getDiningTables")
+    void getDiningTables(Callback<DineInModel> response);
 }

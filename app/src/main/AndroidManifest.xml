@@ -246,7 +246,8 @@
             android:excludeFromRecents="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".ui.Delivery.DineInTableActivity"></activity>
+        <activity android:name=".ui.Delivery.DineInTableActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

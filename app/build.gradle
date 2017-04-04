@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "com.signity.fountain"
+        applicationId "com.signity.tangerine"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode java.lang.Integer.parseInt("${version_code}")

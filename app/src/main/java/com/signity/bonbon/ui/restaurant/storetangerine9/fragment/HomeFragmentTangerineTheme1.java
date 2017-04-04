@@ -27,6 +27,7 @@ import com.signity.bonbon.service.NotifyService;
 import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
 import com.signity.bonbon.ui.book.BookNowActivity;
 import com.signity.bonbon.ui.category.CategoryActivity;
+import com.signity.bonbon.ui.category.MasterCategory;
 import com.signity.bonbon.ui.contacts.ContactActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
@@ -121,7 +122,7 @@ public class HomeFragmentTangerineTheme1 extends Fragment implements View.OnClic
         switch (v.getId()) {
 
             case R.id.relCategory:
-                startActivity(new Intent(getActivity(), CategoryActivity.class));
+                startActivity(new Intent(getActivity(), MasterCategory.class));
                 AnimUtil.slideFromRightAnim(getActivity());
                 break;
             case R.id.relOffers:

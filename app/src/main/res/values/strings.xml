@@ -105,4 +105,13 @@
     <string name="str_login_btn_lbl">Please Login to proceed</string>
 
 
+    <string name="str_no_data_found">No Data found.</string>
+    <string name="str_booknow_fragment_enter_name">Enter Name</string>
+    <string name="str_booknow_fragment_enter_mobile">Enter Mobile Number</string>
+    <string name="str_booknow_fragment_mobile_valiation">Mobile No. should be of 10 digits</string>
+    <string name="str_booknow_fragment_enter_valid_email">Enter Valid Email</string>
+    <string name="str_booknow_fragment_enter_city">Enter City</string>
+    <string name="str_booknow_fragment_enter_date">Please select date</string>
+
+
 </resources>

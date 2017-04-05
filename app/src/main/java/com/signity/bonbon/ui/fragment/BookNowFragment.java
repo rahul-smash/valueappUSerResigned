@@ -275,7 +275,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     private boolean validateName() {
         if (edtName.getText().toString().trim().isEmpty()) {
-            input_layout_name.setError("Enter Name");
+            input_layout_name.setError(getString(R.string.str_booknow_fragment_enter_name));
             return false;
         } else {
             input_layout_name.setErrorEnabled(false);
@@ -286,11 +286,11 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     private boolean validatePhone() {
         if (phoneNumber.getText().toString().trim().isEmpty()) {
-            input_layout_phone.setError("Enter Mobile Number");
+            input_layout_phone.setError(getString(R.string.str_booknow_fragment_enter_mobile));
             return false;
         }
         else if (phoneNumber.getText().toString().trim().length()!=10){
-            input_layout_phone.setError("Mobile No. should be of 10 digits");
+            input_layout_phone.setError(getString(R.string.str_booknow_fragment_mobile_valiation));
             return false;
         }
         else {
@@ -305,7 +305,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
         String emailValue = email.getText().toString().trim();
 
         if (emailValue.isEmpty() || !Util.checkValidEmail(emailValue)) {
-            input_layout_email.setError("Enter Valid Email");
+            input_layout_email.setError(getString(R.string.str_booknow_fragment_enter_valid_email));
             return false;
         } else {
             input_layout_email.setErrorEnabled(false);
@@ -316,7 +316,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     private boolean validateCity() {
         if (city.getText().toString().trim().isEmpty()) {
-            input_layout_city.setError("Enter City");
+            input_layout_city.setError(getString(R.string.str_booknow_fragment_enter_city));
             return false;
         } else {
             input_layout_city.setErrorEnabled(false);
@@ -327,7 +327,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     private boolean validateDate() {
         if (date.getText().toString().trim().isEmpty()) {
-            input_layout_date.setError("Please select date");
+            input_layout_date.setError(getString(R.string.str_booknow_fragment_enter_date));
             return false;
         }
         else {

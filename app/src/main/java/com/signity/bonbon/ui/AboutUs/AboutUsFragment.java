@@ -119,7 +119,7 @@ public class AboutUsFragment extends Fragment {
                     ProgressDialogUtil.hideProgressDialog();
                 } else {
                     ProgressDialogUtil.hideProgressDialog();
-                    Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.str_no_data_found), Toast.LENGTH_SHORT).show();
                 }
             }
 

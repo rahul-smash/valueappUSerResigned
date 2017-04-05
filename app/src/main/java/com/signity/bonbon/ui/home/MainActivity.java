@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,7 +27,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +36,6 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
-import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
@@ -47,7 +44,6 @@ import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.geofence.NamedGeofence;
 import com.signity.bonbon.model.ForceDownloadModel;
@@ -108,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ViewController viewController;
     boolean isActivityLoadsFirstTime = true;
     private String TAG = MainActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
     private String loyalityStatus;
     private GeofenceController.GeofenceControllerListener geofenceControllerListener = new GeofenceController.GeofenceControllerListener() {
         @Override
@@ -130,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 trackScreenView(GAConstant.HOME_SCREEN);
         prefManager = new PrefManager(MainActivity.this);
         viewController = AppController.getInstance().getViewController();
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
 
         getPreferencesValues(); // getting values from prefrences
 
@@ -618,7 +612,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void getStoreServicesForUpdate() {
 
         String deviceid = Settings.Secure.getString(MainActivity.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(MainActivity.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceid);

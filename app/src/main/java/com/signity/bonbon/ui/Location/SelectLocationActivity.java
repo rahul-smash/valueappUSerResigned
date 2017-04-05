@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreAreaModel1;
 
@@ -27,7 +26,6 @@ public class SelectLocationActivity extends AppCompatActivity implements View.On
 
     PrefManager prefManager;
     AppDatabase appDb;
-    private GCMClientManager pushClientManager;
 
     public GetStoreArea storeArea;
     List<GetStoreAreaModel1> areas;

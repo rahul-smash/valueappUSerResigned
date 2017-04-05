@@ -29,7 +29,6 @@ import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
@@ -50,7 +49,6 @@ public class MyFavouriteJewellers extends Fragment {
     ;
     ListView items_list;
     List<Product> listProduct;
-    private GCMClientManager pushClientManager;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     Button btnCartCount;
     LinearLayout linearShopCart;
@@ -63,7 +61,6 @@ public class MyFavouriteJewellers extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.my_favourite, container, false);
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         prefManager=new PrefManager(getActivity());
 
         items_list = (ListView) mView.findViewById(R.id.items_list);

@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +23,6 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.SubCategory;
@@ -41,7 +39,6 @@ import java.util.List;
 public class CategoryDetailGroceryActivity extends FragmentActivity implements View.OnClickListener, CartChangeListener {
 
     public static final String TAG = CategoryDetailGroceryActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
     private AppDatabase appDb;
     private LinearLayout linearShopCart;
     Button backButton, btnSearch, btnShopCart, btnCartCount, proceed, btnShopList;
@@ -64,7 +61,6 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail);
         appDb = DbAdapter.getInstance().getDb();
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         prefManager= new PrefManager(CategoryDetailGroceryActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");

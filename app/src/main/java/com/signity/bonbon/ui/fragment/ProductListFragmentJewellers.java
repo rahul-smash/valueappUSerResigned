@@ -1,11 +1,9 @@
 package com.signity.bonbon.ui.fragment;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -13,11 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,16 +31,13 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
-import com.signity.bonbon.model.ShoppingListObject;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.shopping.ListDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -73,7 +65,6 @@ public class ProductListFragmentJewellers extends Fragment{
 
     public List<Product> listProduct;
     public SubCategory subCategory;
-    private GCMClientManager pushClientManager;
 
     String subCategoryId;
     private AppDatabase appDb;
@@ -90,7 +81,6 @@ public class ProductListFragmentJewellers extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appDb = DbAdapter.getInstance().getDb();
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         cartChangeListener = (CartChangeListener) getActivity();
         prefManager = new PrefManager(getActivity());
         typeFaceRobotoRegular = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_REGULAR);
@@ -372,7 +362,7 @@ public class ProductListFragmentJewellers extends Fragment{
     public void getSubCategoryList(String id) {
         ProgressDialogUtil.showProgressDialog(getActivity());
         String deviceId = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
 //        Log.e("id", id);
         param.put("device_id", deviceId);

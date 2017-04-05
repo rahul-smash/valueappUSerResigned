@@ -13,22 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.signity.bonbon.R;
-import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
-import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
-import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 
@@ -49,7 +42,6 @@ public class LoginFragmentEmail extends Fragment {
     Button updateButton, backButton;
     EditText edtName, edtEmail, edtReferal;
     LinearLayout referalBlock;
-    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
 
     String from, fullName, email;
@@ -60,7 +52,6 @@ public class LoginFragmentEmail extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         prefManager = new PrefManager(getActivity());
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = bundle.getString(AppConstant.FROM);
         fullName = bundle.getString("full_name");
         email = bundle.getString("email");
@@ -142,7 +133,7 @@ public class LoginFragmentEmail extends Fragment {
         PrefManager prefManager = new PrefManager(getActivity());
         String userId = prefManager.getSharedValue(AppConstant.ID);
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("user_id", userId);

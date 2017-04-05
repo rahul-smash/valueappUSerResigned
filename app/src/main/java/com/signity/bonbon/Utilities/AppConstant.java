@@ -11,7 +11,7 @@ public class AppConstant {
     ;  // for tangerine
     public final static String PLATFORM = "android";
     public static String ID = "com.android.bonbon.Utilities.ID";
-
+    public static final String DEVICE_TOKEN = "com.android.bonbon.device_token";
 
     public static String FROM = "com.android.bonbon.Utilities.FROM";
     public static String IS_HEADER = "com.android.bonbon.Utilities.IS_HEADER";

@@ -26,7 +26,6 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.MobData;
 import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.UserRecord;
@@ -48,7 +47,6 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
     Button btnNext, backButton;
     ImageButton backBtn;
     EditText edtPhone;
-    private GCMClientManager pushClientManager;
     private TextInputLayout input_layout_phone;
     String from;
     PrefManager prefManager;
@@ -57,7 +55,6 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefManager = new PrefManager(getActivity());
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = getArguments().getString(AppConstant.FROM);
     }
 
@@ -159,7 +156,7 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
 
         String phone = edtPhone.getText().toString();
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
         param.put("phone", phone);
         param.put("device_id", deviceId);

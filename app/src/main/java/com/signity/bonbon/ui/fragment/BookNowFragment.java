@@ -11,7 +11,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +30,9 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.EnquiryDataModel;
 import com.signity.bonbon.model.EnquiryModel;
-import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.view.DateTimePicker;
 
@@ -65,7 +62,6 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     String storeId;
 
-    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     private AppDatabase appDb;
     Bundle bundle;
@@ -88,7 +84,6 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
         }
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(getActivity());
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         storeId = appDb.getStore(prefManager.getSharedValue(AppConstant.STORE_ID)).getId();
     }
 
@@ -359,7 +354,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
                     String userId = prefManager.getSharedValue(AppConstant.ID);
                     String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-                    String deviceToken = pushClientManager.getRegistrationId(getActivity());
+                    String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
                     Map<String, String> param = new HashMap<String, String>();
 
                     param.put("store_id", storeId);

@@ -24,7 +24,6 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetPickupApiResponse;
 import com.signity.bonbon.model.PickupAdressModel;
 import com.signity.bonbon.network.NetworkAdaper;
@@ -54,7 +53,6 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
     private Button buttonCityName, buttonAreaName;
     private ImageView buttonDelivery, buttonPickup, buttonDineIn;
     private RelativeLayout relative0address,relative1PickUpOtion, dineLayout, pickupLayout, deliveryLayout;
-    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     private AppDatabase appDb;
     private String cityId = "", cityName = "";
@@ -73,7 +71,6 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
         prefManager = new PrefManager(getActivity());
         userId = prefManager.getSharedValue(AppConstant.ID);
         prefManager = new PrefManager(getActivity());
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = getArguments().getString(AppConstant.FROM, "");
         pickUpStatus = prefManager.getPickupFacilityStatus();
         deliveryStatus = prefManager.getDeliveryFacilityStatus();

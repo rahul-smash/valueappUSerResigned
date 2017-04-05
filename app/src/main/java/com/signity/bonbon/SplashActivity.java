@@ -1,13 +1,11 @@
 package com.signity.bonbon;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,12 +14,8 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -32,16 +26,13 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.Location.SelectLocationActivity;
 import com.signity.bonbon.ui.home.MainActivity;
-import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,7 +49,6 @@ public class SplashActivity extends Activity {
     ImageView splash_screen;
     GATrackers trackers;
     private int SPLASH_TIME_OUT = 500;
-    private GCMClientManager pushClientManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +58,8 @@ public class SplashActivity extends Activity {
         trackers.trackScreenView(GAConstant.SPLASH_SCREEN);
         GeofenceController.getInstance().init(this);
         prefManager = new PrefManager(this);
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         appDb = DbAdapter.getInstance().getDb();
-        deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
+        deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         splash_screen = (ImageView) findViewById(R.id.splash_screen);
 
 //        startAnimationProcess()
@@ -125,22 +114,7 @@ public class SplashActivity extends Activity {
     }
 
     private void initSplash() {
-        if (deviceToken != null && !deviceToken.isEmpty()) {
-            getStoreServices();
-        } else {
-            pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler() {
-                @Override
-                public void onSuccess(String registrationId, boolean isNewRegistration) {
-                    getStoreServices();
-                }
-
-                @Override
-                public void onFailure(String ex) {
-                    super.onFailure(ex);
-                    finish();
-                }
-            });
-        }
+        getStoreServices();
     }
 
 
@@ -163,7 +137,7 @@ public class SplashActivity extends Activity {
 
         ProgressDialogUtil.showProgressDialog(SplashActivity.this);
         String deviceid = Settings.Secure.getString(SplashActivity.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(SplashActivity.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceid);

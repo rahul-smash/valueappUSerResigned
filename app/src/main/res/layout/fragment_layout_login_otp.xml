@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Mobile Verification"
+            android:text="@string/str_lbl_mobile_verification"
             android:textColor="@color/app_text_color"
             android:textSize="20sp"
             android:visibility="visible" />
@@ -82,7 +82,7 @@
         android:id="@+id/textLb2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mobile Verification"
+        android:text="@string/str_lbl_mobile_verification"
         android:textSize="@dimen/text_size_large"
         android:layout_centerHorizontal="true"
         android:textColor="@color/ColorPrimary"
@@ -98,7 +98,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:padding="5dp"
-        android:text="Please enter your One Time Password. We have sent the same to your number"
+        android:text="@string/str_lbl_otp_msgs"
         android:textSize="@dimen/text_size" />
 
     <android.support.design.widget.TextInputLayout
@@ -116,7 +116,7 @@
             android:ems="10"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:hint="OTP"
+            android:hint="@string/str_lbl_otp"
             android:imeOptions="actionDone"
             android:inputType="phone"
             android:textColor="@android:color/black"
@@ -156,7 +156,7 @@
             android:background="@drawable/shape_button_resend"
             android:contentDescription=""
             android:ems="6"
-            android:text="Done"
+            android:text="@string/str_lbl_done"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />

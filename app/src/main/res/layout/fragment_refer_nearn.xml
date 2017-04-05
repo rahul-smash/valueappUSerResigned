@@ -43,7 +43,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:textColor="@android:color/black"
-        android:text="Grab Discount"/>
+        android:text="@string/str_lbl_grab"/>
 
     <TextView
         android:id="@+id/label_2"
@@ -54,7 +54,7 @@
         android:gravity="center"
         android:layout_below="@+id/label_1"
         android:textColor="@android:color/black"
-        android:text=" Coupons and Freebies"/>
+        android:text="@string/str_lbl_freebies"/>
 
     <ImageView
         android:id="@+id/gift_icon"
@@ -72,7 +72,7 @@
         android:layout_below="@+id/gift_icon"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="SHARE YOUR REFERRAL CODE"
+        android:text="@string/str_lbl_sharecode"
         android:textSize="@dimen/text_size"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
@@ -102,14 +102,14 @@
         android:gravity="center"
         android:layout_below="@+id/codeTxt"
         android:textColor="@android:color/black"
-        android:text="Share our App among your Friends and Relatives. They will receive the Coupon and you will get one too"/>
+        android:text="@string/str_lbl_share_msgs"/>
 
 
     <Button
         android:id="@+id/shareNearn"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:text="SHARE"
+        android:text="@string/str_lbl_sharetext"
         android:textColor="@color/app_text_color"
         android:layout_margin="20dp"
         android:layout_below="@+id/label_4"

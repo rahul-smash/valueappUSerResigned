@@ -64,7 +64,7 @@
                         android:layout_below="@+id/imgCategory"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="CATEGORIES"
+                        android:text="@string/str_lbl_categories"
                         android:textSize="@dimen/text_size_sub_normal" />
                 </RelativeLayout>
 
@@ -102,7 +102,7 @@
                         android:layout_below="@+id/imgOffers"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="OFFERS"
+                        android:text="@string/str_lbl_offers"
                         android:textSize="@dimen/text_size_sub_normal" />
                 </RelativeLayout>
 
@@ -147,7 +147,8 @@
                         android:layout_below="@+id/imgBookNow"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="BOOK NOW"
+                        android:textAllCaps="true"
+                        android:text="@string/str_lbl_booknow"
                         android:textSize="@dimen/text_size_sub_normal" />
                 </RelativeLayout>
             </RelativeLayout>
@@ -184,7 +185,8 @@
                         android:layout_below="@+id/imgMyOrder"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="DELIVERY AREAS"
+                        android:textAllCaps="true"
+                        android:text="@string/layout_activity_delivery_areas"
                         android:textSize="@dimen/text_size_sub_normal" />
 
                 </RelativeLayout>
@@ -231,7 +233,7 @@
                         android:layout_below="@+id/imgContact"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="CONTACT"
+                        android:text="@string/str_lbl_contact"
                         android:textSize="@dimen/text_size_sub_normal" />
 
                 </RelativeLayout>
@@ -272,7 +274,7 @@
                         android:layout_below="@+id/imgCart"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="MY CART"
+                        android:text="@string/str_lbl_mycart"
                         android:textSize="@dimen/text_size_sub_normal" />
                 </RelativeLayout>
 

@@ -32,7 +32,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="8dp"
             android:singleLine="true"
-            android:text="My Profile"
+            android:text="@string/str_lbl_myprofile"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="NAME"
+                    android:text="@string/str_lbl_name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black"/>
@@ -93,7 +93,7 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Type here.."
+                    android:hint="@string/str_lbl_typehere"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingTop="10dp"
@@ -117,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="EMAIL ID"
+                    android:text="@string/str_lbl_emailid"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="@dimen/text_size_normal"
                     android:textColor="@android:color/black" />
@@ -131,7 +131,7 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Type here.."
+                    android:hint="@string/str_lbl_typehere"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
                     android:paddingTop="10dp"
@@ -156,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="REFERRAL CODE"
+                    android:text="@string/str_lbl_referalcode"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_normal" />
 
@@ -169,7 +169,7 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Type here.."
+                    android:hint="@string/str_lbl_typehere"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:paddingTop="10dp"
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Phone Number"
+                    android:text="@string/str_lbl_phoneno"
                     android:textSize="@dimen/text_size"
                     />
 
@@ -205,7 +205,7 @@
                     android:layout_marginTop="2dp"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Type here.."
+                    android:hint="@string/str_lbl_typehere"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
                     android:paddingTop="10dp"
@@ -227,7 +227,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/round_corner_button1"
-                android:text="Save"
+                android:text="@string/str_lbl_save"
                 android:textColor="@color/app_text_color" />
         </LinearLayout>
 

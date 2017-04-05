@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_toRightOf="@+id/nameTxt"
-                    android:text="AVAILABLE POINTS"
+                    android:text="@string/str_lbl_availble_points"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_large" />
 
@@ -89,7 +89,7 @@
                 android:background="@drawable/round_corner_button1"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="Log In"
+                android:text="@string/str_lbl_login"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_normal"
                 android:visibility="gone">
@@ -107,7 +107,7 @@
             android:layout_gravity="center"
             android:background="@color/colorWhite"
             android:gravity="center"
-            android:text="You are not authorized to see this feature."
+            android:text="@string/str_lbl_authorized_msg"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large"
             android:visibility="gone" />

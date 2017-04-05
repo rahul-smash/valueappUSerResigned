@@ -193,6 +193,41 @@
     <string name="str_no_mobile">Mobile Number</string>
     <string name="str_no_select_datetime">Select Date and Time of the Occasion</string>
     <string name="str_no_your_msgs">Mobile Number</string>
+    <string name="str_lbl_myprofile">My Profile</string>
+    <string name="str_lbl_typehere">Type here..</string>
+    <string name="str_lbl_emailid">EMAIL ID</string>
+    <string name="str_lbl_referalcode">EREFERRAL CODE</string>
+    <string name="str_lbl_phoneno">Phone Number</string>
+    <string name="str_lbl_save">Save</string>
+    <string name="str_lbl_mobile_verification">Mobile Verification</string>
+    <string name="str_lbl_your_no">Your Phone Number</string>
+    <string name="str_lbl_automated_msg">We will send automated message to your number. We will never share your number with anyone.</string>
+    <string name="str_lbl_mobile_length">10 digit phone number</string>
+    <string name="str_lbl_next">NEXT</string>
+    <string name="str_lbl_otp_msgs">Please enter your One Time Password. We have sent the same to your number</string>
+    <string name="str_lbl_otp">OTP</string>
+    <string name="str_lbl_availble_points">AVAILABLE POINTS</string>
+    <string name="str_lbl_login">Log In</string>
+    <string name="str_lbl_authorized_msg">You are not authorized to see this feature.</string>
+    <string name="str_lbl_no_offers">No Offers Found</string>
+    <string name="str_lbl_validfrom">Valid From</string>
+    <string name="str_lbl_to">to</string>
+    <string name="str_lbl_usage_limit">Usage Limit :</string>
+    <string name="str_lbl_min_amonut">Mimimum order amount :</string>
+    <string name="str_lbl_discount">Discount :</string>
+    <string name="str_lbl_coponcode">Coupon Code :</string>
+    <string name="str_lbl_termscondi">Terms n Condition :</string>
+    <string name="str_lbl_grab">Grab Discount</string>
+    <string name="str_lbl_freebies">Coupons and Freebies</string>
+    <string name="str_lbl_sharecode">SHARE YOUR REFERRAL CODE</string>
+    <string name="str_lbl_sharetext">SHARE</string>
+    <string name="str_lbl_share_msgs">Share our App among your Friends and Relatives. They will receive the Coupon and you will get one too</string>
+    <string name="str_lbl_categories">CATEGORIES</string>
+    <string name="str_lbl_offers">OFFERS</string>
+    <string name="str_lbl_contact">CONTACT</string>
+    <string name="str_lbl_mycart">MY CART</string>
+    <string name="str_lbl_shopnow">Shop Now</string>
+
 
 
 </resources>

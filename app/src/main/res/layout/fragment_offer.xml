@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="No Offers Found"
+        android:text="@string/str_lbl_no_offers"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="@dimen/text_size_large"
         android:visibility="gone" />

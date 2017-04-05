@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Mobile Verification"
+            android:text="@string/str_lbl_mobile_verification"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
@@ -67,7 +67,7 @@
         android:id="@+id/textLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Phone Number"
+        android:text="@string/str_lbl_your_no"
         android:textSize="@dimen/text_size_large"
         android:layout_centerHorizontal="true"
         android:textColor="@color/ColorPrimary"
@@ -84,7 +84,7 @@
         android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:gravity="center"
-        android:text="We will send automated message to your number. We will never share your number with anyone."
+        android:text="@string/str_lbl_automated_msg"
         android:textSize="@dimen/text_size" />
 
     <!--<TextView-->
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:hint="10 digit phone number"
+            android:hint="@string/str_lbl_mobile_length"
             android:imeOptions="actionDone"
             android:inputType="phone"
             android:textColor="@android:color/black"
@@ -133,7 +133,7 @@
         android:contentDescription=""
         android:minHeight="10dp"
         android:padding="10dp"
-        android:text="NEXT"
+        android:text="@string/str_lbl_next"
         android:textColor="@color/app_text_color"
         android:textSize="@dimen/text_size_normal"
         android:visibility="visible" />

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Select City"
+            android:text="@string/layout_select_activity_city"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_large"
             android:padding="5dp"

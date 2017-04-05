@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="No Record Found"
+        android:text="@string/str_no_record_found"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="gone" />
 

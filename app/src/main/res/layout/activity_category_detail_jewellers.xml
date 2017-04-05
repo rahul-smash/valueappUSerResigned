@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Total"
+                android:text="@string/layout_activity_categorydetail_total"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_sub_normal" />
 
@@ -218,7 +218,7 @@
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:gravity="center"
-                android:text="Check Out"
+                android:text="@string/layout_activity_categorydetail_checkout"
                 android:textColor="@color/app_text_color"
                 android:textSize="@dimen/text_size_normal" />
 

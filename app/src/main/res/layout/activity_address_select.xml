@@ -32,7 +32,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="8dp"
             android:singleLine="true"
-            android:text="City"
+            android:text="@string/layout_acticity_address_city"
             android:textColor="@color/app_text_color"
             android:textSize="24sp"
             android:visibility="visible" />
@@ -51,7 +51,7 @@
         android:background="@drawable/edit_city_area_shape"
         android:ems="10"
         android:gravity="center_vertical"
-        android:hint="Search here..."
+        android:hint="@string/layout_acticity_address_search"
         android:imeOptions="actionDone"
         android:paddingLeft="5dp"
         android:singleLine="true"

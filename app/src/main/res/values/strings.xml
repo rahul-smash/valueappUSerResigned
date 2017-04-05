@@ -113,5 +113,25 @@
     <string name="str_booknow_fragment_enter_city">Enter City</string>
     <string name="str_booknow_fragment_enter_date">Please select date</string>
 
+    <string name="layout_acticity_address_city">City</string>
+    <string name="layout_acticity_address_search">Search here…</string>
+    <string name="layout_activity_category_total">Total:</string>
+    <string name="layout_activity_categorydetail_total">Total</string>
+    <string name="layout_activity_categorydetail_checkout">Check Out</string>
+
+    <string name="layout_select_activity_city">Select City</string>
+    <string name="layout_activity_delivery_areas">Delivery Areas</string>
+    <string name="layout_select_activity_citys">Select City:</string>
+    <string name="layout_select_activity_no_area_found">Not area found</string>
+
+    <string name="layout_activity_master_city_no_catg">No Category available</string>
+    <string name="layout_notification_detail_confirm">Confirmation</string>
+    <string name="layout_notification_detail_yes">Yes</string>
+    <string name="layout_notification_detail_no">No</string>
+    <string name="layout_notification_detail_order_details">Order Details</string>
+    <string name="layout_order_detail_no_records">No Records Info</string>
+    <string name="layout_order_detail_delivery_address">Delivery Address:</string>
+
+
 
 </resources>

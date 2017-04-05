@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Delivery Areas"
+            android:text="@string/layout_activity_delivery_areas"
             android:textColor="@color/app_text_color"
             android:textSize="24sp"
             android:visibility="visible" />
@@ -52,7 +52,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:singleLine="true"
-            android:text="Select City:"
+            android:text="@string/layout_select_activity_citys"
             android:textSize="18sp"
             android:visibility="visible" />
 
@@ -69,7 +69,7 @@
             android:drawablePadding="5dp"
             android:drawableRight="@drawable/arrow_right_32"
             android:gravity="center_vertical"
-            android:hint="Select City"
+            android:hint="@string/layout_select_activity_city"
             android:paddingBottom="8dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -110,7 +110,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:singleLine="true"
-            android:text="Not area found"
+            android:text="@string/layout_select_activity_no_area_found"
             android:textSize="24sp"
             android:visibility="gone" />
 

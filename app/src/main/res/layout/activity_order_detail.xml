@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:singleLine="true"
-            android:text="Order Details"
+            android:text="@string/layout_notification_detail_order_details"
             android:textColor="@color/app_text_color"
             android:textSize="20sp"
             android:visibility="visible" />
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="No Records Info"
+        android:text="@string/layout_order_detail_no_records"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:visibility="gone" />
@@ -85,7 +85,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Delivery Address:"
+                android:text="@string/layout_order_detail_delivery_address"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 

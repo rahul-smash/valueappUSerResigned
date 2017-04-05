@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="You have login successfully. Please continue."
+        android:text="@string/str_lbl_you_login"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 

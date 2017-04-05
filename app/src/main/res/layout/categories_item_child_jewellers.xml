@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:maxLines="3"
             android:minLines="1"
-            android:text="Title"
+            android:text="@string/str_lbl_title"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_sub_normal" />
 
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="QTY"
+                android:text="@string/str_lbl_qty"
                 android:textColor="#a2a0a2"
                 android:textSize="16sp"
                 android:visibility="gone" />

@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="left|center_vertical"
                             android:padding="3dp"
-                            android:text="Price:"
+                            android:text="@string/layout_product_view_price"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/text_size_normal" />
 
@@ -244,7 +244,7 @@
                             android:paddingLeft="3dp"
                             android:paddingRight="8dp"
                             android:paddingTop="3dp"
-                            android:text="Select Quant"
+                            android:text="@string/layout_product_view_select_quant"
                             android:textColor="@android:color/black"
                             android:textSize="14sp" />
                     </RelativeLayout>
@@ -323,7 +323,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Recommended Items"
+                    android:text="@string/layout_product_view_recom_items"
                     android:textSize="@dimen/text_size_small" />
 
                 <Button
@@ -332,7 +332,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:background="@android:color/transparent"
-                    android:text="View All"
+                    android:text="@string/layout_product_view_viewall"
                     android:textColor="#086cd2"
                     android:textSize="@dimen/text_size_small" />
 

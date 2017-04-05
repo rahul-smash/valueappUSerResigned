@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/offer_bg"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/ColorPrimary"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="@color/ColorPrimary">
 
         <Button
             android:id="@+id/backButton"
@@ -37,9 +36,9 @@
             android:layout_toLeftOf="@+id/btnShopcart"
             android:layout_toRightOf="@+id/backButton"
             android:gravity="center"
+            android:maxLines="2"
             android:paddingRight="15dp"
             android:text=""
-            android:maxLines="2"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
@@ -112,8 +111,8 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/header"
         android:layout_above="@+id/recommendItemLayout"
+        android:layout_below="@+id/header"
         android:fillViewport="true">
 
         <RelativeLayout
@@ -168,10 +167,10 @@
                     android:id="@+id/rel1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/block3"
                     android:layout_alignParentLeft="true"
                     android:layout_alignTop="@+id/block3"
                     android:layout_toLeftOf="@+id/block3"
-                    android:layout_alignBottom="@+id/block3"
                     android:gravity="center_vertical">
 
                     <TextView
@@ -180,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left|center_vertical"
                         android:padding="3dp"
-                        android:text="Price:"
+                        android:text="@string/layout_product_view_price"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_size_normal" />
 
@@ -188,36 +187,36 @@
                         android:id="@+id/items_mrp_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
                         android:layout_toRightOf="@+id/rupee"
                         android:gravity="left|center_vertical"
-                        android:layout_marginRight="5dp"
-                        android:paddingTop="3dp"
                         android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
                         android:text="155"
                         android:textColor="@android:color/black"
-                        android:visibility="gone"
-                        android:textSize="@dimen/text_size_normal" />
+                        android:textSize="@dimen/text_size_normal"
+                        android:visibility="gone" />
 
                     <View
                         android:id="@+id/divider"
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
-                        android:layout_marginTop="12dp"
-                        android:visibility="gone"
                         android:layout_alignLeft="@+id/items_mrp_price"
                         android:layout_alignRight="@+id/items_mrp_price"
-                        android:background="@color/divider" />
+                        android:layout_marginTop="12dp"
+                        android:background="@color/divider"
+                        android:visibility="gone" />
 
 
                     <TextView
                         android:id="@+id/price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
                         android:layout_toRightOf="@+id/items_mrp_price"
                         android:gravity="left|center_vertical"
-                        android:layout_marginLeft="1dp"
-                        android:paddingTop="3dp"
                         android:paddingBottom="3dp"
+                        android:paddingTop="3dp"
                         android:text="15.00 "
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_size_normal" />
@@ -226,11 +225,11 @@
                         android:id="@+id/rupee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
                         android:layout_toRightOf="@+id/price_text"
                         android:gravity="left|center_vertical"
-                        android:paddingTop="3dp"
                         android:paddingBottom="3dp"
-                        android:layout_marginLeft="3dp"
+                        android:paddingTop="3dp"
                         android:text="@string/text_rs"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_size_normal" />
@@ -255,7 +254,7 @@
                         android:paddingRight="8dp"
                         android:paddingTop="5dp"
                         android:spinnerMode="dialog"
-                        android:text="Select Quant"
+                        android:text="@string/layout_product_view_select_quant"
                         android:textColor="@android:color/black" />
                 </RelativeLayout>
 
@@ -283,10 +282,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/number_text"
-                        android:src="@drawable/add"
                         android:background="@android:color/transparent"
                         android:padding="5dp"
-                        />
+                        android:src="@drawable/add" />
 
                     <ImageButton
                         android:id="@+id/remove_button"
@@ -294,10 +292,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/number_text"
                         android:layout_toRightOf="@+id/number_text"
-                        android:src="@drawable/remove"
                         android:background="@android:color/transparent"
                         android:padding="5dp"
-                        />
+                        android:src="@drawable/remove" />
 
                 </RelativeLayout>
 
@@ -311,8 +308,8 @@
                     android:gravity="fill_horizontal"
                     android:padding="3dp"
                     android:text=""
-                    android:textSize="@dimen/text_size_normal"
                     android:textColor="@color/color_ligh_black"
+                    android:textSize="@dimen/text_size_normal"
                     android:visibility="visible" />
 
             </RelativeLayout>
@@ -322,47 +319,40 @@
     </ScrollView>
 
 
+    <RelativeLayout
+        android:id="@+id/recommendItemLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#e3e3e4"
+        android:visibility="gone">
 
-        <RelativeLayout
-            android:id="@+id/recommendItemLayout"
-            android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#e3e3e4"
-            android:visibility="gone"
-            >
+            android:padding="5dp"
+            android:text="@string/layout_product_view_recom_items"
+            android:textSize="@dimen/text_size_small" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recommended Items"
-                android:textSize="@dimen/text_size_small"
-                android:padding="5dp"
-                />
-
-            <Button
-                android:id="@+id/viewAllBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="View All"
-                android:background="@android:color/transparent"
-                android:layout_alignParentRight="true"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="#086cd2"
-                />
+        <Button
+            android:id="@+id/viewAllBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:text="@string/layout_product_view_viewall"
+            android:textColor="#086cd2"
+            android:textSize="@dimen/text_size_small" />
 
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recommendedItemsList"
-                android:layout_below="@+id/viewAllBtn"
-                android:layout_width="fill_parent"
-                android:layout_height="107dp"
-                android:background="@android:color/white"
-                />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recommendedItemsList"
+            android:layout_width="fill_parent"
+            android:layout_height="107dp"
+            android:layout_below="@+id/viewAllBtn"
+            android:background="@android:color/white" />
 
-        </RelativeLayout>
-
-
+    </RelativeLayout>
 
 
 </RelativeLayout>

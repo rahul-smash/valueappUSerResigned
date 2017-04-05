@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Search"
+            android:text="@string/str_lbl_search"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal" />
         <Button
@@ -84,7 +84,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/edittext_round_corners"
             android:drawableLeft="@android:drawable/ic_menu_search"
-            android:hint="Search for products"
+            android:hint="@string/str_lbl_search_products"
             android:imeOptions="actionSearch"
             android:singleLine="true" />
 

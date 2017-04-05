@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="QTY"
+                android:text="@string/str_lbl_qty"
                 android:textColor="#a2a0a2"
                 android:textSize="16sp"
                 android:visibility="gone" />
@@ -147,7 +147,7 @@
                 android:paddingTop="5dp"
                 android:singleLine="true"
                 android:spinnerMode="dialog"
-                android:text="Select Quant"
+                android:text="@string/layout_product_view_select_quant"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="normal" />
         </RelativeLayout>

@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="No Category available"
+        android:text="@string/layout_activity_master_city_no_catg"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="@dimen/text_size_large"
         android:visibility="gone" />

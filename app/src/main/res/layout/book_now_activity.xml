@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Book Now"
+            android:text="@string/str_lbl_booknow"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />

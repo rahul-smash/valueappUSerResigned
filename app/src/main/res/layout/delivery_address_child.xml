@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
-        android:text="SELECT"
+        android:text="@string/str_lbl_select"
         android:textColor="@color/ColorPrimary"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -125,7 +125,7 @@
             android:layout_weight="1"
             android:background="#ffffff"
             android:gravity="center"
-            android:text="Edit Address"
+            android:text="@string/str_lbl_edit_address"
             android:textColor="#7c7c7c"
             android:textSize="13sp" />
 
@@ -141,7 +141,7 @@
             android:layout_weight="1"
             android:background="#ffffff"
             android:gravity="center"
-            android:text="Remove Address"
+            android:text="@string/str_lbl_remove_address"
             android:textColor="#7c7c7c"
             android:textSize="13sp" />
     </LinearLayout>

@@ -125,13 +125,74 @@
     <string name="layout_select_activity_no_area_found">Not area found</string>
 
     <string name="layout_activity_master_city_no_catg">No Category available</string>
-    <string name="layout_notification_detail_confirm">Confirmation</string>
+    <string name="Yes">Confirmation</string>
     <string name="layout_notification_detail_yes">Yes</string>
     <string name="layout_notification_detail_no">No</string>
     <string name="layout_notification_detail_order_details">Order Details</string>
     <string name="layout_order_detail_no_records">No Records Info</string>
     <string name="layout_order_detail_delivery_address">Delivery Address:</string>
 
+    <string name="layout_order_detail_delivery_items">Items Price</string>
+    <string name="layout_order_detail_delivery_usd">USD</string>
+    <string name="layout_order_detail_delivery_shiping_charge">Shipping Charges</string>
+
+    <string name="layout_order_detail_discount">Discount</string>
+
+    <string name="layout_order_detail_details">Details</string>
+    <string name="layout_product_view_price">Price:</string>
+    <string name="layout_product_view_select_quant">Select Quant</string>
+    <string name="layout_product_view_recom_items">Recommended Items</string>
+    <string name="layout_product_view_viewall">View All</string>
+    <string name="layout_product_view_weight">Gold Weight :</string>
+    <string name="layout_product_view_purity">Gold Purity :</string>
+    <string name="layout_product_view_diamond_weight">Diamond Weight : </string>
+    <string name="layout_product_view_stone_weight">Stone Weight : </string>
+    <string name="layout_product_view_color">Color : </string>
+    <string name="layout_product_view_calirty">Clarity : </string>
+    <string name="layout_product_view_consult">Consult</string>
+    <string name="layout_product_view_recom_products">Recommended Products</string>
+
+    <string name="str_lbl_search">Search</string>
+    <string name="str_lbl_search_products">Search for products</string>
+    <string name="str_lbl_choose_location">Choose Location</string>
+    <string name="str_lbl_choose_your_location">Choose your Location</string>
+    <string name="str_lbl_my_location">Use my location</string>
+    <string name="lable_consult_us">CONSULT US</string>
+    <string name="str_lbl_product">Product</string>
+    <string name="str_lbl_productname">Product Name</string>
+    <string name="str_lbl_name">Name</string>
+    <string name="str_lbl_enter_name">Enter Your Name</string>
+    <string name="str_lbl_enter_phone">Phone</string>
+    <string name="str_lbl_enter_your_phone">Enter your phone</string>
+    <string name="str_lbl_email">Email</string>
+    <string name="str_lbl_enter_your_email">Enter your email</string>
+    <string name="str_lbl_city">City</string>
+    <string name="str_lbl_enter_your_city">Enter your city</string>
+    <string name="str_lbl_message">Message</string>
+    <string name="str_lbl_your_message">Your message Here</string>
+    <string name="str_lbl_submit">Submit</string>
+    <string name="str_lbl_add_devl_address">Add Delivery Address</string>
+    <string name="str_lbl_proceed">Proceed</string>
+    <string name="str_lbl_booknow">Book Now</string>
+    <string name="str_lbl_shopping">SHOPPING</string>
+    <string name="str_lbl_qty">QTY</string>
+    <string name="str_lbl_title">Title</string>
+    <string name="str_lbl_address">Address</string>
+    <string name="str_lbl_addbasket">Add Items to Bakset</string>
+    <string name="str_lbl_remove_item">Remove Item</string>
+    <string name="str_lbl_sku">SKU</string>
+    <string name="str_lbl_reset">Reset</string>
+    <string name="str_lbl_setdate">Set date</string>
+    <string name="str_lbl_settime">Set time</string>
+    <string name="str_lbl_add_address">Delivery Addresses</string>
+    <string name="str_lbl_select">SELECT</string>
+    <string name="str_lbl_edit_address">Edit Address</string>
+    <string name="str_lbl_remove_address">Remove Address</string>
+    <string name="str_lbl_you_login">You have login successfully. Please continue.</string>
+    <string name="str_lbl_verify_no">How do i verify my number in GrocersApp?</string>
+    <string name="str_no_mobile">Mobile Number</string>
+    <string name="str_no_select_datetime">Select Date and Time of the Occasion</string>
+    <string name="str_no_your_msgs">Mobile Number</string>
 
 
 </resources>

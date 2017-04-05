@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -146,7 +145,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Items Price"
+                android:text="@string/layout_order_detail_delivery_items"
                 android:textSize="@dimen/text_size_small" />
 
             <RelativeLayout
@@ -162,7 +161,7 @@
                     android:id="@+id/rs1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USD"
+                    android:text="@string/layout_order_detail_delivery_usd"
                     android:textSize="@dimen/text_size_small" />
 
                 <TextView
@@ -184,7 +183,7 @@
                 android:layout_below="@id/items_price_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Shipping Charges"
+                android:text="@string/layout_order_detail_delivery_shiping_charge"
                 android:textSize="@dimen/text_size_small" />
 
             <RelativeLayout
@@ -209,7 +208,7 @@
                     android:id="@+id/rs2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USD"
+                    android:text="@string/layout_order_detail_delivery_usd"
                     android:textSize="@dimen/text_size_small" />
             </RelativeLayout>
 
@@ -221,7 +220,7 @@
                 android:layout_below="@id/shipping_charges_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:text="Discount"
+                android:text="@string/layout_order_detail_discount"
                 android:textSize="@dimen/text_size_small" />
 
             <RelativeLayout
@@ -246,7 +245,7 @@
                     android:id="@+id/rs3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USD"
+                    android:text="@string/layout_order_detail_delivery_usd"
                     android:textSize="@dimen/text_size_small" />
             </RelativeLayout>
 
@@ -290,7 +289,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="Details"
+            android:text="@string/layout_order_detail_details"
             android:textColor="#ffffff"
             android:textSize="22sp" />
 
@@ -315,7 +314,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/currency"
-            android:text="Total:"
+            android:text="@string/layout_activity_category_total"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 

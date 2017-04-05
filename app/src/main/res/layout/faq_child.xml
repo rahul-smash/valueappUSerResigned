@@ -16,7 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_margin="14dp"
-            android:text="How do i verify my number in GrocersApp?"
+            android:text="@string/str_lbl_verify_no"
             android:textColor="#2f2f2f"
             android:textSize="15sp"
             android:textStyle="bold" />

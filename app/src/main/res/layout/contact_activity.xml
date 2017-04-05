@@ -42,7 +42,7 @@
                 android:paddingTop="10dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
-                android:text="Name"
+                android:text="@string/str_lbl_name"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="normal"
@@ -78,7 +78,7 @@
                 android:paddingTop="5dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
-                android:text="Address"
+                android:text="@string/str_lbl_address"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="normal" />

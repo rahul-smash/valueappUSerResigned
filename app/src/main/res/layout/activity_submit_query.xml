@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="grocersapp.android.com.grocersapp.ItemDetail">
+    android:layout_height="match_parent">
 
 
     <RelativeLayout
@@ -32,7 +31,7 @@
             android:layout_centerVertical="true"
             android:gravity="center_horizontal"
             android:paddingRight="15dp"
-            android:text="CONSULT US"
+            android:text="@string/lable_consult_us"
             android:textColor="@color/app_text_color"
             android:textSize="18sp"
             android:visibility="visible" />
@@ -63,7 +62,7 @@
                     android:layout_marginLeft="10dp"
                     android:ems="5"
                     android:padding="10dp"
-                    android:text="Product"
+                    android:text="@string/str_lbl_product"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="20sp" />
 
@@ -76,7 +75,7 @@
                     android:background="@color/colorGray"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Product Name"
+                    android:hint="@string/str_lbl_productname"
                     android:paddingLeft="10dp"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -95,7 +94,7 @@
                     android:layout_marginLeft="10dp"
                     android:ems="5"
                     android:padding="10dp"
-                    android:text="Name"
+                    android:text="@string/str_lbl_name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="20sp" />
 
@@ -108,7 +107,7 @@
                     android:background="@color/colorGray"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Enter Your Name"
+                    android:hint="@string/str_lbl_enter_name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingLeft="10dp"
@@ -130,7 +129,7 @@
                     android:ems="5"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Phone"
+                    android:text="@string/str_lbl_enter_phone"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="20sp" />
 
@@ -143,7 +142,7 @@
                     android:background="@color/colorGray"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Enter your phone"
+                    android:hint="@string/str_lbl_enter_your_phone"
                     android:imeOptions="actionNext"
                     android:inputType="phone"
                     android:paddingLeft="10dp"
@@ -165,7 +164,7 @@
                     android:ems="5"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Email"
+                    android:text="@string/str_lbl_email"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="20sp" />
 
@@ -178,7 +177,7 @@
                     android:background="@color/colorGray"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Enter your email"
+                    android:hint="@string/str_lbl_enter_your_email"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
@@ -200,7 +199,7 @@
                     android:ems="5"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="City"
+                    android:text="@string/str_lbl_city"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="20sp" />
 
@@ -213,7 +212,7 @@
                     android:background="@color/colorGray"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:hint="Enter your city"
+                    android:hint="@string/str_lbl_enter_your_city"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:paddingLeft="10dp"
@@ -236,7 +235,7 @@
                     android:ems="5"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Message"
+                    android:text="@string/str_lbl_message"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="20sp" />
 
@@ -249,7 +248,7 @@
                     android:background="@color/colorGray"
                     android:ems="10"
                     android:gravity="top|left"
-                    android:hint="Your message Here"
+                    android:hint="@string/str_lbl_your_message"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:padding="10dp"
@@ -268,7 +267,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Submit"
+                android:text="@string/str_lbl_submit"
                 android:textColor="@color/app_text_color"
                 android:textSize="14sp"
                 android:textStyle="bold"

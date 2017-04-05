@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Confirmation"
+            android:text="@string/layout_notification_detail_confirm"
             android:textColor="@color/ColorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -79,7 +79,7 @@
                         android:ems="6"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="Yes"
+                        android:text="@string/layout_notification_detail_yes"
                         android:textColor="@android:color/white"
                         android:textSize="15sp"
                         android:visibility="gone" />
@@ -94,7 +94,7 @@
                         android:ems="6"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="No"
+                        android:text="@string/layout_notification_detail_no"
                         android:textColor="@android:color/white"
                         android:textSize="15sp"
                         android:visibility="gone" />

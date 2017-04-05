@@ -63,7 +63,7 @@
                 android:layout_marginRight="8dp"
                 android:background="@drawable/round_corners"
                 android:padding="3dp"
-                android:text="Remove Item"
+                android:text="@string/str_lbl_remove_item"
                 android:textColor="#ffffff"
                 android:textSize="10sp" />
 
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="SKU"
+                android:text="@string/str_lbl_sku"
                 android:textColor="#a2a0a2"
                 android:textSize="14sp" />
 

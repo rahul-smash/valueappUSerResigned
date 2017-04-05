@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,53 +15,36 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
-import com.signity.bonbon.Utilities.DialogHandler;
-import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
-import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetSearchSubProducts;
-import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
-import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
-import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class RecommendProductsActivity extends Activity implements View.OnClickListener {
 
     TextView mHeaderText, shoppinglist_text;
     Button mBackButton, btnShopcart;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
-    private GCMClientManager pushClientManager;
     ProductListAdapter adapter;
     ListView mSearchList;
     List<Product> listProduct;
@@ -101,7 +82,6 @@ public class RecommendProductsActivity extends Activity implements View.OnClickL
         mBackButton = (Button) findViewById(R.id.backButton);
         btnShopcart = (Button) findViewById(R.id.btnShopcart);
         shoppinglist_text = (Button) findViewById(R.id.shoppinglist_text);
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         mSearchList = (ListView) findViewById(R.id.searchList);
 
         favourite = appDb.getUserFavProductList();

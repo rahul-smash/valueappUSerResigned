@@ -23,7 +23,6 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.SubCategory;
@@ -40,7 +39,6 @@ import java.util.List;
 public class CategoryDetailActivity extends FragmentActivity implements View.OnClickListener, CartChangeListener {
 
     public static final String TAG = CategoryDetailActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
     private AppDatabase appDb;
     private LinearLayout linearShopCart;
     Button backButton, btnSearch, btnShopCart, btnCartCount, proceed, btnShopList;
@@ -63,7 +61,6 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail);
         appDb = DbAdapter.getInstance().getDb();
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         prefManager = new PrefManager(CategoryDetailActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");

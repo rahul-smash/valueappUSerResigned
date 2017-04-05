@@ -6,12 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -31,7 +28,6 @@ import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Variant;
@@ -44,7 +40,6 @@ import java.util.List;
 public class ProductViewJewellersActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ProductViewJewellersActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
     Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text;
     TextView description, item_name, price, number_text, title, price_text,rupee;
     TextView textTitle;
@@ -68,7 +63,6 @@ public class ProductViewJewellersActivity extends AppCompatActivity implements V
         initProduct();
         typeFaceRobotoRegular = FontUtil.getTypeface(ProductViewJewellersActivity.this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(ProductViewJewellersActivity.this, FontUtil.FONT_ROBOTO_BOLD);
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         backButton = (Button) findViewById(R.id.backButton);
         btnVarient = (Button) findViewById(R.id.btnVarient);
         textTitle = (TextView) findViewById(R.id.textTitle);

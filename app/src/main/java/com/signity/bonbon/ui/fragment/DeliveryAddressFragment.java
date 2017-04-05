@@ -31,7 +31,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.UserAddressList;
 import com.signity.bonbon.model.UserAddressModel;
@@ -63,7 +62,6 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
     UserAddressModel selectedUserAddress;
     int selectedPostion = 0;
     String currency;
-    private GCMClientManager pushClientManager;
     private List<UserAddressModel> listOfDeliveryAddress;
     private PrefManager prefManager;
     private AppDatabase appDb;
@@ -81,7 +79,6 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         prefManager = new PrefManager(getActivity());
         userId = prefManager.getSharedValue(AppConstant.ID);
         prefManager = new PrefManager(getActivity());
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         from = getArguments().getString(AppConstant.FROM, "");
         currency = prefManager.getSharedValue(AppConstant.CURRENCY);
     }
@@ -253,7 +250,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         ProgressDialogUtil.showProgressDialog(getActivity());
 
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
         param.put("user_id", id);

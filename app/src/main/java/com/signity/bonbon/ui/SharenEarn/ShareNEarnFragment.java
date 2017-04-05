@@ -7,15 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.signity.bonbon.R;
-import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -24,14 +19,10 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
-import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.ReferNEarnCodeModel;
 import com.signity.bonbon.model.ReferNEarnModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +46,6 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
     TextView textTitle,codeTxt;
 //    ImageButton backButton;
     Button shareNearn;
-    private GCMClientManager pushClientManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +54,6 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
         appDb = DbAdapter.getInstance().getDb();
         userId = prefManager.getSharedValue(AppConstant.ID);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         store = appDb.getStore(storeId);
     }
 
@@ -100,7 +89,6 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
         final PrefManager prefManager = new PrefManager(getActivity());
         String userId = prefManager.getSharedValue(AppConstant.ID);
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("user_id", userId);

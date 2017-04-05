@@ -1,42 +1,22 @@
 package com.signity.bonbon.ui.shopcart;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.provider.Settings;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
-import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
-import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.Store;
-import com.signity.bonbon.network.NetworkAdaper;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class PayOnlineActivity extends AppCompatActivity {
 
@@ -44,7 +24,6 @@ public class PayOnlineActivity extends AppCompatActivity {
     WebView webview;
     AppDatabase appDb;
     PrefManager prefManager;
-    private GCMClientManager pushClientManager;
 
     String storeId,url;
     private Store store;
@@ -57,7 +36,6 @@ public class PayOnlineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay_online);
         prefManager = new PrefManager(PayOnlineActivity.this);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         appDb = DbAdapter.getInstance().getDb();
 
         url=getIntent().getStringExtra("url");

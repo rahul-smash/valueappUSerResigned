@@ -38,7 +38,6 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
@@ -70,7 +69,6 @@ public final class ProductListFragment extends Fragment {
 
     public List<Product> listProduct;
     public SubCategory subCategory;
-    private GCMClientManager pushClientManager;
 
     String subCategoryId;
     private AppDatabase appDb;
@@ -88,7 +86,6 @@ public final class ProductListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appDb = DbAdapter.getInstance().getDb();
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         cartChangeListener = (CartChangeListener) getActivity();
         prefManager = new PrefManager(getActivity());
         typeFaceRobotoRegular = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_REGULAR);
@@ -509,7 +506,7 @@ public final class ProductListFragment extends Fragment {
     public void getSubCategoryList(String id) {
         ProgressDialogUtil.showProgressDialog(getActivity());
         String deviceId = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
 //        Log.e("id", id);
         param.put("device_id", deviceId);

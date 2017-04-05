@@ -7,10 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,11 +20,9 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.SubCategory;
-import com.signity.bonbon.ui.fragment.ProductListFragmentGrocery;
 import com.signity.bonbon.ui.fragment.ProductListFragmentJewellers;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
@@ -37,7 +32,6 @@ import java.util.List;
 public class CategoryDetailJewellersActivity extends FragmentActivity implements View.OnClickListener, CartChangeListener {
 
     public static final String TAG = CategoryDetailJewellersActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
     private AppDatabase appDb;
     private LinearLayout linearShopCart;
     Button backButton, btnSearch, btnShopCart, btnCartCount, proceed, btnShopList;
@@ -57,7 +51,6 @@ public class CategoryDetailJewellersActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail_jewellers);
         appDb = DbAdapter.getInstance().getDb();
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         prefManager= new PrefManager(CategoryDetailJewellersActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");

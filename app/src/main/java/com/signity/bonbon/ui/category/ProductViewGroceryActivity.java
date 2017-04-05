@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -44,23 +43,18 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.Variant;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.RecommendedProduct.RecommendProductsActivity;
 import com.signity.bonbon.ui.RecommendedProduct.RecommendProductsGroceryActivity;
-import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 import com.signity.bonbon.ui.shopping.ShoppingListActivity;
 import com.squareup.picasso.Picasso;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -74,7 +68,6 @@ import retrofit.client.Response;
 public class ProductViewGroceryActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ProductViewGroceryActivity.class.getSimpleName();
-    private GCMClientManager pushClientManager;
     Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text,viewAllBtn;
     TextView description, item_name, price, number_text, title, price_text,rupee, items_mrp_price;
     TextView textTitle;
@@ -118,7 +111,6 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         recommendedItemsList.setLayoutManager(horizontalLayoutManagaer);
         recommendItemLayout = (RelativeLayout) findViewById(R.id.recommendItemLayout);
 
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         backButton = (Button) findViewById(R.id.backButton);
         btnVarient = (Button) findViewById(R.id.btnVarient);
         textTitle = (TextView) findViewById(R.id.textTitle);

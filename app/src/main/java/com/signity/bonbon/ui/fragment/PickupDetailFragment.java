@@ -30,7 +30,6 @@ import com.signity.bonbon.ui.Delivery.DeliveryActivity;
 import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
 import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2;
-import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2WithoutLoyality;
 
 /**
  * Created by root on 14/10/15.

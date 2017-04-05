@@ -39,15 +39,12 @@ import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.GetOfferResponse;
-import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityDataModel;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.OfferData;
@@ -113,7 +110,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     String discount = "0", fixed_discount_amount = "0";
     ViewGroup footerView;
     LinearLayout layout, linearFixedTaxLayout,linearFixedTaxLayoutDisable;
-    private GCMClientManager pushClientManager;
     private Button backButton, btnSearch;
     private TextView shipping_charges;
     private AppDatabase appDb;
@@ -180,7 +176,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         if (minmimumChargesText != null && !minmimumChargesText.isEmpty()) {
             minimumCharges = Double.parseDouble(minmimumChargesText);
         }
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         typeFaceRobotoRegular = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(this, FontUtil.FONT_ROBOTO_BOLD);
 
@@ -522,7 +517,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 //        String order = appDb.getOrderStringForSubmit();
         PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
@@ -589,7 +584,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private void callNetworkServiceForPlaceOrderForPickup(String id, String addressId) {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 //        String order = appDb.getOrderStringForSubmit();
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
@@ -651,7 +646,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private void callNetworkServiceForPlaceOrderForDineIn(String id, String addressId) {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 //        String order = appDb.getOrderStringForSubmit();
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
@@ -719,7 +714,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 //        String order = appDb.getOrderStringForSubmit();
         PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
@@ -1367,7 +1362,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         if (!couponCode.isEmpty()) {
             String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-            String deviceToken = pushClientManager.getRegistrationId(ShoppingCartActivity2.this);
+            String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
             String plaform = AppConstant.PLATFORM;
             String uId = userId;
             String orders = appDb.getCartItemsListStringJson();

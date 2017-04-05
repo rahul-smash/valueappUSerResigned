@@ -20,11 +20,9 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.home.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +39,6 @@ public class AboutUsFragment extends Fragment {
     //    TextView txtAboutUs;
     WebView webview;
     View mView;
-    private GCMClientManager pushClientManager;
     AppDatabase appDb;
     PrefManager prefManager;
 
@@ -73,8 +70,6 @@ public class AboutUsFragment extends Fragment {
         webview = (WebView) mView.findViewById(R.id.webview);
         startOrder = (Button) mView.findViewById(R.id.startOrder);
 
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
-
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);
@@ -100,7 +95,7 @@ public class AboutUsFragment extends Fragment {
 
     private void getAboutUsStatus() {
         String deviceid = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceid);

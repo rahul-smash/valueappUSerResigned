@@ -21,21 +21,15 @@ import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.AreaSwitchDataModel;
 import com.signity.bonbon.model.AreaSwitchModel;
 import com.signity.bonbon.model.EmailResponse;
-import com.signity.bonbon.model.StoreAreaListModel;
-import com.signity.bonbon.model.StoreAreaModel;
 import com.signity.bonbon.model.UserAddressModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.common.AddressSelectActivity;
 import com.signity.bonbon.ui.Delivery.LocationAreaActivity;
-import com.signity.bonbon.ui.common.CityAreaActivitiy;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit.Callback;
@@ -62,7 +56,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     private String stateID = "", stateName = "";
     private String cityId = "", cityName = "";
     private String areaID = "", areaName = "";
-    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     private String userId;
     private String from;
@@ -72,7 +65,6 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         prefManager = new PrefManager(getActivity());
         userId = prefManager.getSharedValue(AppConstant.ID);
         from = getArguments().getString(AppConstant.FROM, "");

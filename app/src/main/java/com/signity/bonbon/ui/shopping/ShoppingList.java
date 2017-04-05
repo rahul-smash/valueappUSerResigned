@@ -24,8 +24,6 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
-import com.signity.bonbon.gcm.GCMClientManager;
-import com.signity.bonbon.model.ShoppingListObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,6 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
     Adapter adapter;
     String temp = null;
     ListDatabase db;
-    private GCMClientManager pushClientManager;
     private PrefManager prefManager;
     String from;
 
@@ -54,9 +51,6 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefManager = new PrefManager(getActivity());
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
-
-
     }
 
     public static Fragment newInstance(Context context) {

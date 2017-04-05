@@ -24,20 +24,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.signity.bonbon.R;
-import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.gcm.GCMClientManager;
-import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.UserRecord;
 import com.signity.bonbon.model.VerifyOtpResponse;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
-import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.text.SimpleDateFormat;
@@ -67,13 +61,13 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
     ImageButton backBtn;
     Button resend;
     EditText edtOTp;
-    private GCMClientManager pushClientManager;
     private TextInputLayout input_layout_otp;
+    private PrefManager prefManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
+        prefManager = new PrefManager(getActivity());
         Bundle bundle = getArguments();
         id = bundle.getString("id");
         phone = bundle.getString("phone");
@@ -233,7 +227,6 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
     }
 
     private void saveUserIdToPref() {
-        PrefManager prefManager = new PrefManager(getActivity());
         prefManager.storeSharedValue(AppConstant.ID, id);
         prefManager.storeSharedValue(AppConstant.PHONE, phone);
         if (name != null && !name.isEmpty()) {
@@ -272,8 +265,9 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
 
         ProgressDialogUtil.showProgressDialog(getActivity());
 
+
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
         param.put("phone", phone);
         param.put("device_id", deviceId);

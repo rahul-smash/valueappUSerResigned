@@ -28,7 +28,6 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.GerOrderHistoryModel;
 import com.signity.bonbon.model.OrderHistoryItemModel;
@@ -53,7 +52,6 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     View mView;
     String userId;
     PrefManager prefManager;
-    GCMClientManager pushClientManager;
 
     RelativeLayout listHeader;
     Button backButton;
@@ -74,7 +72,6 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         prefManager = new PrefManager(getActivity());
         appDb = DbAdapter.getInstance().getDb();
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         Bundle bundle = getArguments();
         if (bundle != null) {
             isHeader = bundle.getBoolean(AppConstant.IS_HEADER);
@@ -325,7 +322,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void getOrderHistory() {
         ProgressDialogUtil.showProgressDialog(getActivity());
         String deviceid = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceid);
         param.put("device_token", deviceToken);

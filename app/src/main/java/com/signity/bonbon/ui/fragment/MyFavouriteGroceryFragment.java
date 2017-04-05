@@ -32,7 +32,6 @@ import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.Product;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.ShoppingListObject;
@@ -55,7 +54,6 @@ public class MyFavouriteGroceryFragment extends Fragment {
     ListView items_list;
     List<Product> listProduct;
     public FavouriteItemAdapter adapter;
-    private GCMClientManager pushClientManager;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     Button btnCartCount;
     LinearLayout linearShopCart;
@@ -68,7 +66,6 @@ public class MyFavouriteGroceryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.my_favourite, container, false);
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         prefManager=new PrefManager(getActivity());
         db = new ListDatabase(getActivity());
         items_list = (ListView) mView.findViewById(R.id.items_list);

@@ -11,19 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.FontUtil;
-import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.EmailResponse;
-import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
 
@@ -48,7 +44,6 @@ public class Profile extends Fragment implements View.OnClickListener {
 
     PrefManager prefManager;
     String userId, name, email;
-    GCMClientManager pushClientManager;
     public EditText mobilenumber;
 
     @Override
@@ -56,7 +51,6 @@ public class Profile extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         typeFaceRobotoRegular = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(getActivity(), FontUtil.FONT_ROBOTO_BOLD);
-        pushClientManager = new GCMClientManager(getActivity(), AppConstant.PROJECT_NUMBER);
         prefManager = new PrefManager(getActivity());
         userId = prefManager.getSharedValue(AppConstant.ID);
         name = prefManager.getSharedValue(AppConstant.NAME);
@@ -152,7 +146,7 @@ public class Profile extends Fragment implements View.OnClickListener {
         String email = edtEmail.getText().toString();
         String referCode = edtReferal.getText().toString().trim();
         String deviceId = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(getActivity());
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
 
         param.put("user_id", userId);

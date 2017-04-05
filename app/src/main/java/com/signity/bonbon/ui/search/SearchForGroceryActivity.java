@@ -38,7 +38,6 @@ import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
-import com.signity.bonbon.gcm.GCMClientManager;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
@@ -69,7 +68,6 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
     Button mBackButton,btnShopcart;
     EditText mSearchEdit;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
-    private GCMClientManager pushClientManager;
     ProductListAdapter adapter;
     ListView mSearchList;
     List<Product> listProduct;
@@ -140,7 +138,6 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
         shoppinglist_text = (Button) findViewById(R.id.shoppinglist_text);
         typeFaceRobotoRegular = FontUtil.getTypeface(SearchForGroceryActivity.this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(SearchForGroceryActivity.this, FontUtil.FONT_ROBOTO_BOLD);
-        pushClientManager = new GCMClientManager(this, AppConstant.PROJECT_NUMBER);
         mSearchList = (ListView) findViewById(R.id.searchList);
 
         favourite = appDb.getUserFavProductList();
@@ -196,7 +193,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
         childList = new ArrayList<GetSearchSubProducts>();
         ProgressDialogUtil.showProgressDialog(SearchForGroceryActivity.this);
         String deviceId = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-        String deviceToken = pushClientManager.getRegistrationId(SearchForGroceryActivity.this);
+        String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
         Map<String, String> param = new HashMap<String, String>();
 //        Log.e("id", id);
         param.put("device_id", deviceId);

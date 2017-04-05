@@ -45,7 +45,7 @@ android {
 
 ext {
     supportLibVersion = '23.0.1'
-    playLibVersion = '8.4.0'
+    playLibVersion = '9.0.0'
     okhttpLibVersion = '2.0.0'
     retrofitLibVersion = '1.9.0'
     picassoLibVersion = '2.5.2'
@@ -60,10 +60,12 @@ dependencies {
     compile "com.squareup.retrofit:retrofit:${retrofitLibVersion}"
     compile "com.squareup.okhttp:okhttp:${okhttpLibVersion}"
     compile "com.squareup.okhttp:okhttp-urlconnection:${okhttpLibVersion}"
-    compile "com.google.android.gms:play-services-gcm:${playLibVersion}"
     compile "com.google.android.gms:play-services-maps:${playLibVersion}"
     compile "com.google.android.gms:play-services-location:${playLibVersion}"
     compile "com.google.android.gms:play-services-analytics:${playLibVersion}"
     compile "com.squareup.picasso:picasso:${picassoLibVersion}"
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    compile 'com.google.firebase:firebase-core:9.0.0'
+    compile 'com.google.firebase:firebase-messaging:9.0.0'
 }
+apply plugin: 'com.google.gms.google-services'

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.android.grocersapp.DeliveryAddress.DeliveryAddress2">
+    >
 
 
     <TextView
@@ -14,9 +14,9 @@
         android:layout_below="@+id/header"
         android:gravity="center"
         android:padding="5dp"
-        android:text="Edit Address"
+        android:text="@string/str_add_address_edit_lbl"
         android:textColor="#3a3a3a"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_normal"
         android:textStyle="bold" />
 
     <ScrollView
@@ -41,9 +41,9 @@
                 android:layout_marginTop="8dp"
                 android:background="#e5e5e5"
                 android:padding="5dp"
-                android:text="Delivery Address"
+                android:text="@string/str_add_address_lbl"
                 android:textColor="#3a3a3a"
-                android:textSize="15sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -56,9 +56,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Country"
+                    android:text="@string/str_add_address_country"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/text_size_small" />
 
                 <Button
                     android:id="@+id/country_name"
@@ -69,7 +69,7 @@
                     android:clickable="true"
                     android:editable="false"
                     android:gravity="left|center_vertical"
-                    android:hint="Country"
+                    android:hint="@string/str_add_address_country"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
                     android:textColor="#3a3a3a" />
@@ -86,9 +86,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="10dp"
-                    android:text="State"
+                    android:text="@string/str_add_address_state"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/text_size_small" />
 
                 <Button
                     android:id="@+id/state_name"
@@ -98,7 +98,7 @@
                     android:clickable="true"
                     android:editable="false"
                     android:gravity="left|center_vertical"
-                    android:hint="State"
+                    android:hint="@string/str_add_address_state"
                     android:imeOptions="actionNext"
                     android:paddingLeft="5dp"
                     android:singleLine="true"
@@ -117,9 +117,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="10dp"
-                    android:text="City"
+                    android:text="@string/str_add_address_city"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/text_size_small" />
 
                 <Button
                     android:id="@+id/city_name"
@@ -129,7 +129,7 @@
                     android:clickable="true"
                     android:editable="false"
                     android:gravity="left|center_vertical"
-                    android:hint="City"
+                    android:hint="@string/str_add_address_city"
                     android:imeOptions="actionNext"
                     android:paddingLeft="5dp"
                     android:singleLine="true"
@@ -147,9 +147,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="10dp"
-                    android:text="Area"
+                    android:text="@string/str_add_address_area"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/text_size_small" />
 
                 <Button
                     android:id="@+id/area_name"
@@ -157,7 +157,7 @@
                     android:layout_height="32dp"
                     android:background="#e5e5e5"
                     android:gravity="left|center_vertical"
-                    android:hint="Area"
+                    android:hint="@string/str_add_address_area"
                     android:imeOptions="actionNext"
                     android:paddingLeft="5dp"
                     android:singleLine="true"
@@ -169,9 +169,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
-                android:text="Full Address"
+                android:text="@string/str_add_address_full_address"
                 android:textColor="#646464"
-                android:textSize="12sp" />
+                android:textSize="@dimen/text_size_small" />
 
             <EditText
                 android:id="@+id/address_line1"
@@ -186,9 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="10dp"
-                android:text="Zip/Postalcode"
+                android:text="@string/str_add_address_zip"
                 android:textColor="#646464"
-                android:textSize="12sp" />
+                android:textSize="@dimen/text_size_small" />
 
             <EditText
                 android:id="@+id/zip_code"
@@ -208,9 +208,9 @@
                 android:layout_marginTop="15dp"
                 android:background="@color/ColorPrimary"
                 android:gravity="center"
-                android:text="Done"
+                android:text="@string/str_lbl_done"
                 android:textColor="@color/app_text_color"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_normal" />
         </LinearLayout>
 
     </ScrollView>

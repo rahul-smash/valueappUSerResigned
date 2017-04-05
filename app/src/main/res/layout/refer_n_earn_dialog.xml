@@ -11,7 +11,7 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Referral Code"
+        android:text="@string/str_title_refferal"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textSize="@dimen/text_size_normal"
@@ -40,7 +40,7 @@
         android:padding="8dp"
         android:gravity="center"
         android:textSize="@dimen/text_size"
-        android:text="Kindly Login with Referral Code for and Earn Free Coupons."/>
+        android:text="@string/str_message_refferal"/>
 
 
     <Button
@@ -48,7 +48,7 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:text="LOGIN"
+        android:text="@string/str_login"
         android:layout_below="@id/textMsg"
         android:layout_marginTop="10dp"
         android:layout_marginRight="40dp"
@@ -65,7 +65,7 @@
             android:layout_margin="5dp"
             android:layout_below="@+id/okBtn"
             android:layout_centerHorizontal="true"
-            android:text="Skip >>"
+            android:text="@string/str_skip"
             android:gravity="center"
             android:background="@android:color/transparent"/>
 

@@ -80,4 +80,29 @@
     <string name="str_dining">Dining</string>
     <string name="str_pickup">Pickup</string>
 
+    <!--Internationalization by Pardeep-->
+    <string name="str_shopping_list_item">List Name - 01</string>
+    <string name="str_remove">Remove</string>
+    <string name="str_no_record_found">No records found</string>
+    <string name="str_weight">40 gms</string>
+    <string name="str_choose_your_payment_method">Choose your payment method</string>
+    <string name="str_cod">Cash On Delivery</string>
+    <string name="str_online">Pay Now</string>
+    <string name="str_title_refferal">Enter Referral Code</string>
+    <string name="str_message_refferal">Kindly Login with Referral Code for and Earn Free Coupons.</string>
+    <string name="str_login">Login</string>
+    <string name="str_skip">Skip >></string>
+    <string name="str_tax_label">Tax</string>
+    <string name="str_add_address_edit_lbl">Edit Address</string>
+    <string name="str_add_address_lbl">Delivery Address</string>
+    <string name="str_add_address_country">Country</string>
+    <string name="str_add_address_state">State</string>
+    <string name="str_add_address_city">City</string>
+    <string name="str_add_address_area">Area</string>
+    <string name="str_add_address_full_address">Full Address</string>
+    <string name="str_add_address_zip">Zip/Postalcode</string>
+    <string name="str_lbl_done">Done</string>
+    <string name="str_login_btn_lbl">Please Login to proceed</string>
+
+
 </resources>

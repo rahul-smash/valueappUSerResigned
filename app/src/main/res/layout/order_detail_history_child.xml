@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Product Name:"
             android:textColor="#2f2f2f"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_normal"
             android:textStyle="bold" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:maxLines="3"
             android:text=""
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_normal" />
 
         <TextView
             android:id="@+id/order_number_text"
@@ -39,7 +39,7 @@
             android:layout_marginTop="5dp"
             android:text="Price:"
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_normal" />
 
         <TextView
             android:id="@+id/order_number"
@@ -50,7 +50,7 @@
             android:layout_toRightOf="@+id/order_number_rupya"
             android:text="200"
             android:textColor="#2f2f2f"
-            android:textSize="15sp" />
+            android:textSize="@dimen/text_size_normal" />
 
         <TextView
             android:id="@+id/order_number_rupya"

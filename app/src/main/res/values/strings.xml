@@ -79,6 +79,7 @@
     <string name="str_deliver">Deliver</string>
     <string name="str_dining">Dining</string>
     <string name="str_pickup">Pickup</string>
+    <string name="str_payment_option_message">Please select the payment mode</string>
 
     <!--Internationalization by Pardeep-->
     <string name="str_shopping_list_item">List Name - 01</string>

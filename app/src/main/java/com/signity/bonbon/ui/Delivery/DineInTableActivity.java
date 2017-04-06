@@ -1,8 +1,10 @@
 package com.signity.bonbon.ui.Delivery;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -198,17 +202,9 @@ public class DineInTableActivity extends AppCompatActivity implements View.OnCli
             holder.parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(DineInTableActivity.this, ShoppingCartActivity2.class);
-                    intent.putExtra("dine_in", "yes");
-                    intent.putExtra("dining_table", ""+model.getId());
-                    intent.putExtra("addressId", "363");
-                    intent.putExtra("userId", userId);
-                    intent.putExtra("isForPickup", "yes");
-                    intent.putExtra("shiping_charges", "0");
-                    intent.putExtra("minimum_charges", "0");
-                    intent.putExtra("user_address","Post office Road, Near Fountain Chowk, Fateh Colony, Patiala");
-                    startActivity(intent);
-                    AnimUtil.slideFromRightAnim(DineInTableActivity.this);
+
+                    showAlertDialogForConfirm(DineInTableActivity.this, "Confirmation", getResources().getString(R.string.str_payment_option_message), model.getId());
+
                 }
             });
 
@@ -218,6 +214,102 @@ public class DineInTableActivity extends AppCompatActivity implements View.OnCli
         class ViewHolder {
             TextView name;
             RelativeLayout parent;
+        }
+
+    }
+
+
+    public void showAlertDialogForConfirm(Context context, String title, String message, final String id) {
+
+        if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("0")){
+
+            Intent intent = new Intent(DineInTableActivity.this, ShoppingCartActivity2.class);
+            intent.putExtra("dine_in", "yes");
+            intent.putExtra("dining_table", id);
+            intent.putExtra("addressId", "363");
+            intent.putExtra("userId", userId);
+            intent.putExtra("isForPickup", "yes");
+            intent.putExtra("shiping_charges", "0");
+            intent.putExtra("minimum_charges", "0");
+            intent.putExtra("user_address","Post office Road, Near Fountain Chowk, Fateh Colony, Patiala");
+            intent.putExtra("payment_method", "2");
+            startActivity(intent);
+            AnimUtil.slideFromRightAnim(DineInTableActivity.this);
+
+        }else if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("1")){
+
+            final Dialog dialog = new Dialog(DineInTableActivity.this);
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.custom_dialog);
+            TextView positveButton = (TextView) dialog.findViewById(R.id.yesBtn);
+            positveButton.setVisibility(View.VISIBLE);
+            TextView negativeButton = (TextView) dialog.findViewById(R.id.noBtn);
+            negativeButton.setVisibility(View.VISIBLE);
+            TextView titleTxt = (TextView) dialog.findViewById(R.id.title);
+            TextView messageText = (TextView) dialog.findViewById(R.id.message);
+            titleTxt.setText(""+title);
+            positveButton.setText("COD");
+            negativeButton.setText("Online");
+            messageText.setText(""+message);
+
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            positveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DineInTableActivity.this, ShoppingCartActivity2.class);
+                    intent.putExtra("dine_in", "yes");
+                    intent.putExtra("dining_table", id);
+                    intent.putExtra("addressId", "363");
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("isForPickup", "yes");
+                    intent.putExtra("shiping_charges", "0");
+                    intent.putExtra("minimum_charges", "0");
+                    intent.putExtra("user_address","Post office Road, Near Fountain Chowk, Fateh Colony, Patiala");
+                    intent.putExtra("payment_method", "2");
+                    startActivity(intent);
+                    AnimUtil.slideFromRightAnim(DineInTableActivity.this);
+                    dialog.dismiss();
+                }
+            });
+
+            negativeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DineInTableActivity.this, ShoppingCartActivity2.class);
+                    intent.putExtra("dine_in", "yes");
+                    intent.putExtra("dining_table", id);
+                    intent.putExtra("addressId", "363");
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("isForPickup", "yes");
+                    intent.putExtra("shiping_charges", "0");
+                    intent.putExtra("minimum_charges", "0");
+                    intent.putExtra("user_address","Post office Road, Near Fountain Chowk, Fateh Colony, Patiala");
+                    intent.putExtra("payment_method", "3");
+                    startActivity(intent);
+                    AnimUtil.slideFromRightAnim(DineInTableActivity.this);
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        }
+        else {
+            Intent intent = new Intent(DineInTableActivity.this, ShoppingCartActivity2.class);
+            intent.putExtra("dine_in", "yes");
+            intent.putExtra("dining_table", id);
+            intent.putExtra("addressId", "363");
+            intent.putExtra("userId", userId);
+            intent.putExtra("isForPickup", "yes");
+            intent.putExtra("shiping_charges", "0");
+            intent.putExtra("minimum_charges", "0");
+            intent.putExtra("user_address","Post office Road, Near Fountain Chowk, Fateh Colony, Patiala");
+            intent.putExtra("payment_method", "2");
+            startActivity(intent);
+            AnimUtil.slideFromRightAnim(DineInTableActivity.this);
         }
 
     }

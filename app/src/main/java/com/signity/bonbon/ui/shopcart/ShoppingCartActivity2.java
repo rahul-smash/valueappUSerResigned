@@ -39,12 +39,14 @@ import com.signity.bonbon.Utilities.FontUtil;
 import com.signity.bonbon.Utilities.GsonHelper;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
+import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.GetOfferResponse;
+import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityDataModel;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.OfferData;
@@ -525,7 +527,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = "cod "+edtBar.getText().toString();
+        String note = edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
 
@@ -581,7 +583,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
     }
 
-    private void callNetworkServiceForPlaceOrderForPickup(String id, String addressId) {
+    private void callNetworkServiceForPlaceOrderForPickup(String id, String addressId, String payment_mode) {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
@@ -600,7 +602,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("user_id", id);
         param.put("device_token", deviceToken);
         param.put("platform", AppConstant.PLATFORM);
-        param.put("payment_method", "cod");
+        param.put("payment_method", payment_mode);
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
         param.put("tax", tax);
@@ -643,7 +645,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         });
     }
 
-    private void callNetworkServiceForPlaceOrderForDineIn(String id, String addressId) {
+    private void callNetworkServiceForPlaceOrderForDineIn(String id, String addressId, String payment_mode) {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
@@ -662,7 +664,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("user_id", id);
         param.put("device_token", deviceToken);
         param.put("platform", AppConstant.PLATFORM);
-        param.put("payment_method", "cod");
+        param.put("payment_method", payment_mode);
         param.put("user_address_id", addressId);
         param.put("shipping_charges", shippingcharge);
         param.put("tax", tax);
@@ -795,10 +797,21 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     if (appDb.getCartSize() != 0) {
                         if (isForPickUpStatus.equalsIgnoreCase("yes")) {
                             if(dine_in.equalsIgnoreCase("yes")){
-                                callNetworkServiceForPlaceOrderForDineIn(userId, addressId);
+                                if(payment_method.equalsIgnoreCase("2")){
+                                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId,"cod");
+                                }else if(payment_method.equalsIgnoreCase("3")){
+                                    callNetworkForOnlinepayment();
+                                }else {
+                                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId,"cod");
+                                }
                             }else {
-
-                                callNetworkServiceForPlaceOrderForPickup(userId, addressId);
+                                if(payment_method.equalsIgnoreCase("2")){
+                                    callNetworkServiceForPlaceOrderForPickup(userId, addressId, "cod");
+                                }else if(payment_method.equalsIgnoreCase("3")) {
+                                    callNetworkForOnlinepayment();
+                                }else {
+                                    callNetworkServiceForPlaceOrderForPickup(userId, addressId, "cod");
+                                }
                             }
                         } else {
 
@@ -876,37 +889,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }
     }
 
-    private void callForPaymentOptions() {
-        final Dialog dialog = new Dialog(ShoppingCartActivity2.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.choose_payment_options);
-
-        Button codBtn=(Button)dialog.findViewById(R.id.codBtn);
-        Button onlineBtn=(Button)dialog.findViewById(R.id.onlineBtn);
-
-        codBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                callNetworkServiceForPlaceOrder(userId, addressId);
-            }
-        });
-
-        onlineBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                callNetworkForOnlinepayment();
-            }
-        });
-
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.show();
-
-    }
-
-
 
     private void callNetworkForOnlinepayment(){
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
@@ -958,7 +940,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         {
             String payment_request_id=data.getStringExtra("payment_request_id");
             String payment_id=data.getStringExtra("payment_id");
-            callNetworkServiceForPlaceOrderForOnline(userId, addressId, payment_request_id, payment_id);
+            if(isForPickUpStatus.equalsIgnoreCase("yes")){
+                if(dine_in.equalsIgnoreCase("yes")){
+                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId, "online");
+                }else {
+                    callNetworkServiceForPlaceOrderForPickup(userId, addressId, "online");
+                }
+            }else {
+                callNetworkServiceForPlaceOrderForOnline(userId, addressId, payment_request_id, payment_id);
+            }
+
         }
         else if(resultCode==3){
             showAlertDialog(ShoppingCartActivity2.this, "Message", "There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.");

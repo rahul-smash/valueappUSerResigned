@@ -17,7 +17,7 @@
             android:id="@+id/order_number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Number :"
+            android:text="@string/str_order_no"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_number_text"
-            android:text="Order date :"
+            android:text="@string/str_order_date"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_date_text"
             android:layout_marginTop="5dp"
-            android:text="Order Price :"
+            android:text="@string/str_order_price"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/lbl_order_total_price"
             android:layout_marginTop="5dp"
-            android:text="Ship to :"
+            android:text="@string/str_order_shipto"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small"
             android:visibility="gone" />
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ship_to"
             android:layout_marginTop="5dp"
-            android:text="Status :"
+            android:text="@string/str_order_status"
             android:textColor="@color/ColorPrimary"
             android:textSize="@dimen/text_size_small" />
 
@@ -128,7 +128,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/status_text"
-            android:text="In progress"
+            android:text="@string/str_inprogress"
             android:textColor="@color/ColorPrimary"
             android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
@@ -146,7 +146,7 @@
             android:layout_width="75dp"
             android:layout_height="22dp"
             android:background="@drawable/round_corners"
-            android:text="View Order"
+            android:text="@string/str_order_view"
             android:textColor="@color/app_text_color"
             android:textSize="9sp" />
 
@@ -158,7 +158,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/round_corners"
-            android:text="Re Order"
+            android:text="@string/str_reorder"
             android:textColor="@color/app_text_color"
             android:textSize="9sp" />
 
@@ -168,7 +168,7 @@
             android:layout_height="22dp"
             android:layout_below="@+id/mBtnReorder"
             android:background="@drawable/round_corners"
-            android:text="Cancel"
+            android:text="@string/str_cancel"
             android:textColor="@color/app_text_color"
             android:textSize="9sp" />
     </RelativeLayout>

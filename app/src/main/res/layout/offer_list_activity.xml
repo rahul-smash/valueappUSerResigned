@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Offers"
+            android:text="@string/title_activity_offers"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:textStyle="bold"

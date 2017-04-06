@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
-                android:text="Address"
+                android:text="@string/str_lbl_address"
                 android:textColor="#535353"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/ColorPrimary"
-            android:text="Proceed"
+            android:text="@string/str_lbl_proceed"
             android:textColor="@color/app_text_color" />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/ColorPrimary"
-            android:text="Ok"
+            android:text="@string/str_lbl_ok"
             android:textColor="@color/app_text_color"
             android:visibility="gone"/>
     </RelativeLayout>

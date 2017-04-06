@@ -69,7 +69,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/edittext_round_corners"
-                android:hint="Add unsearched items or notes"
+                android:hint="@string/str_addditems"
                 android:imeOptions="actionDone"
                 android:padding="8dp"
                 android:singleLine="true"
@@ -115,7 +115,7 @@
                     android:layout_below="@+id/div1"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Items Price"
+                    android:text="@string/layout_order_detail_delivery_items"
                     android:textSize="18sp" />
 
                 <RelativeLayout
@@ -151,7 +151,7 @@
                     android:layout_below="@id/items_price_text"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Shipping Charges"
+                    android:text="@string/layout_order_detail_delivery_shiping_charge"
                     android:textSize="18sp" />
 
                 <RelativeLayout
@@ -189,7 +189,7 @@
                     android:layout_below="@id/shipping_charges_text"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Discount"
+                    android:text="@string/layout_order_detail_discount"
                     android:textSize="18sp" />
 
                 <RelativeLayout
@@ -226,7 +226,7 @@
                     android:layout_below="@+id/discountLblText"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Total"
+                    android:text="@string/layout_activity_categorydetail_total"
                     android:textSize="18sp" />
 
                 <RelativeLayout
@@ -273,7 +273,7 @@
                     android:layout_margin="5dp"
                     android:layout_toLeftOf="@+id/applyCoupen"
                     android:background="@drawable/shape_applycoupon"
-                    android:hint="Coupon Code"
+                    android:hint="@string/str_lbl_coponcode"
                     android:imeOptions="actionDone"
                     android:padding="8dp"
                     android:singleLine="true"
@@ -291,7 +291,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Apply Coupon"
+                    android:text="@string/str_applycopon"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/text_size_small" />
 
@@ -308,7 +308,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="Available Offers"
+                    android:text="@string/str_avalble_offers"
                     android:textColor="@color/color_blue"
                     android:textSize="@dimen/text_size_sub_normal" />
 
@@ -317,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editCoupon"
                     android:paddingLeft="5dp"
-                    android:text="*Tax extra if applicable." />
+                    android:text="@string/str_tax" />
 
             </RelativeLayout>
 
@@ -338,7 +338,7 @@
                     android:layout_weight="1"
                     android:background="@color/ColorPrimary"
                     android:gravity="center"
-                    android:text="Confirm Order"
+                    android:text="@string/str_conformorder"
                     android:textColor="#ffffff"
                     android:textSize="15sp" />
 

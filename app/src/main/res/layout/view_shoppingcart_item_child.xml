@@ -35,7 +35,7 @@
                 android:id="@+id/quantTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quantity:"
+                android:text="@string/str_quantity"
                 android:textColor="#2f2f2f"
                 android:textSize="@dimen/text_size_small"
                 />
@@ -60,7 +60,7 @@
                 android:id="@+id/priceTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Price: "
+                android:text="@string/layout_product_view_price"
                 android:textColor="#2f2f2f"
                 android:textSize="13sp"
                 android:layout_alignParentLeft="true"/>
@@ -159,7 +159,7 @@
                 android:paddingTop="2dp"
                 android:singleLine="true"
                 android:spinnerMode="dialog"
-                android:text="Select Quant"
+                android:text="@string/layout_product_view_select_quant"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="normal" />
         </RelativeLayout>

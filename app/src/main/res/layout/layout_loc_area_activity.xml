@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Select Area"
+            android:text="@string/str_lbl_selectarea"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_large"
             android:visibility="visible" />
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
         android:layout_margin="10dp"
-        android:hint="Your Location"
+        android:hint="@string/str_lbl_choose_your_location"
         android:text=""
         android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_small" />
@@ -79,7 +79,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/ColorPrimary"
         android:gravity="center"
-        android:text="Submit"
+        android:text="@string/str_lbl_submit"
         android:textColor="@color/app_text_color" />
 
 

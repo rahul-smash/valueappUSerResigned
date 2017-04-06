@@ -69,7 +69,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="3dp"
                 android:background="@drawable/edittext_round_corners"
-                android:hint="Add unsearched items or notes"
+                android:hint="@string/str_addditems"
                 android:imeOptions="actionDone"
                 android:padding="8dp"
                 android:singleLine="true"
@@ -118,7 +118,7 @@
                     android:layout_below="@+id/discountLblText"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:text="Total"
+                    android:text="@string/layout_activity_categorydetail_total"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/total_size"
                     android:textStyle="bold" />
@@ -172,7 +172,7 @@
                     android:layout_margin="5dp"
                     android:layout_toLeftOf="@+id/applyCoupen_1"
                     android:background="@drawable/shape_applycoupon"
-                    android:hint="Coupon Code"
+                    android:hint="@string/str_lbl_coponcode"
                     android:imeOptions="actionDone"
                     android:padding="8dp"
                     android:singleLine="true"
@@ -190,7 +190,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Apply Coupon"
+                    android:text="@string/str_applycopon"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/text_size_small" />
 
@@ -207,7 +207,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="Available Offers"
+                    android:text="@string/str_avalble_offers"
                     android:textColor="@color/color_blue"
                     android:textSize="@dimen/text_size_sub_normal" />
 
@@ -216,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editCoupon_1"
                     android:paddingLeft="5dp"
-                    android:text="*Tax extra if applicable."
+                    android:text="@string/str_tax"
                     android:visibility="gone" />
 
             </RelativeLayout>
@@ -240,7 +240,7 @@
                     android:layout_toLeftOf="@+id/applyCoupen"
                     android:layout_weight="1"
                     android:background="@drawable/shape_applycoupon"
-                    android:hint="Coupon Code"
+                    android:hint="@string/str_lbl_coponcode"
                     android:imeOptions="actionDone"
                     android:padding="8dp"
                     android:singleLine="true"
@@ -260,7 +260,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Redeem Points"
+                    android:text="@string/str_redeem_points"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/text_size_small"
                     android:visibility="visible" />
@@ -278,7 +278,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Apply Coupon"
+                    android:text="@string/str_applycopon"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/text_size_small"
                     android:visibility="gone" />
@@ -297,7 +297,7 @@
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="Available Offers"
+                    android:text="@string/str_avalble_offers"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/text_size_sub_normal"
                     android:visibility="visible" />
@@ -312,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/loyalityScreen"
                 android:paddingLeft="5dp"
-                android:text="*Tax extra if applicable." />
+                android:text="@string/str_tax" />
 
             <LinearLayout
                 android:id="@+id/bottom_layout"
@@ -331,7 +331,7 @@
                     android:layout_weight="1"
                     android:background="@color/ColorPrimary"
                     android:gravity="center"
-                    android:text="Confirm Order"
+                    android:text="@string/str_conformorder"
                     android:textColor="@color/app_text_color"
                     android:textSize="15sp" />
 

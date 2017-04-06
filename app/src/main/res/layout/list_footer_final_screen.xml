@@ -26,7 +26,7 @@
             android:layout_below="@+id/div1"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="Items Price"
+            android:text="@string/layout_order_detail_delivery_items"
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold"/>
 
@@ -104,7 +104,7 @@
             android:layout_below="@id/items_price_text"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="Shipping Charges"
+            android:text="@string/layout_order_detail_delivery_shiping_charge"
             android:textSize="@dimen/text_size_small"
             />
 
@@ -141,7 +141,7 @@
             android:layout_below="@id/shipping_charges_text"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:text="Discount"
+            android:text="@string/layout_order_detail_discount"
             android:textSize="@dimen/text_size_small" />
 
         <RelativeLayout

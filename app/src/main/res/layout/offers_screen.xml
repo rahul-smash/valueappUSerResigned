@@ -37,7 +37,7 @@
             android:layout_marginLeft="8dp"
             android:singleLine="true"
             android:padding="8dp"
-            android:text="Select Coupon"
+            android:text="@string/str_selct_copon"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_large"
             android:visibility="visible" />
@@ -53,7 +53,7 @@
         android:layout_below="@+id/header"
         android:padding="8dp"
         android:textSize="@dimen/text_size_normal"
-        android:text="Available Coupons"
+        android:text="@string/str_available_coupons"
         android:gravity="left"/>
 
 
@@ -72,7 +72,7 @@
         android:layout_below="@+id/line_horizontal"
         android:padding="8dp"
         android:textSize="@dimen/text_size_normal"
-        android:text="Sorry, there are no Coupons available."
+        android:text="@string/str_no_coupons"
         android:gravity="center"
         android:layout_centerInParent="true"
         android:visibility="gone"/>

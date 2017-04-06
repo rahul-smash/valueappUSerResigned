@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Total"
+                android:text="@string/layout_activity_categorydetail_total"
                 android:textColor="#bc6bac"
                 android:textSize="15sp" />
 
@@ -69,7 +69,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="#29a829"
-            android:text="Proceed to Checkout"
+            android:text="@string/str_proceed_further"
             android:textColor="#ffffff" />
 
 

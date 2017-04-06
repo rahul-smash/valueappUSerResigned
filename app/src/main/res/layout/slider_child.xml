@@ -18,7 +18,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/icon"
-        android:text="My Profile"
+        android:text="@string/str_myprofile"
         android:textColor="@color/app_text_color"
         android:textSize="@dimen/text_size_sub_normal"
         android:textStyle="normal" />

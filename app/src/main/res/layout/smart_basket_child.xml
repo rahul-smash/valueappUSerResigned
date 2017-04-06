@@ -35,7 +35,7 @@
                 android:id="@+id/items_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Basket Name"
+                android:text="@string/str_basketname"
                 android:textColor="#2f2f2f"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_corners"
                 android:padding="3dp"
-                android:text="Customize Basket"
+                android:text="@string/str_basketcustomize"
                 android:textColor="@color/app_text_color"
                 android:textSize="10sp" />
 
@@ -95,7 +95,7 @@
                 android:layout_toRightOf="@+id/customize_basket"
                 android:background="@drawable/round_corner"
                 android:padding="3dp"
-                android:text="Add to cart"
+                android:text="@string/str_addcart"
                 android:textColor="@color/app_text_color"
                 android:textSize="10sp" />
 

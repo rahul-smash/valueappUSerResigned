@@ -18,7 +18,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imageViewOffer"
-        android:text="TITLE"
+        android:text="@string/str_lbl_title"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -30,7 +30,7 @@
         android:layout_alignLeft="@+id/txtOfferTitle"
         android:layout_below="@id/txtOfferTitle"
         android:layout_marginTop="5dp"
-        android:text="Code:"
+        android:text="@string/str_code"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
@@ -45,7 +45,7 @@
         android:paddingRight="10dp"
         android:layout_toRightOf="@id/txtLblCode"
         android:background="@color/ColorPrimary"
-        android:text="Code:"
+        android:text="@string/str_code"
         android:textColor="@color/app_text_color"
         android:textIsSelectable="true"
         android:textSize="18sp" />

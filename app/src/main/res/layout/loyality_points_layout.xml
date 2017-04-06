@@ -37,7 +37,7 @@
             android:layout_marginLeft="8dp"
             android:singleLine="true"
             android:padding="8dp"
-            android:text="Redeem Points"
+            android:text="@string/str_redeem_points"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/text_size_normal"
             android:visibility="visible" />
@@ -53,7 +53,7 @@
         android:layout_below="@+id/header"
         android:padding="8dp"
         android:textSize="@dimen/text_size_normal"
-        android:text="You are not authorized to see this feature."
+        android:text="@string/str_lbl_authorized_msg"
         android:gravity="center_horizontal"
         android:visibility="gone"/>
 
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textSize="@dimen/text_size_normal"
-        android:text="You have 1000 points"
+        android:text="@string/str_youhave_points"
         android:gravity="center_horizontal"/>
 
     <View

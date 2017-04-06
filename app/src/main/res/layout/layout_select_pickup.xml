@@ -31,7 +31,7 @@
                 android:paddingBottom="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="Choose Type"
+                android:text="@string/str_lbl_choosetype"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
@@ -75,7 +75,7 @@
                         android:layout_below="@+id/buttonDelivery"
                         android:layout_marginTop="5dp"
                         android:minHeight="10dp"
-                        android:text="Deliver"
+                        android:text="@string/str_deliver"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_size_small" />
 
@@ -118,7 +118,7 @@
                         android:layout_below="@+id/buttonDineIn"
                         android:layout_marginTop="6dp"
                         android:minHeight="10dp"
-                        android:text="Dine In"
+                        android:text="@string/str_dinein"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_size_small" />
 
@@ -147,7 +147,7 @@
                         android:layout_below="@+id/buttonPickup"
                         android:layout_marginTop="5dp"
                         android:minHeight="10dp"
-                        android:text="Pick Up"
+                        android:text="@string/str_pick_up"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/text_size_small"
                         android:layout_centerHorizontal="true"/>
@@ -181,7 +181,7 @@
                 android:paddingBottom="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="City:"
+                android:text="@string/layout_select_activity_citys"
                 android:textColor="#646464"
                 android:textSize="@dimen/text_size_large" />
 
@@ -193,7 +193,7 @@
                 android:layout_toRightOf="@+id/lblCityName"
                 android:background="@color/color_white"
                 android:gravity="left|center_vertical"
-                android:hint="Select your city"
+                android:hint="@string/str_your_city"
                 android:minHeight="10dp"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
@@ -213,7 +213,7 @@
                 android:paddingBottom="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:text="Area:"
+                android:text="@string/str_area"
                 android:textColor="#646464"
                 android:textSize="@dimen/text_size_large" />
 
@@ -227,7 +227,7 @@
                 android:layout_toRightOf="@+id/lblAreaName"
                 android:background="@color/color_white"
                 android:gravity="left|center_vertical"
-                android:hint="Select your area"
+                android:hint="@string/str_your_area"
                 android:minHeight="10dp"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"

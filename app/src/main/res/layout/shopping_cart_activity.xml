@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recommended Items"
+            android:text="@string/layout_product_view_recom_items"
             android:textSize="@dimen/text_size_small"
             android:padding="5dp"
             />
@@ -79,7 +79,7 @@
             android:id="@+id/viewAllBtn"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="View All"
+            android:text="@string/layout_product_view_viewall"
             android:background="@android:color/transparent"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/text_size_small"
@@ -130,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Empty Cart"
+        android:text="@string/str_emptycart"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="gone" />
 
@@ -165,7 +165,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/shipping_charges_text"
             android:layout_margin="10dp"
-            android:text="Total"
+            android:text="@string/layout_activity_categorydetail_total"
             android:textColor="@color/app_text_color"
             android:textSize="18sp" />
 
@@ -215,7 +215,7 @@
         android:layout_weight="1"
         android:background="@color/ColorPrimary"
         android:gravity="center"
-        android:text="Place Order"
+        android:text="@string/str_placeorder"
         android:textColor="@color/app_text_color"
         android:textSize="15sp" />
 

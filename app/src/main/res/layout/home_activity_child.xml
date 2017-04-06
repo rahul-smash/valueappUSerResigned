@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="SHOPPING"
+            android:text="@string/str_lbl_shoping"
             android:textSize="15sp" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:text="(Coming Soon)"
+            android:text="@string/str_lbl_comingsoon"
             android:textColor="#D1001E"
             android:textSize="10sp"
             android:visibility="gone" />

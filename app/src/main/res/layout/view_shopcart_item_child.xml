@@ -119,7 +119,7 @@
                 android:paddingTop="3dp"
                 android:singleLine="true"
                 android:spinnerMode="dialog"
-                android:text="Select Quant"
+                android:text="@string/layout_product_view_select_quant"
                 android:textSize="@dimen/text_size_small"
                 android:textStyle="normal" />
         </RelativeLayout>

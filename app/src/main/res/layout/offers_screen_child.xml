@@ -3,46 +3,44 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:weightSum="2"
     android:padding="5dp"
-    >
+    android:weightSum="2">
 
     <RelativeLayout
         android:id="@+id/layout1"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        >
+        android:layout_weight="1"
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/discountValue"
             android:layout_width="fill_parent"
-            android:text="10 % Off"
-            android:gravity="left"
-            android:paddingLeft="5dp"
-            android:paddingBottom="2dp"
-            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
+            android:gravity="left"
             android:marqueeRepeatLimit="marquee_forever"
+            android:paddingBottom="2dp"
+            android:paddingLeft="5dp"
             android:scrollHorizontally="true"
-            android:textSize="@dimen/text_size_small"
+            android:singleLine="true"
+            android:text="10 % Off"
             android:textColor="@android:color/black"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"/>
+            android:textSize="@dimen/text_size_small" />
 
 
         <TextView
             android:id="@+id/minValue"
             android:layout_width="wrap_content"
-            android:text="Min Order 100"
-            android:gravity="left"
-            android:textSize="@dimen/home_text_size"
-            android:paddingLeft="5dp"
-            android:maxLines="1"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/discountValue"/>
+            android:layout_below="@+id/discountValue"
+            android:gravity="left"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:text="Min Order 100"
+            android:textSize="@dimen/home_text_size" />
 
     </RelativeLayout>
 
@@ -50,33 +48,32 @@
     <RelativeLayout
         android:id="@+id/layout2"
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
 
         <Button
             android:id="@+id/applyBtn"
             android:layout_width="wrap_content"
-            android:text="Apply"
-            android:textColor="@color/app_text_color"
-            android:background="@drawable/round_corner"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            android:layout_centerVertical="true"
-            android:textSize="14sp"
             android:layout_height="30dp"
-            />
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/round_corner"
+            android:text="@string/str_apply"
+            android:textColor="@color/app_text_color"
+            android:textSize="14sp" />
 
 
         <TextView
             android:id="@+id/needTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:text="You need 100 points more."
             android:layout_centerInParent="true"
-            android:textSize="@dimen/text_size_small"
+            android:maxLines="2"
+            android:text="@string/str_points_needed"
             android:textColor="@android:color/black"
-            android:visibility="gone"/>
+            android:textSize="@dimen/text_size_small"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

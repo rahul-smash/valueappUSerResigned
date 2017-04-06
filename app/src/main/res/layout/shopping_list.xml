@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Shopping List"
+            android:text="@string/str_shopinglist"
             android:textColor="@color/app_text_color"
             android:textSize="@dimen/header_toolbar_text_size"
             android:visibility="visible" />
@@ -79,7 +79,7 @@
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
             android:background="@drawable/round_corner"
-            android:text="ADD"
+            android:text="@string/str_shopinglist_add"
             android:textColor="@color/app_text_color" />
     </RelativeLayout>
 

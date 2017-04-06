@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:padding="3dp"
-                    android:text="Welcome"
+                    android:text="@string/str_welcome"
                     android:textColor="@color/app_text_color"
                     android:textSize="@dimen/text_size_normal"
                     />
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:padding="3dp"
-                    android:text="Guest"
+                    android:text="@string/str_welcome_guest"
                     android:textColor="@color/app_text_color"
                     android:textSize="@dimen/text_size_small" />
 

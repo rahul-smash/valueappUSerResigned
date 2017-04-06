@@ -125,7 +125,7 @@
     <string name="layout_select_activity_no_area_found">Not area found</string>
 
     <string name="layout_activity_master_city_no_catg">No Category available</string>
-    <string name="Yes">Confirmation</string>
+    <string name="layout_notification_detail_confirm">Message</string>
     <string name="layout_notification_detail_yes">Yes</string>
     <string name="layout_notification_detail_no">No</string>
     <string name="layout_notification_detail_order_details">Order Details</string>

@@ -19,7 +19,7 @@
             android:id="@+id/items_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Amul Butter"
+            android:text=""
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold" />

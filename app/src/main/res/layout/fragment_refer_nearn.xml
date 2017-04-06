@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.signity.bonbon.ui.ReferNEarn.ReferNEarnActivity">
+    >
 
     <!--<RelativeLayout
         android:id="@+id/header"
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="JE123"
+        android:text=""
         android:gravity="center"
         android:layout_below="@+id/label_3"
         android:layout_centerHorizontal="true"

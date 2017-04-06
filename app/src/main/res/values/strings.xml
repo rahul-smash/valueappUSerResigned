@@ -281,6 +281,8 @@
     <string name="str_addcart">Add to cart</string>
     <string name="str_groceryapp">Grocery App</string>
     <string name="str_code">Code:</string>
+    <string name="str_layout_about_us_btn_lbl">Start Ordering</string>
+    <string name="str_lbl_note">Note:</string>
 
 
 

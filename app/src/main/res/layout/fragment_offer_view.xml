@@ -43,9 +43,9 @@
                 android:layout_below="@+id/item_image"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/txtLbl1"
-                android:text="2015-12-02"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView
@@ -66,9 +66,9 @@
                 android:layout_below="@+id/item_image"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/txtLbl2"
-                android:text="2015-12-02"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/str_lbl_usage_limit"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_toRightOf="@+id/txtLbl3"
                 android:text="@string/str_lbl_usage_limit"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_normal" />
 
             <TextView
                 android:id="@+id/txtLbl4"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/str_lbl_min_amonut"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView
@@ -113,9 +113,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/txtLbl4"
-                android:text="500 :"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_normal" />
 
 
             <TextView
@@ -126,7 +126,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/str_lbl_discount"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView
@@ -137,9 +137,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/txtLbl5"
-                android:text="10 :"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_normal" />
 
             <TextView
                 android:id="@+id/txtLbl6"
@@ -149,7 +149,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/str_lbl_coponcode"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView
@@ -163,11 +163,11 @@
                 android:background="@color/ColorPrimary"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="3243"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@color/app_text_color"
                 android:textIsSelectable="true"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_normal" />
 
 
             <!-- <TextView
@@ -201,9 +201,9 @@
                 android:layout_below="@+id/txtLbl6"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
-                android:text="3243"
+                android:text=""
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:visibility="gone" />
 
 
@@ -215,7 +215,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/str_lbl_termscondi"
                 android:textAppearance="?android:textAppearanceSmall"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold" />
 
             <TextView

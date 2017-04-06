@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="3"
-            android:text="Amul Butter"
+            android:text=""
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_sub_normal" />
 
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="\u20B9"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="@dimen/text_size_small" />
 
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/rupee2"
-                    android:text="95.00"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="@dimen/text_size_small" />
 
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/rupee"
-                    android:text="95.00"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="@dimen/text_size_small" />
 
@@ -107,7 +107,7 @@
                     android:id="@+id/rupee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="\u20B9"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="@dimen/text_size_small"
                     android:visibility="gone"/>
@@ -180,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:text="19"
+            android:text="0"
             android:gravity="center_horizontal"
             android:textSize="@dimen/text_size_large" />
 

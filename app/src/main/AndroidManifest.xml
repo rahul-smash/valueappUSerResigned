@@ -75,12 +75,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".ui.smartbasket.SmartBasketActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.smartbasket.CustomizeBasketActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.Delivery.DeliveryActivity"
             android:screenOrientation="portrait" />
         <activity

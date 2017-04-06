@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/rs1"
-                android:text="00.00"
+                android:text=""
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_small" />
 
@@ -51,7 +51,7 @@
                 android:id="@+id/rs1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u20B9"
+                android:text=""
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
@@ -122,14 +122,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/rs2"
-                android:text="0.00"
+                android:text=""
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
                 android:id="@+id/rs2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u20B9"
+                android:text=""
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
 
@@ -158,14 +158,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/rs3"
-                android:text="0.00"
+                android:text=""
                 android:textSize="@dimen/text_size_small" />
 
             <TextView
                 android:id="@+id/rs3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\u20B9"
+                android:text=""
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
 

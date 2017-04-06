@@ -52,7 +52,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/items_price"
-                android:text="\u20B9"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 

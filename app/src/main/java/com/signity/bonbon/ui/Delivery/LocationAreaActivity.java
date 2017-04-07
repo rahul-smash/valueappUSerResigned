@@ -11,6 +11,7 @@ import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -494,6 +495,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
             mCityOutput = resultData.getString(AppUtils.LocationConstants.LOCATION_DATA_CITY);
             mStateOutput = resultData.getString(AppUtils.LocationConstants.LOCATION_DATA_STREET);
 
+            Log.e("AddressResultReceiver", "AddressResultReceiver------>" + mAddressOutput + " --" + mAreaOutput);
             displayAddressOutput();
 
             // Show a toast message if an address was found.
@@ -507,7 +509,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
     protected void displayAddressOutput() {
         //  mLocationAddressTextView.setText(mAddressOutput);
         try {
-            if (mAreaOutput != null)
+            if (mAddressOutput != null)
                 // mLocationText.setText(mAreaOutput+ "");
 
                 textViewlocation.setText(mAddressOutput);

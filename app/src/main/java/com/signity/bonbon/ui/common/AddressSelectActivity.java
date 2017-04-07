@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class AddressSelectActivity extends FragmentActivity {
         typeName = getIntent().getStringExtra("typeName");
         typeNameValue = getIntent().getStringExtra("typeNameValue");
         id = getIntent().getStringExtra("id");
+        Log.e("Intent", "id:" + id + " --TypeName:" + typeName + " -- TypeNameVal" + typeNameValue);
 
 
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {

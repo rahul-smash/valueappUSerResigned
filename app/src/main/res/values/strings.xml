@@ -122,7 +122,7 @@
 
     <string name="layout_select_activity_city">Select City</string>
     <string name="layout_activity_delivery_areas">Delivery Areas</string>
-    <string name="layout_select_activity_citys">Select City:</string>
+    <string name="layout_select_activity_citys">City:</string>
     <string name="layout_select_activity_no_area_found">Not area found</string>
 
     <string name="layout_activity_master_city_no_catg">No Category available</string>

@@ -284,7 +284,9 @@
     <string name="str_code">Code:</string>
     <string name="str_layout_about_us_btn_lbl">Start Ordering</string>
     <string name="str_lbl_note">Note:</string>
-
+    <string name="str_lbl_default_zero">0</string>
+    <string name="str_layout_shopcart_item_txt_quanty">QTY</string>
+    <string name="str_lbl_default_one">1</string>
 
 
 </resources>

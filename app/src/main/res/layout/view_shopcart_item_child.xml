@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="QTY"
+                android:text="@string/str_layout_shopcart_item_txt_quanty"
                 android:textColor="#a2a0a2"
                 android:textSize="16sp"
                 android:visibility="gone" />
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/remove_button"
-            android:text="0"
+            android:text="@string/str_lbl_default_zero"
             android:textSize="22sp" />
 
         <ImageButton

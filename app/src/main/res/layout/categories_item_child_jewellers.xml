@@ -49,7 +49,7 @@
                     android:id="@+id/rupee2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="\u20B9"
+                    android:text=""
                     android:textSize="14sp" />
 
                 <TextView
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/rupee2"
-                    android:text="95.00"
+                    android:text=""
                     android:textSize="@dimen/text_size_small" />
 
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/rupee"
-                    android:text="95.00"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="@dimen/text_size_small" />
 
@@ -92,7 +92,7 @@
                     android:id="@+id/rupee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="\u20B9"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/remove_button"
-            android:text="1"
+            android:text="0"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_size_large" />
 

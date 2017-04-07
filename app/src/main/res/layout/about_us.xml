@@ -29,7 +29,7 @@
         android:background="@color/ColorPrimary"
         android:elevation="3dp"
         android:visibility="visible"
-        android:text="Start Ordering"
+        android:text="@string/str_layout_about_us_btn_lbl"
         android:textSize="@dimen/text_size_normal"
         android:textColor="@color/app_text_color"
         />

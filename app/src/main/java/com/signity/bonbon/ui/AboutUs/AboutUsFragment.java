@@ -123,7 +123,7 @@ public class AboutUsFragment extends Fragment {
                 ProgressDialogUtil.hideProgressDialog();
 
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.str_lbl_message), getResources().getString(R.string.error_code_message), false);
             }
         });
     }

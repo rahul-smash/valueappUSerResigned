@@ -1,8 +1,10 @@
 package com.signity.bonbon.ui.fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
+import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.model.PickupAdressModel;
@@ -51,12 +56,12 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     private Button btnCall;
 
     double lat = 0.0, lng = 0.0;
-
+    private PrefManager prefManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PrefManager prefManager = new PrefManager(getActivity());
+        prefManager = new PrefManager(getActivity());
         userId = prefManager.getSharedValue(AppConstant.ID);
         from = getArguments().getString(AppConstant.FROM, "");
         pickupAdressModel = (PickupAdressModel) getArguments().getSerializable("object");
@@ -140,7 +145,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonProceed:
-                Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                /*Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
                 intent.putExtra("addressId", pickupAdressModel.getId());
                 intent.putExtra("userId", userId);
                 intent.putExtra("isForPickup", "yes");
@@ -149,7 +154,8 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
                 startActivity(intent);
                 getActivity().finish();
-                AnimUtil.slideFromRightAnim(getActivity());
+                AnimUtil.slideFromRightAnim(getActivity());*/
+                showAlertDialogForConfirm(getActivity(), "Confirmation", getResources().getString(R.string.str_payment_option_message));
                 break;
 
             case R.id.btnCall:
@@ -180,6 +186,98 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 break;
         }
     }
+
+    public void showAlertDialogForConfirm(Context context, String title, String message) {
+
+        if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("0")){
+
+            Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+            intent.putExtra("addressId", pickupAdressModel.getId());
+            intent.putExtra("userId", userId);
+            intent.putExtra("isForPickup", "yes");
+            intent.putExtra("shiping_charges", "0");
+            intent.putExtra("minimum_charges", "0");
+            intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
+            intent.putExtra("payment_method", "2");
+            startActivity(intent);
+            getActivity().finish();
+            AnimUtil.slideFromRightAnim(getActivity());
+
+        }else if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("1")){
+
+            final Dialog dialog = new Dialog(getActivity());
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.custom_dialog);
+            TextView positveButton = (TextView) dialog.findViewById(R.id.yesBtn);
+            positveButton.setVisibility(View.VISIBLE);
+            TextView negativeButton = (TextView) dialog.findViewById(R.id.noBtn);
+            negativeButton.setVisibility(View.VISIBLE);
+            TextView titleTxt = (TextView) dialog.findViewById(R.id.title);
+            TextView messageText = (TextView) dialog.findViewById(R.id.message);
+            titleTxt.setText(""+title);
+            positveButton.setText("COD");
+            negativeButton.setText("Online");
+            messageText.setText(""+message);
+
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+            positveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                    intent.putExtra("addressId", pickupAdressModel.getId());
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("isForPickup", "yes");
+                    intent.putExtra("shiping_charges", "0");
+                    intent.putExtra("minimum_charges", "0");
+                    intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
+                    intent.putExtra("payment_method", "2");
+                    startActivity(intent);
+                    getActivity().finish();
+                    AnimUtil.slideFromRightAnim(getActivity());
+                    dialog.dismiss();
+                }
+            });
+
+            negativeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+                    intent.putExtra("addressId", pickupAdressModel.getId());
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("isForPickup", "yes");
+                    intent.putExtra("shiping_charges", "0");
+                    intent.putExtra("minimum_charges", "0");
+                    intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
+                    intent.putExtra("payment_method", "3");
+                    startActivity(intent);
+                    getActivity().finish();
+                    AnimUtil.slideFromRightAnim(getActivity());
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), ShoppingCartActivity2.class);
+            intent.putExtra("addressId", pickupAdressModel.getId());
+            intent.putExtra("userId", userId);
+            intent.putExtra("isForPickup", "yes");
+            intent.putExtra("shiping_charges", "0");
+            intent.putExtra("minimum_charges", "0");
+            intent.putExtra("user_address", pickupAdressModel.getPickupAdd());
+            intent.putExtra("payment_method", "2");
+            startActivity(intent);
+            getActivity().finish();
+            AnimUtil.slideFromRightAnim(getActivity());
+        }
+
+    }
+
 
 
 }

@@ -118,14 +118,22 @@ public class FetchAddressIntentService extends IntentService {
             deliverResultToReceiver(AppUtils.LocationConstants.FAILURE_RESULT, errorMessage, null);
         } else {
             Address address = addresses.get(0);
-            ArrayList<String> addressFragments = new ArrayList<String>();
+            StringBuilder strReturnedAddress = new StringBuilder("");
 
             for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                addressFragments.add(address.getAddressLine(i));
-
+                strReturnedAddress.append(address.getAddressLine(i)).append("\n");
             }
+            String strAdd = strReturnedAddress.toString();
             deliverResultToReceiver(AppUtils.LocationConstants.SUCCESS_RESULT,
-                    TextUtils.join(System.getProperty("line.separator"), addressFragments), address);
+                    strAdd, address);
+
+//            ArrayList<String> addressFragments = new ArrayList<String>();
+//            for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+//                addressFragments.add(address.getAddressLine(i));
+//
+//            }
+//            deliverResultToReceiver(AppUtils.LocationConstants.SUCCESS_RESULT,
+//                    TextUtils.join(System.getProperty("line.separator"), addressFragments), address);
             //TextUtils.split(TextUtils.join(System.getProperty("line.separator"), addressFragments), System.getProperty("line.separator"));
 
         }
@@ -136,15 +144,19 @@ public class FetchAddressIntentService extends IntentService {
      */
     private void deliverResultToReceiver(int resultCode, String message, Address address) {
         try {
-            Bundle bundle = new Bundle();
-            bundle.putString(AppUtils.LocationConstants.RESULT_DATA_KEY, message);
-
-            bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_AREA, address.getSubLocality());
-
-            bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_CITY, address.getLocality());
-            bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_STREET, address.getAddressLine(0));
-
-            mReceiver.send(resultCode, bundle);
+            if (address != null) {
+                Log.e("Location", "Message---->" + message);
+                Log.e("Location", "Address---->" + address);
+                Log.e("Location", "Sublocaltiy---->" + address.getSubLocality() + "");
+                Log.e("Location", "Locality---->" + address.getLocality());
+                Log.e("Location", "AddressLine---->" + address.getAddressLine(0));
+                Bundle bundle = new Bundle();
+                bundle.putString(AppUtils.LocationConstants.RESULT_DATA_KEY, message);
+                bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_AREA, address.getSubLocality());
+                bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_CITY, address.getLocality());
+                bundle.putString(AppUtils.LocationConstants.LOCATION_DATA_STREET, address.getAddressLine(0));
+                mReceiver.send(resultCode, bundle);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

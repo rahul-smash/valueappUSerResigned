@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/order_number_text"
-            android:text="sd"
+            android:text=""
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -70,7 +70,7 @@
             android:layout_below="@+id/order_date_text"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/lbl_order_total_price"
-            android:text="\u20B9"
+            android:text=""
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 
@@ -81,7 +81,7 @@
             android:layout_below="@+id/order_date_text"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/rupee"
-            android:text="456"
+            android:text=""
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_small" />
 

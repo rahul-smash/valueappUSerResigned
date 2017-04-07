@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/rupee"
-            android:text="95.00"
+            android:text=""
             android:textStyle="bold"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_extra_small" />
@@ -62,7 +62,7 @@
             android:id="@+id/rupee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\u20B9"
+            android:text=""
             android:textStyle="bold"
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_extra_small"
@@ -77,7 +77,7 @@
         android:maxLines="2"
         android:minLines="1"
         android:padding="2dp"
-        android:text="40 gms"
+        android:text=""
         android:layout_above="@+id/addBtn"
         android:textSize="@dimen/text_size_extra_small" />
 

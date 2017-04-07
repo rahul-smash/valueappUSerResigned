@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="Hello"
+            android:text=""
             android:textColor="@color/app_text_color"
             android:textSize="20sp"
             android:visibility="visible" />
@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/rs4"
-                        android:text="234"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/total_size"
                         android:textStyle="bold" />
@@ -148,7 +148,7 @@
                         android:id="@+id/rs4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="\u20B9"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/total_size"
                         android:textStyle="bold" />

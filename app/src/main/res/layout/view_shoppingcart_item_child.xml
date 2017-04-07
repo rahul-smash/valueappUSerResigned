@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/quantTxt"
                 android:layout_marginLeft="5dp"
-                android:text="1"
+                android:text=""
                 android:textColor="#2f2f2f"
                 android:textSize="@dimen/text_size_small" />
 
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/rupee2"
-                    android:text="95.00"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="13sp" />
 
@@ -87,7 +87,7 @@
                     android:id="@+id/rupee2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="\u20B9"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="14sp" />
 
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/rupee"
-                    android:text="95.00"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="13sp" />
 
@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="\u20B9"
+                    android:text=""
                     android:textColor="#2f2f2f"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -190,7 +190,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="\u20B9"
+            android:text=""
             android:textSize="@dimen/text_size_normal"
             android:layout_marginRight="2dp"/>
 
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/rupeeTxt"
             android:layout_centerVertical="true"
-            android:text="100.0"
+            android:text=""
             android:textSize="@dimen/text_size_normal"/>
 
 

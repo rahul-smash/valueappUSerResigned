@@ -48,7 +48,7 @@
             android:layout_below="@+id/order_date"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/order_number_rupya"
-            android:text="200"
+            android:text=""
             android:textColor="#2f2f2f"
             android:textSize="@dimen/text_size_normal" />
 
@@ -61,7 +61,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/order_number_text"
-            android:text="$"
+            android:text=""
             android:textColor="#2f2f2f"
             android:textSize="15sp" />
 

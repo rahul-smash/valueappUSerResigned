@@ -3,14 +3,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:gravity="center"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:gravity="center">
 
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/title"
@@ -22,12 +21,13 @@
             android:textColor="@color/ColorPrimary"
             android:textSize="@dimen/text_size_normal"
             android:textStyle="bold" />
+
         <View
             android:id="@+id/line"
-            android:layout_below="@+id/title"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@color/ColorPrimary"/>
+            android:layout_below="@+id/title"
+            android:background="@color/ColorPrimary" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -45,9 +45,9 @@
                     android:id="@+id/message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:gravity="center_horizontal"
                     android:padding="10dp"
                     android:text=""
                     android:textColor="@android:color/black"

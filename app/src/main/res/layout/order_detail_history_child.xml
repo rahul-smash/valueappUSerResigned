@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_number_text"
             android:layout_marginTop="5dp"
-            android:text="SKU:"
+            android:text="@string/str_lbl_sku"
             android:textColor="#2f2f2f"
             android:textSize="15sp"
             android:visibility="gone" />

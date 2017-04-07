@@ -97,7 +97,7 @@
             android:background="@drawable/red_noto"
             android:clickable="false"
             android:gravity="center"
-            android:text="0"
+            android:text=""
             android:textColor="#ffffff"
             android:textSize="10sp"
             android:visibility="gone" />
@@ -264,7 +264,7 @@
                             android:layout_below="@+id/add_button"
                             android:layout_marginRight="10dp"
                             android:gravity="center"
-                            android:text="0"
+                            android:text=""
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/text_size_large" />
 

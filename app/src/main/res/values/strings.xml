@@ -281,7 +281,7 @@
     <string name="str_addcart">Add to cart</string>
     <string name="str_groceryapp">Grocery App</string>
     <string name="str_code">Code:</string>
-
+    <string name="str_layout_shopcart_item_txt_quantity">QTY</string>
 
 
 </resources>

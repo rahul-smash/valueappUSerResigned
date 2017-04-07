@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="0"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
@@ -111,7 +111,7 @@
                     android:background="@drawable/red_noto"
                     android:clickable="false"
                     android:gravity="center"
-                    android:text="0"
+                    android:text=""
                     android:textColor="#ffffff"
                     android:textSize="13sp"
                     android:visibility="visible" />

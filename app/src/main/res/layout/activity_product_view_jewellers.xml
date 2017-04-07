@@ -171,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/sku"
-                        android:text="11"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -218,7 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/goldpurity"
-                        android:text="11"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -368,7 +368,7 @@
                 android:layout_alignTop="@+id/add_button"
                 android:layout_toLeftOf="@+id/add_button"
                 android:gravity="center"
-                android:text="1"
+                android:text=""
                 android:textSize="22sp" />
 
             <ImageButton

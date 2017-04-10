@@ -137,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="QTY"
+                android:text="@string/str_layout_shopcart_item_txt_quanty"
                 android:textColor="#a2a0a2"
                 android:textSize="16sp"
                 android:visibility="gone" />

@@ -180,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:text="0"
+            android:text="@string/str_lbl_default_zero"
             android:gravity="center_horizontal"
             android:textSize="@dimen/text_size_large" />
 

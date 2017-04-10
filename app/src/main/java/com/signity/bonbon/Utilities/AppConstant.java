@@ -26,9 +26,10 @@ public class AppConstant {
     public static final String APP_OLD_VERISON = "com.android.bonbon.Utilities.APP_OLD_VERISON";
     public static final String OFFER_VIEW = "com.android.bonbon.Utilities.OFFER_DATA";
 
-    public static final String APP_TYPE_GROCERY = "grocery";
-    public static final String APP_TYPE_RESTAURANT = "restaurant";
-    public static final String APP_TYPE_JEWELLERS = "jewellery";
+    /*Constant for the type of restaurant we are loading*/
+    public static final String KEY_STORE_TYPE_GROCERY = "grocery";
+    public static final String KEY_STORE_TYPE_RESTAURANT = "restaurant";
+    public static final String KEY_STORE_TYPE_JEWELLERY = "jewellery";
 
     public static final String AREA_SELECTED = "Area";
     public static final String SELECTED_STORE = "com.android.bonbon.Utilities.SELECTED_STORE";
@@ -55,6 +56,5 @@ public class AppConstant {
     public static final String STATE = "com.android.bonbon.Utilities.STATE";
     public static final String COUNTRY = "com.android.bonbon.Utilities.COUNTRY";
     public static final String RECOMMENDED_ITEMS = "com.android.bonbon.Utilities.RECOMMENDED_ITEMS";
-
 
 }

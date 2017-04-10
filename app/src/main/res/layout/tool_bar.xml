@@ -69,7 +69,7 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/red_noto"
         android:gravity="center"
-        android:text="0"
+        android:text="@string/str_lbl_default_zero"
         android:textColor="#ffffff"
         android:textSize="13sp"
         android:visibility="gone" />

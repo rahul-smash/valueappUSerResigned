@@ -383,10 +383,10 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.viewAllBtn:
                 DataAdapter.getInstance().setProductList(listRecommendProduct);
-                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
                     startActivity(new Intent(ProductViewActivity.this, RecommendProductsGroceryActivity.class));
                     AnimUtil.slideFromRightAnim(ProductViewActivity.this);
-                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)){
+                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                     startActivity(new Intent(ProductViewActivity.this, RecommendProductsActivity.class));
                     AnimUtil.slideFromRightAnim(ProductViewActivity.this);
                 }
@@ -661,7 +661,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
 
-            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 try {

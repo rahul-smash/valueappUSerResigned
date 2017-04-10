@@ -75,7 +75,7 @@ public class ViewController {
 
         switch (Integer.parseInt(themeId)) {
             case 1:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme1Grocery();
                 } else {
                     fragment = new HomeFragmentTangerineTheme1();
@@ -88,7 +88,7 @@ public class ViewController {
                 fragment = new HomeFragmentTheme3();
                 break;
             case 4:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme4Grocery();
                 } else {
                     fragment = new HomeFragmentTheme4();
@@ -102,28 +102,28 @@ public class ViewController {
                 fragment = new HomeFragmentBuraanTheme6();
                 break;
             case 7:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme7Grocery();
                 } else {
                     fragment = new HomeFragmentHundredTheme7();
                 }
                 break;
             case 8:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme8Grocery();
                 } else {
 
                 }
                 break;
             case 9:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme9Grocery();
                 } else {
 
                 }
                 break;
             case 10:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentTheme10Grocery();
                 } else {
 
@@ -152,7 +152,7 @@ public class ViewController {
                 break;
 
             case 19:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     fragment = new HomeFragmentEgrocersTheme19();
                 } else {
 
@@ -186,50 +186,50 @@ public class ViewController {
                 break;
 
             case 28:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_JEWELLERY)) {
                     fragment = new HomeFragmentAppleTheme28();
                 }
                 break;
 
             case 30:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentManjeetTheme30();
                 }
                 break;
 
 
             case 31:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentSuruchiTheme31();
                 }
                 break;
 
             case 32:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentBurgerTheme32();
                 }
                 break;
 
 
             case 34:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentTheme20();
                 }
                 break;
 
 
             case 36:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentBeliramTheme22();
                 }
                 break;
             case 52:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentKingShakeTheme52();
                 }
                 break;
             case 53:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     fragment = new HomeFragmentKingShakeTheme52();
                 }
                 break;
@@ -251,7 +251,7 @@ public class ViewController {
         switch (Integer.parseInt(themeId)) {
             case 1:
                 // tangerine
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_1_grocery;
                 } else {
                     layoutId = R.layout.home_activity_tangerine;
@@ -266,7 +266,7 @@ public class ViewController {
                 layoutId = R.layout.home_activity_theme_3;
                 break;
             case 4:
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     //Himachal Traders
                     layoutId = R.layout.home_activity_theme_4_grocery;
                 } else {
@@ -284,7 +284,7 @@ public class ViewController {
                 break;
             case 7:
                 //Six ten grocery
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_7_gorcery;
                 } else {
                     //Hundred SPices
@@ -293,7 +293,7 @@ public class ViewController {
                 break;
             case 8:
                 // Empire
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_8_grocery;
                 } else {
                 }
@@ -301,14 +301,14 @@ public class ViewController {
 
             case 9:
 
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_9_grocery;
                 } else {
                 }
                 break;
             case 10:
                 // Kumar Mega Mall
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                     layoutId = R.layout.home_activity_theme_10_grocery;
                 } else {
                 }
@@ -387,21 +387,21 @@ public class ViewController {
 
             case 28:
                 //Apple Diamond
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_JEWELLERY)) {
                     layoutId = R.layout.home_activity_theme_28_apple;
                 }
                 break;
 
             case 30:
                 //Manjeet
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_30_manjeet;
                 }
                 break;
 
             case 31:
                 //Suruchi Bhog and big wich
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
 //                    layoutId = R.layout.home_activity_theme_31_suruchi;
                     layoutId = R.layout.home_activity_theme_31_bigwich;
                 }
@@ -409,35 +409,35 @@ public class ViewController {
 
             case 32:
                 //Burger Point chd
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_32_burger;
                 }
                 break;
 
             case 34:
                 //Dunkin Donuts
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_34_dunkin;
                 }
                 break;
 
             case 36:
                 //Garden Chef
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_36_garden;
                 }
                 break;
 
             case 52:
                 //King of Shakes
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_52_king_shake;
                 }
                 break;
 
             case 53:
                 //Rajpoot
-                if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
                     layoutId = R.layout.home_activity_theme_52_king_shake;
                 }
                 break;
@@ -455,9 +455,9 @@ public class ViewController {
         String themeId = prefManager.getProjectTheme();
         String storeType = prefManager.getProjectType();
 
-        if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+        if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
             return CategoryDetailGroceryActivity.class;
-        } else if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+        } else if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_JEWELLERY)) {
             return CategoryDetailJewellersActivity.class;
         } else {
             return CategoryDetailActivity.class;
@@ -468,7 +468,7 @@ public class ViewController {
 
         PrefManager prefManager = new PrefManager(context);
         String storeType = prefManager.getProjectType();
-        if (storeType.equalsIgnoreCase("grocery")) {
+        if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
             return SearchForGroceryActivity.class;
         } else {
             return SearchActivity.class;
@@ -479,9 +479,9 @@ public class ViewController {
 
         PrefManager prefManager = new PrefManager(context);
         String storeType = prefManager.getProjectType();
-        if (storeType.equalsIgnoreCase("grocery")) {
+        if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
             return ProductViewGroceryActivity.class;
-        } else if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)) {
+        } else if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_JEWELLERY)) {
             return ProductViewJewellersActivity.class;
         } else {
             return ProductViewActivity.class;
@@ -491,11 +491,11 @@ public class ViewController {
     public Fragment getFavouritesFragment() {
         PrefManager prefManager = new PrefManager(context);
         String storeType = prefManager.getProjectType();
-        if (storeType.equalsIgnoreCase("grocery")) {
+        if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
             return new MyFavouriteGroceryFragment();
-        } else if(storeType.equalsIgnoreCase(AppConstant.APP_TYPE_JEWELLERS)){
+        } else if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_JEWELLERY)) {
             return new MyFavouriteJewellers();
-        }else {
+        } else {
             return new MyFavourite();
         }
     }
@@ -503,7 +503,7 @@ public class ViewController {
     public Fragment getBookNowOrShoppinFragment() {
         PrefManager prefManager = new PrefManager(context);
         String storeType = prefManager.getProjectType();
-        if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+        if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)) {
             return new ShoppingList();
         } else {
             return new BookNowFragment();
@@ -513,10 +513,10 @@ public class ViewController {
     public String getMenuTextBookNow() {
         PrefManager prefManager = new PrefManager(context);
         String storeType = prefManager.getProjectType();
-        if (storeType.equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
-            return "Book Now";
+        if (storeType.equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)) {
+            return context.getString(R.string.lbl_title_book_now);
         } else {
-            return "Shopping List";
+            return context.getString(R.string.lbl_title_shop_listing);
         }
     }
 

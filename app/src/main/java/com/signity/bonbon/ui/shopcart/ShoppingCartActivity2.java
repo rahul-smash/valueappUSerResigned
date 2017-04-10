@@ -2030,11 +2030,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
 
 
-            if (prefManager.getProjectType().equals(AppConstant.APP_TYPE_GROCERY)) {
+            if (prefManager.getProjectType().equals(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
-            } else if(prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)){
+            } else if(prefManager.getProjectType().equals(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);

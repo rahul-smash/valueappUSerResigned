@@ -77,7 +77,7 @@
     <string name="error_no_table">No table available</string>
     <string name="str_select">Pickup</string>
     <string name="str_deliver">Deliver</string>
-    <string name="str_dining">Dining</string>
+    <string name="str_dining">Dine In</string>
     <string name="str_pickup">Pickup</string>
     <string name="str_payment_option_message">Please select the payment mode</string>
     <string name="str_already_added">Already added to the list</string>

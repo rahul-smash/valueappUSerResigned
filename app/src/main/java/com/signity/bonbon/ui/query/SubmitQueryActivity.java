@@ -13,7 +13,6 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.network.ApiService;
-import com.signity.bonbon.network.NetworkConstant;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
@@ -21,9 +20,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
-import retrofit.client.OkClient;
 import retrofit.client.Response;
 
 /**
@@ -128,7 +125,7 @@ public class SubmitQueryActivity extends AppCompatActivity implements View.OnCli
                 public void success(EmailResponse emailResponse, Response response) {
 
                     if (emailResponse.getSuccess()) {
-                        Toast.makeText(SubmitQueryActivity.this, "Thank you for posting your query", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SubmitQueryActivity.this, R.string.msg_toast_submit_query, Toast.LENGTH_SHORT).show();
                         finish();
                     }
 

@@ -343,11 +343,11 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 mrpPrice = selectedVariant.getMrpPrice();
             }
 
-            if (prefManager.getProjectType().equals(AppConstant.APP_TYPE_GROCERY)) {
+            if (prefManager.getProjectType().equals(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
-            } else if(prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)){
+            } else if(prefManager.getProjectType().equals(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
@@ -529,7 +529,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
 
-            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
@@ -624,10 +624,10 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
             case R.id.viewAllBtn:
                 DataAdapter.getInstance().setProductList(listRecommendProduct);
-                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
                     startActivity(new Intent(ShoppingCartActivity.this, RecommendProductsGroceryActivity.class));
                     AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
-                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)){
+                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                     startActivity(new Intent(ShoppingCartActivity.this, RecommendProductsActivity.class));
                     AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
                 }

@@ -288,5 +288,11 @@
     <string name="str_layout_shopcart_item_txt_quanty">QTY</string>
     <string name="str_lbl_default_one">1</string>
 
+    <string name="lbl_title_book_now">Book Now</string>
+    <string name="lbl_title_shop_listing">Shopping List</string>
+
+    <!---->
+    <string name="msg_toast_submit_query">Thank you for posting your query</string>
+
 
 </resources>

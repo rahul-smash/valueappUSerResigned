@@ -76,7 +76,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_activity);
-        GATrackers.getInstance().trackScreenView(GAConstant.CATEGORY_SCREEN);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_category_screen));
         getDisplayMetrics();
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(this);
@@ -156,8 +156,18 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                 Category category = listCategory.get(position);
                 if (category.getSubCategoryList() != null && category.getSubCategoryList().size() != 0) {
                     ViewController viewController = AppController.getInstance().getViewController();
+
+/*
                     String categoryGAC = getString(R.string.app_name) + GAConstant.GAC_CAT;
                     GATrackers.getInstance().trackEvent(categoryGAC, categoryGAC + GAConstant.VIEW, category.getTitle() + " is view on " + getString(R.string.app_name));
+*/
+
+                    String appShareGAC = getString(R.string.ga_category_screen);
+                    String action = getString(R.string.app_name)+"_"+getString(R.string.ga_view)+"_"+category.getTitle()+getString(R.string.ga_click);
+                    GATrackers.getInstance().trackEvent(appShareGAC, action,
+                            category.getTitle());
+
+
                     Intent i = new Intent(CategoryActivity.this, viewController.getCategoryDetailActivity());
                     i.putExtra("categoryId", category.getId());
                     i.putExtra("title", category.getTitle());

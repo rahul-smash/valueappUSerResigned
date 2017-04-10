@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="ga_home_screen">HOME_SCREEN</string>
+    <string name="ga_home">_HOME</string>
+    <string name="ga_shared">SHARED</string>
+    <string name="ga_shared_button">Click_Button_SHARED</string>
+    <string name="ga_refer_earn">Refer N Earn</string>
+    <string name="ga_refer_earn_button">Click_Button_Refer N Earn</string>
+    <string name="ga_about_us">ABOUT_US_SCREEN</string>
+    <string name="ga_about">_ABOUT_US</string>
+    <string name="ga_about_us_view">ABOUT US VIEW</string>
+    <string name="ga_sub_cat">_SUB_CATEGORY</string>
+    <string name="ga_view">VIEW</string>
+    <string name="ga_category">CATEGORY</string>
+    <string name="ga_category_screen">CATEGORY SCREEN</string>
+    <string name="ga_click">_CLICK</string>
+
 </resources>

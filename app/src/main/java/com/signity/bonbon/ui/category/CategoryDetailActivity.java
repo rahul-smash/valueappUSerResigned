@@ -248,9 +248,12 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
             }
 
             String subCategoryId = subCategoryList.get(position).getId();
+
             String subCatGAC = getString(R.string.app_name) + GAConstant.SUB_CAT;
             GATrackers.getInstance().trackEvent(subCatGAC, subCatGAC + GAConstant.VIEW,
                     subCategoryList.get(position).getTitle() + " under " + title + " is view on " + getString(R.string.app_name));
+
+
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);

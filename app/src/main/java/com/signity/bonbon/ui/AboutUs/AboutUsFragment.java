@@ -54,18 +54,18 @@ public class AboutUsFragment extends Fragment {
         prefManager = new PrefManager(getActivity());
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
         appDb = DbAdapter.getInstance().getDb();
-        GATrackers.getInstance().trackScreenView(GAConstant.ABOUT_US_SCREEN);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_about_us));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.about_us, container, false);
 
-        String aboutUsGAC = getString(R.string.app_name) + GAConstant.GAC_ABOUT;
-
+        String aboutUsGAC = getString(R.string.ga_about_us);
+        String action = getString(R.string.app_name)+"_"+getString(R.string.ga_view)+"_"+getString(R.string.ga_about_us_view);
         GATrackers.getInstance()
-                .trackEvent(aboutUsGAC, aboutUsGAC + GAConstant.VIEW,
-                        "ABOUT US VIEW");
+                .trackEvent(aboutUsGAC, action,
+                        getString(R.string.ga_about_us));
 
         webview = (WebView) mView.findViewById(R.id.webview);
         startOrder = (Button) mView.findViewById(R.id.startOrder);

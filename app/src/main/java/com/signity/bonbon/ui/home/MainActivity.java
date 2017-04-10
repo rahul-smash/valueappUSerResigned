@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.slider_pane);
         context = this;
         GATrackers.getInstance().
-                trackScreenView(GAConstant.HOME_SCREEN);
+                trackScreenView(getString(R.string.ga_home_screen));
         prefManager = new PrefManager(MainActivity.this);
         viewController = AppController.getInstance().getViewController();
 
@@ -480,10 +480,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     citySelect.setVisibility(View.GONE);
                     title.setText("Refer N Earn");
                     replace(new ShareNEarnFragment());
+
+                    String appShareGAC = getString(R.string.ga_refer_earn);
+                    String action = getString(R.string.app_name)+"_"+getString(R.string.ga_refer_earn_button);
+                    GATrackers.getInstance().trackEvent(appShareGAC, action,
+                            getString(R.string.ga_home_screen));
+
                 } else {
-                    String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
+
+                    /*String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
                     GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                            getString(R.string.app_name) + " App Shared");
+                            getString(R.string.app_name) + " App Shared");*/
+
+                    String appShareGAC = getString(R.string.ga_shared);
+                    String action = getString(R.string.app_name)+"_"+getString(R.string.ga_shared_button);
+                    GATrackers.getInstance().trackEvent(appShareGAC, action,
+                            getString(R.string.ga_home_screen));
+
+
                     String shareContent =
                             "Kindly download " + store.getStoreName() + " app from " +
                                     store.getAndroidAppShareLink() + "\nThanks and Regards\n " +

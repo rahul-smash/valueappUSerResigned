@@ -77,7 +77,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         txtStorename = (TextView) findViewById(R.id.txtStorename);
         txtAddress = (TextView) findViewById(R.id.txtAddress);
 //        txtName = (TextView) findViewById(R.id.txtName);
-        title.setText("Contact Us");
+        title.setText(getString(R.string.lbl_contact_us));
 
         if (store != null) {
             txtStorename.setText(store.getStoreName());
@@ -105,7 +105,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
                     startActivity(intent);
                     AnimUtil.slideFromRightAnim(ContactActivity.this);
                 } else {
-                    Toast.makeText(ContactActivity.this, "Your device is not supporting any calling feature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContactActivity.this, getString(R.string.msg_toast_calling_not_supported), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -161,7 +161,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     private void requestPermission(){
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
-            Toast.makeText(ContactActivity.this,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+            Toast.makeText(ContactActivity.this,getString(R.string.msg_toast_gps_permission),Toast.LENGTH_LONG).show();
 
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);

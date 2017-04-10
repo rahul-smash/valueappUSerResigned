@@ -40,7 +40,7 @@ public class NotificationsDetailActivity extends Activity implements View.OnClic
     private void init() {
 
         positveButton = (TextView) findViewById(R.id.yesBtn);
-        positveButton.setText("OK");
+        positveButton.setText(getString(R.string.str_lbl_ok));
         negativeButton = (TextView) findViewById(R.id.noBtn);
         titleTxt = (TextView) findViewById(R.id.title);
         messageText = (TextView) findViewById(R.id.message);

@@ -208,7 +208,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         total = (TextView) findViewById(com.signity.bonbon.R.id.total);
         title = (TextView) findViewById(com.signity.bonbon.R.id.textTitle);
 
-        title.setText("Confirm Order");
+        title.setText(getString(R.string.str_conformorder));
         placeorder = (Button) findViewById(com.signity.bonbon.R.id.placeorder);
         backButton = (Button) findViewById(com.signity.bonbon.R.id.backButton);
         backButton.setOnClickListener(this);
@@ -563,7 +563,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
                     GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
                             "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialog(ShoppingCartActivity2.this, getString(R.string.lbl_thank_you), getString(R.string.msg_dialog_confirm_order_soon));
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
@@ -627,7 +627,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
                             "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
 
-                    showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialogwithPickUp(ShoppingCartActivity2.this, getString(R.string.lbl_thank_you), getString(R.string.msg_dialog_confirm_order_soon));
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
@@ -692,7 +692,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
                             "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
 
-                    showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialogwithPickUp(ShoppingCartActivity2.this, getString(R.string.lbl_thank_you), getString(R.string.msg_dialog_confirm_order_soon));
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
@@ -756,7 +756,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
                             "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
 
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialog(ShoppingCartActivity2.this, getString(R.string.lbl_thank_you), getString(R.string.msg_dialog_confirm_order_soon));
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
@@ -823,7 +823,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
                             "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
 
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialog(ShoppingCartActivity2.this, getString(R.string.lbl_thank_you), getString(R.string.msg_dialog_confirm_order_soon));
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
@@ -892,7 +892,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
                             "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
 
-                    showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
+                    showAlertDialog(ShoppingCartActivity2.this, getString(R.string.lbl_thank_you), getString(R.string.msg_dialog_confirm_order_soon));
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                     dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
@@ -962,7 +962,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         }
                     } else {
 //                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
-                        new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", "You have a empty cart", false);
+                        new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", getString(R.string.msg_dialog_empty_cart), false);
                     }
                 } else {
                     String message = prefManager.getSharedValue(AppConstant.MESSAGE);
@@ -1081,10 +1081,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         }
         else if(resultCode==3){
-            showAlertDialog(ShoppingCartActivity2.this, "Message", "There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.");
+            showAlertDialog(ShoppingCartActivity2.this, "Message",getString(R.string.msg_dialog_problem_in_processing_your_payment));
         }
         else {
-            showAlertDialog(ShoppingCartActivity2.this, "Message", "There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.");
+            showAlertDialog(ShoppingCartActivity2.this, "Message", getString(R.string.msg_dialog_problem_in_processing_your_payment));
         }
     }
 
@@ -1199,11 +1199,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         note = (TextView) redeemDialog.findViewById(R.id.note);
 
                         if (loyalityModel.getLoyalityPoints().isEmpty()) {
-                            customerPts.setText("You have NIL points.");
+                            customerPts.setText(getString(R.string.lbl_youhave_nil_points));
                             loyalityPoints = Double.parseDouble(loyalityModel.getLoyalityPoints());
                         } else {
                             loyalityPoints = Double.parseDouble(loyalityModel.getLoyalityPoints());
-                            customerPts.setText("You have " + loyalityModel.getLoyalityPoints() + " points.");
+                            customerPts.setText(getString(R.string.lbl_youhave)+" " + loyalityModel.getLoyalityPoints() + " "+getString(R.string.lbl_points));
                         }
 
 
@@ -1217,7 +1217,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     } else {
                         ProgressDialogUtil.hideProgressDialog();
-                        Toast.makeText(ShoppingCartActivity2.this, "There are no coupons to redeem.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShoppingCartActivity2.this, getString(R.string.msg_toast_no_coupons), Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -1305,7 +1305,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             discountVal.setText("0");
 
             if (loyalityStatus.equalsIgnoreCase("0")) {
-                applyCoupon_1.setText("Apply Coupon");
+                applyCoupon_1.setText(getString(R.string.str_applycopon));
                 applyCoupon_1.setTag("apply");
                 editCoupon_1.setText("");
             } else if (loyalityStatus.equalsIgnoreCase("1")) {
@@ -1313,10 +1313,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 editCoupon.setVisibility(View.GONE);
                 applyOffer.setVisibility(View.VISIBLE);
                 redeemPoints.setVisibility(View.VISIBLE);
-                applyCoupon.setText("Apply Coupon");
+                applyCoupon.setText(getString(R.string.str_applycopon));
                 applyCoupon.setTag("apply");
                 editCoupon.setText("");
-                applyCoupon_1.setText("Apply Coupon");
+                applyCoupon_1.setText(getString(R.string.str_applycopon));
                 applyCoupon_1.setTag("apply");
                 editCoupon_1.setText("");
             }
@@ -1359,12 +1359,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             discountVal.setText(String.valueOf(df.format(discount)));
 
             if (loyalityStatus.equalsIgnoreCase("0")) {
-                applyCoupon_1.setText("Remove Coupon");
+                applyCoupon_1.setText(getString(R.string.str_remove_copon));
                 applyCoupon_1.setTag("remove");
             } else if (loyalityStatus.equalsIgnoreCase("1")) {
-                applyCoupon.setText("Remove Coupon");
+                applyCoupon.setText(getString(R.string.str_remove_copon));
                 applyCoupon.setTag("remove");
-                applyCoupon_1.setText("Remove Coupon");
+                applyCoupon_1.setText(getString(R.string.str_remove_copon));
                 applyCoupon_1.setTag("remove");
                 applyCoupon.setVisibility(View.VISIBLE);
                 editCoupon.setVisibility(View.VISIBLE);
@@ -1375,7 +1375,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             callNetworkForTaxCalculations();
 
         } else {
-            Toast.makeText(ShoppingCartActivity2.this, "This offer is valid for minimum price order."
+            Toast.makeText(ShoppingCartActivity2.this, getString(R.string.str_min_price_order)
                     + offerMinimumPrice, Toast.LENGTH_SHORT).show();
         }
 
@@ -1414,7 +1414,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         DecimalFormat df = new DecimalFormat("###.##");
         total.setText(String.valueOf(df.format(finalPrice)));
         discountVal.setText(String.valueOf(df.format(discount)));
-        applyCoupon.setText("Remove Coupon");
+        applyCoupon.setText(getString(R.string.str_remove_copon));
         applyCoupon.setTag("remove");
         applyCoupon.setVisibility(View.VISIBLE);
         editCoupon.setVisibility(View.VISIBLE);
@@ -1564,7 +1564,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         if(validAllCouponsModel.getData()!=null){
                             final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                             dialogHandler.setDialog("Message", validAllCouponsModel.getMessage());
-                            dialogHandler.setPostiveButton("Details", true)
+                            dialogHandler.setPostiveButton(getString(R.string.layout_order_detail_details), true)
                                     .setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -1587,7 +1587,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                         }
                                     });
 
-                            dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                            dialogHandler.setNegativeButton(getString(R.string.str_cancel), true).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     dialogHandler.dismiss();
@@ -1613,7 +1613,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
         } else {
-            Toast.makeText(ShoppingCartActivity2.this, "Coupon Code Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShoppingCartActivity2.this, getString(R.string.lbl_empty_cpons), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -1725,7 +1725,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             }
         });
 
-        dialogHandler.setNegativeButton("Guide Me", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setNegativeButton(getString(R.string.lbl_guide_me), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -1744,7 +1744,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                 String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -1765,7 +1765,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                             String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -2161,7 +2161,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             if(data.getMinimumOrderAmount().equalsIgnoreCase("0")){
                 holder.minValue.setText(""+data.getName());
             }else {
-                holder.minValue.setText("Min Order " + data.getMinimumOrderAmount());
+                holder.minValue.setText(getString(R.string.layout_min_orders)+" " + data.getMinimumOrderAmount());
             }
             double totalPrice = getTotalPrice();
             double minimumCharges = Double.parseDouble(data.getMinimumOrderAmount());
@@ -2169,7 +2169,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.applyBtn.setVisibility(View.GONE);
                 holder.needTxt.setVisibility(View.VISIBLE);
 
-                holder.needTxt.setText("You have " + String.format("%.2f", (minimumCharges - totalPrice)) + " amount short for this offer.");
+                holder.needTxt.setText(getString(R.string.lbl_youhave)+" " + String.format("%.2f", (minimumCharges - totalPrice)) + " "+getString(R.string.lbl_amount_short_for_offer));
             } else {
                 holder.applyBtn.setVisibility(View.VISIBLE);
                 holder.needTxt.setVisibility(View.GONE);
@@ -2260,7 +2260,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             if (points >= loyalityPoints) {
                 holder.redeemNow.setVisibility(View.GONE);
                 holder.needTxt.setVisibility(View.VISIBLE);
-                holder.needTxt.setText("You need " + String.format("%.2f", (points - loyalityPoints)) + " more points.");
+                holder.needTxt.setText(getString(R.string.lbl_you_need)+" " + String.format("%.2f", (points - loyalityPoints)) + " "+getString(R.string.lbl_more_points));
 
             } else {
                 holder.redeemNow.setVisibility(View.VISIBLE);

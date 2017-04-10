@@ -203,7 +203,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                     setupListProduct(getSubCategory.getData());
                 } else {
                     ProgressDialogUtil.hideProgressDialog();
-                    Toast.makeText(SearchActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this, getString(R.string.str_no_data_found), Toast.LENGTH_SHORT).show();
                 }
             }
 

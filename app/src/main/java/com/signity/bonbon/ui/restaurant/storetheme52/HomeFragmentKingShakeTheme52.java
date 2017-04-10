@@ -255,7 +255,7 @@ public class HomeFragmentKingShakeTheme52 extends Fragment implements View.OnCli
                     startActivity(callINtent);
                     AnimUtil.slideFromRightAnim(getActivity());
                 } else {
-                    Toast.makeText(getActivity(), "Your device is not supporting any calling feature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_toast_calling_not_supported), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.relMyCart:
@@ -279,7 +279,7 @@ public class HomeFragmentKingShakeTheme52 extends Fragment implements View.OnCli
         final DialogHandler dialogHandler = new DialogHandler(context);
 
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true)
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -322,7 +322,7 @@ public class HomeFragmentKingShakeTheme52 extends Fragment implements View.OnCli
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getString(R.string.msg_dialog_error), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -412,7 +412,7 @@ public class HomeFragmentKingShakeTheme52 extends Fragment implements View.OnCli
                                             startActivity(i);
                                             AnimUtil.slideFromRightAnim(getActivity());
                                         } else {
-                                            showAlertDialog(getActivity(), "Alert", "No Subcategories exist.");
+                                            showAlertDialog(getActivity(), getString(R.string.msg_dialog_alert), getString(R.string.msg_dialog_no_subcategories));
                                         }
                                     }
                                 }

@@ -185,12 +185,12 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
                         final android.content.ClipData clipData = android.content.ClipData
                                 .newPlainText("text label", holder.codeVal.getText().toString());
                         clipboardManager.setPrimaryClip(clipData);
-                        Toast.makeText(getActivity(), "Copied:" + holder.codeVal.getText().toString(), Toast.LENGTH_SHORT);
+                        Toast.makeText(getActivity(), getString(R.string.str_copied)+" " + holder.codeVal.getText().toString(), Toast.LENGTH_SHORT);
                     } else {
                         final android.text.ClipboardManager clipboardManager = (android.text.ClipboardManager) context
                                 .getSystemService(Context.CLIPBOARD_SERVICE);
                         clipboardManager.setText(holder.codeVal.getText().toString());
-                        Toast.makeText(getActivity(), "Copied:" + holder.codeVal.getText().toString(), Toast.LENGTH_SHORT);
+                        Toast.makeText(getActivity(), getString(R.string.str_copied)+" " + holder.codeVal.getText().toString(), Toast.LENGTH_SHORT);
                     }
                     return true;
                 }

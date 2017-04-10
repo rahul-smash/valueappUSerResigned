@@ -359,11 +359,11 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
 
             if (list.getStatus().equals("0")) {
-                holder.status.setText("Pending");
+                holder.status.setText(getString(R.string.str_pending));
             } else if (list.getStatus().equals("1")) {
-                holder.status.setText("Approved");
+                holder.status.setText(getString(R.string.str_approved));
             } else if (list.getStatus().equals("2")) {
-                holder.status.setText("Rejected");
+                holder.status.setText(getString(R.string.str_rejected));
             }  else {
                 holder.status.setVisibility(View.GONE);
             }

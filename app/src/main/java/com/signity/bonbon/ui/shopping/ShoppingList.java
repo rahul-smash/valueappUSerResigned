@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
@@ -108,10 +109,10 @@ public class ShoppingList extends Fragment implements View.OnClickListener {
             case com.signity.bonbon.R.id.add_list:
                 String name = searchBar.getText().toString().trim();
                 if (name.isEmpty()) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Add List to Add Item", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.lbl_add_items), Toast.LENGTH_SHORT).show();
                 } else {
                     if (name.equalsIgnoreCase(temp)) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Item Already Added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.lbl_already_items_added), Toast.LENGTH_SHORT).show();
                     } else {
                         db.addContact(name);
                         viewList = db.getAllContacts();

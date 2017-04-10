@@ -114,13 +114,13 @@ public class LoginFragmentEmail extends Fragment {
         String referCode = edtReferal.getText().toString().trim();
 
         if (nameTxt.isEmpty()) {
-            Toast.makeText(getActivity(), "Please Enter Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.lbl_entername), Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(!emailtxt.isEmpty()){
             if(!checkValidEmail(emailtxt.trim())){
-                Toast.makeText(getActivity(), "Please enter valid email.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.msg_toast_enter_email), Toast.LENGTH_SHORT).show();
                 return;
             }
         }

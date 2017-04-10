@@ -174,17 +174,17 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
             final OrderHistoryModel orderHistoryModel = liseOrderHistoryModel.get(position);
 
             if (orderHistoryModel.getStatus().equals("0")) {
-                holder.status.setText("Pending");
+                holder.status.setText(getString(R.string.str_pending));
             } else if (orderHistoryModel.getStatus().equals("1")) {
-                holder.status.setText("Approved");
+                holder.status.setText(getString(R.string.str_approved));
             } else if (orderHistoryModel.getStatus().equals("2")) {
-                holder.status.setText("Rejected");
+                holder.status.setText(getString(R.string.str_rejected));
             } else if (orderHistoryModel.getStatus().equals("3") || orderHistoryModel.getStatus().equals("6")) {
-                holder.status.setText("Cancelled");
+                holder.status.setText(getString(R.string.str_cancelled));
             } else if (orderHistoryModel.getStatus().equals("4")) {
-                holder.status.setText("Shipped");
+                holder.status.setText(getString(R.string.str_shipped));
             } else if (orderHistoryModel.getStatus().equals("5")) {
-                holder.status.setText("Delivered");
+                holder.status.setText(getString(R.string.str_delivered));
             } else {
                 holder.status.setVisibility(View.GONE);
             }
@@ -224,8 +224,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                             orderHistoryModel.getStatus().equals("1")) {
                         confirmCancelOrderDialog(orderHistoryModel.getOrderId());
                     } else {
-                        String message = "Your order is already " + holder.status.getText().toString();
-                        showAlertDialog(context, "Info", message, 0);
+                        String message = getString(R.string.str_order_alrady)+" " + holder.status.getText().toString();
+                        showAlertDialog(context, getString(R.string.str_info), message, 0);
                     }
                 }
             });
@@ -307,14 +307,14 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
 
             if (totalOrderItem != addedtoCartItem) {
                 if (addedtoCartItem == 0) {
-                    message = "Sorry, this order can't be processed. Please make a fresh order.";
+                    message = getString(R.string.msg_toast_make_fresh_order);
                 } else {
-                    message = "Some of the items are not available to add to your cart. Please check your cart to proceed";
+                    message = getString(R.string.msg_toast_items_not_availble);
                 }
             } else {
-                message = "Your order is successfully added to your cart. Please check your cart to proceed";
+                message = getString(R.string.msg_toast_order_added_to_cart);
             }
-            showAlertDialog(getActivity(), "Re Order", message, addedtoCartItem);
+            showAlertDialog(getActivity(), getString(R.string.msg_toast_reorder), message, addedtoCartItem);
         }
     }
 
@@ -358,7 +358,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                 ProgressDialogUtil.hideProgressDialog();
                 no_record.setVisibility(View.VISIBLE);
                 order_history_list.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "No Data found.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.str_no_data_found), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -366,15 +366,15 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void confirmCancelOrderDialog(final String orderId) {
 
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setDialog("Cancel Order", getResources().getString(R.string.cancel_order_txt));
-        dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setDialog(getString(R.string.str_cancel_order), getResources().getString(R.string.cancel_order_txt));
+        dialogHandler.setPostiveButton(getString(R.string.layout_notification_detail_yes), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cancelOrder(orderId);
                 dialogHandler.dismiss();
             }
         });
-        dialogHandler.setNegativeButton("No", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setNegativeButton(getString(R.string.layout_notification_detail_no), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -385,15 +385,15 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void confirmReorderOrderDialog(final OrderHistoryModel orderHistoryModel) {
 
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setDialog("Re Order", "Do you want to reorder these items?");
-        dialogHandler.setPostiveButton("Yes", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setDialog(getString(R.string.str_reorder), getString(R.string.layout_reorder_items));
+        dialogHandler.setPostiveButton(getString(R.string.layout_notification_detail_yes), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 reOrder(orderHistoryModel);
                 dialogHandler.dismiss();
             }
         });
-        dialogHandler.setNegativeButton("No", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setNegativeButton(getString(R.string.layout_notification_detail_no), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -405,7 +405,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
     public void showAlertDialog(Context context, String title, String message, final int addedItem) {
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (addedItem != 0) {

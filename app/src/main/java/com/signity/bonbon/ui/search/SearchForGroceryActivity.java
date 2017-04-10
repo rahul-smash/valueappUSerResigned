@@ -214,12 +214,12 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
                     if(getSubCategory.getData().size()!=0){
                         setupListProduct(getSubCategory.getData());
                     }else {
-                        Toast.makeText(SearchForGroceryActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchForGroceryActivity.this, getString(R.string.str_no_data_found), Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
                     ProgressDialogUtil.hideProgressDialog();
-                    Toast.makeText(SearchForGroceryActivity.this, "No Data found.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchForGroceryActivity.this, getString(R.string.str_no_data_found), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -575,20 +575,20 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
     private void addToShopList(final String title) {
         final DialogHandler dialogHandler = new DialogHandler(SearchForGroceryActivity.this);
 
-        dialogHandler.setDialog("Confirmation", "Are you sure to add this product to shopping list");
-        dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setDialog(getString(R.string.msg_dialog_confirmation), getString(R.string.msg_dialog_add_product_to_shoping_list));
+        dialogHandler.setPostiveButton(getString(R.string.str_add), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShoppingListObject att = new ShoppingListObject();
                 db.addContact(title);
                 shoppingList = db.getAllContacts();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(SearchForGroceryActivity.this, "Added to Shopping List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchForGroceryActivity.this, getString(R.string.str_added_shopping_list), Toast.LENGTH_SHORT).show();
                 dialogHandler.dismiss();
 
             }
         });
-        dialogHandler.setNegativeButton("Cancel", true)
+        dialogHandler.setNegativeButton(getString(R.string.str_cancel), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -601,7 +601,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
 
     private void alreadyAddedToShopList(){
         DialogHandler dialogHandler = new DialogHandler(SearchForGroceryActivity.this);
-        dialogHandler.setdialogForFinish("Message", "Already added to the list.", false);
+        dialogHandler.setdialogForFinish("Message", getString(R.string.str_already_added_to_list), false);
     }
     public String unescapeJavaString(String st) {
 

@@ -84,8 +84,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton search, shopingcart;
     Button menu, citySelect;
     ImageView profilePic;
-    String[] labels = {"Home", "My Profile", "Delivery Address", "My Orders",
-            "Book Now", "My Favorites", "About Us", "Share", "Loyalty Points", "Log In"};
+    String[] labels = {getString(R.string.lbl_home), getString(R.string.lbl_myprofile),
+            getString(R.string.lbl_deliveryaddress),getString(R.string.lbl_myorders),
+            getString(R.string.lbl_booknow), getString(R.string.lbl_myfavs),
+            getString(R.string.lbl_aboutus),getString(R.string.lbl_share),
+            getString(R.string.lbl_loyalitypoints), getString(R.string.lbl_login)};
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
             R.drawable.order_icon,
             R.drawable.my_shopping_list_icon, R.drawable.my_fav_icon,
@@ -190,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
                 if(userId.isEmpty()){
                     prefManager.setReferEarnPopupCheck(false);
-                    String msg="Kindly Login with Referral Code for "+store.getStoreName()+" and Earn Free Coupons.";
-                    showReferAndEarnDialog(MainActivity.this, "Enter Referral Code", msg);
+                    String msg=getString(R.string.msg_dialog_login_ref_msg)+" "+store.getStoreName()+" "+getString(R.string.msg_dialog_earn_copons_msg);
+                    showReferAndEarnDialog(MainActivity.this, getString(R.string.str_title_refferal), msg);
                 }
             }
         }
@@ -331,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (!phone.isEmpty()) {
             user.setText(phone);
         } else {
-            user.setText("Guest");
+            user.setText(getString(R.string.str_welcome_guest));
         }
     }
 
@@ -416,7 +419,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     title.setVisibility(View.VISIBLE);
                     citySelect.setVisibility(View.GONE);
-                    title.setText("My Profile");
+                    title.setText(getString(R.string.lbl_myprofile));
                     fragment = new Profile();
                     replace(fragment);
                 }
@@ -449,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     title.setVisibility(View.VISIBLE);
                     citySelect.setVisibility(View.GONE);
-                    title.setText("My Orders");
+                    title.setText(getString(R.string.lbl_myorders));
                     fragment = new OrderHistory();
                     replace(fragment);
                 }
@@ -464,21 +467,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 5:
                 title.setVisibility(View.VISIBLE);
                 citySelect.setVisibility(View.GONE);
-                title.setText("My Favorites");
+                title.setText(getString(R.string.lbl_myfavs));
                 replace(AppController.getInstance().getViewController().getFavouritesFragment());
                 break;
 
             case 6:
                 title.setVisibility(View.VISIBLE);
                 citySelect.setVisibility(View.GONE);
-                title.setText("About Us");
+                title.setText(getString(R.string.lbl_aboutus));
                 replace(new AboutUsFragment());
                 break;
             case 7:
                 if (prefManager.isReferEarnFn() && !userId.isEmpty()) {
                     title.setVisibility(View.VISIBLE);
                     citySelect.setVisibility(View.GONE);
-                    title.setText("Refer N Earn");
+                    title.setText(getString(R.string.lbl_refer_msg));
                     replace(new ShareNEarnFragment());
                 } else {
                     String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
@@ -492,7 +495,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_TEXT, shareContent);
                     intent.putExtra(Intent.EXTRA_SUBJECT, store.getStoreName());
-                    startActivity(Intent.createChooser(intent, "Share with"));
+                    startActivity(Intent.createChooser(intent, getString(R.string.lbl_share_with)));
                 }
 
                 break;
@@ -523,7 +526,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         title.setVisibility(View.VISIBLE);
                         citySelect.setVisibility(View.GONE);
-                        title.setText("Loyalty Points");
+                        title.setText(getString(R.string.lbl_loyalitypoints));
                         fragment = new LoyalityFragment();
                         replace(fragment);
                     }
@@ -556,12 +559,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (requestCode) {
             case REQUESTCODE_FOR_SUCESS_LOGIN:
                 if (resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(context, "Login Successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getString(R.string.lbl_login_msgs), Toast.LENGTH_SHORT).show();
                     getPreferencesValues();
                     updateUserName();
                     adapter.notifyDataSetChanged();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
-                    Toast.makeText(context, "Login Failed or Cancel", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getString(R.string.lbl_login_error_msg), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -573,7 +576,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         prefManager.clearSharedValue(AppConstant.PHONE);
         prefManager.clearSharedValue(AppConstant.NAME);
         prefManager.clearSharedValue(AppConstant.EMAIL);
-        user.setText("Guest");
+        user.setText(getString(R.string.str_welcome_guest));
         userId = prefManager.getSharedValue(AppConstant.ID);
         appDb.deleteCartElement();
 
@@ -836,10 +839,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (forceDownloadModel.getForceDownload() != null) {
             final DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
-            dialogHandler.setDialog("Latest Update", forceDownloadModel.getForceDownloadMessage());
+            dialogHandler.setDialog(getString(R.string.lbl_latest_update), forceDownloadModel.getForceDownloadMessage());
             if (forceDownloadModel.getForceDownload().equalsIgnoreCase("1")) {
                 dialogHandler.setCancelable(false);
-                dialogHandler.setPostiveButton("Update", true).setOnClickListener(new View.OnClickListener() {
+                dialogHandler.setPostiveButton(getString(R.string.lbl_update), true).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         openPlayStoreLink();
@@ -848,13 +851,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 });
             } else {
-                dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+                dialogHandler.setNegativeButton(getString(R.string.str_cancel), true).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialogHandler.dismiss();
                     }
                 });
-                dialogHandler.setPostiveButton("Update", true).setOnClickListener(new View.OnClickListener() {
+                dialogHandler.setPostiveButton(getString(R.string.lbl_update), true).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         openPlayStoreLink();

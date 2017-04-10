@@ -106,7 +106,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             areaID = object.getAreaId();
             cityId = object.getCityId() != null ? object.getCityId() : "";
             areaName = object.getAreaName();
-            edit_address.setText("Edit address");
+            edit_address.setText(getString(R.string.lbl_edit_address));
 
             city_name.setText(object.getCity() != null ? object.getCity() : "");
             area_name.setText(object.getAreaName() != null ? object.getAreaName() : "");
@@ -117,7 +117,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             zip_code.setText(object.getZipcode().toString());
 
         } else if (action.equalsIgnoreCase("ADD")) {
-            edit_address.setText("Add address");
+            edit_address.setText(getString(R.string.lbl_add_address));
         }
 
         getDeliveryAreaSwitchesStatus();
@@ -128,17 +128,17 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                                              if (action.equalsIgnoreCase("edit")) {
 
                                                  if (address_line1.getText().toString().isEmpty()) {
-                                                     address_line1.setError("Address Required");
+                                                     address_line1.setError(getString(R.string.lbl_required_address));
                                                  } else {
                                                      updateDeliveryAddress();
                                                  }
 
                                              } else {
                                                  if (address_line1.getText().toString().isEmpty()) {
-                                                     address_line1.setError("Address Required");
+                                                     address_line1.setError(getString(R.string.lbl_required_address));
                                                  } else if (areaID.isEmpty()) {
-                                                     city_name.setError("City");
-                                                     area_name.setError("Area");
+                                                     city_name.setError(getString(R.string.lbl_city));
+                                                     area_name.setError(getString(R.string.lbl_area));
                                                  } else {
                                                      addNewDeliveryAddress();
                                                  }
@@ -372,7 +372,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                         intentState.putExtra("id", "");
                         startActivityForResult(intentState, STATE);
                     } else {
-                        Toast.makeText(getActivity(), "Select Country First", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.msg_toast_select_country), Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
@@ -399,7 +399,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                         intentCity.putExtra("id", "");
                         startActivityForResult(intentCity, CITY);
                     } else {
-                        Toast.makeText(getActivity(), "Select State First", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.msg_toast_select_state), Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
@@ -433,7 +433,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                             startActivityForResult(intentArea, AREA);
                         }
                     } else {
-                        Toast.makeText(getActivity(), "Select City First", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.msg_toast_select_city), Toast.LENGTH_SHORT).show();
                     }
 
                 } else {

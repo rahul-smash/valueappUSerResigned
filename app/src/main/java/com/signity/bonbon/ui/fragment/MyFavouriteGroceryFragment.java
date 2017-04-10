@@ -472,20 +472,20 @@ public class MyFavouriteGroceryFragment extends Fragment {
     private void addToShopList(final String title) {
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
 
-        dialogHandler.setDialog("Confirmation", "Are you sure to add this product to shopping list");
-        dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setDialog(getString(R.string.msg_dialog_confirmation), "Are you sure to add this product to shopping list");
+        dialogHandler.setPostiveButton(getString(R.string.str_add), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShoppingListObject att = new ShoppingListObject();
                 db.addContact(title);
                 shoppingList = db.getAllContacts();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(), "Added to Shopping List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.str_added_shopping_list), Toast.LENGTH_SHORT).show();
                 dialogHandler.dismiss();
 
             }
         });
-        dialogHandler.setNegativeButton("Cancel", true)
+        dialogHandler.setNegativeButton(getString(R.string.str_cancel), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -498,7 +498,7 @@ public class MyFavouriteGroceryFragment extends Fragment {
 
     private void alreadyAddedToShopList(){
         DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setdialogForFinish("Message", "Already added to the list.", false);
+        dialogHandler.setdialogForFinish("Message", getString(R.string.str_already_added), false);
     }
     public String unescapeJavaString(String st) {
 

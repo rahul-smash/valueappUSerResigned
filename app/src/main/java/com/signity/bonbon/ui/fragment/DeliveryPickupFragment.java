@@ -120,7 +120,7 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.buttonAreaName:
                 if (cityId.isEmpty()) {
-                    Toast.makeText(getActivity(), "Select City First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_toast_select_city), Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intentArea = new Intent(getActivity(),
                             CityAreaActivitiy.class);
@@ -216,7 +216,7 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
 
             private void alertDailogForNoPickup() {
                 DialogHandler dialog = new DialogHandler(getActivity());
-                dialog.setdialogForFinish("Message", "Sorry no pickup location available for above area", false);
+                dialog.setdialogForFinish("Message", getString(R.string.lbl_no_pickup_location), false);
             }
         });
     }

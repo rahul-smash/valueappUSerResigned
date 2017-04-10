@@ -80,6 +80,18 @@
     <string name="str_dining">Dining</string>
     <string name="str_pickup">Pickup</string>
     <string name="str_payment_option_message">Please select the payment mode</string>
+    <string name="str_already_added">Already added to the list</string>
+    <string name="str_procedd_to_checkout">Proceed to checkout, you have</string>
+    <string name="str_items_in_cart">item in your cart</string>
+    <string name="str_copied">Copied</string>
+    <string name="str_pending">Pending</string>
+    <string name="str_approved">Approved</string>
+    <string name="str_rejected">Rejected</string>
+    <string name="str_cancelled">Cancelled</string>
+    <string name="str_shipped">Shipped</string>
+    <string name="str_delivered">Delivered</string>
+    <string name="str_order_alrady">Your order is already</string>
+    <string name="str_info">Info</string>
 
     <!--Internationalization by Pardeep-->
     <string name="str_shopping_list_item">List Name - 01</string>
@@ -107,6 +119,7 @@
 
 
     <string name="str_no_data_found">No Data found.</string>
+    <string name="str_cancel_order">Cancel Order</string>
     <string name="str_booknow_fragment_enter_name">Enter Name</string>
     <string name="str_booknow_fragment_enter_mobile">Enter Mobile Number</string>
     <string name="str_booknow_fragment_mobile_valiation">Mobile No. should be of 10 digits</string>
@@ -139,6 +152,8 @@
     <string name="layout_order_detail_delivery_shiping_charge">Shipping Charges</string>
 
     <string name="layout_order_detail_discount">Discount</string>
+    <string name="layout_reorder_items">Do you want to reorder these items?</string>
+    <string name="layout_min_orders">Min Order</string>
 
     <string name="layout_order_detail_details">Details</string>
     <string name="layout_product_view_price">Price:</string>
@@ -207,6 +222,7 @@
     <string name="str_lbl_mobile_length">10 digit phone number</string>
     <string name="str_lbl_next">NEXT</string>
     <string name="str_lbl_otp_msgs">Please enter your One Time Password. We have sent the same to your number</string>
+    <string name="str_lbl_otp_msg">Please enter your One Time Password.</string>
     <string name="str_lbl_otp">OTP</string>
     <string name="str_lbl_availble_points">AVAILABLE POINTS</string>
     <string name="str_lbl_login">Log In</string>
@@ -228,6 +244,7 @@
     <string name="str_lbl_offers">OFFERS</string>
     <string name="str_lbl_contact">CONTACT</string>
     <string name="str_lbl_mycart">MY CART</string>
+    <string name="str_lbl_congrats_you_saved">Congratulations you saved</string>
     <string name="str_lbl_shopnow">Shop Now</string>
     <string name="str_lbl_shoping">SHOPPING</string>
     <string name="str_lbl_comingsoon">(Coming Soon)</string>
@@ -265,10 +282,14 @@
     <string name="str_cancel">Cancel</string>
     <string name="str_name">NAME</string>
     <string name="str_add">Add</string>
+    <string name="str_added_shopping_list">Added to Shopping List</string>
+    <string name="str_already_added_to_list">Already added to the list.</string>
     <string name="str_emptycart">Empty Cart</string>
     <string name="str_placeorder">Place Order</string>
     <string name="str_addditems">Add unsearched items or notes</string>
     <string name="str_applycopon">Apply Coupon</string>
+    <string name="str_remove_copon">Remove Coupon</string>
+    <string name="str_min_price_order">This offer is valid for minimum price order.</string>
     <string name="str_tax">*Tax extra if applicable.</string>
     <string name="str_avalble_offers">Available Offers</string>
     <string name="str_conformorder">Confirm Order</string>
@@ -287,12 +308,101 @@
     <string name="str_lbl_default_zero">0</string>
     <string name="str_layout_shopcart_item_txt_quanty">QTY</string>
     <string name="str_lbl_default_one">1</string>
+    <string name="str_lbl_get_directions">Get Directions</string>
+    <string name="str_lbl_dilevery_pickup">Delivery Pickup</string>
 
     <string name="lbl_title_book_now">Book Now</string>
     <string name="lbl_title_shop_listing">Shopping List</string>
+    <string name="lbl_edit_address">Edit address</string>
+    <string name="lbl_add_address">Add address</string>
+    <string name="lbl_required_address">Address Required</string>
+    <string name="lbl_city">City</string>
+    <string name="lbl_area">Area</string>
+    <string name="lbl_enter_message">Enter Your Message</string>
+    <string name="lbl_contact_us">Contact Us</string>
+    <string name="lbl_you_currently">You are currently</string>
+    <string name="lbl_you_add_items_tocart">short, please add few more items to your cart.</string>
+    <string name="lbl_you_select_payment">Select Payment Method</string>
+    <string name="lbl_you_online">Online</string>
+    <string name="lbl_select_address">Please select atleast one address</string>
+    <string name="lbl_delete_address">Are you sure you want to delete this address?</string>
+    <string name="lbl_no_pickup_location">Sorry no pickup location available for above area</string>
+    <string name="lbl_entername">Please Enter Name</string>
+    <string name="lbl_off">OFF</string>
+    <string name="lbl_no_response">No response</string>
+    <string name="lbl_home">Home</string>
+    <string name="lbl_myprofile">My Profile</string>
+    <string name="lbl_deliveryaddress">Delivery Address</string>
+    <string name="lbl_myorders">My Orders</string>
+    <string name="lbl_booknow">Book Now</string>
+    <string name="lbl_myfavs">My Favorites</string>
+    <string name="lbl_aboutus">About Us</string>
+    <string name="lbl_share">Share</string>
+    <string name="lbl_loyalitypoints">Loyalty Points</string>
+    <string name="lbl_login">Log In</string>
+    <string name="lbl_share_with">Share with</string>
+    <string name="lbl_refer_msg">Refer N Earn</string>
+    <string name="lbl_login_msgs">Login Successfully!</string>
+    <string name="lbl_login_error_msg">Login Failed or Cancel</string>
+    <string name="lbl_latest_update">Latest Update</string>
+    <string name="lbl_update">Update</string>
+    <string name="lbl_categories">Categories</string>
+    <string name="lbl_no_categories">No Category exists.</string>
+    <string name="lbl_update_name">Please Update Name</string>
+    <string name="lbl_login_to_access">Login to access your Code.</string>
+    <string name="lbl_thank_you">Thank you!</string>
+    <string name="lbl_youhave_nil_points">You have NIL points.</string>
+    <string name="lbl_youhave">You have</string>
+    <string name="lbl_you_need">You need</string>
+    <string name="lbl_points">points</string>
+    <string name="lbl_empty_cpons">Coupon Code Empty</string>
+    <string name="lbl_guide_me">Guide Me</string>
+    <string name="lbl_amount_short_for_offer">amount short for this offer.</string>
+    <string name="lbl_more_points">more points.</string>
+    <string name="lbl_add_items">Add List to Add Item</string>
+    <string name="lbl_already_items_added">Item Already Added</string>
 
     <!---->
     <string name="msg_toast_submit_query">Thank you for posting your query</string>
+    <string name="msg_toast_plz_enter_name">Please Enter your name</string>
+    <string name="msg_toast_plz_enter_no">Please Enter your Number</string>
+    <string name="msg_toast_plz_enter_msg">Please Enter your Message</string>
+    <string name="msg_toast_no_notavailable">Number not available</string>
+    <string name="msg_toast_reorder">Re Order</string>
+    <string name="msg_toast_order_added_to_cart">Your order is successfully added to your cart. Please check your cart to proceed</string>
+    <string name="msg_toast_items_not_availble">Some of the items are not available to add to your cart. Please check your cart to proceed</string>
+    <string name="msg_toast_make_fresh_order">Sorry, this order can't be processed. Please make a fresh order.</string>
+    <string name="msg_toast_no_coupons">There are no coupons to redeem.</string>
+    <string name="msg_toast_enter_email">Please enter valid email.</string>
+    <string name="msg_toast_google_play_error">Google Play Services is not available:</string>
+    <string name="msg_toast_map_error">Sorry! unable to create maps</string>
+    <string name="msg_toast_select_country">Select Country First</string>
+    <string name="msg_toast_select_state">Select State First</string>
+    <string name="msg_toast_select_city">Select City First</string>
+    <string name="msg_toast_failed_to_post">Failed to post your query Message:</string>
+    <string name="msg_toast_add_item_to_cart">Please add items to your cart.</string>
+    <string name="msg_toast_calling_not_supported">Your device is not supporting any calling feature</string>
+    <string name="msg_toast_gps_permission">GPS permission allows us to access location data. Please allow in App Settings for additional functionality.</string>
+
+    <!---->
+    <string name="msg_dialog_submitted_succesfuly">Your request is successfully submitted</string>
+    <string name="msg_dialog_error_msg">Sorry we are unable to submit your request. Please try later</string>
+    <string name="msg_dialog_no_subcategories">No Subcategories exists!</string>
+    <string name="msg_dialog_alert">Alert</string>
+    <string name="msg_dialog_confirmation">Confirmation</string>
+    <string name="msg_dialog_there_will_be">There will be</string>
+    <string name="msg_dialog_error">Error</string>
+    <string name="msg_dialog_shiping_charges">Shipping Charge for this order.\n</string>
+    <string name="msg_dialog_not_able_to_deliver">Sorry we do not deliver in this area.</string>
+    <string name="msg_dialog_login_ref_msg">Kindly Login with Referral Code for</string>
+    <string name="msg_dialog_earn_copons_msg">and Earn Free Coupons.</string>
+    <string name="msg_dialog_add_items_to_list">Do you want to add this item to your list?</string>
+    <string name="msg_dialog_add_product_to_shoping_list">Are you sure to add this product to shopping list</string>
+    <string name="msg_dialog_confirm_order_soon">Thank you for placing the order. We will confirm your order soon.</string>
+    <string name="msg_dialog_empty_cart">You have a empty cart</string>
+    <string name="msg_dialog_internet_connection">Internet Connection</string>
+    <string name="msg_dialog_internet_connection_msg">Internet connection is not available</string>
+    <string name="msg_dialog_problem_in_processing_your_payment">There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.</string>
 
 
 </resources>

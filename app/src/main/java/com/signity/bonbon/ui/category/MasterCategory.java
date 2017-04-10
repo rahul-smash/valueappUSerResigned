@@ -96,7 +96,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
         btnSearch.setOnClickListener(this);
         title = (TextView) findViewById(R.id.textTitle);
         noRecord = (TextView) findViewById(R.id.no_record);
-        title.setText("Categories");
+        title.setText(getString(R.string.lbl_categories));
         title.setTypeface(_ProximaNovaLight);
         setUpRecylerView();
 
@@ -138,7 +138,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
 
                 }
                 else {
-                    showAlertDialog(MasterCategory.this, "Message", "No Category exists.");
+                    showAlertDialog(MasterCategory.this, "Message", getString(R.string.lbl_no_categories));
                 }
 
             }
@@ -264,7 +264,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
         final DialogHandler dialogHandler = new DialogHandler(context);
 
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true)
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

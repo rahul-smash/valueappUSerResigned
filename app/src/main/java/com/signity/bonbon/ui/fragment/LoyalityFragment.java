@@ -125,7 +125,7 @@ public class LoyalityFragment extends Fragment {
                     }
                     else {
                         ProgressDialogUtil.hideProgressDialog();
-                        Toast.makeText(getActivity(), "There are no coupons to redeem.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.msg_toast_no_coupons), Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -201,7 +201,7 @@ public class LoyalityFragment extends Fragment {
 
             try {
 
-                holder.amountTxt.setText(""+pointsList.get(position).getAmount()+" OFF");
+                holder.amountTxt.setText(""+pointsList.get(position).getAmount()+" "+getString(R.string.lbl_off));
             }catch (Exception e){
 
             }

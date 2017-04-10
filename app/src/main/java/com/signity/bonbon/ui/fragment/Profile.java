@@ -110,7 +110,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
 
         if (nameTxt.isEmpty()) {
-            Toast.makeText(getActivity(), "Please Update Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), getString(R.string.lbl_update_name), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -126,7 +126,7 @@ public class Profile extends Fragment implements View.OnClickListener {
                 callUpdateProfileService();
             }
             else {
-                Toast.makeText(getActivity(), "Please enter valid email.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getString(R.string.msg_toast_enter_email), Toast.LENGTH_SHORT).show();
             }
         }
 //        if (emailtxt.isEmpty()) {

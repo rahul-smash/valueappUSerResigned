@@ -21,7 +21,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
@@ -48,26 +47,27 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
     ViewPager viewPager;
     PagerAdapter adapter;
     String title;
-    String id,subCategoryId;
+    String id, subCategoryId;
     List<SubCategory> subCategoryList;
     boolean isActivityFirstTime = true;
 
     PrefManager prefManager;
-    String productViewTitle,showProductImage="";
+    String productViewTitle, showProductImage = "";
     int position;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_category_detail));
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(CategoryDetailActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");
         try {
             subCategoryId = getIntent().getStringExtra("subCategoryId");
-            if(subCategoryId==null){
-                subCategoryId="";
+            if (subCategoryId == null) {
+                subCategoryId = "";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,16 +104,16 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
         checkCartValue();
         Category category = appDb.getCategoryById(id);
-        showProductImage=category.getShowProductImage();
+        showProductImage = category.getShowProductImage();
 
         subCategoryList = category.getSubCategoryList();
 
 
         if (subCategoryList != null && subCategoryList.size() != 0) {
-            if(!subCategoryId.isEmpty()){
-                for (int i=0; i<subCategoryList.size(); i++){
-                    if(subCategoryId.equalsIgnoreCase(subCategoryList.get(i).getId())){
-                        position=i;
+            if (!subCategoryId.isEmpty()) {
+                for (int i = 0; i < subCategoryList.size(); i++) {
+                    if (subCategoryId.equalsIgnoreCase(subCategoryList.get(i).getId())) {
+                        position = i;
                     }
                 }
             }
@@ -162,7 +162,7 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
             }
         });
 
-        if(!subCategoryId.isEmpty()){
+        if (!subCategoryId.isEmpty()) {
             viewPager.setCurrentItem(position);
         }
 
@@ -239,21 +239,12 @@ public class CategoryDetailActivity extends FragmentActivity implements View.OnC
 
         @Override
         public Fragment getItem(int position) {
-
-
             if (subCategoryList.size() <= 1) {
                 productViewTitle = getIntent().getStringExtra("title");
             } else {
                 productViewTitle = subCategoryList.get(position).getTitle();
             }
-
             String subCategoryId = subCategoryList.get(position).getId();
-
-            String subCatGAC = getString(R.string.app_name) + GAConstant.SUB_CAT;
-            GATrackers.getInstance().trackEvent(subCatGAC, subCatGAC + GAConstant.VIEW,
-                    subCategoryList.get(position).getTitle() + " under " + title + " is view on " + getString(R.string.app_name));
-
-
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);

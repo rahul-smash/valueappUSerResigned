@@ -5,7 +5,6 @@ package com.signity.bonbon.listener;
  */
 public interface CartChangeListener {
 
-
     public void onCartChangeListener();
 
 }

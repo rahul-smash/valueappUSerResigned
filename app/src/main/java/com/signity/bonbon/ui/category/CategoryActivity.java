@@ -27,7 +27,6 @@ import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.GetCategory;
@@ -71,12 +70,13 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
     LinearLayoutManager mLinearLayoutManager;
     RvGridSpacesItemDecoration decoration;
 
-    private String categoryId="", titleString="Categories";
+    private String categoryId = "", titleString = "Categories";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_activity);
-        GATrackers.getInstance().trackScreenView(getString(R.string.ga_category_screen));
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_category));
         getDisplayMetrics();
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(this);
@@ -106,7 +106,6 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
         title.setText(titleString);
         title.setTypeface(_ProximaNovaLight);
         setUpRecylerView();
-
 
 
         listCategory = appDb.getCategoryList(categoryId);
@@ -156,18 +155,10 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                 Category category = listCategory.get(position);
                 if (category.getSubCategoryList() != null && category.getSubCategoryList().size() != 0) {
                     ViewController viewController = AppController.getInstance().getViewController();
-
-/*
-                    String categoryGAC = getString(R.string.app_name) + GAConstant.GAC_CAT;
-                    GATrackers.getInstance().trackEvent(categoryGAC, categoryGAC + GAConstant.VIEW, category.getTitle() + " is view on " + getString(R.string.app_name));
-*/
-
-                    String appShareGAC = getString(R.string.ga_category_screen);
-                    String action = getString(R.string.app_name)+"_"+getString(R.string.ga_view)+"_"+category.getTitle()+getString(R.string.ga_click);
-                    GATrackers.getInstance().trackEvent(appShareGAC, action,
+                    String cat = getString(R.string.ga_catagory_click);
+                    String action = getString(R.string.app_name) + "-" + getString(R.string.ga_action_category_item_click);
+                    GATrackers.getInstance().trackEvent(cat, action,
                             category.getTitle());
-
-
                     Intent i = new Intent(CategoryActivity.this, viewController.getCategoryDetailActivity());
                     i.putExtra("categoryId", category.getId());
                     i.putExtra("title", category.getTitle());
@@ -193,11 +184,11 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
     public void getCategoryList() {
 
         ProgressDialogUtil.showProgressDialog(CategoryActivity.this);
-        NetworkAdaper.getInstance().getNetworkServices().getCategoryList(categoryId,new Callback<GetCategory>() {
+        NetworkAdaper.getInstance().getNetworkServices().getCategoryList(categoryId, new Callback<GetCategory>() {
             @Override
             public void success(GetCategory getCategory, Response response) {
                 if (getCategory.getSuccess()) {
-                    appDb.addCategoryList(getCategory.getData(),categoryId);
+                    appDb.addCategoryList(getCategory.getData(), categoryId);
                     listCategory = appDb.getCategoryList(categoryId);
                     if (listCategory != null && listCategory.size() != 0) {
                         adapter = new RvCategoryListAdapter(CategoryActivity.this, listCategory, isTypeList);

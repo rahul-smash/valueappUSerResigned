@@ -38,6 +38,7 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
@@ -73,7 +74,7 @@ public final class ProductListFragment extends Fragment {
     String subCategoryId;
     private AppDatabase appDb;
     PrefManager prefManager;
-    String productViewTitle,showProductImage,productImageSwitch;
+    String productViewTitle, showProductImage, productImageSwitch;
 
     public static Fragment newInstance(Context context) {
         return Fragment.instantiate(context, ProductListFragment.class.getSimpleName());
@@ -94,14 +95,18 @@ public final class ProductListFragment extends Fragment {
         productViewTitle = getArguments().getString("productViewTitle", "");
         showProductImage = getArguments().getString("showProductImage", "0");
         try {
-            productImageSwitch=prefManager.getSharedValue(AppConstant.PRODUCT_IMAGE);
-            if(productImageSwitch==null){
-                productImageSwitch="1";
+            productImageSwitch = prefManager.getSharedValue(AppConstant.PRODUCT_IMAGE);
+            if (productImageSwitch == null) {
+                productImageSwitch = "1";
             }
         } catch (Exception e) {
-            productImageSwitch="1";
+            productImageSwitch = "1";
         }
         listProduct = new ArrayList<>();
+        String cat = getString(R.string.ga_catagory_view);
+        String action = getString(R.string.app_name) + "-" + getString(R.string.ga_action_product_list_view);
+        GATrackers.getInstance().trackEvent(cat, action,
+                productViewTitle);
     }
 
     @Override
@@ -202,12 +207,29 @@ public final class ProductListFragment extends Fragment {
             final SelectedVariant selectedVariant = product.getSelectedVariant();
 
 
-                if(productImageSwitch.equalsIgnoreCase("1")){
+            if (productImageSwitch.equalsIgnoreCase("1")) {
+                holder.items.setVisibility(View.GONE);
+            } else if (productImageSwitch.equalsIgnoreCase("2")) {
+
+                holder.items.setVisibility(View.VISIBLE);
+
+                try {
+                    if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
+                        Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside()
+                                .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.items);
+                    } else {
+                        holder.items.setImageResource(R.mipmap.ic_launcher);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (productImageSwitch.equalsIgnoreCase("3")) {
+
+                if (showProductImage.equalsIgnoreCase("0")) {
                     holder.items.setVisibility(View.GONE);
-                }else if(productImageSwitch.equalsIgnoreCase("2")){
-
+                } else if (showProductImage.equalsIgnoreCase("1")) {
                     holder.items.setVisibility(View.VISIBLE);
-
                     try {
                         if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
                             Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside()
@@ -218,28 +240,10 @@ public final class ProductListFragment extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-                }else if(productImageSwitch.equalsIgnoreCase("3")){
-
-                    if (showProductImage.equalsIgnoreCase("0")) {
-                        holder.items.setVisibility(View.GONE);
-                    } else if (showProductImage.equalsIgnoreCase("1")) {
-                        holder.items.setVisibility(View.VISIBLE);
-                        try {
-                            if (product.getImageMedium() != null && !product.getImageMedium().isEmpty()) {
-                                Picasso.with(getActivity()).load(product.getImageMedium()).fit().centerInside()
-                                        .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.items);
-                            } else {
-                                holder.items.setImageResource(R.mipmap.ic_launcher);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }else {
-                    holder.items.setVisibility(View.GONE);
                 }
-
+            } else {
+                holder.items.setVisibility(View.GONE);
+            }
 
 
             String productPrice = "0.0";
@@ -283,12 +287,12 @@ public final class ProductListFragment extends Fragment {
                 holder.rupee2.setText(currency);
             }
 
-            if(product.getNutrient().isEmpty()){
+            if (product.getNutrient().isEmpty()) {
                 holder.food_type_tag.setVisibility(View.INVISIBLE);
-            }else if(product.getNutrient().equalsIgnoreCase("Veg")){
+            } else if (product.getNutrient().equalsIgnoreCase("Veg")) {
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.veg);
-            }else if(product.getNutrient().equalsIgnoreCase("Non Veg")){
+            } else if (product.getNutrient().equalsIgnoreCase("Non Veg")) {
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.non_veg);
             }
@@ -339,6 +343,16 @@ public final class ProductListFragment extends Fragment {
                     appDb.updateProduct(product);
                     appDb.updateToCart(product);
                     cartChangeListener.onCartChangeListener();
+                    if (quant == 1) {
+                        String cat = getString(R.string.ga_catagory_cart);
+                        String action = getString(R.string.app_name) + "-" +
+                                getString(R.string.ga_action_added_to_cart);
+                        String lbl = String.format(context.getString(R.string.ga_lbl_added_to_cart),
+                                product.getTitle(), selectedVariant.getMrpPrice());
+                        GATrackers.getInstance().trackEvent(cat, action,
+                                lbl);
+                    }
+
                 }
             });
 
@@ -354,17 +368,23 @@ public final class ProductListFragment extends Fragment {
                         appDb.updateProduct(product);
                         appDb.updateToCart(product);
                         cartChangeListener.onCartChangeListener();
+                        if (quant == 0) {
+                            String cat = getString(R.string.ga_catagory_cart);
+                            String action = getString(R.string.app_name) + "-" +
+                                    getString(R.string.ga_action_remove_from_cart);
+                            String lbl = String.format(context.getString(R.string.ga_lbl_removed_from_cart),
+                                    product.getTitle(), selectedVariant.getMrpPrice());
+                            GATrackers.getInstance().trackEvent(cat, action,
+                                    lbl);
+                        }
                     }
                 }
             });
             if (product.getVariants().size() > 1) {
-
                 holder.btnVarient.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View view) {
                         final Dialog dialog = new Dialog(getActivity());
-
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                         dialog.setContentView(R.layout.layout_popup_window_varient);
@@ -372,7 +392,6 @@ public final class ProductListFragment extends Fragment {
                         Button btnCross = (Button) dialog.findViewById(R.id.btnCross);
                         madapter = new MyAdapter(getActivity(), R.layout.custom_spinner, product.getVariants());
                         lv.setAdapter(madapter);
-
                         dialog.setCanceledOnTouchOutside(true);
                         btnCross.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -417,6 +436,11 @@ public final class ProductListFragment extends Fragment {
                     i.putExtra("showProductImage", showProductImage);
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(getActivity());
+                    String cat = getString(R.string.ga_catagory_click);
+                    String action = getString(R.string.app_name) + "-" +
+                            getString(R.string.ga_action_product_list_item_click);
+                    GATrackers.getInstance().trackEvent(cat, action,
+                            productViewTitle);
                 }
             });
 

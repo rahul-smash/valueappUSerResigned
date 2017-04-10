@@ -31,7 +31,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Store;
 
@@ -48,19 +47,14 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     //    Adapter mAdapter;
     PrefManager prefManager;
     String storeId;
-    private  final int PERMISSION_REQUEST_CODE = 100;
+    private final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_activity);
         ((Button) findViewById(R.id.btnSearch)).setVisibility(View.GONE);
-        GATrackers.getInstance().trackScreenView(GAConstant.CONTACT_SCREEN);
-
-        String contactGAC = getString(R.string.app_name) + GAConstant.GAC_CONTACT;
-        GATrackers.getInstance().trackEvent(contactGAC, contactGAC + GAConstant.VIEW,
-                "Contact us view on " + getString(R.string.app_name));
-
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_contact_us));
         prefManager = new PrefManager(this);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
         appDb = DbAdapter.getInstance().getDb();
@@ -145,6 +139,17 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         } else {
             if (latLng != null) {
                 String address = store.getLocation() + "," + store.getCity() + "," + store.getState() + "," + store.getCountry() + "," + store.getZipcode();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    Toast.makeText(ContactActivity.this, "Location Permission denied", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 map.setMyLocationEnabled(true);
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
@@ -158,10 +163,10 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     }
 
 
-    private void requestPermission(){
+    private void requestPermission() {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
-            Toast.makeText(ContactActivity.this,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            Toast.makeText(ContactActivity.this, "GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
 
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
@@ -198,10 +203,9 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED){
-            return  true;
-        }
-        else return false;
+                        PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else return false;
     }
 
     class GetLatLngTask extends AsyncTask<String, Void, LatLng> {

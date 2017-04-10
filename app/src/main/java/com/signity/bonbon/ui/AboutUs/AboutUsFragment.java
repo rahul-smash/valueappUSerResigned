@@ -18,7 +18,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.Store;
@@ -54,18 +53,12 @@ public class AboutUsFragment extends Fragment {
         prefManager = new PrefManager(getActivity());
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
         appDb = DbAdapter.getInstance().getDb();
-        GATrackers.getInstance().trackScreenView(getString(R.string.ga_about_us));
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_about_us));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.about_us, container, false);
-
-        String aboutUsGAC = getString(R.string.ga_about_us);
-        String action = getString(R.string.app_name)+"_"+getString(R.string.ga_view)+"_"+getString(R.string.ga_about_us_view);
-        GATrackers.getInstance()
-                .trackEvent(aboutUsGAC, action,
-                        getString(R.string.ga_about_us));
 
         webview = (WebView) mView.findViewById(R.id.webview);
         startOrder = (Button) mView.findViewById(R.id.startOrder);
@@ -86,7 +79,10 @@ public class AboutUsFragment extends Fragment {
         startOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ( getActivity()).onBackPressed();
+                GATrackers.getInstance().
+                        trackEvent(String.valueOf(getString(R.string.ga_catagory_click)),
+                                getString(R.string.app_name) + "-" + getString(R.string.ga_action_abt_str_click), "");
+                (getActivity()).onBackPressed();
             }
         });
 
@@ -96,7 +92,6 @@ public class AboutUsFragment extends Fragment {
     private void getAboutUsStatus() {
         String deviceid = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
-
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceid);
         param.put("device_token", deviceToken);
@@ -104,12 +99,9 @@ public class AboutUsFragment extends Fragment {
         ProgressDialogUtil.showProgressDialog(getActivity());
 
         NetworkAdaper.getInstance().getNetworkServices().getStore(param, new Callback<GetStoreModel>() {
-
-
             @Override
             public void success(GetStoreModel getStoreModel, Response response) {
                 if (getStoreModel.getSuccess()) {
-
                     webview.loadData(getStoreModel.getStore().getAboutUs(), "text/html", "UTF-8");
                     ProgressDialogUtil.hideProgressDialog();
                 } else {

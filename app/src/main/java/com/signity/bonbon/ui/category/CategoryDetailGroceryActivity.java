@@ -21,7 +21,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.listener.CartChangeListener;
 import com.signity.bonbon.model.Category;
@@ -43,36 +42,37 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
     private LinearLayout linearShopCart;
     Button backButton, btnSearch, btnShopCart, btnCartCount, proceed, btnShopList;
     TextView textTitle;
-    TextView cartTotalPrice,rupee;
+    TextView cartTotalPrice, rupee;
     TabLayout tabLayout;
     ViewPager viewPager;
     PagerAdapter adapter;
     String title;
-    String id,subCategoryId;
+    String id, subCategoryId;
     List<SubCategory> subCategoryList;
     boolean isActivityFirstTime = true;
 
     PrefManager prefManager;
-    String productViewTitle,showProductImage="";
+    String productViewTitle, showProductImage = "";
     int position;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_detail);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_category_detail));
         appDb = DbAdapter.getInstance().getDb();
-        prefManager= new PrefManager(CategoryDetailGroceryActivity.this);
+        prefManager = new PrefManager(CategoryDetailGroceryActivity.this);
         title = getIntent().getStringExtra("title");
         id = getIntent().getStringExtra("categoryId");
         try {
             subCategoryId = getIntent().getStringExtra("subCategoryId");
-            if(subCategoryId==null){
-                subCategoryId="";
+            if (subCategoryId == null) {
+                subCategoryId = "";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        rupee=(TextView)findViewById(R.id.rupee);
+        rupee = (TextView) findViewById(R.id.rupee);
         backButton = (Button) findViewById(R.id.backButton);
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnShopCart = (Button) findViewById(R.id.shopingcart);
@@ -98,23 +98,22 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
 
         if (currency.contains("\\")) {
             rupee.setText(unescapeJavaString(currency));
-        }
-        else {
+        } else {
             rupee.setText(currency);
         }
 
         checkCartValue();
         Category category = appDb.getCategoryById(id);
-        showProductImage=category.getShowProductImage();
+        showProductImage = category.getShowProductImage();
 
         subCategoryList = category.getSubCategoryList();
 
 
         if (subCategoryList != null && subCategoryList.size() != 0) {
-            if(!subCategoryId.isEmpty()){
-                for (int i=0; i<subCategoryList.size(); i++){
-                    if(subCategoryId.equalsIgnoreCase(subCategoryList.get(i).getId())){
-                        position=i;
+            if (!subCategoryId.isEmpty()) {
+                for (int i = 0; i < subCategoryList.size(); i++) {
+                    if (subCategoryId.equalsIgnoreCase(subCategoryList.get(i).getId())) {
+                        position = i;
                     }
                 }
             }
@@ -163,7 +162,7 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
             }
         });
 
-        if(!subCategoryId.isEmpty()){
+        if (!subCategoryId.isEmpty()) {
             viewPager.setCurrentItem(position);
         }
 
@@ -244,15 +243,11 @@ public class CategoryDetailGroceryActivity extends FragmentActivity implements V
 
             if (subCategoryList.size() <= 1) {
                 productViewTitle = getIntent().getStringExtra("title");
-            }
-            else {
-                productViewTitle=subCategoryList.get(position).getTitle();
+            } else {
+                productViewTitle = subCategoryList.get(position).getTitle();
             }
 
             String subCategoryId = subCategoryList.get(position).getId();
-            String subCatGAC = getString(R.string.app_name) + GAConstant.SUB_CAT;
-            GATrackers.getInstance().trackEvent(subCatGAC, subCatGAC + GAConstant.VIEW,
-                    subCategoryList.get(position).getTitle() + " under " + title + " is view on " + getString(R.string.app_name));
             currentPosition = position;
             Bundle arg = new Bundle();
             arg.putInt("position", position);

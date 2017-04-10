@@ -7,13 +7,39 @@
     <string name="ga_shared_button">Click_Button_SHARED</string>
     <string name="ga_refer_earn">Refer N Earn</string>
     <string name="ga_refer_earn_button">Click_Button_Refer N Earn</string>
-    <string name="ga_about_us">ABOUT_US_SCREEN</string>
     <string name="ga_about">_ABOUT_US</string>
     <string name="ga_about_us_view">ABOUT US VIEW</string>
     <string name="ga_sub_cat">_SUB_CATEGORY</string>
     <string name="ga_view">VIEW</string>
     <string name="ga_category">CATEGORY</string>
-    <string name="ga_category_screen">CATEGORY SCREEN</string>
     <string name="ga_click">_CLICK</string>
+
+    <!--String category-->
+    <string name="ga_catagory_cart">Added To Cart</string>
+    <string name="ga_catagory_click">Clicks</string>
+    <string name="ga_catagory_view">View</string>
+    <!--String actions-->
+    <string name="ga_action_abt_str_click">About_Us_Screen_Button_Start_Order_click</string>
+    <string name="ga_action_category_item_click">Category_List_Screen_Item_Click</string>
+    <string name="ga_action_product_list_item_click">Product_List_Screen_Item_Click</string>
+    <string name="ga_action_added_to_cart">Added_To_Cart</string>
+    <string name="ga_action_remove_from_cart">Remove_From_Cart</string>
+    <string name="ga_action_varient_selected">Varient_Selected</string>
+    <string name="ga_action_category_detail_view">Category_Detail_Screen_View</string>
+    <string name="ga_action_product_list_view">Product_List_Screen_View</string>
+
+    <!--String screen layout-->
+    <string name="ga_screen_about_us">ABOUT US SCREEN</string>
+    <string name="ga_screen_category">CATEGORY SCREEN</string>
+    <string name="ga_screen_category_detail">CATEGORY DETAIL SCREEN</string>
+    <string name="ga_screen_contact_us">CATEGORY DETAIL SCREEN</string>
+
+
+
+    <!--lbl-->
+    <string name="ga_lbl_added_to_cart">A Product with name %s , price %s is added to cart</string>
+    <string name="ga_lbl_removed_from_cart">A Product with name %s , price %s is removed from cart</string>
+
+
 
 </resources>

@@ -80,13 +80,10 @@ public class GATrackers {
                     tracker = GoogleAnalytics.getInstance(mContext).newTracker(trackId);
                     String trackerName = "GA- " + mContext.getString(R.string.app_name);
                     tracker.setAppName(trackerName);
-                    tracker.setAppVersion(BuildConfig.VERSION_CODE + "." + BuildConfig.VERSION_NAME + "-" + BuildConfig.DB_VERSION);
+                    tracker.setAppVersion(BuildConfig.VERSION_CODE + "." + BuildConfig.VERSION_NAME);
                     tracker.setAppId(BuildConfig.APPLICATION_ID);
                     tracker.setSessionTimeout(300);
                     tracker.enableExceptionReporting(true);
-                    if (BuildConfig.DEBUG) {
-                        tracker.enableAutoActivityTracking(true);
-                    }
                     break;
                 default:
                     throw new IllegalArgumentException("Unhandled analytics target " + target);
@@ -137,7 +134,6 @@ public class GATrackers {
      * @param label    label
      */
     public void trackEvent(Tracker tracker, String category, String action, String label) {
-
         // Build and send an Event.
         tracker.send(new HitBuilders.EventBuilder().setCategory(category).setAction(action).setLabel(label).build());
     }
@@ -148,6 +144,8 @@ public class GATrackers {
      * @param screenName screen name to be displayed on GA dashboard
      */
     public void trackScreenView(String screenName) {
+        String appName = "GA- " + mContext.getString(R.string.app_name);
+        screenName = appName + "-" + screenName;
         // Set screen name.
         defaultAppTracker.setScreenName(screenName);
         // Send a screen view.

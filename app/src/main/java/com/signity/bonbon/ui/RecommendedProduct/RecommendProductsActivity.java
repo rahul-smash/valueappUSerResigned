@@ -30,7 +30,6 @@ import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.Product;
@@ -61,7 +60,7 @@ public class RecommendProductsActivity extends Activity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_products);
-        GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_recommended));
         prefManager = new PrefManager(RecommendProductsActivity.this);
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();

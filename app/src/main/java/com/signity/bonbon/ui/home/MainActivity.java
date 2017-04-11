@@ -478,24 +478,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     citySelect.setVisibility(View.GONE);
                     title.setText("Refer N Earn");
                     replace(new ShareNEarnFragment());
-
-                    String appShareGAC = getString(R.string.ga_refer_earn);
+                    String gaCategory = getString(R.string.ga_catagory_click);
                     String action = getString(R.string.app_name) + "_" + getString(R.string.ga_refer_earn_button);
-                    GATrackers.getInstance().trackEvent(appShareGAC, action,
-                            getString(R.string.ga_home_screen));
-
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            "");
                 } else {
-
-                    /*String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
-                    GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                            getString(R.string.app_name) + " App Shared");*/
-
-                    String appShareGAC = getString(R.string.ga_shared);
-                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_shared_button);
-                    GATrackers.getInstance().trackEvent(appShareGAC, action,
-                            getString(R.string.ga_home_screen));
-
-
+                    String gaCategory = getString(R.string.ga_catagory_share);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_app_share);
+                    String lbl = String.format(getString(R.string.ga_lbl_share_app), getString(R.string.app_name), name, userId);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     String shareContent =
                             "Kindly download " + store.getStoreName() + " app from " +
                                     store.getAndroidAppShareLink() + "\nThanks and Regards\n " +
@@ -506,10 +498,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra(Intent.EXTRA_SUBJECT, store.getStoreName());
                     startActivity(Intent.createChooser(intent, "Share with"));
                 }
-
                 break;
             case 8:
-
                 if (loyalityStatus.equalsIgnoreCase("0")) {
                     title.setText(store.getStoreName());
                     if (userId.isEmpty()) {
@@ -518,10 +508,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivityForResult(intentLogin, REQUESTCODE_FOR_SUCESS_LOGIN);
                         AnimUtil.slideUpAnim(MainActivity.this);
                     } else {
-
                         title.setVisibility(View.VISIBLE);
                         citySelect.setVisibility(View.GONE);
-
                         replace(viewController.getHomeFragment());
                         logOutUser();
                     }

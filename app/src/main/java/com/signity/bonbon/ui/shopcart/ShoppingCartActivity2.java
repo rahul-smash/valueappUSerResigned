@@ -41,7 +41,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.GetOfferResponse;
@@ -85,7 +84,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     ListView listViewCart;
     TextView items_price, discountVal, total, title, customerPts, note, rs1, rs2, rs3, rs4, shipping_charges_text, discountLblText, taxTag;
     Button placeorder;
-    String userId,payment_method;
+    String userId, payment_method;
     String addressId;
     String shippingChargeText, minmimumChargesText, user_address, areaId;
     ProductListAdapter adapter;
@@ -109,7 +108,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     String isTaxEnable, taxLabel, taxRate;
     String discount = "0", fixed_discount_amount = "0";
     ViewGroup footerView;
-    LinearLayout layout, linearFixedTaxLayout,linearFixedTaxLayoutDisable;
+    LinearLayout layout, linearFixedTaxLayout, linearFixedTaxLayoutDisable;
     private Button backButton, btnSearch;
     private TextView shipping_charges;
     private AppDatabase appDb;
@@ -119,16 +118,17 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String isForPickUpStatus = "no";
     private String coupenCode = "";
     private double loyalityPoints;
-    private String taxDetailsJson,taxLabelJson,taxFixedTaxJson;
+    private String taxDetailsJson, taxLabelJson, taxFixedTaxJson;
     private String loyalityStatus = "0"; // If it will be 1 then we will show loyality points screen otherwise normal screen
     private String couponCode = "";    // variable used to store couponcode applied by the User.
-    private String tax="0" , dining_table="",dine_in="";
+    private String tax = "0", dining_table = "", dine_in = "";
     GsonHelper gsonHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.signity.bonbon.R.layout.shopping_cart_activity2);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_checkout));
         ShoppingCartActivity2.this.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -136,7 +136,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         gsonHelper = new GsonHelper();
         prefManager = new PrefManager(ShoppingCartActivity2.this);
 
-        GATrackers.getInstance().trackScreenView(GAConstant.CHECKOUT_SCREEN);
         try {
             userId = getIntent().getStringExtra("userId");
             addressId = getIntent().getStringExtra("addressId");
@@ -152,20 +151,20 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             payment_method = getIntent().getStringExtra("payment_method");
         } catch (Exception e) {
             e.printStackTrace();
-            payment_method="2";
+            payment_method = "2";
         }
 
         try {
             dining_table = getIntent().getStringExtra("dining_table");
         } catch (Exception e) {
             e.printStackTrace();
-            dining_table="";
+            dining_table = "";
         }
         try {
             dine_in = getIntent().getStringExtra("dine_in") != null ? getIntent().getStringExtra("dine_in") : "no";
         } catch (Exception e) {
             e.printStackTrace();
-            dine_in="no";
+            dine_in = "no";
         }
 
         isForPickUpStatus = getIntent().getStringExtra("isForPickup") != null ? getIntent().getStringExtra("isForPickup") : "no";
@@ -335,16 +334,15 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         addTaxRow(model.getTaxDetail());
 
-        List<FixedTaxDetail> listWithTaxEnable=new ArrayList<>();
-        List<FixedTaxDetail> listWithTaxdisable=new ArrayList<>();
+        List<FixedTaxDetail> listWithTaxEnable = new ArrayList<>();
+        List<FixedTaxDetail> listWithTaxdisable = new ArrayList<>();
 
-        if(model.getFixedTaxDetail()!=null && model.getFixedTaxDetail().size()!=0){
+        if (model.getFixedTaxDetail() != null && model.getFixedTaxDetail().size() != 0) {
 
-            for(FixedTaxDetail fixedTaxDetail:model.getFixedTaxDetail()){
-                if(fixedTaxDetail.getIsTaxEnable().equalsIgnoreCase("1")){
+            for (FixedTaxDetail fixedTaxDetail : model.getFixedTaxDetail()) {
+                if (fixedTaxDetail.getIsTaxEnable().equalsIgnoreCase("1")) {
                     listWithTaxEnable.add(fixedTaxDetail);
-                }
-                else {
+                } else {
                     listWithTaxdisable.add(fixedTaxDetail);
                 }
             }
@@ -375,11 +373,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else {
                     rs5.setText(currency);
                 }
-                double tax= Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
+                double tax = Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
                 tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
                 tax_value.setText("" + String.format("%.2f", tax));
 
-                if(tax!=0.0){
+                if (tax != 0.0) {
                     linearFixedTaxLayout.addView(child);
                 }
 
@@ -409,10 +407,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else {
                     rs5.setText(currency);
                 }
-                double tax= Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
+                double tax = Double.parseDouble(fixedTaxDetail.get(i).getFixedTaxAmount());
                 tax_label.setText("" + fixedTaxDetail.get(i).getFixedTaxLabel());
                 tax_value.setText("" + String.format("%.2f", tax));
-                if(tax!=0.0){
+                if (tax != 0.0) {
                     linearFixedTaxLayoutDisable.addView(child);
                 }
             }
@@ -442,12 +440,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 } else {
                     rs5.setText(currency);
                 }
-                double tax= Double.parseDouble(detailsList.get(i).getTax());
+                double tax = Double.parseDouble(detailsList.get(i).getTax());
 
                 tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
                 tax_value.setText("" + String.format("%.2f", tax));
 
-                if(tax!=0.0){
+                if (tax != 0.0) {
                     layout.addView(child);
                 }
             }
@@ -518,8 +516,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
+
 //        String order = appDb.getOrderStringForSubmit();
-        PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
@@ -527,9 +525,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String order = appDb.getCartListStringJson();
         String note = edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
-        String coupon_code = "" + editCoupon.getText().toString();
-
-
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
         param.put("device_id", deviceId);
@@ -552,21 +547,22 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("store_tax_rate_detail", taxLabelJson);
         param.put("store_fixed_tax_detail", taxFixedTaxJson);
         param.put("calculated_tax_detail", taxDetailsJson);
-
-//        param.put("coupon_code", coupon_code);
         Log.e("params", param.toString());
         NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
             @Override
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
-                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
-                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
+                    String gaCategory = getString(R.string.ga_catagory_order);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_order_place);
+                    String lbl = String.format(getString(R.string.ga_lbl_place_order),
+                            items_price.getText().toString(), prefManager.getSharedValue(AppConstant.NAME), userId, user_address);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -623,14 +619,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
-                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
-                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
-
+                    String gaCategory = getString(R.string.ga_catagory_order);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_order_place);
+                    String lbl = String.format(getString(R.string.ga_lbl_place_order),
+                            items_price.getText().toString(), prefManager.getSharedValue(AppConstant.NAME), userId, user_address);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -644,7 +642,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void callNetworkServiceForPlaceOrderForPickupOnline(String id, String addressId, String payment_mode,
-                                                                String payment_request_id,String payment_id) {
+                                                                String payment_request_id, String payment_id) {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
@@ -688,14 +686,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
-                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
-                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
-
+                    String gaCategory = getString(R.string.ga_catagory_order);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_order_place);
+                    String lbl = String.format(getString(R.string.ga_lbl_place_order),
+                            items_price.getText().toString(), prefManager.getSharedValue(AppConstant.NAME), userId, user_address);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -752,14 +752,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
-                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
-                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
-
+                    String gaCategory = getString(R.string.ga_catagory_order);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_order_place);
+                    String lbl = String.format(getString(R.string.ga_lbl_place_order),
+                            items_price.getText().toString(), prefManager.getSharedValue(AppConstant.NAME), userId, user_address);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -773,7 +775,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
     private void callNetworkServiceForPlaceOrderForDineInOnline(String id, String addressId, String payment_mode,
-                                                                String payment_request_id,String payment_id) {
+                                                                String payment_request_id, String payment_id) {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
@@ -819,14 +821,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
-                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
-                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
-
+                    String gaCategory = getString(R.string.ga_catagory_order);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_order_place);
+                    String lbl = String.format(getString(R.string.ga_lbl_place_order),
+                            items_price.getText().toString(), prefManager.getSharedValue(AppConstant.NAME), userId, user_address);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -840,20 +844,18 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
-
-    private void callNetworkServiceForPlaceOrderForOnline(String id, String addressId,String payment_request_id,String payment_id) {
+    private void callNetworkServiceForPlaceOrderForOnline(String id, String addressId, String payment_request_id, String payment_id) {
 
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 //        String order = appDb.getOrderStringForSubmit();
-        PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = "Online "+edtBar.getText().toString();
+        String note = "Online " + edtBar.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
@@ -888,14 +890,16 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void success(ResponseData responseData, Response response) {
                 ProgressDialogUtil.hideProgressDialog();
                 if (responseData.getSuccess() != null ? responseData.getSuccess() : false) {
-                    String orderGAC = getString(R.string.app_name) + GAConstant.ORDER;
-                    GATrackers.getInstance().trackEvent(orderGAC, orderGAC + GAConstant.PLACED,
-                            "There is one order of amount " + items_price.getText().toString() + " is placed for the address " + user_address);
-
+                    String gaCategory = getString(R.string.ga_catagory_order);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_order_place);
+                    String lbl = String.format(getString(R.string.ga_lbl_place_order),
+                            items_price.getText().toString(), prefManager.getSharedValue(AppConstant.NAME), userId, user_address);
+                    GATrackers.getInstance().trackEvent(gaCategory, action,
+                            lbl);
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
                 }
             }
 
@@ -909,6 +913,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -925,30 +930,30 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 if (openTime()) {
                     if (appDb.getCartSize() != 0) {
                         if (isForPickUpStatus.equalsIgnoreCase("yes")) {
-                            if(dine_in.equalsIgnoreCase("yes")){
-                                if(payment_method.equalsIgnoreCase("2")){
-                                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId,"cod");
-                                }else if(payment_method.equalsIgnoreCase("3")){
+                            if (dine_in.equalsIgnoreCase("yes")) {
+                                if (payment_method.equalsIgnoreCase("2")) {
+                                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId, "cod");
+                                } else if (payment_method.equalsIgnoreCase("3")) {
                                     callNetworkForOnlinepayment();
-                                }else {
-                                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId,"cod");
+                                } else {
+                                    callNetworkServiceForPlaceOrderForDineIn(userId, addressId, "cod");
                                 }
-                            }else {
-                                if(payment_method.equalsIgnoreCase("2")){
+                            } else {
+                                if (payment_method.equalsIgnoreCase("2")) {
                                     callNetworkServiceForPlaceOrderForPickup(userId, addressId, "cod");
-                                }else if(payment_method.equalsIgnoreCase("3")) {
+                                } else if (payment_method.equalsIgnoreCase("3")) {
                                     callNetworkForOnlinepayment();
-                                }else {
+                                } else {
                                     callNetworkServiceForPlaceOrderForPickup(userId, addressId, "cod");
                                 }
                             }
                         } else {
 
-                            if(payment_method.equalsIgnoreCase("2")){
+                            if (payment_method.equalsIgnoreCase("2")) {
                                 callNetworkServiceForPlaceOrder(userId, addressId);
-                            }else if(payment_method.equalsIgnoreCase("3")){
+                            } else if (payment_method.equalsIgnoreCase("3")) {
                                 callNetworkForOnlinepayment();
-                            }else {
+                            } else {
                                 callNetworkServiceForPlaceOrder(userId, addressId);
                             }
                             /*String paymentOption=prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT);
@@ -1019,12 +1024,12 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     }
 
 
-    private void callNetworkForOnlinepayment(){
+    private void callNetworkForOnlinepayment() {
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
         String amount = total.getText().toString();
-        String user_name=prefManager.getSharedValue(AppConstant.NAME);
-        String email=prefManager.getSharedValue(AppConstant.EMAIL);
-        String phone=prefManager.getSharedValue(AppConstant.PHONE);
+        String user_name = prefManager.getSharedValue(AppConstant.NAME);
+        String email = prefManager.getSharedValue(AppConstant.EMAIL);
+        String phone = prefManager.getSharedValue(AppConstant.PHONE);
         Map<String, String> param = new HashMap<String, String>();
         param.put("user_name", user_name);
         param.put("email", email);
@@ -1061,29 +1066,25 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(resultCode==2)
-        {
-            String payment_request_id=data.getStringExtra("payment_request_id");
-            String payment_id=data.getStringExtra("payment_id");
-            if(isForPickUpStatus.equalsIgnoreCase("yes")){
-                if(dine_in.equalsIgnoreCase("yes")){
+        if (resultCode == 2) {
+            String payment_request_id = data.getStringExtra("payment_request_id");
+            String payment_id = data.getStringExtra("payment_id");
+            if (isForPickUpStatus.equalsIgnoreCase("yes")) {
+                if (dine_in.equalsIgnoreCase("yes")) {
                     callNetworkServiceForPlaceOrderForDineInOnline(userId, addressId, "online", payment_request_id, payment_id);
-                }else {
+                } else {
                     callNetworkServiceForPlaceOrderForPickupOnline(userId, addressId, "online", payment_request_id, payment_id);
                 }
-            }else {
+            } else {
                 callNetworkServiceForPlaceOrderForOnline(userId, addressId, payment_request_id, payment_id);
             }
 
-        }
-        else if(resultCode==3){
+        } else if (resultCode == 3) {
             showAlertDialog(ShoppingCartActivity2.this, "Message", "There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.");
-        }
-        else {
+        } else {
             showAlertDialog(ShoppingCartActivity2.this, "Message", "There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.");
         }
     }
@@ -1537,22 +1538,22 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     ProgressDialogUtil.hideProgressDialog();
                     if (validAllCouponsModel.getSuccess()) {
 
-                        if(validAllCouponsModel.getDiscountAmount()!=0.00){
+                        if (validAllCouponsModel.getDiscountAmount() != 0.00) {
                             coupenCode = couponCode;
-                            ValidAllCouponData data=validAllCouponsModel.getData();
+                            ValidAllCouponData data = validAllCouponsModel.getData();
                             String discountPercent = data.getDiscount();
                             fixed_discount_amount = String.valueOf(validAllCouponsModel.getDiscountAmount());
-                            discount="0";
+                            discount = "0";
                             String offerMinimumPrice = data.getMinimumOrderAmount();
 
                             applyDiscount(discountPercent, offerMinimumPrice);
 
-                        }else {
+                        } else {
                             coupenCode = couponCode;
-                            ValidAllCouponData data=validAllCouponsModel.getData();
+                            ValidAllCouponData data = validAllCouponsModel.getData();
                             String discountPercent = data.getDiscount();
                             discount = data.getDiscount();
-                            fixed_discount_amount="0";
+                            fixed_discount_amount = "0";
                             String offerMinimumPrice = data.getMinimumOrderAmount();
 
                             applyDiscount(discountPercent, offerMinimumPrice);
@@ -1561,7 +1562,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     } else {
                         coupenCode = "";
 
-                        if(validAllCouponsModel.getData()!=null){
+                        if (validAllCouponsModel.getData() != null) {
                             final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
                             dialogHandler.setDialog("Message", validAllCouponsModel.getMessage());
                             dialogHandler.setPostiveButton("Details", true)
@@ -1580,7 +1581,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                                 finish();
                                                 AnimUtil.slideFromRightAnim(ShoppingCartActivity2.this);
                                             } catch (Exception e) {
-                                                Toast.makeText(ShoppingCartActivity2.this,""+validAllCouponsModel.getMessage(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ShoppingCartActivity2.this, "" + validAllCouponsModel.getMessage(), Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                                             }
 
@@ -1593,9 +1594,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                     dialogHandler.dismiss();
                                 }
                             });
-                        }else {
+                        } else {
                             DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                            dialogHandler.setdialogForFinish("Message",""+validAllCouponsModel.getMessage(), false);
+                            dialogHandler.setdialogForFinish("Message", "" + validAllCouponsModel.getMessage(), false);
                         }
 
 
@@ -1660,23 +1661,21 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     }
 
                     if (taxCalculationModel.getData().getFixedTaxDetail() != null && taxCalculationModel.getData().getFixedTaxDetail().size() != 0) {
-                        taxFixedTaxJson=getFixedTaxDetailJson(taxCalculationModel.getData().getFixedTaxDetail());
-                    }
-                    else {
-                        taxFixedTaxJson="";
+                        taxFixedTaxJson = getFixedTaxDetailJson(taxCalculationModel.getData().getFixedTaxDetail());
+                    } else {
+                        taxFixedTaxJson = "";
                     }
 
                     if (taxCalculationModel.getData().getTaxLabel() != null && taxCalculationModel.getData().getTaxLabel().size() != 0) {
-                        taxLabelJson=getTaxDetailJson(taxCalculationModel.getData().getTaxLabel());
-                    }
-                    else {
-                        taxLabelJson="";
+                        taxLabelJson = getTaxDetailJson(taxCalculationModel.getData().getTaxLabel());
+                    } else {
+                        taxLabelJson = "";
                     }
 
                     TaxDataModel model = taxCalculationModel.getData();
 
-                    if(!model.getTax().isEmpty()){
-                        tax=model.getTax();
+                    if (!model.getTax().isEmpty()) {
+                        tax = model.getTax();
                     }
 
                     int i = listViewCart.getFooterViewsCount();
@@ -1791,7 +1790,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         jsonString = gson.toJson(list, type);
         Log.i("TAG", jsonString);
 
-        if (list==null){
+        if (list == null) {
             return "";
         }
 
@@ -1807,7 +1806,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         jsonString = gson.toJson(taxDetails, type);
         Log.i("TAG", jsonString);
 
-        if (taxDetails==null){
+        if (taxDetails == null) {
             return "";
         }
 
@@ -1824,7 +1823,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         jsonString = gson.toJson(fixedTaxDetails, type);
         Log.i("TAG", jsonString);
 
-        if (fixedTaxDetails==null){
+        if (fixedTaxDetails == null) {
             return "";
         }
 
@@ -2034,12 +2033,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
-            } else if(prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)){
+            } else if (prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)) {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 holder.btnVarient.setVisibility(View.GONE);
             }
 
@@ -2158,9 +2156,9 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 //            holder.discountValue.setText("" + data.getDiscount() + "% Off");
             holder.discountValue.setText("" + data.getName());
             holder.discountValue.setSelected(true);
-            if(data.getMinimumOrderAmount().equalsIgnoreCase("0")){
-                holder.minValue.setText(""+data.getName());
-            }else {
+            if (data.getMinimumOrderAmount().equalsIgnoreCase("0")) {
+                holder.minValue.setText("" + data.getName());
+            } else {
                 holder.minValue.setText("Min Order " + data.getMinimumOrderAmount());
             }
             double totalPrice = getTotalPrice();
@@ -2275,7 +2273,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     editCoupon.setText("");
                     editCoupon.setText(pointsList.get(position).getCouponCode());
 //                    onApplyCoupon();
-                    coupenCode=pointsList.get(position).getCouponCode();
+                    coupenCode = pointsList.get(position).getCouponCode();
                     applyPointsDiscount(pointsList.get(position).getAmount());
                     redeemDialog.dismiss();
                     redeemDialog = null;

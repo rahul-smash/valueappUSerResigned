@@ -17,7 +17,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.ReferNEarnCodeModel;
 import com.signity.bonbon.model.ReferNEarnModel;
@@ -34,18 +33,19 @@ import retrofit.client.Response;
 /**
  * Created by root on 23/6/16.
  */
-public class ShareNEarnFragment extends Fragment implements View.OnClickListener{
+public class ShareNEarnFragment extends Fragment implements View.OnClickListener {
 
 
     View mView;
     AppDatabase appDb;
     PrefManager prefManager;
 
-    String storeId,userId,code;
+    String storeId, userId, code;
     private Store store;
-    TextView textTitle,codeTxt;
-//    ImageButton backButton;
+    TextView textTitle, codeTxt;
+    //    ImageButton backButton;
     Button shareNearn;
+    private String name;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
         prefManager = new PrefManager(getActivity());
         appDb = DbAdapter.getInstance().getDb();
         userId = prefManager.getSharedValue(AppConstant.ID);
+        name = prefManager.getSharedValue(AppConstant.NAME);
         storeId = prefManager.getSharedValue(AppConstant.STORE_ID);
         store = appDb.getStore(storeId);
     }
@@ -60,19 +61,18 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_refer_nearn, container, false);
-
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_sharenearn));
 //        backButton = (ImageButton) mView.findViewById(R.id.backButton);
-        shareNearn = (Button)mView.findViewById(R.id.shareNearn);
+        shareNearn = (Button) mView.findViewById(R.id.shareNearn);
         textTitle = (TextView) mView.findViewById(R.id.textTitle);
         codeTxt = (TextView) mView.findViewById(R.id.codeTxt);
 
-        code=prefManager.getSharedValue(PrefManager.REFER_OBJ_CODE);
-
+        code = prefManager.getSharedValue(PrefManager.REFER_OBJ_CODE);
 
 
         if (!userId.isEmpty()) {
-                callNetworkForCode();
-        }else {
+            callNetworkForCode();
+        } else {
             codeTxt.setText("Login to access your Code.");
         }
 
@@ -149,9 +149,12 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
     }
 
     private void shareNearnFunction() {
-        String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
-        GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                getString(R.string.app_name) + " Shared And Earn");
+
+        String gaCategory = getString(R.string.ga_catagory_share);
+        String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_refer_earn);
+        String lbl = String.format(getString(R.string.ga_lbl_refer_n_earn), name, userId);
+        GATrackers.getInstance().trackEvent(gaCategory, action,
+                lbl);
         String sharemessage = prefManager.getSharedValue(PrefManager.REFER_OBJ_MSG);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

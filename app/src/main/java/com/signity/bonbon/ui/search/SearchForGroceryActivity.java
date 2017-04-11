@@ -36,7 +36,6 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
@@ -89,7 +88,7 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_search));
         prefManager = new PrefManager(SearchForGroceryActivity.this);
         appDb = DbAdapter.getInstance().getDb();
         db = new ListDatabase(SearchForGroceryActivity.this);
@@ -106,9 +105,11 @@ public class SearchForGroceryActivity extends Activity implements View.OnClickLi
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-                String searchGAC = getString(R.string.app_name) + GAConstant.GAC_SEARCH;
-                GATrackers.getInstance().trackEvent(searchGAC, searchGAC + GAConstant.CLICKED, "There is a search for item " +
-                        mSearchEdit.getText().toString() + " On" + getString(R.string.app_name));
+                String gaCategory = getString(R.string.ga_catagory_search);
+                String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_search);
+                String lbl = String.format(getString(R.string.ga_lbl_search), mSearchEdit.getText().toString(), getString(R.string.app_name));
+                GATrackers.getInstance().trackEvent(gaCategory, action,
+                        lbl);
                 getSearchList(mSearchEdit.getText().toString());
                 return false;
             }

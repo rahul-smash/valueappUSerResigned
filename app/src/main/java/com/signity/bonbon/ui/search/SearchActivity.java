@@ -37,7 +37,6 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.GetSubCategory;
@@ -78,11 +77,12 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
     public int cartSize;
     List<Product> favourite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_search));
         prefManager = new PrefManager(SearchActivity.this);
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
@@ -94,10 +94,11 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
-                String searchGAC = getString(R.string.app_name) + GAConstant.GAC_SEARCH;
-                GATrackers.getInstance().trackEvent(searchGAC, searchGAC + GAConstant.CLICKED, "There is a search for item " +
-                        mSearchEdit.getText().toString() + " On" + getString(R.string.app_name));
+                String gaCategory = getString(R.string.ga_catagory_search);
+                String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_search);
+                String lbl = String.format(getString(R.string.ga_lbl_search), mSearchEdit.getText().toString(), getString(R.string.app_name));
+                GATrackers.getInstance().trackEvent(gaCategory, action,
+                        lbl);
                 getSearchList(mSearchEdit.getText().toString());
                 return false;
             }
@@ -223,9 +224,9 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         }
         if (listProduct != null) {
 
-            for(int i=0; i<favourite.size(); i++){
-                for (int j=0; j<listProduct.size();j++){
-                    if(favourite.get(i).getId().equalsIgnoreCase(listProduct.get(j).getId())){
+            for (int i = 0; i < favourite.size(); i++) {
+                for (int j = 0; j < listProduct.size(); j++) {
+                    if (favourite.get(i).getId().equalsIgnoreCase(listProduct.get(j).getId())) {
                         listProduct.get(j).setFavorites(true);
                     }
                 }
@@ -336,12 +337,12 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 holder.rupee2.setText(currency);
             }
 
-            if(product.getNutrient().isEmpty()){
+            if (product.getNutrient().isEmpty()) {
                 holder.food_type_tag.setVisibility(View.INVISIBLE);
-            }else if(product.getNutrient().equalsIgnoreCase("Veg")){
+            } else if (product.getNutrient().equalsIgnoreCase("Veg")) {
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.veg);
-            }else if(product.getNutrient().equalsIgnoreCase("Non Veg")){
+            } else if (product.getNutrient().equalsIgnoreCase("Non Veg")) {
                 holder.food_type_tag.setVisibility(View.VISIBLE);
                 holder.food_type_tag.setImageResource(R.drawable.non_veg);
             }

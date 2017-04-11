@@ -6,7 +6,7 @@
     <string name="ga_shared">SHARED</string>
     <string name="ga_shared_button">Click_Button_SHARED</string>
     <string name="ga_refer_earn">Refer N Earn</string>
-    <string name="ga_refer_earn_button">Click_Button_Refer N Earn</string>
+    <string name="ga_refer_earn_button">Left_Menu_Refer_And_Earn </string>
     <string name="ga_about">_ABOUT_US</string>
     <string name="ga_about_us_view">ABOUT US VIEW</string>
     <string name="ga_sub_cat">_SUB_CATEGORY</string>
@@ -18,6 +18,9 @@
     <string name="ga_catagory_cart">Added To Cart</string>
     <string name="ga_catagory_click">Clicks</string>
     <string name="ga_catagory_view">View</string>
+    <string name="ga_catagory_share">Shared</string>
+    <string name="ga_catagory_search">Search</string>
+    <string name="ga_catagory_order">Orders</string>
     <!--String actions-->
     <string name="ga_action_abt_str_click">About_Us_Screen_Button_Start_Order_click</string>
     <string name="ga_action_category_item_click">Category_List_Screen_Item_Click</string>
@@ -27,17 +30,29 @@
     <string name="ga_action_varient_selected">Varient_Selected</string>
     <string name="ga_action_category_detail_view">Category_Detail_Screen_View</string>
     <string name="ga_action_product_list_view">Product_List_Screen_View</string>
+    <string name="ga_action_app_share">App_Shared_Button</string>
+    <string name="ga_action_refer_earn">Refer and Earn</string>
+    <string name="ga_action_search">Search Action</string>
+    <string name="ga_action_order_place">Order Placed</string>
 
     <!--String screen layout-->
     <string name="ga_screen_about_us">ABOUT US SCREEN</string>
     <string name="ga_screen_category">CATEGORY SCREEN</string>
     <string name="ga_screen_category_detail">CATEGORY DETAIL SCREEN</string>
     <string name="ga_screen_contact_us">CATEGORY DETAIL SCREEN</string>
+    <string name="ga_screen_product_view">PRODUCT VIEW SCREEN</string>
+    <string name="ga_screen_search">SEARCH SCREEN</string>
+    <string name="ga_screen_sharenearn">REFEER AND EARN SCREEN</string>
+    <string name="ga_screen_checkout">CHECKOUT SCREEN</string>
+    <string name="ga_screen_recommended">RECOMMENDED SCREEN</string>
 
     <!--lbl-->
-    <string name="ga_lbl_added_to_cart">A Product with name %s , price %s is added to cart</string>
-    <string name="ga_lbl_removed_from_cart">A Product with name %s , price %s is removed from cart</string>
-
+    <string name="ga_lbl_added_to_cart">A Product with name %1$s , price %2$s is added to cart</string>
+    <string name="ga_lbl_removed_from_cart">A Product with name %1$s , price %%2$s is removed from cart</string>
+    <string name="ga_lbl_share_app">%1$s is shared by user %2$s(%3$s)</string>
+    <string name="ga_lbl_refer_n_earn">One referral code is shared by user %1$s(%2$s)</string>
+    <string name="ga_lbl_search">There is a search for item %1$s On %2$s</string>
+    <string name="ga_lbl_place_order">There is one order of amount %1$s is placed by the user %2$s(%3$s) is placed for the address %4$s</string>
 
 
 </resources>

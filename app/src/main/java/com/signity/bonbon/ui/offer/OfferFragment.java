@@ -75,7 +75,6 @@ public class OfferFragment extends Fragment implements View.OnClickListener {
         prefManager = new PrefManager(getActivity());
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
-        GATrackers.getInstance().trackScreenView(GAConstant.OFFER_SCREEN);
     }
 
     public static Fragment newInstance(Context context) {

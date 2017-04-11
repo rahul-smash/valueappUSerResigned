@@ -41,7 +41,6 @@ import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetSubCategory;
 import com.signity.bonbon.model.Product;
@@ -69,7 +68,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     public static final String TAG = ProductViewActivity.class.getSimpleName();
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     public int cartSize;
-    Button backButton, btnVarient, btnShopList, btnShopcart, shoppinglist_text,viewAllBtn;
+    Button backButton, btnVarient, btnShopList, btnShopcart, shoppinglist_text, viewAllBtn;
     TextView description, item_name, price, number_text, title, price_text, rupee, items_mrp_price;
     TextView textTitle;
     String productViewTitle = "";
@@ -84,25 +83,24 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     List<Product> listProduct;
     List<Product> listRecommendProduct;
     private RecyclerView recommendedItemsList;
-    private String productId="";
+    private String productId = "";
     HorizontalAdapter mAdapter;
     private RelativeLayout recommendItemLayout;
     private String[] productIds;
-    String product_id="",showProductImage="",productImageSwitch;
+    String product_id = "", showProductImage = "", productImageSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.signity.bonbon.R.layout.activity_product_view);
-
-        GATrackers.getInstance().trackScreenView(GAConstant.PRODUCT_SCREEN);
-
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_product_view));
         appDb = DbAdapter.getInstance().getDb();
         gsonHelper = new GsonHelper();
         prefManager = new PrefManager(ProductViewActivity.this);
         initProduct();
         typeFaceRobotoRegular = FontUtil.getTypeface(ProductViewActivity.this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(ProductViewActivity.this, FontUtil.FONT_ROBOTO_BOLD);
-        recommendedItemsList= (RecyclerView) findViewById(R.id.recommendedItemsList);
+        recommendedItemsList = (RecyclerView) findViewById(R.id.recommendedItemsList);
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(ProductViewActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recommendedItemsList.setLayoutManager(horizontalLayoutManagaer);
@@ -121,14 +119,11 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
         String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
 
-
         if (currency.contains("\\")) {
             rupee.setText(unescapeJavaString(currency));
         } else {
             rupee.setText(currency);
         }
-
-
         btnShopList.setOnClickListener(this);
         backButton.setOnClickListener(this);
         btnShopcart.setOnClickListener(this);
@@ -173,8 +168,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
     private void checkRecommendedItems() {
 
         try {
-            String itemsSwitch= prefManager.getSharedValue(AppConstant.RECOMMENDED_ITEMS);
-            if(itemsSwitch!=null && !itemsSwitch.isEmpty() && itemsSwitch.equalsIgnoreCase("1")){
+            String itemsSwitch = prefManager.getSharedValue(AppConstant.RECOMMENDED_ITEMS);
+            if (itemsSwitch != null && !itemsSwitch.isEmpty() && itemsSwitch.equalsIgnoreCase("1")) {
                 getRecommendProductList(product_id);
             }
         } catch (Exception e) {
@@ -216,15 +211,16 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
         for (SubCategory subCategory : data) {
             listRecommendProduct.addAll(subCategory.getProducts());
         }
-        if (listRecommendProduct != null && listRecommendProduct.size()!=0) {
+        if (listRecommendProduct != null && listRecommendProduct.size() != 0) {
             recommendItemLayout.setVisibility(View.VISIBLE);
-            mAdapter = new HorizontalAdapter( ProductViewActivity.this, listRecommendProduct);
+            mAdapter = new HorizontalAdapter(ProductViewActivity.this, listRecommendProduct);
             recommendedItemsList.setAdapter(mAdapter);
             recommendedItemsList.addItemDecoration(new SimpleDividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
-        }else {
+        } else {
             recommendItemLayout.setVisibility(View.GONE);
         }
     }
+
     // setup value for ui element
     private void setupProductUi() {
         SelectedVariant selectedVariant = product.getSelectedVariant();
@@ -286,17 +282,17 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
     private void checkImageStatus() {
         try {
-            productImageSwitch=prefManager.getSharedValue(AppConstant.PRODUCT_IMAGE);
-            if(productImageSwitch==null){
-                productImageSwitch="1";
+            productImageSwitch = prefManager.getSharedValue(AppConstant.PRODUCT_IMAGE);
+            if (productImageSwitch == null) {
+                productImageSwitch = "1";
             }
         } catch (Exception e) {
-            productImageSwitch="1";
+            productImageSwitch = "1";
         }
 
-        if(productImageSwitch.equalsIgnoreCase("1")){
+        if (productImageSwitch.equalsIgnoreCase("1")) {
             item_image.setVisibility(View.GONE);
-        }else if(productImageSwitch.equalsIgnoreCase("2")){
+        } else if (productImageSwitch.equalsIgnoreCase("2")) {
             item_image.setVisibility(View.VISIBLE);
             try {
                 if (product.getImage() != null && !product.getImage().isEmpty()) {
@@ -307,11 +303,11 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else if(productImageSwitch.equalsIgnoreCase("3")){
+        } else if (productImageSwitch.equalsIgnoreCase("3")) {
 
-            if(showProductImage.equalsIgnoreCase("0")){
+            if (showProductImage.equalsIgnoreCase("0")) {
                 item_image.setVisibility(View.GONE);
-            }else if(showProductImage.equalsIgnoreCase("1")){
+            } else if (showProductImage.equalsIgnoreCase("1")) {
                 item_image.setVisibility(View.VISIBLE);
                 try {
                     if (product.getImage() != null && !product.getImage().isEmpty()) {
@@ -323,7 +319,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
             }
-        }else {
+        } else {
             item_image.setVisibility(View.GONE);
         }
 
@@ -336,11 +332,9 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             showProductImage = getIntent().getStringExtra("showProductImage");
         } catch (Exception e) {
             e.printStackTrace();
-            showProductImage="0";
+            showProductImage = "0";
         }
         productViewTitle = getIntent().getStringExtra("productViewTitle");
-        String productGac = getString(R.string.app_name) + GAConstant.PRODUCT;
-        GATrackers.getInstance().trackEvent(productGac, productGac + GAConstant.VIEW, productViewTitle + " is view on " + getString(R.string.app_name));
         product = appDb.getProduct(product_id);
         if (product == null) {
             product = gsonHelper.getProduct(prefManager.getSharedValue(PrefManager.PREF_SEARCH_PRODUCT));
@@ -383,10 +377,10 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.viewAllBtn:
                 DataAdapter.getInstance().setProductList(listRecommendProduct);
-                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+                if (prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
                     startActivity(new Intent(ProductViewActivity.this, RecommendProductsGroceryActivity.class));
                     AnimUtil.slideFromRightAnim(ProductViewActivity.this);
-                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)){
+                } else if (prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
                     startActivity(new Intent(ProductViewActivity.this, RecommendProductsActivity.class));
                     AnimUtil.slideFromRightAnim(ProductViewActivity.this);
                 }
@@ -610,9 +604,9 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.recommend_product_child, parent, false);
 
-            DisplayMetrics metrics=getDisplayMatric(context);
-            ViewGroup.LayoutParams params=itemView.getLayoutParams();
-            params.width=(metrics.widthPixels/3);
+            DisplayMetrics metrics = getDisplayMatric(context);
+            ViewGroup.LayoutParams params = itemView.getLayoutParams();
+            params.width = (metrics.widthPixels / 3);
             itemView.setLayoutParams(params);
             return new MyViewHolder(itemView);
         }
@@ -661,12 +655,12 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
 
-            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+            if (prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 try {
                     if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
-                        Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50,50).centerInside()
+                        Picasso.with(ProductViewActivity.this).load(product.getImageSmall()).resize(50, 50).centerInside()
                                 .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.imageView);
                     } else {
                         holder.imageView.setImageResource(R.mipmap.ic_launcher);
@@ -674,8 +668,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-            else {
+            } else {
                 holder.imageView.setVisibility(View.GONE);
             }
 
@@ -699,8 +692,8 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             return list.size();
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder  {
-            TextView items_name,items_price,rupee,variant;
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView items_name, items_price, rupee, variant;
             LinearLayout recommendLayout;
             Button addBtn;
             ImageView imageView;
@@ -719,7 +712,6 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
 
         }
     }
-
 
 
     public static DisplayMetrics getDisplayMatric(Context context) {

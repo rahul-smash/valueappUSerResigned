@@ -27,8 +27,6 @@ import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
-import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.GetCategory;
 import com.signity.bonbon.network.NetworkAdaper;
@@ -76,7 +74,6 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_category);
-        GATrackers.getInstance().trackScreenView(GAConstant.CATEGORY_SCREEN);
         getDisplayMetrics();
         appDb = DbAdapter.getInstance().getDb();
         prefManager = new PrefManager(this);

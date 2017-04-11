@@ -32,7 +32,6 @@ import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.GetSearchSubProducts;
 import com.signity.bonbon.model.Product;
@@ -68,7 +67,7 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_products_grocery);
-        GATrackers.getInstance().trackScreenView(GAConstant.SEARCH_SCREEN);
+        GATrackers.getInstance().trackScreenView(getString(R.string.ga_screen_recommended));
         prefManager = new PrefManager(RecommendProductsGroceryActivity.this);
         db = new ListDatabase(RecommendProductsGroceryActivity.this);
         appDb = DbAdapter.getInstance().getDb();

@@ -24,7 +24,6 @@ import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.model.GetStoreArea;
@@ -55,7 +54,6 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
         trackers = GATrackers.getInstance();
-        trackers.trackScreenView(GAConstant.SPLASH_SCREEN);
         GeofenceController.getInstance().init(this);
         prefManager = new PrefManager(this);
         appDb = DbAdapter.getInstance().getDb();
@@ -247,8 +245,6 @@ public class SplashActivity extends Activity {
     }
 
 
-
-
     private void moveToCitySelection() {
 
 //        boolean x=prefManager.getBoolean(AppConstant.CITY_SELECTED);
@@ -272,7 +268,7 @@ public class SplashActivity extends Activity {
                         ProgressDialogUtil.hideProgressDialog();
 //                        DataAdapter.getInstance().setStoreArea(getStoreArea);
                         Intent intent_location = new Intent(SplashActivity.this, SelectLocationActivity.class);
-                        intent_location.putExtra("from","splash");
+                        intent_location.putExtra("from", "splash");
                         startActivity(intent_location);
                         finish();
 

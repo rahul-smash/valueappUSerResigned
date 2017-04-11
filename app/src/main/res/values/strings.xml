@@ -371,7 +371,7 @@
     <string name="msg_toast_reorder">Re Order</string>
     <string name="msg_toast_order_added_to_cart">Your order is successfully added to your cart. Please check your cart to proceed</string>
     <string name="msg_toast_items_not_availble">Some of the items are not available to add to your cart. Please check your cart to proceed</string>
-    <string name="msg_toast_make_fresh_order">Sorry, this order can't be processed. Please make a fresh order.</string>
+    <string name="msg_toast_make_fresh_order">Sorry, this order can not be processed. Please make a fresh order.</string>
     <string name="msg_toast_no_coupons">There are no coupons to redeem.</string>
     <string name="msg_toast_enter_email">Please enter valid email.</string>
     <string name="msg_toast_google_play_error">Google Play Services is not available:</string>

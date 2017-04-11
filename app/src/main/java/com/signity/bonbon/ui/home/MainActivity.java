@@ -42,7 +42,6 @@ import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.geofence.GeofenceController;
 import com.signity.bonbon.geofence.NamedGeofence;
@@ -186,11 +185,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .replace(R.id.container, fragment).commit();
 
 
-        if(prefManager.getReferEarnPopupCheck()){
+        if (prefManager.getReferEarnPopupCheck()) {
             if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
-                if(userId.isEmpty()){
+                if (userId.isEmpty()) {
                     prefManager.setReferEarnPopupCheck(false);
-                    String msg="Kindly Login with Referral Code for "+store.getStoreName()+" and Earn Free Coupons.";
+                    String msg = "Kindly Login with Referral Code for " + store.getStoreName() + " and Earn Free Coupons.";
                     showReferAndEarnDialog(MainActivity.this, "Enter Referral Code", msg);
                 }
             }
@@ -202,16 +201,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showNotificationPopUp() {
-        String message=null;
+        String message = null;
         try {
-            message=DataAdapter.getInstance().getNotificationMessage();
+            message = DataAdapter.getInstance().getNotificationMessage();
         } catch (Exception e) {
-            message=null;
+            message = null;
             e.printStackTrace();
         }
 
-        if(message!=null && !message.isEmpty()){
-            Intent intent=new Intent(MainActivity.this, NotificationsDetailActivity.class);
+        if (message != null && !message.isEmpty()) {
+            Intent intent = new Intent(MainActivity.this, NotificationsDetailActivity.class);
             startActivity(intent);
         }
     }
@@ -440,7 +439,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case 3:
-
                 if (userId.isEmpty()) {
                     Intent intent = new Intent(MainActivity.this, LoginScreenActivity.class);
                     intent.putExtra(AppConstant.FROM, "menu");
@@ -482,7 +480,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     replace(new ShareNEarnFragment());
 
                     String appShareGAC = getString(R.string.ga_refer_earn);
-                    String action = getString(R.string.app_name)+"_"+getString(R.string.ga_refer_earn_button);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_refer_earn_button);
                     GATrackers.getInstance().trackEvent(appShareGAC, action,
                             getString(R.string.ga_home_screen));
 
@@ -493,7 +491,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             getString(R.string.app_name) + " App Shared");*/
 
                     String appShareGAC = getString(R.string.ga_shared);
-                    String action = getString(R.string.app_name)+"_"+getString(R.string.ga_shared_button);
+                    String action = getString(R.string.app_name) + "_" + getString(R.string.ga_shared_button);
                     GATrackers.getInstance().trackEvent(appShareGAC, action,
                             getString(R.string.ga_home_screen));
 
@@ -724,8 +722,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button okBtn = (Button) dialog.findViewById(R.id.okBtn);
         TextView textMsg = (TextView) dialog.findViewById(R.id.textMsg);
         TextView label = (TextView) dialog.findViewById(R.id.label);
-        label.setText(""+title);
-        textMsg.setText(""+message);
+        label.setText("" + title);
+        textMsg.setText("" + message);
 
 
         skipBtn.setOnClickListener(new View.OnClickListener() {
@@ -811,9 +809,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!version.isEmpty()) {
 
                 try {
-                    double appVersion=Double.parseDouble(version);
-                    double appVersionSystem=Double.parseDouble(appVersionName);
-                    if(appVersion>appVersionSystem){
+                    double appVersion = Double.parseDouble(version);
+                    double appVersionSystem = Double.parseDouble(appVersionName);
+                    if (appVersion > appVersionSystem) {
                         openDialogForVersion(forceDownloadModel);
                     }
                 } catch (NumberFormatException e) {

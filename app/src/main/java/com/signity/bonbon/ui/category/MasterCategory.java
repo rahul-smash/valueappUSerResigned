@@ -22,7 +22,6 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.adapter.MasterCategoryListAdapter;
-import com.signity.bonbon.adapter.RvCategoryListAdapter;
 import com.signity.bonbon.adapter.RvGridSpacesItemDecoration;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
@@ -136,8 +135,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
 
                     getCategoryList(category.getId(), category.getTitle());
 
-                }
-                else {
+                } else {
                     showAlertDialog(MasterCategory.this, "Message", "No Category exists.");
                 }
 
@@ -205,8 +203,6 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
                             Category category = listCategory.get(0);
                             if (category.getSubCategoryList() != null && category.getSubCategoryList().size() != 0) {
                                 ViewController viewController = AppController.getInstance().getViewController();
-                                String categoryGAC = getString(R.string.app_name) + GAConstant.GAC_CAT;
-                                GATrackers.getInstance().trackEvent(categoryGAC, categoryGAC + GAConstant.VIEW, category.getTitle() + " is view on " + getString(R.string.app_name));
                                 Intent i = new Intent(MasterCategory.this, viewController.getCategoryDetailActivity());
                                 i.putExtra("categoryId", category.getId());
                                 i.putExtra("title", category.getTitle());

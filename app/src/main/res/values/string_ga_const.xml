@@ -34,8 +34,6 @@
     <string name="ga_screen_category_detail">CATEGORY DETAIL SCREEN</string>
     <string name="ga_screen_contact_us">CATEGORY DETAIL SCREEN</string>
 
-
-
     <!--lbl-->
     <string name="ga_lbl_added_to_cart">A Product with name %s , price %s is added to cart</string>
     <string name="ga_lbl_removed_from_cart">A Product with name %s , price %s is removed from cart</string>

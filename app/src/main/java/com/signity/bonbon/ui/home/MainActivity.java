@@ -84,11 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton search, shopingcart;
     Button menu, citySelect;
     ImageView profilePic;
-    String[] labels = {getString(R.string.lbl_home), getString(R.string.lbl_myprofile),
-            getString(R.string.lbl_deliveryaddress),getString(R.string.lbl_myorders),
-            getString(R.string.lbl_booknow), getString(R.string.lbl_myfavs),
-            getString(R.string.lbl_aboutus),getString(R.string.lbl_share),
-            getString(R.string.lbl_loyalitypoints), getString(R.string.lbl_login)};
+    String[] labels;
     Integer[] icons = {R.drawable.ic_home, R.drawable.profil_icon, R.drawable.address_icon,
             R.drawable.order_icon,
             R.drawable.my_shopping_list_icon, R.drawable.my_fav_icon,
@@ -126,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context = this;
         GATrackers.getInstance().
                 trackScreenView(GAConstant.HOME_SCREEN);
+        setUpLabels();
         prefManager = new PrefManager(MainActivity.this);
         viewController = AppController.getInstance().getViewController();
 
@@ -189,11 +186,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .replace(R.id.container, fragment).commit();
 
 
-        if(prefManager.getReferEarnPopupCheck()){
+        if (prefManager.getReferEarnPopupCheck()) {
             if (prefManager.isReferEarnFnEnableForDevice() && prefManager.isReferEarnFn()) {
-                if(userId.isEmpty()){
+                if (userId.isEmpty()) {
                     prefManager.setReferEarnPopupCheck(false);
-                    String msg=getString(R.string.msg_dialog_login_ref_msg)+" "+store.getStoreName()+" "+getString(R.string.msg_dialog_earn_copons_msg);
+                    String msg = getString(R.string.msg_dialog_login_ref_msg) + " " + store.getStoreName() + " " + getString(R.string.msg_dialog_earn_copons_msg);
                     showReferAndEarnDialog(MainActivity.this, getString(R.string.str_title_refferal), msg);
                 }
             }
@@ -204,17 +201,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void setUpLabels() {
+        labels = new String[]{getString(R.string.lbl_home), getString(R.string.lbl_myprofile),
+                getString(R.string.lbl_deliveryaddress), getString(R.string.lbl_myorders),
+                getString(R.string.lbl_booknow), getString(R.string.lbl_myfavs),
+                getString(R.string.lbl_aboutus), getString(R.string.lbl_share),
+                getString(R.string.lbl_loyalitypoints), getString(R.string.lbl_login)};
+    }
+
     private void showNotificationPopUp() {
-        String message=null;
+        String message = null;
         try {
-            message=DataAdapter.getInstance().getNotificationMessage();
+            message = DataAdapter.getInstance().getNotificationMessage();
         } catch (Exception e) {
-            message=null;
+            message = null;
             e.printStackTrace();
         }
 
-        if(message!=null && !message.isEmpty()){
-            Intent intent=new Intent(MainActivity.this, NotificationsDetailActivity.class);
+        if (message != null && !message.isEmpty()) {
+            Intent intent = new Intent(MainActivity.this, NotificationsDetailActivity.class);
             startActivity(intent);
         }
     }
@@ -713,8 +718,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button okBtn = (Button) dialog.findViewById(R.id.okBtn);
         TextView textMsg = (TextView) dialog.findViewById(R.id.textMsg);
         TextView label = (TextView) dialog.findViewById(R.id.label);
-        label.setText(""+title);
-        textMsg.setText(""+message);
+        label.setText("" + title);
+        textMsg.setText("" + message);
 
 
         skipBtn.setOnClickListener(new View.OnClickListener() {
@@ -800,9 +805,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!version.isEmpty()) {
 
                 try {
-                    double appVersion=Double.parseDouble(version);
-                    double appVersionSystem=Double.parseDouble(appVersionName);
-                    if(appVersion>appVersionSystem){
+                    double appVersion = Double.parseDouble(version);
+                    double appVersionSystem = Double.parseDouble(appVersionName);
+                    if (appVersion > appVersionSystem) {
                         openDialogForVersion(forceDownloadModel);
                     }
                 } catch (NumberFormatException e) {

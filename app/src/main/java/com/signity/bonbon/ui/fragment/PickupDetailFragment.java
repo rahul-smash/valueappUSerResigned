@@ -217,7 +217,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
             TextView titleTxt = (TextView) dialog.findViewById(R.id.title);
             TextView messageText = (TextView) dialog.findViewById(R.id.message);
             titleTxt.setText(""+title);
-            positveButton.setText("COD");
+            positveButton.setText(getResources().getString(R.string.str_cod));
             negativeButton.setText(getString(R.string.lbl_you_online));
             messageText.setText(""+message);
 

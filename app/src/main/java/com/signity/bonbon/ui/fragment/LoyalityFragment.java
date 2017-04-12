@@ -106,7 +106,7 @@ public class LoyalityFragment extends Fragment {
                         note.setVisibility(View.GONE);
 
                         if (loyalityModel.getLoyalityPoints().isEmpty()) {
-                            points.setText("NIL");
+                            points.setText(getResources().getString(R.string.str_nil));
                         } else {
 
                             int point= (int)Double.parseDouble(loyalityModel.getLoyalityPoints());
@@ -207,7 +207,7 @@ public class LoyalityFragment extends Fragment {
             }
 
             try {
-                holder.pointsTxt.setText("" + pointsList.get(position).getPoints()+" Pts.");
+                holder.pointsTxt.setText("" + pointsList.get(position).getPoints()+" "+getResources().getString(R.string.lbl_points));
             }catch (Exception e){
 
             }

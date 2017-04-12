@@ -486,7 +486,7 @@ public final class ProductListFragmentGrocery extends Fragment {
 
     private void alreadyAddedToShopList(){
         DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setdialogForFinish("Message", getString(R.string.str_already_added_to_list), false);
+        dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.str_already_added_to_list), false);
     }
 
     // All networking call here
@@ -538,7 +538,7 @@ public final class ProductListFragmentGrocery extends Fragment {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 

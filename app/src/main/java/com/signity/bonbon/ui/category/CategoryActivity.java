@@ -164,7 +164,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(CategoryActivity.this);
                 } else {
-                    showAlertDialog(CategoryActivity.this, "Message", getString(R.string.msg_dialog_no_subcategories));
+                    showAlertDialog(CategoryActivity.this, getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_no_subcategories));
                 }
             }
         });
@@ -211,7 +211,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(CategoryActivity.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }

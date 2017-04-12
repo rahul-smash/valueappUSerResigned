@@ -185,7 +185,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(MasterCategory.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -234,7 +234,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(MasterCategory.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }

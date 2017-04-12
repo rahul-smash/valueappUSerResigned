@@ -265,7 +265,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                     getOrderHistory();
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", responseStatus.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), responseStatus.getMessage(), false);
                 }
 
             }
@@ -274,7 +274,7 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }

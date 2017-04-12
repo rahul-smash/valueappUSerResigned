@@ -285,7 +285,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                     proceedtoActivity();
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", ""+verifyOtpResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+verifyOtpResponse.getMessage(), false);
                 }
             }
 

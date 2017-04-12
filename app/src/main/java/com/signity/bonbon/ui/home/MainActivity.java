@@ -491,10 +491,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
                     GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                            getString(R.string.app_name) + " App Shared");
+                            getString(R.string.app_name) + getResources().getString(R.string.str_app_shared));
                     String shareContent =
-                            "Kindly download " + store.getStoreName() + " app from " +
-                                    store.getAndroidAppShareLink() + "\nThanks and Regards\n " +
+                            getResources().getString(R.string.str_kindly_download) + store.getStoreName() +  getResources().getString(R.string.str_app_from) +
+                                    store.getAndroidAppShareLink() + "\n"+getResources().getString(R.string.str_thanks_n_regards)+"\n " +
                                     store.getStoreName() + "\n" + store.getCity() + " , " + store.getState();
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
@@ -688,7 +688,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (!(store.getStoreStatus().equalsIgnoreCase("1"))) {
                         String msg = "" + store.getStoreMsg();
-                        new DialogHandler(MainActivity.this).setdialogForFinish("Message", msg, true);
+                        new DialogHandler(MainActivity.this).setdialogForFinish(getResources().getString(R.string.dialog_title), msg, true);
                     }
 
 
@@ -700,7 +700,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void failure(RetrofitError error) {
                 DialogHandler dialogHandler = new DialogHandler(MainActivity.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -927,13 +927,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SliderObject att = new SliderObject();
             if (loyalityStatus.equalsIgnoreCase("0")) {
                 if (userId.isEmpty()) {
-                    att.labels = "Log In";
+                    att.labels = getResources().getString(R.string.str_lbl_login);
                     att.icons = icons[9];
                     viewList.set(8, att);
                     holder.labels.setText(viewList.get(position).labels);
                     login = true;
                 } else if (!userId.isEmpty()) {
-                    att.labels = "Log out";
+                    att.labels = getResources().getString(R.string.str_lbl_logoout);
                     att.icons = icons[9];
                     viewList.set(8, att);
                     holder.labels.setText(viewList.get(position).labels);
@@ -941,13 +941,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             } else if (loyalityStatus.equalsIgnoreCase("1")) {
                 if (userId.isEmpty()) {
-                    att.labels = "Log In";
+                    att.labels = getResources().getString(R.string.str_lbl_login);
                     att.icons = icons[9];
                     viewList.set(9, att);
                     holder.labels.setText(viewList.get(position).labels);
                     login = true;
                 } else if (!userId.isEmpty()) {
-                    att.labels = "Log out";
+                    att.labels = getResources().getString(R.string.str_lbl_logoout);
                     att.icons = icons[9];
                     viewList.set(9, att);
                     holder.labels.setText(viewList.get(position).labels);
@@ -956,13 +956,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             if (!userId.isEmpty() && prefManager.isReferEarnFn()) {
                 SliderObject atts = new SliderObject();
-                atts.labels = "Refer And Earn";
+                atts.labels = getResources().getString(R.string.str_refer_n_earn);
                 atts.icons = icons[7];
                 viewList.set(7, atts);
                 holder.labels.setText(viewList.get(position).labels);
             } else {
                 SliderObject atts = new SliderObject();
-                atts.labels = "Share";
+                atts.labels = getResources().getString(R.string.str_share);
                 atts.icons = icons[7];
                 viewList.set(7, atts);
                 holder.labels.setText(viewList.get(position).labels);

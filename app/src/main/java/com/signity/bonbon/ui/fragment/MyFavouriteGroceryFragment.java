@@ -472,7 +472,7 @@ public class MyFavouriteGroceryFragment extends Fragment {
     private void addToShopList(final String title) {
         final DialogHandler dialogHandler = new DialogHandler(getActivity());
 
-        dialogHandler.setDialog(getString(R.string.msg_dialog_confirmation), "Are you sure to add this product to shopping list");
+        dialogHandler.setDialog(getString(R.string.msg_dialog_confirmation), getResources().getString(R.string.msg_dialog_add_shopping_list));
         dialogHandler.setPostiveButton(getString(R.string.str_add), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -498,7 +498,7 @@ public class MyFavouriteGroceryFragment extends Fragment {
 
     private void alreadyAddedToShopList(){
         DialogHandler dialogHandler = new DialogHandler(getActivity());
-        dialogHandler.setdialogForFinish("Message", getString(R.string.str_already_added), false);
+        dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.str_already_added), false);
     }
     public String unescapeJavaString(String st) {
 

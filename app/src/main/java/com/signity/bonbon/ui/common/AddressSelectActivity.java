@@ -103,7 +103,7 @@ public class AddressSelectActivity extends FragmentActivity {
                     }
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(AddressSelectActivity.this);
-                    dialogHandler.setdialogForFinish("Message", "" + addressSelectModel.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), "" + addressSelectModel.getMessage(), false);
                 }
 
                 ProgressDialogUtil.hideProgressDialog();
@@ -149,7 +149,7 @@ public class AddressSelectActivity extends FragmentActivity {
                         cityAdapter.update(filterList);
                     } else {
                         AddressSelectData model = new AddressSelectData();
-                        model.setTypeName("No Data Found");
+                        model.setTypeName(getResources().getString(R.string.str_no_record_found));
                         model.setId("");
                         filterList.add(model);
                         cityAdapter.update(filterList);

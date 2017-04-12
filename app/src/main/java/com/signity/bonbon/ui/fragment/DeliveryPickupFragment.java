@@ -211,12 +211,12 @@ public class DeliveryPickupFragment extends Fragment implements View.OnClickList
             public void failure(RetrofitError error) {
 //                Log.e(TAG, "" + error.getMessage());
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
 
             private void alertDailogForNoPickup() {
                 DialogHandler dialog = new DialogHandler(getActivity());
-                dialog.setdialogForFinish("Message", getString(R.string.lbl_no_pickup_location), false);
+                dialog.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.lbl_no_pickup_location), false);
             }
         });
     }

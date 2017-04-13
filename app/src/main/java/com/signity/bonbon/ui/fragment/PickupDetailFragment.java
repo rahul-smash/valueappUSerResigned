@@ -103,7 +103,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
         if (from.equalsIgnoreCase("shopping_cart2")) {
             buttonProceed.setVisibility(View.INVISIBLE);
             buttonOk.setVisibility(View.VISIBLE);
-            buttonOk.setText("Get Directions");
+            buttonOk.setText(getString(R.string.str_lbl_get_directions));
         }
     }
 
@@ -134,7 +134,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
             map.addMarker(new MarkerOptions()
-                    .title("Delivery Pickup")
+                    .title(getString(R.string.str_lbl_dilevery_pickup))
                     .snippet(address)
                     .position(latLng));
         }
@@ -155,7 +155,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                 startActivity(intent);
                 getActivity().finish();
                 AnimUtil.slideFromRightAnim(getActivity());*/
-                showAlertDialogForConfirm(getActivity(), "Confirmation", getResources().getString(R.string.str_payment_option_message));
+                showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), getResources().getString(R.string.str_payment_option_message));
                 break;
 
             case R.id.btnCall:
@@ -167,10 +167,10 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
                         startActivity(intentCall);
                         AnimUtil.slideFromRightAnim(getActivity());
                     } else {
-                        Toast.makeText(getActivity(), "Your device is not supporting any calling feature", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getString(R.string.msg_toast_calling_not_supported), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Number not available", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.msg_toast_no_notavailable), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -218,7 +218,7 @@ public class PickupDetailFragment extends Fragment implements View.OnClickListen
             TextView messageText = (TextView) dialog.findViewById(R.id.message);
             titleTxt.setText(""+title);
             positveButton.setText("COD");
-            negativeButton.setText("Online");
+            negativeButton.setText(getString(R.string.lbl_you_online));
             messageText.setText(""+message);
 
             dialog.setCanceledOnTouchOutside(true);

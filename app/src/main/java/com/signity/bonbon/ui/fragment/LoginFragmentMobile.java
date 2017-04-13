@@ -306,11 +306,11 @@ public class LoginFragmentMobile extends Fragment implements View.OnClickListene
 
     private boolean validatePhone() {
         if (edtPhone.getText().toString().trim().isEmpty()) {
-            input_layout_phone.setError("Enter Mobile Number");
+            input_layout_phone.setError(getString(R.string.str_booknow_fragment_enter_mobile));
             return false;
         }
         else if (edtPhone.getText().toString().trim().length()!=10){
-            input_layout_phone.setError("Mobile No. should be of 10 digits");
+            input_layout_phone.setError(getString(R.string.str_booknow_fragment_mobile_valiation));
             return false;
         }
         else {

@@ -70,10 +70,11 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
         code = prefManager.getSharedValue(PrefManager.REFER_OBJ_CODE);
 
 
+
         if (!userId.isEmpty()) {
-            callNetworkForCode();
-        } else {
-            codeTxt.setText("Login to access your Code.");
+                callNetworkForCode();
+        }else {
+            codeTxt.setText(getString(R.string.lbl_login_to_access));
         }
 
 //        backButton.setOnClickListener(this);
@@ -113,7 +114,7 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
                             prefManager.setReferEarnFnEnableForDevice(false);
                             prefManager.storeSharedValue(PrefManager.REFER_OBJ_MSG, "");
                             prefManager.storeSharedValue(PrefManager.REFER_OBJ_CODE, "");
-                            codeTxt.setText("Login to access your Code.");
+                            codeTxt.setText(getString(R.string.lbl_login_to_access));
                         }
                     }
 
@@ -149,18 +150,15 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
     }
 
     private void shareNearnFunction() {
-
-        String gaCategory = getString(R.string.ga_catagory_share);
-        String action = getString(R.string.app_name) + "_" + getString(R.string.ga_action_refer_earn);
-        String lbl = String.format(getString(R.string.ga_lbl_refer_n_earn), name, userId);
-        GATrackers.getInstance().trackEvent(gaCategory, action,
-                lbl);
+        String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
+        GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
+                getString(R.string.app_name) + " Shared And Earn");
         String sharemessage = prefManager.getSharedValue(PrefManager.REFER_OBJ_MSG);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, sharemessage);
         intent.putExtra(Intent.EXTRA_SUBJECT, "Refer and Earn");
-        startActivity(Intent.createChooser(intent, "Share with"));
+        startActivity(Intent.createChooser(intent, getString(R.string.lbl_share_with)));
 
     }
 

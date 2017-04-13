@@ -115,7 +115,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
             }
 
             public void onFinish() {
-                resend.setText("Skip");
+                resend.setText(getString(R.string.str_skip));
                 resend.setSelected(true);
             }
         }.start();
@@ -160,7 +160,7 @@ public class LoginFragmentOtp extends Fragment implements View.OnClickListener {
                 if (otpcode != null && !otpcode.isEmpty()) {
                     callVerifyOtpService(otpcode);
                 } else {
-                    edtOTp.setError("Enter your one time password");
+                    edtOTp.setError(getString(R.string.str_lbl_otp_msg));
                     return;
                 }
                 InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

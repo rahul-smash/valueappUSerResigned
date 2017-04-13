@@ -333,7 +333,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
 
     private boolean validateMessage() {
         if (message.getText().toString().trim().isEmpty()) {
-            input_layout_message.setError("Enter Your Message");
+            input_layout_message.setError(getString(R.string.lbl_enter_message));
             return false;
         } else {
             input_layout_message.setErrorEnabled(false);
@@ -371,10 +371,10 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                         public void success(EmailResponse getValidCouponResponse, Response response) {
                             ProgressDialogUtil.hideProgressDialog();
                             if (getValidCouponResponse.getSuccess()) {
-                                showSuccessFailureMessage(getActivity(), "Success", "Your request is successfully submitted",
+                                showSuccessFailureMessage(getActivity(), "Success", getString(R.string.msg_dialog_submitted_succesfuly),
                                         isFinsish);
                             } else {
-                                showSuccessFailureMessage(getActivity(), "Message", "Sorry we are unable to submit your request. Please try later", isFinsish);
+                                showSuccessFailureMessage(getActivity(), "Message", getString(R.string.msg_dialog_error_msg), isFinsish);
                             }
                         }
 

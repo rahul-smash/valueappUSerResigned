@@ -13,7 +13,6 @@ import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.network.ApiService;
-import com.signity.bonbon.network.NetworkConstant;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
@@ -21,9 +20,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
-import retrofit.client.OkClient;
 import retrofit.client.Response;
 
 /**
@@ -128,7 +125,7 @@ public class SubmitQueryActivity extends AppCompatActivity implements View.OnCli
                 public void success(EmailResponse emailResponse, Response response) {
 
                     if (emailResponse.getSuccess()) {
-                        Toast.makeText(SubmitQueryActivity.this, "Thank you for posting your query", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SubmitQueryActivity.this, R.string.msg_toast_submit_query, Toast.LENGTH_SHORT).show();
                         finish();
                     }
 
@@ -137,7 +134,7 @@ public class SubmitQueryActivity extends AppCompatActivity implements View.OnCli
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Toast.makeText(SubmitQueryActivity.this, "Failed to post your query \n Message: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SubmitQueryActivity.this, getString(R.string.msg_toast_failed_to_post)  + error.getMessage(), Toast.LENGTH_SHORT).show();
                     ProgressDialogUtil.hideProgressDialog();
                 }
             });
@@ -150,16 +147,16 @@ public class SubmitQueryActivity extends AppCompatActivity implements View.OnCli
     private boolean isValidationTrue() {
 
         if (name.getText().toString().isEmpty()) {
-            Toast.makeText(SubmitQueryActivity.this, "Please Enter your name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SubmitQueryActivity.this, getString(R.string.msg_toast_plz_enter_name), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (phone.getText().toString().isEmpty()) {
-            Toast.makeText(SubmitQueryActivity.this, "Please Enter your Number", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SubmitQueryActivity.this, getString(R.string.msg_toast_plz_enter_no), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (message.getText().toString().isEmpty()) {
-            Toast.makeText(SubmitQueryActivity.this, "Please Enter your Message", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SubmitQueryActivity.this, getString(R.string.msg_toast_plz_enter_msg), Toast.LENGTH_SHORT).show();
             return false;
         }
 

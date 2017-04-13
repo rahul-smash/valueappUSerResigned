@@ -165,7 +165,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
                     startActivity(i);
                     AnimUtil.slideFromRightAnim(CategoryActivity.this);
                 } else {
-                    showAlertDialog(CategoryActivity.this, "Message", "No Subcategories exists!");
+                    showAlertDialog(CategoryActivity.this, "Message", getString(R.string.msg_dialog_no_subcategories));
                 }
             }
         });
@@ -241,7 +241,7 @@ public class CategoryActivity extends FragmentActivity implements View.OnClickLi
         final DialogHandler dialogHandler = new DialogHandler(context);
 
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true)
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -167,9 +167,9 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 double diff = minprice - cartprice;
                 String shortPrice = String.format("%.2f", diff);
 
-                String message = "You are currently " + currencySymbol + "" + shortPrice +
-                        " short, please add few more items to your cart.";
-                showAlertDialogForMinAmount(getActivity(), "Alert", message
+                String message = getString(R.string.lbl_you_currently)+" " + currencySymbol + "" + shortPrice +
+                        " "+getString(R.string.lbl_you_add_items_tocart);
+                showAlertDialogForMinAmount(getActivity(), getString(R.string.msg_dialog_alert), message
                 );
             } else {
                 String message = noteText.trim();
@@ -178,7 +178,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 } else {
                     message = "";
                 }
-                showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", minmumCartString, userAddress, areaId);
+                showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), message, userId, addressId, "", minmumCartString, userAddress, areaId);
             }
         } else {
             if (minmumCartString != null && !minmumCartString.isEmpty() && !minmumCartString.equalsIgnoreCase("0")) {
@@ -193,23 +193,23 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                             } else {
                                 message = "";
                             }
-                            showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                            showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), message, userId,
                                     addressId, shipingCharges, minmumCartString, userAddress, areaId
                             );
                         } else {
                             double diff = minprice - cartprice;
                             String shortPrice = String.format("%.2f", diff);
 
-                            String message = "You are currently " + currencySymbol + "" + shortPrice +
-                                    " short, please add few more items to your cart.";
+                            String message = getString(R.string.lbl_you_currently)+" " + currencySymbol + "" + shortPrice +
+                                    " "+getString(R.string.lbl_you_add_items_tocart);;
                             showAlertDialogForMinAmount(getActivity(), "Alert", message
                             );
                         }
                     } else if (minprice > cartprice) {
-                        String message = "There will be " + currencySymbol + "" + shipingCharges +
-                                " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
+                        String message = getString(R.string.msg_dialog_there_will_be)+" " + currencySymbol + "" + shipingCharges +
+                                " "+getString(R.string.msg_dialog_shiping_charges) + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
                                 "\n";
-                        showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                        showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), message, userId,
                                 addressId, shipingCharges, minmumCartString, userAddress, areaId
                         );
                     } else {
@@ -219,7 +219,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                         } else {
                             message = "";
                         }
-                        showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId,
+                        showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), message, userId,
                                 addressId, shipingCharges, minmumCartString, userAddress, areaId);
                     }
                 }
@@ -227,10 +227,10 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
             } else {
                 if (shipingCharges != null
                         && !shipingCharges.isEmpty() && !(shipingCharges.equalsIgnoreCase("0"))) {
-                    String message = "There will be " + currencySymbol + " " + shipingCharges +
-                            " Shipping Charge for this order.\n" + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
+                    String message = getString(R.string.msg_dialog_there_will_be)+" " + currencySymbol + " " + shipingCharges +
+                            " "+getString(R.string.msg_dialog_shiping_charges) + ((noteText != null & (!(noteText.isEmpty()))) ? noteText + "\n" : "") +
                             "\n";
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, shipingCharges, "", userAddress, areaId);
+                    showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), message, userId, addressId, shipingCharges, "", userAddress, areaId);
                 } else {
                     String message = noteText.trim();
                     if (message != null && !message.isEmpty()) {
@@ -238,7 +238,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     } else {
                         message = "";
                     }
-                    showAlertDialogForConfirm(getActivity(), "Confirmation", message, userId, addressId, "", "", userAddress, areaId);
+                    showAlertDialogForConfirm(getActivity(), getString(R.string.msg_dialog_confirmation), message, userId, addressId, "", "", userAddress, areaId);
                 }
             }
         }
@@ -307,7 +307,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         if(prefManager.getSharedValue(AppConstant.ONLINE_PAYMENT).equalsIgnoreCase("0")){
             final DialogHandler dialogHandler = new DialogHandler(context);
             dialogHandler.setDialog(title, message);
-            dialogHandler.setPostiveButton("Proceed", true)
+            dialogHandler.setPostiveButton(getString(R.string.str_lbl_proceed), true)
                     .setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -327,7 +327,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                         }
                     });
 
-            dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+            dialogHandler.setNegativeButton(getString(R.string.str_cancel), true).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dialogHandler.dismiss();
@@ -348,8 +348,8 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
             TextView messageText = (TextView) dialog.findViewById(R.id.message);
             titleTxt.setText(""+title);
             positveButton.setText("COD");
-            negativeButton.setText("Online");
-            messageText.setText(""+message+"Select Payment Method");
+            negativeButton.setText(getString(R.string.lbl_you_online));
+            messageText.setText(""+message+""+getString(R.string.lbl_you_select_payment));
 
             dialog.setCanceledOnTouchOutside(true);
             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -393,7 +393,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
         else {
             final DialogHandler dialogHandler = new DialogHandler(context);
             dialogHandler.setDialog(title, message);
-            dialogHandler.setPostiveButton("Proceed", true)
+            dialogHandler.setPostiveButton(getString(R.string.str_lbl_proceed), true)
                     .setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -413,7 +413,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                         }
                     });
 
-            dialogHandler.setNegativeButton("Cancel", true).setOnClickListener(new View.OnClickListener() {
+            dialogHandler.setNegativeButton(getString(R.string.str_cancel), true).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dialogHandler.dismiss();
@@ -430,7 +430,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
         final DialogHandler dialogHandler = new DialogHandler(context);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("Yes", true)
+        dialogHandler.setPostiveButton(getString(R.string.layout_notification_detail_yes), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -439,7 +439,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     }
                 });
 
-        dialogHandler.setNegativeButton("No", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setNegativeButton(getString(R.string.layout_notification_detail_no), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -475,7 +475,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 if (selectedUserAddress != null) {
                     confirmUserForDeliveryAddress(selectedUserAddress);
                 } else {
-                    Toast.makeText(getActivity(), "Please select atleast one address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.lbl_select_address), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -672,7 +672,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                     UserAddressModel addressModel = deliveryAddress.get(position);
                     String userId = prefManager.getSharedValue(AppConstant.ID);
                     String addressId = addressModel.getId();
-                    showAlertDialogForDelete(getActivity(), "Confirmation", "Are you sure you want to delete this address?", userId, addressId, position);
+                    showAlertDialogForDelete(getActivity(), getString(R.string.msg_dialog_confirmation), getString(R.string.lbl_delete_address), userId, addressId, position);
 //                    notifyDataSetChanged();
                 }
             });

@@ -57,7 +57,7 @@ public class NotifyService extends Service {
         int cartSize = appDb.getCartSize();
         if (cartSize != 0) {
             String title = getString(R.string.app_name);
-            String message = "Proceed to checkout, you have " + cartSize + " item in your cart";
+            String message = getString(R.string.str_procedd_to_checkout)+" " + cartSize + " "+getString(R.string.str_items_in_cart);
             sendNotification(title, message);
             prefManager.setCartLocalNotification(false);
         }

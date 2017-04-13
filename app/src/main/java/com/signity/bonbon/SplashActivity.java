@@ -294,7 +294,7 @@ public class SplashActivity extends Activity {
     public void showAlertDialogForInternetConnection(Context context) {
 
         final DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-        dialogHandler.setDialog("Internet Connection", "Internet connection is not available");
+        dialogHandler.setDialog(getString(R.string.msg_dialog_internet_connection), getString(R.string.msg_dialog_internet_connection_msg));
         dialogHandler.setPostiveButton("OK", true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override

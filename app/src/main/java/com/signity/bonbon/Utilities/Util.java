@@ -31,7 +31,6 @@ public class Util {
     public static String getTime(Date date, String dateFormat) {
         // Create a DateFormatter object for displaying date in specified format.
 //        2015-07-28 01:18:42
-        DateFormat inFormatone = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         DateFormat outPutFormatone = new SimpleDateFormat(dateFormat);
 //        Date date1 = null;
 //        try {

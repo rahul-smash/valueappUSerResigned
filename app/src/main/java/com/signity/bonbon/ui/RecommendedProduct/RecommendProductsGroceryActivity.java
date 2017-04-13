@@ -495,14 +495,14 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
     private void addToShopList(final String title) {
         final DialogHandler dialogHandler = new DialogHandler(RecommendProductsGroceryActivity.this);
 
-        dialogHandler.setDialog("Confirmation", "Do you want to add this item to your list?");
+        dialogHandler.setDialog(getString(R.string.msg_dialog_confirmation), getString(R.string.msg_dialog_add_items_to_list));
         dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 db.addContact(title);
                 shoppingList = db.getAllContacts();
                 adapter.notifyDataSetChanged();
-                Toast.makeText(RecommendProductsGroceryActivity.this, "Added to Shopping List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecommendProductsGroceryActivity.this, getString(R.string.str_added_shopping_list), Toast.LENGTH_SHORT).show();
                 dialogHandler.dismiss();
 
             }
@@ -520,7 +520,7 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
 
     private void alreadyAddedToShopList(){
         DialogHandler dialogHandler = new DialogHandler(RecommendProductsGroceryActivity.this);
-        dialogHandler.setdialogForFinish("Message", "Already added to the list.", false);
+        dialogHandler.setdialogForFinish("Message", getString(R.string.str_already_added_to_list), false);
     }
 
     public String unescapeJavaString(String st) {

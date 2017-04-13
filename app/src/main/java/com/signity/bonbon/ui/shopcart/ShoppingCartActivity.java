@@ -144,7 +144,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         total = (TextView) findViewById(R.id.total);
         title = (TextView) findViewById(R.id.textTitle);
         emptyCart = (TextView) findViewById(R.id.emptyCart);
-        title.setText("My Cart");
+        title.setText(getString(R.string.str_lbl_mycart));
         placeorder = (Button) findViewById(R.id.placeorder);
         backButton = (Button) findViewById(R.id.backButton);
         viewAllBtn = (Button) findViewById(R.id.viewAllBtn);
@@ -248,9 +248,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         }else {
             saving_rupee.setVisibility(View.VISIBLE);
             if (currency.contains("\\")) {
-                saving_rupee.setText("Congratulations you saved "+unescapeJavaString(currency)+totalSaving);
+                saving_rupee.setText(getString(R.string.str_lbl_congrats_you_saved)+" "+unescapeJavaString(currency)+totalSaving);
             } else {
-                saving_rupee.setText("Congratulations you saved "+currency+totalSaving);
+                saving_rupee.setText(getString(R.string.str_lbl_congrats_you_saved)+" "+currency+totalSaving);
             }
         }
     }
@@ -343,11 +343,11 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 mrpPrice = selectedVariant.getMrpPrice();
             }
 
-            if (prefManager.getProjectType().equals(AppConstant.APP_TYPE_GROCERY)) {
+            if (prefManager.getProjectType().equals(AppConstant.KEY_STORE_TYPE_GROCERY)) {
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
-            } else if(prefManager.getProjectType().equals(AppConstant.APP_TYPE_RESTAURANT)){
+            } else if(prefManager.getProjectType().equals(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                 holder.btnVarient.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 holder.btnVarient.setText(txtQuant);
                 holder.btnVarient.setVisibility(View.VISIBLE);
@@ -529,7 +529,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
 
-            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
@@ -613,7 +613,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 if (appDb.getCartSize() != 0) {
                     proceedToPlaceOrder();
                 } else {
-                    Toast.makeText(ShoppingCartActivity.this, "Please add items to your cart.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShoppingCartActivity.this, getString(R.string.msg_toast_add_item_to_cart), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -624,10 +624,10 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
             case R.id.viewAllBtn:
                 DataAdapter.getInstance().setProductList(listRecommendProduct);
-                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
                     startActivity(new Intent(ShoppingCartActivity.this, RecommendProductsGroceryActivity.class));
                     AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
-                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)){
+                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                     startActivity(new Intent(ShoppingCartActivity.this, RecommendProductsActivity.class));
                     AnimUtil.slideFromRightAnim(ShoppingCartActivity.this);
                 }
@@ -847,7 +847,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 //                    adapter.notifyDataSetChanged();
                     callProceedToPlaceOrder();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
-                    Toast.makeText(context, "Login Failed or Cancel", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getString(R.string.lbl_login_error_msg), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

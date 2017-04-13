@@ -31,6 +31,7 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Store;
 
@@ -47,7 +48,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     //    Adapter mAdapter;
     PrefManager prefManager;
     String storeId;
-    private final int PERMISSION_REQUEST_CODE = 100;
+    private  final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
         txtStorename = (TextView) findViewById(R.id.txtStorename);
         txtAddress = (TextView) findViewById(R.id.txtAddress);
 //        txtName = (TextView) findViewById(R.id.txtName);
-        title.setText("Contact Us");
+        title.setText(getString(R.string.lbl_contact_us));
 
         if (store != null) {
             txtStorename.setText(store.getStoreName());
@@ -99,7 +100,7 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
                     startActivity(intent);
                     AnimUtil.slideFromRightAnim(ContactActivity.this);
                 } else {
-                    Toast.makeText(ContactActivity.this, "Your device is not supporting any calling feature", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContactActivity.this, getString(R.string.msg_toast_calling_not_supported), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -163,10 +164,10 @@ public class ContactActivity extends FragmentActivity implements View.OnClickLis
     }
 
 
-    private void requestPermission() {
+    private void requestPermission(){
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            Toast.makeText(ContactActivity.this, "GPS permission allows us to access location data. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+            Toast.makeText(ContactActivity.this,getString(R.string.msg_toast_gps_permission),Toast.LENGTH_LONG).show();
 
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);

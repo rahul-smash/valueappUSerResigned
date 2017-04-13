@@ -203,7 +203,7 @@ public class DineInTableActivity extends AppCompatActivity implements View.OnCli
                 @Override
                 public void onClick(View v) {
 
-                    showAlertDialogForConfirm(DineInTableActivity.this, "Confirmation", getResources().getString(R.string.str_payment_option_message), model.getId());
+                    showAlertDialogForConfirm(DineInTableActivity.this, getString(R.string.msg_dialog_confirmation), getResources().getString(R.string.str_payment_option_message), model.getId());
 
                 }
             });

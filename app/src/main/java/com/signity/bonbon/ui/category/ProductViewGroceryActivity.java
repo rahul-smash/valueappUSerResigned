@@ -67,8 +67,8 @@ import retrofit.client.Response;
 public class ProductViewGroceryActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = ProductViewGroceryActivity.class.getSimpleName();
-    Button backButton, btnVarient, btnShopList, btnShopcart, shoppinglist_text, viewAllBtn;
-    TextView description, item_name, price, number_text, title, price_text, rupee, items_mrp_price;
+    Button backButton, btnVarient, btnShopList,btnShopcart,shoppinglist_text,viewAllBtn;
+    TextView description, item_name, price, number_text, title, price_text,rupee, items_mrp_price;
     TextView textTitle;
     public Typeface typeFaceRobotoRegular, typeFaceRobotoBold;
     private Product product;
@@ -80,17 +80,17 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
     public int cartSize;
 
-    String productViewTitle = "";
+    String productViewTitle="";
     View divider;
 
     List<Product> listProduct;
     List<Product> listRecommendProduct;
     private RecyclerView recommendedItemsList;
-    private String productId = "";
+    private String productId="";
     HorizontalAdapter mAdapter;
     private RelativeLayout recommendItemLayout;
     private String[] productIds;
-    String product_id = "";
+    String product_id="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +103,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         initProduct();
         typeFaceRobotoRegular = FontUtil.getTypeface(ProductViewGroceryActivity.this, FontUtil.FONT_ROBOTO_REGULAR);
         typeFaceRobotoBold = FontUtil.getTypeface(ProductViewGroceryActivity.this, FontUtil.FONT_ROBOTO_BOLD);
-        recommendedItemsList = (RecyclerView) findViewById(R.id.recommendedItemsList);
+        recommendedItemsList= (RecyclerView) findViewById(R.id.recommendedItemsList);
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(ProductViewGroceryActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recommendedItemsList.setLayoutManager(horizontalLayoutManagaer);
@@ -113,9 +113,9 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         btnVarient = (Button) findViewById(R.id.btnVarient);
         textTitle = (TextView) findViewById(R.id.textTitle);
         btnShopList = (Button) findViewById(R.id.btnShopList);
-        btnShopcart = (Button) findViewById(R.id.btnShopcart);
-        shoppinglist_text = (Button) findViewById(R.id.shoppinglist_text);
-        rupee = (TextView) findViewById(R.id.rupee);
+        btnShopcart=(Button)findViewById(R.id.btnShopcart);
+        shoppinglist_text=(Button)findViewById(R.id.shoppinglist_text);
+        rupee=(TextView)findViewById(R.id.rupee);
         items_mrp_price = (TextView) findViewById(R.id.items_mrp_price);
         divider = (View) findViewById(R.id.divider);
         viewAllBtn = (Button) findViewById(R.id.viewAllBtn);
@@ -125,7 +125,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
         if (currency.contains("\\")) {
             rupee.setText(unescapeJavaString(currency));
-        } else {
+        }
+        else {
             rupee.setText(currency);
         }
         btnShopList.setOnClickListener(this);
@@ -133,9 +134,9 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         btnShopcart.setOnClickListener(this);
         viewAllBtn.setOnClickListener(this);
 
-        if (productViewTitle == null) {
+        if(productViewTitle==null){
             textTitle.setText(product.getTitle());
-        } else {
+        }else {
             textTitle.setText(productViewTitle);
         }
 
@@ -170,13 +171,13 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         listProduct = appDb.getCartListProduct();
         if (listProduct != null && listProduct.size() != 0) {
 
-            productIds = new String[listProduct.size()];
+            productIds=new String[listProduct.size()];
 
-            for (int i = 0; i < listProduct.size(); i++) {
-                productIds[i] = listProduct.get(i).getId();
+            for (int i=0; i<listProduct.size();i++){
+                productIds[i]=listProduct.get(i).getId();
             }
 
-            productId = Arrays.toString(productIds);
+            productId= Arrays.toString(productIds);
 
             getRecommendProductList(product_id);
         } else {
@@ -217,16 +218,15 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         for (SubCategory subCategory : data) {
             listRecommendProduct.addAll(subCategory.getProducts());
         }
-        if (listRecommendProduct != null && listRecommendProduct.size() != 0) {
+        if (listRecommendProduct != null && listRecommendProduct.size()!=0) {
             recommendItemLayout.setVisibility(View.VISIBLE);
-            mAdapter = new HorizontalAdapter(ProductViewGroceryActivity.this, listRecommendProduct);
+            mAdapter = new HorizontalAdapter( ProductViewGroceryActivity.this, listRecommendProduct);
             recommendedItemsList.setAdapter(mAdapter);
             recommendedItemsList.addItemDecoration(new SimpleDividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
-        } else {
+        }else {
             recommendItemLayout.setVisibility(View.GONE);
         }
     }
-
     // setup value for ui element
     private void setupProductUi() {
 
@@ -269,7 +269,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
         }
         number_text.setText(txtQuantCount);
 
-        String variant = selectedVariant.getWeight().trim() + selectedVariant.getUnitType().trim();
+        String variant=selectedVariant.getWeight().trim()+selectedVariant.getUnitType().trim();
         if (!variant.isEmpty()) {
             btnVarient.setVisibility(View.VISIBLE);
             btnVarient.setText(txtQuant);
@@ -293,6 +293,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
     private void initProduct() {
         product_id = getIntent().getStringExtra("product_id");
         productViewTitle = getIntent().getStringExtra("productViewTitle");
+        String productGac = getString(R.string.app_name) + GAConstant.PRODUCT;
+        GATrackers.getInstance().trackEvent(productGac, productGac + GAConstant.VIEW, productViewTitle + " is view on " + getString(R.string.app_name));
         productViewTitle = getIntent().getStringExtra("productViewTitle");
         product = appDb.getProduct(product_id);
         if (product == null) {
@@ -304,10 +306,10 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
     public void checkCartValue() {
         cartSize = appDb.getCartSize();
 
-        if (cartSize != 0) {
+        if(cartSize!=0){
             shoppinglist_text.setVisibility(View.VISIBLE);
-            shoppinglist_text.setText("" + cartSize);
-        } else {
+            shoppinglist_text.setText(""+cartSize);
+        }else {
             shoppinglist_text.setVisibility(View.GONE);
         }
     }
@@ -339,10 +341,10 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.viewAllBtn:
                 DataAdapter.getInstance().setProductList(listRecommendProduct);
-                if (prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+                if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
                     startActivity(new Intent(ProductViewGroceryActivity.this, RecommendProductsGroceryActivity.class));
                     AnimUtil.slideFromRightAnim(ProductViewGroceryActivity.this);
-                } else if (prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_RESTAURANT)) {
+                }else if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_RESTAURANT)){
                     startActivity(new Intent(ProductViewGroceryActivity.this, RecommendProductsActivity.class));
                     AnimUtil.slideFromRightAnim(ProductViewGroceryActivity.this);
                 }
@@ -447,7 +449,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
             if (currency.contains("\\")) {
                 rupee_tag.setText(unescapeJavaString(currency));
-            } else {
+            }
+            else {
                 rupee_tag.setText(currency);
             }
             TextView price = (TextView) convertView.findViewById(com.signity.bonbon.R.id.price);
@@ -560,9 +563,9 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.recommend_product_child, parent, false);
 
-            DisplayMetrics metrics = getDisplayMatric(context);
-            ViewGroup.LayoutParams params = itemView.getLayoutParams();
-            params.width = (metrics.widthPixels / 3);
+            DisplayMetrics metrics=getDisplayMatric(context);
+            ViewGroup.LayoutParams params=itemView.getLayoutParams();
+            params.width=(metrics.widthPixels/3);
             itemView.setLayoutParams(params);
             return new MyViewHolder(itemView);
         }
@@ -611,12 +614,12 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
 
-            if (prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)) {
+            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 if (product.getImageSmall() != null && !product.getImageSmall().isEmpty()) {
                     try {
-                        Picasso.with(ProductViewGroceryActivity.this).load(product.getImageSmall()).resize(50, 50).centerInside()
+                        Picasso.with(ProductViewGroceryActivity.this).load(product.getImageSmall()).resize(50,50).centerInside()
                                 .error(R.mipmap.ic_launcher).placeholder(R.drawable.placeholder).into(holder.imageView);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -624,7 +627,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
                 } else {
                     holder.imageView.setImageResource(R.mipmap.ic_launcher);
                 }
-            } else {
+            }
+            else {
                 holder.imageView.setVisibility(View.GONE);
             }
 
@@ -647,8 +651,8 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
             return list.size();
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView items_name, items_price, rupee, variant;
+        public class MyViewHolder extends RecyclerView.ViewHolder  {
+            TextView items_name,items_price,rupee,variant;
             LinearLayout recommendLayout;
             Button addBtn;
             ImageView imageView;
@@ -667,6 +671,7 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
 
         }
     }
+
 
 
     public static DisplayMetrics getDisplayMatric(Context context) {

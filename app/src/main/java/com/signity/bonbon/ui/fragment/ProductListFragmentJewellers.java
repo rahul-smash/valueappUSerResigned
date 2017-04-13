@@ -396,7 +396,7 @@ public class ProductListFragmentJewellers extends Fragment{
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), "No response", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.lbl_no_response), Toast.LENGTH_SHORT).show();
                 }
 
                 ProgressDialogUtil.hideProgressDialog();

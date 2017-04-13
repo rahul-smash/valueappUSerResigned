@@ -22,11 +22,14 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.adapter.MasterCategoryListAdapter;
+import com.signity.bonbon.adapter.RvCategoryListAdapter;
 import com.signity.bonbon.adapter.RvGridSpacesItemDecoration;
 import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.app.ViewController;
 import com.signity.bonbon.db.AppDatabase;
+import com.signity.bonbon.ga.GAConstant;
+import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Category;
 import com.signity.bonbon.model.GetCategory;
 import com.signity.bonbon.network.NetworkAdaper;
@@ -92,7 +95,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
         btnSearch.setOnClickListener(this);
         title = (TextView) findViewById(R.id.textTitle);
         noRecord = (TextView) findViewById(R.id.no_record);
-        title.setText("Categories");
+        title.setText(getString(R.string.lbl_categories));
         title.setTypeface(_ProximaNovaLight);
         setUpRecylerView();
 
@@ -132,8 +135,9 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
 
                     getCategoryList(category.getId(), category.getTitle());
 
-                } else {
-                    showAlertDialog(MasterCategory.this, "Message", "No Category exists.");
+                }
+                else {
+                    showAlertDialog(MasterCategory.this, "Message", getString(R.string.lbl_no_categories));
                 }
 
             }
@@ -257,7 +261,7 @@ public class MasterCategory extends FragmentActivity implements View.OnClickList
         final DialogHandler dialogHandler = new DialogHandler(context);
 
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true)
+        dialogHandler.setPostiveButton(getString(R.string.str_lbl_ok), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

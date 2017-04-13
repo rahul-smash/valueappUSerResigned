@@ -250,7 +250,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
 
         } else {
             Toast.makeText(getApplicationContext(),
-                    "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                    getString(R.string.msg_toast_map_error), Toast.LENGTH_SHORT)
                     .show();
         }
 
@@ -272,7 +272,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
                             }
                             else {
                                 DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-                                dialogHandler.setdialogForFinish("Message", "Sorry we do not deliver in this area.", true);
+                                dialogHandler.setdialogForFinish("Message", getString(R.string.msg_dialog_not_able_to_deliver), true);
                             }
                         }
 
@@ -296,7 +296,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
                             }
                             else {
                                 DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-                                dialogHandler.setdialogForFinish("Message", "Sorry we do not deliver in this area.", true);
+                                dialogHandler.setdialogForFinish("Message", getString(R.string.msg_dialog_not_able_to_deliver), true);
                             }
                         }
 
@@ -329,7 +329,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
         }
         if(title.isEmpty()){
             DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-            dialogHandler.setdialogForFinish("Message", "Sorry we do not deliver in this area.", true);
+            dialogHandler.setdialogForFinish("Message", getString(R.string.msg_dialog_not_able_to_deliver), true);
         }else {
             Bundle b = new Bundle();
             b.putString("id", code);
@@ -410,7 +410,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
         } catch (GooglePlayServicesNotAvailableException e) {
             // Indicates that Google Play Services is not available and the problem is not easily
             // resolvable.
-            String message = "Google Play Services is not available: " +
+            String message = getString(R.string.msg_toast_google_play_error)+" " +
                     GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
 
             Toast.makeText(LocationAreaActivity.this, message, Toast.LENGTH_SHORT).show();

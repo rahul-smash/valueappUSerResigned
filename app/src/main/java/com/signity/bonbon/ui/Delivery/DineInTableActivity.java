@@ -122,7 +122,7 @@ public class DineInTableActivity extends AppCompatActivity implements View.OnCli
                 ProgressDialogUtil.hideProgressDialog();
                 try {
                     DialogHandler dialogHandler = new DialogHandler(DineInTableActivity.this);
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
                 } catch (Resources.NotFoundException e) {
                     e.printStackTrace();
                 }
@@ -250,8 +250,8 @@ public class DineInTableActivity extends AppCompatActivity implements View.OnCli
             TextView titleTxt = (TextView) dialog.findViewById(R.id.title);
             TextView messageText = (TextView) dialog.findViewById(R.id.message);
             titleTxt.setText(""+title);
-            positveButton.setText("COD");
-            negativeButton.setText("Online");
+            positveButton.setText(getResources().getString(R.string.str_cod));
+            negativeButton.setText(getResources().getString(R.string.lbl_you_online));
             messageText.setText(""+message);
 
             dialog.setCanceledOnTouchOutside(true);

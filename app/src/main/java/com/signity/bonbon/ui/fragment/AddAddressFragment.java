@@ -185,7 +185,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -243,7 +243,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                     mgr.hideSoftInputFromWindow(done_text.getWindowToken(), 0);
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", "" + emailResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), "" + emailResponse.getMessage(), false);
                 }
             }
 
@@ -251,7 +251,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -310,7 +310,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", "" + emailResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), "" + emailResponse.getMessage(), false);
                 }
             }
 
@@ -318,7 +318,7 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }

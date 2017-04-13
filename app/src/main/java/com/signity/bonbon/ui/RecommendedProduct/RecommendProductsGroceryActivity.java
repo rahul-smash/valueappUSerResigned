@@ -496,7 +496,7 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
         final DialogHandler dialogHandler = new DialogHandler(RecommendProductsGroceryActivity.this);
 
         dialogHandler.setDialog(getString(R.string.msg_dialog_confirmation), getString(R.string.msg_dialog_add_items_to_list));
-        dialogHandler.setPostiveButton("Add", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton(getResources().getString(R.string.str_add), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 db.addContact(title);
@@ -507,7 +507,7 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
 
             }
         });
-        dialogHandler.setNegativeButton("Cancel", true)
+        dialogHandler.setNegativeButton(getResources().getString(R.string.str_cancel), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -520,7 +520,7 @@ public class RecommendProductsGroceryActivity extends Activity implements View.O
 
     private void alreadyAddedToShopList(){
         DialogHandler dialogHandler = new DialogHandler(RecommendProductsGroceryActivity.this);
-        dialogHandler.setdialogForFinish("Message", getString(R.string.str_already_added_to_list), false);
+        dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.str_already_added_to_list), false);
     }
 
     public String unescapeJavaString(String st) {

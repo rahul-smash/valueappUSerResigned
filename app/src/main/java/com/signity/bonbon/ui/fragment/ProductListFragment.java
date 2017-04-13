@@ -576,7 +576,7 @@ public final class ProductListFragment extends Fragment {
                 try {
                     ProgressDialogUtil.hideProgressDialog();
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
                 } catch (Resources.NotFoundException e) {
                     e.printStackTrace();
                 }

@@ -519,6 +519,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 
 //        String order = appDb.getOrderStringForSubmit();
+        PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
@@ -548,6 +549,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         param.put("store_tax_rate_detail", taxLabelJson);
         param.put("store_fixed_tax_detail", taxFixedTaxJson);
         param.put("calculated_tax_detail", taxDetailsJson);
+
+//        param.put("coupon_code", coupon_code);
         Log.e("params", param.toString());
         NetworkAdaper.getInstance().getNetworkServices().placeOrder(param, new Callback<ResponseData>() {
             @Override
@@ -563,7 +566,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+responseData.getMessage(), false);
                 }
             }
 
@@ -571,7 +574,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -629,7 +632,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+responseData.getMessage(), false);
                 }
             }
 
@@ -637,7 +640,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -696,7 +699,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialogwithPickUp(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+responseData.getMessage(), false);
                 }
             }
 
@@ -704,7 +707,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -762,7 +765,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+responseData.getMessage(), false);
                 }
             }
 
@@ -770,7 +773,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -831,7 +834,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+responseData.getMessage(), false);
                 }
             }
 
@@ -839,7 +842,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -902,7 +905,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     showAlertDialog(ShoppingCartActivity2.this, "Thank you!", "Thank you for placing the order. We will confirm your order soon.");
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", ""+responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+responseData.getMessage(), false);
                 }
             }
 
@@ -910,7 +913,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -970,11 +973,11 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                         }
                     } else {
 //                    Toast.makeText(ShoppingCartActivity2.this, "Empty Cart", Toast.LENGTH_SHORT).show();
-                        new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", getString(R.string.msg_dialog_empty_cart), false);
+                        new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_empty_cart), false);
                     }
                 } else {
                     String message = prefManager.getSharedValue(AppConstant.MESSAGE);
-                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish("Message", message, false);
+                    new DialogHandler(ShoppingCartActivity2.this).setdialogForFinish(getResources().getString(R.string.dialog_title), message, false);
                 }
                 break;
 
@@ -1062,7 +1065,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
     }
@@ -1089,10 +1092,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         }
         else if(resultCode==3){
-            showAlertDialog(ShoppingCartActivity2.this, "Message",getString(R.string.msg_dialog_problem_in_processing_your_payment));
+            showAlertDialog(ShoppingCartActivity2.this, getResources().getString(R.string.dialog_title),getString(R.string.msg_dialog_problem_in_processing_your_payment));
         }
         else {
-            showAlertDialog(ShoppingCartActivity2.this, "Message", getString(R.string.msg_dialog_problem_in_processing_your_payment));
+            showAlertDialog(ShoppingCartActivity2.this, getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_problem_in_processing_your_payment));
         }
     }
 
@@ -1293,7 +1296,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -1571,7 +1574,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                         if(validAllCouponsModel.getData()!=null){
                             final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                            dialogHandler.setDialog("Message", validAllCouponsModel.getMessage());
+                            dialogHandler.setDialog(getResources().getString(R.string.dialog_title), validAllCouponsModel.getMessage());
                             dialogHandler.setPostiveButton(getString(R.string.layout_order_detail_details), true)
                                     .setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -1603,7 +1606,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                             });
                         }else {
                             DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                            dialogHandler.setdialogForFinish("Message",""+validAllCouponsModel.getMessage(), false);
+                            dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title),""+validAllCouponsModel.getMessage(), false);
                         }
 
 
@@ -1615,7 +1618,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                     coupenCode = "";
                     ProgressDialogUtil.hideProgressDialog();
                     DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
                 }
             });
 
@@ -1700,14 +1703,14 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                 } else {
 
-                    showAlertDialogOnTaxFailure(ShoppingCartActivity2.this, "Message", "" + taxCalculationModel.getMessage());
+                    showAlertDialogOnTaxFailure(ShoppingCartActivity2.this, getResources().getString(R.string.dialog_title), "" + taxCalculationModel.getMessage());
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
-                showAlertDialogOnTaxFailure(ShoppingCartActivity2.this, "Message", getResources().getString(R.string.error_code_message));
+                showAlertDialogOnTaxFailure(ShoppingCartActivity2.this, getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message));
 //                DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
 //                dialogHandler.setdialogForFinish("Error", getResources().getString(R.string.error_code_message), false);
             }
@@ -1720,7 +1723,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                                           String message) {
         final DialogHandler dialogHandler = new DialogHandler(ShoppingCartActivity2.this);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
+        dialogHandler.setPostiveButton(getResources().getString(R.string.str_lbl_ok), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogHandler.dismiss();
@@ -1740,7 +1743,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 appDb.deleteCartElement();
                 Intent intent_home = new Intent(ShoppingCartActivity2.this, DeliveryPickupActivity.class);
                 intent_home.putExtra(AppConstant.FROM, "shopping_cart2");
-                intent_home.putExtra("title", "Guide Me");
+                intent_home.putExtra("title", getResources().getString(R.string.lbl_guide_me));
                 startActivity(intent_home);
                 finish();
                 AnimUtil.slideFromLeftAnim(ShoppingCartActivity2.this);

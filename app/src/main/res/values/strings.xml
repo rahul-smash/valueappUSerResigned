@@ -226,6 +226,7 @@
     <string name="str_lbl_otp">OTP</string>
     <string name="str_lbl_availble_points">AVAILABLE POINTS</string>
     <string name="str_lbl_login">Log In</string>
+    <string name="str_lbl_logoout">Log out</string>
     <string name="str_lbl_authorized_msg">You are not authorized to see this feature.</string>
     <string name="str_lbl_no_offers">No Offers Found</string>
     <string name="str_lbl_validfrom">Valid From</string>
@@ -248,7 +249,7 @@
     <string name="str_lbl_shopnow">Shop Now</string>
     <string name="str_lbl_shoping">SHOPPING</string>
     <string name="str_lbl_comingsoon">(Coming Soon)</string>
-    <string name="str_lbl_ok">Ok</string>
+    <string name="str_lbl_ok">OK</string>
     <string name="str_lbl_selectarea">Select Area</string>
     <string name="str_lbl_varients">Variants</string>
     <string name="str_lbl_choosetype">Choose Type</string>
@@ -354,7 +355,7 @@
     <string name="lbl_youhave_nil_points">You have NIL points.</string>
     <string name="lbl_youhave">You have</string>
     <string name="lbl_you_need">You need</string>
-    <string name="lbl_points">points</string>
+    <string name="lbl_points"> points </string>
     <string name="lbl_empty_cpons">Coupon Code Empty</string>
     <string name="lbl_guide_me">Guide Me</string>
     <string name="lbl_amount_short_for_offer">amount short for this offer.</string>
@@ -403,6 +404,17 @@
     <string name="msg_dialog_internet_connection">Internet Connection</string>
     <string name="msg_dialog_internet_connection_msg">Internet connection is not available</string>
     <string name="msg_dialog_problem_in_processing_your_payment">There is problem in processing your payment. Please try after some time. In case your money has been deducted from your account then please contact your respective bank.</string>
-
+    <string name="msg_dialog_success">Success</string>
+    <string name="str_no_city_found">No City Found</string>
+    <string name="str_no_area_found">No Area Found</string>
+    <string name="str_nil">NIL</string>
+    <string name="str_app_shared"> App Shared </string>
+    <string name="str_kindly_download"> Kindly download </string>
+    <string name="str_app_from"> app from </string>
+    <string name="str_thanks_n_regards"> Thanks and Regards </string>
+    <string name="str_share">Share</string>
+    <string name="str_refer_n_earn">Refer And Earn</string>
+    <string name="msg_dialog_add_shopping_list">Are you sure to add this product to shopping list?</string>
+    <string name="str_off"> OFF </string>
 
 </resources>

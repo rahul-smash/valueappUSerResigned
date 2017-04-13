@@ -202,7 +202,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
                             String message = getString(R.string.lbl_you_currently)+" " + currencySymbol + "" + shortPrice +
                                     " "+getString(R.string.lbl_you_add_items_tocart);;
-                            showAlertDialogForMinAmount(getActivity(), "Alert", message
+                            showAlertDialogForMinAmount(getActivity(), getResources().getString(R.string.msg_dialog_alert), message
                             );
                         }
                     } else if (minprice > cartprice) {
@@ -271,7 +271,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
                 } else {
 //                    Toast.makeText(getActivity(), responseData.getMessage(), Toast.LENGTH_SHORT).show();
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", "" + responseData.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), "" + responseData.getMessage(), false);
                 }
             }
 
@@ -279,7 +279,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -290,7 +290,7 @@ public class DeliveryAddressFragment extends Fragment implements View.OnClickLis
 
         final DialogHandler dialogHandler = new DialogHandler(context);
         dialogHandler.setDialog(title, message);
-        dialogHandler.setPostiveButton("OK", true)
+        dialogHandler.setPostiveButton(getResources().getString(R.string.str_lbl_ok), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

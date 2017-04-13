@@ -168,7 +168,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 
                     try {
                         ((MainActivity) getActivity()).user.setText(name);
-                        showAlertDialog(getActivity(), "Success", emailResponse.getMessage());
+                        showAlertDialog(getActivity(), getResources().getString(R.string.msg_dialog_success), emailResponse.getMessage());
                     } catch (Exception e) {
                         e.getMessage();
                     }
@@ -177,7 +177,7 @@ public class Profile extends Fragment implements View.OnClickListener {
 //                    proceedToMobileOtpGeneration(data);
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(getActivity());
-                    dialogHandler.setdialogForFinish("Message", ""+emailResponse.getMessage(), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+emailResponse.getMessage(), false);
                 }
             }
 
@@ -185,7 +185,7 @@ public class Profile extends Fragment implements View.OnClickListener {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 

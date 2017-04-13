@@ -225,12 +225,12 @@ public class SplashActivity extends Activity {
 
                     } else {
                         String msg = "" + store.getStoreMsg();
-                        showAlertDialog(SplashActivity.this, "Message", msg);
+                        showAlertDialog(SplashActivity.this, getResources().getString(R.string.dialog_title), msg);
                     }
 
                 } else {
                     DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-                    dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                    dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
                 }
             }
 
@@ -238,7 +238,7 @@ public class SplashActivity extends Activity {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), true);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), true);
             }
         });
 
@@ -295,7 +295,7 @@ public class SplashActivity extends Activity {
 
         final DialogHandler dialogHandler = new DialogHandler(SplashActivity.this);
         dialogHandler.setDialog(getString(R.string.msg_dialog_internet_connection), getString(R.string.msg_dialog_internet_connection_msg));
-        dialogHandler.setPostiveButton("OK", true)
+        dialogHandler.setPostiveButton(getResources().getString(R.string.str_lbl_ok), true)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

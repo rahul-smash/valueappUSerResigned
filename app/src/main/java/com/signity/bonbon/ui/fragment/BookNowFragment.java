@@ -139,7 +139,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                     if(enquiryModel.getEnquiryDataModel()!=null){
                         EnquiryDataModel model=enquiryModel.getEnquiryDataModel();
                         DialogHandler dialogHandler = new DialogHandler(getActivity());
-                        dialogHandler.setdialogForFinish("Message", ""+model.getMessage(), false);
+                        dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), ""+model.getMessage(), false);
                     }
                 }
 
@@ -149,7 +149,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(getActivity());
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), false);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), false);
             }
         });
 
@@ -371,10 +371,10 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
                         public void success(EmailResponse getValidCouponResponse, Response response) {
                             ProgressDialogUtil.hideProgressDialog();
                             if (getValidCouponResponse.getSuccess()) {
-                                showSuccessFailureMessage(getActivity(), "Success", getString(R.string.msg_dialog_submitted_succesfuly),
+                                showSuccessFailureMessage(getActivity(), getResources().getString(R.string.msg_dialog_success), getString(R.string.msg_dialog_submitted_succesfuly),
                                         isFinsish);
                             } else {
-                                showSuccessFailureMessage(getActivity(), "Message", getString(R.string.msg_dialog_error_msg), isFinsish);
+                                showSuccessFailureMessage(getActivity(), getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_error_msg), isFinsish);
                             }
                         }
 
@@ -398,7 +398,7 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
     private void showSuccessFailureMessage(Context activity, String title, String message, final boolean isFinish) {
         final DialogHandler dialog = new DialogHandler(activity);
         dialog.setDialog(title, message);
-        dialog.setPostiveButton("OK", true).setOnClickListener(new View.OnClickListener() {
+        dialog.setPostiveButton(getResources().getString(R.string.str_lbl_ok), true).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isFinish) {

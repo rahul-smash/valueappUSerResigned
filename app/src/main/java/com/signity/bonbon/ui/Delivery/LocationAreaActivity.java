@@ -272,7 +272,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
                             }
                             else {
                                 DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-                                dialogHandler.setdialogForFinish("Message", getString(R.string.msg_dialog_not_able_to_deliver), true);
+                                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_not_able_to_deliver), true);
                             }
                         }
 
@@ -296,7 +296,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
                             }
                             else {
                                 DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-                                dialogHandler.setdialogForFinish("Message", getString(R.string.msg_dialog_not_able_to_deliver), true);
+                                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_not_able_to_deliver), true);
                             }
                         }
 
@@ -329,7 +329,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
         }
         if(title.isEmpty()){
             DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-            dialogHandler.setdialogForFinish("Message", getString(R.string.msg_dialog_not_able_to_deliver), true);
+            dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getString(R.string.msg_dialog_not_able_to_deliver), true);
         }else {
             Bundle b = new Bundle();
             b.putString("id", code);
@@ -382,7 +382,7 @@ public class LocationAreaActivity extends AddGoogleLocationServicesActivity impl
             public void failure(RetrofitError error) {
                 ProgressDialogUtil.hideProgressDialog();
                 DialogHandler dialogHandler = new DialogHandler(LocationAreaActivity.this);
-                dialogHandler.setdialogForFinish("Message", getResources().getString(R.string.error_code_message), true);
+                dialogHandler.setdialogForFinish(getResources().getString(R.string.dialog_title), getResources().getString(R.string.error_code_message), true);
             }
         });
     }

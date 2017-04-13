@@ -182,7 +182,7 @@ public class CityAreaActivitiy extends FragmentActivity {
                     else {
                         GetStoreAreaModel model=new GetStoreAreaModel();
                         GetStoreAreaModel2 model2=new GetStoreAreaModel2();
-                        model2.setCity("No City Found");
+                        model2.setCity(getResources().getString(R.string.str_no_city_found));
                         model.setCity(model2);
                         filterList.add(model);
                         cityAdapter.update(filterList);
@@ -235,7 +235,7 @@ public class CityAreaActivitiy extends FragmentActivity {
                         cityAreaAdapter.update(filterList);
                     }else {
                         GetStoreAreaModel1 model1=new GetStoreAreaModel1();
-                        model1.setArea("No Area found");
+                        model1.setArea(getResources().getString(R.string.str_no_area_found));
                         filterList.add(model1);
                         cityAreaAdapter.update(filterList);
                     }

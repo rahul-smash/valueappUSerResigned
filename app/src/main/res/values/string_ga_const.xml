@@ -54,5 +54,4 @@
     <string name="ga_lbl_search">There is a search for item %1$s On %2$s</string>
     <string name="ga_lbl_place_order">There is one order of amount %1$s is placed by the user %2$s(%3$s) is placed for the address %4$s</string>
 
-
 </resources>

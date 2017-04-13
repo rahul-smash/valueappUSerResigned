@@ -293,9 +293,6 @@ public class ProductViewGroceryActivity extends AppCompatActivity implements Vie
     private void initProduct() {
         product_id = getIntent().getStringExtra("product_id");
         productViewTitle = getIntent().getStringExtra("productViewTitle");
-        String productGac = getString(R.string.app_name) + GAConstant.PRODUCT;
-        GATrackers.getInstance().trackEvent(productGac, productGac + GAConstant.VIEW, productViewTitle + " is view on " + getString(R.string.app_name));
-        productViewTitle = getIntent().getStringExtra("productViewTitle");
         product = appDb.getProduct(product_id);
         if (product == null) {
             product = gsonHelper.getProduct(prefManager.getSharedValue(PrefManager.PREF_SEARCH_PRODUCT));

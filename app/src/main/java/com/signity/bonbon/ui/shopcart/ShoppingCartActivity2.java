@@ -519,7 +519,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 
 //        String order = appDb.getOrderStringForSubmit();
-        PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
@@ -855,7 +854,6 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String deviceId = Settings.Secure.getString(ShoppingCartActivity2.this.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
         String deviceToken = prefManager.getSharedValue(AppConstant.DEVICE_TOKEN);
 //        String order = appDb.getOrderStringForSubmit();
-        PrefManager prefManager = new PrefManager(this);
         String shippingcharge = shipping_charges.getText().toString();
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();

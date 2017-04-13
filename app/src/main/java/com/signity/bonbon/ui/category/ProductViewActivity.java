@@ -661,7 +661,7 @@ public class ProductViewActivity extends AppCompatActivity implements View.OnCli
             holder.items_price.setText(productPrice);
             holder.variant.setText(txtQuant);
 
-            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.APP_TYPE_GROCERY)){
+            if(prefManager.getProjectType().equalsIgnoreCase(AppConstant.KEY_STORE_TYPE_GROCERY)){
 
                 holder.imageView.setVisibility(View.VISIBLE);
                 try {

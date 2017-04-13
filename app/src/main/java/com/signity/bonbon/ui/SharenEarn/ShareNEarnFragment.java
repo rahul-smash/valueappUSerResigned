@@ -70,10 +70,9 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
         code = prefManager.getSharedValue(PrefManager.REFER_OBJ_CODE);
 
 
-
         if (!userId.isEmpty()) {
-                callNetworkForCode();
-        }else {
+            callNetworkForCode();
+        } else {
             codeTxt.setText(getString(R.string.lbl_login_to_access));
         }
 
@@ -150,9 +149,10 @@ public class ShareNEarnFragment extends Fragment implements View.OnClickListener
     }
 
     private void shareNearnFunction() {
-        String appShareGAC = getString(R.string.app_name) + GAConstant.GAC_SHARE;
-        GATrackers.getInstance().trackEvent(appShareGAC, appShareGAC + GAConstant.SHARED,
-                getString(R.string.app_name) + " Shared And Earn");
+        String cat = getString(R.string.ga_catagory_share);
+        String action = getString(R.string.app_name) + "-" + getString(R.string.ga_action_app_share);
+        GATrackers.getInstance().trackEvent(cat, action,
+                getString(R.string.ga_lbl_refer_n_earn));
         String sharemessage = prefManager.getSharedValue(PrefManager.REFER_OBJ_MSG);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");

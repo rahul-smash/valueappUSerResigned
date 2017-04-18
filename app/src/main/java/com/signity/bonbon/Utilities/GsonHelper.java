@@ -6,7 +6,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.signity.bonbon.model.OfferData;
 import com.signity.bonbon.model.Product;
-import com.signity.bonbon.model.ReferAndEarn;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.SubCategory;
 import com.signity.bonbon.model.UserRecord;

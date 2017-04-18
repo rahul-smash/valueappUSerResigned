@@ -27,13 +27,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
-import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
-import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.model.PickupAdressModel;
-import com.signity.bonbon.ui.Delivery.DeliveryActivity;
-import com.signity.bonbon.ui.Delivery.DeliveryPickupActivity;
-import com.signity.bonbon.ui.home.MainActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity2;
 
 /**

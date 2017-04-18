@@ -26,8 +26,8 @@ import com.signity.bonbon.model.AreaSwitchModel;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.model.UserAddressModel;
 import com.signity.bonbon.network.NetworkAdaper;
-import com.signity.bonbon.ui.common.AddressSelectActivity;
 import com.signity.bonbon.ui.Delivery.LocationAreaActivity;
+import com.signity.bonbon.ui.common.AddressSelectActivity;
 
 import java.util.HashMap;
 import java.util.Map;

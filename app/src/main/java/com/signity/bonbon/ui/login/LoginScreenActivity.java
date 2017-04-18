@@ -1,13 +1,11 @@
 package com.signity.bonbon.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.ui.fragment.LoginFragmentMobile;
-import com.signity.bonbon.ui.home.MainActivity;
 
 /**
  * Created by rajesh on 12/10/15.

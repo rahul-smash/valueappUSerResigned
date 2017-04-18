@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
-import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.AppController;
 

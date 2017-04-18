@@ -1,39 +1,7 @@
 package com.signity.bonbon.ui.restaurant.storetheme32;
 
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageView;
-
-import com.signity.bonbon.R;
-import com.signity.bonbon.Utilities.AnimUtil;
-import com.signity.bonbon.Utilities.AppConstant;
-import com.signity.bonbon.Utilities.PrefManager;
-import com.signity.bonbon.app.AppController;
-import com.signity.bonbon.app.DbAdapter;
-import com.signity.bonbon.app.ViewController;
-import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.model.Store;
-import com.signity.bonbon.service.NotifyService;
-import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
-import com.signity.bonbon.ui.category.CategoryActivity;
-import com.signity.bonbon.ui.contacts.ContactActivity;
-import com.signity.bonbon.ui.login.LoginScreenActivity;
-import com.signity.bonbon.ui.offer.OfferListActivity;
-import com.signity.bonbon.ui.order.OrderListActivity;
-import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
-
-import java.util.Calendar;
 
 /**
  * Created by root on 22/2/16.

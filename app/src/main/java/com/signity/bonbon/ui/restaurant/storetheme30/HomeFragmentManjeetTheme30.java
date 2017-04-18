@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.signity.bonbon.R;
@@ -29,9 +27,7 @@ import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
 import com.signity.bonbon.ui.book.BookNowActivity;
 import com.signity.bonbon.ui.category.CategoryActivity;
 import com.signity.bonbon.ui.contacts.ContactActivity;
-import com.signity.bonbon.ui.login.LoginScreenActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;
-import com.signity.bonbon.ui.order.OrderListActivity;
 import com.signity.bonbon.ui.shopcart.ShoppingCartActivity;
 
 import java.util.Calendar;

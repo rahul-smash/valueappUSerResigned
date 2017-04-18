@@ -39,7 +39,6 @@ import com.signity.bonbon.Utilities.AppUtils;
 import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
-import com.signity.bonbon.app.AppController;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.model.GetStoreAreaModel1;
@@ -48,7 +47,6 @@ import com.signity.bonbon.model.StoreAreaListModel;
 import com.signity.bonbon.model.StoreAreaModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.service.FetchAddressIntentService;
-import com.signity.bonbon.ui.Location.SearchLocationActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -31,7 +31,6 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.app.DbAdapter;
 import com.signity.bonbon.db.AppDatabase;
-import com.signity.bonbon.ga.GAConstant;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.Store;
 

@@ -3,7 +3,7 @@ package com.signity.bonbon.fcm;
 /**
  * Created by root on 28/11/16.
  */
-import android.app.AlarmManager;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -21,8 +21,6 @@ import com.signity.bonbon.SplashActivity;
 import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.ui.Notifications.NotificationsDetailActivity;
-
-import java.util.Calendar;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

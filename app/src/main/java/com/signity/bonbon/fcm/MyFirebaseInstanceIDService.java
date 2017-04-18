@@ -10,7 +10,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
-import com.signity.bonbon.Utilities.Util;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 

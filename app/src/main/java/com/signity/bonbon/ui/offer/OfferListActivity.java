@@ -8,8 +8,6 @@ import android.widget.Button;
 
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
-import com.signity.bonbon.ga.GAConstant;
-import com.signity.bonbon.ga.GATrackers;
 
 /**
  * Created by rajesh on 9/12/15.

@@ -15,7 +15,6 @@ import com.signity.bonbon.model.GetPickupApiResponse;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.GetSubCategory;
-import com.signity.bonbon.model.GetValidCouponResponse;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.OnlinePaymentModel;

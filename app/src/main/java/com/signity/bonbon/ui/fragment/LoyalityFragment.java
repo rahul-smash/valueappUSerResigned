@@ -2,11 +2,8 @@ package com.signity.bonbon.ui.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +21,6 @@ import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.model.LoyalityDataModel;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.network.NetworkAdaper;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.List;

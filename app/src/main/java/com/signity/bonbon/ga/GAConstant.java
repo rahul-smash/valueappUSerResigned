@@ -1,7 +1,6 @@
 package com.signity.bonbon.ga;
 
 import com.signity.bonbon.BuildConfig;
-import com.signity.bonbon.R;
 
 /**
  * Created by rajesh on 21/4/16.

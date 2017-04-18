@@ -26,7 +26,6 @@ import com.signity.bonbon.model.Store;
 import com.signity.bonbon.service.NotifyService;
 import com.signity.bonbon.ui.Delivery.DeliveryAreaActivity;
 import com.signity.bonbon.ui.book.BookNowActivity;
-import com.signity.bonbon.ui.category.CategoryActivity;
 import com.signity.bonbon.ui.category.MasterCategory;
 import com.signity.bonbon.ui.contacts.ContactActivity;
 import com.signity.bonbon.ui.offer.OfferListActivity;

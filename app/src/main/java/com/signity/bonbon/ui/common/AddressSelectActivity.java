@@ -25,10 +25,6 @@ import com.signity.bonbon.Utilities.DialogHandler;
 import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.model.AddressSelectData;
 import com.signity.bonbon.model.AddressSelectModel;
-import com.signity.bonbon.model.GetStoreArea;
-import com.signity.bonbon.model.GetStoreAreaModel;
-import com.signity.bonbon.model.GetStoreAreaModel1;
-import com.signity.bonbon.model.GetStoreAreaModel2;
 import com.signity.bonbon.network.NetworkAdaper;
 
 import java.util.ArrayList;

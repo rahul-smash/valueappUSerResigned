@@ -22,6 +22,7 @@ import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.PrefManager;
+import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.OrderHistoryItemModel;
@@ -123,10 +124,10 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
 
         if (currency.contains("\\")) {
-            currencyTxt.setText(unescapeJavaString(currency));
-            rs1.setText(unescapeJavaString(currency));
-            rs2.setText(unescapeJavaString(currency));
-            rs3.setText("- "+unescapeJavaString(currency));
+            currencyTxt.setText(Util.unescapeJavaString(currency));
+            rs1.setText(Util.unescapeJavaString(currency));
+            rs2.setText(Util.unescapeJavaString(currency));
+            rs3.setText("- "+Util.unescapeJavaString(currency));
 //            rs4.setText(unescapeJavaString(currency));
         }
         else {
@@ -212,7 +213,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
                 String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
                 if (currency.contains("\\")) {
-                    rs5.setText(unescapeJavaString(currency));
+                    rs5.setText(Util.unescapeJavaString(currency));
                 } else {
                     rs5.setText(currency);
                 }
@@ -239,7 +240,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
                 String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
                 if (currency.contains("\\")) {
-                    rs5.setText(unescapeJavaString(currency));
+                    rs5.setText(Util.unescapeJavaString(currency));
                 } else {
                     rs5.setText(currency);
                 }
@@ -269,7 +270,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
                 String currency = prefManager.getSharedValue(AppConstant.CURRENCY);
                 if (currency.contains("\\")) {
-                    rs5.setText(unescapeJavaString(currency));
+                    rs5.setText(Util.unescapeJavaString(currency));
                 } else {
                     rs5.setText(currency);
                 }
@@ -350,7 +351,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
 
 
             if (currency.contains("\\")) {
-                holder.order_number_rupya.setText(unescapeJavaString(currency));
+                holder.order_number_rupya.setText(Util.unescapeJavaString(currency));
             }
             else {
                 holder.order_number_rupya.setText(currency);
@@ -403,77 +404,6 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
         }
-    }
-
-    public String unescapeJavaString(String st) {
-
-        StringBuilder sb = new StringBuilder(st.length());
-
-        for (int i = 0; i < st.length(); i++) {
-            char ch = st.charAt(i);
-            if (ch == '\\') {
-                char nextChar = (i == st.length() - 1) ? '\\' : st
-                        .charAt(i + 1);
-// Octal escape?
-                if (nextChar >= '0' && nextChar <= '7') {
-                    String code = "" + nextChar;
-                    i++;
-                    if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
-                            && st.charAt(i + 1) <= '7') {
-                        code += st.charAt(i + 1);
-                        i++;
-                        if ((i < st.length() - 1) && st.charAt(i + 1) >= '0'
-                                && st.charAt(i + 1) <= '7') {
-                            code += st.charAt(i + 1);
-                            i++;
-                        }
-                    }
-                    sb.append((char) Integer.parseInt(code, 8));
-                    continue;
-                }
-                switch (nextChar) {
-                    case '\\':
-                        ch = '\\';
-                        break;
-                    case 'b':
-                        ch = '\b';
-                        break;
-                    case 'f':
-                        ch = '\f';
-                        break;
-                    case 'n':
-                        ch = '\n';
-                        break;
-                    case 'r':
-                        ch = '\r';
-                        break;
-                    case 't':
-                        ch = '\t';
-                        break;
-                    case '\"':
-                        ch = '\"';
-                        break;
-                    case '\'':
-                        ch = '\'';
-                        break;
-// Hex Unicode: u????
-                    case 'u':
-                        if (i >= st.length() - 5) {
-                            ch = 'u';
-                            break;
-                        }
-                        int code = Integer.parseInt(
-                                "" + st.charAt(i + 2) + st.charAt(i + 3)
-                                        + st.charAt(i + 4) + st.charAt(i + 5), 16);
-                        sb.append(Character.toChars(code));
-                        i += 5;
-                        continue;
-                }
-                i++;
-            }
-            sb.append(ch);
-        }
-        return sb.toString();
     }
 
 }

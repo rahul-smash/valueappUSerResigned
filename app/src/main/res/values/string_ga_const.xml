@@ -48,7 +48,7 @@
 
     <!--lbl-->
     <string name="ga_lbl_added_to_cart">A Product with name %1$s , price %2$s is added to cart</string>
-    <string name="ga_lbl_removed_from_cart">A Product with name %1$s , price %%2$s is removed from cart</string>
+    <string name="ga_lbl_removed_from_cart">A Product with name %1$s , price %2$s is removed from cart</string>
     <string name="ga_lbl_share_app">%1$s is shared by user %2$s(%3$s)</string>
     <string name="ga_lbl_refer_n_earn">One referral code is shared by user %1$s(%2$s)</string>
     <string name="ga_lbl_search">There is a search for item %1$s On %2$s</string>

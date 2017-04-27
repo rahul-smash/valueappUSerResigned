@@ -173,7 +173,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
             }
 
             final OrderHistoryModel orderHistoryModel = liseOrderHistoryModel.get(position);
-
+//            holder.mBtnCancel.setEnabled(true);
+            holder.mBtnCancel.setVisibility(View.VISIBLE);
             if (orderHistoryModel.getStatus().equals("0")) {
                 holder.status.setText(getString(R.string.str_pending));
             } else if (orderHistoryModel.getStatus().equals("1")) {
@@ -182,6 +183,8 @@ public class OrderHistory extends Fragment implements View.OnClickListener {
                 holder.status.setText(getString(R.string.str_rejected));
             } else if (orderHistoryModel.getStatus().equals("3") || orderHistoryModel.getStatus().equals("6")) {
                 holder.status.setText(getString(R.string.str_cancelled));
+//                holder.mBtnCancel.setEnabled(false);
+                holder.mBtnCancel.setVisibility(View.GONE);
             } else if (orderHistoryModel.getStatus().equals("4")) {
                 holder.status.setText(getString(R.string.str_shipped));
             } else if (orderHistoryModel.getStatus().equals("5")) {

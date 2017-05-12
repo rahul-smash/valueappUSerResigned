@@ -345,7 +345,7 @@
     <string name="lbl_loyalitypoints">Loyalty Points</string>
     <string name="lbl_login">Log In</string>
     <string name="lbl_share_with">Share with</string>
-    <string name="lbl_refer_msg">Refer N Earn</string>
+    <string name="lbl_refer_msg">Refer and Earn</string>
     <string name="lbl_login_msgs">Login Successfully!</string>
     <string name="lbl_login_error_msg">Login Failed or Cancelled!</string>
     <string name="lbl_latest_update">Latest Update</string>
@@ -416,7 +416,7 @@
     <string name="str_app_from"> app from </string>
     <string name="str_thanks_n_regards"> Thanks and Regards </string>
     <string name="str_share">Share</string>
-    <string name="str_refer_n_earn">Refer And Earn</string>
+    <string name="str_refer_n_earn">Refer and Earn</string>
     <string name="msg_dialog_add_shopping_list">Are you sure to add this product to shopping list?</string>
     <string name="str_off"> OFF </string>
 

@@ -216,6 +216,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/linear5"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/round_corner1"
                 android:ems="10"

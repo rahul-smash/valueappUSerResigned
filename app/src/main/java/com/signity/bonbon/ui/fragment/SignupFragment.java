@@ -1,5 +1,6 @@
 package com.signity.bonbon.ui.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.signity.bonbon.model.LoginData;
 import com.signity.bonbon.model.LoginModel;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.login.LoginScreenActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -234,15 +236,12 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
 
     private void proceedtoActivity() {
-        Intent intent_home = new Intent(getActivity(), MainActivity.class);
-        intent_home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent_home);
-        getActivity().finish();
-
         if(getActivity().getCurrentFocus()!=null) {
             final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
         }
+
+        ((LoginScreenActivity) getActivity()).setResultForActivity(Activity.RESULT_OK);
     }
 
     private void saveUserIdToPref(LoginData data) {

@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AnimUtil;
 import com.signity.bonbon.Utilities.AppConstant;
@@ -776,6 +777,7 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 if (resultCode == Activity.RESULT_OK) {
 //                    userId = prefManager.getSharedValue(AppConstant.ID);
 //                    adapter.notifyDataSetChanged();
+                    logUser();
                     callProceedToPlaceOrder();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Toast.makeText(context, getString(R.string.lbl_login_error_msg), Toast.LENGTH_SHORT).show();
@@ -783,5 +785,18 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
                 break;
         }
     }
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        try {
+            Crashlytics.setUserIdentifier(prefManager.getSharedValue(AppConstant.ID));
+            Crashlytics.setUserEmail(prefManager.getSharedValue(AppConstant.EMAIL));
+            Crashlytics.setUserName(prefManager.getSharedValue(AppConstant.NAME));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

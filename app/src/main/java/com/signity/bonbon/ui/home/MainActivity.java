@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
@@ -71,6 +72,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.fabric.sdk.android.Fabric;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.slider_pane);
         context = this;
         GATrackers.getInstance().
@@ -567,6 +570,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(context, getString(R.string.lbl_login_msgs), Toast.LENGTH_SHORT).show();
                     getPreferencesValues();
                     updateUserName();
+                    // TODO: Move this to where you establish a user session
+                    logUser();
+
                     adapter.notifyDataSetChanged();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
                     Toast.makeText(context, getString(R.string.lbl_login_error_msg), Toast.LENGTH_SHORT).show();
@@ -574,6 +580,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        try {
+            Crashlytics.setUserIdentifier(prefManager.getSharedValue(AppConstant.ID));
+            Crashlytics.setUserEmail(prefManager.getSharedValue(AppConstant.EMAIL));
+            Crashlytics.setUserName(prefManager.getSharedValue(AppConstant.NAME));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void logOutUser() {
         PrefManager prefManager = new PrefManager(MainActivity.this);

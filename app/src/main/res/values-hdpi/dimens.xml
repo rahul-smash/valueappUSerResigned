@@ -129,6 +129,7 @@
     <dimen name="image_size">150dp</dimen>
     <integer name="cat_image_size">300</integer>
     <dimen name="pager_height">200dp</dimen>
+    <dimen name="margin_bottom">50dp</dimen>
     <dimen name="bottom_margin_logo">-20dp</dimen>
     <dimen name="bottom_margin">10dp</dimen>
 

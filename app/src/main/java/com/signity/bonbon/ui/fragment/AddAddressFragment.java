@@ -134,12 +134,13 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                                                  }
 
                                              } else {
-                                                 if (address_line1.getText().toString().isEmpty()) {
-                                                     address_line1.setError(getString(R.string.lbl_required_address));
-                                                 } else if (areaID.isEmpty()) {
+                                                 if (areaID.isEmpty()) {
                                                      city_name.setError(getString(R.string.lbl_city));
                                                      area_name.setError(getString(R.string.lbl_area));
-                                                 } else {
+                                                 }
+                                                 else if (address_line1.getText().toString().isEmpty()) {
+                                                     address_line1.setError(getString(R.string.lbl_required_address));
+                                                 }  else {
                                                      addNewDeliveryAddress();
                                                  }
 

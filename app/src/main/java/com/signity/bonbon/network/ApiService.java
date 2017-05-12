@@ -15,6 +15,7 @@ import com.signity.bonbon.model.GetPickupApiResponse;
 import com.signity.bonbon.model.GetStoreArea;
 import com.signity.bonbon.model.GetStoreModel;
 import com.signity.bonbon.model.GetSubCategory;
+import com.signity.bonbon.model.LoginModel;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.MobResponse;
 import com.signity.bonbon.model.OnlinePaymentModel;
@@ -178,6 +179,25 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/multiple_tax_calculation")
     void getTaxCalculations(@FieldMap Map<String, String> parameters, Callback<TaxCalculationModel> response);
+
+
+    @FormUrlEncoded
+    @POST("/userLogin")
+    void loginVerification(@FieldMap Map<String, String> parameters, Callback<LoginModel> response);
+
+
+    @FormUrlEncoded
+    @POST("/userSignup")
+    void userSignup(@FieldMap Map<String, String> parameters, Callback<LoginModel> response);
+
+    @FormUrlEncoded
+    @POST("/forgetPassword")
+    void forgetPassword(@FieldMap Map<String, String> parameters, Callback<LoginModel> response);
+
+    @FormUrlEncoded
+    @POST("/updatePhoneNumber")
+    void updatePhoneNumber(@FieldMap Map<String, String> parameters, Callback<LoginModel> response);
+
 
     @FormUrlEncoded
     @POST("/productDetail")

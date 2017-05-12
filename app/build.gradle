@@ -18,11 +18,13 @@ android {
         buildConfigField "String", "STORE_TYPE", "\"${store_type}\""
         buildConfigField "int", "DB_VERSION", "${db_version}"
         buildConfigField "String", "NETWORK_URL", "\"${network_url}${store_id}/${api_version}\""
+        buildConfigField "String", "LOGIN_WITH_EMAIL", "\"${login_with_email}\""
 
         //Reference them in .xml files.
         resValue "string", "app_name", "${app_name}"
         resValue "color", "ColorPrimary", "${color_primary}"
         resValue "color", "ColorPrimaryDark", "${color_primary_dark}"
+        resValue "string", "facebook_app_id", "${facebook_app_id}"
 
     }
     buildTypes {
@@ -63,9 +65,11 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:${playLibVersion}"
     compile "com.google.android.gms:play-services-location:${playLibVersion}"
     compile "com.google.android.gms:play-services-analytics:${playLibVersion}"
+    compile "com.google.android.gms:play-services-auth:${playLibVersion}"
     compile "com.squareup.picasso:picasso:${picassoLibVersion}"
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     compile 'com.google.firebase:firebase-core:9.0.0'
     compile 'com.google.firebase:firebase-messaging:9.0.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
 }
 apply plugin: 'com.google.gms.google-services'

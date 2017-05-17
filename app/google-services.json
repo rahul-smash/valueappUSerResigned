@@ -81,6 +81,13 @@
             {
               "client_id": "642385261665-6c08pvv0polvtogms4be88lmpffackps.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "642385261665-8urgppl4i95vqcc7jvf1fqh3tq812088.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.signity.FCC"
+              }
             }
           ]
         },
@@ -145,6 +152,84 @@
             {
               "client_id": "642385261665-6c08pvv0polvtogms4be88lmpffackps.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "642385261665-8urgppl4i95vqcc7jvf1fqh3tq812088.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.signity.FCC"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642385261665:android:cb971824fe231001",
+        "android_client_info": {
+          "package_name": "com.signity.bombayspice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642385261665-ep5distfgddhoafisc6cvr4v5pcou5jk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signity.bombayspice",
+            "certificate_hash": "e3746660b1a422503eedaec25e29fb5bb450ff42"
+          }
+        },
+        {
+          "client_id": "642385261665-tnj0ga3cvbivim09okr3pg1e1jkvml46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signity.bombayspice",
+            "certificate_hash": "1783843b364035d8d8b94a73a9d9aac093520877"
+          }
+        },
+        {
+          "client_id": "642385261665-j09932d8t6hur71ov2ecqv5d3fafb9vt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.signity.bombayspice",
+            "certificate_hash": "eae6951cb4a3e5605bb8696e32a1bc1fd78a68d9"
+          }
+        },
+        {
+          "client_id": "642385261665-6c08pvv0polvtogms4be88lmpffackps.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "642385261665-creqv34c9tdph0pad1sljpbkbc39l4ov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKlxmByrb8059TCwxDC14cTn4xUrpxP6M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642385261665-6c08pvv0polvtogms4be88lmpffackps.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "642385261665-8urgppl4i95vqcc7jvf1fqh3tq812088.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.signity.FCC"
+              }
             }
           ]
         },

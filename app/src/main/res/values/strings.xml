@@ -320,6 +320,8 @@
     <string name="lbl_edit_address">Edit address</string>
     <string name="lbl_add_address">Add address</string>
     <string name="lbl_required_address">Address Required</string>
+    <string name="lbl_country">Country</string>
+    <string name="lbl_state">State</string>
     <string name="lbl_city">City</string>
     <string name="lbl_area">Area</string>
     <string name="lbl_enter_message">Enter Your Message</string>
@@ -332,6 +334,7 @@
     <string name="lbl_delete_address">Are you sure you want to delete this address?</string>
     <string name="lbl_no_pickup_location">Sorry no pickup location available for above area</string>
     <string name="lbl_entername">Please Enter Name</string>
+    <string name="lbl_enteremail">Please Enter Email</string>
     <string name="lbl_off">OFF</string>
     <string name="lbl_no_response">No response</string>
     <string name="lbl_home">Home</string>
@@ -353,6 +356,7 @@
     <string name="lbl_categories">Categories</string>
     <string name="lbl_no_categories">No Category exists.</string>
     <string name="lbl_update_name">Please Update Name</string>
+    <string name="lbl_update_email">Please Update Email</string>
     <string name="lbl_login_to_access">Login to access your Code.</string>
     <string name="lbl_thank_you">Thank you!</string>
     <string name="lbl_youhave_nil_points">You have NIL points.</string>

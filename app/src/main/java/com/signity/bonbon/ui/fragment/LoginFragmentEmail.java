@@ -124,6 +124,10 @@ public class LoginFragmentEmail extends Fragment {
                 return;
             }
         }
+        else {
+            Toast.makeText(getActivity(), getString(R.string.lbl_enteremail), Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
         prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);

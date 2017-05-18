@@ -60,6 +60,8 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
     private String userId;
     private String from;
     private TextView edit_address;
+    private EditText getPhone;
+    private boolean iscountryEnalble=false, isStateEnable=false, isCityEnable=false;
 
 
     @Override
@@ -134,13 +136,8 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
                                                  }
 
                                              } else {
-                                                 if (areaID.isEmpty()) {
-                                                     city_name.setError(getString(R.string.lbl_city));
-                                                     area_name.setError(getString(R.string.lbl_area));
-                                                 }
-                                                 else if (address_line1.getText().toString().isEmpty()) {
-                                                     address_line1.setError(getString(R.string.lbl_required_address));
-                                                 }  else {
+
+                                                 if (checkValidations()) {
                                                      addNewDeliveryAddress();
                                                  }
 
@@ -152,6 +149,53 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 
 
         return mView;
+    }
+
+    private boolean checkValidations() {
+
+        if(iscountryEnalble){
+            if(country_name.getText().toString().trim().isEmpty()){
+                country_name.setError(getString(R.string.lbl_country));
+                return false;
+            }else {
+                country_name.setError(null);
+            }
+        }
+
+        if(isStateEnable){
+            if(state_name.getText().toString().trim().isEmpty()){
+                state_name.setError(getString(R.string.lbl_state));
+                return false;
+            }else {
+                state_name.setError(null);
+            }
+        }
+
+        if(isCityEnable){
+            if(city_name.getText().toString().trim().isEmpty()){
+                city_name.setError(getString(R.string.lbl_city));
+                return false;
+            }else {
+                city_name.setError(null);
+            }
+        }
+
+        if(areaID.isEmpty()){
+            area_name.setError(getString(R.string.lbl_area));
+            return false;
+        }else {
+            area_name.setError(null);
+        }
+
+
+        if (address_line1.getText().toString().isEmpty()) {
+            address_line1.setError(getString(R.string.lbl_required_address));
+            return false;
+        }
+        else {
+            address_line1.setError(null);
+        }
+        return true;
     }
 
     private void getDeliveryAreaSwitchesStatus() {
@@ -328,18 +372,24 @@ public class AddAddressFragment extends Fragment implements View.OnClickListener
 
         if (prefManager.getAreaSwitch(AppConstant.COUNTRY).equalsIgnoreCase("0")) {
             countryLayout.setVisibility(View.GONE);
+            iscountryEnalble=false;
         } else {
             countryLayout.setVisibility(View.VISIBLE);
+            iscountryEnalble=true;
         }
         if (prefManager.getAreaSwitch(AppConstant.STATE).equalsIgnoreCase("0")) {
             stateLayout.setVisibility(View.GONE);
+            isStateEnable=false;
         } else {
             stateLayout.setVisibility(View.VISIBLE);
+            isStateEnable=true;
         }
         if (prefManager.getAreaSwitch(AppConstant.CITY).equalsIgnoreCase("0")) {
             cityLayout.setVisibility(View.GONE);
+            isCityEnable=false;
         } else {
             cityLayout.setVisibility(View.VISIBLE);
+            isCityEnable=true;
         }
         /*if (prefManager.getAreaSwitch(AppConstant.SHOW_MAP).equalsIgnoreCase("0")) {
             areaLayout.setVisibility(View.GONE);

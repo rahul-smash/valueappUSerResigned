@@ -115,9 +115,8 @@ public class Profile extends Fragment implements View.OnClickListener {
         }
 
         if(emailtxt.isEmpty()){
-            prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
-            prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);
-            callUpdateProfileService();
+            Toast.makeText(getActivity(), getString(R.string.lbl_update_email), Toast.LENGTH_SHORT).show();
+            return;
         }
         else {
             if(checkValidEmail(emailtxt.trim())){

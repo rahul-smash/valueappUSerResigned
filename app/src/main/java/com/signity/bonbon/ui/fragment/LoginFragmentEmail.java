@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -123,10 +124,6 @@ public class LoginFragmentEmail extends Fragment {
                 Toast.makeText(getActivity(), getString(R.string.msg_toast_enter_email), Toast.LENGTH_SHORT).show();
                 return;
             }
-        }
-        else {
-            Toast.makeText(getActivity(), getString(R.string.lbl_enteremail), Toast.LENGTH_SHORT).show();
-            return;
         }
 
         prefManager.storeSharedValue(AppConstant.NAME, nameTxt);

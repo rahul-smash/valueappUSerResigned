@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -22,6 +23,7 @@ import com.signity.bonbon.Utilities.ProgressDialogUtil;
 import com.signity.bonbon.model.EmailResponse;
 import com.signity.bonbon.network.NetworkAdaper;
 import com.signity.bonbon.ui.home.MainActivity;
+import com.signity.bonbon.ui.loginwithemail.LoginWithEmailFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -115,8 +117,17 @@ public class Profile extends Fragment implements View.OnClickListener {
         }
 
         if(emailtxt.isEmpty()){
-            Toast.makeText(getActivity(), getString(R.string.lbl_update_email), Toast.LENGTH_SHORT).show();
-            return;
+
+            if(BuildConfig.LOGIN_WITH_EMAIL.equalsIgnoreCase("yes")){
+                Toast.makeText(getActivity(), getString(R.string.lbl_update_email), Toast.LENGTH_SHORT).show();
+                return;
+            }else {
+                prefManager.storeSharedValue(AppConstant.NAME, nameTxt);
+                prefManager.storeSharedValue(AppConstant.EMAIL, emailtxt);
+                callUpdateProfileService();
+            }
+
+
         }
         else {
             if(checkValidEmail(emailtxt.trim())){

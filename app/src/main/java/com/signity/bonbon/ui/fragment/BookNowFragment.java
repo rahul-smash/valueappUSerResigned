@@ -21,7 +21,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.signity.bonbon.BuildConfig;
 import com.signity.bonbon.R;
 import com.signity.bonbon.Utilities.AppConstant;
 import com.signity.bonbon.Utilities.DialogHandler;
@@ -285,8 +287,10 @@ public class BookNowFragment extends Fragment implements View.OnClickListener {
             return false;
         }
         else if (phoneNumber.getText().toString().trim().length()!=10){
-            input_layout_phone.setError(getString(R.string.str_booknow_fragment_mobile_valiation));
-            return false;
+            if(!BuildConfig.LOGIN_WITH_EMAIL.equalsIgnoreCase("yes")){
+                input_layout_phone.setError(getString(R.string.str_booknow_fragment_mobile_valiation));
+                return false;
+            }
         }
         else {
             input_layout_phone.setErrorEnabled(false);

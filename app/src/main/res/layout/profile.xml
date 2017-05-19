@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="@string/str_lbl_phoneno"
+                    android:text="@string/str_lbl_referalcode"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_normal" />
 

@@ -525,7 +525,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = edtBar.getText().toString();
+        String note = "Delivery type-Delivery\nMobile App-COD\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();
@@ -591,7 +591,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = edtBar.getText().toString();
+        String note = "Delivery type-PickUp\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
 
@@ -656,7 +656,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = edtBar.getText().toString();
+        String note = "Delivery type-PickUp\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
 
@@ -722,7 +722,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = edtBar.getText().toString();
+        String note = "Delivery type-DineIn\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
 
@@ -789,7 +789,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = edtBar.getText().toString();
+        String note = "Delivery type-DineIn\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
 
@@ -860,7 +860,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
         String order = appDb.getCartListStringJson();
-        String note = "Online "+edtBar.getText().toString();
+        String note = "Delivery type-Delivery\nMobile App-Online\n"+edtBar.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
         Log.e("Order", order);
         Map<String, String> param = new HashMap<String, String>();

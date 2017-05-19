@@ -102,7 +102,7 @@
     <string name="str_no_record_found">No records found</string>
     <string name="str_weight">40 gms</string>
     <string name="str_choose_your_payment_method">Choose your payment method</string>
-    <string name="str_cod">Cash On Delivery</string>
+    <string name="str_cod">COD</string>
     <string name="str_online">Pay Now</string>
     <string name="str_title_refferal">Enter Referral Code</string>
     <string name="str_message_refferal">Kindly Login with Referral Code for and Earn Free Coupons.</string>

@@ -276,7 +276,13 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                 }
                 double tax= Double.parseDouble(detailsList.get(i).getTax());
 
-                tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
+
+                if(detailsList.get(i).getRate().isEmpty() || detailsList.get(i).getRate().equalsIgnoreCase("0")){
+                    tax_label.setText("" + detailsList.get(i).getLabel());
+                }else {
+                    tax_label.setText("" + detailsList.get(i).getLabel() + "(" + detailsList.get(i).getRate() + "%)");
+                }
+
                 tax_value.setText("" + String.format("%.2f", tax));
                 if(tax!=0.0){
                     linearTaxLayout.addView(child);

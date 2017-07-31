@@ -48,6 +48,10 @@ public class TaxDataModel {
     @Expose
     private List<TaxDetail> taxLabel = new ArrayList<TaxDetail>();
 
+    @SerializedName("products")
+    @Expose
+    private List<ProductsWIthTax> products = null;
+
 
     public List<TaxDetail> getTaxLabel() {
         return taxLabel;
@@ -114,5 +118,12 @@ public class TaxDataModel {
         this.total = total;
     }
 
+    public List<ProductsWIthTax> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductsWIthTax> products) {
+        this.products = products;
+    }
 
 }

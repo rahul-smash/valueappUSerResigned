@@ -3,6 +3,8 @@ package com.signity.bonbon.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by rajesh on 15/10/15.
  */
@@ -67,6 +69,10 @@ public class OrderHistoryItemModel {
     @SerializedName("isTaxEnable")
     @Expose
     private String isTaxEnable;
+
+    @SerializedName("gst")
+    @Expose
+    private List<Gst> gst = null;
 
 
     public String getIsTaxEnable() {
@@ -329,4 +335,13 @@ public class OrderHistoryItemModel {
     public void setProductBrand(String productBrand) {
         this.productBrand = productBrand;
     }
+
+    public List<Gst> getGst() {
+        return gst;
+    }
+
+    public void setGst(List<Gst> gst) {
+        this.gst = gst;
+    }
+
 }

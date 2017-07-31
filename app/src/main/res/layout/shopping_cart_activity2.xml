@@ -100,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/divider"></View>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -132,6 +133,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp">
 
+
                     <TextView
                         android:id="@+id/total"
                         android:layout_width="wrap_content"
@@ -140,7 +142,9 @@
                         android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/total_size"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:layout_alignBaseline="@+id/rs4"/>
 
                     <TextView
                         android:id="@+id/rs4"
@@ -149,11 +153,33 @@
                         android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/total_size"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:drawableLeft="@drawable/information"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical"/>
 
                 </RelativeLayout>
             </LinearLayout>
 
+
+            <TextView
+                android:id="@+id/infoTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/loyalityScreen"
+                android:paddingLeft="5dp"
+                android:text="@string/str_gst_detail"
+                android:textSize="@dimen/text_size_extra_small"/>
+
+            <TextView
+                android:id="@+id/taxTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loyalityScreen"
+                android:paddingLeft="5dp"
+                android:text="@string/str_tax"
+                android:textSize="@dimen/text_size_extra_small"/>
 
             <RelativeLayout
                 android:id="@+id/normalOfferScreen"
@@ -304,13 +330,6 @@
             </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/taxTag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/loyalityScreen"
-                android:paddingLeft="5dp"
-                android:text="@string/str_tax" />
 
             <LinearLayout
                 android:id="@+id/bottom_layout"

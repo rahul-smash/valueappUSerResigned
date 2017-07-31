@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,8 +27,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.TableRow.LayoutParams;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,11 +56,13 @@ import com.signity.bonbon.db.AppDatabase;
 import com.signity.bonbon.ga.GATrackers;
 import com.signity.bonbon.model.FixedTaxDetail;
 import com.signity.bonbon.model.GetOfferResponse;
+import com.signity.bonbon.model.Gst;
 import com.signity.bonbon.model.LoyalityDataModel;
 import com.signity.bonbon.model.LoyalityModel;
 import com.signity.bonbon.model.OfferData;
 import com.signity.bonbon.model.OnlinePaymentModel;
 import com.signity.bonbon.model.Product;
+import com.signity.bonbon.model.ProductsWIthTax;
 import com.signity.bonbon.model.ResponseData;
 import com.signity.bonbon.model.SelectedVariant;
 import com.signity.bonbon.model.Store;
@@ -101,10 +114,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     ListOfferAdapter mAdapter;
     ListView offerList;
     TextView messageTxt;
-    Dialog dialog, redeemDialog;
+    Dialog dialog, redeemDialog, taxDetailDialog;
     ListView list_view;
     Adapter pointAdapter;
-    RelativeLayout normalOfferScreen, shipping_layout, discount_layout;
+    RelativeLayout normalOfferScreen, shipping_layout, discount_layout, totalLayout;
     LinearLayout loyalityScreen;
     String isTaxEnable, taxLabel, taxRate;
     String discount = "0", fixed_discount_amount = "0";
@@ -124,6 +137,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private String couponCode = "";    // variable used to store couponcode applied by the User.
     private String tax="0" , dining_table="",dine_in="";
     GsonHelper gsonHelper;
+
+    private List<ProductsWIthTax> productListWithTax;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -185,6 +200,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
         loyalityScreen = (LinearLayout) findViewById(R.id.loyalityScreen);  // getting id of loyality screen
         normalOfferScreen = (RelativeLayout) findViewById(R.id.normalOfferScreen); // getting id of normal screen
+        totalLayout = (RelativeLayout) findViewById(R.id.total_layout);
 
         loyalityStatus = prefManager.getSharedValue(AppConstant.LOYALITY);
 
@@ -230,6 +246,7 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         applyOffer.setOnClickListener(this);
         applyOffer_1.setOnClickListener(this);
         redeemPoints.setOnClickListener(this);
+        totalLayout.setOnClickListener(this);
 
 
         listProduct = appDb.getCartListProduct();
@@ -530,7 +547,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
-        String order = appDb.getCartListStringJson();
+//        String order = appDb.getCartListStringJson();
+        String order = prefManager.getSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX);
         String note = "Delivery type-Delivery\nMobile App-COD\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
         Log.e("Order", order);
@@ -596,7 +614,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
-        String order = appDb.getCartListStringJson();
+//        String order = appDb.getCartListStringJson();
+        String order = prefManager.getSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX);
         String note = "Delivery type-PickUp\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
@@ -661,7 +680,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
-        String order = appDb.getCartListStringJson();
+//        String order = appDb.getCartListStringJson();
+        String order = prefManager.getSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX);
         String note = "Delivery type-PickUp\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
@@ -727,7 +747,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
-        String order = appDb.getCartListStringJson();
+//        String order = appDb.getCartListStringJson();
+        String order = prefManager.getSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX);
         String note = "Delivery type-DineIn\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
@@ -794,7 +815,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
-        String order = appDb.getCartListStringJson();
+//        String order = appDb.getCartListStringJson();
+        String order = prefManager.getSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX);
         String note = "Delivery type-DineIn\nMobile App-"+payment_mode+"\n"+edtBar.getText().toString();
 //        String tax = tax_value.getText().toString();
 
@@ -865,7 +887,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         String orderPrice = items_price.getText().toString();
         String discount = discountVal.getText().toString();
         String amount = total.getText().toString();
-        String order = appDb.getCartListStringJson();
+//        String order = appDb.getCartListStringJson();
+        String order = prefManager.getSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX);
         String note = "Delivery type-Delivery\nMobile App-Online\n"+edtBar.getText().toString();
         String coupon_code = "" + editCoupon.getText().toString();
         Log.e("Order", order);
@@ -1031,6 +1054,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.total_layout:
+                Util.showTaxDetail(this, productListWithTax);
+                break;
+
         }
     }
 
@@ -1644,12 +1671,13 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
     private void callNetworkForTaxCalculations() {
 
         ProgressDialogUtil.showProgressDialog(ShoppingCartActivity2.this);
-        PrefManager prefManager = new PrefManager(this);
+        final PrefManager prefManager = new PrefManager(this);
 //        taxRate=prefManager.getSharedValue(AppConstant.tax_rate); //getting tax rate from prefrencees
 
         String shippingcharge = shipping_charges.getText().toString();
 
-        String order = appDb.getCartItemsListStringJson();
+//        String order = appDb.getCartItemsListStringJson();
+        String order = appDb.getCartListStringJson();
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("shipping", shippingcharge);
@@ -1705,6 +1733,10 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
 
                     initializeFooterView(model);
 
+                    productListWithTax=model.getProducts();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(productListWithTax);
+                    prefManager.storeSharedValue(AppConstant.PRODUCT_LIST_WITH_TAX, json);
 
                 } else {
 
@@ -2236,5 +2268,8 @@ public class ShoppingCartActivity2 extends Activity implements View.OnClickListe
         }
 
     }
+
+
+
 
 }

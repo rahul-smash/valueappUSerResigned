@@ -56,5 +56,6 @@ public class AppConstant {
     public static final String STATE = "com.android.bonbon.Utilities.STATE";
     public static final String COUNTRY = "com.android.bonbon.Utilities.COUNTRY";
     public static final String RECOMMENDED_ITEMS = "com.android.bonbon.Utilities.RECOMMENDED_ITEMS";
+    public static final String PRODUCT_LIST_WITH_TAX = "com.android.bonbon.Utilities.PRODUCT_LIST_WITH_TAX";
 
 }

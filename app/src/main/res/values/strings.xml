@@ -268,6 +268,7 @@
     <string name="str_nofavs_found">No Favorites found</string>
     <string name="str_proceed_further">Proceed to Checkout</string>
     <string name="str_selct_copon">Select Coupon</string>
+    <string name="str_tax_details">Tax Details</string>
     <string name="str_available_coupons">Available Coupons</string>
     <string name="str_no_coupons">Sorry, there are no Coupons available.</string>
     <string name="str_apply">Apply</string>
@@ -423,5 +424,13 @@
     <string name="str_refer_n_earn">Refer and Earn</string>
     <string name="msg_dialog_add_shopping_list">Are you sure to add this product to shopping list?</string>
     <string name="str_off"> OFF </string>
+    <string name="str_products_name">Product Name</string>
+    <string name="str_tax_rate">Tax</string>
+    <string name="str_taxable_amt">Price</string>
+    <string name="str_tax_amount">Tax Amount</string>
+    <string name="str_total">Total</string>
+    <string name="str_gst_detail">*Click info icon to know more about GST</string>
+    <string name="str_gst_info">To know about per product GST</string>
+    <string name="str_bill_details">Bill Details</string>
 
 </resources>

@@ -1,13 +1,18 @@
 package com.signity.bonbon.ui.order;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
@@ -16,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.signity.bonbon.R;
@@ -25,8 +32,10 @@ import com.signity.bonbon.Utilities.PrefManager;
 import com.signity.bonbon.Utilities.Util;
 import com.signity.bonbon.app.DataAdapter;
 import com.signity.bonbon.model.FixedTaxDetail;
+import com.signity.bonbon.model.Gst;
 import com.signity.bonbon.model.OrderHistoryItemModel;
 import com.signity.bonbon.model.OrderHistoryModel;
+import com.signity.bonbon.model.ProductsWIthTax;
 import com.signity.bonbon.model.TaxDetails;
 
 import java.util.ArrayList;
@@ -47,13 +56,14 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
     PrefManager prefManager;
     OrderHistoryModel orderHistoryModel;
     List<OrderHistoryItemModel> listOrderHistoryItemModel;
-    Button backButton;
+    Button backButton, bill_detail_btn;
 
     Animation slideUpAnim;
     Animation slideDownAnim;
-    RelativeLayout layout_total,taxlayout,shipping_layout,discount_layout;
+    RelativeLayout layout_total,taxlayout,shipping_layout,discount_layout, gst_layout;
     String isTaxEnable,taxLabel,taxRate;
     LinearLayout linearFixedTaxLayout,linearTaxLayout,linearFixedTaxLayoutDisable;
+    Dialog taxDetailDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +85,7 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         linearFixedTaxLayout=(LinearLayout)findViewById(R.id.linearFixedTaxLayout);
         linearTaxLayout=(LinearLayout)findViewById(R.id.linearTaxLayout);
         linearFixedTaxLayoutDisable=(LinearLayout)findViewById(R.id.linearFixedTaxLayoutDisable);
+        gst_layout=(RelativeLayout)findViewById(R.id.gst_layout);
 
         rs1=(TextView)findViewById(R.id.rs1);
         rs2=(TextView)findViewById(R.id.rs2);
@@ -93,6 +104,8 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
         prefManager = new PrefManager(this);
         order_history_list = (ListView) findViewById(com.signity.bonbon.R.id.order_history_list);
         backButton = (Button) findViewById(com.signity.bonbon.R.id.backButton);
+        bill_detail_btn=(Button)findViewById(R.id.bill_detail_btn);
+        bill_detail_btn.setOnClickListener(this);
         no_record = (TextView) findViewById(com.signity.bonbon.R.id.no_record);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +126,22 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                 no_record.setVisibility(View.GONE);
                 adapter = new Adapter(this, listOrderHistoryItemModel);
                 order_history_list.setAdapter(adapter);
+
+                try {
+                    if(listOrderHistoryItemModel.get(0).getGst()!=null && listOrderHistoryItemModel.get(0).getGst().size()!=0){
+                        gst_layout.setVisibility(View.VISIBLE);
+                    }else {
+                        gst_layout.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    gst_layout.setVisibility(View.GONE);
+                }
+
             } else {
                 order_history_list.setVisibility(View.GONE);
                 no_record.setVisibility(View.VISIBLE);
+                gst_layout.setVisibility(View.GONE);
             }
         }
 
@@ -409,7 +435,217 @@ public class OrderDetail extends AppCompatActivity implements View.OnClickListen
                     layout_total.setVisibility(View.GONE);
                 }
                 break;
+            case R.id.bill_detail_btn:
+                showTaxDetail(this, listOrderHistoryItemModel);
+                break;
         }
+    }
+
+    public void showTaxDetail(Context context, List<OrderHistoryItemModel> productListWithTax){
+        taxDetailDialog=null;
+        taxDetailDialog = new Dialog(context);
+        taxDetailDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        taxDetailDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        taxDetailDialog.setContentView(R.layout.layout_tax_detail_layout);
+
+        TableLayout mainTable = (TableLayout) taxDetailDialog.findViewById(R.id.maintable);
+        addHeaders(context,mainTable);
+
+        addData(context,mainTable,productListWithTax);
+
+        taxDetailDialog.setCanceledOnTouchOutside(true);
+        taxDetailDialog.show();
+    }
+
+    private void addData(Context context, TableLayout mainTable, List<OrderHistoryItemModel> productListWithTax) {
+
+        if(productListWithTax!=null && productListWithTax.size()!=0){
+
+            for(int i=0; i<productListWithTax.size(); i++){
+
+                String taxLabel1 = null, taxLabel2 = null, tax1 = null, tax2 = null, rate = null, actualPrice = null, totalPrice = null, taxType=null;
+                String productName= (!productListWithTax.get(i).getProductName().isEmpty() ? productListWithTax.get(i).getProductName():"");
+                List<Gst> gst = productListWithTax.get(i).getGst();
+                if(!gst.isEmpty()){
+                    taxLabel1=(!gst.get(0).getLable1().isEmpty() ? gst.get(0).getLable1():"");
+                    taxLabel2=(!gst.get(0).getLable2().isEmpty() ? gst.get(0).getLable2():"");
+                    tax1=(!gst.get(0).getTax1().toString().isEmpty() ? gst.get(0).getTax1().toString():"");
+                    tax2=(!gst.get(0).getTax2().toString().isEmpty() ? gst.get(0).getTax2().toString():"");
+                    rate=(!gst.get(0).getRate().isEmpty() ? gst.get(0).getRate():"");
+                    actualPrice=(!gst.get(0).getActualPrice().toString().isEmpty() ? gst.get(0).getActualPrice().toString():"");
+                    totalPrice=(!gst.get(0).getTotalPrice().toString().isEmpty() ? gst.get(0).getTotalPrice().toString():"");
+                    taxType=(!gst.get(0).getType().toString().isEmpty() ? gst.get(0).getType().toString():"");
+                }
+
+                TableRow tr = new TableRow(context);
+                tr.setLayoutParams(new TableRow.LayoutParams(
+                        TableRow.LayoutParams.FILL_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT));
+
+                /** Creating a TextView to add to the row **/
+                TextView product = new TextView(context);
+                product.setText(productName+"\n("+rate+"% "+taxLabel1+"+"+taxLabel2+")");
+                product.setTextColor(Color.BLACK);
+                product.setGravity(Gravity.LEFT);
+                product.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                product.setPadding(5, 5, 5, 5);
+                product.setTextSize(9);
+                tr.addView(product, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 3f));  // Adding textView to tablerow.
+
+                TableRow.LayoutParams layoutParams=new TableRow.LayoutParams(0, 20, 0.03f);
+                layoutParams.setMargins(0,4,0,4);
+                View v1 = new View(context);
+                v1.setLayoutParams(layoutParams);
+                v1.setBackgroundColor(Color.LTGRAY);
+                tr.addView(v1);
+
+                /** Creating another textview **/
+                TextView taxableAmount = new TextView(context);
+                taxableAmount.setText(actualPrice+"\n("+taxType+")");
+                taxableAmount.setTextColor(Color.BLACK);
+                taxableAmount.setGravity(Gravity.LEFT);
+                taxableAmount.setPadding(5, 5, 5, 5);
+                taxableAmount.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                taxableAmount.setTextSize(9);
+                tr.addView(taxableAmount, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1.3f)); // Adding textView to tablerow.
+
+
+                View v2 = new View(context);
+                v2.setLayoutParams(layoutParams);
+                v2.setBackgroundColor(Color.LTGRAY);
+                tr.addView(v2);
+
+                /** Creating another textview **/
+                TextView taxRate = new TextView(context);
+                taxRate.setText(tax1+" + "+tax2);
+                taxRate.setTextColor(Color.DKGRAY);
+                taxRate.setGravity(Gravity.LEFT);
+                taxRate.setPadding(5, 5, 5, 5);
+                taxRate.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+                taxRate.setTextSize(9);
+                tr.addView(taxRate, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1.5f)); // Adding textView to tablerow.
+
+                View v3 = new View(context);
+                v3.setLayoutParams(layoutParams);
+                v3.setBackgroundColor(Color.LTGRAY);
+                tr.addView(v3);
+
+
+                /** Creating another textview **/
+                /*TextView taxAmout = new TextView(this);
+                taxAmout.setText(tax1+" + "+tax2);
+                taxAmout.setTextColor(Color.BLACK);
+                taxAmout.setGravity(Gravity.CENTER_HORIZONTAL);
+                taxAmout.setPadding(5, 5, 5, 0);
+                taxAmout.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+                taxAmout.setTextSize(9);
+                tr.addView(taxAmout, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)); // Adding textView to tablerow.
+*/
+
+                /** Creating another textview **/
+                TextView total = new TextView(context);
+                total.setText(totalPrice);
+                total.setTextColor(Color.BLACK);
+                total.setGravity(Gravity.LEFT);
+                total.setPadding(5, 5, 5, 5);
+                total.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                total.setTextSize(9);
+                tr.addView(total, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1.3f)); // Adding textView to tablerow.
+
+
+                // Add the TableRow to the TableLayout
+                mainTable.addView(tr, new TableLayout.LayoutParams(
+                        TableRow.LayoutParams.FILL_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT));
+
+
+
+            }
+        }
+
+
+    }
+
+    private void addHeaders(Context context, TableLayout mainTable) {
+
+        PrefManager prefManager=new PrefManager(context);
+        String currency;
+        if (prefManager.getSharedValue(AppConstant.CURRENCY).contains("\\")) {
+            currency=Util.unescapeJavaString(prefManager.getSharedValue(AppConstant.CURRENCY));
+        } else {
+            currency=prefManager.getSharedValue(AppConstant.CURRENCY);
+        }
+
+        TableRow tr = new TableRow(context);
+        tr.setLayoutParams(new TableRow.LayoutParams(
+                TableRow.LayoutParams.FILL_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+
+        /** Creating a TextView to add to the row **/
+        TextView product = new TextView(context);
+        product.setText(context.getResources().getString(R.string.str_products_name));
+        product.setBackgroundResource(R.color.color_gray);
+        product.setTextColor(Color.WHITE);
+        product.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+        product.setPadding(5, 5, 5, 5);
+        product.setTextSize(11);
+        tr.addView(product, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 3f));  // Adding textView to tablerow.
+
+
+        /** Creating another textview **/
+        TextView taxableAmount = new TextView(context);
+        taxableAmount.setText(context.getResources().getString(R.string.str_taxable_amt)+"("+currency+")");
+        taxableAmount.setBackgroundResource(R.color.color_gray);
+        taxableAmount.setTextColor(Color.WHITE);
+        taxableAmount.setPadding(5, 5, 5, 5);
+        taxableAmount.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+        taxableAmount.setTextSize(11);
+        tr.addView(taxableAmount, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1.3f)); // Adding textView to tablerow.
+
+
+//        Creating another textview
+        TextView taxRate = new TextView(context);
+        taxRate.setText(context.getResources().getString(R.string.str_tax_rate)+"("+currency+")");
+        taxRate.setTextColor(Color.WHITE);
+        taxRate.setBackgroundResource(R.color.color_gray);
+        taxRate.setPadding(5, 5, 5, 5);
+        taxRate.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+        taxRate.setTextSize(11);
+        tr.addView(taxRate, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1.5f)); // Adding textView to tablerow.
+
+
+        /** Creating another textview **/
+        /*TextView taxAmout = new TextView(this);
+        taxAmout.setText(getResources().getString(R.string.str_tax_amount));
+        taxAmout.setTextColor(Color.BLACK);
+        taxAmout.setGravity(Gravity.CENTER_HORIZONTAL);
+        taxAmout.setPadding(5, 5, 5, 0);
+        taxAmout.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        taxAmout.setTextSize(11);
+        tr.addView(taxAmout, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)); // Adding textView to tablerow.
+*/
+
+        /** Creating another textview **/
+        TextView total = new TextView(context);
+        total.setText(context.getResources().getString(R.string.str_total)+"("+currency+")");
+        total.setBackgroundResource(R.color.color_gray);
+        total.setTextColor(Color.WHITE);
+        total.setPadding(5, 5, 5, 5);
+        total.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+        total.setTextSize(11);
+        tr.addView(total, new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1.3f)); // Adding textView to tablerow.
+
+        // Add the TableRow to the TableLayout
+        mainTable.addView(tr, new TableLayout.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT));
+
+       /* View v = new View(this);
+        v.setBackgroundColor(R.color.color_ligh_black);
+        v.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, 1));
+
+        tr.addView(v);*/
+
     }
 
 }

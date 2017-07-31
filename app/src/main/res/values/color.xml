@@ -64,6 +64,7 @@
 
     <color name="color_off_white">#FFF7E6</color>
     <color name="color_dark_green">#0D621E</color>
+    <color name="color_gray">#222222</color>
     <!--panna sweets-->
 
 </resources>

@@ -157,7 +157,7 @@ public class SplashActivity extends Activity {
                     prefManager.setPickupFacilityStatus(store.getPickUpFacility());
                     prefManager.setDeliveryFacilityStatus(store.getDeliveryFacility());
                     prefManager.setInStoreFacilityStatus(store.getInStore());
-                    prefManager.setGeoFenceEnableFeature(store.getStoreStatus());
+                    prefManager.setGeoFenceEnableFeature(store.getGeoFenceStatus());
                     prefManager.storeSharedValue(AppConstant.is24x7_open, store.getIs24x7_open());
                     prefManager.storeSharedValue(AppConstant.OPEN_TIME, store.getOpenhoursFrom());
                     prefManager.storeSharedValue(AppConstant.CLOSE_TIME, store.getOpenhoursTo());

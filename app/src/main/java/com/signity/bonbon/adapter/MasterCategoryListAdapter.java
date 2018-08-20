@@ -27,6 +27,7 @@ public class MasterCategoryListAdapter extends RecyclerView.Adapter<MasterCatego
     // Define listener member variable
     private static OnItemClickListener listener;
 
+
     // Define the listener interface
     public interface OnItemClickListener {
         void onItemClick(View itemView, int position);

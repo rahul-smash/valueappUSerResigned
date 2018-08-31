@@ -4,8 +4,8 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.signity.tangerine"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion 16
+        targetSdkVersion 27
         versionCode java.lang.Integer.parseInt("${version_code}")
         versionName "${version_name}"
 
@@ -45,8 +45,8 @@ android {
 
 
 ext {
-    supportLibVersion = '23.0.1'
-    playLibVersion = '9.0.0'
+    supportLibVersion = '27.1.0'
+    playLibVersion = '15.0.1'
     okhttpLibVersion = '2.0.0'
     retrofitLibVersion = '1.9.0'
     picassoLibVersion = '2.5.2'
@@ -65,12 +65,14 @@ dependencies {
     compile "com.squareup.retrofit:retrofit:${retrofitLibVersion}"
     compile "com.squareup.okhttp:okhttp:${okhttpLibVersion}"
     compile "com.squareup.okhttp:okhttp-urlconnection:${okhttpLibVersion}"
-    compile "com.google.android.gms:play-services-maps:${playLibVersion}"
-    compile "com.google.android.gms:play-services-location:${playLibVersion}"
-    compile "com.google.android.gms:play-services-places:${playLibVersion}"
-    compile "com.google.android.gms:play-services-auth:${playLibVersion}"
-    compile 'com.google.android.gms:play-services-analytics:16.0.1'
-    compile "com.squareup.picasso:picasso:${picassoLibVersion}"
+    implementation "com.google.android.gms:play-services-maps:${playLibVersion}"
+    implementation "com.google.android.gms:play-services-location:${playLibVersion}"
+    implementation "com.google.android.gms:play-services-places:${playLibVersion}"
+    implementation "com.google.android.gms:play-services-auth:${playLibVersion}"
+    implementation 'com.google.android.gms:play-services-analytics:16.0.1'
+
+
+    implementation "com.squareup.picasso:picasso:${picassoLibVersion}"
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 
     implementation 'com.google.firebase:firebase-messaging:17.0.0'
